@@ -23,10 +23,25 @@ before_install:
   - go env && pwd
   - go get github.com/FiloSottile/gvt
 
+after_success:
+  - sh ./bin/set_tags.sh
+
 script:
-  - ./make --init
-  - ./make --build-front
-  - ./make --build-back
+  - ./bin/make.sh --init
+  - ./bin/make.sh --build-front
+  - ./bin/make.sh --build-back
+
+deploy:
+  provider: releases
+  api_key:
+    secure: ATrNFZsdoLkKAErnXHoFzn7caVZ71h/m9mKGKH8AUWBg82jYIPhq/zC7WibA6LOieNBb9anczP+TphlSKLN+r1clACVStez0sExMEArTtmh8WOFAuFpwmjoILofJvYbbhUXy/YLwXjAab7ovfc8Og0HEKvKRqrDBjC0qRx8RLIPzU+Sx4/RBbEi1RuPT9yymjOONe/m943M0SS9owO8lath6XBoopJI1DCE6rFjMGg5/m6ie9xY25Rpcdb3DKB1rerEACe9B1/90jRkjlQFuE7L/BLc8ZsJGlH3c+q3B3NK8xlR9a8fw+mpz1TDXJLdulYlb0Hc+xYmX8lJEhALd4EMgi+23nsf5OVvqslLtW+Vsrs6w2dF+5tuSNuljZi0P+qEw9vQHWzvIsKxp/PKW9uTGp+Py/KcA/2fPxwLolPO2iZgI/8i4K0ba4mdpYLg9cdTOgeeYiw7HYH7M72dHw1yOX8DLK9+jpDB2/alO4taXaV271B5i/OWb5MVtIpfHexejI6DWtNK2Kj2fjzu7FsTtzeL//Bi8jCjg0eOKS9Pq+ykKDoHP4xRNgFPjqsgxGoghM/bC3Qt5hkvVQ2zZrtdvf3Tit+W9K41YmW0JSmI/cDCsLiH0FRvzN0tM7olF0LkvBOFw4xluztK7A9jMnsvazs91gQGwq5diDfFiXu4=
+  file: $HOME/smart-home-configurator.tar.gz
+  skip_cleanup: true
+  on:
+    branch: master
+    repo: e154/smart-home-configurator
 
 notifications:
-  email: false
+  email:
+    on_success: never
+    on_failure: always

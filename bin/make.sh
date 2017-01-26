@@ -5,9 +5,10 @@
 #
 # base variables
 #
-BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-TMP_DIR="${BASEDIR}/tmp/configurator"
-EXEC=configurator
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}")" && cd ../ && pwd)"
+EXEC="configurator"
+TMP_DIR="${ROOT}/tmp/${EXEC}"
+ARCHIVE="smart-home-${EXEC}.tar.gz"
 
 
 #
@@ -78,14 +79,14 @@ main() {
 __test() {
 
     DIRS=(
-        "${BASEDIR}/controllers"
-        "${BASEDIR}/models"
-        "${BASEDIR}/router"
+        "${ROOT}/controllers"
+        "${ROOT}/models"
+        "${ROOT}/router"
     )
 
     for dir in ${DIRS};
     do
-        pushd ${BASEDIR}${dir}
+        pushd ${ROOT}${dir}
         go test -v
         popd
     done
@@ -94,45 +95,51 @@ __test() {
 __init() {
 
     mkdir -p ${TMP_DIR}
-    cd ${BASEDIR}
+    cd ${ROOT}
     gvt rebuild
-    cd ${BASEDIR}/static_source/private
+    cd ${ROOT}/static_source/private
     bower install
-    cd ${BASEDIR}/static_source/public
+    cd ${ROOT}/static_source/public
     bower install
-    cd ${BASEDIR}/static_source
+    cd ${ROOT}/static_source
     npm install
 }
 
 __clean() {
 
-    rm -rf ${BASEDIR}/build
-    rm -rf ${BASEDIR}/tmp
-    rm -rf ${BASEDIR}/static_source/node_modules
-    rm -rf ${BASEDIR}/static_source/private/bower_components
-    rm -rf ${BASEDIR}/static_source/private/tmp
-    rm -rf ${BASEDIR}/static_source/public/bower_components
-    rm -rf ${BASEDIR}/static_source/public/tmp
-    rm -rf ${BASEDIR}/vendor/bin
-    rm -rf ${BASEDIR}/vendor/pkg
-    rm -rf ${BASEDIR}/vendor/src
+    rm -rf ${ROOT}/build
+    rm -rf ${ROOT}/tmp
+    rm -rf ${ROOT}/static_source/node_modules
+    rm -rf ${ROOT}/static_source/private/bower_components
+    rm -rf ${ROOT}/static_source/private/tmp
+    rm -rf ${ROOT}/static_source/public/bower_components
+    rm -rf ${ROOT}/static_source/public/tmp
+    rm -rf ${ROOT}/vendor/bin
+    rm -rf ${ROOT}/vendor/pkg
+    rm -rf ${ROOT}/vendor/src
     rm -rf ${TMP_DIR}
 }
 
 __build_front() {
 
-    cd ${BASEDIR}/static_source
+    cd ${ROOT}/static_source
     gulp pack
-    cp -r ${BASEDIR}/build ${TMP_DIR}
+    cp -r ${ROOT}/build ${TMP_DIR}
 }
 
 __build_back() {
 
-    cd ${BASEDIR}
+    cd ${ROOT}
     go build -ldflags "${GOBUILD_LDFLAGS}" -o ${TMP_DIR}/${EXEC}
-    cp -r ${BASEDIR}/views ${TMP_DIR}
-    cp -r ${BASEDIR}/conf ${TMP_DIR}
-    sed 's/dev\/app.conf/prod\/app.conf/' ${BASEDIR}/conf/app.conf > ${TMP_DIR}/conf/app.conf
+    cp -r ${ROOT}/views ${TMP_DIR}
+    cp -r ${ROOT}/conf ${TMP_DIR}
+    sed 's/dev\/app.conf/prod\/app.conf/' ${ROOT}/conf/app.conf > ${TMP_DIR}/conf/app.conf
+    cp ${ROOT}/LICENSE ${TMP_DIR}
+    cp ${ROOT}/README.md ${TMP_DIR}
+    cp ${ROOT}/contributors.txt ${TMP_DIR}
+    cd ${TMP_DIR}
+    echo "tar: ${ARCHIVE} copy to ${HOME}"
+    tar -zcf ${HOME}/${ARCHIVE} .
 }
 
 __help() {
