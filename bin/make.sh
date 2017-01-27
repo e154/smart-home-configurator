@@ -78,18 +78,8 @@ main() {
 
 __test() {
 
-    DIRS=(
-        "${ROOT}/controllers"
-        "${ROOT}/models"
-        "${ROOT}/router"
-    )
-
-    for dir in ${DIRS};
-    do
-        pushd ${ROOT}${dir}
-        go test -v
-        popd
-    done
+    cd ${ROOT}
+    goveralls
 }
 
 __init() {

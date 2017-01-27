@@ -6,6 +6,7 @@ go:
 env:
   global:
     - UNAME="$(uname | tr '[:upper:]' '[:lower:]')"
+    - secure: CnuPn9fAFmg8seA1RjCQ8C9+q8KkLIMaRfpm/1dCaBQhWPYnZZ2iuwN3ewuepl2sSVEnE/kK33vePn99BepjUGt5tEPhlivJ0s0O0Ad7uBLzSH6LiV0Y5kQehfwET4MtnsyCHLlOIm3mhoUXAki6INT8hn9V3lNVK9YHwVJmH93eXvXCd+TQZT2dZFguBBYboopXShCsu8a7PDr3cKh7+gaGwZuHq/1Uij+ZG0LE/O1rdFvayyZMN2Gf/lPHBItMXXpgkJRnyGA+hQ8XVC00N8vxD4kAupfO85DyJ8LX+QU9738g0ILKzS+modfsncoNBXdn7z0DT2JDGldDacerXW9ruvB4lzM2TgX+QaVV28CKjOJrRePEzVDyLSvNH4LCbal726y6tr0ldaEfV1jCstYvxlkOPXLSjcOYKdM65t9T2PgM7SSDE/6NitJtNb2loCGN7WPWu2mfBsW5mmRxSvGAptsy3AZqwtubGNIIl9hjlV9h/bc7sz7YQGumPTTyaXB5kdLdYCnDKvyY/U4UJfN/e8pdv/CLKLyTMx4h0MHbWVHnSDIipViK1rYqpF8yg1T42lhO347jz1oUZGMOk/yEA97JbSwoZoCUfExbN6go+hi5AnpB13QNz0UF6WUI3TBg6JwjqLl0VJ1Ic0XvQHZIHIkmcRZzZzDQO1iU3sc=
   matrix:
     - NODE_VERSION="4.2.0"
 
@@ -20,8 +21,10 @@ before_install:
   - nvm use $NODE_VERSION
   - npm install -g bower
   - npm install -g gulp
-  - go env && pwd
   - go get github.com/FiloSottile/gvt
+  - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
+  - go env && pwd
 
 after_success:
   - sh ./bin/set_tags.sh
@@ -29,6 +32,7 @@ after_success:
 script:
   - ./bin/make.sh --init
   - ./bin/make.sh --build-front
+  - $HOME/gopath/bin/goveralls -service=travis-ci -repotoken $COVERALLS_TOKEN
   - ./bin/make.sh --build-back
 
 deploy:
