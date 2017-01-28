@@ -119,17 +119,7 @@ __build_front() {
 
 __build_back() {
 
-    cd ${ROOT}
-    GOOS=windows GOARCH=amd64 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-amd64-windows.exe"
-    GOOS=windows GOARCH=386 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-386-windows.exe"
-    GOOS=linux GOARCH=amd64 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-amd64-linux"
-    GOOS=linux GOARCH=386 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-386-linux"
-    GOOS=linux GOARCH=arm64 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-arm64-linux"
-    GOOS=linux GOARCH=arm go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-arm-linux"
-#    GOOS=freebsd GOARCH=amd64 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-amd64-freebsd"
-#    GOOS=freebsd GOARCH=386 go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-386-freebsd"
-#    GOOS=freebsd GOARCH=arm go build -ldflags "${GOBUILD_LDFLAGS}" -o "${TMP_DIR}/${EXEC}-arm-freebsd"
-
+    xgo --out=${EXEC} --targets=linux/*,windows/*,darwin/* --ldflags="${GOBUILD_LDFLAGS}" ${PACKAGE}
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
     sed 's/dev\/app.conf/prod\/app.conf/' ${ROOT}/conf/app.conf > ${TMP_DIR}/conf/app.conf
