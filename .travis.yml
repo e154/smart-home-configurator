@@ -30,8 +30,8 @@ before_install:
   - go get github.com/karalabe/xgo
   - go env && pwd
 
-after_success:
-  - sh ./bin/set_tags.sh
+#after_success:
+#  - sh ./bin/set_tags.sh
 
 script:
   - ./bin/make.sh --init
@@ -46,6 +46,7 @@ deploy:
   file: $HOME/smart-home-configurator.tar.gz
   skip_cleanup: true
   on:
+    tags: true
     branch: master
     repo: e154/smart-home-configurator
 
