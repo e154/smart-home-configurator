@@ -14,7 +14,7 @@ ARCHIVE="smart-home-${EXEC}.tar.gz"
 #
 # build version variables
 #
-PACKAGE="github.com/e154/smart-home"
+PACKAGE="github.com/e154/smart-home-configurator"
 VERSION_VAR="main.VersionString"
 REV_VAR="main.RevisionString"
 REV_URL_VAR="main.RevisionURLString"
@@ -136,7 +136,7 @@ __help() {
   cat <<EOF
 Usage: make.sh [options]
 
-Bootstrap Debian 8.0 host with mysql installation.
+Bootstrap Debian 8.0 host.
 
 OPTIONS:
 
