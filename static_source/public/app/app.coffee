@@ -22,6 +22,7 @@ app = angular.module('app', [
   'appServices'
   'ngRoute'
   'ui.router'
+  'base64'
 ])
 
 app.version =

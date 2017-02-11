@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/astaxie/beego"
 	"github.com/e154/smart-home-configurator/models"
+	"strings"
 )
 
 type DashboardController struct {
@@ -43,17 +44,14 @@ func (h *DashboardController) Signin() {
 
 	if isajax := h.Ctx.Input.IsAjax(); isajax {
 
-		var err error
-		input := map[string]string{}
-		if err = json.Unmarshal(h.Ctx.Input.RequestBody, &input); err != nil {
-			h.ErrHan(403, err.Error())
+		auth := strings.SplitN(h.Ctx.Input.Header("Authorization"), " ", 2)
+		if len(auth) != 2 || auth[0] != "Basic" {
+			h.ErrHan(403, "bad syntax")
 			return
 		}
 
 		server_url := fmt.Sprintf("%s:%s/api/v1/signin", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
-
-		j, _ := json.Marshal(input)
-		result, err := h.SendRequest("POST", server_url, j)
+		result, err := h.SignIn("GET", server_url, "Basic " + auth[1])
 		if err != nil {
 			h.ErrHan(403, err.Error())
 			return

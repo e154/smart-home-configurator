@@ -47,7 +47,7 @@ angular
 #    http://stackoverflow.com/questions/24764764/conditionally-set-angulars-ng-class-based-on-state
   $rootScope.$state = $state;
 
-  $http.defaults.headers.common['Authorization'] = window.app_settings.token
+  $http.defaults.headers.common['token'] = window.app_settings.token
 
   return
 ]
