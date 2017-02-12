@@ -30,7 +30,7 @@ angular
       @connect()
 
     connect: ->
-      url = "#{window.app_settings.server_url}/api/v1/ws?token=#{window.app_settings.token}"
+      url = "#{window.app_settings.server_url}/api/v1/ws?access_token=#{window.app_settings.access_token}"
       @socket = socketFactory({
         socket: new SockJS(url)
       })

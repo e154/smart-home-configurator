@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'signinCtrl', ['$scope', 'Auth', '$timeout'
-($scope, Auth, $timeout) ->
+.controller 'signinCtrl', ['$scope', '$http', '$timeout', '$base64'
+($scope, $http, $timeout, $base64) ->
 
   $scope.email = ''
   $scope.password = ''
@@ -9,13 +9,19 @@ angular
 
   $scope.signin =->
     return if $scope.email == '' || $scope.password == ''
+
     success =()->
       window.location.reload()
+
     error =(error)->
       $scope.error = error.data.message
       $timeout ()->
         $scope.error = ''
       , 2000
-    Auth.signin {email: $scope.email, password: $scope.password}, success, error
+
+    headers =
+      Authorization: "Basic " + $base64.encode("#{$scope.email}:#{$scope.password}")
+
+    $http.get('/signin', {headers: headers}).then success, error
 
 ]

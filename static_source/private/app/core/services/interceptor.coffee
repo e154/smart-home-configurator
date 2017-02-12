@@ -3,7 +3,7 @@ angular
 .factory('myHttpInterceptor', ['$q','$injector', '$rootScope', ($q, $injector, $rootScope) ->
   'request': (config) ->
 #    config.headers['X-Requested-With'] = 'XMLHttpRequest'
-    config.headers['Authorization'] = window.app_settings.token
+    config.headers['access_token'] = window.app_settings.access_token
     config
 
   'requestError': (rejection) ->

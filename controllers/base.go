@@ -20,8 +20,8 @@ func (b *BaseController) Prepare() {
 		b.Data["current_user"] = string(current_user)
 	}
 
-	if token := b.Ctx.Input.Session("token"); token != nil {
-		b.Data["token"] = token.(string)
+	if access_token := b.Ctx.Input.Session("access_token"); access_token != nil {
+		b.Data["access_token"] = access_token.(string)
 	}
 
 	b.Data["version"] = map[string]string{
