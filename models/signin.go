@@ -6,6 +6,6 @@ type Message struct {
 }
 
 type Signin struct {
-	Token	string	`json:"token"`
+	Token	string	`json:"access_token"`
 	User	*User	`json:"current_user"`
 }
