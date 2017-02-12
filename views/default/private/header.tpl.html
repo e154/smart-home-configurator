@@ -123,9 +123,9 @@ window.app_settings = Object.create(Object.prototype, {
             return {{{safeJs .current_user}}};
         }
     },
-    token: {
+    access_token: {
         get: function(){
-            return {{{.token}}};
+            return {{{.access_token}}};
         }
     },
     debug: {

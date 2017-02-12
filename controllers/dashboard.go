@@ -76,7 +76,7 @@ func (h *DashboardController) Signin() {
 
 		if signin.User != nil {
 			h.SetSession("userinfo", signin.User)
-			h.SetSession("token", signin.Token)
+			h.SetSession("access_token", signin.Token)
 			h.ServeJSON()
 			return
 		}
@@ -91,7 +91,7 @@ func (h *DashboardController) Signin() {
 
 func (h *DashboardController) Signout() {
 	h.DelSession("userinfo")
-	h.DelSession("token")
+	h.DelSession("access_token")
 	h.Ctx.Redirect(302, "/signin")
 }
 
