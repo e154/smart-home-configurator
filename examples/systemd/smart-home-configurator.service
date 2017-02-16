@@ -1,0 +1,13 @@
+[Unit]
+Description=Smart Home Configurator
+Requires=
+After=
+
+[Service]
+PIDFile=/var/run/smart-home-configurator.pid
+ExecStartPre=/bin/rm -f /var/run/smart-home-configurator.pid
+ExecStart=/opt/smart-home/configurator/configurator
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

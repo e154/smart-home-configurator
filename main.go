@@ -1,34 +1,34 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/e154/smart-home-configurator/router"
+	"log"
+	"os"
+)
+
+var (
+	stdlog, errlog *log.Logger
 )
 
 func main() {
-	Initialize()
-	beego.Run()
-}
 
-func Initialize() {
-	router.Initialize()
+	// just start
+	args := os.Args
+	if len(args) == 1 {
+		stdlog.Printf(shortVersionBanner, "")
+		ServiceInitialize()
+		return
+	}
 
-	beego.Info("Starting....")
-	beego.Info("AppPath:", beego.AppPath)
-
-	data_dir := beego.AppConfig.String("data_dir")
-
-	if(beego.AppConfig.String("runmode") == "dev") {
-		beego.Info("Develment mode enabled")
-
-		beego.SetStaticPath("/static", "build/private")
-		beego.SetStaticPath("/_static", "build/public")
-		beego.SetStaticPath("/attach", data_dir)
-	} else {
-		beego.Info("Product mode enabled")
-
-		beego.SetStaticPath("/static", "build/private")
-		beego.SetStaticPath("/_static", "build/public")
-		beego.SetStaticPath("/attach", data_dir)
+	switch args[1] {
+	case "install", "remove", "start", "stop", "status":
+		ServiceInitialize()
+	default:
+		stdlog.Printf(verboseVersionBanner, "", args[0])
 	}
 }
+
+func init() {
+	stdlog = log.New(os.Stdout, "", log.Ldate|log.Ltime)
+	errlog = log.New(os.Stderr, "", log.Ldate|log.Ltime)
+}
+

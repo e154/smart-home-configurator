@@ -30,14 +30,11 @@ before_install:
   - go get github.com/karalabe/xgo
   - go env && pwd
 
-#after_success:
-#  - sh ./bin/set_tags.sh
-
 script:
-  - ./bin/make.sh --init
-  - ./bin/make.sh --build-front
+  - ./bin/travis.sh --init
+  - ./bin/travis.sh --build-front
   - $HOME/gopath/bin/goveralls -service=travis-ci -repotoken $COVERALLS_TOKEN
-  - ./bin/make.sh --build-back
+  - ./bin/travis.sh --build-back
 
 deploy:
   provider: releases
