@@ -10,3 +10,6 @@ src
 tmp
 .idea
 /smart-home-configurator
+/conf/prod/app.conf
+/conf/app.conf
+/conf/dev/app.conf
