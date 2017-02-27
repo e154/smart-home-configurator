@@ -1,15 +1,10 @@
 angular
 .module('appControllers')
-.controller 'scriptModalEditCtrl', ['$scope', 'Notify', 'Script', '$state', 'Message'
-($scope, Notify, Script, $state, Message) ->
+.controller 'scriptModalEditCtrl', ['$scope', 'Notify', 'Script', '$state', 'Message', '$rootScope'
+($scope, Notify, Script, $state, Message, $rootScope) ->
   vm = this
-  $scope.ace_options =
-    useWrapMode: true
-    mode:'coffee'
-    theme:'dawn'
-    advanced:{}
-    workerPath:'/static/js/ace-builds/src-noconflict'
-    readOnly: false
+
+  $scope.ace_options = angular.cope $rootScope.ace_options
 
   vm.script = new Script($scope.$parent.script)
 

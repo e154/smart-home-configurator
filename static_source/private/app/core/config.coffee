@@ -49,5 +49,17 @@ angular
 
   $http.defaults.headers.common['access_token'] = window.app_settings.access_token
 
+  #
+  # themes:
+  # dawn|clouds_midnight|tomorrow_night
+  #
+  $rootScope.ace_options =
+    readOnly: false
+    useWrapMode: true
+    mode:'coffee'
+    theme:'dawn'
+    advanced:{}
+    workerPath:'/static/js/ace-builds/src-noconflict'
+
   return
 ]

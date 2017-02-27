@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    %h3 {{'scenario.index_form' | translate}}
+
+.row
+  .col-md-12
+    .form-group
+      %a(ui-sref="dashboard.scenario.new")
+        %i.fa.fa-plus
+        &nbsp;
+        {{'Add new' | translate}}
+
+.row
+  .col-md-12
+    .table(table="options")

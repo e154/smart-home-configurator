@@ -22,6 +22,11 @@ angular
           false
       }
       {
+        name: 'workflow.scenario'
+        field: 'scenario'
+        template: '<a ng-if="item[field]" ui-sref="dashboard.scenario.show({id:item[field].id})">{{::item[field].name}}&nbsp;<span class="fa fa-external-link"></span></a>'
+      }
+      {
         name: 'workflow.created_at'
         field: 'created_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
