@@ -1,17 +1,12 @@
 angular
 .module('appControllers')
-.controller 'scriptModalShowCtrl', ['$scope', 'Notify', 'Script', '$stateParams', '$state', 'Message'
-($scope, Notify, Script, $stateParams, $state, Message) ->
+.controller 'scriptModalShowCtrl', ['$scope', '$rootScope'
+($scope, $rootScope) ->
   vm = this
+
   vm.script = $scope.$parent.script
 
-  $scope.ace_options =
-    useWrapMode: true
-    mode:'coffee'
-    theme:'dawn'
-    advanced:{}
-    workerPath:'/static/js/ace-builds/src-noconflict'
-    readOnly: true
+  $scope.ace_options = angular.extend {}, $rootScope.ace_options, readOnly: true
 
   switch vm.script.lang
     when 'javascript'
