@@ -4,7 +4,7 @@ angular
 ($scope, Notify, Script, $state, Message, $rootScope) ->
   vm = this
 
-  $scope.ace_options = angular.cope $rootScope.ace_options
+  $scope.ace_options = angular.copy $rootScope.ace_options
 
   vm.script = new Script($scope.$parent.script)
 
