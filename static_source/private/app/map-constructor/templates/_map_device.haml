@@ -41,8 +41,8 @@
   .col-md-6
     .form-group
       .map-preview-img.relative
-        %a(ng-href="{{element.prototype.image.url}}" rel="gallery" title="original" ng-if="element.prototype.image.url" fancybox="true")
-          %img(ngf-thumbnail="element.prototype.image.url || '/thumb.jpg'" alt="" title="")
+        %a(ng-href="{{server_url}}/{{element.prototype.image.url}}" rel="gallery" title="original" ng-if="element.prototype.image.url" fancybox="true")
+          %img(ngf-thumbnail="server_url + element.prototype.image.url || '/thumb.jpg'" alt="" title="")
         %a.delete.button(href="#" ng-click="element.prototype.removeImage()" ng-if="element.prototype.image.url")
           .cross
 
@@ -70,8 +70,8 @@
     .col-md-6
       .form-group
         .map-preview-img.relative
-          %a(ng-href="{{state.image.url}}" rel="gallery" title="original" ng-if="state.image.url" fancybox="true")
-            %img(ngf-thumbnail="state.image.url || '/thumb.jpg'" alt="" title="")
+          %a(ng-href="{{server_url}}/{{state.image.url}}" rel="gallery" title="original" ng-if="state.image.url" fancybox="true")
+            %img(ngf-thumbnail="server_url + state.image.url || '/thumb.jpg'" alt="" title="")
           %a.delete.button(href="#" ng-click="state.removeImage()" ng-if="state.image.url")
             .cross
 
@@ -110,8 +110,8 @@
     .col-md-6
       .form-group
         .map-preview-img.relative
-          %a(ng-href="{{action.image.url}}" rel="gallery" title="original" ng-if="action.image.url" fancybox="true")
-            %img(ngf-thumbnail="action.image.url || '/thumb.jpg'" alt="" title="")
+          %a(ng-href="{{server_url}}/{{action.image.url}}" rel="gallery" title="original" ng-if="action.image.url" fancybox="true")
+            %img(ngf-thumbnail="server_url + action.image.url || '/thumb.jpg'" alt="" title="")
           %a.delete.button(href="#" ng-click="action.removeImage()" ng-if="action.image.url")
             .cross
 

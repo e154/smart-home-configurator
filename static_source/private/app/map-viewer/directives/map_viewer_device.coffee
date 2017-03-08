@@ -9,6 +9,8 @@ angular
     element: '=mapViewerDevice'
   link: ($scope, $element, $attrs) ->
 
+    $scope.server_url = window.app_settings.server_url
+
     # vars
     # --------------------
 #    console.log 'element',$scope.element
