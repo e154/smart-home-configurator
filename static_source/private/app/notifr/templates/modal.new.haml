@@ -1,0 +1,35 @@
+.row
+  .col-md-12
+    .form-group
+      %label {{'notifr.title' | translate}}
+      %input.form-control(ng-model="message.title")
+
+    .form-group
+      %label {{'notifr.address' | translate}}
+      %input.form-control(ng-model="message.address")
+
+    .form-group
+      %laber {{'notifr.type' | translate}}
+      %select.form-control(ng-model="message.type")
+        %option(value="email")
+          {{'notifr.email' | translate}}
+        %option(value="sms")
+          {{'notifr.sms' | translate}}
+        %option(value="push")
+          {{'notifr.push' | translate}}
+
+    .form-group(ng-if="message.type == 'email'")
+      %label {{'notifr.template' | translate}}
+      %input.form-control(ng-model="message.template")
+
+    .form-group
+      %label {{'notifr.body' | translate}}
+      %textarea.form-control(ng-model="message.body" rows="10" )
+
+.row
+  .col-md-12
+    .pull-right
+      %button.btn.btn-default(ng-click="cancel()")
+        {{'Cancel' | translate}}
+      %button.btn.btn-default(ng-click="send()")
+        {{'notifr.send' | translate}}

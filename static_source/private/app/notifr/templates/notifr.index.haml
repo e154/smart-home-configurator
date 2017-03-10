@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    %h3 {{ 'notifr.notifications' | translate }}
+
+.row
+  .col-md-12
+    .form-group
+      %a(ng-click="new_notification()")
+        .fa.fa-plus
+        &nbsp;
+        {{'notifr.new_notification' | translate}}
+
+.row
+  .col-md-12
+    .table(table="options")

@@ -149,8 +149,12 @@ angular
         'icon': 'fa fa-envelope'
         'items': [
           {
-            'label': 'All templates'
+            'label': 'All notifications'
             'route': 'dashboard.notifr.index'
+          }
+          {
+            'label': 'All templates'
+            'route': 'dashboard.notifr.template_list'
           }
           {
             'label': 'Add template'

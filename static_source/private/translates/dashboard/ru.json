@@ -41,6 +41,7 @@
   "Workflow": "БП",
   "Scenaries": "Сценарии",
   "All templates": "Все шаблоны",
+  "All notifications": "Все уведомления",
   "All items": "Все элементы",
   "All users": "Все пользователи",
   "All roles": "Все роли",
@@ -231,7 +232,14 @@
     "package_name": "Логи"
   },
   "notifr": {
+    "email": "email",
+    "sms": "sms",
+    "push": "push",
+    "body": "Содержимое сообщения",
     "email_system": "Система уведомлений",
+    "type": "Тип",
+    "notifications": "Сообщения",
+    "new_notification": "Новое сообщение",
     "refrash_list": "Обновить список",
     "add_template": "Добавить шаблон",
     "email_template": "Шаблон сообщения",
@@ -241,11 +249,14 @@
     "description": "Описание",
     "created_at": "Дата создания",
     "updated_at": "Дата обновления",
+    "address": "Адрес",
     "title": "Заголовок",
     "items": "Элементы",
     "preview": "Просмотр",
     "source_code": "Исходный код",
-    "package_name": "Управление уведомлениями"
+    "package_name": "Управление уведомлениями",
+    "template": "Шаблон",
+    "send": "Отправить"
   },
   "map": {
     "name": "Название",
