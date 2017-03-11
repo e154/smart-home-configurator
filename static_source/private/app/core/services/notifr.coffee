@@ -8,6 +8,11 @@ angular
       transformResponse: (data) ->
         data?.item || data  
 
+    repeat:
+      url: window.app_settings.server_url + '/api/v1/notifr/:id/repeat'
+      method: 'POST'
+      responseType: 'json'
+
     send:
       method: 'POST'
       responseType: 'json'

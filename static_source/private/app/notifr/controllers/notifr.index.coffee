@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'notifrIndexCtrl', ['$scope', 'Notifr','ngDialog'
-($scope, Notifr, ngDialog) ->
+.controller 'notifrIndexCtrl', ['$scope', 'Notifr','ngDialog','Message','Notify'
+($scope, Notifr, ngDialog, Message, Notify) ->
 
   tableCallback = {}
   $scope.options =
@@ -11,11 +11,12 @@ angular
       {
         name: 'notifr.refresh'
         field: 'state'
-        template: "<button class='btn btn-success btn-xs' ng-if='item[field] == \"error\"'><i class='fa fa-refresh'> refresh</i></button>"
+        template: "<button class='btn btn-default btn-xs' ng-if='item[field] == \"error\"'><i class='fa fa-refresh'> repeat</i></button>"
         width: '100px'
         clickCallback: ($event, item)->
           $event.preventDefault()
           $event.stopPropagation()
+          repeat(item)
 
           false
       }
@@ -84,4 +85,14 @@ angular
       template: '/notifr/templates/modal.new.html'
       className: 'ngdialog-theme-default ngdialog-notifr-show'
       controller: 'notifrNewCtrl'
+
+  repeat =(notify)->
+    return if !notify
+
+    success =->
+      Notify 'success', 'Сообщение успешно добавлено в обработчик', 3
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    Notifr.repeat {id: notify.id}, success, error
 ]
