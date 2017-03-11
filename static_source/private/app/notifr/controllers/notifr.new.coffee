@@ -1,13 +1,9 @@
 angular
 .module('appControllers')
-.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message'
-($scope, Notifr, Message) ->
+.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$state'
+($scope, Notifr, Message, $state) ->
 
   $scope.message = {}
-
-  $scope.cancel =->
-    if confirm('Вы хотите закрыть диалог?')
-      $scope.closeThisDialog()
 
   $scope.send =->
     success =->
