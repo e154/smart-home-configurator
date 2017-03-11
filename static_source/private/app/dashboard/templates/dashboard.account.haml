@@ -42,7 +42,7 @@
     .col-md-2
         .form-group
             .avatar.lg(ng-if="user.avatar.url != ''")
-                %img(ng-src="{{user.avatar.url}}" alt="")
+                %img(ng-src="{{server_url}}/{{user.avatar.url}}" alt="")
     .col-md-2
         .form-group(ng-if="user.sign_in_count")
             .text-muted {{'user.sign_in_count' | translate}}
