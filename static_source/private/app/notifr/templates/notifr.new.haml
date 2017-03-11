@@ -45,6 +45,12 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
+    .form-group(ng-if="message.template.markers.length")
+      %label {{'notifr.markers' | translate}}
+    .form-group(ng-repeat="marker in message.template.markers")
+      %label [{{marker}}]
+      %input.form-control(ng-model="message.params[maker]")
+
 .row
   .col-md-6.form-group
     .pull-right
