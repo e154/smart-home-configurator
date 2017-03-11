@@ -39,7 +39,9 @@
   "Notifr": "Уведомления",
   "Flow": "Задачи",
   "Workflow": "БП",
+  "Scenaries": "Сценарии",
   "All templates": "Все шаблоны",
+  "All notifications": "Все уведомления",
   "All items": "Все элементы",
   "All users": "Все пользователи",
   "All roles": "Все роли",
@@ -51,6 +53,7 @@
   "All maps": "Все карты",
   "All flow": "Все задачи",
   "All device": "Все устройства",
+  "All scenaries": "Все сценарии",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
@@ -149,7 +152,8 @@
     "index_form": "Список БП",
     "show_form": "БП",
     "new_form": "Новый БП",
-    "edit_form": "Радактирование БП"
+    "edit_form": "Радактирование БП",
+    "scenario": "Сценарий"
   },
   "flow": {
     "edit": "Редактирование процесса",
@@ -228,7 +232,18 @@
     "package_name": "Логи"
   },
   "notifr": {
+    "markers": "Маркеры",
+    "refresh": "Обновить",
+    "error": "Ошибка",
+    "state": "Состояние",
+    "email": "email",
+    "sms": "sms",
+    "push": "push",
+    "body": "Содержимое сообщения",
     "email_system": "Система уведомлений",
+    "type": "Тип",
+    "notifications": "Сообщения",
+    "new_notification": "Новое сообщение",
     "refrash_list": "Обновить список",
     "add_template": "Добавить шаблон",
     "email_template": "Шаблон сообщения",
@@ -238,11 +253,14 @@
     "description": "Описание",
     "created_at": "Дата создания",
     "updated_at": "Дата обновления",
+    "address": "Адрес",
     "title": "Заголовок",
     "items": "Элементы",
     "preview": "Просмотр",
     "source_code": "Исходный код",
-    "package_name": "Управление уведомлениями"
+    "package_name": "Управление уведомлениями",
+    "template": "Шаблон",
+    "send": "Отправить"
   },
   "map": {
     "name": "Название",
@@ -484,5 +502,22 @@
   },
   "auth": {
     "package_name": "Авторизация"
+  },
+  "scenario": {
+    "name": "Название",
+    "system_name": "Системное название",
+    "switch_to": "Переключить",
+    "created_at": "Дата создания",
+    "update_at": "Дата обновления",
+    "show_form": "Сценарий",
+    "new_form": "Новый сценарий",
+    "index_form": "Список сценариев",
+    "edit_form": "Редактирование сценария",
+    "on_enter": "При включении",
+    "on_exit": "При выключении",
+    "remove_script": "Удалить",
+    "save_script": "Сохранить",
+    "add_on_enter": "Добавить",
+    "add_on_exit": "Добавить"
   }
 }

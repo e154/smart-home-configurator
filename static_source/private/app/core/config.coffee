@@ -45,9 +45,22 @@ angular
     document.getElementsByTagName('body')[0].classList.remove('loading')
 
 #    http://stackoverflow.com/questions/24764764/conditionally-set-angulars-ng-class-based-on-state
-  $rootScope.$state = $state;
+  $rootScope.$state = $state
+  $rootScope.server_url = window.app_settings.server_url
 
   $http.defaults.headers.common['access_token'] = window.app_settings.access_token
+
+  #
+  # themes:
+  # dawn|clouds_midnight|tomorrow_night
+  #
+  $rootScope.ace_options =
+    readOnly: false
+    useWrapMode: true
+    mode:'coffee'
+    theme:'dawn'
+    advanced:{}
+    workerPath:'/static/js/ace-builds/src-noconflict'
 
   return
 ]

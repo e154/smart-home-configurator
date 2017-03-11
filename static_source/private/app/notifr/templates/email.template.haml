@@ -1,28 +1,19 @@
 .row
   .col-md-12
     %h3
-      %a(href="" ui-sref="dashboard.notifr.index")
+      %a(href="" ui-sref="dashboard.notifr.template_list")
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{ 'notifr.email_template' | translate }}
 
 .row.section
   .col-md-8
-    .form-group
-      %label(for="vars") Основные переменные:
-      %span(id="vars")
-        [site:name],
-        [site:url],
-        [site:login-url],
-        [site:url-brief],
-
-        [user:name:nick],
-        [user:name:first],
-        [user:name:last],
-        [user:mail],
-        [user:edit-url],
-        [user:one-time-login-url],
-        [user:cancel-url].
+    .form-group(ng-if="ctrl.template.markers.length")
+      %label Основные переменные:
+      %div
+        %span(ng-repeat="marker in ctrl.template.markers")
+          [{{marker}}]
+          %span(ng-if="!$last") ,
 
     .form-group
       %label(for="title") {{'notifr.title' | translate}}

@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'emailItemCtrl', ['$scope','Message','EmailItem','Notify'
-($scope, Message, EmailItem, Notify) ->
+.controller 'emailItemCtrl', ['$scope','Message','EmailItem','Notify','$rootScope'
+($scope, Message, EmailItem, Notify, $rootScope) ->
 
   vm = this
   vm.items = []
@@ -13,12 +13,7 @@ angular
     content: ""
   vm.isNew = true
 
-  $scope.ace_options =
-    useWrapMode: true
-    mode:'html'
-    theme:'dawn'
-    advanced:{}
-    workerPath:'/static/js/ace-builds/src-noconflict'
+  $scope.ace_options = angular.extend $rootScope.ace_options, {mode: null}
 
   vm.getItem = (item) ->
     success =(item) ->

@@ -1,7 +1,7 @@
 .row
   .col-md-12
     %h3
-      %a(href="" ui-sref="dashboard.notifr.index")
+      %a(href="" ui-sref="dashboard.notifr.template_list")
         %small.fa.fa-long-arrow-left
           &nbsp;
 
@@ -54,15 +54,15 @@
   .col-md-8
     .list-group
       .form-group
-        %label(for="name") {{'notifr.name' | translate}}
+        %label {{'notifr.name' | translate}}
         %input#name.form-control(ng-model="ctrl.activeItem.name" placeholder="{{'item name' | translate}}" type="text")/
 
       .form-group
-        %label(for="description") {{'notifr.description' | translate}}
+        %label {{'notifr.description' | translate}}
         %input#description.form-control(ng-model="ctrl.activeItem.description" placeholder="{{'item description' | translate}}" type="text")/
 
       .form-group
-        %label(for="content") {{'notifr.source_code' | translate}}
+        %label {{'notifr.source_code' | translate}}
         #content.ace-editor.form-control(ng-model="ctrl.activeItem.content" rows="20" ui-ace="ace_options")
 
       .form-group

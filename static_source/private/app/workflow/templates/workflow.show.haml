@@ -4,7 +4,7 @@
       %a(href="" ui-sref="dashboard.workflow.index")
         %small.fa.fa-long-arrow-left
           &nbsp;
-      {{'workflow.show_form' | translate}} №{{workflow.workflow.id}}
+      {{'workflow.show_form' | translate}} "{{workflow.workflow.name}}"
       .edit-icon-link
         %a(ui-sref="dashboard.workflow.edit({id:workflow.workflow.id})")
           %span.fa.fa-pencil
@@ -32,6 +32,15 @@
         {{'workflow.name' | translate}}
       %div
         {{::workflow.workflow.name}}
+
+    .form-group(ng-if="workflow.workflow.scenario && workflow.workflow.scenario.id")
+      .text-muted
+        {{'workflow.scenario' | translate}}
+      %div
+        %a(ui-sref="dashboard.scenario.show({id:workflow.workflow.scenario.id})" )
+          {{::workflow.workflow.scenario.name}}
+          &nbsp;
+          .fa.fa-external-link
 
     .form-group(ng-if="workflow.workflow.description")
       .text-muted

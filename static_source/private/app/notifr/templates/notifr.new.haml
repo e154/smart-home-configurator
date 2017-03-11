@@ -1,0 +1,66 @@
+.row
+  .col-md-6
+    %h3 {{'notifr.new_notification' | translate}}
+
+.row
+  .col-md-6
+    .form-group(ng-if="message.type != 'push'")
+      %label
+        {{'notifr.address' | translate}}*
+        &nbsp;
+        %span.text-muted(ng-if="message.type == 'email'")
+          (john doe &lt;john_doe@example.net&gt;, jeyn doe &lt;jeyn_doe@example.net&gt;)
+        %span.text-muted(ng-if="message.type == 'sms'")
+          (+12233232332,+12233232334)
+      %input.form-control(ng-model="message.address")
+
+    .form-group
+      %label {{'notifr.title' | translate}}
+      %input.form-control(ng-model="message.title")
+
+    .form-group
+      %label {{'notifr.body' | translate}}
+      %textarea.form-control(ng-model="message.body" rows="10" )
+
+  .col-md-6
+    .form-group
+      %laber {{'notifr.type' | translate}}
+      %select.form-control(ng-model="message.type")
+        %option(value="email")
+          {{'notifr.email' | translate}}
+        %option(value="sms")
+          {{'notifr.sms' | translate}}
+        %option(value="push")
+          {{'notifr.push' | translate}}
+
+    .form-group(ng-if="message.type == 'email'")
+      %label {{'notifr.template' | translate}}
+      -#
+      -#  select2
+      -#
+      %ui-select(ng-model="message.template" theme="bootstrap")
+        %ui-select-match(placeholder="{{'notifr.template' | translate}}" allow-clear="true")
+          %div(ng-if="message.template")
+            {{message.template.description}} ({{message.template.name}})
+        %ui-select-choices(repeat="template in templates | filter: $select.search" refresh="refreshTemplateList($select.search)" refresh-delay="0")
+          %div
+            %span(ng-bind-html="template.description | highlight: $select.search")
+            (
+            %small.text-muted(ng-bind-html="template.name | highlight: $select.search")
+            )
+        %ui-select-no-choice
+          {{'No data' | translate}}
+
+    .form-group(ng-if="message.template.markers.length")
+      %label {{'notifr.markers' | translate}}
+    .form-group(ng-repeat="marker in message.template.markers")
+      %label [{{marker}}]
+      %input.form-control(ng-model="message.params[marker]")
+
+.row
+  .col-md-6.form-group
+    .pull-right
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.notifr.index")
+        {{'Cancel' | translate}}
+      %button.btn.btn-default(ng-click="send()")
+        {{'notifr.send' | translate}}

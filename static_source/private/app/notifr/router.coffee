@@ -19,8 +19,22 @@ angular
       url: ""
       views:
         '@dashboard.notifr':
-          templateUrl: '/notifr/templates/email.index.html'
-          controller: 'emailIndexCtrl as ctrl'
+          templateUrl: '/notifr/templates/notifr.index.html'
+          controller: 'notifrIndexCtrl'
+    )
+
+    .state(
+      name: "dashboard.notifr.new_notification"
+      url: "/new_notification"
+      templateUrl: '/notifr/templates/notifr.new.html'
+      controller: 'notifrNewCtrl as ctrl'
+    )
+
+    .state(
+      name: "dashboard.notifr.template_list"
+      url: "/template_list"
+      templateUrl: '/notifr/templates/email.index.html'
+      controller: 'emailIndexCtrl as ctrl'
     )
 
     .state(

@@ -15,6 +15,10 @@ angular
         field: 'name'
         width: '310px'
         template: '<strong>{{item[field]}}</strong>'
+        clickCallback: ($event, item)->
+          $event.preventDefault()
+          $state.go('dashboard.notifr.template', {name: item.name})
+          false
       }
       {
         name: 'notifr.description'
@@ -35,9 +39,6 @@ angular
     ]
     menu: null
     callback: tableCallback
-    rowsClickCallback: ($event, item)->
-      $event.preventDefault()
-      $state.go('dashboard.notifr.template', {name: item.name})
-      false
+
   vm
 ]

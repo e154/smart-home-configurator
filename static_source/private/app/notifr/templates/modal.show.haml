@@ -1,0 +1,42 @@
+.row
+  .col-md-12
+
+    .pull-right.date-info-block
+      .form-group
+        %small
+          {{'Created at' | translate}} {{notify.created_at | readableDateTime}}
+        %small
+          {{'Updated at' | translate}} {{notify.update_at | readableDateTime}}
+
+.row
+  .col-md-12
+    .form-group(ng-if="notify.error_system_message")
+      %label
+        {{'notifr.error' | translate}}
+      .alert.alert-danger
+        %h5
+          %i.fa.fa-exclamation-triangle
+          &nbsp;
+          {{notify.error_system_message}}
+
+    .form-group(ng-if="notify.message.type == 'email'")
+      %label
+        {{'notifr.title' | translate}}
+      %div
+        {{notify.message.email_title}}
+    .form-group(ng-if="notify.message.type == 'email'")
+      %label
+        {{'notifr.body' | translate}}
+      %iframe-preview(content="notify.message.email_body")
+
+    .form-group(ng-if="notify.message.type == 'sms'")
+      {{notify.message.sms_text}}
+
+    .form-group(ng-if="notify.message.type == 'push'")
+      {{notify.message.ui_text}}
+
+.row
+  .col-md-12
+    .pull-right
+      %button.btn.btn-default(ng-click="remove()")
+        {{'Delete' | translate}}
