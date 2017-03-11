@@ -8,7 +8,7 @@
 
 .row.section
   .col-md-8
-    .form-group
+    .form-group(ng-if="ctrl.template.markers.length")
       %label Основные переменные:
       %div
         %span(ng-repeat="marker in ctrl.template.markers")
