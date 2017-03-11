@@ -28,5 +28,8 @@ angular
       Notify 'success', 'Сообщение успешно добавлено в обработчик', 3
     error =(result)->
       Message result.data.status, result.data.message
-    Notifr.send $scope.message, success, error
+
+    message = angular.extend $scope.message
+    message.params = {} if !message.template?
+    Notifr.send message, success, error
 ]
