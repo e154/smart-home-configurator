@@ -11,8 +11,8 @@
     .form-group
       %label Основные переменные:
       %div
-        %span(ng-repeat="var in vars")
-          {{var}}
+        %span(ng-repeat="marker in ctrl.template.markers")
+          [{{marker}}]
           %span(ng-if="!$last") ,
 
     .form-group
