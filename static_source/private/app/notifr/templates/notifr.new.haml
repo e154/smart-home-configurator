@@ -5,13 +5,18 @@
 .row
   .col-md-6
     .form-group
+      %label {{'notifr.address' | translate}}*
+      %input.form-control(ng-model="message.address")
+
+    .form-group
       %label {{'notifr.title' | translate}}
       %input.form-control(ng-model="message.title")
 
     .form-group
-      %label {{'notifr.address' | translate}}
-      %input.form-control(ng-model="message.address")
+      %label {{'notifr.body' | translate}}
+      %textarea.form-control(ng-model="message.body" rows="10" )
 
+  .col-md-6
     .form-group
       %laber {{'notifr.type' | translate}}
       %select.form-control(ng-model="message.type")
@@ -40,12 +45,8 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
-    .form-group
-      %label {{'notifr.body' | translate}}
-      %textarea.form-control(ng-model="message.body" rows="10" )
-
 .row
-  .col-md-6
+  .col-md-6.form-group
     .pull-right
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.notifr.index")
         {{'Cancel' | translate}}

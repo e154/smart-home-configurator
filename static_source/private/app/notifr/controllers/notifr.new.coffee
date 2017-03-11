@@ -3,7 +3,11 @@ angular
 .controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$http'
 ($scope, Notifr, Message, $http) ->
 
-  $scope.message = {}
+  $scope.message = {
+    type: 'email'
+    template: ''
+    params: {}
+  }
 
   # select2
   # ------------------
