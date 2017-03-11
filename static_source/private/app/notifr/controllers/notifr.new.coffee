@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$http'
-($scope, Notifr, Message, $http) ->
+.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$http', 'Notify'
+($scope, Notifr, Message, $http, Notify) ->
 
   $scope.message = {
     type: 'email'
@@ -25,9 +25,8 @@ angular
 
   $scope.send =->
     success =->
-      $scope.$parent.update()
-      $scope.closeThisDialog()
+      Notify 'success', 'Сообщение успешно добавлено в обработчик', 3
     error =(result)->
       Message result.data.status, result.data.message
-    Notifr.post $scope.message, success, error
+    Notifr.send $scope.message, success, error
 ]

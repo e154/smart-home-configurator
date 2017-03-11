@@ -4,8 +4,14 @@
 
 .row
   .col-md-6
-    .form-group
-      %label {{'notifr.address' | translate}}*
+    .form-group(ng-if="message.type != 'push'")
+      %label
+        {{'notifr.address' | translate}}*
+        &nbsp;
+        %span.text-muted(ng-if="message.type == 'email'")
+          (john doe &lt;john_doe@example.net&gt;, jeyn doe &lt;jeyn_doe@example.net&gt;)
+        %span.text-muted(ng-if="message.type == 'sms'")
+          (+12233232332,+12233232334)
       %input.form-control(ng-model="message.address")
 
     .form-group
@@ -49,7 +55,7 @@
       %label {{'notifr.markers' | translate}}
     .form-group(ng-repeat="marker in message.template.markers")
       %label [{{marker}}]
-      %input.form-control(ng-model="message.params[maker]")
+      %input.form-control(ng-model="message.params[marker]")
 
 .row
   .col-md-6.form-group

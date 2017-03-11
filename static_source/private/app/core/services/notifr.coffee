@@ -8,7 +8,7 @@ angular
       transformResponse: (data) ->
         data?.item || data  
 
-    create:
+    send:
       method: 'POST'
       responseType: 'json'
 
