@@ -9,9 +9,26 @@ angular
     resource: Notifr
     columns: [
       {
+        name: 'notifr.refresh'
+        field: 'state'
+        template: "<button class='btn btn-success btn-xs' ng-if='item[field] == \"error\"'><i class='fa fa-refresh'> refresh</i></button>"
+        width: '100px'
+        clickCallback: ($event, item)->
+          $event.preventDefault()
+          $event.stopPropagation()
+
+          false
+      }
+      {
         name: 'notifr.title'
         field: 'message'
         template: "<span truncate-text='100'>{{item[field].email_title || item[field].sma_text || item[field].ui_title}}</span>"
+      }
+      {
+        name: 'notifr.state'
+        field: 'state'
+        template: "<span class='label' ng-class='{\"label-success\": item[field] == \"succeed\", \"label-danger\": item[field] == \"error\", \"label-default\": item[field] == \"in_process\"}'>{{item[field]}}</span>"
+        width: '100px'
       }
       {
         name: 'notifr.type'

@@ -10,6 +10,14 @@
 
 .row
   .col-md-12
+    .form-group(ng-if="notify.error_system_message")
+      %label
+        {{'notifr.error' | translate}}
+      .alert.alert-danger
+        %h5
+          %i.fa.fa-exclamation-triangle
+          &nbsp;
+          {{notify.error_system_message}}
 
     .form-group(ng-if="notify.message.type == 'email'")
       %label

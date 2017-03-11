@@ -232,6 +232,9 @@
     "package_name": "Логи"
   },
   "notifr": {
+    "refresh": "Обновить",
+    "error": "Ошибка",
+    "state": "Состояние",
     "email": "email",
     "sms": "sms",
     "push": "push",

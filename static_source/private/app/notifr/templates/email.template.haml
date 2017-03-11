@@ -9,20 +9,11 @@
 .row.section
   .col-md-8
     .form-group
-      %label(for="vars") Основные переменные:
-      %span(id="vars")
-        [site:name],
-        [site:url],
-        [site:login-url],
-        [site:url-brief],
-
-        [user:name:nick],
-        [user:name:first],
-        [user:name:last],
-        [user:mail],
-        [user:edit-url],
-        [user:one-time-login-url],
-        [user:cancel-url].
+      %label Основные переменные:
+      %div
+        %span(ng-repeat="var in vars")
+          {{var}}
+          %span(ng-if="!$last") ,
 
     .form-group
       %label(for="title") {{'notifr.title' | translate}}

@@ -1,9 +1,23 @@
 angular
 .module('appControllers')
-.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$state'
-($scope, Notifr, Message, $state) ->
+.controller 'notifrNewCtrl', ['$scope', 'Notifr','Message','$http'
+($scope, Notifr, Message, $http) ->
 
   $scope.message = {}
+
+  # select2
+  # ------------------
+  $scope.templates = []
+  $scope.refreshTemplateList = (query)->
+    $http(
+      method: 'GET'
+      url: window.app_settings.server_url + "/api/v1/email/template/search"
+      params:
+        query: query
+        limit: 10
+        offset: 0
+    ).then (response)->
+      $scope.templates = response.data.templates
 
   $scope.send =->
     success =->
