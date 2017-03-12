@@ -8,7 +8,7 @@ angular
 
     # http://htmlbook.ru/html/iframe
     iframe = document.createElement('iframe')
-    iframe.setAttribute('sandbox', 'allow-same-origin || allow-top-navigation || allow-forms || allow-scripts')
+#    iframe.setAttribute('sandbox', 'allow-same-origin || allow-top-navigation || allow-forms || allow-scripts')
     iframe.setAttribute('scrolling', 'auto')
     iframe.setAttribute('seamless', '')
     iframe.setAttribute('frameborder', 'no')

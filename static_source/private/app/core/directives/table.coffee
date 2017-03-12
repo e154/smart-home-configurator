@@ -132,9 +132,8 @@ angular
     template: '
 <div class="clearfix" ng-if="pagination.objects_count >= perPage">
     <div class="pull-left">
-        <pagination boundary-links="true" total-items="pagination.objects_count" items-per-page="perPage"
-max-size="maxSize" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
-first-text="&laquo;" last-text="&raquo;"></pagination>
+ <ul uib-pagination boundary-links="true" direction-links="true" total-items="pagination.objects_count" ng-model="currentPage" num-pages="smallnumPages" ng-change="tableUpdate(currentPage)"
+max-size="maxSize" class="pagination-sm" items-per-page="perPage" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
     </div>
 
     <div class="pull-right">
@@ -233,7 +232,8 @@ ng-class="{ \'sorted desc\': order == \'desc\' && sortby.indexOf(column.field) !
       $scope.table.callback.update = ()->
         getItems()
 
-      $scope.tableUpdate = getItems =->
+      $scope.tableUpdate = getItems =(currentPage)->
+        $scope.currentPage = currentPage if currentPage
 
         if !$scope.table.resource
           return

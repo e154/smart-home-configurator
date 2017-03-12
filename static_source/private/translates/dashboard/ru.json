@@ -486,7 +486,15 @@
     "signin": "Вход",
     "signout": "Выход",
     "recovery": "Восстановление пароля",
-    "reset": "Сброс пароля"
+    "reset": "Сброс пароля",
+    "create_script": "Создать скрипт",
+    "delete_script": "Удалить скрипт",
+    "update_script": "Обновить скрипт",
+    "read_script": "Прочитать скрипт",
+    "show_notify": "Прочитать уведомление",
+    "create_notify": "Создать уведомление",
+    "repeat_notify": "Повторная отправка уведомления",
+    "delete_notify": "Удалить уведомление"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -518,6 +526,7 @@
     "remove_script": "Удалить",
     "save_script": "Сохранить",
     "add_on_enter": "Добавить",
-    "add_on_exit": "Добавить"
+    "add_on_exit": "Добавить",
+    "package_name": "Сценарии"
   }
 }
