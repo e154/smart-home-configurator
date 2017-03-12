@@ -127,6 +127,7 @@ __build_back() {
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
+    cp ${ROOT}/bin/configurator ${TMP_DIR}
     cd ${TMP_DIR}
     echo "tar: ${ARCHIVE} copy to ${HOME}"
     tar -zcf ${HOME}/${ARCHIVE} .
