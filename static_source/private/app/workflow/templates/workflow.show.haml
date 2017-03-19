@@ -37,10 +37,7 @@
       .text-muted
         {{'workflow.scenario' | translate}}
       %div
-        %a(ui-sref="dashboard.scenario.show({id:workflow.workflow.scenario.id})" )
-          {{::workflow.workflow.scenario.name}}
-          &nbsp;
-          .fa.fa-external-link
+        {{::workflow.workflow.scenario.name}}
 
     .form-group(ng-if="workflow.workflow.description")
       .text-muted

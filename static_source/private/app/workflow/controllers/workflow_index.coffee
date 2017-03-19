@@ -24,7 +24,7 @@ angular
       {
         name: 'workflow.scenario'
         field: 'scenario'
-        template: '<a ng-if="item[field]" ui-sref="dashboard.scenario.show({id:item[field].id})">{{::item[field].name}}&nbsp;<span class="fa fa-external-link"></span></a>'
+        template: '<span class="label label-success">{{::item[field].name}}</span>'
       }
       {
         name: 'workflow.created_at'
