@@ -11,7 +11,19 @@ angular
       name: 'New'
       system_name: 'New'
 
-  vm.doScenario =(item)->
+  vm.update_scenario =(item)->
+    return if !item.id?
+
+    success =->
+      $scope.workflow.workflow.scenario = item
+      vm.current = angular.copy item
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    data =
+      workflow_id: $scope.workflow.workflow.id
+      id: item.id
+    Workflow.update_scenario data, success, error
 
   vm.get_all_scenario =->
     success =(scenarios)->

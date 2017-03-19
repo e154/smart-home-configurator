@@ -13,7 +13,7 @@ angular
       responseType: 'json'
 
     update:
-        method: 'PUT'
+      method: 'PUT'
 
     delete:
       method: 'DELETE'
@@ -24,6 +24,10 @@ angular
       transformResponse: (data) ->
         meta: data?.meta || {}
         items: data?.workflows || []
+
+    update_scenario:
+      url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/update_scenario'
+      method: 'PUT'
 
     scenario_show:
       url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/scenario/:id'

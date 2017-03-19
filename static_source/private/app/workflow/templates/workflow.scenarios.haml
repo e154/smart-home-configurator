@@ -38,7 +38,7 @@
             {{'Updated at' | translate}} {{item.update_at | readableDateTime}}
           .clearfix
           .pull-right
-            %button.btn.btn-success.btn-xs(ng-click="scenarios.doScenario(item, $event)" type="button")
+            %button.btn.btn-success.btn-xs(ng-click="scenarios.update_scenario(item, $event)" type="button")
               .fa.fa-play
               &nbsp;
               {{'workflow.scenario.do_scenario' | translate}}
