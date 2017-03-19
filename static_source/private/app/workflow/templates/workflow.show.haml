@@ -22,7 +22,7 @@
       .text-muted
         {{'workflow.status' | translate}}
 
-      %span.label.label-success(ng-if="workflow.workflow.state == 'enabled'")
+      %span.label.label-success(ng-if="workflow.workflow.status == 'enabled'")
         {{"workflow.enabled" | translate}}
       %span.label.label-default(ng-if="workflow.workflow.status == 'disabled'")
         {{"workflow.disabled" | translate}}
@@ -32,12 +32,6 @@
         {{'workflow.name' | translate}}
       %div
         {{::workflow.workflow.name}}
-
-    .form-group(ng-if="workflow.workflow.scenario && workflow.workflow.scenario.id")
-      .text-muted
-        {{'workflow.scenario' | translate}}
-      %div
-        {{::workflow.workflow.scenario.name}}
 
     .form-group(ng-if="workflow.workflow.description")
       .text-muted

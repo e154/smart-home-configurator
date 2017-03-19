@@ -1,1 +1,50 @@
-scenarios
+.row
+  .col-md-6
+    .row
+      .col-md-12
+        .form-group
+          %a(href="#" ng-click="scenarios.addNew()")
+            .fa.fa-plus &nbsp;
+            {{'workflow.scenario.add' | translate}}
+
+    %div
+      %div(ng-include="'/workflow/templates/_scenario_form.html'" )
+
+    .form-group
+      .pull-right
+        %a.btn.btn-danger(href="" role="button" ng-click="scenarios.remove()" ng-if="scenarios.current.id")
+          {{'Delete' | translate}}
+        %a.btn.btn-default(href="" role="button" ng-click="scenarios.cancel()" ng-if="scenarios.current.id")
+          {{'Cancel' | translate}}
+        %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
+          %span(ng-if="!scenarios.current.id")
+            {{'Create' | translate}}
+          %span(ng-if="scenarios.current.id")
+            {{'Update' | translate}}
+      .clearfix
+
+  .col-md-6
+    .list-group(ng-if="workflow.workflow.scenarios.length")
+      .panel.panel-default
+        .panel-heading
+          {{'workflow.scenarios' | translate}}
+        %a.list-group-item(href="#" ng-repeat="item in workflow.workflow.scenarios" ng-click="scenarios.show(item)" ng-class="{'active' : scenarios.current.id == item.id}" )
+          %strong.list-group-item-heading
+            {{item.name}}
+            &nbsp;
+            %i.fa.fa-check(ng-if="workflow.workflow.scenario.id == item.id")
+
+          .pull-right.small
+            {{'Updated at' | translate}} {{item.update_at | readableDateTime}}
+          .clearfix
+          .pull-right
+            %button.btn.btn-success.btn-xs(ng-click="scenarios.doScenario(item, $event)" type="button")
+              .fa.fa-play
+              &nbsp;
+              {{'workflow.scenario.do_scenario' | translate}}
+          .pull-left.list-group-item-text
+            .small
+              {{'workflow.scenario.system_name' | translate}}:
+            .small
+              {{item.system_name}}
+          .clearfix

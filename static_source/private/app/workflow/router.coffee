@@ -40,7 +40,7 @@ angular
           controller: 'workflowShowCtrl as workflow'
         "tab-view@dashboard.workflow.show":
           templateUrl: '/workflow/templates/workflow.scenarios.html'
-          controller: 'workflowScenariosCtrl'
+          controller: 'workflowScenariosCtrl as scenarios'
     )
 
     .state(
