@@ -17,7 +17,7 @@
           {{'Updated at' | translate}} {{workflow.workflow.update_at | readableDateTime}}
 
 .row
-  .col-md-12
+  .col-md-2
     .form-group
       .text-muted
         {{'workflow.status' | translate}}
@@ -44,3 +44,16 @@
         {{'workflow.description' | translate}}
       %div
         {{::workflow.workflow.description}}
+
+  .col-sm-10
+    .form-group
+      %ul.nav.nav-tabs
+        %li(role="presentation" ui-sref-active-eq="active" ui-sref="dashboard.workflow.show")
+          %a(href="#")
+            {{'workflow.scenarios' | translate}}
+        %li(role="presentation" ui-sref-active-eq="active" ui-sref="dashboard.workflow.show.scripts")
+          %a(href="#")
+            {{'workflow.scripts' | translate}}
+
+
+    %div(ui-view="tab-view")

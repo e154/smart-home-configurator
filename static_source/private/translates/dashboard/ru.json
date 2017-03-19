@@ -151,6 +151,8 @@
     "show_form": "БП",
     "new_form": "Новый БП",
     "edit_form": "Радактирование БП",
+    "scenarios": "Сценарии",
+    "scripts": "Скрипты",
     "scenario": "Сценарий"
   },
   "flow": {

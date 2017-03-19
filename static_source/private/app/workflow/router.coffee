@@ -34,8 +34,22 @@ angular
     .state(
       name: "dashboard.workflow.show"
       url: "/:id"
-      templateUrl: '/workflow/templates/workflow.show.html'
-      controller: 'workflowShowCtrl as workflow'
+      views:
+        "":
+          templateUrl: '/workflow/templates/workflow.show.html'
+          controller: 'workflowShowCtrl as workflow'
+        "tab-view@dashboard.workflow.show":
+          templateUrl: '/workflow/templates/workflow.scenarios.html'
+          controller: 'workflowScenariosCtrl'
+    )
+
+    .state(
+      name: "dashboard.workflow.show.scripts"
+      url: "/scripts"
+      views:
+        "tab-view@dashboard.workflow.show":
+          templateUrl: '/workflow/templates/workflow.scripts.html'
+          controller: 'workflowScriptsCtrl'
     )
 
     .state(
