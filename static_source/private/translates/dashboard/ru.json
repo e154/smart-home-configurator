@@ -39,7 +39,6 @@
   "Notifr": "Уведомления",
   "Flow": "Задачи",
   "Workflow": "БП",
-  "Scenaries": "Сценарии",
   "All templates": "Все шаблоны",
   "All notifications": "Все уведомления",
   "All items": "Все элементы",
@@ -52,8 +51,7 @@
   "All workflow": "Все БП",
   "All maps": "Все карты",
   "All flow": "Все задачи",
-  "All device": "Все устройства",
-  "All scenaries": "Все сценарии",
+  "All device": "Все устройства"
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
@@ -152,8 +150,7 @@
     "index_form": "Список БП",
     "show_form": "БП",
     "new_form": "Новый БП",
-    "edit_form": "Радактирование БП",
-    "scenario": "Сценарий"
+    "edit_form": "Радактирование БП"
   },
   "flow": {
     "edit": "Редактирование процесса",
@@ -510,23 +507,5 @@
   },
   "auth": {
     "package_name": "Авторизация"
-  },
-  "scenario": {
-    "name": "Название",
-    "system_name": "Системное название",
-    "switch_to": "Переключить",
-    "created_at": "Дата создания",
-    "update_at": "Дата обновления",
-    "show_form": "Сценарий",
-    "new_form": "Новый сценарий",
-    "index_form": "Список сценариев",
-    "edit_form": "Редактирование сценария",
-    "on_enter": "При включении",
-    "on_exit": "При выключении",
-    "remove_script": "Удалить",
-    "save_script": "Сохранить",
-    "add_on_enter": "Добавить",
-    "add_on_exit": "Добавить",
-    "package_name": "Сценарии"
   }
 }
