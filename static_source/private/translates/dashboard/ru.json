@@ -51,7 +51,7 @@
   "All workflow": "Все БП",
   "All maps": "Все карты",
   "All flow": "Все задачи",
-  "All device": "Все устройства"
+  "All device": "Все устройства",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
