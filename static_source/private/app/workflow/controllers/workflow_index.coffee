@@ -22,7 +22,7 @@ angular
           false
       }
       {
-        name: 'workflow.scenario'
+        name: 'workflow.scenario.scenario'
         field: 'scenario'
         template: '<span class="label label-success">{{::item[field].name}}</span>'
       }
