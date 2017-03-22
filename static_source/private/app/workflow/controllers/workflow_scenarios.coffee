@@ -72,6 +72,13 @@ angular
 
   vm.show =(item)->
     vm.current = item
+    success =(result)->
+    error =(result)->
+      Message result.data.status, result.data.message
+    data =
+      workflow_id: $scope.workflow.workflow.id
+      id: item.id
+    Workflow.scenario_show data, success, error
 
   vm
 ]
