@@ -1,44 +1,10 @@
 .script-editor
-  .row(ng-show="state == 'add'")
-    .col-lg-4.col-md-5.col-sm-12
-      .form-group
-        -#
-        -#  select2
-        -#
-        %ui-select(ng-model="attached_script.script" theme="bootstrap")
-          %ui-select-match(placeholder="{{'workflow.script' | translate}}")
-            %div(ng-if="attached_script.script")
-              {{attached_script.script.name}} ({{attached_script.script.lang}})
-          %ui-select-choices(repeat="item in scripts | filter: $select.search" refresh="refreshScripts($select.search)" refresh-delay="0")
-            %div
-              %span(ng-bind-html="item.name | highlight: $select.search")
-              (
-              %small.text-muted(ng-bind-html="item.lang | highlight: $select.search")
-              )
-          %ui-select-no-choice
-            {{'No data' | translate}}
-
-    .col-lg-2.col-md-7.col-sm-12
-      .form-group
-        %button.btn.btn-default(ng-click="appendScript()") Добавить
-
-        %a(href="#" ng-click="state = 'redactor'" )
-          Закрыть
-
-        %a(href="#" ng-click="state = 'new'" )
-          Добавить новый
-
-
-  .row(ng-if="state == 'new'")
-    new
-  .row(ng-if="state == 'edit'")
-    edit
   .row
     .col-lg-3.file-list
 
       .form-group
         %strong
-          Файлы
+          {{'script.editor.file_list' | translate}}
           &nbsp;
           %small
             %a(ng-click="state = 'add'" href="#")
@@ -56,8 +22,65 @@
 
     .col-lg-9
       .form-group
-        %strong Окно редактора
+        %strong {{'script.editor.body' | translate}}
 
       .form-group
         .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")
 
+  .overlay(ng-show="state == 'add' || state == 'new' || state == 'edit'")
+
+  .script-editor-dialog(ng-show="state == 'add'")
+    .dialog-header
+      %strong
+        Добавление скрипта
+        %span.small
+          %a(href="#" ng-click="state = 'new'" )
+            Добавить новый
+      .cross(href="#" ng-click="state = 'redactor'" )
+    .dialog-body
+      .form-group
+        -#
+        -#  select2
+        -#
+        %ui-select(ng-model="attached_script.script" theme="bootstrap")
+          %ui-select-match(placeholder="{{'script.name' | translate}}")
+            %div(ng-if="attached_script.script")
+              {{attached_script.script.name}} ({{attached_script.script.lang}})
+          %ui-select-choices(repeat="item in scripts | filter: $select.search" refresh="refreshScripts($select.search)" refresh-delay="0")
+            %div
+              %span(ng-bind-html="item.name | highlight: $select.search")
+              (
+              %small.text-muted(ng-bind-html="item.lang | highlight: $select.search")
+              )
+          %ui-select-no-choice
+            {{'No data' | translate}}
+
+      %button.btn.btn-default(ng-click="appendScript()") Добавить
+
+  .script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
+    .dialog-header
+      %strong
+        Добавление скрипта
+        %span.small
+          %a(href="#" ng-click="state = 'new'" )
+            Добавить новый
+      .cross(href="#" ng-click="state = 'redactor'" )
+    .dialog-body
+      .form-group
+        %label Наименование*
+        %input.form-control(ng-model="")
+      .form-group
+        %label {{'script.lang' | translate}}*
+        %select.form-control(ng-model="script.script.lang")
+          %option(value="coffeescript")
+            coffee script
+          %option(value="javascript")
+            javascript
+          %option(value="lua")
+            lua
+      .form-group
+        %label Описание
+        %input.form-control(ng-model="")
+
+  .row(ng-if="state == 'edit'")
+    edit

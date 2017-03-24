@@ -5,7 +5,7 @@
 .row
   .col-md-3
     .form-group
-      %laber {{'log.start_date' | translate}}
+      %label {{'log.start_date' | translate}}
       .input-group(ng-init="qwe = ''")
         %input.form-control(pikaday="qwe" ng-model="qwe" number-of-months="1" on-select="setStartDay(date)")
         %span.input-group-addon
@@ -14,7 +14,7 @@
 
   .col-md-3
     .form-group
-      %laber {{'log.end_date' | translate}}
+      %label {{'log.end_date' | translate}}
       .input-group
         %input.form-control(pikaday="qwe1" ng-model="qwe1" number-of-months="1" on-select="setEndDay(date)")
         %span.input-group-addon

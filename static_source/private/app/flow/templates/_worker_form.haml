@@ -1,13 +1,13 @@
 .form-group
-  %laber {{'worker.name' | translate}}*
+  %label {{'worker.name' | translate}}*
   %input.form-control(ng-model="worker.name")
 
 .form-group
-  %laber {{'worker.time' | translate}}*
+  %label {{'worker.time' | translate}}*
   %input.form-control(ng-model="worker.time")
 
 .form-group
-  %laber {{'worker.status' | translate}}
+  %label {{'worker.status' | translate}}
   %select.form-control(ng-model="worker.status")
     %option(value="enabled")
       {{'worker.enabled' | translate}}
@@ -15,7 +15,7 @@
       {{'worker.disabled' | translate}}
 
 .form-group
-  %laber.clearfix
+  %label.clearfix
     {{'worker.action_name' | translate}}
     .pull-right(ng-if="worker.device_action.device.id")
       %a(href="#" ui-sref="dashboard.device.show({id: worker.device_action.device.id})")

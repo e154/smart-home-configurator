@@ -22,7 +22,7 @@ angular
       $scope.current_script = {}
       $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
 
-    $scope.state = 'redactor' #redactor|add|new|edit
+    $scope.state = 'add' #redactor|add|new|edit
 
     # select2
     # ------------------

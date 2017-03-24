@@ -137,6 +137,9 @@ rect.product {
 }
 
 .script-editor {
+  position: relative;
+  z-index: inherit;
+
   .file-list {
     .file {
       cursor: pointer;
@@ -161,5 +164,56 @@ rect.product {
         }
       }
     }
+  }
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: rgba(158, 153, 162, 0.55);
+  }
+  .script-editor-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 11;
+
+    margin: 0 auto;
+    width: 100%;
+    max-width: 450px;
+
+    padding: 15px;
+
+    .dialog-header {
+      position: relative;
+      background-color: #2c4359;
+      padding: 15px;
+      color: white;
+      .small {
+        margin-left: 10px;
+        color: #a5a5a5;
+        a {
+          color: #a5a5a5;
+        }
+      }//small
+      .cross {
+        position: absolute;
+        top: 8px;
+        right: 15px;
+        &:before, &:after {
+          background-color: white;
+        }
+      }//cross
+    }//dialog-header
+    .dialog-body {
+      background-color: white;
+      padding: 15px;
+      .btn {
+        width: 100%;
+      }
+    }//dialog-body
   }
 }

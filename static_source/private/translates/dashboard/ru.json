@@ -226,6 +226,10 @@
     "index_form": "Список скриптов",
     "access_list": {
       "execute script": "Выполнить скрипт один раз"
+    },
+    "editor": {
+      "file_list": "Файлы",
+      "body": "Окно редактора"
     }
   },
   "log": {

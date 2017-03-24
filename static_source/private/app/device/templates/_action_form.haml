@@ -1,9 +1,9 @@
 .form-group
-  %laber {{'device.action.name' | translate}}*
+  %label {{'device.action.name' | translate}}*
   %input.form-control(ng-model="action.current.name")
 
 .form-group
-  %laber
+  %label
     {{'device.script' | translate}}
     .pull-right
       .dropdown
@@ -36,5 +36,5 @@
 
 
 .form-group
-  %laber {{'device.action.description' | translate}}
+  %label {{'device.action.description' | translate}}
   %textarea.form-control(ng-model="action.current.description" rows="5")

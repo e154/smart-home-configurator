@@ -23,11 +23,11 @@
               .row
                 .col-md-6
                   .form-group
-                    %laber {{'map.element.name' | translate}}*
+                    %label {{'map.element.name' | translate}}*
                     %input.form-control(ng-model="element.name")
                 .col-md-6
                   .form-group
-                    %laber {{'map.element.status' | translate}}
+                    %label {{'map.element.status' | translate}}
                     %select.form-control(ng-model="element.status")
                       %option(value="enabled")
                         {{'map.element.enabled' | translate}}
@@ -38,7 +38,7 @@
               .row
                 .col-md-6
                   .form-group
-                    %laber {{'map.element.type' | translate}}
+                    %label {{'map.element.type' | translate}}
                     %select.form-control(ng-model="element.prototype_type")
                       %option(value="image")
                         {{'map.element.image' | translate}}
