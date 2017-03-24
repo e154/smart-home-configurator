@@ -135,3 +135,31 @@
 rect.product {
   fill: red;
 }
+
+.script-editor {
+  .file-list {
+    .file {
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 34px;
+      .file-action-icons {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        a {
+          margin-left: 3px;
+        }
+      }
+      &.active {
+        .file-action-icons {
+          color: white;
+          a {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,10 +9,20 @@ angular
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
-    $scope.used_scripts = []
+    $scope.used_scripts = $scope.ngModel || []
     $scope.current_script = {}
+    $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
     $scope.attached_script =
       script: null
+
+    $scope.$watch 'ngModel', (nv, ov) ->
+      return if nv == ov
+      $scope.used_scripts = []
+      $scope.used_scripts = nv if nv
+      $scope.current_script = {}
+      $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
+
+    $scope.state = 'redactor' #redactor|add|new|edit
 
     # select2
     # ------------------
@@ -28,14 +38,27 @@ angular
       ).then (response)->
         $scope.scripts = response.data.scripts
 
+    $scope.edit =(script, e)->
+      e.preventDefault()
+
+
     $scope.remove =(script, e)->
       e.preventDefault()
+      return if !confirm("Удалить данный элемент?")
+
       index = $scope.used_scripts.indexOf(script)
       $scope.current_script = null if $scope.current_script == script
       $scope.used_scripts.splice(index, 1)
 
     $scope.select =(script, e)->
       e.preventDefault()
+      switch script.lang
+        when 'javascript'
+          $scope.ace_options.mode = 'javascript'
+        when 'coffeescript'
+          $scope.ace_options.mode = 'coffee'
+        when 'lua'
+          $scope.ace_options.mode = 'lua'
       $scope.current_script = script
 
     $scope.appendScript =->

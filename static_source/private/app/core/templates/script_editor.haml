@@ -1,6 +1,6 @@
-.panel
-  .row
-    .col-lg-4.col-md-5.col-sm-6
+.script-editor
+  .row(ng-show="state == 'add'")
+    .col-lg-4.col-md-5.col-sm-12
       .form-group
         -#
         -#  select2
@@ -18,36 +18,46 @@
           %ui-select-no-choice
             {{'No data' | translate}}
 
-    .col-lg-8.col-md-7.col-sm-6
+    .col-lg-2.col-md-7.col-sm-12
       .form-group
         %button.btn.btn-default(ng-click="appendScript()") Добавить
+
+        %a(href="#" ng-click="state = 'redactor'" )
+          Закрыть
+
+        %a(href="#" ng-click="state = 'new'" )
+          Добавить новый
+
+
+  .row(ng-if="state == 'new'")
+    new
+  .row(ng-if="state == 'edit'")
+    edit
   .row
-    .col-lg-2
+    .col-lg-3.file-list
 
       .form-group
-        %h4 file list
+        %strong
+          Файлы
+          &nbsp;
+          %small
+            %a(ng-click="state = 'add'" href="#")
+              .fa.fa-plus
       .form-group
-        %ul.list-unstyled
-          %li(ng-repeat="script in used_scripts")
-            .pull-left
-              %a(href="#" ng-click="select(script, $event)")
-                {{script.name}}
-            .pull-right
+        %ul.list-group
+          %li.file.list-group-item(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
+            {{script.name}}
+            .file-action-icons
+              %a(href="#" ng-click="edit(script, $event)")
+                .fa.fa-pencil
               %a(href="#" ng-click="remove(script, $event)")
-                .fa.fa-crosshairs
+                .fa.fa-trash
             .clearfix
 
-    .col-lg-10
+    .col-lg-9
       .form-group
-        %h4 Окно редактора
+        %strong Окно редактора
 
       .form-group
         .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")
 
-  .row
-    .col-lg-12
-      .pull-right
-        %a.btn.btn-danger(href="" role="button" ng-click="device.remove()")
-          {{'Delete' | translate}}
-        %a.btn.btn-primary(href="" role="button" ng-click="device.submit()")
-          {{'Update' | translate}}
