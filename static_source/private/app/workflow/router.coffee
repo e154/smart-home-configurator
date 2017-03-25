@@ -49,7 +49,7 @@ angular
       views:
         "tab-view@dashboard.workflow.show":
           templateUrl: '/workflow/templates/workflow.scripts.html'
-          controller: 'workflowScriptsCtrl'
+          controller: 'workflowScriptsCtrl as ws'
     )
 
     .state(
