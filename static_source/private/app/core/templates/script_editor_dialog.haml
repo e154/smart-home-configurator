@@ -1,0 +1,62 @@
+.overlay(ng-show="state == 'add' || state == 'new' || state == 'edit'")
+
+.script-editor-dialog(ng-show="state == 'add'")
+  .dialog-header
+    %strong
+      Добавление скрипта
+      %span.small
+        %a(href="#" ng-click="state = 'new'" )
+          Добавить новый
+    .cross(href="#" ng-click="state = 'redactor'" )
+  .dialog-body
+    .form-group
+      -#
+      -#  select2
+      -#
+      %ui-select(ng-model="attached_script.script" theme="bootstrap")
+        %ui-select-match(placeholder="{{'script.name' | translate}}")
+          %div(ng-if="attached_script.script")
+            {{attached_script.script.name}} ({{attached_script.script.lang}})
+        %ui-select-choices(repeat="item in scripts | filter: $select.search" refresh="refreshScripts($select.search)" refresh-delay="0")
+          %div
+            %span(ng-bind-html="item.name | highlight: $select.search")
+            (
+            %small.text-muted(ng-bind-html="item.lang | highlight: $select.search")
+            )
+        %ui-select-no-choice
+          {{'No data' | translate}}
+
+    %button.btn.btn-default(ng-click="appendScript()") Добавить
+
+.script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
+  .dialog-header
+    %strong
+      %span(ng-if="state == 'new'")
+        Новый скрипт
+      %span(ng-if="state == 'edit'")
+        Редактирование скрипт
+      %span.small
+        %a(href="#" ng-click="state = 'add'" )
+          Выбрать из каталога
+    .cross(href="#" ng-click="state = 'redactor'" )
+  .dialog-body
+    .form-group
+      %label Наименование*
+      %input.form-control(ng-model="current_script.name")
+    .form-group
+      %label {{'script.lang' | translate}}*
+      %select.form-control(ng-model="current_script.lang")
+        %option(value="coffeescript" selected)
+          coffee script
+        %option(value="javascript")
+          javascript
+        %option(value="lua")
+          lua
+    .form-group
+      %label Описание
+      %input.form-control(ng-model="current_script.description")
+
+    %button.btn.btn-default(ng-click="updateScript()") Сохранить
+
+.row(ng-if="state == 'edit'")
+  edit

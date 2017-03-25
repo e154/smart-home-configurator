@@ -142,6 +142,8 @@ rect.product {
 
   .file-list {
     .file {
+      color: rgba(44, 67, 89, 0.49);
+      position: relative;
       cursor: pointer;
       white-space: nowrap;
       overflow: hidden;
@@ -150,16 +152,18 @@ rect.product {
       .file-action-icons {
         position: absolute;
         right: 10px;
-        top: 10px;
+        top: 0;
         a {
+          color: rgba(44, 67, 89, 0.49);
           margin-left: 3px;
         }
       }
       &.active {
+        color: #2c4359;
         .file-action-icons {
-          color: white;
+          color: #2c4359;
           a {
-            color: white;
+            color: #2c4359;
           }
         }
       }

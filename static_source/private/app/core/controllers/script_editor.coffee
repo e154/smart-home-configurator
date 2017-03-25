@@ -4,8 +4,8 @@
 
 angular
 .module('appControllers')
-.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http'
-  ($scope, Notify, $log, Stream, $rootScope, $http) ->
+.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http','Script','Message','$timeout'
+  ($scope, Notify, $log, Stream, $rootScope, $http, Script, Message, $timeout) ->
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
@@ -22,7 +22,7 @@ angular
       $scope.current_script = {}
       $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
 
-    $scope.state = 'add' #redactor|add|new|edit
+    $scope.state = 'redactor' #redactor|add|new|edit
 
     # select2
     # ------------------
@@ -40,7 +40,10 @@ angular
 
     $scope.edit =(script, e)->
       e.preventDefault()
-
+      $scope.state = 'edit'
+      $scope.current_script = script
+      $timeout ()->
+        $scope.$apply()
 
     $scope.remove =(script, e)->
       e.preventDefault()
@@ -71,4 +74,11 @@ angular
 
       $scope.used_scripts.push $scope.attached_script.script if !exist
 
+    $scope.updateScript =->
+      return if !$scope.current_script
+      success =->
+        Notify.success 'Скрипт успешно обновлён', 3000
+      error =(result)->
+        Message result.data.status, result.data.message
+      Script.update $scope.current_script, success, error
 ]
