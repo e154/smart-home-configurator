@@ -49,5 +49,18 @@
               {{item.system_name}}
           .clearfix
 
+
 .row
-  .col-md-6
+  .col-lg-12
+    %h4
+      Скрипты привязанные к выделенному сценарию
+
+.row
+  .col-lg-12
+    %script-editor(ng-model="scenarios.current.scripts")
+
+.row
+  .col-lg-12.form-group
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
+        {{'Update' | translate}}

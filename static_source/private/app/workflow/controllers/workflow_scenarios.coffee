@@ -10,6 +10,7 @@ angular
     vm.current =
       name: 'New'
       system_name: 'New'
+      scripts: []
 
   vm.update_scenario =(item)->
     return if !item.id?
@@ -65,14 +66,17 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
+    return if data.system_name == '' || data.name == ''
+
     if !data?.id?
       Workflow.scenario_create data, success, error
     else
       Workflow.scenario_update data, success, error
 
   vm.show =(item)->
-    vm.current = item
     success =(result)->
+      result.scripts = [] if !result.scripts
+      vm.current = result
     error =(result)->
       Message result.data.status, result.data.message
     data =
