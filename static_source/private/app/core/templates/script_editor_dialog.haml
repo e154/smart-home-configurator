@@ -5,9 +5,9 @@
     %strong
       Добавление скрипта
       %span.small
-        %a(href="#" ng-click="state = 'new'" )
+        %a(href="#" ng-click="dialog('new')" )
           Добавить новый
-    .cross(href="#" ng-click="state = 'redactor'" )
+    .cross(href="#" ng-click="dialog('redactor')" )
   .dialog-body
     .form-group
       -#
@@ -34,11 +34,11 @@
       %span(ng-if="state == 'new'")
         Новый скрипт
       %span(ng-if="state == 'edit'")
-        Редактирование скрипт
+        Редактирование скрипта
       %span.small
-        %a(href="#" ng-click="state = 'add'" )
+        %a(href="#" ng-click="dialog('add')" )
           Выбрать из каталога
-    .cross(href="#" ng-click="state = 'redactor'" )
+    .cross(href="#" ng-click="dialog('redactor')" )
   .dialog-body
     .form-group
       %label Наименование*
@@ -57,6 +57,3 @@
       %input.form-control(ng-model="current_script.description")
 
     %button.btn.btn-default(ng-click="updateScript()") Сохранить
-
-.row(ng-if="state == 'edit'")
-  edit

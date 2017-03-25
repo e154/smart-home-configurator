@@ -38,20 +38,21 @@ angular
       ).then (response)->
         $scope.scripts = response.data.scripts
 
-    $scope.edit =(script, e)->
+    $scope.edit =(e)->
       e.preventDefault()
+      return if !$scope.current_script
       $scope.state = 'edit'
-      $scope.current_script = script
       $timeout ()->
         $scope.$apply()
 
-    $scope.remove =(script, e)->
+    $scope.remove_from_filelist =(e)->
       e.preventDefault()
+      return if !$scope.current_script
       return if !confirm("Удалить данный элемент?")
 
-      index = $scope.used_scripts.indexOf(script)
-      $scope.current_script = null if $scope.current_script == script
+      index = $scope.used_scripts.indexOf($scope.current_script)
       $scope.used_scripts.splice(index, 1)
+      $scope.current_script = null
 
     $scope.select =(script, e)->
       e.preventDefault()
@@ -64,21 +65,43 @@ angular
           $scope.ace_options.mode = 'lua'
       $scope.current_script = script
 
-    $scope.appendScript =->
-      return if !$scope.attached_script.script
-
+    appendScript =(_script)->
       exist = false
       angular.forEach $scope.used_scripts, (script) ->
-        exist = script == $scope.attached_script.script
-        return if exist
+        if script.id == _script.id
+          exist = true
 
-      $scope.used_scripts.push $scope.attached_script.script if !exist
+      $scope.used_scripts.push _script if !exist
+
+    $scope.appendScript =->
+      return if !$scope.attached_script.script
+      appendScript($scope.attached_script.script)
+
 
     $scope.updateScript =->
       return if !$scope.current_script
-      success =->
-        Notify.success 'Скрипт успешно обновлён', 3000
       error =(result)->
         Message result.data.status, result.data.message
-      Script.update $scope.current_script, success, error
+
+      if $scope.current_script.id
+        success =->
+          Notify 'success', 'Скрипт успешно обновлён', 3
+        Script.update $scope.current_script, success, error
+      else
+        success =(script)->
+          Notify 'success', 'Скрипт успешно создан', 3
+          $scope.current_script = script
+          appendScript($scope.current_script)
+          $scope.state = 'edit'
+        Script.create $scope.current_script, success, error
+
+    $scope.dialog =(state)->
+      $scope.state = state
+      if state == 'new'
+        $scope.current_script =
+          name: "Новый скрипт"
+          lang: "coffeescript"
+          description: ""
+          source: ""
+
 ]

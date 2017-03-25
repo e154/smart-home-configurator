@@ -141,6 +141,17 @@ rect.product {
   z-index: inherit;
 
   .file-list {
+    .file-list-header {
+      position: relative;
+      .file-action-icons {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        a {
+          margin-left: 3px;
+        }
+      }
+    }
     .file {
       color: rgba(44, 67, 89, 0.49);
       position: relative;
@@ -148,24 +159,8 @@ rect.product {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-right: 34px;
-      .file-action-icons {
-        position: absolute;
-        right: 10px;
-        top: 0;
-        a {
-          color: rgba(44, 67, 89, 0.49);
-          margin-left: 3px;
-        }
-      }
       &.active {
         color: #2c4359;
-        .file-action-icons {
-          color: #2c4359;
-          a {
-            color: #2c4359;
-          }
-        }
       }
     }
   }
@@ -204,6 +199,7 @@ rect.product {
         }
       }//small
       .cross {
+        cursor: pointer;
         position: absolute;
         top: 8px;
         right: 15px;
