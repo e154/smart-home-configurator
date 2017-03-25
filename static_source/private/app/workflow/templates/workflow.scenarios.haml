@@ -43,10 +43,16 @@
               &nbsp;
               {{'workflow.scenario.do_scenario' | translate}}
           .pull-left.list-group-item-text
-            .small
+            %div
               {{'workflow.scenario.system_name' | translate}}:
-            .small
+            .text-muted
               {{item.system_name}}
+            %div
+              {{'workflow.scripts' | translate}}:
+            .text-muted(ng-if="!item.scripts.length")
+              Нет
+            .text-muted(ng-repeat="script in item.scripts")
+              {{script.name}}({{script.lang}})
           .clearfix
 
 
