@@ -56,16 +56,16 @@
           .clearfix
 
 
-.row
+.row(ng-if="scenarios.current.id")
   .col-lg-12
     %h4
-      Скрипты привязанные к выделенному сценарию
+      {{'workflow.scenario.scripts_title' | translate}}
 
-.row
+.row(ng-if="scenarios.current.id")
   .col-lg-12
     %script-editor(ng-model="scenarios.current.scripts")
 
-.row
+.row(ng-if="scenarios.current.id")
   .col-lg-12.form-group
     .pull-right
       %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
