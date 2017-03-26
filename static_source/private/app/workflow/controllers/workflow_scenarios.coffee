@@ -33,7 +33,7 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
-    Workflow.scenario_all {workflow_id: $scope.workflow.workflow.id}, success, error
+    Workflow.get_scenarios {workflow_id: $scope.workflow.workflow.id}, success, error
 
   vm.remove = ()->
     return if !confirm('Хотите удалить этот сценарий?')

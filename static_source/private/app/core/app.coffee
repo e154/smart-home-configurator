@@ -7,6 +7,7 @@ angular.module('templates', [])
 angular.module('appDirectives', [])
 angular.module('appFilters', [])
 angular.module('appControllers', [])
+angular.module('appConstants', [])
 angular.module('appServices', ['ngResource'])
 app = angular.module('app', [
   'pascalprecht.translate'
@@ -14,6 +15,7 @@ app = angular.module('app', [
   'appDirectives'
   'ngRoute'
   'appControllers'
+  'appConstants'
   'appFilters'
   'appServices'
   'ui.router'

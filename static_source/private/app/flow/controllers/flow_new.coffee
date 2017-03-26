@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'flowNewCtrl', ['$scope', 'Notify', 'Flow', '$state', 'Message', 'Workflow', '$timeout'
-($scope, Notify, Flow, $state, Message, Workflow, $timeout) ->
+.controller 'flowNewCtrl', ['$scope', 'Notify', 'Flow', '$state', 'Message', 'Workflow', '$timeout', 'WorkflowSelect2'
+($scope, Notify, Flow, $state, Message, Workflow, $timeout, WorkflowSelect2) ->
   vm = this
 
   $scope.flow = new Flow({
@@ -29,6 +29,9 @@ angular
       Message result.data.status, result.data.message
 
     $scope.flow.$create(success, error)
+
+  $scope.workflows = []
+  $scope.refreshWorkflows = WorkflowSelect2 $scope.workflows
 
   vm
 ]

@@ -34,14 +34,14 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        data?.workflow_scenario || data
+        data?.scenario || data
 
     scenario_create:
       url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/scenario'
       method: 'POST'
       responseType: 'json'
       transformResponse: (data) ->
-        data?.workflow_scenario || data
+        data?.scenario || data
 
     scenario_update:
       url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/scenario/:id'
@@ -51,12 +51,12 @@ angular
       url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/scenario/:id'
       method: 'DELETE'
 
-    scenario_all:
+    get_scenarios:
       url: window.app_settings.server_url + '/api/v1/workflow/:workflow_id/scenarios'
       method: 'GET'
       responseType: 'json'
       isArray: true
       transformResponse: (data) ->
-        data?.workflow_scenarios || []
+        data?.scenarios || []
 
 ]

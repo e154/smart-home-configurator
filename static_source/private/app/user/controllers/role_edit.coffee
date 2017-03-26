@@ -1,21 +1,12 @@
 angular
 .module('appControllers')
-.controller 'roleEditCtrl', ['$scope', 'Notify','Role', '$stateParams', '$state', '$http', 'Message'
-($scope, Notify, Role, $stateParams, $state, $http, Message) ->
+.controller 'roleEditCtrl', ['$scope', 'Notify','Role', '$stateParams', '$state', '$http', 'Message', 'RoleSelect2'
+($scope, Notify, Role, $stateParams, $state, $http, Message, RoleSelect2) ->
 
   $scope.role = new Role {name: $stateParams.name}
   $scope.roles = []
 
-  $scope.refreshRoles = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/role/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.roles = response.data.roles
+  $scope.refreshRoles = RoleSelect2 (roles) -> $scope.roles = roles
 
   show =->
     success =->

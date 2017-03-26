@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'userEditCtrl', ['$scope', 'Notify', 'User', '$stateParams', 'Message', '$state', '$http'
-($scope, Notify, User, $stateParams, Message, $state, $http) ->
+.controller 'userEditCtrl', ['$scope', 'Notify', 'User', '$stateParams', 'Message', '$state', 'RoleSelect2'
+($scope, Notify, User, $stateParams, Message, $state, RoleSelect2) ->
 
   $scope.user = new User {id: $stateParams.id}
   meta = [
@@ -23,16 +23,7 @@ angular
     }
   ]
 
-  $scope.refreshRoles = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/role/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.roles = response.data.roles
+  $scope.refreshRoles = RoleSelect2 (roles)-> $scope.roles = roles
 
   show =->
     success =(user)->

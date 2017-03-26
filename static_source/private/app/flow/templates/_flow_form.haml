@@ -12,7 +12,18 @@
 
 .form-group
     %label {{'flow.workflow' | translate}}
-    %select.form-control(ng-model="flow.workflow.id" ng-options="wf.id as wf.name for wf in workflows")
+    -#%select.form-control(ng-model="flow.workflow.id" ng-options="wf.id as wf.name for wf in workflows")
+
+    -#
+    -#  select2
+    -#
+    %ui-select(ng-model="flow.workflow" theme="bootstrap")
+        %ui-select-match(placeholder="{{'flow.workflow' | translate}}")
+            {{flow.workflow.name}}
+        %ui-select-choices(repeat="item in workflows | filter: $select.search" refresh="refreshWorkflows($select.search)" refresh-delay="0")
+            %div(ng-bind-html="item.name | highlight: $select.search")
+        %ui-select-no-choice
+            {{'No data' | translate}}
 
 .form-group
     %label {{'flow.description' | translate}}

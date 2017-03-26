@@ -4,8 +4,8 @@
 
 angular
 .module('appControllers')
-.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http','Script','Message','$timeout'
-  ($scope, Notify, $log, Stream, $rootScope, $http, Script, Message, $timeout) ->
+.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http','Script','Message','$timeout', 'ScriptSelect2'
+  ($scope, Notify, $log, Stream, $rootScope, $http, Script, Message, $timeout, ScriptSelect2) ->
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
@@ -27,16 +27,7 @@ angular
     # select2
     # ------------------
     $scope.scripts = []
-    $scope.refreshScripts = (query)->
-      $http(
-        method: 'GET'
-        url: window.app_settings.server_url + "/api/v1/script/search"
-        params:
-          query: query
-          limit: 5
-          offset: 0
-      ).then (response)->
-        $scope.scripts = response.data.scripts
+    $scope.refreshScripts = ScriptSelect2 (scripts)-> $scope.scripts = scripts
 
     $scope.edit =(e)->
       e.preventDefault()
