@@ -46,7 +46,7 @@ angular
         DeviceState.get_by_device {id: device.device?.id || device.id}, success, error
 
       # get devices (select2)
-      refreshDevices: DeviceSelect2(devices)=>
+      refreshDevices: DeviceSelect2 (devices)=>
         angular.forEach devices, (device, index)->
           if !device.device_id? && !device.address?
             devices.splice(index, 1)

@@ -25,6 +25,20 @@
         %ui-select-no-choice
             {{'No data' | translate}}
 
+.form-group(ng-if="flow.workflow")
+    %label {{'workflow.scenario' | translate}}
+
+    -#
+    -#  select2
+    -#
+    %ui-select(ng-model="flow.scenario" theme="bootstrap")
+        %ui-select-match(placeholder="{{'workflow.scenario' | translate}}")
+            {{flow.scenario.name}}
+        %ui-select-choices(repeat="item in scenarios | filter: $select.search" refresh="refreshScenarios($select.search)" refresh-delay="0")
+            %div(ng-bind-html="item.name | highlight: $select.search")
+        %ui-select-no-choice
+            {{'No data' | translate}}
+
 .form-group
     %label {{'flow.description' | translate}}
     %textarea.form-control(ng-model="flow.description" rows="2" )
