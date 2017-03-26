@@ -36,6 +36,7 @@ angular
     Workflow.scenario_all {workflow_id: $scope.workflow.workflow.id}, success, error
 
   vm.remove = ()->
+    return if !confirm('Хотите удалить этот сценарий?')
     data = angular.copy vm.current
     data.workflow_id = $scope.workflow.workflow.id
 
