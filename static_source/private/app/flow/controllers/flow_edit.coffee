@@ -1,13 +1,14 @@
 angular
 .module('appControllers')
 .controller 'flowEditCtrl', ['$scope', 'Message', '$stateParams', 'Flow', '$state', 'Workflow', '$timeout'
-'log', 'Notify', 'Worker', '$rootScope'
-($scope, Message, $stateParams, Flow, $state, Workflow, $timeout, log, Notify, Worker, $rootScope) ->
+'log', 'Notify', 'Worker', '$rootScope', 'WorkflowSelect2', 'WorkflowScenarioSelect2'
+($scope, Message, $stateParams, Flow, $state, Workflow, $timeout, log, Notify, Worker, $rootScope, WorkflowSelect2, WorkflowScenarioSelect2) ->
   vm = this
 
   # vars
   $scope.callback = {}
   $scope.workflows = []
+  $scope.scenarios = []
   $scope.flow = {}
   $scope.elementScripts = {}
   $scope.elementFlows = {}
@@ -22,12 +23,15 @@ angular
   #------------------------------------------------------------------------------
   # workflow list
   #------------------------------------------------------------------------------
-  getWorkflow =->
-    success = (result)->
-      $scope.workflows = result.items
-    error = (result)->
-      Message result.data.status, result.data.message
-    Workflow.all {}, success, error
+  $scope.refreshWorkflows = WorkflowSelect2 (workflows)-> $scope.workflows = workflows
+
+  get_workflow_id =-> $scope.flow.workflow?.id
+  $scope.refreshScenarios = WorkflowScenarioSelect2 get_workflow_id, (scenarios)-> $scope.scenarios = scenarios
+
+#  $scope.$watch 'flow.workflow', (nv, ov)->
+#    return if nv == ov || !nv
+#    $scope.scenarios = []
+#    $scope.flow.scenario = null
 
   #------------------------------------------------------------------------------
   # flow
@@ -94,7 +98,6 @@ angular
   #------------------------------------------------------------------------------
   # init
   #------------------------------------------------------------------------------
-  getWorkflow()
   getFlow()
 
   vm
