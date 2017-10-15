@@ -2,7 +2,7 @@ Smart home configurator
 -----------------------
 
 [Project site](https://e154.github.io/smart-home/) |
-[Configurator](https://github.com/e154/smart-home-configurator/) |
+[Server](https://github.com/e154/smart-home/) |
 [Node](https://github.com/e154/smart-home-node/) |
 [Development Tools](https://github.com/e154/smart-home-tools/) |
 [Smart home Socket](https://github.com/e154/smart-home-socket/)
