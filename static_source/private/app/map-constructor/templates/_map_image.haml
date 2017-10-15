@@ -1,7 +1,7 @@
 .row
   .col-md-6
     .form-group
-      %laber {{'map.element.prototype.image' | translate}}*
+      %label {{'map.element.prototype.image' | translate}}*
       .map-preview-img.relative
         %a(ng-href="{{server_url}}/{{element.prototype.image.url}}" rel="gallery" title="original" ng-if="element.prototype.image.url" fancybox="true")
           %img(ngf-thumbnail="server_url + element.prototype.image.url || '/thumb.jpg'" alt="" title="")
@@ -21,5 +21,5 @@
 
   .col-md-6
     .form-group
-      %laber {{'map.element.prototype.style' | translate}}
+      %label {{'map.element.prototype.style' | translate}}
       %textarea.form-control(ng-model="element.prototype.style")

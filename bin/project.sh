@@ -55,14 +55,10 @@ __init() {
     npm install
 
     cd ${ROOT}
-    go get ./...
+    go install $(go list ./... | grep -v "/vendor\|/database")
 
     cp ${ROOT}/conf/app.sample.conf ${ROOT}/conf/app.conf
     cp ${ROOT}/conf/dev/app.sample.conf ${ROOT}/conf/dev/app.conf
-
-    go get github.com/karalabe/xgo
-
-    __mysql_help
 }
 
 __clean() {
@@ -100,27 +96,10 @@ __build() {
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
-    cp ${ROOT}/bin/configurator ${TMP_DIR}
+    cp ${ROOT}/bin/${EXEC} ${TMP_DIR}
     cd ${TMP_DIR}
 #    echo "tar: ${ARCHIVE} copy to ${HOME}"
 #    tar -zcf ${HOME}/${ARCHIVE} .
-}
-
-__mysql_help() {
-    cat <<EOF
-
-#
-# please install database
-#
-
-mysql -u root -p
-CREATE DATABASE smarthome;
-CREATE USER 'smarthome'@'localhost' IDENTIFIED BY 'smarthome';
-GRANT ALL PRIVILEGES ON smarthome . * TO 'smarthome'@'localhost';
-FLUSH PRIVILEGES;
-use smarthome
-source /opt/smart-home/server/dump.sql
-EOF
 }
 
 __help() {

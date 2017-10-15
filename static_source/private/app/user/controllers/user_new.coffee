@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'userNewCtrl', ['$scope', 'Notify', 'User', 'Message', '$http', '$state'
-($scope, Notify, User, Message, $http, $state) ->
+.controller 'userNewCtrl', ['$scope', 'Notify', 'User', 'Message', '$http', '$state', 'RoleSelect2'
+($scope, Notify, User, Message, $http, $state, RoleSelect2) ->
 
   $scope.user = new User({
     status: 'active'
@@ -29,16 +29,7 @@ angular
   })
 
   $scope.roles = []
-  $scope.refreshRoles = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/role/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.roles = response.data.roles
+  $scope.refreshRoles = RoleSelect2 (roles)-> $scope.roles = roles
 
   $scope.create =->
     success =(user)->

@@ -1,7 +1,7 @@
 angular
 .module('angular-map')
-.factory 'MapDevice', [ '$http', 'Message', 'Notify', 'DeviceState', 'MapDeviceState', 'DeviceAction', 'MapDeviceAction'
-  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction) ->
+.factory 'MapDevice', [ '$http', 'Message', 'Notify', 'DeviceState', 'MapDeviceState', 'DeviceAction', 'MapDeviceAction', 'DeviceSelect2'
+  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction, DeviceSelect2) ->
     class MapDevice
 
       id: null
@@ -46,20 +46,11 @@ angular
         DeviceState.get_by_device {id: device.device?.id || device.id}, success, error
 
       # get devices (select2)
-      refreshDevices: (query)=>
-        $http(
-          method: 'GET'
-          url: window.app_settings.server_url + "/api/v1/device/search"
-          params:
-            query: query
-            limit: 15
-            offset: 0
-        ).then (response)=>
-          devices = angular.copy(response.data.devices)
-          angular.forEach devices, (device, index)->
-            if !device.device_id? && !device.address?
-              devices.splice(index, 1)
-          @devices = devices
+      refreshDevices: DeviceSelect2 (devices)=>
+        angular.forEach devices, (device, index)->
+          if !device.device_id? && !device.address?
+            devices.splice(index, 1)
+        @devices = devices
 
       serialize: ()->
         return if !@device

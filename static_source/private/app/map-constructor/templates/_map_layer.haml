@@ -6,11 +6,11 @@
     .row
       .col-md-12
         .form-group
-          %laber {{'map.layer.name' | translate}}*
+          %label {{'map.layer.name' | translate}}*
           %input.form-control(ng-model="current_layer.name")
       .col-md-12
         .form-group
-          %laber {{'map.layer.status' | translate}}
+          %label {{'map.layer.status' | translate}}
           %select.form-control(ng-model="current_layer.status")
             %option(value="enabled")
               {{'map.layer.enabled' | translate}}
@@ -20,7 +20,7 @@
               {{'map.element.frozen' | translate}}
 
     .form-group
-      %laber {{'map.layer.description' | translate}}
+      %label {{'map.layer.description' | translate}}
       %textarea.form-control(ng-model="current_layer.description" rows="2" )
 
     .form-group

@@ -6,14 +6,14 @@
         {{element.data.type.name}}
 
     .form-group
-      %laber {{'flow.element.title' | translate}}
+      %label {{'flow.element.title' | translate}}
       %input.form-control(ng-model="element.data.title")
 
     -#
     -#  Flow (select2)
     -#
     .form-group(ng-if="element.data.type.name == 'flow'")
-      %laber.clearfix
+      %label.clearfix
         {{'flow.element.flow_link' | translate}}
       %ui-select(ng-model="elementFlows[element.data.id]" theme="bootstrap")
         %ui-select-match(placeholder="{{'flow.element.flow' | translate}}" allow-clear="true")
@@ -28,7 +28,7 @@
     -#  Script (select2)
     -#
     .form-group(ng-if="element.data.type.name != 'flow'")
-      %laber.clearfix
+      %label.clearfix
         {{'flow.element.script' | translate}}
         .pull-right
           .dropdown
@@ -59,7 +59,7 @@
           {{'No data' | translate}}
 
     .form-group
-      %laber {{'flow.element.description' | translate}}
+      %label {{'flow.element.description' | translate}}
       %textarea.form-control(ng-model="element.data.description" rows="2" )
 
     .form-group

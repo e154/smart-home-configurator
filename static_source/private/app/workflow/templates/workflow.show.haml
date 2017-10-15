@@ -17,12 +17,12 @@
           {{'Updated at' | translate}} {{workflow.workflow.update_at | readableDateTime}}
 
 .row
-  .col-md-12
+  .col-md-2
     .form-group
       .text-muted
         {{'workflow.status' | translate}}
 
-      %span.label.label-success(ng-if="workflow.workflow.state == 'enabled'")
+      %span.label.label-success(ng-if="workflow.workflow.status == 'enabled'")
         {{"workflow.enabled" | translate}}
       %span.label.label-default(ng-if="workflow.workflow.status == 'disabled'")
         {{"workflow.disabled" | translate}}
@@ -33,17 +33,21 @@
       %div
         {{::workflow.workflow.name}}
 
-    .form-group(ng-if="workflow.workflow.scenario && workflow.workflow.scenario.id")
-      .text-muted
-        {{'workflow.scenario' | translate}}
-      %div
-        %a(ui-sref="dashboard.scenario.show({id:workflow.workflow.scenario.id})" )
-          {{::workflow.workflow.scenario.name}}
-          &nbsp;
-          .fa.fa-external-link
-
     .form-group(ng-if="workflow.workflow.description")
       .text-muted
         {{'workflow.description' | translate}}
       %div
         {{::workflow.workflow.description}}
+
+  .col-md-10
+    .form-group
+      %ul.nav.nav-tabs
+        %li(role="presentation" ui-sref-active-eq="active" ui-sref="dashboard.workflow.show")
+          %a(href="#")
+            {{'workflow.scenarios' | translate}}
+        %li(role="presentation" ui-sref-active-eq="active" ui-sref="dashboard.workflow.show.scripts")
+          %a(href="#")
+            {{'workflow.scripts' | translate}}
+
+
+    %div(ui-view="tab-view")

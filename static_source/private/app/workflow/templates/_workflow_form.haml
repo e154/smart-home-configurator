@@ -1,9 +1,9 @@
 .form-group
-    %laber {{'workflow.name' | translate}}*
+    %label {{'workflow.name' | translate}}*
     %input.form-control(ng-model="workflow.workflow.name")
 
 .form-group
-    %laber {{'workflow.status' | translate}}
+    %label {{'workflow.status' | translate}}
     %select.form-control(ng-model="workflow.workflow.status")
         %option(value="enabled")
             {{'workflow.enabled' | translate}}
@@ -11,25 +11,6 @@
             {{'workflow.disabled' | translate}}
 
 .form-group
-    %laber {{'workflow.scenario' | translate}}*
-
-    -#
-    -# select2
-    -#
-    %ui-select(ng-model="workflow.workflow.scenario" theme="bootstrap")
-        %ui-select-match(placeholder="{{'workflow.scenario' | translate}}" allow-clear="true")
-            %div(ng-if="workflow.workflow.scenario && workflow.workflow.scenario.id")
-                {{workflow.workflow.scenario.name}} ({{workflow.workflow.scenario.system_name}})
-        %ui-select-choices(repeat="item in scenarios | filter: $select.search" refresh="refreshScenarios($select.search)" refresh-delay="0")
-            %div
-                %span(ng-bind-html="item.name | highlight: $select.search")
-                (
-                %small.text-muted(ng-bind-html="item.system_name | highlight: $select.search")
-                )
-        %ui-select-no-choice
-            {{'No data' | translate}}
-
-.form-group
-    %laber {{'workflow.description' | translate}}
+    %label {{'workflow.description' | translate}}
     %textarea.form-control(ng-model="workflow.workflow.description" rows="10" )
 

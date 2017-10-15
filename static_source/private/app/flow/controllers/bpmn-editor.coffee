@@ -1,9 +1,9 @@
 angular
 .module('appControllers')
 .controller 'bpmnEditorCtrl', ['$scope', 'Notify', 'Flow', '$stateParams', '$state', '$timeout', 'bpmnMock'
-'bpmnScheme', 'bpmnSettings', '$http', 'log', 'Worker', 'ngDialog', '$filter', 'Stream'
+'bpmnScheme', 'bpmnSettings', '$http', 'log', 'Worker', 'ngDialog', '$filter', 'Stream', 'DeviceActionSelect2', 'ScriptSelect2', 'FlowSelect2'
 ($scope, Notify, Flow, $stateParams, $state, $timeout, bpmnMock, bpmnScheme, bpmnSettings, $http
-log, Worker, ngDialog, $filter, Stream) ->
+log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, FlowSelect2) ->
   vm = this
 
   $scope.selected = []
@@ -214,29 +214,11 @@ log, Worker, ngDialog, $filter, Stream) ->
 
   # get device actions (select2)
   $scope.actions = []
-  $scope.refreshActions = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/device_action/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.actions = response.data.actions
+  $scope.refreshActions = DeviceActionSelect2 (actions)-> $scope.actions = actions
 
   # select scripts for flow elements (select2)
   $scope.scripts = []
-  $scope.refreshScripts = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/script/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.scripts = response.data.scripts
+  $scope.refreshScripts = ScriptSelect2 (scripts)-> $scope.scripts = scripts
 
   # scripts
   #------------------------------------------------------------------------------
@@ -299,19 +281,11 @@ log, Worker, ngDialog, $filter, Stream) ->
   #------------------------------------------------------------------------------
   # select flows for flow elements (select2)
   $scope.flows = []
-  $scope.refreshFlows = (query)->
-    $http(
-      method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/flow/search"
-      params:
-        query: query
-        limit: 5
-        offset: 0
-    ).then (response)->
-      $scope.flows = []
-      angular.forEach response.data.flows, (flow)->
-        if flow.id != $scope.flow.id
-          $scope.flows.push flow
+  $scope.refreshFlows = FlowSelect2 (flows)->
+    $scope.flows = []
+    angular.forEach flows, (flow)->
+      if flow.id != $scope.flow.id
+        $scope.flows.push flow
 
   vm
 ]

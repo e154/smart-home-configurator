@@ -1,9 +1,9 @@
 .form-group
-  %laber {{'role.name' | translate}}*
+  %label {{'role.name' | translate}}*
   %input.form-control(ng-model="role.name" type="text")
 
 .form-group
-  %laber {{'role.parent' | translate}}
+  %label {{'role.parent' | translate}}
   -#
   -#  select2
   -#
@@ -16,6 +16,6 @@
       {{'No data' | translate}}
 
 .form-group
-  %laber {{'role.description' | translate}}
+  %label {{'role.description' | translate}}
   %input.form-control(ng-model="role.description" type="text")
 

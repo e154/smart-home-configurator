@@ -1,0 +1,9 @@
+.row
+  .col-lg-12
+    %script-editor(ng-model="workflow.workflow.scripts")
+
+.row
+  .col-lg-12.form-group
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="ws.submit()")
+        {{'Update' | translate}}

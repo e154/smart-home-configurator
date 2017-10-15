@@ -105,22 +105,6 @@ angular
         ]
       }
       {
-        'label': 'Scenaries'
-        'route': 'dashboard.scenario'
-        'link': 'dashboard.scenario.index'
-        'icon': 'fa fa-gamepad'
-        'items': [
-          {
-            'label': 'All scenaries'
-            'route': 'dashboard.scenario.index'
-          }
-          {
-            'label': 'Add new'
-            'route': 'dashboard.scenario.new'
-          }
-        ]
-      }
-      {
         'label': 'Scripts'
         'route': 'dashboard.script'
         'link': 'dashboard.script.index'

@@ -1,11 +1,11 @@
 .row
     .col-md-2
         .form-group
-            %laber {{'script.name' | translate}}*
+            %label {{'script.name' | translate}}*
             %input.form-control(ng-model="script.script.name")
 
         .form-group
-            %laber {{'script.lang' | translate}}*
+            %label {{'script.lang' | translate}}*
             %select.form-control(ng-model="script.script.lang")
                 %option(value="coffeescript")
                     coffee script
@@ -15,7 +15,7 @@
                     lua
 
         .form-group
-            %laber {{'script.description' | translate}}
+            %label {{'script.description' | translate}}
             %textarea.form-control(ng-model="script.script.description" rows="2" )
 
         .form-group(ng-if="script.script.id")
@@ -30,5 +30,5 @@
                     x
 
         .form-group
-            %laber {{'script.source' | translate}}
+            %label {{'script.source' | translate}}
             .ace-editor.form-control(ng-model="script.script.source" ui-ace="ace_options")

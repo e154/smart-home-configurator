@@ -1,0 +1,34 @@
+.script-editor
+  .row
+    .col-lg-3.file-list
+
+      .form-group.file-list-header
+        %strong
+          {{'script.editor.file_list' | translate}}
+          &nbsp;
+          %small
+            %a(ng-click="dialog('add')" href="#")
+              .fa.fa-plus
+        .file-action-icons(ng-if="used_scripts.length && current_script")
+          %a(href="#" ng-click="edit($event)")
+            .fa.fa-pencil
+          %a(href="#" ng-click="remove_from_filelist($event)")
+            .fa.fa-trash
+        .clearfix
+      .form-group
+        %div(ng-if="!used_scripts.length")
+          Список пока пуст
+        .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
+          {{script.name}}
+
+    .col-lg-9
+      .form-group
+        %strong {{'script.editor.body' | translate}}
+        .pull-right
+          %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-if="current_script")
+            {{'Save' | translate}}
+
+      .form-group
+        .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")
+
+  %div(ng-include="'/core/templates/script_editor_dialog.html'")

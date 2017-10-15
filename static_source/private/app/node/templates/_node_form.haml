@@ -1,23 +1,23 @@
 .form-group
-    %laber {{'node.name' | translate}}*
+    %label {{'node.name' | translate}}*
     %input.form-control(ng-model="node.node.name")
 
 .form-group
-    %laber {{'node.ip' | translate}}*
+    %label {{'node.ip' | translate}}*
     %input.form-control(ng-model="node.node.ip")
 
 .form-group
-    %laber {{'node.port' | translate}}*
+    %label {{'node.port' | translate}}*
     %input.form-control(ng-model="node.node.port" type="number")
 
 .form-group
-    %laber {{'node.status' | translate}}
+    %label {{'node.status' | translate}}
     %select.form-control(ng-model="node.node.status")
         %option(value="enabled")
             {{'node.enabled' | translate}}
         %option(value="disabled")
             {{'node.disabled' | translate}}
 .form-group
-    %laber {{'node.description' | translate}}
+    %label {{'node.description' | translate}}
     %textarea.form-control(ng-model="node.node.description" rows="10" )
 

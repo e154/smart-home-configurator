@@ -1,7 +1,7 @@
 .row
   .col-md-6
     .form-group
-      %laber.clearfix
+      %label.clearfix
         .pull-left
           {{'map.element.device' | translate}}
         .pull-right(ng-if="element.prototype.device.id")
@@ -81,7 +81,7 @@
             {{'set image' | translate}}
 
       .form-group
-        %laber {{'map.element.prototype.style' | translate}}
+        %label {{'map.element.prototype.style' | translate}}
         %textarea.form-control(ng-model="state.style")
 
     .col-md-6
