@@ -12,7 +12,7 @@ type User struct {
 	LastName              	string                	`json:"last_name"`
 
 	Email                  	string                	`json:"email"`
-	History                	string                	`json:"history"`
+	History                	[]*UserHistory                	`json:"history"`
 	Status                 	string                	`json:"status"`
 
 	Avatar                 	*Image                	`json:"avatar"`
