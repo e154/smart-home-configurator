@@ -1,5 +1,8 @@
 {
   "ip": "адрес",
   "port": "порт",
-  "Not unique": "Не уникальный"
+  "Not unique": "Не уникальный",
+  "The script was successfully updated": "Скрипт успешно обновлён",
+  "The script was successfully created": "Скрипт успешно создан",
+  "Delete this item": "Удалить данный элемент"
 }

@@ -52,6 +52,9 @@
   "All maps": "All maps",
   "All flow": "All flow",
   "All device": "All device",
+  "upload": "Upload",
+  "archive": "Archive",
+  "upload file": "Upload file",
   "node": {
     "package_name": "Nodes",
     "name": "Name",
@@ -225,6 +228,9 @@
     "edit_form": "Edit form",
     "new_form": "New form",
     "index_form": "Script list",
+    "add_new": "Add new",
+    "script_edit": "Script edit",
+    "browser": "Browser",
     "access_list": {
       "execute script": "Do script"
     },
