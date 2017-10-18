@@ -49,7 +49,6 @@ func (h *DashboardController) Signin() {
 			h.ErrHan(403, "bad syntax")
 			return
 		}
-		//h.Token = "Basic " + auth[1]
 
 		server_url := fmt.Sprintf("%s:%s/api/v1/signin", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
 		result, err := h.SendRequest(
