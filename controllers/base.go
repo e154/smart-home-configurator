@@ -24,7 +24,7 @@ func (b *BaseController) Prepare() {
 		b.Data["access_token"] = access_token.(string)
 	}
 
-	b.Data["version"] = map[string]string{
+	b.Data["info"] = map[string]string{
 		"version": os.Getenv("VERSION"),
 		"revision": os.Getenv("REVISION"),
 		"revision_url": os.Getenv("REVISION_URL"),
