@@ -37,4 +37,5 @@ func (b *BaseController) Prepare() {
 	b.Data["domen"] = beego.AppConfig.String("domen")
 	b.Data["server_url"] = fmt.Sprintf("%s:%s",beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
 	b.Data["debug"] = beego.AppConfig.String("runmode") == "dev"
+	b.Data["language"] = beego.AppConfig.String("language")
 }

@@ -10,7 +10,8 @@ angular
     loadFailureHandler: 'LocaleErrorHandler'
   })
 
-  $translateProvider.preferredLanguage 'ru'
+  current_lang = window.app_settings.current_user.lang || window.app_settings.language || 'en'
+  $translateProvider.preferredLanguage current_lang
   $translateProvider.useSanitizeValueStrategy null
 
   $locationProvider.html5Mode
@@ -21,19 +22,22 @@ angular
     redirectTo: '/'
 
 #   Pikaday
-    locales =
-      ru:
-        previousMonth : 'Назад',
-        nextMonth     : 'Следующий',
-        months        : ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентабрь", "Октябрь", "Ноябрь", "Декабрь"],
-        weekdays      : ["Понедельник", "Вторник", "Среда","Четверг", "Пятница", "Суббота", "Воскресенье"],
-        weekdaysShort : ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+  locales =
+    ru:
+      previousMonth : 'Назад',
+      nextMonth     : 'Следующий',
+      months        : ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентабрь", "Октябрь", "Ноябрь", "Декабрь"],
+      weekdays      : ["Понедельник", "Вторник", "Среда","Четверг", "Пятница", "Суббота", "Воскресенье"],
+      weekdaysShort : ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
 
-
-  pikadayConfigProvider.setConfig
-    i18n: locales.ru
+  params =
     locales: locales
     theme: 'smart-theme'
+
+  if locales.hasOwnProperty(current_lang)
+    params['i18n'] = locales[current_lang]
+
+  pikadayConfigProvider.setConfig params
 
 ]
 

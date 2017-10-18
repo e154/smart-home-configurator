@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'userEditCtrl', ['$scope', 'Notify', 'User', '$stateParams', 'Message', '$state', 'RoleSelect2'
-($scope, Notify, User, $stateParams, Message, $state, RoleSelect2) ->
+.controller 'userEditCtrl', ['$scope', 'Notify', 'User', '$stateParams', 'Message', '$state', 'RoleSelect2', '$translate'
+($scope, Notify, User, $stateParams, Message, $state, RoleSelect2, $translate) ->
 
   $scope.user = new User {id: $stateParams.id}
   meta = [
@@ -38,7 +38,8 @@ angular
 
   $scope.update =->
     success =->
-      Notify 'success', 'Пользователь успешно обновлён', 3
+      $translate.use($scope.user.lang)
+      Notify 'success', 'Пользователь  успешно обновлён', 3
     error =(result)->
       Message result.data.status, result.data.message
     $scope.user.$update success, error

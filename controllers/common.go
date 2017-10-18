@@ -14,6 +14,7 @@ import  (
 
 type CommonController struct {
 	beego.Controller
+	Token	string
 }
 
 func (c *CommonController) ErrHan(code int, message string) {
@@ -75,32 +76,16 @@ func (c *CommonController) UpdateTemplate() {
 	c.Render()
 }
 
-func (c *CommonController) SignIn(method, url string, token string) (result []byte, err error) {
-	fmt.Println("URL:>", url)
-
-	req, err := http.NewRequest(method, url, bytes.NewBuffer([]byte{}))
-	req.Header.Set("X-Custom-Header", "myvalue")
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", token)
-
-	client := &http.Client{}
-	var resp *http.Response
-	if resp, err = client.Do(req); err != nil {
-		return
-	}
-
-	defer resp.Body.Close()
-	result, _ = ioutil.ReadAll(resp.Body)
-
-	return
-}
-
 func (c *CommonController) SendRequest(method, url string, jsonStr []byte) (result []byte, err error) {
 	fmt.Println("URL:>", url)
 
 	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonStr))
 	req.Header.Set("X-Custom-Header", "myvalue")
 	req.Header.Set("Content-Type", "application/json")
+
+	if c.Token != "" {
+		req.Header.Set("Authorization", c.Token)
+	}
 
 	client := &http.Client{}
 	var resp *http.Response
