@@ -125,7 +125,7 @@ __check_os() {
             OS_TYPE="linux"
         ;;
         (Darwin)
-            OS_TYPE="darwin"
+            OS_TYPE="darwin-10.6"
         ;;
     esac
 

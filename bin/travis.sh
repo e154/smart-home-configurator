@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#set -o errexit
+set -o errexit
 
 #
 # base variables
@@ -120,7 +120,20 @@ __build_front() {
 __build_back() {
 
     cd ${TMP_DIR}
-    xgo --out=${EXEC} --branch=${TRAVIS_BRANCH} --targets=linux/*,windows/*,darwin/* --ldflags="${GOBUILD_LDFLAGS}" ${PACKAGE}
+
+    BRANCH="$(git name-rev --name-only HEAD)"
+
+    if [[ $BRANCH == *"tags/"* ]]; then
+      BRANCH="master"
+    fi
+
+    echo ""
+    echo "build command:"
+    echo "xgo --out=${EXEC} --branch=${BRANCH} --targets=linux/*,windows/*,darwin/* --ldflags='${GOBUILD_LDFLAGS}' ${PACKAGE}"
+    echo ""
+
+    xgo --out=${EXEC} --branch=${BRANCH} --targets=linux/*,windows/*,darwin/* --ldflags="${GOBUILD_LDFLAGS}" ${PACKAGE}
+
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
     sed 's/dev\/app.conf/prod\/app.conf/' ${ROOT}/conf/app.sample.conf > ${TMP_DIR}/conf/app.sample.conf
