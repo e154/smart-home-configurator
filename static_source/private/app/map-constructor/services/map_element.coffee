@@ -89,7 +89,7 @@ angular
 
       create: (cb)->
         success =(data)=>
-          @id = data.id
+          @deserialize(data)
           Notify 'success', 'Item successfully created', 3
           cb() if cb
         error =(result)->
