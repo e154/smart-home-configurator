@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'deviceStatusCtrl', ['$scope', 'Notify', 'DeviceState', 'Message', '$stateParams', '$translate'
-($scope, Notify, DeviceState, Message, $stateParams, $translate) ->
+.controller 'deviceStatusCtrl', ['$scope', 'DeviceState', 'Message', '$stateParams', '$translate'
+($scope, DeviceState, Message, $stateParams, $translate) ->
   vm = this
 
   vm.statuses = []

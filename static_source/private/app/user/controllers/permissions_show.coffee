@@ -24,7 +24,7 @@ angular
 
   $scope.update =->
     success =->
-      Notify 'success','Права доступа успешно обновлены.',3
+      Notify 'success','Permissions successfully updated',3
       current_access_list = {}
     error =(result)->
       Message result.data.status, result.data.message

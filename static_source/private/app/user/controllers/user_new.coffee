@@ -33,7 +33,7 @@ angular
 
   $scope.create =->
     success =(user)->
-      Notify 'success', 'Пользователь успешно создан', 3
+      Notify 'success', 'User successfully created', 3
       $state.go 'dashboard.user.edit', {id: user.id}
     error =(result)->
       Message result.data.status, result.data.message

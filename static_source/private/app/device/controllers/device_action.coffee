@@ -31,7 +31,7 @@ angular
 
   vm.submit =->
     success =(result)->
-      Notify 'success', 'Действие успешно обновлено', 3
+      Notify 'success', 'Action successfully updated', 3
 
       vm.getDeviceActions()
       vm.getDefaultAction()

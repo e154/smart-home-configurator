@@ -208,9 +208,9 @@ log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, Flow
     return if !worker.id
     Stream.sendRequest("do.worker", {worker_id: worker.id}).then (result)->
       if !result.error
-        Notify 'success', "Команда выполнена успешно", 3
+        Notify 'success', "Command executed successfully", 3
       else
-        Notify 'error', "Результат выполнения команды:\n\r #{result.error}", 3
+        Notify 'error', result.error, 3
 
   # get device actions (select2)
   $scope.actions = []

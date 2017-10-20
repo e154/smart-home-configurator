@@ -35,7 +35,7 @@ angular
 
   vm.updateTree = ->
     success =(data) ->
-      Notify 'success', 'Дерево успешно обновлено', 3
+      Notify 'success', 'Tree successfully updated', 3
     error =(response)->
       Message response.data.status, response.data.message
 
@@ -58,7 +58,7 @@ angular
 
   vm.save = ->
     success =(data) ->
-      Notify 'success', 'Элемент успешно создан', 3
+      Notify 'success', 'Item successfully created', 3
       vm.isNew = false
       vm.getTree()
 
@@ -71,7 +71,7 @@ angular
 
     success =->
       vm.getTree()
-      Notify 'success', 'Элемент успешно обнослён', 3
+      Notify 'success', 'Item successfully updated', 3
 
     error =(response)->
       Message response.data.status, response.data.message

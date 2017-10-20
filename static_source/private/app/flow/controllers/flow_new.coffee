@@ -14,7 +14,7 @@ angular
 
   $scope.submit =->
     success =(data)->
-      Notify 'success', 'Процесс успешно создан', 1
+      Notify 'success', 'Process successfully created', 1
       $timeout ()->
         $state.go("dashboard.flow.show", {id: data.id})
       , 1000

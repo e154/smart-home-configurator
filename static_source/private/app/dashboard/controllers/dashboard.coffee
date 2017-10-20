@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'dashboardCtrl', ['$scope', 'Notify', 'Stream'
-($scope, Notify, Stream) ->
+.controller 'dashboardCtrl', ['$scope', 'Stream'
+($scope, Stream) ->
   vm = this
 
   vm.menu =

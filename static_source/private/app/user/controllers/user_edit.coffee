@@ -39,18 +39,19 @@ angular
   $scope.update =->
     success =->
       $translate.use($scope.user.lang)
-      Notify 'success', 'Пользователь  успешно обновлён', 3
+      Notify 'success', 'User successfully updated', 3
     error =(result)->
       Message result.data.status, result.data.message
     $scope.user.$update success, error
 
   $scope.remove =->
-    return if !confirm('точно удалить пользователя?')
-    success =->
-      $state.go 'dashboard.user.index'
-    error =(result)->
-      Message result.data.status, result.data.message
-    $scope.user.$delete success, error
+    $translate('Delete user?').then (text)=>
+      return if !confirm text
+      success =->
+        $state.go 'dashboard.user.index'
+      error =(result)->
+        Message result.data.status, result.data.message
+      $scope.user.$delete success, error
 
   show()
 

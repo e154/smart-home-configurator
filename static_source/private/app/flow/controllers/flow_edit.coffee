@@ -81,7 +81,7 @@ WorkflowSelect2, WorkflowScenarioSelect2, $translate) ->
   $scope.submit =->
     success =(data)->
       $scope.$on('$destroy', instance);
-      Notify 'success', 'Схема успешно сохранена', 3
+      Notify 'success', 'Schema saved successfully', 3
 
     error =(result)->
       Message result.data.status, result.data.message

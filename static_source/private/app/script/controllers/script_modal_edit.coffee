@@ -11,7 +11,7 @@ angular
   vm.submitScript =->
     success =(script)->
       $scope.$parent.setScript(script)
-      Notify 'success', 'Скрипт успешно сохранён', 1
+      Notify 'success', 'Script successfully saved', 1
 
     error =(result)->
       Message result.data.status, result.data.message

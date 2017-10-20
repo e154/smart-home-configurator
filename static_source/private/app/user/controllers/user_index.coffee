@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'userIndexCtrl', ['$scope', 'User', '$state', '$filter', 'Notify', 'Message'
-($scope, User, $state, $filter, Notify, Message) ->
+.controller 'userIndexCtrl', ['$scope', 'User', '$state', '$filter', 'Notify', 'Message', '$translate'
+($scope, User, $state, $filter, Notify, Message, $translate) ->
 
   tableCallback = {}
   $scope.options =
@@ -100,20 +100,21 @@ angular
     rows: (item)->
 
   remove =(id)->
-    return if !confirm('точно удалить пользователя?')
-    success =->
-      tableCallback.update()
+    $translate('Delete user?').then (text)=>
+      return if !confirm text
+      success =->
+        tableCallback.update()
+        return
+      error =(result)->
+        Message result.data.status, result.data.message
+      User.delete {id: id}, success, error
       return
-    error =(result)->
-      Message result.data.status, result.data.message
-    User.delete {id: id}, success, error
-    return
 
   updateStatus =(user, status)->
     return if !status || status == ''
     user.status = status
     success =->
-      Notify 'success', 'Пользователь успешно обновлён', 3
+      Notify 'success', 'User successfully updated', 3
     error =(result)->
       Message result.data.status, result.data.message
     User.update_status user, success, error

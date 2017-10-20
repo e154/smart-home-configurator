@@ -41,8 +41,7 @@ angular
       e.preventDefault()
       return if !$scope.current_script
       $translate("Delete this item").then (text)->
-        return if !confirm("Удалить данный элемент?")
-
+        return if !confirm text
         index = $scope.used_scripts.indexOf($scope.current_script)
         $scope.used_scripts.splice(index, 1)
         $scope.current_script = null

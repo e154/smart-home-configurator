@@ -90,7 +90,7 @@ angular
     return if !notify
 
     success =->
-      Notify 'success', 'Сообщение успешно добавлено в обработчик', 3
+      Notify 'success', 'Message successfully added to the handler', 3
     error =(result)->
       Message result.data.status, result.data.message
 

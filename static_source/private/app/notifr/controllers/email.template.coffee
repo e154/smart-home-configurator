@@ -80,7 +80,7 @@ angular
     serialize()
 
     success =(template)->
-      Notify 'success', 'Шаблон успешно создан', 3
+      Notify 'success', 'Template successfully created', 3
       vm.isNew = false
       vm.template_name = vm.template.name
       $state.go 'dashboard.notifr.template', {name: template.name}
@@ -94,7 +94,7 @@ angular
     serialize()
 
     success =->
-      Notify 'success', 'Шаблон успешно обновлен', 3
+      Notify 'success', 'Template successfully updated', 3
       vm.getTemplate()
 
     error =(response)->

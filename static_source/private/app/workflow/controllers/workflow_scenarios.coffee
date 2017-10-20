@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'workflowScenariosCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', 'Notify'
-($scope, Message, $stateParams, Workflow, Notify) ->
+.controller 'workflowScenariosCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', 'Notify', '$translate'
+($scope, Message, $stateParams, Workflow, Notify, $translate) ->
 
   vm = this
   vm.current = {}
@@ -36,12 +36,16 @@ angular
     Workflow.get_scenarios {workflow_id: $scope.workflow.workflow.id}, success, error
 
   vm.remove = ()->
-    return if !confirm('Хотите удалить этот сценарий?')
+    $translate('Delete this script?').then (text)=>
+      return if !confirm text
+      remove()
+
+  remove = ->
     data = angular.copy vm.current
     data.workflow_id = $scope.workflow.workflow.id
 
     success =->
-      Notify 'success', 'Сценарий успешно удалён', 5
+      Notify 'success', 'The script was successfully deleted', 5
       vm.get_all_scenario()
       vm.cancel()
     error =(result)->
@@ -63,7 +67,7 @@ angular
       if !data.id?
         $scope.workflow.workflow.scenarios.push scenario
       else
-        Notify 'success', 'Сценарий успешно обновлён', 5
+        Notify 'success', 'Successfully updated script', 5
     error =(result)->
       Message result.data.status, result.data.message
 

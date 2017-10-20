@@ -1,15 +1,16 @@
 angular
 .module('appControllers')
-.controller 'scriptEditCtrl', ['$scope', 'Message', '$stateParams', 'Script', '$state', 'Notify'
-($scope, Message, $stateParams, Script, $state, Notify) ->
+.controller 'scriptEditCtrl', ['$scope', 'Message', '$stateParams', 'Script', '$state', 'Notify', '$translate'
+($scope, Message, $stateParams, Script, $state, Notify, $translate) ->
   vm = this
 
   Script.show {id: $stateParams.id}, (script)->
     vm.script = script
 
   vm.remove =->
-    if confirm('точно удалить узел?')
-      remove()
+    $translate('exactly remove the node?').then (text)->
+      if confirm text
+        remove()
 
   remove =->
     success =->
@@ -20,7 +21,7 @@ angular
 
   vm.submit =->
     success =(data)->
-      Notify 'success', 'Скрипт успешно сохранен', 3
+      Notify 'success', 'Script successfully saved', 3
 
     error =(result)->
       Message result.data.status, result.data.message

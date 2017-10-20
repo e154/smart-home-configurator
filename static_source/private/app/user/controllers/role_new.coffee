@@ -14,7 +14,7 @@ angular
 
   $scope.create =->
     success =(role)->
-      Notify 'success', 'Роль успешно создана', 3
+      Notify 'success', 'Role successfully created', 3
       $state.go 'dashboard.role.edit', {name: role.name}
     error =(result)->
       Message result.data.status, result.data.message

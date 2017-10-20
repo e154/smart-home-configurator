@@ -12,7 +12,7 @@ angular
 
   $scope.update =->
     success =(data)->
-      Notify 'success', 'Карта успешно обновлена', 3
+      Notify 'success', 'Map updated successfully', 3
     $scope.map.update success
 
   #------------------------------------------------------------------------------
