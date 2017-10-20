@@ -38,4 +38,4 @@ app = angular.module('app', [
   'http-auth-interceptor'
 ])
 
-app.version = window.app_settings.version
+app.version = window.app_settings.info
