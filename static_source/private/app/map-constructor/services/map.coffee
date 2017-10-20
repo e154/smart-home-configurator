@@ -1,7 +1,8 @@
 angular
 .module('angular-map')
-.factory 'mapConstructor', ['$rootScope', '$compile', 'MapResource', 'Message', 'Notify', 'mapEditor', 'MapLayer'
-  ($rootScope, $compile, MapResource, Message, Notify, mapEditor, MapLayer) ->
+.factory 'mapConstructor', ['$rootScope', '$compile', 'MapResource', 'Message', 'Notify', 'mapEditor'
+'MapLayer', '$translate'
+  ($rootScope, $compile, MapResource, Message, Notify, mapEditor, MapLayer, $translate) ->
     class mapConstructor extends mapEditor
 
       id: null
@@ -54,12 +55,13 @@ angular
         map.$showFull success, error
 
       remove: (cb)->
-        return if !confirm('Вы точно хотите удалить эту карту?')
-        success =(data)=>
-          cb(data)
-        error =(result)->
-          Message result.data.status, result.data.message
-        MapResource.delete {id: @id}, success, error
+        $translate("Are you sure you want to remove this card?").then (text)=>
+          return if !confirm text
+          success =(data)=>
+            cb(data)
+          error =(result)->
+            Message result.data.status, result.data.message
+          MapResource.delete {id: @id}, success, error
 
       fadeIn: ()->
         return if !@wrapper

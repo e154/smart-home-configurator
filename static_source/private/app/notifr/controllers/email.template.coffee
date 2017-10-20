@@ -1,7 +1,8 @@
 angular
 .module('appControllers')
-.controller 'emailTemplateCtrl', ['$scope','Message', 'EmailTemplate','$http', 'EmailItem', '$stateParams', '$state', 'Notify'
-($scope, Message, EmailTemplate, $http, EmailItem, $stateParams, $state, Notify) ->
+.controller 'emailTemplateCtrl', ['$scope','Message', 'EmailTemplate','$http', 'EmailItem',
+'$stateParams', '$state', 'Notify', '$translate'
+($scope, Message, EmailTemplate, $http, EmailItem, $stateParams, $state, Notify, $translate) ->
 
   vm = this
 
@@ -120,7 +121,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    if confirm('точно удалить шаблон?')
+    if confirm('do I delete a template?')
       EmailTemplate.delete {name: vm.template.name}, success, error
 
 

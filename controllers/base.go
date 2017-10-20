@@ -20,6 +20,8 @@ func (b *BaseController) Prepare() {
 		b.Data["access_token"] = access_token
 	}
 
+	var language string = beego.AppConfig.String("language")
+
 	if userinfo := b.Ctx.Input.Session("userinfo"); userinfo != nil {
 		user_from_session := userinfo.(*models.User)
 
@@ -42,6 +44,7 @@ func (b *BaseController) Prepare() {
 			if err = json.Unmarshal(result, &curren_user); err == nil {
 				jcu, _ := json.Marshal(curren_user.User)
 				b.Data["current_user"] = string(jcu)
+				language = curren_user.User.Lang
 			} else {
 				fmt.Println(err.Error())
 			}
@@ -62,5 +65,5 @@ func (b *BaseController) Prepare() {
 	b.Data["domen"] = beego.AppConfig.String("domen")
 	b.Data["server_url"] = fmt.Sprintf("%s:%s",beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
 	b.Data["debug"] = beego.AppConfig.String("runmode") == "dev"
-	b.Data["language"] = beego.AppConfig.String("language")
+	b.Data["language"] = language
 }

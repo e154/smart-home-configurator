@@ -31,8 +31,9 @@ angular
     vm.getNodeInfo()
 
   vm.remove =->
-    if confirm('точно удалить узел?')
-      remove()
+    $translate('remove the node?').then (text)->
+      if confirm text
+        remove()
 
   remove =->
     success =->

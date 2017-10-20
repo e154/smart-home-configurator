@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'emailItemCtrl', ['$scope','Message','EmailItem','Notify','$rootScope'
-($scope, Message, EmailItem, Notify, $rootScope) ->
+.controller 'emailItemCtrl', ['$scope','Message','EmailItem','Notify','$rootScope', '$translate'
+($scope, Message, EmailItem, Notify, $rootScope, $translate) ->
 
   vm = this
   vm.items = []
@@ -82,12 +82,12 @@ angular
     success =->
       vm.getTree()
       vm.addNew()
-      Notify 'success', 'Элемент успешно удалён', 3
+      Notify 'success', 'Item successfully deleted', 3
 
     error =(response)->
       Message response.data.status, response.data.message
 
-    if confirm('точно удалить элемент шаблона?')
+    if confirm('delete the template element?')
       EmailItem.delete {name: vm.activeItem.name}, vm.activeItem, success, error
 
   vm.toggleStatus = (item) ->

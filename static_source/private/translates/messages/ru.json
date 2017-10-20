@@ -4,5 +4,17 @@
   "Not unique": "Не уникальный",
   "The script was successfully updated": "Скрипт успешно обновлён",
   "The script was successfully created": "Скрипт успешно создан",
-  "Delete this item": "Удалить данный элемент"
+  "Delete this item": "Удалить данный элемент",
+  "Are you sure you want to delete this action?": "Вы точно хотите удалить это действие?",
+  "remove the node?": "удалить узел?",
+  "Command executed successfully": "Команда выполнена успешно",
+  "Are you sure you want to delete this state?": "Вы точно хотите удалить это состояние?",
+  "Item successfully deleted": "Элемент успешно удалён",
+  "delete the template element?": "удалить элемент шаблона?",
+  "do I delete a template?": "удалить шаблон?",
+  "Are you sure you want to leave the editing process?": "Вы точно хотите покинут редактирование процесса?",
+  "Are you sure you want to remove this card?": "Вы точно хотите удалить эту карту?",
+  "Are you sure you want to delete this item?": "Вы точно хотите удалить этот элемент?",
+  "Item successfully created": "Элемент успешно создан",
+  "Item successfully updated": "Элемент успешно обновлён"
 }

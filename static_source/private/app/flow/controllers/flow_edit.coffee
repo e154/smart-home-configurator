@@ -1,8 +1,9 @@
 angular
 .module('appControllers')
 .controller 'flowEditCtrl', ['$scope', 'Message', '$stateParams', 'Flow', '$state', 'Workflow', '$timeout'
-'log', 'Notify', 'Worker', '$rootScope', 'WorkflowSelect2', 'WorkflowScenarioSelect2'
-($scope, Message, $stateParams, Flow, $state, Workflow, $timeout, log, Notify, Worker, $rootScope, WorkflowSelect2, WorkflowScenarioSelect2) ->
+'log', 'Notify', 'Worker', '$rootScope', 'WorkflowSelect2', 'WorkflowScenarioSelect2', '$translate'
+($scope, Message, $stateParams, Flow, $state, Workflow, $timeout, log, Notify, Worker, $rootScope
+WorkflowSelect2, WorkflowScenarioSelect2, $translate) ->
   vm = this
 
   # vars
@@ -16,8 +17,9 @@ angular
   # watcher
   #------------------------------------------------------------------------------
   instance = $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams, options)->
-    if !confirm('Вы точно хотите покинут редактирование процесса?')
-      event.preventDefault()
+    $translate('Are you sure you want to leave the editing process?').then (text)->
+      if !confirm text
+        event.preventDefault()
     $scope.$on('$destroy', instance);
 
   #------------------------------------------------------------------------------

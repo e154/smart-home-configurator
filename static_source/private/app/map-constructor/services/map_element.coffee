@@ -1,8 +1,9 @@
 angular
 .module('angular-map')
 .factory 'MapElement', ['$rootScope', '$compile', 'MapElementResource', 'Message'
-'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText'
-  ($rootScope, $compile, MapElementResource, Message, Notify, MapImage, MapDevice, MapScript, MapText) ->
+'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText', '$translate'
+  ($rootScope, $compile, MapElementResource, Message, Notify, MapImage, MapDevice, MapScript,
+  MapText, $translate) ->
     class MapElement
 
       scope: null
@@ -14,7 +15,7 @@ angular
       id: null
       layer_id: null
       map_id: null
-      name: 'Новый элемент'
+      name: 'New item'
       description: ''
       prototype_type: ''
       prototype_id: null
@@ -89,7 +90,7 @@ angular
       create: (cb)->
         success =(data)=>
           @id = data.id
-          Notify 'success', 'Элемент успешно создан', 3
+          Notify 'success', 'Item successfully created', 3
           cb() if cb
         error =(result)->
           Message result.data.status, result.data.message
@@ -109,7 +110,7 @@ angular
 
       update: (cb)->
         success =(data)=>
-          Notify 'success', 'Элемент успешно обновлён', 3
+          Notify 'success', 'Item successfully updated', 3
           cb() if cb
         error =(result)->
           Message result.data.status, result.data.message
@@ -118,15 +119,16 @@ angular
         model.$update success, error
 
       remove: (cb)->
-        return if !confirm('Вы точно хотите удалить этот элемент?')
-        success =(data)=>
-          cb() if cb
-          Notify 'success', 'Элемент успешно удалён', 3
-        error =(result)->
-          Message result.data.status, result.data.message
+        $translate('Are you sure you want to delete this item?').then (text)=>
+          return if !confirm text
+          success =(data)=>
+            cb() if cb
+            Notify 'success', 'Item successfully deleted', 3
+          error =(result)->
+            Message result.data.status, result.data.message
 
-        model = new MapElementResource({id: @id})
-        model.$delete success, error
+          model = new MapElementResource({id: @id})
+          model.$delete success, error
 
       get_prototype: (data)->
         switch @prototype_type

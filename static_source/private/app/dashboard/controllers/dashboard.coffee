@@ -47,7 +47,7 @@ angular
         'icon': 'fa fa-microchip'
         'items': [
           {
-            'label': 'All devices'
+            'label': 'All device'
             'route': 'dashboard.device.index'
           }
           {

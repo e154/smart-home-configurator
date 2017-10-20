@@ -4,15 +4,16 @@ angular
 ($translatePartialLoaderProvider, $translateProvider, $locationProvider, $routeProvider, pikadayConfigProvider) ->
 
   $translatePartialLoaderProvider.addPart('dashboard');
+  $translatePartialLoaderProvider.addPart('messages');
 
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/static/translates/{part}/{lang}.json'
     loadFailureHandler: 'LocaleErrorHandler'
   })
 
-  current_lang = window.app_settings.current_user.lang || window.app_settings.language || 'en'
-  $translateProvider.preferredLanguage current_lang
+  current_lang = window.app_settings.language || 'en'
   $translateProvider.useSanitizeValueStrategy null
+  $translateProvider.preferredLanguage current_lang
 
   $locationProvider.html5Mode
     enabled: true
