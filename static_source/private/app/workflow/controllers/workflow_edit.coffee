@@ -1,15 +1,16 @@
 angular
 .module('appControllers')
-.controller 'workflowEditCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', '$state'
-($scope, Message, $stateParams, Workflow, $state) ->
+.controller 'workflowEditCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', '$state', '$translate'
+($scope, Message, $stateParams, Workflow, $state, $translate) ->
   vm = this
 
   Workflow.show {id: $stateParams.id}, (workflow)->
     vm.workflow = workflow
 
   vm.remove =->
-    if confirm('точно удалить узел?')
-      remove()
+    $translate('remove the node?').then (text)->
+      if confirm text
+        remove()
 
   remove =->
     success =->

@@ -1,8 +1,8 @@
 angular
 .module('appControllers')
-.controller 'bpmnViewerCtrl', ['$scope', 'Notify', 'Flow', '$stateParams', '$state', '$timeout', 'bpmnMock'
+.controller 'bpmnViewerCtrl', ['$scope', 'Flow', '$stateParams', '$state', '$timeout', 'bpmnMock'
 'bpmnScheme', 'bpmnSettings'
-($scope, Notify, Flow, $stateParams, $state, $timeout, bpmnMock, bpmnScheme, bpmnSettings) ->
+($scope, Flow, $stateParams, $state, $timeout, bpmnMock, bpmnScheme, bpmnSettings) ->
   vm = this
 
   # settings

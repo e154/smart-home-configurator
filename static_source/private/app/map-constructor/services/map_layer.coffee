@@ -1,7 +1,8 @@
 angular
 .module('angular-map')
-.factory 'MapLayer', ['$rootScope', '$compile', 'MapElement', 'MapLayerResource', 'Notify', 'Message', 'FileManager', 'MapElementResource'
-  ($rootScope, $compile, MapElement, MapLayerResource, Notify, Message, FileManager, MapElementResource) ->
+.factory 'MapLayer', ['$rootScope', '$compile', 'MapElement', 'MapLayerResource', 'Notify', 'Message', 'FileManager',
+'MapElementResource', '$translate'
+  ($rootScope, $compile, MapElement, MapLayerResource, Notify, Message, FileManager, MapElementResource, $translate) ->
     class MapLayer
 
       scope: null
@@ -78,7 +79,7 @@ angular
       create: ()->
         success =(data)=>
           @id = data.id
-          Notify 'success', 'Слой успешно создан', 3
+          Notify 'success', 'Layer successfully created', 3
         error =(result)->
           Message result.data.status, result.data.message
 
@@ -87,7 +88,7 @@ angular
 
       update: (cb)->
         success =(data)=>
-          Notify 'success', 'Слой успешно обновлён', 3
+          Notify 'success', 'Layer successfully updated', 3
         error =(result)->
           Message result.data.status, result.data.message
 
@@ -95,15 +96,16 @@ angular
         model.$update success, error
 
       remove: (cb)->
-        return if !confirm('Вы точно хотите удалить этот слой?')
-        success =(data)=>
-          cb() if cb
-          Notify 'success', 'Слой успешно удалён', 3
-        error =(result)->
-          Message result.data.status, result.data.message
+        $translate("Are you sure you want to delete this layer?").then (text)=>
+          return if !confirm text
+          success =(data)=>
+            cb() if cb
+            Notify 'success', 'Layer successfully deleted', 3
+          error =(result)->
+            Message result.data.status, result.data.message
 
-        model = new MapLayerResource({id: @id})
-        model.$delete success, error
+          model = new MapLayerResource({id: @id})
+          model.$delete success, error
 
       addNewImage: ()->
         element = new MapElement(@scope)

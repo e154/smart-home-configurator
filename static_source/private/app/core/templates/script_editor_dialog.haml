@@ -3,10 +3,10 @@
 .script-editor-dialog(ng-show="state == 'add'")
   .dialog-header
     %strong
-      Добавление скрипта
+      {{'script.package_name' | translate}}
       %span.small
         %a(href="#" ng-click="dialog('new')" )
-          Добавить новый
+          {{'script.add_new' | translate}}
     .cross(href="#" ng-click="dialog('redactor')" )
   .dialog-body
     .form-group
@@ -26,22 +26,22 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
-    %button.btn.btn-default(ng-click="appendScript()") Добавить
+    %button.btn.btn-default(ng-click="appendScript()") {{'Add' | translate}}
 
 .script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
   .dialog-header
     %strong
       %span(ng-if="state == 'new'")
-        Новый скрипт
+        {{'New script' | translate}}
       %span(ng-if="state == 'edit'")
-        Редактирование скрипта
+        {{'script.script_edit' | translate}}
       %span.small
         %a(href="#" ng-click="dialog('add')" )
-          Выбрать из каталога
+          {{'script.browser' | translate}}
     .cross(href="#" ng-click="dialog('redactor')" )
   .dialog-body
     .form-group
-      %label Наименование*
+      %label {{'script.name' | translate}}*
       %input.form-control(ng-model="current_script.name")
     .form-group
       %label {{'script.lang' | translate}}*
@@ -53,7 +53,7 @@
         %option(value="lua")
           lua
     .form-group
-      %label Описание
+      %label {{'script.description' | translate}}
       %input.form-control(ng-model="current_script.description")
 
-    %button.btn.btn-default(ng-click="updateScript()") Сохранить
+    %button.btn.btn-default(ng-click="updateScript()") {{'save' | translate}}

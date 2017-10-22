@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'deviceCtrl', ['$scope', 'Notify', 'Device', '$state'
-($scope, Notify, Device, $state) ->
+.controller 'deviceCtrl', ['$scope', 'Device', '$state'
+($scope, Device, $state) ->
   vm = this
 
   vm

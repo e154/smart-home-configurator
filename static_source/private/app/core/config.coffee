@@ -4,14 +4,16 @@ angular
 ($translatePartialLoaderProvider, $translateProvider, $locationProvider, $routeProvider, pikadayConfigProvider) ->
 
   $translatePartialLoaderProvider.addPart('dashboard');
+  $translatePartialLoaderProvider.addPart('messages');
 
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/static/translates/{part}/{lang}.json'
     loadFailureHandler: 'LocaleErrorHandler'
   })
 
-  $translateProvider.preferredLanguage 'ru'
+  current_lang = window.app_settings.language || 'en'
   $translateProvider.useSanitizeValueStrategy null
+  $translateProvider.preferredLanguage current_lang
 
   $locationProvider.html5Mode
     enabled: true
@@ -21,19 +23,22 @@ angular
     redirectTo: '/'
 
 #   Pikaday
-    locales =
-      ru:
-        previousMonth : 'Назад',
-        nextMonth     : 'Следующий',
-        months        : ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентабрь", "Октябрь", "Ноябрь", "Декабрь"],
-        weekdays      : ["Понедельник", "Вторник", "Среда","Четверг", "Пятница", "Суббота", "Воскресенье"],
-        weekdaysShort : ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+  locales =
+    ru:
+      previousMonth : 'Назад',
+      nextMonth     : 'Следующий',
+      months        : ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентабрь", "Октябрь", "Ноябрь", "Декабрь"],
+      weekdays      : ["Понедельник", "Вторник", "Среда","Четверг", "Пятница", "Суббота", "Воскресенье"],
+      weekdaysShort : ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
 
-
-  pikadayConfigProvider.setConfig
-    i18n: locales.ru
+  params =
     locales: locales
     theme: 'smart-theme'
+
+  if locales.hasOwnProperty(current_lang)
+    params['i18n'] = locales[current_lang]
+
+  pikadayConfigProvider.setConfig params
 
 ]
 

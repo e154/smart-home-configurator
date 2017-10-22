@@ -4,8 +4,9 @@
 
 angular
 .module('appControllers')
-.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http','Script','Message','$timeout', 'ScriptSelect2'
-  ($scope, Notify, $log, Stream, $rootScope, $http, Script, Message, $timeout, ScriptSelect2) ->
+.controller 'ScriptEditorCtrl', ['$scope','Notify','$log','Stream','$rootScope','$http','Script',
+'Message','$timeout', 'ScriptSelect2', '$translate'
+  ($scope, Notify, $log, Stream, $rootScope, $http, Script, Message, $timeout, ScriptSelect2, $translate) ->
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
@@ -39,11 +40,11 @@ angular
     $scope.remove_from_filelist =(e)->
       e.preventDefault()
       return if !$scope.current_script
-      return if !confirm("Удалить данный элемент?")
-
-      index = $scope.used_scripts.indexOf($scope.current_script)
-      $scope.used_scripts.splice(index, 1)
-      $scope.current_script = null
+      $translate("Delete this item").then (text)->
+        return if !confirm text
+        index = $scope.used_scripts.indexOf($scope.current_script)
+        $scope.used_scripts.splice(index, 1)
+        $scope.current_script = null
 
     $scope.select =(script, e)->
       e.preventDefault()
@@ -76,11 +77,11 @@ angular
 
       if $scope.current_script.id
         success =->
-          Notify 'success', 'Скрипт успешно обновлён', 3
+          Notify 'success', 'The script was successfully updated', 3
         Script.update $scope.current_script, success, error
       else
         success =(script)->
-          Notify 'success', 'Скрипт успешно создан', 3
+          Notify 'success', 'The script was successfully created', 3
           $scope.current_script = script
           appendScript($scope.current_script)
           $scope.state = 'edit'
@@ -90,7 +91,7 @@ angular
       $scope.state = state
       if state == 'new'
         $scope.current_script =
-          name: "Новый скрипт"
+          name: "New script"
           lang: "coffeescript"
           description: ""
           source: ""

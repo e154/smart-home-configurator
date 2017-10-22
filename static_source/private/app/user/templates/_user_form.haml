@@ -24,6 +24,14 @@
       {{'user.blocked' | translate}}
 
 .form-group
+  %label {{'user.language' | translate}}*
+  %select.form-control(ng-model="user.lang")
+    %option(value="ru")
+      русский
+    %option(value="en")
+      english
+
+.form-group
   %label {{'user.first_name' | translate}}*
   %input.form-control(ng-model="user.first_name" type="text")
 

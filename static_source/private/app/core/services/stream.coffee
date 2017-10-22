@@ -115,7 +115,7 @@ angular
       if !(name in @subscribers)
         @subscribers[name] = func
       else
-        Notify "Ошибка", "Подписчик #{name} уже есть в списке"
+        Notify "Ошибка", "Subscriber #{name} is already in the list"
 
     unsubscribe: (name)->
       if (name in @subscribers)

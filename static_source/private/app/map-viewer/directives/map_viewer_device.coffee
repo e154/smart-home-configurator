@@ -39,9 +39,9 @@ angular
     $scope.doAction =(action, $event)->
       Stream.sendRequest("do.action", {action_id: action.device_action.id, device_id: $scope.element.prototype.device.id}).then (result)->
         if !result.error
-          Notify 'success', "Команда выполнена успешно", 3
+          Notify 'success', "Command executed successfully", 3
         else
-          Notify 'error', "Результат выполнения команды:\n\r #{result.error}", 3
+          Notify 'error', result.error, 3
 
     # menu
     # --------------------

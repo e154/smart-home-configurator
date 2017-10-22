@@ -1,7 +1,8 @@
 angular
 .module('appControllers')
 .controller 'deviceEditCtrl', ['$scope', 'Message', '$stateParams', 'Device', '$state', 'Node'
-($scope, Message, $stateParams, Device, $state, Node) ->
+'$translate'
+($scope, Message, $stateParams, Device, $state, Node, $translate) ->
   vm = this
 
   vm.nodes = {}
@@ -12,7 +13,7 @@ angular
       angular.forEach data.devices, (device)->
         if device.id != vm.device.id
           vm.devices.push(device)
-      vm.devices.push({name: "Без группы", id: null})
+      vm.devices.push({name: "Device", id: null})
 
   Node.get {
     limit:99
@@ -30,8 +31,9 @@ angular
     vm.getNodeInfo()
 
   vm.remove =->
-    if confirm('точно удалить узел?')
-      remove()
+    $translate('remove the node?').then (text)->
+      if confirm text
+        remove()
 
   remove =->
     success =->

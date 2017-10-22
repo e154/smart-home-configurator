@@ -5,7 +5,7 @@ angular
   vm = this
 
   vm.script = new Script({
-    name: "Новый скрипт"
+    name: "New script"
     lang: "coffeescript"
     description: ""
     source: ""

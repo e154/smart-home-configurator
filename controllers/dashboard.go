@@ -51,14 +51,23 @@ func (h *DashboardController) Signin() {
 		}
 
 		server_url := fmt.Sprintf("%s:%s/api/v1/signin", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
-		result, err := h.SignIn("GET", server_url, "Basic " + auth[1])
+		result, err := h.SendRequest(
+			"GET",
+			server_url,
+			[]byte{},
+			map[string]string{"Authorization": "Basic " + auth[1]},
+		)
 		if err != nil {
 			h.ErrHan(403, err.Error())
 			return
 		}
 
-		message := &models.Message{}
-		if err = json.Unmarshal(result, message); err != nil {
+		message := struct {
+			Status	string	`json:"status"`
+			Message	string	`json:"message"`
+		}{}
+
+		if err = json.Unmarshal(result, &message); err != nil {
 			h.ErrHan(403, err.Error())
 			return
 		}
@@ -68,15 +77,19 @@ func (h *DashboardController) Signin() {
 			return
 		}
 
-		signin := &models.Signin{}
-		if err = json.Unmarshal(result, signin); err != nil {
+		current := struct {
+			Token	string			`json:"access_token"`
+			User	*models.User	`json:"current_user"`
+		}{}
+
+		if err = json.Unmarshal(result, &current); err != nil {
 			h.ErrHan(403, err.Error())
 			return
 		}
 
-		if signin.User != nil {
-			h.SetSession("userinfo", signin.User)
-			h.SetSession("access_token", signin.Token)
+		if current.User != nil {
+			h.SetSession("userinfo", current.User)
+			h.SetSession("access_token", current.Token)
 			h.ServeJSON()
 			return
 		}

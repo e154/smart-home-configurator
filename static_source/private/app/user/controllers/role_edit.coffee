@@ -15,7 +15,7 @@ angular
     $scope.role.$show success, error
 
   $scope.remove =->
-    return if !confirm('точно удалить эту роль?')
+    return if !confirm('Remove role?')
     success =->
       $state.go 'dashboard.role.index'
     error =(result)->
@@ -24,7 +24,7 @@ angular
 
   $scope.update =->
     success =->
-      Notify('success', 'Роль успешно обновлена', 3)
+      Notify('success', 'Role successfully updated', 3)
     error =(result)->
       Message result.data.status, result.data.message
     $scope.role.$update success, error

@@ -1,15 +1,17 @@
 angular
 .module("appServices")
-.service 'Notify', ['$log', 'toaster'
-($log, toaster) ->
+.service 'Notify', ['$log', 'toaster', '$translate'
+($log, toaster, $translate) ->
   (status, message, time)->
     if !message || typeof message != 'string' || message == ""
       return
 
-    if !time
-      time = 5
+    $translate(message).then (message)->
 
-    time *= 1000
+      if !time
+        time = 5
 
-    toaster.pop(status, null, message, time, 'trustedHtml')
+      time *= 1000
+
+      toaster.pop(status, null, message, time, 'trustedHtml')
 ]

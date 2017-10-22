@@ -1,8 +1,8 @@
 angular
 .module('appControllers')
 .controller 'deviceActionCtrl', ['$scope', 'Notify', 'DeviceAction', 'Message', '$stateParams', 'Device'
-'$http', 'ngDialog', 'Stream'
-($scope, Notify, DeviceAction, Message, $stateParams, Device, $http, ngDialog, Stream) ->
+'$http', 'ngDialog', 'Stream', '$translate'
+($scope, Notify, DeviceAction, Message, $stateParams, Device, $http, ngDialog, Stream, $translate) ->
   vm = this
   vm.actions = []
   vm.current ={}
@@ -21,17 +21,17 @@ angular
 
   vm.getDefaultAction =->
     vm.current = new DeviceAction({
-        name: "Новое действие"
+        name: "New action"
         command: "03000005"
         script: null
-        description: "Какое-то действие"
+        description: "action description"
         device:
           id: parseInt($stateParams.id, 10)
       })
 
   vm.submit =->
     success =(result)->
-      Notify 'success', 'Действие успешно обновлено', 3
+      Notify 'success', 'Action successfully updated', 3
 
       vm.getDeviceActions()
       vm.getDefaultAction()
@@ -56,8 +56,9 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
-    if confirm('Вы точно хотите удалить это действие?')
-      vm.current.$remove(success, error)
+    $translate('Are you sure you want to delete this action?').then (text)->
+      if confirm text
+        vm.current.$remove(success, error)
 
   # select2
   # ------------------
@@ -125,9 +126,9 @@ angular
 
     Stream.sendRequest("do.action", {action_id: action.id, device_id: parseInt($stateParams.id, 10)}).then (result)->
       if !result.error
-        Notify 'success', "Команда выполнена успешно", 3
+        Notify 'success', "Command executed successfully", 3
       else
-        Notify 'error', "Результат выполнения команды:\n\r #{result.error}", 3
+        Notify 'error', result.error, 3
 
   # starting
   # ------------------------------------------

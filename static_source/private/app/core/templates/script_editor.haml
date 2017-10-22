@@ -17,7 +17,7 @@
         .clearfix
       .form-group
         %div(ng-if="!used_scripts.length")
-          Список пока пуст
+          {{'empty list' | translate}}
         .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
           {{script.name}}
 

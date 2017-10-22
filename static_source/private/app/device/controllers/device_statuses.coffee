@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'deviceStatusCtrl', ['$scope', 'Notify', 'DeviceState', 'Message', '$stateParams', '$timeout'
-($scope, Notify, DeviceState, Message, $stateParams, $timeout) ->
+.controller 'deviceStatusCtrl', ['$scope', 'DeviceState', 'Message', '$stateParams', '$translate'
+($scope, DeviceState, Message, $stateParams, $translate) ->
   vm = this
 
   vm.statuses = []
@@ -31,7 +31,8 @@ angular
     })
 
   vm.remove =(_state)->
-    return if !confirm('Вы точно хотите удалить это состояние?')
+    $translate('Are you sure you want to delete this state?').then (text)->
+      return if !confirm text
 
     if _state.id
       success =()->

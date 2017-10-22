@@ -7,7 +7,7 @@ angular
   $scope.ace_options = angular.copy $rootScope.ace_options
 
   vm.script = new Script
-    name: "Новый скрипт"
+    name: "New script"
     lang: "coffeescript"
     description: ""
     source: ""
@@ -15,7 +15,7 @@ angular
   vm.submitScript =->
     success =(script)->
       $scope.$parent.setScript(script)
-      Notify 'success', 'Скрипт успешно создан', 1
+      Notify 'success', 'The script was successfully created', 1
 
     error =(result)->
       Message result.data.status, result.data.message

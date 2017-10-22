@@ -20,9 +20,10 @@ type User struct {
 	CurrentSignInIp     	string                	`json:"current_sign_in_ip"`
 	LastSignInIp        	string                	`json:"last_sign_in_ip"`
 
-	CreatedBy	       	*User                   `json:"created_by"`
+	CreatedBy	       		*User                   `json:"created_by"`
 	Role                   	*Role                	`json:"role"`
-	Meta			[]*UserMeta		`json:"meta"`
+	Meta					[]*UserMeta				`json:"meta"`
+	Lang					string				`json:"lang"`
 
 	CurrentSignInAt     	time.Time        	`json:"current_sign_in_at"`
 	LastSignInAt        	time.Time        	`json:"last_sign_in_at"`

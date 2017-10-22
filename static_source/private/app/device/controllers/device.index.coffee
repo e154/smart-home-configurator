@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'deviceIndexCtrl', ['$scope', 'Notify', 'Device', '$state', 'Node'
-($scope, Notify, Device, $state, Node) ->
+.controller 'deviceIndexCtrl', ['$scope', 'Device', '$state', 'Node'
+($scope, Device, $state, Node) ->
   vm = this
 
   Node.get {

@@ -143,7 +143,7 @@ ng-change="tableUpdate()"></select>
 </div>
 
 <div ng-if="!items.length || !table.columns.length">
-  Данные отсутствуют
+  {{"empty list" | translate}}
 </div>
 
 <div ng-if="items.length && table.columns.length" class="form-group clearfix">{{"total items" | translate}} ({{pagination.objects_count}})</div>

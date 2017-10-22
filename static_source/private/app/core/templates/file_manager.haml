@@ -17,7 +17,7 @@
                 %a(ng-click="mode = 'upload'")
                     %li.drop-box.file-manager-item
                         %span.fa.fa-plus(aria-hidden="true")
-                        .title Загрузить
+                        .title {{'upload' | translate}}
                 %li.file-manager-item( ng-repeat="file in file_list | orderBy: $index: true" ng-click="select($event, file)")
                     %img(ng-src="{{server_url}}{{file.url}}" err-src="/static/images/placeholder_file_not_found.svg")
                     .file-manager-item-title
@@ -29,13 +29,13 @@
         .col-sm-2
             %a(href="#" ng-click="mode = 'select'")
                 %i.fa.fa-file-archive-o
-                Архив
+                {{'archive' | translate}}
         .col-sm-10
             %ul.file-manager-items
                 %li.drop-box.file-manager-item(ngf-drop="true" ngf-select="selectFile($files)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true")
                     %span.fa.fa-cloud-upload( aria-hidden="true")
                     .title
-                        Добавить файлы
+                        {{'upload file' | translate}}
                 %li.file-manager-item( ng-repeat="file in files_to_upload | orderBy: $index: true")
                     %img( ngf-thumbnail="file")
                     %img( src="/static/images/placeholder_file.svg" ng-if="file.type.indexOf('image') < 0")
@@ -44,5 +44,5 @@
                     .cross.close-button( ng-click="removeFile($event, file)")
 .file-manager-footer
     %span( ng-if="files_to_upload || selected_files") Итого выбрано файлов: {{files_to_upload.length || selected_files.length}}
-    %button.btn.btn-product.btn-sm.pull-right( ng-if="mode == 'upload'" ng-click="upload($event)" ng-disabled="!files_to_upload.length") Загрузить на сервер
-    %button.btn.btn-product.btn-sm.pull-right( ng-if="mode == 'select'" ng-click="submit($event); closeThisDialog()" ng-disabled="!selected_files.length") Выбрать
+    %button.btn.btn-product.btn-sm.pull-right( ng-if="mode == 'upload'" ng-click="upload($event)" ng-disabled="!files_to_upload.length") {{'upload' | translate}}
+    %button.btn.btn-product.btn-sm.pull-right( ng-if="mode == 'select'" ng-click="submit($event); closeThisDialog()" ng-disabled="!selected_files.length") {{'select' | translate}}

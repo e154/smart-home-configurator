@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'dashboardIndexCtrl', ['$scope', 'Notify', 'Stream', 'Dashboard', '$timeout', 'Message'
-($scope, Notify, Stream, Dashboard, $timeout, Message) ->
+.controller 'dashboardIndexCtrl', ['$scope', 'Stream', 'Dashboard', '$timeout', 'Message'
+($scope, Stream, Dashboard, $timeout, Message) ->
 
   angular.element(document).find('body').addClass('dashboard')
   $scope.total_uptime = 0
