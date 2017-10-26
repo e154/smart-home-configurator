@@ -3,16 +3,17 @@
     .panel-heading
       Revocery access
     .panel-body
-      .form-group(ng-if="error")
-        .alert.alert-danger
-          {{error}}
+      %form(name="reset" ng-submit="submit()")
+        .form-group(ng-if="error")
+          .alert.alert-danger
+            {{error}}
 
-      .form-group
-        %input.form-control(ng-model="password" type="password" placeholder="Password")
-      .form-group
-        %input.form-control(ng-model="password" type="password" placeholder="Password")
-      .form-group.clearfix
-        %a.pull-right(href="#" ui-sref="signin")
-          login form
-      .btn.btn-default(ng-click="signin()" ng-disabled="!password")
-        Send password
+        .form-group
+          %input.form-control(ng-model="password" type="password" placeholder="Password")
+        .form-group
+          %input.form-control(ng-model="password" type="password" placeholder="Password")
+        .form-group.clearfix
+          %a.pull-right(href="#" ui-sref="signin")
+            login form
+        %input.btn.btn-default(type="submit" ng-disabled="!password")
+          Send password

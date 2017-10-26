@@ -6,7 +6,7 @@ angular
   $scope.email = ''
   $scope.error = null
 
-  $scope.reset =->
+  $scope.submit =->
     return if $scope.email == ''
     success =()->
       console.log 'ok'

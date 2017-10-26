@@ -3,16 +3,17 @@
     .panel-heading
       Sign in
     .panel-body
-      .form-group(ng-if="error")
-        .alert.alert-danger
-          {{error}}
+      %form(name="signin" ng-submit="submit()")
+        .form-group(ng-if="error")
+          .alert.alert-danger
+            {{error}}
 
-      .form-group
-        %input.form-control(ng-model="email" type="email" placeholder="E-mail")
-      .form-group
-        %input.form-control(ng-model="password" type="password" placeholder="Password")
-      .form-group.clearfix
-        %a.pull-right(href="#" ui-sref="recovery" )
-          forgot password?
-      .btn.btn-default(ng-click="signin()" ng-disabled="!email || !password")
-        Sign in
+        .form-group
+          %input.form-control(ng-model="email" type="email" placeholder="E-mail")
+        .form-group
+          %input.form-control(ng-model="password" type="password" placeholder="Password")
+        .form-group.clearfix
+          %a.pull-right(href="#" ui-sref="recovery" )
+            forgot password?
+        %input.btn.btn-default(type="submit" ng-disabled="!email || !password")
+          Sign in
