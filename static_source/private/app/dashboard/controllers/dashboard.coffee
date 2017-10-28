@@ -1,12 +1,18 @@
 angular
 .module('appControllers')
-.controller 'dashboardCtrl', ['$scope', 'Stream' ,'authForm'
-($scope, Stream, authForm) ->
+.controller 'dashboardCtrl', ['$scope', 'Stream' ,'authForm', 'ifCan'
+($scope, Stream, authForm, ifCan) ->
   vm = this
 
   vm.menu =
     'name': 'Main Menu'
     'items': [
+      {
+        'label': 'dashboard.name'
+        'route': 'dashboard.index'
+        'icon': 'fa fa-home'
+        'access': {dashboard: ['read']}
+      }
       {
         'label': 'Account'
         'route': 'dashboard.account'
@@ -15,13 +21,10 @@ angular
           {
             'label': 'Sign out'
             'route': 'dashboard.signout'
+            'access': {user: ['read']}
           }
         ]
-      }
-      {
-        'label': 'dashboard.name'
-        'route': 'dashboard.index'
-        'icon': 'fa fa-home'
+        'access': {user: ['read']}
       }
       {
         'label': 'Maps'
@@ -32,13 +35,15 @@ angular
           {
             'label': 'All maps'
             'route': 'dashboard.map.index'
+            'access': {map: ['read_map']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.map.new'
+            'access': {map: ['create_map']}
           }
         ]
-        permission: ''
+        'access': {map: ['read_map']}
       }
       {
         'label': 'Devices'
@@ -49,12 +54,15 @@ angular
           {
             'label': 'All device'
             'route': 'dashboard.device.index'
+            'access': {device: ['read']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.device.new'
+            'access': {device: ['create']}
           }
         ]
+        'access': {device: ['read']}
       }
       {
         'label': 'Nodes'
@@ -65,12 +73,15 @@ angular
           {
             'label': 'All nodes'
             'route': 'dashboard.node.index'
+            'access': {node: ['read']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.node.new'
+            'access': {node: ['create']}
           }
         ]
+        'access': {node: ['read']}
       }
       {
         'label': 'Flows'
@@ -81,12 +92,15 @@ angular
           {
             'label': 'All flow'
             'route': 'dashboard.flow.index'
+            'access': {flow: ['read']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.flow.new'
+            'access': {flow: ['create']}
           }
         ]
+        'access': {flow: ['read']}
       }
       {
         'label': 'Workflow'
@@ -97,12 +111,15 @@ angular
           {
             'label': 'All workflow'
             'route': 'dashboard.workflow.index'
+            'access': {workflow: ['read']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.workflow.new'
+            'access': {workflow: ['create']}
           }
         ]
+        'access': {workflow: ['read']}
       }
       {
         'label': 'Scripts'
@@ -113,17 +130,21 @@ angular
           {
             'label': 'All scripts'
             'route': 'dashboard.script.index'
+            'access': {script: ['read']}
           }
           {
             'label': 'Add new'
             'route': 'dashboard.script.new'
+            'access': {script: ['create']}
           }
         ]
+        'access': {script: ['read']}
       }
       {
         'label': 'Logs'
         'route': 'dashboard.log.index'
         'icon': 'fa fa-file-text-o'
+        'access': {log: ['read']}
 
       }
       {
@@ -135,20 +156,25 @@ angular
           {
             'label': 'All notifications'
             'route': 'dashboard.notifr.index'
+            'access': {notifr: ['show_notify']}
           }
           {
             'label': 'All templates'
             'route': 'dashboard.notifr.template_list'
+            'access': {notifr: ['read_notifr_template']}
           }
           {
             'label': 'Add template'
             'route': 'dashboard.notifr.new_template'
+            'access': {notifr: ['create_notifr_template']}
           }
           {
             'label': 'All items'
             'route': 'dashboard.notifr.items'
+            'access': {notifr: ['read_notifr_item']}
           }
         ]
+        'access': {notifr: ['show_notify']}
       }
       {
         'label': 'Users'
@@ -159,27 +185,25 @@ angular
           {
             'label': 'All users'
             'route': 'dashboard.user.index'
+            'access': {user: ['read']}
           }
           {
             'label': 'All roles'
             'route': 'dashboard.role.index'
+            'access': {user: ['read_role']}
           }
           {
             'label': 'Add user'
             'route': 'dashboard.user.new'
+            'access': {user: ['create']}
           }
           {
             'label': 'Add role'
             'route': 'dashboard.role.new'
+            'access': {user: ['create_role']}
           }
         ]
-      }
-    ]
-    'down_items': [
-      {
-        'label': 'Signout'
-        'link': '/signout'
-        'icon': 'fa fa-sign-out'
+        'access': {user: ['read']}
       }
     ]
 

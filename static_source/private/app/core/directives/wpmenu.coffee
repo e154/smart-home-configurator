@@ -13,7 +13,7 @@ angular
       template: '<!--- Sidebar navigation -->
         <script type="text/ng-template" id="categoryTree">
           <ul>
-            <li ng-repeat="item in item.items" ng-class="{open: (item.route | includedByState), has_sub: item.items.length}">
+            <li ng-repeat="item in item.items" ng-class="{open: (item.route | includedByState), has_sub: item.items.length}" if-Can="item.access">
               <a ui-sref="{{item.route}}" ui-sref-active="active"><i ng-if="item.icon" ng-class=[item.icon]></i><span translate="{{item.label}}"></span>
                 <span ng-if="item.items.length" class="pull-right"><i class="fa" ng-class="(item.route | includedByState) ? \'fa-chevron-down\' : \'fa-chevron-left\'"></i></span>
               </a>
@@ -24,7 +24,7 @@ angular
         <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
         <ul id="nav">
           <!-- Main menu with font awesome icon -->
-          <li ng-repeat="item in wpmenu.items" ng-class="{active: (item.route | includedByState), has_sub: item.items.length}">
+          <li ng-repeat="item in wpmenu.items" ng-class="{active: (item.route | includedByState), has_sub: item.items.length}" if-Can="item.access">
               <span class="glow"></span>
               <a ui-sref="{{item.link || item.route}}" ng-class="{has_sub: item.items}"><i ng-class=[item.icon]></i><span translate="{{item.label}}"></span>
                 <span ng-if="item.items.length" class="pull-right"><i class="fa" ng-class="(item.route | includedByState) ? \'fa-chevron-down\' : \'fa-chevron-left\'"></i></span>

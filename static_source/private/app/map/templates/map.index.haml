@@ -2,7 +2,7 @@
   .col-md-12
     %h3 {{'map.index_form' | translate}}
 
-.row
+.row(if-can="{map: ['create_map']}")
   .col-md-12
     .form-group
       %a(ui-sref="dashboard.map.new")
