@@ -75,6 +75,13 @@ func ServiceInitialize() {
 }
 
 func Initialize() {
+
+	beego.BConfig.WebConfig.TemplateLeft = "{{{"
+	beego.BConfig.WebConfig.TemplateRight = "}}}"
+	beego.BConfig.WebConfig.AutoRender = false
+	beego.BConfig.WebConfig.EnableXSRF = false
+	beego.AppConfig.Set("template_type", "default")
+
 	router.Initialize()
 
 	beego.Info("Starting....")
