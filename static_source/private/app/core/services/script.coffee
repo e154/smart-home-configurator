@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Script', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/script/:id', {id: '@id'},
+  $resource app.server_url + '/api/v1/script/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -31,7 +31,7 @@ angular
         items: data?.scripts || []
 
     exec:
-      url: window.app_settings.server_url + '/api/v1/script/:id/exec'
+      url: app.server_url + '/api/v1/script/:id/exec'
       method: 'POST'
       responseType: 'json'
       transformResponse: (data) ->

@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Log', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/log/:id', {id: '@id'},
+  $resource app.server_url + '/api/v1/log/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'

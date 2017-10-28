@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'dashboardCtrl', ['$scope', 'Stream'
-($scope, Stream) ->
+.controller 'dashboardCtrl', ['$scope', 'Stream' ,'authForm'
+($scope, Stream, authForm) ->
   vm = this
 
   vm.menu =
@@ -187,6 +187,10 @@ angular
   $scope.nodes = {}
   Stream.subscribe "nodes", (nodes)->
     $scope.nodes = nodes
+
+  # show signin dialog
+  if !app_settings.current_user.id
+    authForm.show()
 
   vm
 ]

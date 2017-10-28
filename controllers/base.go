@@ -29,27 +29,39 @@ func (b *BaseController) Prepare() {
 		//-----------------------
 		server_url := fmt.Sprintf("%s:%s/api/v1/user/%d", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"), user_from_session.Id)
 
-		result, err := b.SendRequest(
+		resp, result, err := b.SendRequest(
 			"GET",
 			server_url,
 			[]byte{},
 			map[string]string{"access_token": access_token},
 		);
 
-		if err == nil {
-			curren_user := struct {
-				User models.User `json: "user"`
-			}{}
-
-			if err = json.Unmarshal(result, &curren_user); err == nil {
-				jcu, _ := json.Marshal(curren_user.User)
-				b.Data["current_user"] = string(jcu)
-				language = curren_user.User.Lang
-			} else {
-				fmt.Println(err.Error())
-			}
-
+		if err != nil {
+			b.ErrHan(403, err.Error())
+			return
 		}
+
+		if(resp.StatusCode == 401) {
+			b.DelSession("userinfo")
+			b.DelSession("access_token")
+			b.Ctx.Redirect(302, "/signin")
+
+			return
+		}
+
+		curren_user := struct {
+			User models.User `json: "user"`
+		}{}
+
+		if err = json.Unmarshal(result, &curren_user); err == nil {
+			jcu, _ := json.Marshal(curren_user.User)
+			b.Data["current_user"] = string(jcu)
+			language = curren_user.User.Lang
+		} else {
+			b.ErrHan(403, err.Error())
+			return
+		}
+
 	}
 
 	b.Data["info"] = map[string]string{

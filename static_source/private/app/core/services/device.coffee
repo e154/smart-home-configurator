@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Device', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/device/:id', {id: '@id'},
+  $resource app.server_url + '/api/v1/device/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -9,12 +9,12 @@ angular
         data?.device || data
 
     group:
-      url: window.app_settings.server_url + '/api/v1/device/group'
+      url: app.server_url + '/api/v1/device/group'
       method: 'GET'
       responseType: 'json'
 
     actions:
-      url: window.app_settings.server_url + '/api/v1/device/:id/actions'
+      url: app.server_url + '/api/v1/device/:id/actions'
       method: 'GET'
       isArray: true
       responseType: 'json'

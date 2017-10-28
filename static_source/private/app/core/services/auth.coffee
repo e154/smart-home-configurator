@@ -14,7 +14,7 @@ angular
       responseType: 'json'
 
     show:
-      url: window.app_settings.server_url + '/api/v1/access_list'
+      url: app.server_url + '/api/v1/access_list'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->

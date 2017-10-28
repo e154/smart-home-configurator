@@ -23,6 +23,9 @@ angular
         plain: false
         overlay: true
         showClose: false
+        closeByEscape: false
+        closeByNavigation: false
+        closeByDocument: false
         preCloseCallback: ()=>
           @ngDialogInstance = null
           return

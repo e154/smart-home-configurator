@@ -74,7 +74,7 @@ func (c *CommonController) UpdateTemplate() {
 	c.Render()
 }
 
-func (c *CommonController) SendRequest(method, url string, jsonStr []byte, headParams map[string]string) (result []byte, err error) {
+func (c *CommonController) SendRequest(method, url string, jsonStr []byte, headParams map[string]string) (resp *http.Response, b []byte, err error) {
 
 	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonStr))
 	req.Header.Set("X-Custom-Header", "myvalue")
@@ -87,13 +87,12 @@ func (c *CommonController) SendRequest(method, url string, jsonStr []byte, headP
 	}
 
 	client := &http.Client{}
-	var resp *http.Response
 	if resp, err = client.Do(req); err != nil {
 		return
 	}
 
 	defer resp.Body.Close()
-	result, _ = ioutil.ReadAll(resp.Body)
+	b, _ = ioutil.ReadAll(resp.Body)
 
 	return
 }

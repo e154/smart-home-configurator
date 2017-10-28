@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'MapResource', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/map/:id', {id: '@id'},
+  $resource app.server_url + '/api/v1/map/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -33,7 +33,7 @@ angular
         items: data?.maps || []
 
     showFull:
-      url: window.app_settings.server_url + '/api/v1/map/:id/full'
+      url: app.server_url + '/api/v1/map/:id/full'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->

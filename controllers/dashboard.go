@@ -51,7 +51,7 @@ func (h *DashboardController) Signin() {
 		}
 
 		server_url := fmt.Sprintf("%s:%s/api/v1/signin", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"))
-		result, err := h.SendRequest(
+		_, b, err := h.SendRequest(
 			"GET",
 			server_url,
 			[]byte{},
@@ -67,7 +67,7 @@ func (h *DashboardController) Signin() {
 			Message	string	`json:"message"`
 		}{}
 
-		if err = json.Unmarshal(result, &message); err != nil {
+		if err = json.Unmarshal(b, &message); err != nil {
 			h.ErrHan(403, err.Error())
 			return
 		}
@@ -82,7 +82,7 @@ func (h *DashboardController) Signin() {
 			User	*models.User	`json:"current_user"`
 		}{}
 
-		if err = json.Unmarshal(result, &current); err != nil {
+		if err = json.Unmarshal(b, &current); err != nil {
 			h.ErrHan(403, err.Error())
 			return
 		}
@@ -90,6 +90,8 @@ func (h *DashboardController) Signin() {
 		if current.User != nil {
 			h.SetSession("userinfo", current.User)
 			h.SetSession("access_token", current.Token)
+
+			h.Data["json"] = &map[string]interface{}{"access_token": current.Token}
 			h.ServeJSON()
 			return
 		}
