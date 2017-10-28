@@ -530,5 +530,8 @@
   },
   "auth": {
     "package_name": "Авторизация"
+  },
+  "scenarios": {
+    "package_name": "Сценарии"
   }
 }
