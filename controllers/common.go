@@ -6,7 +6,6 @@ import  (
 	"strconv"
 	"reflect"
 	"html/template"
-	"fmt"
 	"net/http"
 	"bytes"
 	"io/ioutil"
@@ -76,7 +75,6 @@ func (c *CommonController) UpdateTemplate() {
 }
 
 func (c *CommonController) SendRequest(method, url string, jsonStr []byte, headParams map[string]string) (result []byte, err error) {
-	fmt.Println("URL:>", url)
 
 	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonStr))
 	req.Header.Set("X-Custom-Header", "myvalue")
