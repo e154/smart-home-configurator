@@ -7,7 +7,7 @@
             .fa.fa-plus &nbsp;
             {{'workflow.scenario.add' | translate}}
 
-    %div
+    %div(if-can="{scenarios:['create']}")
       %div(ng-include="'/workflow/templates/_scenario_form.html'" )
 
     .form-group
@@ -16,10 +16,10 @@
           {{'Delete' | translate}}
         %a.btn.btn-default(href="" role="button" ng-click="scenarios.cancel()" ng-if="scenarios.current.id")
           {{'Cancel' | translate}}
-        %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
-          %span(ng-if="!scenarios.current.id" if-can="{scenarios:['create']}")
+        %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()" if-can="{scenarios:['create','update']}")
+          %span(ng-show="!scenarios.current.id" if-can="{scenarios:['create']}")
             {{'Create' | translate}}
-          %span(ng-if="scenarios.current.id" if-can="{scenarios:['update']}")
+          %span(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
             {{'Update' | translate}}
       .clearfix
 

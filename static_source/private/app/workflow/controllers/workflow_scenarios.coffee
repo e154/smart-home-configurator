@@ -12,6 +12,8 @@ angular
       system_name: 'SCENARIO'
       scripts: []
 
+  vm.current = vm.addNew()
+
   vm.update_scenario =(item)->
     return if !item.id?
 
