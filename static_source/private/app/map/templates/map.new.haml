@@ -19,5 +19,5 @@
     .pull-right
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.map.index")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="create()")
+      %a.btn.btn-primary(href="" role="button" ng-click="create()" if-can="{map:['create_map']}")
         {{'Create' | translate}}

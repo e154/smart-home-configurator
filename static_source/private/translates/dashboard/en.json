@@ -528,5 +528,8 @@
   },
   "auth": {
       "package_name": "Authorization"
+  },
+  "scenarios": {
+    "package_name": "Scenarios"
   }
 }

@@ -1,14 +1,14 @@
-.panel.panel-default.map-layers-editor
+.panel.panel-default.map-layers-editor(if-can="{map:['read_map_layer', 'create_map_layer', 'update_map_layer']}")
   .panel-heading
     {{'map.layers' | translate}}
   .panel-body
-    .form-group
+    .form-group(if-can="{map:['create_map_layer', 'update_map_layer']}")
       %a(href="#" ng-click="addLayer()")
         .fa.fa-plus
         &nbsp;
         {{'map.add_layer' | translate}}
 
-    .form-group
+    .form-group(if-can="{map:['read_map_layer']}")
       %ul.list-group(ng-sortable="{ group: 'layers', animation: 0, handle: '.map-layer-handler', onSort: sortLayers}")
         %li.list-group-item(ng-repeat="layer in map.layers | orderBy:'weight'" ng-click="selectLayer(layer, $index)" ng-class="{'selected': layer == current_layer}")
           %span.map-layer-handler

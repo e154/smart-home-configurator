@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'map.show_form' | translate}} "{{map.name}}"
-      .edit-icon-link
+      .edit-icon-link(if-can="{map: ['update_map']}")
         %a(ui-sref="dashboard.map.edit.main({id:map.id})")
           %span.fa.fa-pencil
 
