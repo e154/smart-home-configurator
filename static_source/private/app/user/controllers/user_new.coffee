@@ -4,6 +4,7 @@ angular
 ($scope, Notify, User, Message, $http, $state, RoleSelect2) ->
 
   $scope.user = new User({
+    nickname: 'johndoe'
     status: 'active'
     role:
       name: 'user'
@@ -25,6 +26,10 @@ angular
         value: ''
       }
     ]
+    lang: 'en'
+    first_name: 'John'
+    last_name: 'Doe'
+    email: 'john@e154.ru'
 
   })
 

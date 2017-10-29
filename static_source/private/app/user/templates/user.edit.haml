@@ -20,9 +20,9 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{user:['delete']}")
         {{'Delete' | translate}}
-      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index")
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index" if-can="{user:['update']}")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="update()")
+      %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{user:['update']}")
         {{'Update' | translate}}

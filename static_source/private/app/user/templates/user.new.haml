@@ -13,7 +13,7 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index")
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index" if-can="{user:['create']}")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="create()")
+      %a.btn.btn-primary(href="" role="button" ng-click="create()" if-can="{user:['create']}")
         {{'Create' | translate}}

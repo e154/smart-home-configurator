@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'user.show_form' | translate}} - {{user.full_name || user.nickname}}
-      .edit-icon-link
+      .edit-icon-link(if-can="{user:['edit']}")
         %a(ui-sref="dashboard.user.edit({id:user.id})")
           %span.fa.fa-pencil
 
