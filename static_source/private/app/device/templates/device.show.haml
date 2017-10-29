@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'device.show_form' | translate}} №{{device.device.id}}
-      .edit-icon-link
+      .edit-icon-link(if-can="{device:['update']}")
         %a(ui-sref="dashboard.device.edit({id:device.device.id})")
           %span.fa.fa-pencil
 

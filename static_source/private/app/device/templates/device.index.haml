@@ -2,7 +2,7 @@
   .col-md-12
     %h3 {{'device.index_form' | translate}}
 
-.row
+.row(if-can="{device:['create']}")
   .col-md-12
     .form-group
       %a(ui-sref="dashboard.device.new")
@@ -10,6 +10,6 @@
         &nbsp;
         {{'Add new' | translate}}
 
-.row
+.row(if-can="{device:['read']}")
   .col-md-12
     .table(table="device.options")

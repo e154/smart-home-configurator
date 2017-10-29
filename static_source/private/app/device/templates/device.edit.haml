@@ -8,9 +8,9 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="device.remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="device.remove()" if-can="{device:['delete']}")
         {{'Delete' | translate}}
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.device.index")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="device.submit()")
+      %a.btn.btn-primary(href="" role="button" ng-click="device.submit()" if-can="{device:['update']}")
         {{'Update' | translate}}

@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'deviceNewCtrl', ['$scope', 'Device', '$state', 'Message', 'Node'
-($scope, Notify, $state, Message, Node) ->
+.controller 'deviceNewCtrl', ['$scope', 'Notify', 'Device', '$state', 'Message', 'Node'
+($scope, Notify, Device, $state, Message, Node) ->
   vm = this
 
   vm.devices = []

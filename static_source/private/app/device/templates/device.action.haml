@@ -1,6 +1,6 @@
-.row
+.row(if-can="{device_action:['read', 'create']}")
   .col-md-6
-    .row
+    .row(if-can="{device_action:['create']}")
       .col-md-12
         .form-group
           %a(href="#" ng-click="action.addNew()")
@@ -12,17 +12,19 @@
 
       .form-group
         .pull-right
-          %a.btn.btn-danger(href="" role="button" ng-click="action.remove()" ng-if="action.current.id")
+          %a.btn.btn-danger(href="" role="button" ng-click="action.remove()" ng-show="action.current.id" if-can="{device_action:['delete']}")
             {{'Delete' | translate}}
-          %a.btn.btn-default(href="" role="button" ng-click="action.cancel()" ng-if="action.current.id")
+          %a.btn.btn-default(href="" role="button" ng-click="action.cancel()" ng-show="action.current.id" )
             {{'Cancel' | translate}}
-          %a.btn.btn-primary(href="" role="button" ng-click="action.submit()")
-            %span(ng-if="!action.current.id")
+          %a.btn.btn-primary(href="" role="button" ng-click="action.submit()" if-can="{device_action:['create', 'update']}")
+            %span(ng-show="!action.current.id" if-can="{device_action:['create']}")
               {{'Create' | translate}}
-            %span(ng-if="action.current.id")
+            %span(ng-show="action.current.id" if-can="{device_action:['update']}")
               {{'Update' | translate}}
         .clearfix
 
+  .col-md-6(ng-if="!action.actions.length")
+    {{'No actions' | translate}}
   .col-md-6(ng-if="action.actions.length")
     .list-group
       .panel.panel-default
