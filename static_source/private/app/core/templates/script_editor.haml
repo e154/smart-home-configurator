@@ -6,13 +6,13 @@
         %strong
           {{'script.editor.file_list' | translate}}
           &nbsp;
-          %small
+          %small(if-can="{script:['create']}")
             %a(ng-click="dialog('add')" href="#")
               .fa.fa-plus
         .file-action-icons(ng-if="used_scripts.length && current_script")
-          %a(href="#" ng-click="edit($event)")
+          %a(href="#" ng-click="edit($event)" if-can="{script:['update']}")
             .fa.fa-pencil
-          %a(href="#" ng-click="remove_from_filelist($event)")
+          %a(href="#" ng-click="remove_from_filelist($event)" if-can="{script:['delete']}")
             .fa.fa-trash
         .clearfix
       .form-group
@@ -25,7 +25,7 @@
       .form-group
         %strong {{'script.editor.body' | translate}}
         .pull-right
-          %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-if="current_script")
+          %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-if="current_script" if-can="{script:['create', 'update']}")
             {{'Save' | translate}}
 
       .form-group

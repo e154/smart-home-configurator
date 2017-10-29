@@ -37,6 +37,6 @@
       %select(id="items" data-ng-attr-size="{{ctrl.selectSize}}" multiple="multiple" ng-model="selectedItems" ng-options="item as item for item in ctrl.items" style="width: 100%;")
 
     .form-group
-      %button.btn.btn-primary(ng-click="ctrl.save()" ng-if="ctrl.isNew" type="button") {{'Save' | translate}}
-      %button.btn.btn-primary(ng-click="ctrl.update()" ng-if="!ctrl.isNew" type="button") {{'Update' | translate}}
-      %button.btn.btn-danger(ng-click="ctrl.delete()" ng-if="!ctrl.isNew" type="button") {{'Delete' | translate}}
+      %button.btn.btn-primary(ng-click="ctrl.save()" ng-show="ctrl.isNew" type="button" if-can="{notifr:['create_notifr_template']}") {{'Save' | translate}}
+      %button.btn.btn-primary(ng-click="ctrl.update()" ng-show="!ctrl.isNew" type="button" if-can="{notifr:['update_notifr_template']}") {{'Update' | translate}}
+      %button.btn.btn-danger(ng-click="ctrl.delete()" ng-show="!ctrl.isNew" type="button" if-can="{notifr:['delete_notifr_template']}") {{'Delete' | translate}}

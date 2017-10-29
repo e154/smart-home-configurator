@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    .row
+    .row(if-can="{scenarios:['create']}")
       .col-md-12
         .form-group
           %a(href="#" ng-click="scenarios.addNew()")
@@ -12,14 +12,14 @@
 
     .form-group
       .pull-right
-        %a.btn.btn-danger(href="" role="button" ng-click="scenarios.remove()" ng-if="scenarios.current.id")
+        %a.btn.btn-danger(href="" role="button" ng-click="scenarios.remove()" ng-show="scenarios.current.id" if-can="{scenarios:['delete']}")
           {{'Delete' | translate}}
         %a.btn.btn-default(href="" role="button" ng-click="scenarios.cancel()" ng-if="scenarios.current.id")
           {{'Cancel' | translate}}
         %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
-          %span(ng-if="!scenarios.current.id")
+          %span(ng-if="!scenarios.current.id" if-can="{scenarios:['create']}")
             {{'Create' | translate}}
-          %span(ng-if="scenarios.current.id")
+          %span(ng-if="scenarios.current.id" if-can="{scenarios:['update']}")
             {{'Update' | translate}}
       .clearfix
 
@@ -50,7 +50,7 @@
             %div
               {{'workflow.scripts' | translate}}:
             .text-muted(ng-if="!item.scripts.length")
-              Нет
+              {{'No scripts' | translate}}
             .text-muted(ng-repeat="script in item.scripts")
               {{script.name}}({{script.lang}})
           .clearfix
@@ -65,7 +65,7 @@
   .col-lg-12
     %script-editor(ng-model="scenarios.current.scripts")
 
-.row(ng-if="scenarios.current.id")
+.row(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
   .col-lg-12.form-group
     .pull-right
       %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")

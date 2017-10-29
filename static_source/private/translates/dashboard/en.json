@@ -55,6 +55,9 @@
   "upload": "Upload",
   "archive": "Archive",
   "upload file": "Upload file",
+  "No scripts": "No scripts",
+  "No actions": "No actions",
+  "No states": "No states",
   "node": {
     "package_name": "Nodes",
     "name": "Name",
@@ -275,7 +278,7 @@
     "items": "Items",
     "preview": "Preview",
     "source_code": "Source code",
-    "package_name": "Package name",
+    "package_name": "Notifr",
     "template": "Template",
     "send": "Send"
   },

@@ -6,7 +6,7 @@
           &nbsp;
       {{'workflow.show_form' | translate}} "{{workflow.workflow.name}}"
       .edit-icon-link
-        %a(ui-sref="dashboard.workflow.edit({id:workflow.workflow.id})")
+        %a(ui-sref="dashboard.workflow.edit({id:workflow.workflow.id})" if-can="{workflow:['update']}")
           %span.fa.fa-pencil
 
     .pull-right.date-info-block

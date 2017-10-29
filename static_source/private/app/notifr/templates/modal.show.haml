@@ -38,5 +38,5 @@
 .row
   .col-md-12
     .pull-right
-      %button.btn.btn-default(ng-click="remove()")
+      %button.btn.btn-default(ng-click="remove()" if-can="{notifr:['delete_notify']}")
         {{'Delete' | translate}}

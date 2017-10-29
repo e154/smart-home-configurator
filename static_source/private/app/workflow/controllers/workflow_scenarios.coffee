@@ -9,7 +9,7 @@ angular
   vm.addNew =->
     vm.current =
       name: 'New'
-      system_name: 'New'
+      system_name: 'SCENARIO'
       scripts: []
 
   vm.update_scenario =(item)->

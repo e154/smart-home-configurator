@@ -56,7 +56,10 @@
   "archive": "Архив",
   "upload file": "Добавить файлы",
   "select": "Выбрать",
-  "empty list": "Список пока пуст",
+  "empty list": "Список пуст",
+  "No scripts": "Список пуст",
+  "No actions": "Список пуст",
+  "No states": "Список пуст",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",

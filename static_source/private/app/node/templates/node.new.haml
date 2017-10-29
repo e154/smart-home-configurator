@@ -10,5 +10,5 @@
         .pull-right
             %a.btn.btn-default(href="" role="button" ui-sref="dashboard.node.index")
                 {{'Cancel' | translate}}
-            %a.btn.btn-primary(href="" role="button" ng-click="node.submit()")
+            %a.btn.btn-primary(href="" role="button" ng-click="node.submit()" if-can="{node:['create']}")
                 {{'Create' | translate}}

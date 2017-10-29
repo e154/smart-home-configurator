@@ -20,7 +20,7 @@
     .dark(accordion-v1="flow-worker" title="{{'flow.worker' | translate}} ({{worker.name}})" ng-repeat="worker in flow.workers")
       %div(ng-include="'/flow/templates/_worker_form.html'")
 
-    .form-group
+    .form-group(if-can="{flow:['create']}")
       %a(href="#" ng-click="addNewWorker()" )
         .fa.fa-plus &nbsp;
         {{'flow.add_worker' | translate}}
@@ -34,9 +34,9 @@
 .row
   .col-md-12
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{flow:['delete']}")
         {{'Delete' | translate}}
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.flow.show({id:flow.id})")
         {{'Close' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="submit()")
+      %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{flow:['update']}")
         {{'Update' | translate}}

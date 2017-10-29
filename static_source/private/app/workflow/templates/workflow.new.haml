@@ -10,5 +10,5 @@
         .pull-right
             %a.btn.btn-default(href="" role="button" ui-sref="dashboard.workflow.index")
                 {{'Cancel' | translate}}
-            %a.btn.btn-primary(href="" role="button" ng-click="workflow.submit()")
+            %a.btn.btn-primary(href="" role="button" ng-click="workflow.submit()" if-can="{workflow:['create']}")
                 {{'Create' | translate}}

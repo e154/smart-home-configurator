@@ -5,5 +5,5 @@
 .row
   .col-lg-12.form-group
     .pull-right
-      %a.btn.btn-primary(href="" role="button" ng-click="ws.submit()")
+      %a.btn.btn-primary(href="" role="button" ng-click="ws.submit()" if-can="{workflow:['update']}")
         {{'Update' | translate}}
