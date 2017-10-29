@@ -108,5 +108,8 @@ angular
       update: (cb)->
         @upload(cb)
 
+      valid: =>
+        @device != null
+
     MapDevice
 ]

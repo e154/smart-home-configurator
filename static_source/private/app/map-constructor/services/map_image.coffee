@@ -27,4 +27,7 @@ angular
 
       @
 
+    valid: ->
+      @image != null
+
   MapImage

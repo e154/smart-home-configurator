@@ -152,5 +152,9 @@ angular
 
         @
 
+      valid: ()->
+        return false if !@prototype
+        @prototype.valid()
+
     MapElement
 ]

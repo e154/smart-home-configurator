@@ -22,4 +22,7 @@ angular
 
       @
 
+    valid: ->
+      @text != ''
+
   MapImage

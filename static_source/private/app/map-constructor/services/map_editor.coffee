@@ -20,7 +20,8 @@ angular
         @scope.addNewDevice = @addNewDevice
         @scope.addNewScript = @addNewScript
         @scope.preview = @preview
-        @scope.current_element = {}
+        @scope.current_element = null
+        @scope.valid = @valid
 
         @map_editor = new storage('map-editor')
 
@@ -180,6 +181,10 @@ angular
 
       preview: ()=>
         console.log 'preview'
+
+      valid: ()=>
+        return if !@scope.current_element || @scope.current_element == {}
+        @scope.current_element.valid()
 
       keyboard: ()=>
         angular.forEach @scope.settings.keyboard, (button, key_id)=>
