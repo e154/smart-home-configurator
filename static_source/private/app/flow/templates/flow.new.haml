@@ -8,7 +8,7 @@
 .row
     .col-md-6
         .pull-right
-            %a.btn.btn-default(href="" role="button" ui-sref="dashboard.flow.index")
+            %a.btn.btn-default(href="" role="button" ui-sref="dashboard.flow.index" if-can="{flow:['create']}")
                 {{'Cancel' | translate}}
             %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{flow:['create']}")
                 {{'Create' | translate}}
