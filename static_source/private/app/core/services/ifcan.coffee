@@ -8,11 +8,15 @@ angular
 .service 'ifCan', [ '$rootScope', ($rootScope) ->
   class ifCan
 
+    user = null
+
     constructor: ->
+      @user = window.app_settings.current_user
 
     check: (params) ->
-      return false if !app.current_user.role.access_list
-      access_list = app.current_user.role.access_list
+      return false if !@user.role.access_list
+      return true if @user.id == 1
+      access_list = @user.role.access_list
 
       exist = false
       angular.forEach params, (rights, dir)->
