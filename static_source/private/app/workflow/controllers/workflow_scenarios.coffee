@@ -8,8 +8,8 @@ angular
 
   vm.addNew =->
     vm.current =
-      name: 'New'
-      system_name: 'SCENARIO'
+      name: 'New scenario'
+      system_name: 'scenario'
       scripts: []
 
   vm.current = vm.addNew()
