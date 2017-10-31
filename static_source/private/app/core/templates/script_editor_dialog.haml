@@ -31,9 +31,9 @@
 .script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
   .dialog-header
     %strong
-      %span(ng-if="state == 'new'" if-can="{script:['create']}")
+      %span(ng-show="state == 'new'" if-can="{script:['create']}")
         {{'New script' | translate}}
-      %span(ng-if="state == 'edit'" if-can="{script:['update']}")
+      %span(ng-show="state == 'edit'" if-can="{script:['update']}")
         {{'script.script_edit' | translate}}
       %span.small
         %a(href="#" ng-click="dialog('add')" )

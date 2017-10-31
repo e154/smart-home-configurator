@@ -63,6 +63,6 @@
                     {{'Delete' | translate}}
                   %a.btn.btn-default(href="" role="button" ng-click="updateElement(element)" if-can="{map:['update_map_element']}" ng-disabled="!valid(element)")
                     {{'Update' | translate}}
-                  %a.btn.btn-default(href="#" ng-click="current_layer.copyElement(element, $event)" ng-if="element.prototype_type != 'device'" if-can="{map:['update_map_element']}")
+                  %a.btn.btn-default(href="#" ng-click="current_layer.copyElement(element, $event)" ng-show="element.prototype_type != 'device'" if-can="{map:['update_map_element']}")
                     {{'Copy' | translate}}
 
