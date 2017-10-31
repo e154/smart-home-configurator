@@ -21,13 +21,11 @@
         .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
           {{script.name}}
 
-    .col-lg-9
       .form-group
-        %strong {{'script.editor.body' | translate}}
-        .pull-right
-          %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-if="current_script" if-can="{script:['create', 'update']}")
-            {{'Save' | translate}}
+        %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-show="current_script" if-can="{script:['create', 'update']}")
+          {{'Save script' | translate}}
 
+    .col-lg-9
       .form-group
         .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")
 
