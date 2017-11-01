@@ -56,4 +56,4 @@
       %label {{'script.description' | translate}}
       %input.form-control(ng-model="current_script.description")
 
-    %button.btn.btn-default(ng-click="updateScript()" if-can="{script:['create', 'update']}") {{'save' | translate}}
+    %button.btn.btn-default(ng-click="updateScript(current_script)" if-can="{script:['create', 'update']}") {{'save' | translate}}

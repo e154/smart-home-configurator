@@ -10,7 +10,7 @@ angular
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
-    $scope.current_script = {}
+    $scope.current_script = null
     $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
     $scope.attached_script =
       script: null
@@ -20,7 +20,7 @@ angular
       return if nv == ov
       $scope.used_scripts = []
       $scope.used_scripts = nv if nv
-      $scope.current_script = {}
+      $scope.current_script = null
       $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
       $scope.used_scripts_back = angular.copy($scope.used_scripts)
 
@@ -63,7 +63,7 @@ angular
         $scope.current_script = null
 
     $scope.select =(script, e)->
-      e.preventDefault()
+      e.preventDefault() if e
       switch script.lang
         when 'javascript'
           $scope.ace_options.mode = 'javascript'
@@ -81,6 +81,7 @@ angular
           exist = true
 
       $scope.used_scripts.push _script if !exist
+      $scope.used_scripts_back.push angular.copy(_script) if !exist
 
     $scope.appendScript =->
       return if !$scope.attached_script.script
@@ -92,18 +93,17 @@ angular
 
       error =(result)->
         Message result.data.status, result.data.message
-        err()
+        err() if err
 
       if script.id
         success =->
-          cb()
+          cb() if cb
           Notify 'success', 'The script was successfully updated', 3
         Script.update script, success, error
       else
         success =(script)->
-          cb()
+          cb() if cb
           Notify 'success', 'The script was successfully created', 3
-          script = script
           appendScript(script)
           $scope.state = 'edit'
         Script.create script, success, error

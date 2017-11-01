@@ -6,6 +6,17 @@
           %a(href="#" ng-click="scenarios.addNew()")
             .fa.fa-plus &nbsp;
             {{'workflow.scenario.add' | translate}}
+          &nbsp;
+          &nbsp;
+          &nbsp;
+
+          %a(href="#" ng-click="scenarios.state='show'" ng-if="scenarios.state!='show'")
+            .fa.fa-arrow-circle-o-left &nbsp;
+            {{'Back' | translate}}
+
+
+.row(ng-if="scenarios.state=='add' || scenarios.state=='edit'")
+  .col-md-6
 
     %div(if-can="{scenarios:['create']}")
       %div(ng-include="'/workflow/templates/_scenario_form.html'" )
@@ -14,21 +25,24 @@
       .pull-right
         %a.btn.btn-danger(href="" role="button" ng-click="scenarios.remove()" ng-show="scenarios.current.id" if-can="{scenarios:['delete']}")
           {{'Delete' | translate}}
-        %a.btn.btn-default(href="" role="button" ng-click="scenarios.cancel()" ng-if="scenarios.current.id")
-          {{'Cancel' | translate}}
+
         %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()" if-can="{scenarios:['create','update']}")
           %span(ng-show="!scenarios.current.id" if-can="{scenarios:['create']}")
             {{'Create' | translate}}
           %span(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
             {{'Update' | translate}}
-      .clearfix
 
-  .col-md-6
+        %a.btn.btn-default(href="" role="button" ng-click="scenarios.cancel()")
+          {{'Cancel' | translate}}
+
+
+.row(ng-if="scenarios.state=='show'")
+  .col-md-12
     .list-group(ng-if="workflow.workflow.scenarios.length")
       .panel.panel-default
-        .panel-heading
+        -#.panel-heading
           {{'workflow.scenarios' | translate}}
-        %a.list-group-item(href="#" ng-repeat="item in workflow.workflow.scenarios" ng-click="scenarios.show(item)" ng-class="{'active' : scenarios.current.id == item.id}" )
+        .list-group-item(href="#" ng-repeat="item in workflow.workflow.scenarios" )
           %strong.list-group-item-heading
             {{item.name}}
             &nbsp;
@@ -43,11 +57,11 @@
               &nbsp;
               {{'workflow.scenario.do_scenario' | translate}}
           .pull-left.list-group-item-text
-            %div
+            %strong
               {{'workflow.scenario.system_name' | translate}}:
             .text-muted
               {{item.system_name}}
-            %div
+            %strong
               {{'workflow.scripts' | translate}}:
             .text-muted(ng-if="!item.scripts.length")
               {{'No scripts' | translate}}
@@ -55,18 +69,26 @@
               {{script.name}}({{script.lang}})
           .clearfix
 
+          .text-right
+            %a(href="#" ng-click="scenarios.show(item); scenarios.state='edit'" )
+              %i.fa.fa-pencil
+            &nbsp;
+            &nbsp;
+            %a(href="#" ng-click="scenarios.show(item); scenarios.state='script_editor'" )
+              %i.fa.fa-file-text-o
 
-.row(ng-if="scenarios.current.id")
-  .col-lg-12
-    %h4
-      {{'workflow.scenario.scripts_title' | translate}}
+%div(ng-if="scenarios.state=='script_editor'")
+  .row
+    .col-lg-12
+      %h4
+        {{'workflow.scenario.scripts_title' | translate}}
 
-.row(ng-if="scenarios.current.id")
-  .col-lg-12
-    %script-editor(ng-model="scenarios.current.scripts")
+  .row
+    .col-lg-12
+      %script-editor(ng-model="scenarios.current.scripts")
 
--#.row(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
-  .col-lg-12.form-group
-    .pull-right
-      %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
-        {{'Update' | translate}}
+  .row(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
+    .col-lg-12.form-group
+      .pull-right
+        %a.btn.btn-primary(href="" role="button" ng-click="scenarios.submit()")
+          {{'Update scenario' | translate}}

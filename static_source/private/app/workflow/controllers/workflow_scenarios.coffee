@@ -5,14 +5,14 @@ angular
 
   vm = this
   vm.current = {}
+  vm.state = 'show' #show|add|edit|script_editor
 
   vm.addNew =->
+    vm.state = 'add'
     vm.current =
       name: 'New scenario'
       system_name: 'scenario'
       scripts: []
-
-  vm.current = vm.addNew()
 
   vm.update_scenario =(item)->
     return if !item.id?
@@ -31,6 +31,7 @@ angular
   vm.get_all_scenario =->
     success =(scenarios)->
       $scope.workflow.workflow.scenarios = angular.copy scenarios
+      vm.state = 'show'
       vm.cancel()
     error =(result)->
       Message result.data.status, result.data.message
@@ -56,6 +57,7 @@ angular
     Workflow.scenario_delete data, success, error
 
   vm.cancel =()->
+    vm.state = 'show'
     vm.current = null
 
   vm.submit =->
@@ -70,6 +72,10 @@ angular
         $scope.workflow.workflow.scenarios.push scenario
       else
         Notify 'success', 'Successfully updated script', 5
+
+      vm.get_all_scenario()
+
+
     error =(result)->
       Message result.data.status, result.data.message
 
