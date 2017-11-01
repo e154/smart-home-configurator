@@ -36,7 +36,7 @@ angular
               script.modif = true
     , true
 
-    $scope.state = 'show' #show|add|new|edit
+    $scope.state = 'redactor' #redactor|add|new|edit
     $scope.used_scripts = $scope.ngModel || []
     $scope.used_scripts_back = angular.copy($scope.used_scripts)
     $scope.wait = 0
