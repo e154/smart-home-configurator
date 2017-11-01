@@ -20,12 +20,24 @@
           {{'empty list' | translate}}
         .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
           {{script.name}}
+          %span(ng-if="script.modif")
+            *
 
-      .form-group
-        %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-show="current_script" if-can="{script:['create', 'update']}")
-          {{'Save script' | translate}}
+      .form-group(ng-if="current_script")
+        %button.btn.btn-success.btn-xs.full-width(ng-click="exec()")
+          {{'script.execute' | translate}}
+
+      .form-group(ng-if="script_changed")
+        %button.btn.btn-primary.btn-xs.full-width(ng-click="save()" if-can="{script:['create', 'update']}" ng-disabled="wait")
+          {{'Save all scripts' | translate}}
 
     .col-lg-9
+      .form-group(ng-show="result && result != ''")
+        .console
+          %pre(ng-bind-html="result")
+          %a.close(href="#" ng-click="result = ''" )
+            x
+
       .form-group
         .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")
 
