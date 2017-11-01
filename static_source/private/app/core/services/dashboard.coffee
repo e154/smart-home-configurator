@@ -7,7 +7,7 @@ angular
       responseType: 'json'
       transformResponse: (data) ->
         dashboard = data?.dashboard || data
-        console.log dashboard.widgets
+#        console.log dashboard.widgets
         dashboard.widgets = angular.fromJson(dashboard.widgets || "[]") || []
         dashboard
 
