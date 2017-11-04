@@ -24,7 +24,6 @@ app = angular.module('app', [
   'angular-bpmn'
   'ui.select'
   'ngSanitize'
-  'ui.ace'
   'ngDialog'
   'ui.bootstrap.pagination'
   'pikaday'

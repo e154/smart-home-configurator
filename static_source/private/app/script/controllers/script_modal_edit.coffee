@@ -25,8 +25,8 @@ angular
         $scope.ace_options.mode = 'javascript'
       when 'coffeescript'
         $scope.ace_options.mode = 'coffee'
-      when 'lua'
-        $scope.ace_options.mode = 'lua'
+      when 'ts'
+        $scope.ace_options.mode = 'typescript'
 
   vm.exec =->
     success =(data)->
