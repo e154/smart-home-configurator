@@ -15,14 +15,14 @@ type BaseController struct {
 func (b *BaseController) Prepare() {
 
 	var access_token string
-	if at := b.Ctx.Input.Session("access_token"); at != nil {
+	if at := b.GetSession("access_token"); at != nil {
 		access_token = at.(string)
 		b.Data["access_token"] = access_token
 	}
 
 	var language string = beego.AppConfig.String("language")
 
-	if userinfo := b.Ctx.Input.Session("userinfo"); userinfo != nil {
+	if userinfo := b.GetSession("userinfo"); userinfo != nil {
 		user_from_session := userinfo.(*models.User)
 
 		//get current user info
