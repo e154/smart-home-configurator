@@ -85,7 +85,7 @@
 
   .row
     .col-lg-12
-      %script-editor(ng-model="scenarios.current.scripts")
+      %script-editor(ng-model="scenarios.current.scripts" options="{isArray:true}")
 
   .row(ng-show="scenarios.current.id" if-can="{scenarios:['update']}")
     .col-lg-12.form-group

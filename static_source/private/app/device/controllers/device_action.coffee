@@ -7,17 +7,25 @@ angular
   vm.actions = []
   vm.current ={}
   vm.last_current =null
+  vm.state = 'show' #show|add|edit|script_editor
 
   vm.addNew =->
+    vm.state = 'add'
     vm.getDefaultAction()
 
   vm.show =(action)->
     vm.last_current = angular.copy action
     vm.current = new DeviceAction(action)
 
+  $scope.$watch 'vm.current.script', (nv, ov) ->
+    return if nv == ov
+
   vm.getDeviceActions =->
     Device.actions {id: $stateParams.id}, (actions)->
       vm.actions = actions
+      if actions.length == 0
+        vm.state = 'edit'
+      return
 
   vm.getDefaultAction =->
     vm.current = new DeviceAction({
@@ -32,7 +40,7 @@ angular
   vm.submit =->
     success =(result)->
       Notify 'success', 'Action successfully updated', 3
-
+      vm.state = 'show'
       vm.getDeviceActions()
       vm.getDefaultAction()
 
@@ -47,9 +55,12 @@ angular
   vm.cancel =->
     return if !vm.last_current
     vm.current = new DeviceAction(vm.last_current)
+    vm.state = 'show'
+    return
 
   vm.remove =->
     success =->
+      vm.state = 'show'
       vm.getDeviceActions()
       vm.getDefaultAction()
 

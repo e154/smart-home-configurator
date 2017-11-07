@@ -70,7 +70,7 @@ angular
     modePath: '/static/js/ace-builds/src-noconflict'
     themePath: '/static/js/ace-builds/src-noconflict'
     basePath: '/static/js/ace-builds/src-noconflict'
-    packaged: true,
+    packaged: true
 
   return
 ]

@@ -6,22 +6,25 @@
         %strong
           {{'script.editor.file_list' | translate}}
           &nbsp;
-          %small(if-can="{script:['create']}")
+          %small(if-can="{script:['create']}" ng-show="used_scripts.length && isArray || !isArray && !current_script" )
             %a(ng-click="dialog('add')" href="#")
               .fa.fa-plus
-        .file-action-icons(ng-if="used_scripts.length && current_script")
+        .file-action-icons(ng-if="current_script")
           %a(href="#" ng-click="edit($event)" if-can="{script:['update']}")
             .fa.fa-pencil
           %a(href="#" ng-click="remove_from_filelist($event)" if-can="{script:['delete']}")
             .fa.fa-trash
         .clearfix
-      .form-group
-        %div(ng-if="!used_scripts.length")
-          {{'empty list' | translate}}
+      .form-group(ng-if="isArray")
         .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
           {{script.name}}({{script.lang}})
           %span(ng-if="script.modif")
             *
+      .form-group(ng-if="!isArray && current_script")
+        {{current_script.name}}({{current_script.lang}})
+
+      .form-group(ng-if="isArray && !used_scripts.length || !isArray && !current_script")
+        {{'empty list' | translate}}
 
       .form-group(ng-if="current_script")
         %button.btn.btn-success.btn-xs.full-width(ng-click="exec()")

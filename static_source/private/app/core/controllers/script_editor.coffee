@@ -11,13 +11,35 @@ angular
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
     $scope.current_script = null
-    $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
     $scope.attached_script =
       script: null
     $scope.script_changed = false
+    $scope.isArray = true
+    $scope.state = 'redactor' #redactor|add|new|edit
+    $scope.used_scripts = $scope.ngModel || []
+    $scope.used_scripts_back = angular.copy($scope.used_scripts)
+    $scope.wait = 0
+
+    init =->
+      $scope.isArray = $scope.options && $scope.options.isArray || false
+
+      if $scope.isArray
+        $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
+      else
+        $scope.current_script = angular.copy($scope.ngModel)
+
+    init()
 
     $scope.$watch 'current_script', (nv, ov) ->
-      return if !nv || nv == ov
+      return if nv == ov
+
+      if !$scope.current_script
+        $scope.script_changed = false
+        return
+
+      if angular.toJson($scope.current_script) != angular.toJson($scope.ngModel)
+        $scope.script_changed = true
+
       switch $scope.current_script.lang
         when 'javascript'
           $scope.ace_options.mode = 'javascript'
@@ -25,18 +47,19 @@ angular
           $scope.ace_options.mode = 'coffee'
         when 'ts'
           $scope.ace_options.mode = 'typescript'
+    , true
 
     $scope.$watch 'ngModel', (nv, ov) ->
       return if nv == ov
+
       $scope.used_scripts = []
       $scope.used_scripts = nv if nv
-      $scope.current_script = null
-      $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length
       $scope.used_scripts_back = angular.copy($scope.used_scripts)
+      init()
 
     # check and mark as modified
     $scope.$watch 'used_scripts', (nv, ov) ->
-      return if nv == ov
+      return if nv == ov || !$scope.isArray
       $scope.script_changed = false
       for key, script of nv
         for key_b, script_back of $scope.used_scripts_back
@@ -45,11 +68,6 @@ angular
               $scope.script_changed = true
               script.modif = true
     , true
-
-    $scope.state = 'redactor' #redactor|add|new|edit
-    $scope.used_scripts = $scope.ngModel || []
-    $scope.used_scripts_back = angular.copy($scope.used_scripts)
-    $scope.wait = 0
 
     # select2
     # ------------------
@@ -65,6 +83,10 @@ angular
 
     $scope.remove_from_filelist =(e)->
       e.preventDefault()
+      if !$scope.isArray
+        $scope.current_script = null
+        $scope.ngModel = null
+        return
       return if !$scope.current_script
       $translate("Delete this item").then (text)->
         return if !confirm text
@@ -78,6 +100,10 @@ angular
       $scope.result = ''
 
     appendScript =(_script)->
+      if !$scope.isArray
+        $scope.current_script = angular.copy(_script)
+        $scope.ngModel = angular.copy(_script)
+        return
       exist = false
       angular.forEach $scope.used_scripts, (script) ->
         if script.id == _script.id
@@ -114,6 +140,16 @@ angular
     # save all changed files
     $scope.save =->
       $scope.wait = 0
+      if !$scope.isArray
+        $scope.wait++
+        success =->
+          $scope.wait--
+          $scope.script_changed = false
+          $scope.ngModel = angular.copy($scope.current_script)
+        error =->
+          $scope.wait--
+        $scope.updateScript($scope.current_script, success, error)
+        return
       for key, script of $scope.used_scripts
         for key_b, script_back of $scope.used_scripts_back
           if script_back.id == script.id
