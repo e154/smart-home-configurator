@@ -10,5 +10,5 @@ angular.module('appConstants')
           limit: 5
           offset: 0
       ).then (response)->
-        cb(response.data.device_actions) if cb
+        cb(response.data.actions) if cb
 ]
