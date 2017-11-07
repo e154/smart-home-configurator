@@ -16,6 +16,16 @@ angular
       script: null
     $scope.script_changed = false
 
+    $scope.$watch 'current_script', (nv, ov) ->
+      return if !nv || nv == ov
+      switch $scope.current_script.lang
+        when 'javascript'
+          $scope.ace_options.mode = 'javascript'
+        when 'coffeescript'
+          $scope.ace_options.mode = 'coffee'
+        when 'ts'
+          $scope.ace_options.mode = 'typescript'
+
     $scope.$watch 'ngModel', (nv, ov) ->
       return if nv == ov
       $scope.used_scripts = []
@@ -64,13 +74,6 @@ angular
 
     $scope.select =(script, e)->
       e.preventDefault() if e
-      switch script.lang
-        when 'javascript'
-          $scope.ace_options.mode = 'javascript'
-        when 'coffeescript'
-          $scope.ace_options.mode = 'coffee'
-        when 'ts'
-          $scope.ace_options.mode = 'typescript'
       $scope.current_script = script
       $scope.result = ''
 

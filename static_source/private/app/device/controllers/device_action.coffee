@@ -102,6 +102,10 @@ angular
       className: 'ngdialog-theme-default ngdialog-scripts-edit'
       controller: 'scriptModalNewCtrl'
       controllerAs: 'script'
+      preCloseCallback: ()=>
+        vm.getDeviceActions()
+        vm.getDefaultAction()
+        return
 
   vm.editScript =(script, e)->
     e.preventDefault()

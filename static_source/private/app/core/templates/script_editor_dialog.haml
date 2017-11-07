@@ -26,7 +26,7 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
-    %button.btn.btn-default(ng-click="appendScript()") {{'Add' | translate}}
+    %button.btn.btn-default(ng-click="appendScript(); dialog('redactor')") {{'Add' | translate}}
 
 .script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
   .dialog-header
@@ -56,4 +56,4 @@
       %label {{'script.description' | translate}}
       %input.form-control(ng-model="current_script.description")
 
-    %button.btn.btn-default(ng-click="updateScript(current_script)" if-can="{script:['create', 'update']}") {{'save' | translate}}
+    %button.btn.btn-default(ng-click="updateScript(current_script); dialog('redactor')" if-can="{script:['create', 'update']}") {{'save' | translate}}
