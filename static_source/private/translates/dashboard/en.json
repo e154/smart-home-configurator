@@ -169,7 +169,7 @@
     }
   },
   "flow": {
-    "edit": "Ddit",
+    "edit": "Edit",
     "worker": "Worker",
     "workers": "Workers",
     "name": "Name",
