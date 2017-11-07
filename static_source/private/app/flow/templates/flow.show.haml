@@ -35,7 +35,7 @@
     .form-group
       .text-muted
         {{'flow.workers' | translate}}
-      %div{ng-if="!flow.workers.length"}
+      %div(ng-if="!flow.workers.length")
         {{'No data' | translate}}
       %div
         .form-group(ng-repeat="worker in flow.workers")
