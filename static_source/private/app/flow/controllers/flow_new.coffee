@@ -13,6 +13,9 @@ angular
   })
 
   $scope.submit =->
+
+    return if !$scope.flow.workflow || !$scope.flow.scenario
+
     success =(data)->
       Notify 'success', 'Process successfully created', 1
       $timeout ()->
