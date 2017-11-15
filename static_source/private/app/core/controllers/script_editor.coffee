@@ -10,7 +10,6 @@ angular
 
     $scope.ace_options = angular.copy $rootScope.ace_options
     $scope.ace_options.mode = 'coffee'
-    $scope.current_script = null
     $scope.attached_script =
       script: null
     $scope.script_changed = false
@@ -22,6 +21,7 @@ angular
 
     init =->
       $scope.isArray = $scope.options && $scope.options.isArray || false
+      $scope.current_script = null
 
       if $scope.isArray
         $scope.current_script = $scope.ngModel[0] if $scope.ngModel && $scope.ngModel.length

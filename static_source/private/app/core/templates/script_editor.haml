@@ -6,7 +6,7 @@
         %strong
           {{'script.editor.file_list' | translate}}
           &nbsp;
-          %small(if-can="{script:['create']}" ng-show="used_scripts.length && isArray || !isArray && !current_script" )
+          %small(if-can="{script:['create']}" ng-show="used_scripts && isArray || !isArray && !current_script" )
             %a(ng-click="dialog('add')" href="#")
               .fa.fa-plus
         .file-action-icons(ng-if="current_script")
