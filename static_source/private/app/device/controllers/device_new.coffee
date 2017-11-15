@@ -1,14 +1,15 @@
 angular
 .module('appControllers')
-.controller 'deviceNewCtrl', ['$scope', 'Notify', 'Device', '$state', 'Message', 'Node'
-($scope, Notify, Device, $state, Message, Node) ->
+.controller 'deviceNewCtrl', ['$scope', 'Notify', 'Device', '$state', 'Message', 'Node', '$translate'
+($scope, Notify, Device, $state, Message, Node, $translate) ->
   vm = this
 
   vm.devices = []
 
   Device.group {}, (data)->
     vm.devices = data.devices
-    vm.devices.push({name: "Без группы", id: null})
+    $translate('Without group').then (text)=>
+      vm.devices.push({name: text, id: null})
     vm.getNodeInfo()
 
   Node.get {

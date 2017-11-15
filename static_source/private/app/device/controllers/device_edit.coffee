@@ -13,7 +13,9 @@ angular
       angular.forEach data.devices, (device)->
         if device.id != vm.device.id
           vm.devices.push(device)
-      vm.devices.push({name: "Device", id: null})
+      $translate('Without group').then (text)=>
+        vm.devices.push({name: text, id: null})
+
 
   Node.get {
     limit:99
@@ -51,7 +53,7 @@ angular
 
     vm.device.stop_bite = parseInt(vm.device.stop_bite, 10)
 
-    if vm.device.device?
+    if vm.device.device? && vm.device.device.id?
       vm.device.stop_bite = null
       vm.device.node_id = null
       vm.device.baud = null

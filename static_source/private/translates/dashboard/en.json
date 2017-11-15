@@ -58,6 +58,7 @@
   "No scripts": "No scripts",
   "No actions": "No actions",
   "No states": "No states",
+  "Without group": "Without group",
   "node": {
     "package_name": "Nodes",
     "name": "Name",

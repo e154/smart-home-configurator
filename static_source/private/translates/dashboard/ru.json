@@ -60,6 +60,7 @@
   "No scripts": "Список пуст",
   "No actions": "Список пуст",
   "No states": "Список пуст",
+  "Without group": "Без группы",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
