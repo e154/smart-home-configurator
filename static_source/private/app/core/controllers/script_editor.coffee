@@ -134,7 +134,7 @@ angular
           cb() if cb
           Notify 'success', 'The script was successfully created', 3
           appendScript(script)
-          $scope.state = 'edit'
+          $scope.state = 'redactor'
         Script.create script, success, error
 
     # save all changed files
