@@ -21,6 +21,14 @@ angular
       transformResponse: (data) ->
         data?.actions || data
 
+    statuses:
+      url: app.server_url + '/api/v1/device/:id/statuses'
+      method: 'GET'
+      isArray: true
+      responseType: 'json'
+      transformResponse: (data) ->
+        data?.statuses || data
+
     create:
       method: 'POST'
       responseType: 'json'

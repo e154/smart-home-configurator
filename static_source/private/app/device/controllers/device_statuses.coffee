@@ -1,26 +1,19 @@
 angular
 .module('appControllers')
-.controller 'deviceStatusCtrl', ['$scope', 'DeviceState', 'Message', '$stateParams', '$translate'
-($scope, DeviceState, Message, $stateParams, $translate) ->
+.controller 'deviceStatusCtrl', ['$scope', 'DeviceState', 'Message', '$stateParams', '$translate', 'Device'
+($scope, DeviceState, Message, $stateParams, $translate, Device) ->
   vm = this
 
   vm.statuses = []
   vm.getAll =->
-    query =
-      limit:100
-      offset:0
-      order:'desc'
-      query:
-        device_id: $stateParams.id
-      sortby:'created_at'
 
     success =(result)->
-      vm.statuses = angular.copy(result.items) || []
+      vm.statuses = angular.copy(result) || []
 
     error =(result)->
       Message result.data.status, result.data.message
 
-    DeviceState.all query, success, error
+    Device.statuses {id: $stateParams.id}, success, error
 
   vm.addNew =->
     vm.statuses.push new DeviceState({

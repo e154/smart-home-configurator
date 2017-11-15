@@ -30,7 +30,6 @@ angular
   vm.getDefaultAction =->
     vm.current = new DeviceAction({
         name: "New action"
-        command: "03000005"
         script: null
         description: "action description"
         device:
