@@ -354,8 +354,8 @@
       "swap": "swap",
       "memory": "memory",
       "cpu": "cpu",
-      "nodes": "Ноды",
-      "devices": "deices",
+      "nodes": "nodes",
+      "devices": "devices",
       "uptime": "uptime"
     },
     "memory": {
