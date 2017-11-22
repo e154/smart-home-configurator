@@ -40,7 +40,7 @@ angular
   # stream
   # --------------------
   $timeout ()->
-    Stream.sendRequest("get.telemetry", {}).then (data)->
+    Stream.sendRequest("dashboard.get.telemetry", {}).then (data)->
       return if !data.telemetry
       broadcastDeviceState(data.telemetry)
   , 1000

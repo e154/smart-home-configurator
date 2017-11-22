@@ -34,7 +34,7 @@ angular
     # stream
     # --------------------
     $timeout ()->
-      Stream.sendRequest("get.devices.states", {}).then (data)->
+      Stream.sendRequest("dashboard.get.devices.states", {}).then (data)->
         return if !data.states
         broadcastDeviceState(data.states)
     , 1000

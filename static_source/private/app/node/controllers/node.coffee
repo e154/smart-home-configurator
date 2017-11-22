@@ -6,7 +6,7 @@ angular
 
   $scope.nodes = []
   $scope.getStatus = ->
-    Stream.sendRequest("get.nodes.status", {})
+    Stream.sendRequest("dashboard.get.nodes.status", {})
 
   vm
 ]
