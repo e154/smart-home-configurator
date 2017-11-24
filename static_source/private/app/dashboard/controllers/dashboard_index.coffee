@@ -41,11 +41,11 @@ angular
   # --------------------
   $timeout ()->
     Stream.sendRequest("dashboard.get.telemetry", {}).then (data)->
-      return if !data.telemetry
-      broadcastDeviceState(data.telemetry)
+      return if !data['dashboard.telemetry']
+      broadcastDeviceState(data['dashboard.telemetry'])
   , 1000
 
-  Stream.subscribe 'telemetry', (data)->
+  Stream.subscribe 'dashboard.telemetry', (data)->
     $scope.total_uptime = data.uptime.total if data.uptime?.total
     broadcastDeviceState(data)
 
@@ -53,7 +53,7 @@ angular
     $scope.$broadcast 'telemetry_update', data
 
   $scope.$on '$stateChangeSuccess', ()->
-    Stream.unsubscribe 'telemetry'
+    Stream.unsubscribe 'dashboard.telemetry'
 
   # crud
   # --------------------

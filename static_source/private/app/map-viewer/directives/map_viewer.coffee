@@ -34,12 +34,12 @@ angular
     # stream
     # --------------------
     $timeout ()->
-      Stream.sendRequest("dashboard.get.devices.states", {}).then (data)->
+      Stream.sendRequest("map.get.devices.states", {}).then (data)->
         return if !data.states
         broadcastDeviceState(data.states)
     , 1000
 
-    Stream.subscribe 'telemetry', (data)->
+    Stream.subscribe 'map.telemetry', (data)->
       return if !data.device
       state = {}
       state[data.device.id] = data.device.state
