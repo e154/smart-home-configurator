@@ -32,7 +32,7 @@ angular
       k = if si then 1000 else 1024
       if Math.abs(bytes) < k
         return bytes + ' B'
-      dm = decimals + 1 || 3
+      dm = decimals || 2
       units = if !si then [
         'kB','MB','GB','TB','PB','EB','ZB','YB'
       ] else [
@@ -44,9 +44,9 @@ angular
   .filter 'toHHMMSS', ->
     (sec_num) ->
       days = Math.floor(sec_num / (3600 * 24))
-      hours = Math.floor((sec_num - days) / 3600)
-      minutes = Math.floor((sec_num - (hours * 3600)) / 60)
-      seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60))
+      hours = Math.floor((sec_num - (days * 3600 * 24)) / 3600)
+      minutes = Math.floor((sec_num - (days * 3600 * 24 + hours * 3600)) / 60)
+      seconds = Math.floor(sec_num - (days * 3600 * 24 + hours * 3600 + minutes * 60))
 
       days = "0" + days if days < 10
       hours = "0" + hours if hours < 10
@@ -58,9 +58,9 @@ angular
   .filter 'uptime', ['$filter', ($filter)->
     (sec_num) ->
       days = Math.floor(sec_num / (3600 * 24))
-      hours = Math.floor((sec_num - days) / 3600)
-      minutes = Math.floor((sec_num - (hours * 3600)) / 60)
-      seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60))
+      hours = Math.floor((sec_num - (days * 3600 * 24)) / 3600)
+      minutes = Math.floor((sec_num - (days * 3600 * 24 + hours * 3600)) / 60)
+      seconds = Math.floor(sec_num - (days * 3600 * 24 + hours * 3600 + minutes * 60))
 
       translate = $filter('translate')
       _days = translate('uptime.days')

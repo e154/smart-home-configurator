@@ -356,7 +356,8 @@
       "cpu": "cpu",
       "nodes": "nodes",
       "devices": "devices",
-      "uptime": "uptime"
+      "uptime": "uptime",
+      "disk": "disk"
     },
     "memory": {
       "total": "Total",

@@ -22,11 +22,12 @@ angular
   $scope.dashboard = {}
   $scope.current_widget = null
   $scope.dashboard.widgets = [
-    {id: 1, col: 0, row: 0, sizeY: 1, sizeX: 1, name: 'swap', type: 'swap' }
-    {id: 2, col: 1, row: 0, sizeY: 1, sizeX: 2, name: 'memory', type: 'memory' }
-    {id: 3, col: 3, row: 0, sizeY: 1, sizeX: 1, name: 'cpu', type: 'cpu_dig' }
-    {id: 4, col: 0, row: 1, sizeY: 1, sizeX: 1, name: 'nodes', type: 'nodes' }
-    {id: 5, col: 1, row: 1, sizeY: 1, sizeX: 1, name: 'devices', type: 'devices' }
+    {id: 1, col: 0, row: 0, sizeY: 1, sizeX: 2, name: 'swap', type: 'swap' }
+    {id: 2, col: 2, row: 0, sizeY: 1, sizeX: 2, name: 'memory', type: 'memory' }
+    {id: 3, col: 0, row: 1, sizeY: 1, sizeX: 1, name: 'cpu', type: 'cpu_dig' }
+    {id: 4, col: 1, row: 1, sizeY: 1, sizeX: 1, name: 'nodes', type: 'nodes' }
+    {id: 5, col: 2, row: 1, sizeY: 1, sizeX: 1, name: 'devices', type: 'devices' }
+    {id: 6, col: 3, row: 1, sizeY: 1, sizeX: 1, name: 'disk', type: 'disk' }
   ]
 
   #TODO remove hard code

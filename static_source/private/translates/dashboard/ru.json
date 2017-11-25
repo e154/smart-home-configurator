@@ -358,7 +358,8 @@
       "cpu": "Процессор",
       "nodes": "Ноды",
       "devices": "Устройства",
-      "uptime": "uptime"
+      "uptime": "Время работы",
+      "disk": "Диск"
     },
     "memory": {
       "total": "Всего",
