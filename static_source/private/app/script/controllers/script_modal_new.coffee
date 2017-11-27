@@ -34,6 +34,7 @@ angular
 
   vm.exec =->
     success =(data)->
+      vm.script.result = vm.script.result.replace(/(\\n)/g, '<br>')
 
     error =(result)->
       Message result.data.status, result.data.message
