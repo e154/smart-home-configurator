@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'MapElementResource', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/map_element/:id', {id: '@id'},
+  $resource '/api/v1/map_element/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -19,12 +19,12 @@ angular
         responseType: 'json'
 
     sort:
-      url: app.server_url + '/api/v1/map_element/sort'
+      url: '/api/v1/map_element/sort'
       method: 'PUT'
       responseType: 'json'
 
     update_element_only:
-      url: app.server_url + '/api/v1/map_element/:id/element_only'
+      url: '/api/v1/map_element/:id/element_only'
       method: 'PUT'
       responseType: 'json'
 

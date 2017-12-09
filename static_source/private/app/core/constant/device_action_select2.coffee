@@ -4,7 +4,7 @@ angular.module('appConstants')
     (query)->
       $http(
         method: 'GET'
-        url: app.server_url + "/api/v1/device_action/search"
+        url: "/api/v1/device_action/search"
         params:
           query: query
           limit: 5

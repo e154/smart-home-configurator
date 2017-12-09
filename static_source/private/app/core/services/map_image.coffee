@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'MapImageResource', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/map_image/:id', {id: '@id'},
+  $resource '/api/v1/map_image/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'

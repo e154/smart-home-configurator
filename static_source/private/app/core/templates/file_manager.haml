@@ -19,7 +19,7 @@
                         %span.fa.fa-plus(aria-hidden="true")
                         .title {{'upload' | translate}}
                 %li.file-manager-item( ng-repeat="file in file_list | orderBy: $index: true" ng-click="select($event, file)")
-                    %img(ng-src="{{server_url}}{{file.url}}" err-src="/static/images/placeholder_file_not_found.svg")
+                    %img(ng-src="{{file.url}}" err-src="/static/images/placeholder_file_not_found.svg")
                     .file-manager-item-title
                         {{file.name}}
                     .cross.close-button(ng-show="!file.selected" ng-click="removeFile($event, file)" if-can="{image:['delete']}")

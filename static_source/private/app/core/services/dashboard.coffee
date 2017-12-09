@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Dashboard', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/dashboard/:id', {id: '@id'},
+  $resource '/api/v1/dashboard/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'

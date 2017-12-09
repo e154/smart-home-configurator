@@ -13,5 +13,7 @@ func Initialize() {
 	beego.Router("/signout", &controllers.DashboardController{}, "get:Signout")
 	beego.Router("/recovery", &controllers.DashboardController{}, "post:Recovery")
 	beego.Router("/reset", &controllers.DashboardController{}, "post:Reset")
+	beego.Router("/api/*", &controllers.ProxyController{}, "*:Simple")
+	beego.Router("/upload/*", &controllers.ProxyController{}, "*:Simple")
 	beego.Router("/*", &controllers.DashboardController{}, "*:Index")
 }

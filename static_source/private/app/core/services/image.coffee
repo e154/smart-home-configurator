@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'ImageResource', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/image/:id', {id: '@id'},
+  $resource '/api/v1/image/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'

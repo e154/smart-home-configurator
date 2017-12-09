@@ -7,8 +7,6 @@ angular
     element: '=mapEditorElement'
   link: ($scope, $element, $attrs) ->
 
-    $scope.server_url = app.server_url
-
     $element.on 'click', (e)->
       $scope.$emit 'select_element_on_map', $scope.element
 

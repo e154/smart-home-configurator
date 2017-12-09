@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Notifr', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/notifr/:id', {id: '@id'},
+  $resource '/api/v1/notifr/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -9,7 +9,7 @@ angular
         data?.item || data  
 
     repeat:
-      url: app.server_url + '/api/v1/notifr/:id/repeat'
+      url: '/api/v1/notifr/:id/repeat'
       method: 'POST'
       responseType: 'json'
 

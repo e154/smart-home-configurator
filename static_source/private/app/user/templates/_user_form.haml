@@ -46,8 +46,8 @@
 .form-group
   %label {{'user.avatar' | translate}}*
   .map-preview-img.relative
-    %a(ng-href="{{server_url}}{{user.avatar.url}}" rel="gallery" title="original" ng-if="user.avatar.url" fancybox="true")
-      %img(ngf-thumbnail="server_url + user.avatar.url || '/thumb.jpg'" alt="" title="")
+    %a(ng-href="{{user.avatar.url}}" rel="gallery" title="original" ng-if="user.avatar.url" fancybox="true")
+      %img(ngf-thumbnail="user.avatar.url || '/thumb.jpg'" alt="" title="")
     %a.delete.button(href="#" ng-click="removeAvatar()" ng-if="user.avatar.url")
       .cross
 

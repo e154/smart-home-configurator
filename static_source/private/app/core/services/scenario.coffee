@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Scenario', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/scenario/:id', {id: '@id'},
+  $resource '/api/v1/scenario/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'

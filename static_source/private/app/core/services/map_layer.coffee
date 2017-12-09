@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'MapLayerResource', ['$resource', ($resource) ->
-  $resource app.server_url + '/api/v1/map_layer/:id', {id: '@id'},
+  $resource '/api/v1/map_layer/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -19,7 +19,7 @@ angular
         responseType: 'json'
 
     sort:
-      url: app.server_url + '/api/v1/map_layer/sort'
+      url: '/api/v1/map_layer/sort'
       method: 'PUT'
       responseType: 'json'
 

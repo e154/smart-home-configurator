@@ -3,12 +3,12 @@
     .form-group
       %label {{'map.element.prototype.image' | translate}}*
       .map-preview-img.relative
-        %a(ng-href="{{server_url}}/{{element.prototype.image.url}}" rel="gallery" title="original" ng-if="element.prototype.image.url" fancybox="true")
-          %img(ngf-thumbnail="server_url + element.prototype.image.url || '/thumb.jpg'" alt="" title="")
+        %a(ng-href="{{element.prototype.image.url}}" rel="gallery" title="original" ng-if="element.prototype.image.url" fancybox="true")
+          %img(ngf-thumbnail="element.prototype.image.url || '/thumb.jpg'" alt="" title="")
         %a.delete.button(href="#" ng-click="element.prototype.remove_image()" ng-if="element.prototype.image.url")
           .cross
 
-        %img(ngf-thumbnail="server_url + element.prototype.file" alt="" title="" ng-if="element.prototype.file")
+        %img(ngf-thumbnail="element.prototype.file" alt="" title="" ng-if="element.prototype.file")
         %a.delete.button(href="#" ng-click="element.prototype.file = null" ng-if="element.prototype.file")
           .cross
 

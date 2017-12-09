@@ -51,7 +51,6 @@ angular
 
 #    http://stackoverflow.com/questions/24764764/conditionally-set-angulars-ng-class-based-on-state
   $rootScope.$state = $state
-  $rootScope.server_url = app.server_url
 
   if app.access_token
     $http.defaults.headers.common['access_token'] = app.access_token

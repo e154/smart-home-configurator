@@ -76,7 +76,7 @@ angular
   $scope.refreshScripts = (query)->
     $http(
       method: 'GET'
-      url: app.server_url + "/api/v1/script/search"
+      url: "/api/v1/script/search"
       params:
         query: query
         limit: 5
