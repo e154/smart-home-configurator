@@ -36,7 +36,7 @@ angular
 
       @t = t
 
-      url = "ws://#{app.server_url}/api/v1/ws?access_token=#{app.access_token}"
+      url = "ws://#{window.location.host}/api/v1/ws?access_token=#{app.access_token}"
       if t == 'sockjs'
         @socket = socketFactory({
           socket: new SockJS(url)

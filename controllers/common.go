@@ -76,7 +76,7 @@ func (c *CommonController) UpdateTemplate() {
 
 func (c *CommonController) SendRequest(method, url string, jsonStr []byte, headParams map[string]string) (resp *http.Response, b []byte, err error) {
 
-	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonStr))
+	req, err := http.NewRequest(method, "http://" + url, bytes.NewBuffer(jsonStr))
 	req.Header.Set("X-Custom-Header", "myvalue")
 	req.Header.Set("Content-Type", "application/json")
 
