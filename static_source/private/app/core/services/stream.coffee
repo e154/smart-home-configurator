@@ -23,24 +23,36 @@ angular
     socket: null
     callbacks: null
     subscribers: null
+    t: ''
 
-    constructor: ->
+    constructor: (t)->
       @subscribers = {}
       @callbacks = {}
-      @connect()
+      @connect(t)
 
-    connect: ->
+    connect: (t)->
 
       return if @socket
 
-      url = "#{app.server_url}/api/v1/ws?access_token=#{app.access_token}"
-      @socket = socketFactory({
-        socket: new SockJS(url)
-      })
+      @t = t
 
-      @setHandler "message", @onmessage
-      @setHandler "open", @onopen
-      @setHandler "close", @onclose
+      url = "ws://#{app.server_url}/api/v1/ws?access_token=#{app.access_token}"
+      if t == 'sockjs'
+        @socket = socketFactory({
+          socket: new SockJS(url)
+        })
+
+        @setHandler "message", @onmessage
+        @setHandler "open", @onopen
+        @setHandler "close", @onclose
+
+      else
+        @socket = new WebSocket(url);
+        @socket.onopen = @onopen
+        @socket.onclose = @onclose
+        @socket.onerror = ()=>
+          @socket.close() if @socket
+        @socket.onmessage = @onmessage
 
     setHandler: (event, callback)->
       @connect() if !@socket
@@ -87,7 +99,8 @@ angular
 
     onclose: =>
       $timeout ()=>
-        @connect()
+        @socket = null
+        @connect(@t)
       , 1000
 
     send: (m)->
@@ -125,5 +138,5 @@ angular
         delete @subscribers[name]
 
 
-  new Stream()
+  new Stream('websock')
 ]
