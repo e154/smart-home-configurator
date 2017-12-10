@@ -48,6 +48,7 @@ angular
 
   Stream.subscribe 'dashboard.telemetry', (data)->
     $scope.total_uptime = data.uptime.total if data.uptime?.total
+    $scope.$apply()
     broadcastDeviceState(data)
 
   broadcastDeviceState =(data)->
