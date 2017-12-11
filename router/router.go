@@ -14,6 +14,7 @@ func Initialize() {
 	beego.Router("/recovery", &controllers.DashboardController{}, "post:Recovery")
 	beego.Router("/reset", &controllers.DashboardController{}, "post:Reset")
 	beego.Router("/api/v1/ws ", &controllers.ProxyController{}, "*:Ws")
+	beego.Router("/api/v1/image/upload", &controllers.ProxyController{}, "*:Upload")
 	beego.Router("/api/v1/* ", &controllers.ProxyController{}, "*:Simple")
 	beego.Router("/upload/*", &controllers.ProxyController{}, "*:Simple")
 	beego.Router("/*", &controllers.DashboardController{}, "*:Index")

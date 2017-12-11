@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/url"
 	"github.com/e154/smart-home-configurator/websocketproxy"
+	"github.com/parnurzeal/gorequest"
+	"bytes"
 )
 
 type ProxyController struct {
@@ -83,4 +85,51 @@ func (w *ProxyController) Ws() {
 	u2 := &url.URL{Scheme: "ws", Host: addr, Path: fmt.Sprintf("/api/v1/ws?access_token=%s", m["access_token"][0])}
 
 	websocketproxy.NewProxy(u2).ServeHTTP(w.Ctx.ResponseWriter, w.Ctx.Request)
+}
+
+func (c *ProxyController) Upload() {
+
+	files := c.Ctx.Request.MultipartForm.File
+	if len(files) == 0 {
+		c.ErrHan(403, "http: no such file")
+		return
+	}
+
+	r := c.Ctx.Request
+
+	// destination server url
+	u := fmt.Sprintf("http://%s:%s%s", beego.AppConfig.String("serveraddr"), beego.AppConfig.String("serverport"), r.RequestURI)
+
+	request := gorequest.New().Post(u).Type("multipart")
+
+	for k, value := range r.Header {
+		if k == "Access_token" {
+			request.Header.Add(k, value[0])
+		}
+	}
+
+	for k, file := range files {
+
+		for _, f := range file {
+			r, err := f.Open()
+			if err != nil {
+				c.ErrHan(403, err.Error())
+				return
+			}
+			defer r.Close()
+
+			buf := bytes.NewBuffer(nil)
+			if _, err := io.Copy(buf, r); err != nil {
+				c.ErrHan(403, err.Error())
+				return
+			}
+
+			request = request.SendFile(buf.Bytes(), f.Filename, k)
+		}
+	}
+
+	_, _, errs := request.End()
+	for _, err := range errs {
+		c.ErrHan(403, err.Error())
+	}
 }

@@ -16,6 +16,22 @@
             "revision": "c55883f97322b4bcbf48f734e23d6ab3af1ea488",
             "branch": "master",
             "notests": true
+        },
+        {
+            "importpath": "github.com/parnurzeal/gorequest",
+            "repository": "https://github.com/parnurzeal/gorequest",
+            "vcs": "git",
+            "revision": "8e3aed27fe49f7fdc765dad067845f600fc984e8",
+            "branch": "master",
+            "notests": true
+        },
+        {
+            "importpath": "github.com/moul/http2curl",
+            "repository": "https://github.com/moul/http2curl",
+            "vcs": "git",
+            "revision": "9ac6cf4d929b2fa8fd2d2e6dec5bb0feb4f4911d",
+            "branch": "master",
+            "notests": true
         }
 	]
 }
