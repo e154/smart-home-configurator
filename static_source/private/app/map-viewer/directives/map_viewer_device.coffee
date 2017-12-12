@@ -7,7 +7,17 @@ angular
   templateUrl: '/map-viewer/templates/map_viewer_device.html'
   scope:
     element: '=mapViewerDevice'
+    opt: '@'
   link: ($scope, $element, $attrs) ->
+
+    # device options
+    base_options =
+      show_state_text: true
+      show_options_text: true
+    $scope.opt = {} if !$scope.opt
+    $scope.options = angular.extend $scope.opt, base_options
+
+    $scope.current_status = null
 
     # vars
     # --------------------
@@ -30,9 +40,10 @@ angular
           break
 
     $scope.$on 'broadcast_device_state', (e, data)->
-      return if !data || !data?.state
+      return if !data || !data?.status
       if $scope.element.prototype.device.id == data.id
-        setState data.state
+        $scope.current_status = data
+        setState data.status
 
     $scope.doAction =(action, $event)->
       Stream.sendRequest("do.action", {action_id: action.device_action.id, device_id: $scope.element.prototype.device.id}).then (result)->

@@ -36,19 +36,16 @@ angular
     $timeout ()->
       Stream.sendRequest("map.get.devices.states", {}).then (data)->
         return if !data.states
-        broadcastDeviceState(data.states)
+        broadcastDeviceState(data.states.device_stats)
     , 1000
 
     Stream.subscribe 'map.telemetry', (data)->
       return if !data.device
-      state = {}
-      state[data.device.id] = data.device.state
-      broadcastDeviceState(state)
+      broadcastDeviceState([data.device])
 
     broadcastDeviceState =(states)->
       angular.forEach states, (state, id)->
-        id = parseInt(id, 10) if typeof id == 'string'
-        $scope.$broadcast 'broadcast_device_state', {id: id, state: state}
+        $scope.$broadcast 'broadcast_device_state', state
 
     # etc
     # --------------------
