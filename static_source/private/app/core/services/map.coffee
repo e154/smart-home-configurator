@@ -39,6 +39,5 @@ angular
       transformResponse: (data) ->
         map = data?.map || data
         map.options = angular.fromJson(map.options || "{}") || {}
-        map.options.zoom ||= 1.2
         map
 ]

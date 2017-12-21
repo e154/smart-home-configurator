@@ -302,6 +302,8 @@
     "update_at": "Updated at",
     "file_manager": "File manager",
     "add_layer": "Add layer",
+    "element_state_text": "Show element state text",
+    "element_option_text": "Show element option text",
     "layer": {
       "name": "Name",
       "status": "Status",

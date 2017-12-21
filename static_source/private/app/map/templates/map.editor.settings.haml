@@ -8,13 +8,29 @@
   .col-md-6
     .form-group
       %label {{'map.description' | translate}}
-      %textarea.form-control(ng-model="map.description" rows="10" )
+      %textarea.form-control(ng-model="map.description" rows="5" )
 
 .row
   .col-md-6
     .form-group
       %label {{'map.zoom' | translate}}
       %input.form-control(ng-model="map.options.zoom" type="number" step="0.1" min="1" max="4")
+
+.row
+  .col-md-6
+    .form-group
+      .checkbox
+        %label
+          %input(ng-model="map.options.element_state_text" type="checkbox" )
+          {{'map.element_state_text' | translate}}
+
+.row
+  .col-md-6
+    .form-group
+      .checkbox
+        %label
+          %input(ng-model="map.options.element_option_text" type="checkbox" )
+          {{'map.element_option_text' | translate}}
 
 .row
   .col-md-6
