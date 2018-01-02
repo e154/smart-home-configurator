@@ -36,7 +36,11 @@ angular
       return if !_state || !_state?.id
       for map_element_state in $scope.element.prototype.states
         if map_element_state.device_state.id == _state.id
-          $scope.element.prototype.current_state = map_element_state
+          # update element state
+          $timeout ()->
+            $scope.$apply(
+              $scope.element.prototype.current_state = map_element_state
+            )
           break
 
     $scope.$on 'broadcast_device_state', (e, data)->
