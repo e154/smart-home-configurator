@@ -1,0 +1,9 @@
+{
+  "httpaddr": "127.0.0.1",
+  "httpport": 8080,
+  "runmode": "debug",
+  "api_addr": "127.0.0.1",
+  "api_port": 3000,
+  "mem_story_secret": "secret",
+  "session_story": "mysession"
+}
