@@ -32,8 +32,8 @@ angular
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
-        name: 'workflow.update_at'
-        field: 'update_at'
+        name: 'workflow.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {

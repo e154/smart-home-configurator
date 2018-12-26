@@ -6,6 +6,7 @@ type AppConfig struct {
 	Runmode        RunMode `json:"runmode"`
 	ApiAddr        string  `json:"api_addr"`
 	ApiPort        int     `json:"api_port"`
+	ApiScheme      string  `json:"api_scheme"`
 	MemStorySecret string  `json:"mem_story_secret"`
 	SessionStory   string  `json:"session_story"`
 }

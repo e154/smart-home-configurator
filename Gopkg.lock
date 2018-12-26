@@ -135,6 +135,14 @@
   version = "1.0.1"
 
 [[projects]]
+  digest = "1:7aefb397a53fc437c90f0fdb3e1419c751c5a3a165ced52325d5d797edf1aca6"
+  name = "github.com/moul/http2curl"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9ac6cf4d929b2fa8fd2d2e6dec5bb0feb4f4911d"
+  version = "v1.0.0"
+
+[[projects]]
   digest = "1:995fe8c9729e94587361e836896824337bbceab8030f698a40552b1a63bf2c59"
   name = "github.com/olivere/elastic"
   packages = [
@@ -153,6 +161,14 @@
   pruneopts = "UT"
   revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
   version = "v1"
+
+[[projects]]
+  digest = "1:d776f3e95774a8719f2e57fabbbb33103035fe072dcf6f1864f33abd17b753e5"
+  name = "github.com/parnurzeal/gorequest"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3"
+  version = "v0.2.15"
 
 [[projects]]
   digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
@@ -196,6 +212,17 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:b6a3256ffb6ee9d7e7159c062f57e091c30c19e13ac3c676729baac7d83ecd21"
+  name = "golang.org/x/net"
+  packages = [
+    "idna",
+    "publicsuffix",
+  ]
+  pruneopts = "UT"
+  revision = "927f97764cc334a6575f4b7a1584a147864d5723"
+
+[[projects]]
+  branch = "master"
   digest = "1:ba8cbf57cfd92d5f8592b4aca1a35d92c162363d32aeabd5b12555f8896635e7"
   name = "golang.org/x/sys"
   packages = [
@@ -204,6 +231,29 @@
   ]
   pruneopts = "UT"
   revision = "4d1cda033e0619309c606fc686de3adcf599539e"
+
+[[projects]]
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
 
 [[projects]]
   digest = "1:cbc72c4c4886a918d6ab4b95e347ffe259846260f99ebdd8a198c2331cf2b2e9"
@@ -232,6 +282,7 @@
     "github.com/gorilla/websocket",
     "github.com/olivere/elastic",
     "github.com/op/go-logging",
+    "github.com/parnurzeal/gorequest",
     "github.com/sirupsen/logrus",
   ]
   solver-name = "gps-cdcl"

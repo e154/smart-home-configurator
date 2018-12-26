@@ -46,7 +46,7 @@
           %strong.list-group-item-heading
             {{item.name}}
           .pull-right.small
-            {{'Updated at' | translate}} {{item.update_at | readableDateTime}}
+            {{'Updated at' | translate}} {{item.updated_at | readableDateTime}}
           .clearfix
           .pull-right(ng-if="item.script")
             %button.btn.btn-success.btn-xs(ng-click="action.doAction(item, $event)" type="button")

@@ -49,7 +49,7 @@
             %i.fa.fa-check(ng-if="workflow.workflow.scenario.id == item.id")
 
           .pull-right.small
-            {{'Updated at' | translate}} {{item.update_at | readableDateTime}}
+            {{'Updated at' | translate}} {{item.updated_at | readableDateTime}}
           .clearfix
           .pull-right
             %button.btn.btn-success.btn-xs(ng-click="scenarios.update_scenario(item, $event)" type="button")

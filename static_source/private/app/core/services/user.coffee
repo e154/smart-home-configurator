@@ -29,9 +29,10 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/users'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.users || []
+        items: data?.items || []
 ]

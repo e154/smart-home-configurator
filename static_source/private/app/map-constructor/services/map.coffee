@@ -82,7 +82,7 @@ angular
         @name = model.name
         @description = model.description
         @created_at = model.created_at
-        @update_at = model.update_at
+        @updated_at = model.updated_at
         @options = angular.extend({}, mapSettings.default, model.options)
         @layers = []
 

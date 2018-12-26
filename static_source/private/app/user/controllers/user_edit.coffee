@@ -14,11 +14,11 @@ angular
       value: ''
     }
     {
-      key: 'phone3'
+      key: 'telegram'
       value: ''
     }
     {
-      key: 'autograph'
+      key: 'slack'
       value: ''
     }
   ]

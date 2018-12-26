@@ -59,6 +59,8 @@ func (s *Server) customRouter(ctx *gin.Context) {
 		s.Controllers.Proxy.Simple(ctx)
 	case strings.Contains(r, "/api/v1/ws"):
 		s.Controllers.Proxy.Ws(ctx)
+	case strings.Contains(r, "/api/v1"):
+		s.Controllers.Proxy.Simple(ctx)
 	case strings.Contains(r, "/api/v1/image/upload"):
 		s.Controllers.Proxy.Upload(ctx)
 	default:

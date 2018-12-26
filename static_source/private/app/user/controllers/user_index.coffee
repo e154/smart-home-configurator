@@ -41,8 +41,8 @@ angular
         width: '120px'
       }
       {
-        name: 'user.update_at'
-        field: 'update_at'
+        name: 'user.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
         width: '120px'
       }

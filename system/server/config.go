@@ -14,8 +14,8 @@ type ServerConfig struct {
 
 func NewServerConfig(cfg *config.AppConfig) *ServerConfig {
 	return &ServerConfig{
-		Host:           cfg.ApiAddr,
-		Port:           cfg.ApiPort,
+		Host:           cfg.Httpaddr,
+		Port:           cfg.Httpport,
 		RunMode:        cfg.Runmode,
 		MemStorySecret: cfg.MemStorySecret,
 		SessionStory:   cfg.SessionStory,

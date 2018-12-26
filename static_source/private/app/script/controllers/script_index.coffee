@@ -40,8 +40,8 @@ angular
         width: '150px'
       }
       {
-        name: 'script.update_at'
-        field: 'update_at'
+        name: 'script.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
         width: '150px'
       }

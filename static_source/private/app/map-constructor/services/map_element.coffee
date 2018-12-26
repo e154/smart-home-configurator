@@ -23,7 +23,7 @@ angular
       status: 'enabled'
       selected: false
       created_at: null
-      update_at: null
+      updated_at: null
       weight: 0
       graph_settings:
         width: null
@@ -61,7 +61,7 @@ angular
         status: @status
         description: @description
         created_at: @created_at if @created_at
-        update_at: @update_at if @update_at
+        updated_at: @updated_at if @updated_at
         weight: @weight
         prototype_type: @prototype_type
         prototype_id: @prototype_id if @prototype_id
@@ -79,7 +79,7 @@ angular
         @prototype_id = element.prototype_id if element.prototype_id
         @weight = element.weight || 0
         @created_at = element.created_at || ''
-        @update_at = element.update_at || ''
+        @updated_at = element.updated_at || ''
         @graph_settings = angular.fromJson(element.graph_settings) if element.graph_settings
 
         if element.prototype

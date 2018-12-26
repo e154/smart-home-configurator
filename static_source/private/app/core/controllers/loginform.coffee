@@ -17,6 +17,7 @@ angular
     app.access_token = null
 
     success =(result)->
+      console.log result
       app.access_token = result.data.access_token || null
 
       authService.loginConfirmed()

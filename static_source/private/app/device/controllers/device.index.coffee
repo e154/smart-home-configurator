@@ -58,8 +58,8 @@ angular
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
-        name: 'device.update_at'
-        field: 'update_at'
+        name: 'device.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
