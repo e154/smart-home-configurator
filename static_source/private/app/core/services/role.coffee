@@ -18,16 +18,19 @@ angular
     update:
       method: 'PUT'
       responseType: 'json'
+      transformResponse: (data) ->
+        @
 
     delete:
       method: 'DELETE'
 
     all:
+      url: '/api/v1/roles'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.roles || []
+        items: data?.items || []
 
     get_access_list:
       url: '/api/v1/role/:name/access_list'

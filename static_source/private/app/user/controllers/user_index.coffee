@@ -20,8 +20,8 @@ angular
       }
       {
         name: 'user.role'
-        field: 'role'
-        template: '<span>{{item[field]["name"]}}</span>'
+        field: 'role_name'
+        template: '<span>{{item[field]}}</span>'
         width: '100px'
       }
       {

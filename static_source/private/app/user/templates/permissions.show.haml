@@ -20,6 +20,15 @@
           &nbsp;
           {{'permission.warning_message' | translate}}
 
+.row
+  .col-md-6
+    .form-group.clearfix
+      .pull-right
+        %a.btn.btn-default(href="" role="button" ng-click="cancel()" if-can="{user:['update_role_access_list']}")
+          {{'Cancel' | translate}}
+        %a.btn.btn-danger(href="" role="button" ng-click="update()" if-can="{user:['update_role_access_list']}")
+          {{'Update' | translate}}
+
 .row(if-can="{user:['read_role_access_list']}")
   .col-md-6
     .form-group
