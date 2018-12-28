@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"fmt"
 	"io"
+	"net/url"
+	"github.com/e154/smart-home-configurator/system/websocketproxy"
 )
 
 type ControllerProxy struct {
@@ -49,7 +51,6 @@ func (i ControllerProxy) Simple(ctx *gin.Context) {
 		wr.Header().Set(k, v[0])
 	}
 
-
 	wr.WriteHeader(resp.StatusCode)
 	io.Copy(wr, resp.Body)
 
@@ -62,7 +63,29 @@ func (i ControllerProxy) Upload(ctx *gin.Context) {
 }
 
 func (i ControllerProxy) Ws(ctx *gin.Context) {
-	log.Info("ws")
+
+	var err error
+
+	// get access_token
+	var u *url.URL
+	if u, err = url.Parse(ctx.Request.RequestURI); err != nil {
+		return
+	}
+
+	var m url.Values
+	if m, err = url.ParseQuery(u.RawQuery); err != nil {
+		return
+	}
+
+	if len(m["access_token"]) == 0 || m["access_token"][0] == "" {
+		ctx.AbortWithError(500, err)
+		return
+	}
+
+	addr := fmt.Sprintf("%s:%d", i.cfg.ApiAddr, i.cfg.ApiPort)
+	u2 := &url.URL{Scheme: "ws", Host: addr, Path: fmt.Sprintf("/api/v1/ws?access_token=%s", m["access_token"][0])}
+
+	websocketproxy.NewProxy(u2).ServeHTTP(ctx.Writer, ctx.Request)
+
 	return
 }
-

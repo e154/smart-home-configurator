@@ -19,10 +19,11 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/nodes'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.nodes || []
+        items: data?.items || []
 
 ]

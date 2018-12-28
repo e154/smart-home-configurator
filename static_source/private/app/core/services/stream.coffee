@@ -35,7 +35,7 @@ angular
       return if @socket
 
       #TODO remove
-      return
+#      return
       @t = t
 
       url = "ws://#{window.location.host}/api/v1/ws?access_token=#{app.access_token}"
