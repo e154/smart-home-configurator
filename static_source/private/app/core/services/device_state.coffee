@@ -22,7 +22,7 @@ angular
       method: 'DELETE'
 
     get_by_device:
-      url: '/api/v1/device_state/get_by_device/:id'
+      url: '/api/v1/device_states/:id'
       method: 'GET'
       isArray: true
       responseType: 'json'

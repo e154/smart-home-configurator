@@ -1,4 +1,4 @@
-%div(ng-if="device.device.type == 'smartbus'")
+%div(ng-if="device.device.type == 'smartbus'" )
 
     .form-group
         %label {{'device.baud' | translate}}
@@ -20,25 +20,38 @@
         %label {{'device.tty' | translate}}
         %input.form-control(ng-model="device.device.properties.tty" type="string" )
 
-%div(ng-if="device.device.type == 'modbus'")
+%div(ng-if="device.device.type == 'modbus' && device.device.device.id != null")
+    .form-group
+        %label {{'device.slave_id' | translate}}
+        %input.form-control(ng-model="device.device.properties.slave_id" type="number" )
+
+%div(ng-if="device.device.type == 'modbus' && device.device.device.id == null")
+
+    .form-group
+        %label {{'device.slave_id' | translate}}
+        %input.form-control(ng-model="device.device.properties.slave_id" type="number" )
 
     .form-group
         %label {{'device.baud' | translate}}
         %input.form-control(ng-model="device.device.properties.baud" type="number" )
 
     .form-group
-        %label {{'device.timeout' | translate}}
-        %input.form-control(ng-model="device.device.properties.timeout" type="number" )
+        %label {{'device.data_bits' | translate}}
+        %input.form-control(ng-model="device.device.properties.data_bits" type="number" )
 
     .form-group
-        %label {{'device.stop_bite' | translate}}
+        %label {{'device.stop_bits' | translate}}
         %input.form-control(ng-model="device.device.properties.stop_bits" type="number" )
+
+    .form-group
+        %label {{'device.parity' | translate}}
+        %input.form-control(ng-model="device.device.properties.parity" type="string" )
 
     .form-group
         %label {{'device.tty' | translate}}
         %input.form-control(ng-model="device.device.properties.tty" type="string" )
 
-%div(ng-if="device.device.type == 'default' || device.device.type == 'command'")
+%div(ng-if="device.device.device.id == null && device.device.type == 'default' || device.device.type == 'command'")
     .form-group
         %label {{'device.no_params' | translate}}
 

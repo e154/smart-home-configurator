@@ -4,12 +4,24 @@ angular
 ($scope, DeviceState, Message, $stateParams, $translate, Device) ->
   vm = this
 
+  deviceId = parseInt($stateParams.id, 10)
+
+  vm.getAll =->
+
+    success =(result)->
+      $scope.device.states = angular.copy(result) || []
+
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    Device.statuses {id: $stateParams.id}, success, error
+
   vm.addNew =->
     $scope.device.states.push new DeviceState({
       system_name: "NAME"
       description: ""
       device:
-        id: parseInt($stateParams.id, 10)
+        id: deviceId
     })
 
   vm.remove =(_state)->
@@ -47,6 +59,8 @@ angular
       Message result.data.status, result.data.message
 
     state = new DeviceState _state
+    state.device =
+      id: deviceId
     state.$update success, error
 
   vm.create =(_state)->
