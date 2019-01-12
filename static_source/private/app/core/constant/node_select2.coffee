@@ -1,14 +1,14 @@
 angular.module('appConstants')
-.factory 'ScriptSelect2', ['$http', ($http)->
+.factory 'NodeSelect2', ['$http', ($http)->
   (cb)->
     (query)->
       $http(
         method: 'GET'
-        url: "/api/v1/scripts/search"
+        url: "/api/v1/nodes/search"
         params:
           query: query
           limit: 5
           offset: 0
       ).then (response)->
-        cb(response.data.scripts) if cb
+        cb(response.data.nodes) if cb
 ]

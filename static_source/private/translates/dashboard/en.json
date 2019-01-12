@@ -109,6 +109,9 @@
     "no": "No",
     "is_group": "Is group",
     "script": "Script",
+    "type": "Type",
+    "parent": "Parent",
+    "no_params": "No params",
     "action": {
       "add": "Add action",
       "name": "Name",

@@ -40,7 +40,7 @@ angular
     success =(result)->
       Notify 'success', 'Action successfully updated', 3
       vm.state = 'show'
-      vm.getDeviceActions()
+#      vm.getDeviceActions()
       vm.getDefaultAction()
 
     error =(result)->
@@ -60,7 +60,7 @@ angular
   vm.remove =->
     success =->
       vm.state = 'show'
-      vm.getDeviceActions()
+#      vm.getDeviceActions()
       vm.getDefaultAction()
 
     error =(result)->
@@ -76,7 +76,7 @@ angular
   $scope.refreshScripts = (query)->
     $http(
       method: 'GET'
-      url: "/api/v1/script/search"
+      url: "/api/v1/scripts/search"
       params:
         query: query
         limit: 5
@@ -113,7 +113,7 @@ angular
       controller: 'scriptModalNewCtrl'
       controllerAs: 'script'
       preCloseCallback: ()=>
-        vm.getDeviceActions()
+#        vm.getDeviceActions()
         vm.getDefaultAction()
         return
 
@@ -146,7 +146,7 @@ angular
 
   # starting
   # ------------------------------------------
-  vm.getDeviceActions()
+#  vm.getDeviceActions()
   vm.getDefaultAction()
 
   vm

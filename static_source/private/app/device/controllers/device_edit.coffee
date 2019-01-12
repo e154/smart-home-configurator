@@ -1,39 +1,22 @@
 angular
 .module('appControllers')
 .controller 'deviceEditCtrl', ['$scope', 'Message', '$stateParams', 'Device', '$state', 'Node'
-'$translate'
-($scope, Message, $stateParams, Device, $state, Node, $translate) ->
+'$translate', 'NodeSelect2', 'DeviceSelect2', 'DeviceTypes'
+($scope, Message, $stateParams, Device, $state, Node, $translate, NodeSelect2, DeviceSelect2, DeviceTypes) ->
   vm = this
 
-  vm.nodes = {}
-  vm.devices = []
+  $scope.devices = []
+  $scope.nodes = []
+  vm.deviceTypes = DeviceTypes
 
-  getDevices =->
-    Device.group {}, (data)->
-      angular.forEach data.devices, (device)->
-        if device.id != vm.device.id
-          vm.devices.push(device)
-      $translate('Without group').then (text)=>
-        vm.devices.push({name: text, id: null})
-
-
-  Node.get {
-    limit:99
-    offset: 0
-    order: 'desc'
-    query: {}
-    sortby: 'created_at'
-  }, (data)->
-    vm.nodes = data.nodes
-    getDevices()
+  $scope.refreshNodes = NodeSelect2 (nodes)-> $scope.nodes = nodes
+  $scope.refreshDevices = DeviceSelect2 (devices)-> $scope.devices = devices
 
   Device.show {id: $stateParams.id}, (device)->
     vm.device = device
-    vm.device.stop_bite = device.stop_bite.toString()
-    vm.getNodeInfo()
 
   vm.remove =->
-    $translate('remove the node?').then (text)->
+    $translate('remove this device?').then (text)->
       if confirm text
         remove()
 
@@ -46,30 +29,13 @@ angular
 
   vm.submit =->
     success =(data)->
-      $state.go("dashboard.device.show", {id: data.id})
 
     error =(result)->
       Message result.data.status, result.data.message
-
-    vm.device.stop_bite = parseInt(vm.device.stop_bite, 10)
-
-    if vm.device.device? && vm.device.device.id?
-      vm.device.stop_bite = null
-      vm.device.node_id = null
-      vm.device.baud = null
-      vm.device.tty = ""
-      vm.device.timeout = null
-    else
-      vm.device.device = null
+      angular.forEach result.data.errors, (err)->
+        Message result.data.status, err.field + ' - ' + err.message
 
     vm.device.$update(success, error)
-
-  vm.getNodeInfo =->
-    if !vm.device.device?.node?.id
-      return
-
-    Node.show {id: vm.device.device.node.id}, (node)->
-      vm.device.device.node = node
 
   vm
 ]

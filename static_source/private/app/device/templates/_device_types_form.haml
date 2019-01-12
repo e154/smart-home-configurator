@@ -1,0 +1,44 @@
+%div(ng-if="device.device.type == 'smartbus'")
+
+    .form-group
+        %label {{'device.baud' | translate}}
+        %input.form-control(ng-model="device.device.properties.baud" type="number" )
+
+    .form-group
+        %label {{'device.timeout' | translate}}
+        %input.form-control(ng-model="device.device.properties.timeout" type="number" )
+
+    .form-group
+        %label {{'device.sleep' | translate}}
+        %input.form-control(ng-model="device.device.properties.sleep" type="number" )
+
+    .form-group
+        %label {{'device.stop_bite' | translate}}
+        %input.form-control(ng-model="device.device.properties.stop_bits" type="number" )
+
+    .form-group
+        %label {{'device.tty' | translate}}
+        %input.form-control(ng-model="device.device.properties.tty" type="string" )
+
+%div(ng-if="device.device.type == 'modbus'")
+
+    .form-group
+        %label {{'device.baud' | translate}}
+        %input.form-control(ng-model="device.device.properties.baud" type="number" )
+
+    .form-group
+        %label {{'device.timeout' | translate}}
+        %input.form-control(ng-model="device.device.properties.timeout" type="number" )
+
+    .form-group
+        %label {{'device.stop_bite' | translate}}
+        %input.form-control(ng-model="device.device.properties.stop_bits" type="number" )
+
+    .form-group
+        %label {{'device.tty' | translate}}
+        %input.form-control(ng-model="device.device.properties.tty" type="string" )
+
+%div(ng-if="device.device.type == 'default' || device.device.type == 'command'")
+    .form-group
+        %label {{'device.no_params' | translate}}
+

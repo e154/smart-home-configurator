@@ -1,7 +1,10 @@
-.row(ng-if="total_uptime")
+.row
   .col-lg-12
     %h3.uptime.text-center
-      {{total_uptime | uptime}}
+      %div(ng-if="total_uptime")
+        {{total_uptime | uptime}}
+      %div(ng-if="!total_uptime")
+        &nbsp;
 
 .row
   .col-lg-12

@@ -6,7 +6,7 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        data?.device || data
+        data
 
     group:
       url: '/api/v1/device/group'
@@ -34,16 +34,16 @@ angular
       responseType: 'json'
 
     update:
-        method: 'PUT'
+      method: 'PUT'
 
     delete:
       method: 'DELETE'
 
     all:
+      url: '/api/v1/devices'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.devices || []
-
+        items: data?.items || []
 ]

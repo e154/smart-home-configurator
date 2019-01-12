@@ -9,7 +9,7 @@
 
 .row(if-can="{device_state:['read']}")
   .col-md-12
-    .row(ng-repeat="_state in status.statuses" )
+    .row(ng-repeat="_state in device.states" )
       .col-md-3
         .form-group
           %label {{'device.status.system_name' | translate}}*

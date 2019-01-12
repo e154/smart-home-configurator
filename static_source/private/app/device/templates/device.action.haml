@@ -11,7 +11,7 @@
           &nbsp;
           &nbsp;
 
-          %a(href="#" ng-click="action.state='show'" ng-if="action.state!='show' && action.actions.length")
+          %a(href="#" ng-click="action.state='show'" ng-if="action.state!='show' && device.actions.length")
             .fa.fa-arrow-circle-o-left &nbsp;
             {{'Back' | translate}}
 
@@ -33,16 +33,16 @@
             {{'Cancel' | translate}}
         .clearfix
 
-  .col-md-6(ng-if="!action.actions.length && action.state == 'show'")
+  .col-md-6(ng-if="!device.actions.length && action.state == 'show'")
     {{'No actions' | translate}}
 
-.row(ng-if="action.actions.length && action.state == 'show'")
+.row(ng-if="device.actions.length && action.state == 'show'")
   .col-md-12
     .list-group
       .panel.panel-default
         -#.panel-heading
           {{'device.action.all' | translate}} ({{device.device.device.name || device.device.name}})
-        .list-group-item( ng-repeat="item in action.actions" )
+        .list-group-item( ng-repeat="item in device.actions" )
           %strong.list-group-item-heading
             {{item.name}}
           .pull-right.small
