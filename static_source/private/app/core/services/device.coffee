@@ -13,22 +13,6 @@ angular
       method: 'GET'
       responseType: 'json'
 
-    actions:
-      url: '/api/v1/device/:id/actions'
-      method: 'GET'
-      isArray: true
-      responseType: 'json'
-      transformResponse: (data) ->
-        data?.actions || data
-
-    statuses:
-      url: '/api/v1/device/:id/statuses'
-      method: 'GET'
-      isArray: true
-      responseType: 'json'
-      transformResponse: (data) ->
-        data?.statuses || data
-
     create:
       method: 'POST'
       responseType: 'json'

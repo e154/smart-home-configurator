@@ -6,7 +6,7 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        data?.action || data
+        data
 
     create:
       method: 'POST'
@@ -19,10 +19,10 @@ angular
       method: 'DELETE'
 
     get_by_device:
-      url: '/api/v1/device_action/get_by_device/:id'
+      url: '/api/v1/device_actions/:id'
       method: 'GET'
       isArray: true
       responseType: 'json'
       transformResponse: (data) ->
-        data?.device_actions || data
+        data
 ]
