@@ -54,6 +54,10 @@
         %label {{'device.parity' | translate}}
         %div {{device.device.device.properties.parity}}
 
+    .form-group(ng-if="device.device.device.properties.timeout")
+        %label {{'device.timeout' | translate}}
+        %div {{device.device.device.properties.timeout}}
+
 %div(ng-if="device.device.type == 'default' || device.device.type == 'command'")
     .form-group
         %label {{'device.no_params' | translate}}
