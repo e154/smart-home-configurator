@@ -22,9 +22,10 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/images'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.images || []
+        items: data?.items || []
 ]

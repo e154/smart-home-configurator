@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/url"
 	"github.com/e154/smart-home-configurator/system/websocketproxy"
+	"github.com/parnurzeal/gorequest"
+	"bytes"
 )
 
 type ControllerProxy struct {
@@ -58,7 +60,50 @@ func (i ControllerProxy) Simple(ctx *gin.Context) {
 }
 
 func (i ControllerProxy) Upload(ctx *gin.Context) {
-	log.Info("upload")
+
+	form, _ := ctx.MultipartForm()
+
+	if len(form.File) == 0 {
+		ctx.AbortWithError(403, fmt.Errorf("http: no such file"))
+		return
+	}
+
+	r := ctx.Request
+
+	// destination server url
+	u := fmt.Sprintf("%s://%s:%d%s", i.cfg.ApiScheme, i.cfg.ApiAddr, i.cfg.ApiPort, ctx.Request.RequestURI)
+	request := gorequest.New().Post(u).Type("multipart")
+	for k, value := range r.Header {
+		if k == "Access_token" {
+			request.Set(k, value[0])
+		}
+	}
+
+	for k, file := range form.File {
+
+		for _, f := range file {
+			r, err := f.Open()
+			if err != nil {
+				ctx.AbortWithError(403, err)
+				return
+			}
+			defer r.Close()
+
+			buf := bytes.NewBuffer(nil)
+			if _, err := io.Copy(buf, r); err != nil {
+				ctx.AbortWithError(403, err)
+				return
+			}
+
+			request = request.SendFile(buf.Bytes(), f.Filename, k)
+		}
+	}
+
+	_, _, errs := request.End()
+	for _, err := range errs {
+		ctx.AbortWithError(403, err)
+	}
+
 	return
 }
 

@@ -55,14 +55,14 @@ func (s *Server) customRouter(ctx *gin.Context) {
 		s.Controllers.Index.Recovery(ctx)
 	case r == "/reset":
 		s.Controllers.Index.Reset(ctx)
-	case r == "/upload":
+	case strings.Contains(r, "/api/v1/image/upload"):
+		s.Controllers.Proxy.Upload(ctx)
+	case strings.Contains(r, "/upload"):
 		s.Controllers.Proxy.Simple(ctx)
 	case strings.Contains(r, "/api/v1/ws"):
 		s.Controllers.Proxy.Ws(ctx)
 	case strings.Contains(r, "/api/v1"):
 		s.Controllers.Proxy.Simple(ctx)
-	case strings.Contains(r, "/api/v1/image/upload"):
-		s.Controllers.Proxy.Upload(ctx)
 	default:
 		s.Controllers.Index.Index(ctx)
 	}
