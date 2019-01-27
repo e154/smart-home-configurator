@@ -24,11 +24,12 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/scripts'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.scripts || []
+        items: data?.items || []
 
     exec:
       url: '/api/v1/script/:id/exec'
