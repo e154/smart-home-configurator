@@ -19,11 +19,12 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/workflows'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.workflows || []
+        items: data?.items || []
 
     update_scenario:
       url: '/api/v1/workflow/:workflow_id/update_scenario'

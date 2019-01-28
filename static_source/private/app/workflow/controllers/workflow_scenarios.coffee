@@ -24,8 +24,9 @@ angular
       Message result.data.status, result.data.message
 
     data =
+      workflow_scenario_id: item.id
       workflow_id: $scope.workflow.workflow.id
-      id: item.id
+
     Workflow.update_scenario data, success, error
 
   vm.get_all_scenario =->

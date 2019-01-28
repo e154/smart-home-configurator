@@ -26,11 +26,12 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/maps'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.maps || []
+        items: data?.items || []
 
     showFull:
       url: '/api/v1/map/:id/full'
