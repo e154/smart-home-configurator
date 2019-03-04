@@ -19,7 +19,7 @@
             %textarea.form-control(ng-model="script.script.description" rows="2" )
 
         .form-group(ng-if="script.script.id")
-            %a.btn.btn-success.full-width(ng-click="script.exec()")
+            %a.btn.btn-success.full-width(ng-click="script.exec_src()")
                 {{'script.execute' | translate}}
 
     .col-md-10

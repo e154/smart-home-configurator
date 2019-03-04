@@ -11,14 +11,12 @@ angular
     create:
       method: 'POST'
       responseType: 'json'
-      transformResponse: (data) ->
-        data?.script || data
 
     update:
-        method: 'PUT'
-        responseType: 'json'
-        transformResponse: (data) ->
-          data?.script || data
+      method: 'PUT'
+      responseType: 'json'
+      transformResponse: (data) ->
+        @
 
     delete:
       method: 'DELETE'
@@ -35,8 +33,9 @@ angular
       url: '/api/v1/script/:id/exec'
       method: 'POST'
       responseType: 'json'
-      transformResponse: (data) ->
-        script = data?.script || data
-        script.result = data?.result || ""
-        script
+
+    exec_src:
+      url: '/api/v1/script/:id/exec_src'
+      method: 'POST'
+      responseType: 'json'
 ]

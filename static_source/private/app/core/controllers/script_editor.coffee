@@ -92,7 +92,7 @@ angular
         return if !confirm text
         index = $scope.used_scripts.indexOf($scope.current_script)
         $scope.used_scripts.splice(index, 1)
-        $scope.current_script = null
+        $scope.current_script = $scope.used_scripts[0] || null
 
     $scope.select =(script, e)->
       e.preventDefault() if e
@@ -130,9 +130,10 @@ angular
           Notify 'success', 'The script was successfully updated', 3
         Script.update script, success, error
       else
-        success =(script)->
+        success =(result)->
           cb() if cb
           Notify 'success', 'The script was successfully created', 3
+          script.id = result.id
           appendScript(script)
           $scope.state = 'redactor'
         Script.create script, success, error
@@ -188,5 +189,17 @@ angular
         Message result.data.status, result.data.message
 
       Script.exec $scope.current_script, success, error
+
+    $scope.exec_src =->
+      return if !$scope.current_script
+
+      success =(data)->
+        $scope.result = data.result
+
+      error =(result)->
+        console.log '----',result
+        Message result.data.status, result.data.message
+
+      Script.exec_src $scope.current_script, success, error
 
 ]

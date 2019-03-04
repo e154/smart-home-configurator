@@ -40,12 +40,25 @@ angular
 
   vm.exec =->
     success =(data)->
-      vm.script.result = vm.script.result.replace(/(\\n)/g, '<br>')
+      if !data.result
+        return
+      vm.script.result = data.result.replace(/(\\n)/g, '<br>')
 
     error =(result)->
       Message result.data.status, result.data.message
 
-    vm.script.$exec success, error
+    Script.exec vm.script, success, error
+
+  vm.exec_src =->
+    success =(data)->
+      if !data.result
+        return
+      vm.script.result = data.result.replace(/(\\n)/g, '<br>')
+
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    Script.exec_src vm.script, success, error
 
   vm
 ]

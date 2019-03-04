@@ -39,8 +39,8 @@ func (s *Server) setControllers() {
 func (s *Server) customRouter(ctx *gin.Context) {
 
 	r := strings.ToLower(ctx.Request.RequestURI)
-	method := ctx.Request.Method
-	log.Infof("path %s, meth(%s)", r, method)
+	method := ctx.Request.Method + "    "
+	log.Infof("[%s] %s", method[:4], r)
 
 	if strings.Contains(r, "/static") || strings.Contains(r, "/_static") {
 		return

@@ -27,7 +27,7 @@
         {{'empty list' | translate}}
 
       .form-group(ng-if="current_script")
-        %button.btn.btn-success.btn-xs.full-width(ng-click="exec()")
+        %button.btn.btn-success.btn-xs.full-width(ng-click="exec_src()")
           {{'script.execute' | translate}}
 
       .form-group(ng-if="script_changed")
