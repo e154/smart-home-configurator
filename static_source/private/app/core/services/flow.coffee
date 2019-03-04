@@ -43,10 +43,11 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/flows'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.flows || []
+        items: data?.items || []
 
 ]
