@@ -4,7 +4,7 @@ angular.module('appConstants')
     (query)->
       $http(
         method: 'GET'
-        url: "/api/v1/workflow/search"
+        url: "/api/v1/workflows/search"
         params:
           query: query
           limit: 5
