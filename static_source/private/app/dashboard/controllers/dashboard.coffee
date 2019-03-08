@@ -205,6 +205,13 @@ angular
         ]
         'access': {user: ['read']}
       }
+      {
+        'label': 'Swagger'
+        'route': 'dashboard.swagger.index'
+        'icon': 'fa fa-file-text-o'
+        'access': {swagger: ['read']}
+
+      }
     ]
 
 
