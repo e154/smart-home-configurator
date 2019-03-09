@@ -25,7 +25,7 @@ angular
       method: 'PUT'
       responseType: 'json'
       transformResponse: (data) ->
-        @
+        data
 
     delete:
       method: 'DELETE'

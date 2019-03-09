@@ -34,7 +34,7 @@ angular
     $scope.user.$show success, error
 
   $scope.removeAvatar =->
-    $scope.user.avatar = null
+    $scope.user.image = null
 
   $scope.update =->
     success =->
