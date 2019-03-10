@@ -62,9 +62,9 @@ angular
       $scope.zoom = $scope.map.options?.zoom || 1.2
       panning.setZoom($scope.zoom)
       return if !$scope.map.layers
-      angular.forEach $scope.map.layers, (layer)->
-        angular.forEach layer.elements, (element)->
-          element.graph_settings = angular.fromJson(element.graph_settings)
+#      angular.forEach $scope.map.layers, (layer)->
+#        angular.forEach layer.elements, (element)->
+#          element.graph_settings = angular.fromJson(element.graph_settings)
 
     #init
     getOptions()

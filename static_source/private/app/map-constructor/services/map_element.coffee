@@ -65,7 +65,7 @@ angular
         weight: @weight
         prototype_type: @prototype_type
         prototype_id: @prototype_id if @prototype_id
-        graph_settings: angular.toJson(@graph_settings)
+        graph_settings: @graph_settings
         prototype: prototype if prototype
 
       deserialize: (element)->
@@ -80,7 +80,7 @@ angular
         @weight = element.weight || 0
         @created_at = element.created_at || ''
         @updated_at = element.updated_at || ''
-        @graph_settings = angular.fromJson(element.graph_settings) if element.graph_settings
+        @graph_settings = element.graph_settings
 
         if element.prototype
           @get_prototype(element.prototype)

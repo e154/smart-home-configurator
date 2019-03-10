@@ -38,7 +38,5 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        map = data?.map || data
-        map.options = angular.fromJson(map.options || "{}") || {}
-        map
+        data?.map || data
 ]
