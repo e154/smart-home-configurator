@@ -51,8 +51,8 @@ angular
 
         DeviceSelect2((devices)=>
           angular.forEach devices, (device, index)->
-            if !device.device_id? && !device.address?
-              devices.splice(index, 1)
+            #if !device.device_id? && !device.address?
+            #  devices.splice(index, 1)
             _this.devices = devices
         )(args)
 
