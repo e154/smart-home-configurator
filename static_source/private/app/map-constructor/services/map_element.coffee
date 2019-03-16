@@ -141,7 +141,7 @@ angular
           when 'script'
             @prototype = new MapScript(@scope)
 
-        if data
+        if data && data.system_name
           @prototype.deserialize(data)
 
       copy: (_element)->

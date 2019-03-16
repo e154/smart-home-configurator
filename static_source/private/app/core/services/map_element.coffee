@@ -19,7 +19,7 @@ angular
         responseType: 'json'
 
     sort:
-      url: '/api/v1/map_element/sort'
+      url: '/api/v1/map_elements/sort'
       method: 'PUT'
       responseType: 'json'
 
