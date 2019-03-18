@@ -6,7 +6,7 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        user = data?.user || data
+        user = data
         user.full_name = "#{user.last_name} #{user.first_name}" if user.first_name && user.last_name || ""
         user
 
@@ -14,7 +14,7 @@ angular
       method: 'POST'
       responseType: 'json'
       transformResponse: (data) ->
-        data?.user || data
+        data
 
     update_status:
       url: '/api/v1/user/:id/update_status'
