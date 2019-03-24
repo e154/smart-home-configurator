@@ -12,4 +12,5 @@ type Image struct {
 	Size      int64     `json:"size"`
 	Name      string    `json:"name"`
 	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }

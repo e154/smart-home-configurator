@@ -21,10 +21,10 @@ type User struct {
 	Role            *Role          `json:"role"`
 	Meta            []*UserMeta    `json:"meta"`
 	Lang            string         `json:"lang"`
-	CurrentSignInAt time.Time      `json:"current_sign_in_at"`
-	LastSignInAt    time.Time      `json:"last_sign_in_at"`
+	CurrentSignInAt *time.Time     `json:"current_sign_in_at"`
+	LastSignInAt    *time.Time     `json:"last_sign_in_at"`
 	CreatedAt       time.Time      `json:"created_at"`
-	UpdateAt        time.Time      `json:"update_at"`
+	UpdatedAt       time.Time      `json:"updated_at"`
 }
 
 func init() {

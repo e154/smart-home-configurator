@@ -9,5 +9,5 @@ type Role struct {
 	Children    []*Role             `json:"children"`
 	AccessList  map[string][]string `json:"access_list"`
 	CreatedAt   time.Time           `json:"created_at"`
-	UpdateAt    time.Time           `json:"update_at"`
+	UpdatedAt   time.Time           `json:"updated_at"`
 }
