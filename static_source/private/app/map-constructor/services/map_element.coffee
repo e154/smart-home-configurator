@@ -56,8 +56,8 @@ angular
         prototype = @prototype?.serialize() || null
         name: @name
         id: @id if @id
-        map: {id: @map_id} if @map_id
-        layer: {id: @layer_id} if @layer_id
+        map_id: @map_id if @map_id
+        layer_id: @layer_id if @layer_id
         status: @status
         description: @description
         created_at: @created_at if @created_at
@@ -70,8 +70,8 @@ angular
 
       deserialize: (element)->
         @id = element.id || null
-        @map_id = element.map.id if element.map?.id
-        @layer_id = element.layer.id if element.layer?.id
+        @map_id = element.map_id if element.map_id
+        @layer_id = element.layer_id if element.layer_id
         @name = element.name || ''
         @description = element.description || ''
         @status = element.status || ''
@@ -109,6 +109,7 @@ angular
         model.$update_element_only success, error
 
       update: (cb)->
+        console.log '---', @
         success =(data)=>
           Notify 'success', 'Item successfully updated', 3
           cb() if cb
