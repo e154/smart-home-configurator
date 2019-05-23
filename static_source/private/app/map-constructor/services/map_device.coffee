@@ -75,6 +75,7 @@ angular
         {
           id: @id if @id
           device: {id: @device.id} if @device
+          device_id: @device.id if @device
           states: states
           actions: actions
           image: @image

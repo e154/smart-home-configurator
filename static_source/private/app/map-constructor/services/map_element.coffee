@@ -109,7 +109,6 @@ angular
         model.$update_element_only success, error
 
       update: (cb)->
-        console.log '---', @
         success =(data)=>
           Notify 'success', 'Item successfully updated', 3
           cb() if cb
@@ -142,7 +141,7 @@ angular
           when 'script'
             @prototype = new MapScript(@scope)
 
-        if data && data.system_name
+        if data
           @prototype.deserialize(data)
 
       copy: (_element)->
