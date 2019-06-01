@@ -21,8 +21,8 @@ angular
 
         $(template).css({
           position: 'absolute'
-          top: -23
-          left: -45
+          top: -15
+          left: -15
         })
 
         if @scope.settings.zoom
