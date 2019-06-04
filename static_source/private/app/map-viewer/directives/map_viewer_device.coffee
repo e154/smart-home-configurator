@@ -33,6 +33,7 @@ angular
     # stream
     # --------------------
     setState =(_state)->
+      console.log 'setState', _state
       return if !_state || !_state?.id
       for map_element_state in $scope.element.prototype.states
         if map_element_state.device_state.id == _state.id
@@ -45,7 +46,7 @@ angular
 
     $scope.$on 'broadcast_device_state', (e, data)->
       return if !data || !data?.status
-      if $scope.element.prototype.device.id == data.id
+      if $scope.element.prototype.device.id == data.id && $scope.element.name == data.element_name
         $scope.current_status = data
         setState data.status
 
