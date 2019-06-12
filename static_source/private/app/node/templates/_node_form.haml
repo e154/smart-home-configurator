@@ -21,3 +21,43 @@
     %label {{'node.description' | translate}}
     %textarea.form-control(ng-model="node.node.description" rows="10" )
 
+.form-group
+    %label {{'node.login' | translate}}*
+    %input.form-control(ng-model="node.node.login" type="text")
+
+.row
+  .col-lg-12
+    .form-group
+      {{'node.set_password' | translate}}
+
+-#
+-# password
+-#
+.row
+  %password-check(nickname="input#nickname" password-input="input#password" confirm-input="input#password_repeat" password-recommendation="#pass-recommendation" password-confirm-recommendation="#pass-confirm-recommendation" strength-recommendation="#strength-recommendation" auto_disable="node.node.isNew" submit_button="button.submit_button")
+  .col-lg-6
+    .form-group
+      %label {{'node.password' | translate}}*
+      %input#password.form-control(ng-model="node.node.password" type="password" )
+
+  .col-lg-6
+    .form-group
+      #pass-recommendation
+      .clearfix
+
+.row
+  .col-lg-6
+    .form-group
+      %label {{'node.password_repeat' | translate}}*
+      %input#password_repeat.form-control(ng-model="node.node.password_repeat" type="password" )
+
+  .col-lg-6
+    .form-group
+      #pass-confirm-recommendation
+      .clearfix
+
+.row
+  .col-lg-12
+    .form-group
+      #strength-recommendation
+      .clearfix

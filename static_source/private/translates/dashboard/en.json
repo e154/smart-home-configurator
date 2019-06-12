@@ -74,6 +74,10 @@
     "enabled": "enabled",
     "disabled": "disabled",
     "status": "Status",
+    "login": "Login",
+    "password": "Password",
+    "password_repeat": "Password repeat",
+    "set_password": "Specify a password in both fields",
     "state": {
       "disconnected": "Disconnected",
       "connected": "Connected",
@@ -394,7 +398,6 @@
       "online": "Online",
       "disabled": "Disabled"
     }
-
   },
   "uptime": {
     "days": "Days",
@@ -542,7 +545,7 @@
     }
   },
   "auth": {
-      "package_name": "Authorization"
+    "package_name": "Authorization"
   },
   "scenarios": {
     "package_name": "Scenarios"

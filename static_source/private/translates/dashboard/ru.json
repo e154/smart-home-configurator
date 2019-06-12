@@ -76,6 +76,10 @@
     "enabled": "Включен",
     "disabled": "Выключен",
     "status": "Состояние",
+    "login": "Login",
+    "password": "Пароль",
+    "password_repeat": "Пароль повторно",
+    "set_password": "Укажите пароль в обоих полях.",
     "state": {
       "disconnected": "Отключено",
       "connected": "Подключено",
@@ -396,7 +400,6 @@
       "online": "В сети",
       "disabled": "Отключены"
     }
-
   },
   "uptime": {
     "days": "дней",
