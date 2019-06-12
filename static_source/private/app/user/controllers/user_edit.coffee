@@ -27,7 +27,7 @@ angular
 
   show =->
     success =(user)->
-      if user.meta.length == 0
+      if user.meta == null || user.meta.length == 0
         $scope.user.meta = meta
     error =->
       $state.go 'dashboard.user.index'
