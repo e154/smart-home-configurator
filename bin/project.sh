@@ -55,10 +55,9 @@ __init() {
     npm install
 
     cd ${ROOT}
-    go install $(go list ./... | grep -v "/vendor\|/database")
+    dep ensure
 
-    cp ${ROOT}/conf/app.sample.conf ${ROOT}/conf/app.conf
-    cp ${ROOT}/conf/dev/app.sample.conf ${ROOT}/conf/dev/app.conf
+    cp ${ROOT}/conf/config.dev.json ${ROOT}/conf/config.json
 }
 
 __clean() {
@@ -70,9 +69,7 @@ __clean() {
     rm -rf ${ROOT}/static_source/private/tmp
     rm -rf ${ROOT}/static_source/public/bower_components
     rm -rf ${ROOT}/static_source/public/tmp
-    rm -rf ${ROOT}/vendor/bin
-    rm -rf ${ROOT}/vendor/pkg
-    rm -rf ${ROOT}/vendor/src
+    rm -rf ${ROOT}/vendor/*
     rm -rf ${TMP_DIR}
 }
 
@@ -92,7 +89,6 @@ __build() {
     go build -o ${TMP_DIR}/${EXEC}-${OS_TYPE}-${OS_ARCH}
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
-    sed 's/dev\/app.conf/prod\/app.conf/' ${ROOT}/conf/app.sample.conf > ${TMP_DIR}/conf/app.sample.conf
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
