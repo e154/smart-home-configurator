@@ -3,12 +3,11 @@ angular
 .controller 'recoveryCtrl', ['$scope', 'Auth'
 ($scope, Auth) ->
 
-  $scope.password = ''
   $scope.email = ''
   $scope.error = null
 
-  $scope.recovery =->
-    return if $scope.email == '' || $scope.password == ''
+  $scope.submit =->
+    return if $scope.email == ''
     success =()->
       console.log 'ok'
     error =(error)->

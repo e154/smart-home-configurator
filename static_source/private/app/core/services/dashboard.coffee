@@ -1,13 +1,13 @@
 angular
 .module('appServices')
 .factory 'Dashboard', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/dashboard/:id', {id: '@id'},
+  $resource '/api/v1/dashboard/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         dashboard = data?.dashboard || data
-        console.log dashboard.widgets
+#        console.log dashboard.widgets
         dashboard.widgets = angular.fromJson(dashboard.widgets || "[]") || []
         dashboard
 

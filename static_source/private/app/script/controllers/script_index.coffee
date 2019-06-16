@@ -12,10 +12,12 @@ angular
       {
         name: '#'
         field: 'id'
+        width: '35px'
       }
       {
         name: 'script.name'
         field: 'name'
+        width: '150px'
         clickCallback: ($event, item)->
           $event.preventDefault()
           $state.go('dashboard.script.edit', {id: item.id})
@@ -24,16 +26,24 @@ angular
       {
         name: 'script.lang'
         field: 'lang'
+        width: '100px'
+      }
+      {
+        name: 'script.description'
+        field: 'description'
+
       }
       {
         name: 'script.created_at'
         field: 'created_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
+        width: '150px'
       }
       {
-        name: 'script.update_at'
-        field: 'update_at'
+        name: 'script.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
+        width: '150px'
       }
     ]
     menu:null

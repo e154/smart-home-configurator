@@ -169,6 +169,10 @@ module.exports = {
         images: {
             source: public_src + '/images/**/*',
             dest: public_dest + '/images'
+        },
+        'images-private': {
+            source: private_src + '/images/**/*',
+            dest: private_dest + '/images'
         }
     }
 

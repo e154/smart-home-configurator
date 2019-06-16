@@ -4,8 +4,8 @@
 
 angular
 .module('appControllers')
-.controller 'loginFormCtrl', ['$scope','Auth','authService','Message', '$rootScope', 'storage', '$http'
-($scope, Auth, authService, Message, $rootScope, storage, $http) ->
+.controller 'loginFormCtrl', ['$scope','Auth','authService','Message','$base64','$http'
+($scope, Auth, authService, Message, $base64, $http) ->
 
   $scope.user = new Auth {
     email: '',
@@ -13,12 +13,23 @@ angular
   }
 
   $scope.auth = ->
+
+    app.access_token = null
+
     success =(result)->
+      console.log result
+      app.access_token = result.data.access_token || null
+
       authService.loginConfirmed()
       $scope.closeThisDialog()
 
     error = (result)->
       Message result.data.status, result.data.message
-    $scope.user.$signin success, error
+
+    headers =
+      "X-Requested-With": "XMLHttpRequest"
+      Authorization: "Basic " + $base64.encode("#{$scope.user.email}:#{$scope.user.password}")
+
+    $http.post('/signin', {}, {headers: headers}).then success, error
 
 ]

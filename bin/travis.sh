@@ -86,7 +86,7 @@ __init() {
 
     mkdir -p ${TMP_DIR}
     cd ${ROOT}
-    gvt rebuild
+    dep ensure
     cd ${ROOT}/static_source/private
     bower install
     cd ${ROOT}/static_source/public
@@ -104,9 +104,7 @@ __clean() {
     rm -rf ${ROOT}/static_source/private/tmp
     rm -rf ${ROOT}/static_source/public/bower_components
     rm -rf ${ROOT}/static_source/public/tmp
-    rm -rf ${ROOT}/vendor/bin
-    rm -rf ${ROOT}/vendor/pkg
-    rm -rf ${ROOT}/vendor/src
+    rm -rf ${ROOT}/vendor/*
     rm -rf ${TMP_DIR}
 }
 
@@ -136,7 +134,6 @@ __build_back() {
 
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
-    sed 's/dev\/app.conf/prod\/app.conf/' ${ROOT}/conf/app.sample.conf > ${TMP_DIR}/conf/app.sample.conf
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
@@ -149,8 +146,6 @@ __build_back() {
 __help() {
   cat <<EOF
 Usage: travis.sh [options]
-
-Bootstrap Debian 8.0 host.
 
 OPTIONS:
 

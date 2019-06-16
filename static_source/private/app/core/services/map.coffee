@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'MapResource', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/map/:id', {id: '@id'},
+  $resource '/api/v1/map/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -26,19 +26,17 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/maps'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.maps || []
+        items: data?.items || []
 
     showFull:
-      url: window.app_settings.server_url + '/api/v1/map/:id/full'
+      url: '/api/v1/map/:id/full'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
-        map = data?.map || data
-        map.options = angular.fromJson(map.options || "{}") || {}
-        map.options.zoom ||= 1.2
-        map
+        data?.map || data
 ]

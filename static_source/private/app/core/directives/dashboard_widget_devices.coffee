@@ -21,6 +21,7 @@ angular
       $scope.error = 0
       $scope.total = data.devices.total if data.devices.total
       angular.forEach data.devices.status, (status, device)->
+        return if !status
         switch status.system_name
           when 'ENABLED'
             $scope.online++

@@ -7,8 +7,6 @@ angular
     element: '=mapViewerElement'
   link: ($scope, $element, $attrs) ->
 
-    $scope.server_url = window.app_settings.server_url
-
     compile =->
       st = $scope.element.graph_settings
 

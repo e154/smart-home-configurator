@@ -55,6 +55,10 @@
   "upload": "Upload",
   "archive": "Archive",
   "upload file": "Upload file",
+  "No scripts": "No scripts",
+  "No actions": "No actions",
+  "No states": "No states",
+  "Without group": "Without group",
   "node": {
     "package_name": "Nodes",
     "name": "Name",
@@ -66,10 +70,14 @@
     "ip": "Ip",
     "port": "Port",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "enabled": "enabled",
     "disabled": "disabled",
     "status": "Status",
+    "login": "Login",
+    "password": "Password",
+    "password_repeat": "Password repeat",
+    "set_password": "Specify a password in both fields",
     "state": {
       "disconnected": "Disconnected",
       "connected": "Connected",
@@ -87,6 +95,10 @@
     "show_form": "Device",
     "index_form": "Device list",
     "baud": "baud (19200)",
+    "slave_id": "slave id",
+    "data_bits": "data bits",
+    "stop_bits": "stop bits",
+    "parity": "четность",
     "address": "Address (device group if null)",
     "group": "Group",
     "tty": "/dev/tty...",
@@ -98,13 +110,16 @@
     "node": "Node",
     "timeout": "Timeout",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "actions": "Actions",
     "statuses": "Statuses",
     "yes": "Yes",
     "no": "No",
     "is_group": "Is group",
     "script": "Script",
+    "type": "Type",
+    "parent": "Parent",
+    "no_params": "No params",
     "action": {
       "add": "Add action",
       "name": "Name",
@@ -148,7 +163,7 @@
     "enabled": "Enabled",
     "disabled": "Disabled",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "package_name": "Workflow access",
     "index_form": "Workflow list",
     "show_form": "Show Workflow",
@@ -166,7 +181,7 @@
     }
   },
   "flow": {
-    "edit": "Ddit",
+    "edit": "Edit",
     "worker": "Worker",
     "workers": "Workers",
     "name": "Name",
@@ -175,7 +190,7 @@
     "enabled": "Enabled",
     "disabled": "Disabled",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "workflow": "Workflow",
     "remove_worker": "Remove worker",
     "do_worker": "Do worker",
@@ -222,7 +237,7 @@
     "source": "Source",
     "lang": "Language",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "execute": "Execute",
     "show_form": "Show form",
     "edit_form": "Edit form",
@@ -275,7 +290,7 @@
     "items": "Items",
     "preview": "Preview",
     "source_code": "Source code",
-    "package_name": "Package name",
+    "package_name": "Notifr",
     "template": "Template",
     "send": "Send"
   },
@@ -295,9 +310,11 @@
     "settings": "Settings",
     "main_window": "Main window",
     "callback": "Callback",
-    "update_at": "Updated at",
+    "updated_at": "Updated at",
     "file_manager": "File manager",
     "add_layer": "Add layer",
+    "element_state_text": "Show element state text",
+    "element_option_text": "Show element option text",
     "layer": {
       "name": "Name",
       "status": "Status",
@@ -350,9 +367,10 @@
       "swap": "swap",
       "memory": "memory",
       "cpu": "cpu",
-      "nodes": "Ноды",
-      "devices": "deices",
-      "uptime": "uptime"
+      "nodes": "nodes",
+      "devices": "devices",
+      "uptime": "uptime",
+      "disk": "disk"
     },
     "memory": {
       "total": "Total",
@@ -380,7 +398,6 @@
       "online": "Online",
       "disabled": "Disabled"
     }
-
   },
   "uptime": {
     "days": "Days",
@@ -402,14 +419,15 @@
     "edit_form": "User edit",
     "nickname": "Nickname",
     "add_new": "New user",
-    "avatar": "Avatar",
+    "image": "Avatar",
     "status": "Status",
     "active": "Active",
     "blocked": "Blocked",
     "autograph": "Autograph",
     "phone1": "Phone1",
     "phone2": "Phone2",
-    "phone3": "Phone3",
+    "telegram": "Telegram",
+    "slack": "Slack",
     "role": "Role",
     "first_name": "First name",
     "last_name": "Last name",
@@ -424,7 +442,7 @@
     "current_sign_in_at": "Current sign in at",
     "current_sign_in_ip": "Current sign in ip",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "Sign in": "Sign in",
     "menu": {
       "show": "Show",
@@ -448,7 +466,7 @@
     "permissions_form": "Permissions form",
     "description": "Description",
     "created_at": "Created at",
-    "update_at": "Update at",
+    "updated_at": "Update at",
     "parent": "Parent",
     "children": "Children",
     "name": "Name",
@@ -527,6 +545,9 @@
     }
   },
   "auth": {
-      "package_name": "Authorization"
+    "package_name": "Authorization"
+  },
+  "scenarios": {
+    "package_name": "Scenarios"
   }
 }

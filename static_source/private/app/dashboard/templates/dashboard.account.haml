@@ -2,7 +2,7 @@
     .col-md-12
         %h3
             {{'user.show_form' | translate}} - {{user.full_name || user.nickname}}
-            .edit-icon-link
+            .edit-icon-link(if-can="{user: ['update']}")
                 %a(ui-sref="dashboard.user.edit({id:user.id})")
                     %span.fa.fa-pencil
 
@@ -11,7 +11,7 @@
                 %small
                     {{'Created at' | translate}} {{user.created_at | readableDateTime}}
                 %small
-                    {{'Updated at' | translate}} {{user.update_at | readableDateTime}}
+                    {{'Updated at' | translate}} {{user.updated_at | readableDateTime}}
 
 .row
     .col-md-2
@@ -41,8 +41,8 @@
 
     .col-md-2
         .form-group
-            .avatar.lg(ng-if="user.avatar.url != ''")
-                %img(ng-src="{{server_url}}/{{user.avatar.url}}" alt="")
+            .avatar.lg(ng-if="user.image.url != ''")
+                %img(ng-src="{{user.image.url}}" alt="")
     .col-md-2
         .form-group(ng-if="user.sign_in_count")
             .text-muted {{'user.sign_in_count' | translate}}

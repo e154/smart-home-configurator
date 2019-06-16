@@ -14,7 +14,7 @@
         %small
           {{'Created at' | translate}} {{node.node.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{node.node.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{node.node.updated_at | readableDateTime}}
 
 .row
   .col-md-12
@@ -48,3 +48,8 @@
         {{'node.description' | translate}}
       %div
         {{::node.node.description}}
+    .form-group
+      .text-muted
+        {{'node.login' | translate}}
+      %div
+        {{::node.node.login}}

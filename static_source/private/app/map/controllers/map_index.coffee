@@ -28,8 +28,8 @@ angular
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
-        name: 'map.update_at'
-        field: 'update_at'
+        name: 'map.updated_at'
+        field: 'updated_at'
         width: '140px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }

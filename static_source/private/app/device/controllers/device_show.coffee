@@ -4,8 +4,9 @@ angular
 ($scope, Notify, Device, $stateParams, $state) ->
   vm = this
 
+  $scope.device = {}
   success = (device) ->
-    vm.device = device
+    $scope.device = device
 
   error = ->
     $state.go 'dashboard.device.index'

@@ -1,36 +1,28 @@
 angular
 .module('appControllers')
-.controller 'deviceNewCtrl', ['$scope', 'Device', '$state', 'Message', 'Node'
-($scope, Notify, $state, Message, Node) ->
+.controller 'deviceNewCtrl', ['$scope', 'Notify', 'Device', '$state', 'Message', 'Node', '$translate',
+  'NodeSelect2', 'DeviceSelect2', 'DeviceTypes'
+($scope, Notify, Device, $state, Message, Node, $translate, NodeSelect2, DeviceSelect2, DeviceTypes) ->
   vm = this
 
-  vm.devices = []
+  $scope.devices = []
+  $scope.nodes = []
+  vm.deviceTypes = DeviceTypes
 
-  Device.group {}, (data)->
-    vm.devices = data.devices
-    vm.devices.push({name: "Без группы", id: null})
-    vm.getNodeInfo()
-
-  Node.get {
-    limit:99
-    offset: 0
-    order: 'desc'
-    query: {}
-    sortby: 'created_at'
-  }, (data)->
-    vm.nodes = data.nodes
+  $scope.refreshNodes = NodeSelect2 (nodes)-> $scope.nodes = nodes
+  $scope.refreshDevices = DeviceSelect2 (devices)-> $scope.devices = devices
 
   vm.device = new Device({
     name: "New device"
     description: ""
     device: null
     node_id: null
-    baud: null
-    tty: null
-    stop_bite: "2"
-    timeout: null
-    address: null
     status: "enabled"
+    type: "modbus"
+    properties:
+      baud: 9600
+      timeout: 1000
+      stop_bits: 2
   })
 
   vm.submit =->
@@ -40,16 +32,8 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
-    vm.device.stop_bite = parseInt(vm.device.stop_bite, 10)
-
     if vm.device?.device?.id != null
-      vm.device.stop_bite = null
-      vm.device.node_id = null
-      vm.device.baud = null
-      vm.device.tty = ""
-      vm.device.timeout = null
-    else
-      vm.device.device = null
+      vm.device.properties = {}
 
     vm.device.$create(success, error)
 
@@ -59,6 +43,9 @@ angular
 
     Node.show {id: vm.device.device.node.id}, (node)->
       vm.device.device.node = node
+
+
+  vm.changeDeviceType =->
 
   vm
 ]

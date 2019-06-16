@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'flow.show_form' | translate}} "{{flow.name}}"
-      .edit-icon-link
+      .edit-icon-link(if-can="{flow:['update']}")
         %a(ui-sref="dashboard.flow.edit({id:flow.id})")
           %span.fa.fa-pencil
 
@@ -14,7 +14,7 @@
         %small
           {{'Created at' | translate}} {{flow.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{flow.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{flow.updated_at | readableDateTime}}
 
 .row
   .col-md-2
@@ -35,7 +35,7 @@
     .form-group
       .text-muted
         {{'flow.workers' | translate}}
-      %div{ng-if="!flow.workers.length"}
+      %div(ng-if="!flow.workers.length")
         {{'No data' | translate}}
       %div
         .form-group(ng-repeat="worker in flow.workers")

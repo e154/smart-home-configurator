@@ -7,7 +7,7 @@ angular
   $scope.password = ''
   $scope.error = null
 
-  $scope.signin =->
+  $scope.submit =->
     return if $scope.email == '' || $scope.password == ''
 
     success =()->

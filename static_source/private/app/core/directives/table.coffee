@@ -313,7 +313,7 @@ angular
         field: "=field"
       link: ($scope, $element, attrs) ->
         if $scope.button?.template
-          console.log $scope.button.template
+#          console.log $scope.button.template
           $element.html($compile($scope.button.template)($scope))
 
   ]

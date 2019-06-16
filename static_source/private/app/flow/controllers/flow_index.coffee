@@ -38,8 +38,8 @@ angular
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
-        name: 'flow.update_at'
-        field: 'update_at'
+        name: 'flow.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {

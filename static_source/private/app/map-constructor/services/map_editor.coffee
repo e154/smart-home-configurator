@@ -1,7 +1,9 @@
 angular
 .module('angular-map')
-.factory 'mapEditor', ['$rootScope', '$compile', 'mapFullscreen', 'mapPanning', '$templateCache', 'MapLayer', 'storage', '$timeout', 'MapLayerResource'
-  ($rootScope, $compile, mapFullscreen, mapPanning, $templateCache, MapLayer, storage, $timeout, MapLayerResource) ->
+.factory 'mapEditor', ['$rootScope', '$compile', 'mapFullscreen', 'mapPanning', '$templateCache', 'MapLayer', 'storage'
+'$timeout', 'MapLayerResource', '$filter'
+  ($rootScope, $compile, mapFullscreen, mapPanning, $templateCache, MapLayer, storage, $timeout, MapLayerResource
+  $filter) ->
     class mapEditor
 
       constructor: ()->
@@ -20,7 +22,8 @@ angular
         @scope.addNewDevice = @addNewDevice
         @scope.addNewScript = @addNewScript
         @scope.preview = @preview
-        @scope.current_element = {}
+        @scope.current_element = null
+        @scope.valid = @valid
 
         @map_editor = new storage('map-editor')
 
@@ -154,13 +157,22 @@ angular
 
       sortLayers: ()=>
         weight = 0
-        for layer in @layers
-          layer.weight = weight
-          weight++
-        success =(data)->
+        layers = @layers.map (layer) ->
+          return {
+            id:layer.id,
+            weight: weight++
+          }
+
+        success =(data)=>
+          weight = 0
+          for layer in @layers
+            layer.weight = weight
+            weight++
+          @layers = $filter('orderBy')(@layers, '-weight', true)
+
         error =(result)->
           Message result.data.status, result.data.message
-        MapLayerResource.sort @layers, success, error
+        MapLayerResource.sort layers, success, error
 
       addNewImage: ()=>
         return if !@scope.current_layer
@@ -180,6 +192,10 @@ angular
 
       preview: ()=>
         console.log 'preview'
+
+      valid: ()=>
+        return if !@scope.current_element || @scope.current_element == {}
+        @scope.current_element.valid()
 
       keyboard: ()=>
         angular.forEach @scope.settings.keyboard, (button, key_id)=>

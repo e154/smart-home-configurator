@@ -62,6 +62,6 @@
       %label {{'flow.element.description' | translate}}
       %textarea.form-control(ng-model="element.data.description" rows="2" )
 
-    .form-group
+    .form-group(if-can="{flow:['delete']}")
       %a.btn.btn-default.full-width.cropping(ng-click="removeElement(element, $index)" href="#")
         {{'flow.element.remove' | translate}}

@@ -62,5 +62,5 @@
     .pull-right
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.notifr.index")
         {{'Cancel' | translate}}
-      %button.btn.btn-default(ng-click="send()")
+      %button.btn.btn-default(ng-click="send()" if-can="{notifr:['create_notify']}")
         {{'notifr.send' | translate}}

@@ -1,8 +1,8 @@
 angular
 .module('angular-map')
 .factory 'mapConstructor', ['$rootScope', '$compile', 'MapResource', 'Message', 'Notify', 'mapEditor'
-'MapLayer', '$translate'
-  ($rootScope, $compile, MapResource, Message, Notify, mapEditor, MapLayer, $translate) ->
+'MapLayer', '$translate', 'mapSettings'
+  ($rootScope, $compile, MapResource, Message, Notify, mapEditor, MapLayer, $translate, mapSettings) ->
     class mapConstructor extends mapEditor
 
       id: null
@@ -82,8 +82,8 @@ angular
         @name = model.name
         @description = model.description
         @created_at = model.created_at
-        @update_at = model.update_at
-        @options = model.options
+        @updated_at = model.updated_at
+        @options = angular.extend({}, mapSettings.default, model.options)
         @layers = []
 
         if model?.layers && model.layers.length != 0

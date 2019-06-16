@@ -17,7 +17,7 @@ angular
     serialize: ()->
       return null if !@image
       id: @id if @id
-      image: @image
+      image_id: @image.id
       style: @style
 
     deserialize: (m)->
@@ -26,5 +26,8 @@ angular
       @style = m.style if m.style
 
       @
+
+    valid: ->
+      @image != null
 
   MapImage

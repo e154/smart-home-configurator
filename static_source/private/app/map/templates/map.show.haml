@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'map.show_form' | translate}} "{{map.name}}"
-      .edit-icon-link
+      .edit-icon-link(if-can="{map: ['update_map']}")
         %a(ui-sref="dashboard.map.edit.main({id:map.id})")
           %span.fa.fa-pencil
 
@@ -14,7 +14,7 @@
         %small
           {{'Created at' | translate}} {{map.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{map.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{map.updated_at | readableDateTime}}
 
 .row
   .col-lg-12

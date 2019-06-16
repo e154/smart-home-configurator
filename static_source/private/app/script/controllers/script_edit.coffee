@@ -35,16 +35,30 @@ angular
         $scope.ace_options.mode = 'javascript'
       when 'coffeescript'
         $scope.ace_options.mode = 'coffee'
-      when 'lua'
-        $scope.ace_options.mode = 'lua'
+      when 'ts'
+        $scope.ace_options.mode = 'typescript'
 
   vm.exec =->
     success =(data)->
+      if !data.result
+        return
+      vm.script.result = data.result.replace(/(\\n)/g, '<br>')
 
     error =(result)->
       Message result.data.status, result.data.message
 
-    vm.script.$exec success, error
+    Script.exec vm.script, success, error
+
+  vm.exec_src =->
+    success =(data)->
+      if !data.result
+        return
+      vm.script.result = data.result.replace(/(\\n)/g, '<br>')
+
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    Script.exec_src vm.script, success, error
 
   vm
 ]

@@ -1,0 +1,28 @@
+%div
+  .widget-header
+    %i.fa.fa-dot-circle-o.status-icon
+    .title
+      %strong(translate="widget.name.{{widget.name}}")
+    .widget-header-btns
+      %a(title="settings" ng-click="openSettings()" href="#" )
+        %i.fa.fa-cog
+      %a(title="remove widget" ng-click="removeWidget()" href="#" )
+        %i.fa.fa-trash
+    .clearfix
+
+  .widget-container
+    .widget-contaner-inline
+      .form-group(ng-repeat="(name, folder) in disk")
+        .row
+          .col-md-6
+            .label {{folder.path}}
+
+          .col-md-6
+            .label
+            .counter.right
+              {{folder.total/1024 | readableBytes}}
+
+        .progress
+          .progress-bar(role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': folder.usedPercent + '%' }")
+            %span.lg-only(ng-class="{'danger' : folder.usedPercent >= 90}")
+              {{floor(folder.usedPercent)}}%

@@ -11,7 +11,7 @@ angular
     loadFailureHandler: 'LocaleErrorHandler'
   })
 
-  current_lang = window.app_settings.language || 'en'
+  current_lang = app.language || 'en'
   $translateProvider.useSanitizeValueStrategy null
   $translateProvider.preferredLanguage current_lang
 
@@ -51,9 +51,9 @@ angular
 
 #    http://stackoverflow.com/questions/24764764/conditionally-set-angulars-ng-class-based-on-state
   $rootScope.$state = $state
-  $rootScope.server_url = window.app_settings.server_url
 
-  $http.defaults.headers.common['access_token'] = window.app_settings.access_token
+  if app.access_token
+    $http.defaults.headers.common['access_token'] = app.access_token
 
   #
   # themes:
@@ -65,7 +65,11 @@ angular
     mode:'coffee'
     theme:'dawn'
     advanced:{}
-    workerPath:'/static/js/ace-builds/src-noconflict'
+    workerPath: '/static/js/ace-builds/src-noconflict'
+    modePath: '/static/js/ace-builds/src-noconflict'
+    themePath: '/static/js/ace-builds/src-noconflict'
+    basePath: '/static/js/ace-builds/src-noconflict'
+    packaged: true
 
   return
 ]

@@ -6,27 +6,40 @@
         %strong
           {{'script.editor.file_list' | translate}}
           &nbsp;
-          %small
+          %small(if-can="{script:['create']}" ng-show="used_scripts && isArray || !isArray && !current_script" )
             %a(ng-click="dialog('add')" href="#")
               .fa.fa-plus
-        .file-action-icons(ng-if="used_scripts.length && current_script")
-          %a(href="#" ng-click="edit($event)")
+        .file-action-icons(ng-if="current_script")
+          %a(href="#" ng-click="edit($event)" if-can="{script:['update']}")
             .fa.fa-pencil
-          %a(href="#" ng-click="remove_from_filelist($event)")
+          %a(href="#" ng-click="remove_from_filelist($event)" if-can="{script:['delete']}")
             .fa.fa-trash
         .clearfix
-      .form-group
-        %div(ng-if="!used_scripts.length")
-          {{'empty list' | translate}}
+      .form-group(ng-if="isArray")
         .file(ng-repeat="script in used_scripts" ng-class="{'active': script.id == current_script.id}" ng-click="select(script, $event)")
-          {{script.name}}
+          {{script.name}}({{script.lang}})
+          %span(ng-if="script.modif")
+            *
+      .form-group(ng-if="!isArray && current_script")
+        {{current_script.name}}({{current_script.lang}})
+
+      .form-group(ng-if="isArray && !used_scripts.length || !isArray && !current_script")
+        {{'empty list' | translate}}
+
+      .form-group(ng-if="current_script")
+        %button.btn.btn-success.btn-xs.full-width(ng-click="exec_src()")
+          {{'script.execute' | translate}}
+
+      .form-group(ng-if="script_changed")
+        %button.btn.btn-primary.btn-xs.full-width(ng-click="save()" if-can="{script:['create', 'update']}" ng-disabled="wait")
+          {{'Save all scripts' | translate}}
 
     .col-lg-9
-      .form-group
-        %strong {{'script.editor.body' | translate}}
-        .pull-right
-          %button.pull-right.btn.btn-primary.btn-xs.full-width(ng-click="updateScript()" ng-if="current_script")
-            {{'Save' | translate}}
+      .form-group(ng-show="result && result != ''")
+        .console
+          %pre(ng-bind-html="result")
+          %a.close(href="#" ng-click="result = ''" )
+            x
 
       .form-group
         .ace-editor.form-control(ng-model="current_script.source" ui-ace="ace_options")

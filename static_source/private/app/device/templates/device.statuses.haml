@@ -1,4 +1,4 @@
-.row
+.row(if-can="{device_state:['create']}")
   .col-md-6
     .row
       .col-md-12
@@ -7,9 +7,9 @@
             .fa.fa-plus &nbsp;
             {{'device.status.add' | translate}}
 
-.row
+.row(if-can="{device_state:['read']}")
   .col-md-12
-    .row(ng-repeat="_state in status.statuses" )
+    .row(ng-repeat="_state in device.states" )
       .col-md-3
         .form-group
           %label {{'device.status.system_name' | translate}}*
@@ -22,9 +22,9 @@
         .form-group
           %label {{'device.status.action' | translate}}
           .input-group-btn
-            %button.btn.btn-default(ng-click="status.remove(_state)")
+            %button.btn.btn-default(ng-click="status.remove(_state)" if-can="{device_state:['delete']}")
               {{'Delete' | translate}}
-            %button.btn.btn-default(ng-click="status.update(_state)" ng-if="_state.id")
+            %button.btn.btn-default(ng-click="status.update(_state)" ng-show="_state.id" if-can="{device_state:['update']}")
               {{'Update' | translate}}
-            %button.btn.btn-default(ng-click="status.create(_state)" ng-if="!_state.id")
+            %button.btn.btn-default(ng-click="status.create(_state)" ng-show="!_state.id" if-can="{device_state:['create']}")
               {{'Create' | translate}}

@@ -23,7 +23,7 @@ angular
       status: 'enabled'
       selected: false
       created_at: null
-      update_at: null
+      updated_at: null
       weight: 0
       graph_settings:
         width: null
@@ -56,22 +56,22 @@ angular
         prototype = @prototype?.serialize() || null
         name: @name
         id: @id if @id
-        map: {id: @map_id} if @map_id
-        layer: {id: @layer_id} if @layer_id
+        map_id: @map_id if @map_id
+        layer_id: @layer_id if @layer_id
         status: @status
         description: @description
         created_at: @created_at if @created_at
-        update_at: @update_at if @update_at
+        updated_at: @updated_at if @updated_at
         weight: @weight
         prototype_type: @prototype_type
         prototype_id: @prototype_id if @prototype_id
-        graph_settings: angular.toJson(@graph_settings)
+        graph_settings: @graph_settings
         prototype: prototype if prototype
 
       deserialize: (element)->
         @id = element.id || null
-        @map_id = element.map.id if element.map?.id
-        @layer_id = element.layer.id if element.layer?.id
+        @map_id = element.map_id if element.map_id
+        @layer_id = element.layer_id if element.layer_id
         @name = element.name || ''
         @description = element.description || ''
         @status = element.status || ''
@@ -79,8 +79,8 @@ angular
         @prototype_id = element.prototype_id if element.prototype_id
         @weight = element.weight || 0
         @created_at = element.created_at || ''
-        @update_at = element.update_at || ''
-        @graph_settings = angular.fromJson(element.graph_settings) if element.graph_settings
+        @updated_at = element.updated_at || ''
+        @graph_settings = element.graph_settings
 
         if element.prototype
           @get_prototype(element.prototype)
@@ -151,6 +151,10 @@ angular
         @name = "#{@name} (copy)" if @name.indexOf('(copy)') == -1
 
         @
+
+      valid: ()->
+        return false if !@prototype
+        @prototype.valid()
 
     MapElement
 ]

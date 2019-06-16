@@ -11,7 +11,7 @@
         %small
           {{'Created at' | translate}} {{user.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{user.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{user.updated_at | readableDateTime}}
 
 .row
   .col-md-6
@@ -20,9 +20,9 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{user:['delete']}")
         {{'Delete' | translate}}
-      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index")
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.user.index" if-can="{user:['update']}")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="update()")
+      %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{user:['update']}")
         {{'Update' | translate}}

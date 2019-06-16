@@ -2,7 +2,7 @@
   .col-md-12
     %h3 {{'node.index_form' | translate}}
 
-.row
+.row(if-can="{node:['create']}")
   .col-md-12
     .form-group
       %a(ui-sref="dashboard.node.new")
@@ -10,6 +10,6 @@
         &nbsp;
         {{'Add new' | translate}}
 
-.row
+.row(if-can="{node:['read']}")
   .col-md-12
     .table(table="node.options")

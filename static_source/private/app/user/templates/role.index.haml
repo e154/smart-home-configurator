@@ -2,7 +2,7 @@
   .col-md-12
     %h3 {{'role.index_form' | translate}}
 
-.row
+.row(if-can="{user:['create_role']}")
   .col-md-12
     .form-group
       %a(ui-sref="dashboard.role.new" )
@@ -10,6 +10,6 @@
         &nbsp;
         {{'role.add_new' | translate}}
 
-.row
+.row(if-can="{user:['read_role']}")
   .col-md-12
     .table.users(table="options")

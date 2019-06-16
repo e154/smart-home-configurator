@@ -56,7 +56,11 @@
   "archive": "Архив",
   "upload file": "Добавить файлы",
   "select": "Выбрать",
-  "empty list": "Список пока пуст",
+  "empty list": "Список пуст",
+  "No scripts": "Список пуст",
+  "No actions": "Список пуст",
+  "No states": "Список пуст",
+  "Without group": "Без группы",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
@@ -68,10 +72,14 @@
     "ip": "Адрес",
     "port": "Порт",
     "created_at": "Дата создания",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "enabled": "Включен",
     "disabled": "Выключен",
     "status": "Состояние",
+    "login": "Login",
+    "password": "Пароль",
+    "password_repeat": "Пароль повторно",
+    "set_password": "Укажите пароль в обоих полях.",
     "state": {
       "disconnected": "Отключено",
       "connected": "Подключено",
@@ -89,6 +97,10 @@
     "show_form": "Устройтво",
     "index_form": "Список устройств",
     "baud": "Скорость порта (19200)",
+    "slave_id": "Адрес на шине",
+    "data_bits": "data биты",
+    "stop_bits": "стоп биты",
+    "parity": "четность",
     "address": "Адрес (если пустой, то это группа)",
     "group": "Группа",
     "tty": "/dev/tty...",
@@ -100,13 +112,16 @@
     "node": "Узел",
     "timeout": "timeout",
     "created_at": "Дата создания",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "actions": "Действия",
     "statuses": "Состояния",
     "yes": "Да",
     "no": "Нет",
     "is_group": "Это группа?",
     "script": "Скрипт",
+    "type": "Тип",
+    "parent": "Родитель",
+    "no_params": "Нет параметров",
     "action": {
       "add": "Добавить действие",
       "name": "Название действия",
@@ -150,7 +165,7 @@
     "enabled": "Включен",
     "disabled": "Выключен",
     "created_at": "Дата создания",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "package_name": "Действия над корневыми БП",
     "index_form": "Список БП",
     "show_form": "БП",
@@ -177,7 +192,7 @@
     "enabled": "Включен",
     "disabled": "Выключен",
     "created_at": "Дата создания",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "workflow": "Рабочая группа",
     "remove_worker": "Удалить воркер",
     "do_worker": "Выполнить один раз",
@@ -224,7 +239,7 @@
     "source": "Исходный код",
     "lang": "Язык программирования",
     "created_at": "Дата создания",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "execute": "Выполнить",
     "show_form": "Скрипт",
     "edit_form": "Редактирование скрипта",
@@ -297,9 +312,11 @@
     "settings": "Настройки",
     "main_window": "Основное окно",
     "callback": "Event callbacks",
-    "update_at": "Дата обновления",
+    "updated_at": "Дата обновления",
     "file_manager": "Каталог файлов",
     "add_layer": "Добавите слой",
+    "element_state_text": "Показывать текст состояния элемента",
+    "element_option_text": "Показывать опциональный текст элемента",
     "layer": {
       "name": "Название",
       "status": "Состояние",
@@ -354,7 +371,8 @@
       "cpu": "Процессор",
       "nodes": "Ноды",
       "devices": "Устройства",
-      "uptime": "uptime"
+      "uptime": "Время работы",
+      "disk": "Диск"
     },
     "memory": {
       "total": "Всего",
@@ -382,7 +400,6 @@
       "online": "В сети",
       "disabled": "Отключены"
     }
-
   },
   "uptime": {
     "days": "дней",
@@ -404,14 +421,15 @@
     "edit_form": "Редактирование пользователя",
     "nickname": "Ник",
     "add_new": "Добавить пользователя",
-    "avatar": "Фото",
+    "image": "Фото",
     "status": "Статус",
     "active": "Активный",
     "blocked": "Заблокирован",
     "autograph": "Подпись",
     "phone1": "Телефон1",
     "phone2": "Телефон2",
-    "phone3": "Телефон3",
+    "telegram": "Telegram",
+    "slack": "Slack",
     "role": "Роль",
     "first_name": "Имя",
     "last_name": "Фамилия",
@@ -426,7 +444,7 @@
     "current_sign_in_at": "Сейчас зашёл",
     "current_sign_in_ip": "Сейчас зашёл с ip",
     "created_at": "Создан",
-    "update_at": "Обновлён",
+    "updated_at": "Обновлён",
     "Sign in": "Авторизация",
     "menu": {
       "show": "Просмотр",
@@ -450,7 +468,7 @@
     "permissions_form": "Права доступа",
     "description": "Описание",
     "created_at": "Создан",
-    "update_at": "Обновлён",
+    "updated_at": "Обновлён",
     "parent": "Родитель",
     "children": "Дочерние роли",
     "name": "Название",
@@ -530,5 +548,8 @@
   },
   "auth": {
     "package_name": "Авторизация"
+  },
+  "scenarios": {
+    "package_name": "Сценарии"
   }
 }

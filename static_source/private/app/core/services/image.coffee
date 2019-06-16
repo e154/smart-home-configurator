@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'ImageResource', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/image/:id', {id: '@id'},
+  $resource '/api/v1/image/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -22,9 +22,10 @@ angular
       method: 'DELETE'
 
     all:
+      url: '/api/v1/images'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.images || []
+        items: data?.items || []
 ]

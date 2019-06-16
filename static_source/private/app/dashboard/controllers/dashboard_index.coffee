@@ -22,11 +22,12 @@ angular
   $scope.dashboard = {}
   $scope.current_widget = null
   $scope.dashboard.widgets = [
-    {id: 1, col: 0, row: 0, sizeY: 1, sizeX: 1, name: 'swap', type: 'swap' }
-    {id: 2, col: 1, row: 0, sizeY: 1, sizeX: 2, name: 'memory', type: 'memory' }
-    {id: 3, col: 3, row: 0, sizeY: 1, sizeX: 1, name: 'cpu', type: 'cpu_dig' }
-    {id: 4, col: 0, row: 1, sizeY: 1, sizeX: 1, name: 'nodes', type: 'nodes' }
-    {id: 5, col: 1, row: 1, sizeY: 1, sizeX: 1, name: 'devices', type: 'devices' }
+    {id: 1, col: 0, row: 0, sizeY: 1, sizeX: 2, name: 'swap', type: 'swap' }
+    {id: 2, col: 2, row: 0, sizeY: 1, sizeX: 2, name: 'memory', type: 'memory' }
+    {id: 3, col: 0, row: 1, sizeY: 1, sizeX: 1, name: 'cpu', type: 'cpu_dig' }
+    {id: 4, col: 1, row: 1, sizeY: 1, sizeX: 1, name: 'nodes', type: 'nodes' }
+    {id: 5, col: 2, row: 1, sizeY: 1, sizeX: 1, name: 'devices', type: 'devices' }
+    {id: 6, col: 3, row: 1, sizeY: 1, sizeX: 1, name: 'disk', type: 'disk' }
   ]
 
   #TODO remove hard code
@@ -40,20 +41,21 @@ angular
   # stream
   # --------------------
   $timeout ()->
-    Stream.sendRequest("get.telemetry", {}).then (data)->
-      return if !data.telemetry
-      broadcastDeviceState(data.telemetry)
+    Stream.sendRequest("dashboard.get.telemetry", {}).then (data)->
+      return if !data['dashboard.telemetry']
+      broadcastDeviceState(data['dashboard.telemetry'])
   , 1000
 
-  Stream.subscribe 'telemetry', (data)->
+  Stream.subscribe 'dashboard.telemetry', (data)->
     $scope.total_uptime = data.uptime.total if data.uptime?.total
+    $scope.$apply()
     broadcastDeviceState(data)
 
   broadcastDeviceState =(data)->
     $scope.$broadcast 'telemetry_update', data
 
   $scope.$on '$stateChangeSuccess', ()->
-    Stream.unsubscribe 'telemetry'
+    Stream.unsubscribe 'dashboard.telemetry'
 
   # crud
   # --------------------

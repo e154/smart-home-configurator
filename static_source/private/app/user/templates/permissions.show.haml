@@ -9,7 +9,7 @@
         %small
           {{'Created at' | translate}} {{role.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{role.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{role.updated_at | readableDateTime}}
 
 .row
   .col-md-12
@@ -21,6 +21,15 @@
           {{'permission.warning_message' | translate}}
 
 .row
+  .col-md-6
+    .form-group.clearfix
+      .pull-right
+        %a.btn.btn-default(href="" role="button" ng-click="cancel()" if-can="{user:['update_role_access_list']}")
+          {{'Cancel' | translate}}
+        %a.btn.btn-danger(href="" role="button" ng-click="update()" if-can="{user:['update_role_access_list']}")
+          {{'Update' | translate}}
+
+.row(if-can="{user:['read_role_access_list']}")
   .col-md-6
     .form-group
       .panel.panel-danger(ng-repeat="(pack_name, pack) in access_list")
@@ -44,7 +53,7 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-default(href="" role="button" ng-click="cancel()")
+      %a.btn.btn-default(href="" role="button" ng-click="cancel()" if-can="{user:['update_role_access_list']}")
         {{'Cancel' | translate}}
-      %a.btn.btn-danger(href="" role="button" ng-click="update()")
+      %a.btn.btn-danger(href="" role="button" ng-click="update()" if-can="{user:['update_role_access_list']}")
         {{'Update' | translate}}

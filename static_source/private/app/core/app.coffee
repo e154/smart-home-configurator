@@ -24,7 +24,6 @@ app = angular.module('app', [
   'angular-bpmn'
   'ui.select'
   'ngSanitize'
-  'ui.ace'
   'ngDialog'
   'ui.bootstrap.pagination'
   'pikaday'
@@ -36,6 +35,12 @@ app = angular.module('app', [
   'gridster'
   'passwordCheck'
   'http-auth-interceptor'
+  'base64'
 ])
 
 app.version = window.app_settings.info
+app.access_token = window.app_settings.access_token
+app.current_user = window.app_settings.current_user
+app.debug = window.app_settings.debug
+app.language = window.app_settings.language
+app.server_url = window.app_settings.server_url

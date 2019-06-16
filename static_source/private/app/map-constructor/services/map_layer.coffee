@@ -14,7 +14,7 @@ angular
       status: 'enabled'
       elements: null
       created_at: null
-      update_at: null
+      updated_at: null
       weight: 0
 
       constructor: (@scope)->
@@ -31,7 +31,7 @@ angular
         status: @status
         description: @description
         created_at: @created_at if @created_at
-        update_at: @update_at if @update_at
+        updated_at: @updated_at if @updated_at
         elements: elements if elements.length
         weight: @weight
 
@@ -42,7 +42,7 @@ angular
         @description = layer.description || ''
         @status = layer.status || ''
         @created_at = layer.created_at || ''
-        @update_at = layer.update_at || ''
+        @updated_at = layer.updated_at || ''
         @weight = layer.weight || 0
 
         angular.forEach layer.elements, (element)=>

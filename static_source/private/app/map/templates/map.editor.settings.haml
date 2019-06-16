@@ -8,7 +8,7 @@
   .col-md-6
     .form-group
       %label {{'map.description' | translate}}
-      %textarea.form-control(ng-model="map.description" rows="10" )
+      %textarea.form-control(ng-model="map.description" rows="5" )
 
 .row
   .col-md-6
@@ -18,8 +18,24 @@
 
 .row
   .col-md-6
+    .form-group
+      .checkbox
+        %label
+          %input(ng-model="map.options.element_state_text" type="checkbox" )
+          {{'map.element_state_text' | translate}}
+
+.row
+  .col-md-6
+    .form-group
+      .checkbox
+        %label
+          %input(ng-model="map.options.element_option_text" type="checkbox" )
+          {{'map.element_option_text' | translate}}
+
+.row
+  .col-md-6
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{map: ['delete_map']}")
         {{'Delete' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="update()")
+      %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{map: ['update_map']}")
         {{'Update' | translate}}

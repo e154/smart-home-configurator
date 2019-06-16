@@ -6,7 +6,7 @@
         %small
           {{'Created at' | translate}} {{notify.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{notify.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{notify.updated_at | readableDateTime}}
 
 .row
   .col-md-12
@@ -38,5 +38,5 @@
 .row
   .col-md-12
     .pull-right
-      %button.btn.btn-default(ng-click="remove()")
+      %button.btn.btn-default(ng-click="remove()" if-can="{notifr:['delete_notify']}")
         {{'Delete' | translate}}

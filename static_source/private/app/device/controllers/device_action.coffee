@@ -4,41 +4,49 @@ angular
 '$http', 'ngDialog', 'Stream', '$translate'
 ($scope, Notify, DeviceAction, Message, $stateParams, Device, $http, ngDialog, Stream, $translate) ->
   vm = this
-  vm.actions = []
   vm.current ={}
   vm.last_current =null
+  vm.state = 'show' #show|add|edit|script_editor
 
+  deviceId = parseInt($stateParams.id, 10)
   vm.addNew =->
+    vm.state = 'add'
     vm.getDefaultAction()
 
   vm.show =(action)->
     vm.last_current = angular.copy action
     vm.current = new DeviceAction(action)
 
+  $scope.$watch 'vm.current.script', (nv, ov) ->
+    return if nv == ov
+
   vm.getDeviceActions =->
-    Device.actions {id: $stateParams.id}, (actions)->
-      vm.actions = actions
+    DeviceAction.get_by_device {id: deviceId}, (actions)->
+      $scope.device.actions = actions
+      if actions.length == 0
+        vm.state = 'edit'
+      return
 
   vm.getDefaultAction =->
     vm.current = new DeviceAction({
         name: "New action"
-        command: "03000005"
         script: null
         description: "action description"
         device:
-          id: parseInt($stateParams.id, 10)
+          id: deviceId
       })
 
   vm.submit =->
     success =(result)->
       Notify 'success', 'Action successfully updated', 3
-
+      vm.state = 'show'
       vm.getDeviceActions()
       vm.getDefaultAction()
 
     error =(result)->
       Message result.data.status, result.data.message
 
+    vm.current.device = {id: deviceId}
     if !vm.current.id
       vm.current.$create(success, error)
     else
@@ -47,9 +55,12 @@ angular
   vm.cancel =->
     return if !vm.last_current
     vm.current = new DeviceAction(vm.last_current)
+    vm.state = 'show'
+    return
 
   vm.remove =->
     success =->
+      vm.state = 'show'
       vm.getDeviceActions()
       vm.getDefaultAction()
 
@@ -66,7 +77,7 @@ angular
   $scope.refreshScripts = (query)->
     $http(
       method: 'GET'
-      url: window.app_settings.server_url + "/api/v1/script/search"
+      url: "/api/v1/scripts/search"
       params:
         query: query
         limit: 5
@@ -102,6 +113,10 @@ angular
       className: 'ngdialog-theme-default ngdialog-scripts-edit'
       controller: 'scriptModalNewCtrl'
       controllerAs: 'script'
+      preCloseCallback: ()=>
+        vm.getDeviceActions()
+        vm.getDefaultAction()
+        return
 
   vm.editScript =(script, e)->
     e.preventDefault()
@@ -124,7 +139,7 @@ angular
     e.stopPropagation()
     return if !action.id
 
-    Stream.sendRequest("do.action", {action_id: action.id, device_id: parseInt($stateParams.id, 10)}).then (result)->
+    Stream.sendRequest("do.action", {action_id: action.id, device_id: deviceId}).then (result)->
       if !result.error
         Notify 'success', "Command executed successfully", 3
       else

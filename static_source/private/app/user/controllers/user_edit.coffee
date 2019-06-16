@@ -14,11 +14,11 @@ angular
       value: ''
     }
     {
-      key: 'phone3'
+      key: 'telegram'
       value: ''
     }
     {
-      key: 'autograph'
+      key: 'slack'
       value: ''
     }
   ]
@@ -27,14 +27,14 @@ angular
 
   show =->
     success =(user)->
-      if user.meta.length == 0
+      if user.meta == null || user.meta.length == 0
         $scope.user.meta = meta
     error =->
       $state.go 'dashboard.user.index'
     $scope.user.$show success, error
 
   $scope.removeAvatar =->
-    $scope.user.avatar = null
+    $scope.user.image = null
 
   $scope.update =->
     success =->

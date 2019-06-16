@@ -34,21 +34,18 @@ angular
     # stream
     # --------------------
     $timeout ()->
-      Stream.sendRequest("get.devices.states", {}).then (data)->
+      Stream.sendRequest("map.get.devices.states", {}).then (data)->
         return if !data.states
-        broadcastDeviceState(data.states)
+        broadcastDeviceState(data.states.device_stats)
     , 1000
 
-    Stream.subscribe 'telemetry', (data)->
+    Stream.subscribe 'map.telemetry', (data)->
       return if !data.device
-      state = {}
-      state[data.device.id] = data.device.state
-      broadcastDeviceState(state)
+      broadcastDeviceState([data.device])
 
     broadcastDeviceState =(states)->
       angular.forEach states, (state, id)->
-        id = parseInt(id, 10) if typeof id == 'string'
-        $scope.$broadcast 'broadcast_device_state', {id: id, state: state}
+        $scope.$broadcast 'broadcast_device_state', state
 
     # etc
     # --------------------
@@ -65,9 +62,9 @@ angular
       $scope.zoom = $scope.map.options?.zoom || 1.2
       panning.setZoom($scope.zoom)
       return if !$scope.map.layers
-      angular.forEach $scope.map.layers, (layer)->
-        angular.forEach layer.elements, (element)->
-          element.graph_settings = angular.fromJson(element.graph_settings)
+#      angular.forEach $scope.map.layers, (layer)->
+#        angular.forEach layer.elements, (element)->
+#          element.graph_settings = angular.fromJson(element.graph_settings)
 
     #init
     getOptions()

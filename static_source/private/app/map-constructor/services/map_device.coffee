@@ -46,11 +46,16 @@ angular
         DeviceState.get_by_device {id: device.device?.id || device.id}, success, error
 
       # get devices (select2)
-      refreshDevices: DeviceSelect2 (devices)=>
-        angular.forEach devices, (device, index)->
-          if !device.device_id? && !device.address?
-            devices.splice(index, 1)
-        @devices = devices
+      refreshDevices: (args)=>
+        _this = @
+
+        DeviceSelect2((devices)=>
+          angular.forEach devices, (device, index)->
+            #if !device.device_id? && !device.address?
+            #  devices.splice(index, 1)
+            _this.devices = devices
+        )(args)
+
 
       serialize: ()->
         return if !@device
@@ -70,6 +75,7 @@ angular
         {
           id: @id if @id
           device: {id: @device.id} if @device
+          device_id: @device.id if @device
           states: states
           actions: actions
           image: @image
@@ -107,6 +113,9 @@ angular
       remove: ()->
       update: (cb)->
         @upload(cb)
+
+      valid: =>
+        @device != null
 
     MapDevice
 ]

@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'role.show_form' | translate}} - {{role.name}}
-      .edit-icon-link
+      .edit-icon-link(if-can="{user:['update_role']}")
         %a(ui-sref="dashboard.role.edit({name:role.name})")
           %span.fa.fa-pencil
         &nbsp;
@@ -17,14 +17,14 @@
         %small
           {{'Created at' | translate}} {{role.created_at | readableDateTime}}
         %small
-          {{'Updated at' | translate}} {{role.update_at | readableDateTime}}
+          {{'Updated at' | translate}} {{role.updated_at | readableDateTime}}
 
 .row
   .col-md-2
     .form-group
       .text-muted {{'role.name' | translate}}
       %div {{::role.name}}
-    .form-group
+    .form-group(ng-if="role.description != ''")
       .text-muted {{'role.description' | translate}}
       %div {{::role.description}}
     .form-group(ng-if="role.parent")

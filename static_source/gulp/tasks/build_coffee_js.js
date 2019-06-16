@@ -22,9 +22,9 @@ for (var key in conf) {
             return gulp.src(source)
                 .pipe(coffee({bare: true})
                     .on('error', done))     // Compile coffeescript
-                //.pipe(ngconcat(conf.filename))
+                // .pipe(ngconcat(filename))
                 .pipe(concat(filename))
-                //.pipe(uglify())
+                .pipe(uglify())
                 //.pipe(ngClassify())
                 .pipe(replace('__CURRENT_TIME__', date))
                 .pipe(gulp.dest(dest));

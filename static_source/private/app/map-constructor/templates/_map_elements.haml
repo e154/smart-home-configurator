@@ -1,16 +1,16 @@
-.panel.panel-default.map-elements-editor
+.panel.panel-default.map-elements-editor(if-can="{map:['create_map_element', 'read_map_element', 'update_map_element']}")
   .panel-body
-    .form-group
+    .form-group(if-can="{map:['create_map_element', 'update_map_element']}")
       %a(href="#" ng-click="addElement()")
         .fa.fa-plus
         &nbsp;
         {{'map.add_element' | translate}}
 
-    .form-group
+    .form-group(if-can="{map:['read_map_element']}")
       %ul.list-group(ng-sortable="{ group: 'elements', animation: 0, handle: '.map-element-handler', onSort: current_layer.sortElements}")
         %li.list-group-item(ng-repeat="element in current_layer.elements | orderBy:'weight'" ng-click="selectElement(element, $index)" ng-class="{'selected': element.selected}")
           .map-element-header
-            %span.map-element-handler
+            %span.map-element-handler(if-can="{map:['update_map_element']}")
               ☰
             %span.map-element-subtitle
               %span
@@ -59,10 +59,10 @@
 
               .row
                 .col-md-12
-                  %a.btn.btn-default(href="" role="button" ng-click="removeElement(element)")
+                  %a.btn.btn-default(href="" role="button" ng-click="removeElement(element)" if-can="{map:['delete_map_element']}")
                     {{'Delete' | translate}}
-                  %a.btn.btn-default(href="" role="button" ng-click="updateElement(element)")
+                  %a.btn.btn-default(href="" role="button" ng-click="updateElement(element)" if-can="{map:['update_map_element']}" ng-disabled="!valid(element)")
                     {{'Update' | translate}}
-                  %a.btn.btn-default(href="#" ng-click="current_layer.copyElement(element, $event)" ng-if="element.prototype_type != 'device'")
+                  %a.btn.btn-default(href="#" ng-click="current_layer.copyElement(element, $event)" ng-show="element.prototype_type != 'device'" if-can="{map:['update_map_element']}")
                     {{'Copy' | translate}}
 

@@ -1,7 +1,7 @@
 #
 # example:
-# %script-editor(ng-model="model")
-# %div(script-editor="{}" ng-model="model")
+# %script-editor(ng-model="model" options="{}")
+# %div(script-editor ng-model="model" options="{}")
 #
 
 angular
@@ -9,7 +9,7 @@ angular
 .directive 'scriptEditor', ['Script', '$compile', (Script, $compile) ->
   restrict: 'EA'
   scope:
-    options: "=scriptEditor"
+    options: "=options"
     ngModel: "="
   templateUrl: '/core/templates/script_editor.html'
   controller: 'ScriptEditorCtrl'

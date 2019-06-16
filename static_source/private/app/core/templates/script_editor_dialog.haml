@@ -5,7 +5,7 @@
     %strong
       {{'script.package_name' | translate}}
       %span.small
-        %a(href="#" ng-click="dialog('new')" )
+        %a(href="#" ng-click="dialog('new')" if-can="{script:['create']}")
           {{'script.add_new' | translate}}
     .cross(href="#" ng-click="dialog('redactor')" )
   .dialog-body
@@ -26,14 +26,14 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
-    %button.btn.btn-default(ng-click="appendScript()") {{'Add' | translate}}
+    %button.btn.btn-default(ng-click="appendScript(); dialog('redactor')") {{'Add' | translate}}
 
 .script-editor-dialog(ng-show="state == 'new' || state == 'edit'")
   .dialog-header
     %strong
-      %span(ng-if="state == 'new'")
+      %span(ng-show="state == 'new'" if-can="{script:['create']}")
         {{'New script' | translate}}
-      %span(ng-if="state == 'edit'")
+      %span(ng-show="state == 'edit'" if-can="{script:['update']}")
         {{'script.script_edit' | translate}}
       %span.small
         %a(href="#" ng-click="dialog('add')" )
@@ -50,10 +50,10 @@
           coffee script
         %option(value="javascript")
           javascript
-        %option(value="lua")
-          lua
+        %option(value="ts")
+          typescript
     .form-group
       %label {{'script.description' | translate}}
       %input.form-control(ng-model="current_script.description")
 
-    %button.btn.btn-default(ng-click="updateScript()") {{'save' | translate}}
+    %button.btn.btn-default(ng-click="updateScript(current_script); dialog('redactor')" if-can="{script:['create', 'update']}") {{'save' | translate}}

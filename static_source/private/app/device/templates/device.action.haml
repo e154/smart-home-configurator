@@ -1,54 +1,111 @@
-.row
+.row(if-can="{device_action:['read', 'create']}")
   .col-md-6
-    .row
+    .row(if-can="{device_action:['create']}")
       .col-md-12
         .form-group
           %a(href="#" ng-click="action.addNew()")
             .fa.fa-plus &nbsp;
             {{'device.action.add' | translate}}
 
-    %div
+          &nbsp;
+          &nbsp;
+          &nbsp;
+
+          %a(href="#" ng-click="action.state='show'" ng-if="action.state!='show' && device.actions.length")
+            .fa.fa-arrow-circle-o-left &nbsp;
+            {{'Back' | translate}}
+
+    %div(ng-if="action.state == 'add' || action.state == 'edit'")
       %div(ng-include="'/device/templates/_action_form.html'" )
 
       .form-group
         .pull-right
-          %a.btn.btn-danger(href="" role="button" ng-click="action.remove()" ng-if="action.current.id")
+          %a.btn.btn-danger(href="" role="button" ng-click="action.remove()" ng-show="action.current.id" if-can="{device_action:['delete']}")
             {{'Delete' | translate}}
-          %a.btn.btn-default(href="" role="button" ng-click="action.cancel()" ng-if="action.current.id")
-            {{'Cancel' | translate}}
-          %a.btn.btn-primary(href="" role="button" ng-click="action.submit()")
-            %span(ng-if="!action.current.id")
+
+          %a.btn.btn-primary(href="" role="button" ng-click="action.submit()" if-can="{device_action:['create', 'update']}")
+            %span(ng-show="!action.current.id" if-can="{device_action:['create']}")
               {{'Create' | translate}}
-            %span(ng-if="action.current.id")
+            %span(ng-show="action.current.id" if-can="{device_action:['update']}")
               {{'Update' | translate}}
+
+          %a.btn.btn-default(href="" role="button" ng-click="action.cancel()" ng-show="action.current.id" )
+            {{'Cancel' | translate}}
         .clearfix
 
-  .col-md-6(ng-if="action.actions.length")
+  .col-md-6(ng-if="!device.actions.length && action.state == 'show'")
+    {{'No actions' | translate}}
+
+.row(ng-if="device.actions.length && action.state == 'show'")
+  .col-md-12
     .list-group
       .panel.panel-default
-        .panel-heading
+        -#.panel-heading
           {{'device.action.all' | translate}} ({{device.device.device.name || device.device.name}})
-        %a.list-group-item(href="#" ng-repeat="act in action.actions" ng-click="action.show(act)" ng-class="{'active' : action.current.id == act.id}" )
+        .list-group-item( ng-repeat="item in device.actions" )
           %strong.list-group-item-heading
-            {{act.name}}
+            {{item.name}}
           .pull-right.small
-            {{'Updated at' | translate}} {{act.update_at | readableDateTime}}
+            {{'Updated at' | translate}} {{item.updated_at | readableDateTime}}
           .clearfix
-          .pull-right(ng-if="act.script")
-            %button.btn.btn-success.btn-xs(ng-click="action.doAction(act, $event)" type="button")
+          .pull-right(ng-if="item.script")
+            %button.btn.btn-success.btn-xs(ng-click="action.doAction(item, $event)" type="button")
               .fa.fa-play
               &nbsp;
               {{'device.action.do_action' | translate}}
           .pull-left.list-group-item-text
             .small
-              {{'device.device' | translate}} {{act.device.name}}
+              {{'device.device' | translate}} {{item.device.name}}
             .small
-              {{act.description}}
-            .small(ng-if="act.script")
+              {{item.description}}
+            .small(ng-if="item.script")
               %span
-                {{act.script.name}}
+                {{item.script.name}}
               (
               %span.text-muted
-                {{act.script.lang}}
+                {{item.script.lang}}
               )
           .clearfix
+
+          .text-right
+            %a(href="#" ng-click="action.show(item); action.state='edit'" )
+              %i.fa.fa-pencil
+            &nbsp;
+            &nbsp;
+            %a(href="#" ng-click="action.show(item); action.state='script_editor'" )
+              %i.fa.fa-file-text-o
+
+%div(ng-if="action.current.id && action.state=='script_editor'")
+  .row
+    .col-lg-12
+      %h4
+        {{'device.action.script' | translate}}
+
+  .row
+    .col-lg-12.form-group
+      .pull-right
+        %button.btn.btn-success(ng-click="action.doAction(action.current, $event)" type="button")
+          .fa.fa-play
+          &nbsp;
+          {{'device.action.do_action' | translate}}
+        &nbsp;
+        &nbsp;
+        %a.btn.btn-primary(href="" role="button" ng-click="action.submit()" if-can="{device_action:['update']}")
+          {{'Update action' | translate}}
+      .clearfix
+  .row
+    .col-lg-12
+      %script-editor(ng-model="action.current.script")
+
+  .row
+    .col-lg-12.form-group
+      .pull-right
+        %button.btn.btn-success(ng-click="action.doAction(action.current, $event)" type="button")
+          .fa.fa-play
+          &nbsp;
+          {{'device.action.do_action' | translate}}
+        &nbsp;
+        &nbsp;
+        %a.btn.btn-primary(href="" role="button" ng-click="action.submit()" if-can="{device_action:['update']}")
+          {{'Update action' | translate}}
+      .clearfix

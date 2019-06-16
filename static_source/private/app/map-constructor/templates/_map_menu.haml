@@ -1,4 +1,4 @@
-.row
+.row(if-can="{map:['create_map_element', 'update_map_element']}")
   .col-md-12
     .btn.btn-primary.btn-small(href="#" ng-click="addNewImage()" data-help="{{'add new image object to selected layer' | translate}}")
       {{'map.element.prototype.image' | translate}}
@@ -9,7 +9,7 @@
     -#.btn.btn-primary.btn-small(href="#" ng-click="addNewScript()" data-help="{{'add new script object to selected layer' | translate}}")
       %strong Script
     .btn.btn-primary.btn-small(href="#" data-help="{{'image manager' | translate}}")
-      %div(file-manager="{}" )
+      %div(ng-init="filemanager = {}" file-manager="{}" ng-model="filemanager")
         {{'map.file_manager' | translate}}
 
     .btn.btn-primary.btn-small.pull-right(href="#" ng-click="preview()" data-help="{{'preview' | translate}}")

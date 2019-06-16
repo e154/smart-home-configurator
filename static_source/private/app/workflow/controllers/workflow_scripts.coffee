@@ -5,7 +5,7 @@ angular
   vm = this
 
   vm.submit =->
-    console.log $scope.workflow.workflow
+
     success =(data)->
       Notify 'success', 'Connection successfully updated', 3
     error =(result)->

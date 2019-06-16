@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'userIndexCtrl', ['$scope', 'User', '$state', '$filter', 'Notify', 'Message', '$translate'
-($scope, User, $state, $filter, Notify, Message, $translate) ->
+.controller 'userIndexCtrl', ['$scope', 'User', '$state', '$filter', 'Notify', 'Message', '$translate', 'ifCan'
+($scope, User, $state, $filter, Notify, Message, $translate, ifCan) ->
 
   tableCallback = {}
   $scope.options =
@@ -20,8 +20,8 @@ angular
       }
       {
         name: 'user.role'
-        field: 'role'
-        template: '<span>{{item[field]["name"]}}</span>'
+        field: 'role_name'
+        template: '<span>{{item[field]}}</span>'
         width: '100px'
       }
       {
@@ -41,8 +41,8 @@ angular
         width: '120px'
       }
       {
-        name: 'user.update_at'
-        field: 'update_at'
+        name: 'user.updated_at'
+        field: 'updated_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
         width: '120px'
       }
@@ -63,6 +63,9 @@ angular
             $event.preventDefault()
             $state.go('dashboard.user.edit', {id: user.id})
             false
+
+          showIf: ()->
+            ifCan.check({user: ['update']})
         }
         {
           name: $filter('translate')('user.menu.block')
@@ -73,11 +76,14 @@ angular
             $event.preventDefault()
             updateStatus(user, 'blocked')
             false
+
+          showIf: ()->
+            ifCan.check({user: ['update']})
         }
         {
           name: $filter('translate')('user.menu.unblock')
           showIf: (user)->
-            user.status == 'blocked'
+            user.status == 'blocked' && ifCan.check({user: ['update']})
 
           clickCallback: ($event, user)->
             $event.preventDefault()
@@ -87,7 +93,7 @@ angular
         {
           name: $filter('translate')('user.menu.remove')
           showIf: (user)->
-            user.status == 'blocked'
+            user.status == 'blocked' && ifCan.check({user: ['update']})
 
           clickCallback: ($event, user)->
             $event.preventDefault()

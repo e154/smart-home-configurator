@@ -9,9 +9,9 @@
 .row
   .col-md-6
     .pull-right
-      %a.btn.btn-danger(href="" role="button" ng-click="workflow.remove()")
+      %a.btn.btn-danger(href="" role="button" ng-click="workflow.remove()" if-can="{workflow:['delete']}")
         {{'Delete' | translate}}
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.workflow.show({id:workflow.workflow.id})")
         {{'Cancel' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="workflow.submit()")
+      %a.btn.btn-primary(href="" role="button" ng-click="workflow.submit()" if-can="{workflow:['update']}")
         {{'Update' | translate}}

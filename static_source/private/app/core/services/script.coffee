@@ -1,7 +1,7 @@
 angular
 .module('appServices')
 .factory 'Script', ['$resource', ($resource) ->
-  $resource window.app_settings.server_url + '/api/v1/script/:id', {id: '@id'},
+  $resource '/api/v1/script/:id', {id: '@id'},
     show:
       method: 'GET'
       responseType: 'json'
@@ -11,31 +11,31 @@ angular
     create:
       method: 'POST'
       responseType: 'json'
-      transformResponse: (data) ->
-        data?.script || data
 
     update:
-        method: 'PUT'
-        responseType: 'json'
-        transformResponse: (data) ->
-          data?.script || data
+      method: 'PUT'
+      responseType: 'json'
+      transformResponse: (data) ->
+        @
 
     delete:
       method: 'DELETE'
 
     all:
+      url: '/api/v1/scripts'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.scripts || []
+        items: data?.items || []
 
     exec:
-      url: window.app_settings.server_url + '/api/v1/script/:id/exec'
+      url: '/api/v1/script/:id/exec'
       method: 'POST'
       responseType: 'json'
-      transformResponse: (data) ->
-        script = data?.script || data
-        script.result = data?.result || ""
-        script
+
+    exec_src:
+      url: '/api/v1/script/:id/exec_src'
+      method: 'POST'
+      responseType: 'json'
 ]
