@@ -1,14 +1,14 @@
 language: go
 
 go:
-  - 1.7.x
+  - 1.9.x
 
 env:
   global:
     - UNAME="$(uname | tr '[:upper:]' '[:lower:]')"
     - secure: CnuPn9fAFmg8seA1RjCQ8C9+q8KkLIMaRfpm/1dCaBQhWPYnZZ2iuwN3ewuepl2sSVEnE/kK33vePn99BepjUGt5tEPhlivJ0s0O0Ad7uBLzSH6LiV0Y5kQehfwET4MtnsyCHLlOIm3mhoUXAki6INT8hn9V3lNVK9YHwVJmH93eXvXCd+TQZT2dZFguBBYboopXShCsu8a7PDr3cKh7+gaGwZuHq/1Uij+ZG0LE/O1rdFvayyZMN2Gf/lPHBItMXXpgkJRnyGA+hQ8XVC00N8vxD4kAupfO85DyJ8LX+QU9738g0ILKzS+modfsncoNBXdn7z0DT2JDGldDacerXW9ruvB4lzM2TgX+QaVV28CKjOJrRePEzVDyLSvNH4LCbal726y6tr0ldaEfV1jCstYvxlkOPXLSjcOYKdM65t9T2PgM7SSDE/6NitJtNb2loCGN7WPWu2mfBsW5mmRxSvGAptsy3AZqwtubGNIIl9hjlV9h/bc7sz7YQGumPTTyaXB5kdLdYCnDKvyY/U4UJfN/e8pdv/CLKLyTMx4h0MHbWVHnSDIipViK1rYqpF8yg1T42lhO347jz1oUZGMOk/yEA97JbSwoZoCUfExbN6go+hi5AnpB13QNz0UF6WUI3TBg6JwjqLl0VJ1Ic0XvQHZIHIkmcRZzZzDQO1iU3sc=
   matrix:
-    - NODE_VERSION="4.2.0"
+    - NODE_VERSION="8.4.0"
 
 services:
   - docker
@@ -22,9 +22,10 @@ before_install:
   - source ~/.nvm/nvm.sh
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
-  - npm install -g bower
-  - npm install -g gulp
-  - go get github.com/FiloSottile/gvt
+  - npm i -g npm@5.6.0
+  - npm i -g bower
+  - npm i -g gulp
+  - go get -u github.com/golang/dep/cmd/dep
   - go get github.com/mattn/goveralls
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/karalabe/xgo
@@ -38,14 +39,17 @@ script:
 
 deploy:
   provider: releases
-  api_key:
-    secure: ATrNFZsdoLkKAErnXHoFzn7caVZ71h/m9mKGKH8AUWBg82jYIPhq/zC7WibA6LOieNBb9anczP+TphlSKLN+r1clACVStez0sExMEArTtmh8WOFAuFpwmjoILofJvYbbhUXy/YLwXjAab7ovfc8Og0HEKvKRqrDBjC0qRx8RLIPzU+Sx4/RBbEi1RuPT9yymjOONe/m943M0SS9owO8lath6XBoopJI1DCE6rFjMGg5/m6ie9xY25Rpcdb3DKB1rerEACe9B1/90jRkjlQFuE7L/BLc8ZsJGlH3c+q3B3NK8xlR9a8fw+mpz1TDXJLdulYlb0Hc+xYmX8lJEhALd4EMgi+23nsf5OVvqslLtW+Vsrs6w2dF+5tuSNuljZi0P+qEw9vQHWzvIsKxp/PKW9uTGp+Py/KcA/2fPxwLolPO2iZgI/8i4K0ba4mdpYLg9cdTOgeeYiw7HYH7M72dHw1yOX8DLK9+jpDB2/alO4taXaV271B5i/OWb5MVtIpfHexejI6DWtNK2Kj2fjzu7FsTtzeL//Bi8jCjg0eOKS9Pq+ykKDoHP4xRNgFPjqsgxGoghM/bC3Qt5hkvVQ2zZrtdvf3Tit+W9K41YmW0JSmI/cDCsLiH0FRvzN0tM7olF0LkvBOFw4xluztK7A9jMnsvazs91gQGwq5diDfFiXu4=
+  api_key: $GITHUB_OAUTH_TOKEN
   file: $HOME/smart-home-configurator.tar.gz
   skip_cleanup: true
   on:
     tags: true
     branch: master
     repo: e154/smart-home-configurator
+  branches:
+    only:
+      - master
+      - /^v\d+(\.\d+)+$/
 
 notifications:
   email:
