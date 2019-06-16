@@ -5,7 +5,8 @@ Smart home configurator
 [Server](https://github.com/e154/smart-home/) |
 [Node](https://github.com/e154/smart-home-node/) |
 [Development Tools](https://github.com/e154/smart-home-tools/) |
-[Smart home Socket](https://github.com/e154/smart-home-socket/)
+[Smart home Socket](https://github.com/e154/smart-home-socket/) |
+[Modbus device controller](https://github.com/e154/smart-home-modbus-ctrl-v1/)
 
 [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator)
 [![Coverage Status](https://coveralls.io/repos/github/e154/smart-home-configurator/badge.svg?branch=master)](https://coveralls.io/github/e154/smart-home-configurator?branch=master)
@@ -16,13 +17,13 @@ Attention! The project is under active development.
 ### Installation for development
 
 ```bash
-go get -u github.com/FiloSottile/gvt
+go get -u github.com/golang/dep/cmd/dep
 
 git clone https://github.com/e154/smart-home-configurator $GOPATH/src/github.com/e154/smart-home-configurator
 
 cd $GOPATH/src/github.com/e154/smart-home-configurator
 
-gvt restore
+dep ensure
 
 go build
 ```
@@ -30,9 +31,8 @@ go build
 editing configuration files
 
 ```bash
-cp conf/app.sample.conf conf/api.conf
-cp conf/dev/app.sample.conf conf/dev/app.conf
-cp conf/prod/app.sample.conf conf/prod/app.conf
+cp conf/config.dev.json conf/config.json
+
 ```
 
 init project files
