@@ -24,6 +24,8 @@
       %div(ng-if="node.node.status != 'disabled'")
         %span.label.label-success(ng-if="node.node.state == 'enabled'")
           {{"node.state.enabled" | translate}}
+        %span.label.label-default(ng-if="node.node.state == 'disabled'")
+          {{"node.state.disabled" | translate}}
         %span.label.label-success(ng-if="node.node.state == 'connected'")
           {{"node.state.connected" | translate}}
         %span.label.label-warning(ng-if="node.node.state == 'wait'")
