@@ -42,8 +42,7 @@ angular
   # --------------------
   $timeout ()->
     Stream.sendRequest("dashboard.get.telemetry", {}).then (data)->
-      return if !data['dashboard.telemetry']
-      broadcastDeviceState(data['dashboard.telemetry'])
+      broadcastDeviceState(data)
   , 1000
 
   Stream.subscribe 'dashboard.telemetry', (data)->
