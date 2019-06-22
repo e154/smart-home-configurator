@@ -40,8 +40,6 @@ angular
     , 1000
 
     Stream.subscribe 'map.telemetry', (data)->
-      console.log '---'
-      console.log data
       return if !data.device
       broadcastDeviceState([data.device])
 
