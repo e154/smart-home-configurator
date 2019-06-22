@@ -82,6 +82,7 @@
       "disconnected": "Disconnected",
       "connected": "Connected",
       "wait": "Wait",
+      "enabled": "Enabled",
       "error": "Error"
     }
   },
