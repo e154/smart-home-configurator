@@ -208,7 +208,7 @@ angular
       {
         'label': 'Gate'
         'route': 'dashboard.gate.index'
-        'icon': 'fa fa-file-text-o'
+        'icon': 'fa fa-cloud'
         'access': {gate: ['read']}
 
       }

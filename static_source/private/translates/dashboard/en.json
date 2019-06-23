@@ -59,6 +59,7 @@
   "No actions": "No actions",
   "No states": "No states",
   "Without group": "Without group",
+  "empty": "Empty",
   "node": {
     "package_name": "Nodes",
     "name": "Name",
@@ -532,7 +533,11 @@
     "show_notify": "Show notify",
     "create_notify": "Create notify",
     "repeat_notify": "Repeat notify",
-    "delete_notify": "Delete notify"
+    "delete_notify": "Delete notify",
+    "create_mobile": "Create mobile client token",
+    "delete_mobile": "Delete mobile client token",
+    "read_gate": "Read gate settings",
+    "update_gate": "Update gate settings"
   },
   "access_list": {
     "package_name": "Access rule list"
@@ -551,5 +556,20 @@
   },
   "scenarios": {
     "package_name": "Scenarios"
+  },
+  "swagger": {
+    "package_name": "Swagger",
+    "index_form": ""
+  },
+  "gate": {
+    "package_name": "Gate",
+    "index_form": "Gate settings",
+    "address": "Address",
+    "gate_server_token": "Access toke",
+    "status": "Status",
+    "enabled": "enabled",
+    "disabled": "disabled",
+    "mobile_list": "Mobile list",
+    "add_mobile": "Add mobile"
   }
 }

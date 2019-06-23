@@ -3,32 +3,44 @@
     %h3 {{'gate.index_form' | translate}}
 
 .row
-  .col-md-3
-    .form-group
-      %label {{'gate.start_date' | translate}}
-      .input-group(ng-init="qwe = ''")
-        %input.form-control(pikaday="qwe" ng-model="qwe" number-of-months="1" on-select="setStartDay(date)")
-        %span.input-group-addon
-          %a(ng-click="setStartDay(null);qwe=null" href="#" )
-            .fa.fa-close
-
-  .col-md-3
-    .form-group
-      %label {{'gate.end_date' | translate}}
-      .input-group
-        %input.form-control(pikaday="qwe1" ng-model="qwe1" number-of-months="1" on-select="setEndDay(date)")
-        %span.input-group-addon
-          %a(ng-click="setEndDay(null);qwe1=null" href="#" )
-            .fa.fa-close
-
-.row
   .col-md-6
     .form-group
-      %a(href="#" ng-click="level.selected = !level.selected" ng-repeat="level in levels" )
-        %span.label(ng-class="{'label-primary' : level.selected, 'label-default': !level.selected}")
-          {{level.name}}
-        &nbsp;
+      %label {{'gate.address' | translate}}*
+      %input.form-control(ng-model="settings.address" type="text")
+    .form-group
+      %label {{'gate.gate_server_token' | translate}}*
+      %input.form-control(ng-model="settings.gate_server_token" type="text")
+    .form-group
+      %label {{'gate.status' | translate}}
+      %select.form-control(ng-model="settings.status")
+        %option(value="enabled")
+          {{'gate.enabled' | translate}}
+        %option(value="disabled")
+          {{'gate.disabled' | translate}}
+
+    .pull-right
+      .form-group
+        %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{gate:['update']}")
+            {{'Update' | translate}}
+
+  .col-md-6
 
 .row
   .col-md-12
-    .table.gateging(table="options")
+    %h3 {{'gate.mobile_list' | translate}}
+      %span(ng-if="mobileList.total") ({{mobileList.total}})
+
+.row
+  .col-md-6
+    %div(ng-if="mobileList.token_list.length == 0")
+        {{'empty' | translate}}
+    .form-group(ng-repeat="item in mobileList.token_list" )
+      %a(href="#" ng-click="show(item)")
+        %span
+          {{item}}
+        &nbsp;
+
+    .pull-right
+      .form-group
+        %a.btn.btn-primary(href="" role="button" ng-click="addMobile()" if-can="{gate:['update']}")
+          {{'gate.add_mobile' | translate}}

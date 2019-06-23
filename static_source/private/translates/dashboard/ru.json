@@ -61,6 +61,7 @@
   "No actions": "Список пуст",
   "No states": "Список пуст",
   "Without group": "Без группы",
+  "empty": "Пока тут пусто",
   "node": {
     "package_name": "Работа с устройствами связи",
     "name": "Название",
@@ -534,7 +535,11 @@
     "show_notify": "Прочитать уведомление",
     "create_notify": "Создать уведомление",
     "repeat_notify": "Повторная отправка уведомления",
-    "delete_notify": "Удалить уведомление"
+    "delete_notify": "Удалить уведомление",
+    "create_mobile": "Создать мобильный клиент",
+    "delete_mobile": "Удалить мобильный клиент",
+    "read_gate": "Прочитать настройки шлюза",
+    "update_gate": "Сохранить настройки шлюза"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -553,5 +558,20 @@
   },
   "scenarios": {
     "package_name": "Сценарии"
+  },
+  "swagger": {
+    "package_name": "Swagger",
+    "index_form": ""
+  },
+  "gate": {
+    "package_name": "Шлюз",
+    "index_form": "",
+    "address": "Адрес",
+    "gate_server_token": "Токен доступа",
+    "status": "Статус",
+    "enabled": "Включен",
+    "disabled": "Выключен",
+    "mobile_list": "Список мобильных клиентов",
+    "add_mobile": "Добавить клиента"
   }
 }

@@ -35,7 +35,8 @@ app = angular.module('app', [
   'gridster'
   'passwordCheck'
   'http-auth-interceptor'
-  'base64'
+  'base64',
+  'monospaced.qrcode'
 ])
 
 app.version = window.app_settings.info
