@@ -206,6 +206,13 @@ angular
         'access': {user: ['read']}
       }
       {
+        'label': 'Gate'
+        'route': 'dashboard.gate.index'
+        'icon': 'fa fa-file-text-o'
+        'access': {gate: ['read']}
+
+      }
+      {
         'label': 'Swagger'
         'route': 'dashboard.swagger.index'
         'icon': 'fa fa-file-text-o'
