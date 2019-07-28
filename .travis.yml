@@ -31,6 +31,9 @@ before_install:
   - go get github.com/karalabe/xgo
   - go env && pwd
 
+install:
+  - dep ensure
+
 script:
   - ./bin/travis.sh --init
   - ./bin/travis.sh --build-front
