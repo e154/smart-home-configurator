@@ -46,7 +46,7 @@
     "keymaster": "~1.6.3",
     "bpmn-font": "^0.7.0",
     "ace-builds": "^1",
-    "ace": "nemanjan00/ui-ace",
+    "ace": "angular-ui/ui-ace",
     "ng-dialog": "^0.6.4",
     "pikaday": "^1.5.1",
     "pikaday-angular": "^2.0.0",
