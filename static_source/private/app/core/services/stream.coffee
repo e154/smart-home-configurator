@@ -38,7 +38,8 @@ angular
 #      return
       @t = t
 
-      url = "ws://#{window.location.host}/api/v1/ws?access_token=#{app.access_token}"
+      protocol = if location.protocol == 'https:' then 'wss' else 'ws'
+      url = "#{protocol}://#{window.location.host}/api/v1/ws?access_token=#{app.access_token}"
       if t == 'sockjs'
         @socket = socketFactory({
           socket: new SockJS(url)

@@ -19,12 +19,12 @@
 
 {{template "private_index.tpl.html" .}}
 
-<script src="/static/js/lib.min.js"></script>
-<script src="/static/js/app.min.js"></script>
-<script src="/static/js/templates.min.js"></script>
-<script src="/static/js/ace-builds/src-noconflict/theme-dawn.js"></script>
-<script src="/static/js/ace-builds/src-noconflict/theme-clouds_midnight.js"></script>
-<script src="/static/js/ace-builds/src-noconflict/theme-tomorrow_night.js"></script>
+<script src="/static/js/lib.min.js?t={{.t}}"></script>
+<script src="/static/js/app.min.js?t={{.t}}"></script>
+<script src="/static/js/templates.min.js?t={{.t}}"></script>
+<script src="/static/js/ace-builds/src-noconflict/theme-dawn.js?t={{.t}}"></script>
+<script src="/static/js/ace-builds/src-noconflict/theme-clouds_midnight.js?t={{.t}}"></script>
+<script src="/static/js/ace-builds/src-noconflict/theme-tomorrow_night.js?t={{.t}}"></script>
 <script>
     function resizeIframe(obj) {
         obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';

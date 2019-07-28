@@ -1,17 +1,18 @@
 package controllers
 
 import (
-	"github.com/op/go-logging"
-	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/sessions"
-	"encoding/json"
-	"net/http"
 	"crypto/tls"
-	"github.com/parnurzeal/gorequest"
-	"github.com/e154/smart-home-configurator/system/config"
-	m "github.com/e154/smart-home-configurator/models"
+	"encoding/json"
 	"fmt"
+	m "github.com/e154/smart-home-configurator/models"
+	"github.com/e154/smart-home-configurator/system/config"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/op/go-logging"
+	"github.com/parnurzeal/gorequest"
+	"net/http"
 	"os"
+	"time"
 )
 
 var (
@@ -66,6 +67,20 @@ func (c *ControllerCommon) showPage(ctx *gin.Context) {
 				"developers":   os.Getenv("DEVELOPERS"),
 				"build_number": os.Getenv("BUILD_NUMBER"),
 			},
+			"t": time.Now().Unix(),
+		}
+	} else {
+		params = gin.H{
+			"server_url": fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
+			"info": map[string]string{
+				"version":      os.Getenv("VERSION"),
+				"revision":     os.Getenv("REVISION"),
+				"revision_url": os.Getenv("REVISION_URL"),
+				"generated":    os.Getenv("GENERATED"),
+				"developers":   os.Getenv("DEVELOPERS"),
+				"build_number": os.Getenv("BUILD_NUMBER"),
+			},
+			"t": time.Now().Unix(),
 		}
 	}
 	ctx.HTML(200, page, params)
