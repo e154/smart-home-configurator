@@ -36,6 +36,15 @@ GOBUILD_LDFLAGS="\
         -X ${BUILD_NUMBER_VAR}=${BUILD_NUMBER_VALUE} \
 "
 
+#
+# docker params
+#
+DEPLOY_IMAGE=smart-home-${EXEC}
+DOCKER_VERSION="${VERSION_VALUE//-dirty}"
+IMAGE=smart-home-${EXEC}
+DOCKER_ACCOUNT=e154
+DOCKER_IMAGE_VER=${DOCKER_ACCOUNT}/${IMAGE}:${DOCKER_VERSION}
+DOCKER_IMAGE_LATEST=${DOCKER_ACCOUNT}/${IMAGE}:latest
 
 main() {
 
@@ -58,18 +67,17 @@ main() {
     --clean)
     __clean
     ;;
-    --help)
-    __help
-    ;;
     --build-front)
     __build_front
     ;;
     --build-back)
     __build_back
     ;;
+    --docker_deploy)
+    __docker_deploy
+    ;;
     *)
     echo "Error: Invalid argument '$1'" >&2
-    __help
     exit 1
     ;;
   esac
@@ -138,26 +146,28 @@ __build_back() {
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
     cp ${ROOT}/bin/configurator ${TMP_DIR}
+    cp ${ROOT}/bin/docker/Dockerfile ${TMP_DIR}
     cd ${TMP_DIR}
     echo "tar: ${ARCHIVE} copy to ${HOME}"
     tar -zcf ${HOME}/${ARCHIVE} .
 }
 
-__help() {
-  cat <<EOF
-Usage: travis.sh [options]
+__docker_deploy() {
 
-OPTIONS:
+    cd ${TMP_DIR}
 
-  --test - testing package
-  --init - initialize the development environment
-  --clean - cleaning of temporary directories
-  --build-front - build frontend
-  --build-back - build backend
+    ls -ll
 
-  -h / --help - show this help text and exit 0
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-EOF
+    # build image
+    docker build -f ${TMP_DIR}/Dockerfile -t ${DOCKER_ACCOUNT}/${IMAGE} .
+    # set tag to builded image
+    docker tag ${DOCKER_ACCOUNT}/${IMAGE} ${DOCKER_IMAGE_VER}
+    docker tag ${DOCKER_ACCOUNT}/${IMAGE} ${DOCKER_IMAGE_LATEST}
+    # push tagged image
+    docker push ${DOCKER_IMAGE_VER}
+    docker push ${DOCKER_IMAGE_LATEST}
 }
 
 main "$@"
