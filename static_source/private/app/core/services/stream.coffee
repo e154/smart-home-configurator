@@ -70,16 +70,16 @@ angular
 
       switch m.type
         when "notify"
-          Notify m.value.type, m.value.body
+          Notify m.payload.type, m.payload.body
         when "broadcast"
-          if (m.value.type in Object.keys(@subscribers))
-            @subscribers[m.value.type](m.value.body)
+          if (m.command in Object.keys(@subscribers))
+            @subscribers[m.command](m.payload)
 
-      if !m.id || m.id == ""
+      if !m.id || m.id == "" || m.id == "00000000-0000-0000-0000-000000000000"
         return
 
       if @callbacks[m.id]?.defer
-        $rootScope.$apply @callbacks[m.id].defer.resolve(m)
+        $rootScope.$apply @callbacks[m.id].defer.resolve(m.payload)
         delete @callbacks[m.id]
 
       return
@@ -117,14 +117,16 @@ angular
 
       defer = $q.defer()
       id = uuid.getId()
-      m.id = id
       @callbacks[id] =
         time: new Date()
         defer: defer
 
       $timeout ()=>
-        q = {}
-        q[c] = m
+        q = {
+          id: id
+          command: c
+          payload: m
+        }
         @send q
 
       defer.promise

@@ -1,0 +1,46 @@
+.row
+  .col-md-12
+    %h3 {{'gate.index_form' | translate}}
+
+.row
+  .col-md-6
+    .form-group
+      %label {{'gate.address' | translate}}*
+      %input.form-control(ng-model="settings.address" type="text")
+    .form-group
+      %label {{'gate.gate_server_token' | translate}}*
+      %input.form-control(ng-model="settings.gate_server_token" type="text")
+    .form-group
+      %label {{'gate.status' | translate}}
+      %select.form-control(ng-model="settings.status")
+        %option(value="enabled")
+          {{'gate.enabled' | translate}}
+        %option(value="disabled")
+          {{'gate.disabled' | translate}}
+
+    .pull-right
+      .form-group
+        %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{gate:['update']}")
+            {{'Update' | translate}}
+
+  .col-md-6
+
+.row
+  .col-md-12
+    %h3 {{'gate.mobile_list' | translate}}
+      %span(ng-if="mobileList.total") ({{mobileList.total}})
+
+.row
+  .col-md-6
+    %div(ng-if="mobileList.token_list.length == 0")
+        {{'empty' | translate}}
+    .form-group(ng-repeat="item in mobileList.token_list" )
+      %a(href="#" ng-click="show(item)")
+        %span
+          {{item}}
+        &nbsp;
+
+    .pull-right
+      .form-group
+        %a.btn.btn-primary(href="" role="button" ng-click="addMobile()" if-can="{gate:['update']}")
+          {{'gate.add_mobile' | translate}}
