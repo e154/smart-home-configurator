@@ -22,14 +22,6 @@ angular
           false
       }
       {
-        name: 'node.ip'
-        field: 'ip'
-      }
-      {
-        name: 'node.port'
-        field: 'port'
-      }
-      {
         name: 'node.created_at'
         field: 'created_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'

@@ -41,11 +41,6 @@
         {{'node.name' | translate}}
       %div
         {{::node.node.name}}
-    .form-group
-      .text-muted
-        {{'node.ip' | translate}}
-      %div
-        {{::node.node.ip}}:{{::node.node.port}}
 
     .form-group(ng-if="node.node.description")
       .text-muted

@@ -3,14 +3,6 @@
     %input.form-control(ng-model="node.node.name")
 
 .form-group
-    %label {{'node.ip' | translate}}*
-    %input.form-control(ng-model="node.node.ip")
-
-.form-group
-    %label {{'node.port' | translate}}*
-    %input.form-control(ng-model="node.node.port" type="number")
-
-.form-group
     %label {{'node.status' | translate}}
     %select.form-control(ng-model="node.node.status")
         %option(value="enabled")
