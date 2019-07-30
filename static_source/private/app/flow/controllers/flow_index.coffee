@@ -33,6 +33,11 @@ angular
         template: '<a ui-sref="dashboard.workflow.show({id:item.workflow.id})">{{item.workflow.name}}</a>'
       }
       {
+        name: 'workflow.scenario'
+        field: 'workflow'
+        template: '<span class="label label-success">{{item.workflow.scenario.name}}</span>'
+      }
+      {
         name: 'flow.created_at'
         field: 'created_at'
         template: '<span>{{item[field] | readableDateTime}}</span>'
