@@ -2,7 +2,7 @@
   .col-md-12
     %h3 {{'script.index_form' | translate}}
 
-.row
+.row(if-can="{script:['create']}")
   .col-md-12
     .form-group
       %a(ui-sref="dashboard.script.new")

@@ -68,7 +68,7 @@
           .clearfix
 
           .text-right
-            %a(href="#" ng-click="action.show(item); action.state='edit'" )
+            %a(href="#" ng-click="action.show(item); action.state='edit'" if-can="{device_action:['update']}")
               %i.fa.fa-pencil
             &nbsp;
             &nbsp;
