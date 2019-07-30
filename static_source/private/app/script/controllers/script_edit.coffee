@@ -38,6 +38,15 @@ angular
       when 'ts'
         $scope.ace_options.mode = 'typescript'
 
+  vm.copy =->
+    success =(data)->
+      $state.go('dashboard.script.edit', {id: data.id})
+
+    error =(result)->
+      Message result.data.status, result.data.message
+
+    Script.copy vm.script, success, error
+
   vm.exec =->
     success =(data)->
       if !data.result

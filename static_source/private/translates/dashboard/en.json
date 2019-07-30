@@ -537,7 +537,8 @@
     "create_mobile": "Create mobile client token",
     "delete_mobile": "Delete mobile client token",
     "read_gate": "Read gate settings",
-    "update_gate": "Update gate settings"
+    "update_gate": "Update gate settings",
+    "copy": "Copy"
   },
   "access_list": {
     "package_name": "Access rule list"
