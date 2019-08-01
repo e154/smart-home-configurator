@@ -18,7 +18,7 @@
             %label {{'script.description' | translate}}
             %textarea.form-control(ng-model="script.script.description" rows="2" )
 
-        .form-group(ng-if="script.script.id")
+        .form-group(ng-if="script.script.id" if-can="{script:['exec_script']}")
             %a.btn.btn-success.full-width(ng-click="script.exec_src()")
                 {{'script.execute' | translate}}
 

@@ -5,7 +5,7 @@
         %small.fa.fa-long-arrow-left
           &nbsp;
       {{'node.show_form' | translate}} №{{node.node.id}}
-      .edit-icon-link
+      .edit-icon-link(if-can="{node:['update']}")
         %a(ui-sref="dashboard.node.edit({id:node.node.id})")
           %span.fa.fa-pencil
 
@@ -41,11 +41,6 @@
         {{'node.name' | translate}}
       %div
         {{::node.node.name}}
-    .form-group
-      .text-muted
-        {{'node.ip' | translate}}
-      %div
-        {{::node.node.ip}}:{{::node.node.port}}
 
     .form-group(ng-if="node.node.description")
       .text-muted

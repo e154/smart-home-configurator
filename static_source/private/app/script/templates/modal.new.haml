@@ -7,5 +7,5 @@
     .pull-right
       %a.btn.btn-default(href="" role="button" ng-click="closeThisDialog()" )
         {{'Close' | translate}}
-      %a.btn.btn-primary(href="" role="button" ng-click="script.submitScript()")
+      %a.btn.btn-primary(href="" role="button" ng-click="script.submitScript()" if-can="{script:['create']}")
         {{'Create' | translate}}

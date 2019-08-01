@@ -6,8 +6,6 @@ angular
 
   vm.node = new Node({
     name: 'New node'
-    ip: "127.0.0.1"
-    port: 3000
     status: "enabled"
     description: ""
   })

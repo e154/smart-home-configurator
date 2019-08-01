@@ -51,7 +51,7 @@
           .pull-right.small
             {{'Updated at' | translate}} {{item.updated_at | readableDateTime}}
           .clearfix
-          .pull-right
+          .pull-right(if-can="{workflow:['update']}")
             %button.btn.btn-success.btn-xs(ng-click="scenarios.update_scenario(item, $event)" type="button")
               .fa.fa-play
               &nbsp;
@@ -70,7 +70,7 @@
           .clearfix
 
           .text-right
-            %a(href="#" ng-click="scenarios.show(item); scenarios.state='edit'" )
+            %a(href="#" ng-click="scenarios.show(item); scenarios.state='edit'" if-can="{scenarios:['update']}")
               %i.fa.fa-pencil
             &nbsp;
             &nbsp;

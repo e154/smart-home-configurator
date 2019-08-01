@@ -34,6 +34,11 @@ angular
       method: 'POST'
       responseType: 'json'
 
+    copy:
+      url: '/api/v1/script/:id/copy'
+      method: 'POST'
+      responseType: 'json'
+
     exec_src:
       url: '/api/v1/script/:id/exec_src'
       method: 'POST'
