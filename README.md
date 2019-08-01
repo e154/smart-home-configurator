@@ -9,7 +9,7 @@ Smart home configurator
 [Modbus device controller](https://github.com/e154/smart-home-modbus-ctrl-v1/)
 
 [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator)
-[![Coverage Status](https://coveralls.io/repos/github/e154/smart-home-configurator/badge.svg?branch=master)](https://coveralls.io/github/e154/smart-home-configurator?branch=master)
+![status](https://img.shields.io/badge/status-beta-yellow.svg)
 
 Attention! The project is under active development.
 ---------
