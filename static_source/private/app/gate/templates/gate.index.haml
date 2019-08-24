@@ -3,6 +3,14 @@
     %h3 {{'gate.index_form' | translate}}
 
 .row
+  .col-md-12
+    .pull-right
+      {{'gate.status' | translate}}:
+      &nbsp;
+      %span.label(ng-class="{'label-success' : gateStatus=='connected', 'label-default': gateStatus=='disabled'}")
+        {{gateStatus}}
+
+.row
   .col-md-6
     .form-group
       %label {{'gate.address' | translate}}*
@@ -30,7 +38,10 @@
     %h3 {{'gate.mobile_list' | translate}}
       %span(ng-if="mobileList.total") ({{mobileList.total}})
 
-.row
+.row(ng-if="gateStatus=='disabled'")
+  .col-md-6
+    gate not connected...
+.row(ng-if="gateStatus=='connected'")
   .col-md-6
     %div(ng-if="mobileList.token_list.length == 0")
         {{'empty' | translate}}

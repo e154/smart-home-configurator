@@ -1,7 +1,9 @@
 angular
 .module('appControllers')
-.controller 'gateIndexCtrl', ['$scope', 'Gate', 'ngDialog', '$q', '$httpParamSerializer'
-($scope, Gate, ngDialog, $q, $httpParamSerializer) ->
+.controller 'gateIndexCtrl', ['$scope', 'Gate', 'ngDialog', '$q', 'Stream', '$timeout'
+($scope, Gate, ngDialog, $q, Stream, $timeout) ->
+
+  $scope.gateStatus = "disabled"
 
   getSettings =->
     success = (settings) ->
@@ -49,6 +51,18 @@ angular
         return
     return defer.promise
 
+  Stream.subscribe 'dashboard.telemetry', (data)->
+    return if !data.gate?.status
+    if data.gate.status == 'connected' && $scope.gateStatus != data.gate.status
+      getMobileList()
+    $scope.gateStatus = data.gate.status
+    $timeout ()->
+    $scope.$apply(
+      $scope.gateStatus
+    )
+
+  $scope.$on '$stateChangeSuccess', ()->
+    Stream.unsubscribe 'dashboard.telemetry'
 
   getSettings()
   getMobileList()
