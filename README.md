@@ -3,7 +3,7 @@ Smart home configurator
 
 [Project site](https://e154.github.io/smart-home/) |
 [Server](https://github.com/e154/smart-home/) |
-[Mobile gate](https://e154.github.io/smart-home-gate/) |
+[Mobile gate](https://github.com/e154/smart-home-gate/) |
 [Node](https://github.com/e154/smart-home-node/) |
 [Smart home Socket](https://github.com/e154/smart-home-socket/) |
 [Modbus device controller](https://github.com/e154/smart-home-modbus-ctrl-v1/) |
