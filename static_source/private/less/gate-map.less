@@ -1,0 +1,84 @@
+@import "custom-variables";
+
+.gate-map {
+  margin-bottom: 50px;
+
+  .gate-map-wrapper {
+    img {
+      width: auto;
+    }
+
+    .gate-map-smart-home-server {
+      float: left;
+      width: 79px;
+      height: 66px;
+      //background-color: red;
+      margin: 10px;
+      position: relative;
+    }
+
+    .gate-map-arrows {
+      width: 112px;
+      height: 66px;
+      float: left;
+      padding: 23px 0px;
+      //background-color: green;
+      margin: 10px 0;
+      position: relative;
+
+      .gate-map-arrow-status {
+        position: absolute;
+        left: 39px;
+        top: 20px;
+        opacity: 0.9;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        padding: 5px;
+        border-radius: 50%;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+
+        &.success {
+          background-color: @brand-success;
+        }
+
+        &.wait {
+          background-color: @brand-warning;
+        }
+
+        &.error {
+          background-color: @brand-danger;
+        }
+      }
+    }
+
+    .gate-map-server {
+      width: 129px;
+      float: left;
+      /* background-color: red; */
+      height: 66px;
+      margin: 10px;
+      position: relative;
+    }
+
+    .gate-map-user {
+      width: 26px;
+      float: left;
+      margin: 10px;
+      //background-color: red;
+      height: 66px;
+      position: relative;
+    }
+
+    .description {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -20px;
+      text-align: center;
+    }
+
+  }
+}

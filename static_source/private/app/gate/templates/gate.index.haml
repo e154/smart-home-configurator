@@ -3,12 +3,31 @@
     %h3 {{'gate.index_form' | translate}}
 
 .row
-  .col-md-12
-    .pull-right
-      {{'gate.status' | translate}}:
-      &nbsp;
-      %span.label(ng-class="{'label-success' : gateStatus=='connected', 'label-default': gateStatus=='disabled'}")
-        {{gateStatus}}
+  .col-md-6.gate-map
+    .gate-map-wrapper
+      .gate-map-smart-home-server
+        %img(src="/static/images/gate/gate_net_icon.svg" alt="smart home server")
+        .description
+          {{'gate.this_server' | translate}}
+      .gate-map-arrows
+        %img(src="/static/images/gate/gate_two_arrows.svg" alt="arrows")
+        .gate-map-arrow-status.wait(ng-if="gateStatus=='wait' || gateStatus==''")
+          %i.fa.fa-refresh
+        .gate-map-arrow-status.success(ng-if="gateStatus=='connected'")
+          %i.fa.fa-check
+        .gate-map-arrow-status.error(ng-if="gateStatus=='disabled'")
+          %i.fa.fa-remove
+      .gate-map-server
+        %img(src="/static/images/gate/gate_cloud_orange.svg" alt="gate server")
+        .description
+          {{settings.address}}
+      .gate-map-arrows
+        %img(src="/static/images/gate/gate_two_arrows.svg" alt="arrows")
+      .gate-map-user
+        %img(src="/static/images/gate/gate_user.svg" alt="gate user")
+        .description
+          {{'gate.mobile' | translate}}
+  .col-md-6
 
 .row
   .col-md-6

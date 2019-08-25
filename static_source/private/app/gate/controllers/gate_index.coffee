@@ -3,7 +3,7 @@ angular
 .controller 'gateIndexCtrl', ['$scope', 'Gate', 'ngDialog', '$q', 'Stream', '$timeout'
 ($scope, Gate, ngDialog, $q, Stream, $timeout) ->
 
-  $scope.gateStatus = "disabled"
+  $scope.gateStatus = "wait"
 
   getSettings =->
     success = (settings) ->
@@ -61,8 +61,12 @@ angular
       $scope.gateStatus
     )
 
+  Stream.subscribe 'gate.access_token', (data)->
+    $scope.settings.gate_server_token = data.accessToken
+
   $scope.$on '$stateChangeSuccess', ()->
     Stream.unsubscribe 'dashboard.telemetry'
+    Stream.unsubscribe 'gate.access_token'
 
   getSettings()
   getMobileList()
