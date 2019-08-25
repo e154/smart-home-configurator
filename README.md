@@ -17,7 +17,7 @@ Attention! The project is under active development.
 ---------
 
 | screenshots | screenshots |
-|:-------------------------:|:-------------------------:|:-------------------------:|
+|:-------------------------:|:-------------------------:|
 |<img width="1604" alt="smart home configurator" src="doc/screenshot1.png">  |  <img width="1604" alt="smart home configurator" src="doc/screenshot2.png">|
 |<img width="1604" alt="smart home configurator" src="doc/screenshot3.png">  |  <img width="1604" alt="smart home configurator" src="doc/screenshot4.png">|
 
