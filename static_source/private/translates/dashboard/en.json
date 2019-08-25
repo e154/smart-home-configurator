@@ -571,6 +571,8 @@
     "enabled": "enabled",
     "disabled": "disabled",
     "mobile_list": "Mobile list",
-    "add_mobile": "Add mobile"
+    "add_mobile": "Add mobile",
+    "this_server": "This server",
+    "mobile": "Mobile"
   }
 }
