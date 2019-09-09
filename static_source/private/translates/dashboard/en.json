@@ -330,6 +330,7 @@
     },
     "element": {
       "name": "Name",
+      "system_name": "System name",
       "status": "Status",
       "enabled": "Enabled",
       "disabled": "Disabled",

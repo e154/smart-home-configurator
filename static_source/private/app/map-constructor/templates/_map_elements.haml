@@ -38,6 +38,11 @@
               .row
                 .col-md-6
                   .form-group
+                    %label {{'map.element.description' | translate}}
+                    %input.form-control(ng-model="element.description")
+              .row
+                .col-md-6
+                  .form-group
                     %label {{'map.element.type' | translate}}
                     %select.form-control(ng-model="element.prototype_type")
                       %option(value="image")

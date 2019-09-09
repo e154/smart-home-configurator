@@ -1,6 +1,12 @@
 .row
   .col-md-6
     .form-group
+      %label {{'map.element.system_name' | translate}}*
+      %input.form-control(ng-model="element.prototype.system_name")
+
+.row
+  .col-md-6
+    .form-group
       %label.clearfix
         .pull-left
           {{'map.element.device' | translate}}
