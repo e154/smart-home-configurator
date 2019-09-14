@@ -5,6 +5,7 @@ angular
     class MapDevice
 
       id: null
+      system_name: null
       scope: null
       device: null
       devices: []
@@ -79,6 +80,7 @@ angular
           states: states
           actions: actions
           image: @image
+          system_name: @system_name
         }
 
       deserialize: (m)=>
@@ -86,6 +88,7 @@ angular
         @device = m.device if m.device
         @status = m.status || 'enabled'
         @image = m.image || null
+        @system_name = m.system_name || null
 
         @states = []
         angular.forEach @device.states, (device_state)=>

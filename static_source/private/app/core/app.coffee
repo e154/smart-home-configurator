@@ -36,7 +36,8 @@ app = angular.module('app', [
   'passwordCheck'
   'http-auth-interceptor'
   'base64',
-  'monospaced.qrcode'
+  'monospaced.qrcode',
+  'ngTagsInput'
 ])
 
 app.version = window.app_settings.info

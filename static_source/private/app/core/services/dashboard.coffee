@@ -15,7 +15,7 @@ angular
       method: 'POST'
       responseType: 'json'
       transformRequest: (data)->
-        data.widgets = angular.toJson(data.widgets)
+        data.widgets = angular.fromJson(data.widgets)
         result = angular.toJson(data);
         result
 
@@ -23,7 +23,7 @@ angular
         method: 'PUT'
         responseType: 'json'
         transformRequest: (data)->
-          data.widgets = angular.toJson(data.widgets)
+          data.widgets = angular.fromJson(data.widgets)
           result = angular.toJson(data);
           result
 

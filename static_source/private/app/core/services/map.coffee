@@ -18,7 +18,7 @@ angular
         method: 'PUT'
         responseType: 'json'
         transformRequest: (data)->
-          data.options = angular.toJson(data.options)
+          data.options = angular.fromJson(data.options)
           result = angular.toJson(data);
           result
 

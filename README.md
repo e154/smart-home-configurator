@@ -60,6 +60,35 @@ run server
 ./smart-home-configurator
 ```
 
+### install depends on MAC OS
+
+```bash
+brew search node
+brew install node@8
+brew link node@8
+```
+
+now add string at ~/.bash_profile
+
+```bash
+echo 'export PATH="/usr/local/opt/node@8/bin:$PATH"' >> ~/.bash_profile
+```
+
+install gulp and bower
+
+```bash
+node -v
+#v8.16.1
+
+npm -v
+#6.4.1
+
+./cd static_source && npm install
+
+node install gulp -g
+node install bower -g
+```
+
 It's all
 
 ### LICENSE
