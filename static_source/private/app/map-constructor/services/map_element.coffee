@@ -1,9 +1,9 @@
 angular
 .module('angular-map')
 .factory 'MapElement', ['$rootScope', '$compile', 'MapElementResource', 'Message'
-'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText', '$translate'
+'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText', '$translate', 'MapZoneSelect2', 'MapZone'
   ($rootScope, $compile, MapElementResource, Message, Notify, MapImage, MapDevice, MapScript,
-  MapText, $translate) ->
+  MapText, $translate, MapZoneSelect2, MapZone) ->
     class MapElement
 
       scope: null
@@ -25,6 +25,7 @@ angular
       created_at: null
       updated_at: null
       weight: 0
+      zone: []
       graph_settings:
         width: null
         height: null
@@ -63,6 +64,7 @@ angular
         created_at: @created_at if @created_at
         updated_at: @updated_at if @updated_at
         weight: @weight
+        zone: @zone[0] if @zone && @zone.length
         prototype_type: @prototype_type
         prototype_id: @prototype_id if @prototype_id
         graph_settings: @graph_settings
@@ -78,6 +80,7 @@ angular
         @prototype_type = element.prototype_type || ''
         @prototype_id = element.prototype_id if element.prototype_id
         @weight = element.weight || 0
+        @zone = [element.zone] if element.zone
         @created_at = element.created_at || ''
         @updated_at = element.updated_at || ''
         @graph_settings = element.graph_settings
@@ -155,6 +158,30 @@ angular
       valid: ()->
         return false if !@prototype
         @prototype.valid()
+
+      # get map zones
+      refreshMapZones: (args)=>
+        _this = @
+
+        MapZoneSelect2((zones)=>
+          _this.zones = zones
+        )(args)
+
+      onZoneAdded: (args) =>
+        zone = new MapZone({
+          id: args.id,
+          name: args.name
+        })
+        _this = @
+        success =(data)->
+          _this.zone = [data]
+        error =(result)->
+          Message result.data.status, result.data.message
+        zone.$create(success, error)
+
+
+      onZoneRemoved: (args) =>
+        @zone = []
 
     MapElement
 ]

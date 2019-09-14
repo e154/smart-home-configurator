@@ -318,6 +318,7 @@
     "add_layer": "Add layer",
     "element_state_text": "Show element state text",
     "element_option_text": "Show element option text",
+    "zone": "Zone",
     "layer": {
       "name": "Name",
       "status": "Status",

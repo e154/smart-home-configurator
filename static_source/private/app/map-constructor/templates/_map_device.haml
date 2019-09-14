@@ -4,6 +4,13 @@
       %label {{'map.element.system_name' | translate}}*
       %input.form-control(ng-model="element.prototype.system_name")
 
+  .col-md-6
+    .form-group
+      %label
+        {{'map.zone' | translate}}
+      %tags-input(ng-model="element.zone" display-property="name" add-on-paste="true" placeholder="{{'map.zone' | translate}}" on-tag-added="element.onZoneAdded($tag)" on-tag-removed="element.onZoneRemoved($tag)")
+        %auto-complete(source="element.refreshMapZones($query)")
+
 .row
   .col-md-6
     .form-group
