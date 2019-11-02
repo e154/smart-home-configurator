@@ -97,7 +97,7 @@ angular
       Message response.data.status, response.data.message
 
     item.status = if item.status == 'active' then 'inactive' else 'active'
-    EmailItem.update {name: item.name}, item, success, error
+    EmailItem.update_status {name: item.name}, {name: item.name, status: item.status}, success, error
 
   #init
   vm.getTree()

@@ -4,7 +4,7 @@ angular.module('appConstants')
     (query)->
       $http(
         method: 'GET'
-        url: "/api/v1/email/template/search"
+        url: "/api/v1/templates/search"
         params:
           query: query
           limit: 5
