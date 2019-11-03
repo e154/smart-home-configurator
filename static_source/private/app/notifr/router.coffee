@@ -24,6 +24,15 @@ angular
     )
 
     .state(
+      name: "dashboard.notifr.settings"
+      url: "/settings"
+      views:
+        '@dashboard.notifr':
+          templateUrl: '/notifr/templates/notifr.settings.html'
+          controller: 'notifrSettingsCtrl'
+    )
+
+    .state(
       name: "dashboard.notifr.new_notification"
       url: "/new_notification"
       templateUrl: '/notifr/templates/notifr.new.html'

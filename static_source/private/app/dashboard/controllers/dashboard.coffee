@@ -149,13 +149,13 @@ angular
       }
       {
         'label': 'Notifr'
-        'link': 'dashboard.notifr.index'
-        'route': 'dashboard.notifr'
+        'link': 'dashboard.notifr.settings'
+        'route': 'dashboard.notifr.settings'
         'icon': 'fa fa-envelope'
         'items': [
           {
-            'label': 'All notifications'
-            'route': 'dashboard.notifr.index'
+            'label': 'Settings'
+            'route': 'dashboard.notifr.settings'
             'access': {notifr: ['show_notify']}
           }
           {
