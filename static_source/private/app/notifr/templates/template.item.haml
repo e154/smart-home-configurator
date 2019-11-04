@@ -10,13 +10,13 @@
 .row
   .col-md-4
     .form-group
-      %a(href="#" ng-click="ctrl.getTree()" if-can="{notifr:['read_notifr_item']}")
+      %a(href="#" ng-click="ctrl.getTree()" if-can="{template:['read']}")
         %span.icon
           %i.fa.fa-refresh
           {{'notifr.refrash_list' | translate}}
 
 
-      %a.pull-right(href="#" ng-click="ctrl.addNew()" ng-show="!ctrl.isNew" if-can="{notifr:['create_notifr_item']}")
+      %a.pull-right(href="#" ng-click="ctrl.addNew()" ng-show="!ctrl.isNew" if-can="{template:['create']}")
         %span.icon
           %i.fa.fa-plus
           {{'Add new' | translate}}
@@ -31,11 +31,11 @@
         {{node.name}}
 
         .pull-right(data-nodrag="true")
-          %a(href="" ng-click="ctrl.toggleStatus(node)" data-nodrag="true" if-can="{notifr:['update_notifr_item']}")
+          %a(href="" ng-click="ctrl.toggleStatus(node)" data-nodrag="true" if-can="{template:['update']}")
             .fa.fa-eye(ng-if="node.status == 'active'" )
             .fa.fa-eye-slash(ng-if="node.status == 'inactive'" )
 
-          %a(href="" data-nodrag="true" ng-click="ctrl.edit(node.name)" style="margin-left: 8px;" if-can="{notifr:['update_notifr_item']}")
+          %a(href="" data-nodrag="true" ng-click="ctrl.edit(node.name)" style="margin-left: 8px;" if-can="{template:['read','update']}")
             .fa.fa-pencil
 
         %ol(ui-tree-nodes="true" ng-model="node.nodes" ng-class="{hidden: collapsed}")
@@ -49,7 +49,7 @@
       %br/
       %br/
       %br/
-      %button.btn.btn-primary(ng-click="ctrl.updateTree()" type="button" if-can="{notifr:['update_notifr_item']}") {{'Update' | translate}}
+      %button.btn.btn-primary(ng-click="ctrl.updateTree()" type="button" if-can="{template:['update']}") {{'Update' | translate}}
 
   .col-md-8
     .list-group
@@ -66,6 +66,6 @@
         #content.ace-editor.form-control(ng-model="ctrl.activeItem.content" rows="20" ui-ace="ace_options")
 
       .form-group
-        %button.btn.btn-primary(ng-click="ctrl.save()" ng-show="ctrl.isNew" type="button" if-can="{notifr:['create_notifr_item']}") {{'Save' | translate}}
-        %button.btn.btn-primary(ng-click="ctrl.update()" ng-show="!ctrl.isNew" type="button" if-can="{notifr:['update_notifr_item']}") {{'Update' | translate}}
-        %button.btn.btn-danger(ng-click="ctrl.delete()" ng-show="!ctrl.isNew" type="button" if-can="{notifr:['delete_notifr_item']}") {{'Delete' | translate}}
+        %button.btn.btn-primary(ng-click="ctrl.save()" ng-show="ctrl.isNew" type="button" if-can="{template:['create']}") {{'Save' | translate}}
+        %button.btn.btn-primary(ng-click="ctrl.update()" ng-show="!ctrl.isNew" type="button" if-can="{template:['update']}") {{'Update' | translate}}
+        %button.btn.btn-danger(ng-click="ctrl.delete()" ng-show="!ctrl.isNew" type="button" if-can="{template:['delete']}") {{'Delete' | translate}}

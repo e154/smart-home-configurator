@@ -5,16 +5,17 @@
 .row
   .col-md-12
     .form-group
-      %a(ui-sref="dashboard.notifr.new_template" if-can="{notifr:['create_notifr_template']}")
+      %a(ui-sref="dashboard.notifr.new_template" if-can="{template:['create']}")
         .fa.fa-plus
         &nbsp;
         {{'notifr.add_template' | translate}}
-      ,
-      &nbsp;
-      %a(ui-sref="dashboard.notifr.items" if-can="{notifr:['read_notifr_item']}")
+      %span(if-can="{template:['create']}")
+        ,
+        &nbsp;
+      %a(ui-sref="dashboard.notifr.items" if-can="{template:['read']}")
         &nbsp;
         {{'notifr.element_of_template' | translate}}
 
-.row(if-can="{notifr:['read_notifr_template']}")
+.row(if-can="{template:['read']}")
   .col-md-12
     .table(table="ctrl.options")

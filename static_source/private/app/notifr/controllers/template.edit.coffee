@@ -1,8 +1,8 @@
 angular
 .module('appControllers')
-.controller 'emailTemplateCtrl', ['$scope','Message', 'EmailTemplate','$http', 'EmailItem',
+.controller 'templateEditCtrl', ['$scope','Message', 'Template','$http', 'TemplateItem',
 '$stateParams', '$state', 'Notify', '$translate'
-($scope, Message, EmailTemplate, $http, EmailItem, $stateParams, $state, Notify, $translate) ->
+($scope, Message, Template, $http, TemplateItem, $stateParams, $state, Notify, $translate) ->
 
   vm = this
 
@@ -10,6 +10,7 @@ angular
     content: ''
     description: ''
     name: ''
+    status: 'active'  
   vm.template_name = $stateParams.name
   vm.items = []
   $scope.selectedItems = []
@@ -35,7 +36,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailTemplate.show {name: vm.template_name}, success, error
+    Template.show {name: vm.template_name}, success, error
 
   vm.getItems = ->
     success =(data)->
@@ -45,7 +46,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.items {}, success, error
+    TemplateItem.items {}, success, error
 
   vm.preview = ->
     if typeof vm.content == 'undefined'
@@ -83,12 +84,12 @@ angular
       Notify 'success', 'Template successfully created', 3
       vm.isNew = false
       vm.template_name = vm.template.name
-      $state.go 'dashboard.notifr.template', {name: template.name}
+      $state.go 'dashboard.notifr.template', {name: vm.template.name}
 
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailTemplate.create {}, vm.template, success, error
+    Template.create {}, vm.template, success, error
 
   vm.update = ->
     serialize()
@@ -100,7 +101,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailTemplate.update {name: vm.template.name}, vm.template, success, error
+    Template.update {name: vm.template.name}, vm.template, success, error
 
   vm.delete = ->
     success =->
@@ -116,13 +117,13 @@ angular
       vm.template_name = ''
       $scope.selectedItems = []
       getFrame().html ''
-      $state.go 'dashboard.notifr.index', {}
+      $state.go 'dashboard.notifr.template_list', {}
 
     error =(response)->
       Message response.data.status, response.data.message
 
     if confirm('do I delete a template?')
-      EmailTemplate.delete {name: vm.template.name}, success, error
+      Template.delete {name: vm.template.name}, success, error
 
 
   #init

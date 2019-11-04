@@ -1,7 +1,7 @@
 angular
 .module('appServices')
-.factory 'EmailTemplate', ['$resource', ($resource) ->
-  $resource '/api/v1/template/:name', {id: '@name'},
+.factory 'Template', ['$resource', ($resource) ->
+  $resource '/api/v1/template/:name', {},
     show:
       method: 'GET'
       responseType: 'json'

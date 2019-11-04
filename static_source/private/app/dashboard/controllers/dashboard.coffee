@@ -149,32 +149,36 @@ angular
       }
       {
         'label': 'Notifr'
-        'link': 'dashboard.notifr.settings'
-        'route': 'dashboard.notifr.settings'
+        'link': 'dashboard.notifr.index'
+        'route': 'dashboard.notifr.index'
         'icon': 'fa fa-envelope'
+        'access': {dashboard: ['read']}
         'items': [
+          {
+            'label': 'All params'
+            'route': 'dashboard.notifr.index'
+          }
           {
             'label': 'Settings'
             'route': 'dashboard.notifr.settings'
-            'access': {notifr: ['show_notify']}
+            'access': {notifr: ['read_config', 'update_config']}
           }
           {
             'label': 'All templates'
             'route': 'dashboard.notifr.template_list'
-            'access': {notifr: ['read_notifr_template']}
+            'access': {template: ['read']}
           }
           {
             'label': 'Add template'
             'route': 'dashboard.notifr.new_template'
-            'access': {notifr: ['create_notifr_template']}
+            'access': {template: ['read', 'create']}
           }
           {
             'label': 'All items'
             'route': 'dashboard.notifr.items'
-            'access': {notifr: ['read_notifr_item']}
+            'access': {template: ['read']}
           }
         ]
-        'access': {notifr: ['show_notify']}
       }
       {
         'label': 'Users'

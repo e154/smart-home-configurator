@@ -1,7 +1,7 @@
 angular
 .module('appServices')
-.factory 'EmailItem', ['$resource', ($resource) ->
-  $resource '/api/v1/template_item/:name', {name: '@name'},
+.factory 'TemplateItem', ['$resource', ($resource) ->
+  $resource '/api/v1/template_item/:name', {},
     show:
       method: 'GET'
       responseType: 'json'
@@ -9,6 +9,7 @@ angular
         data?.item || data  
 
     create:
+      url: '/api/v1/template_item'
       method: 'POST'
       responseType: 'json'
 
@@ -25,13 +26,11 @@ angular
     get_tree:
       url: '/api/v1/template_items/tree'
       method: 'GET'
-      responseType: 'json'
-      transformResponse: (data) ->
-        data?.tree || data
+      isArray: true
 
     update_tree:
       url: '/api/v1/template_items/tree'
-      method: 'POST'
+      method: 'PUT'
 
     update_status:
       url: '/api/v1/template_items/status/:name'

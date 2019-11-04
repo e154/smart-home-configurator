@@ -556,7 +556,10 @@
     "delete_mobile": "Delete mobile client token",
     "read_gate": "Read gate settings",
     "update_gate": "Update gate settings",
-    "copy": "Copy"
+    "copy": "Copy",
+    "read_config": "Read config",
+    "update_config": "Update config",
+    "preview": "Preview"
   },
   "access_list": {
     "package_name": "Access rule list"
@@ -592,5 +595,14 @@
     "add_mobile": "Add mobile",
     "this_server": "This server",
     "mobile": "Mobile"
+  },
+  "notify": {
+    "package_name": "Notify"
+  },
+  "template": {
+    "package_name": "Template"
+  },
+  "map_zone": {
+    "package_name": "Map zone"
   }
 }
