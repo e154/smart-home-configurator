@@ -270,7 +270,7 @@
     "markers": "Markers",
     "refresh": "Refresh",
     "error": "Error",
-    "state": "State",
+    "status": "Status",
     "email": "Email",
     "sms": "Sms",
     "push": "Push",

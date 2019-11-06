@@ -272,7 +272,7 @@
     "markers": "Маркеры",
     "refresh": "Обновить",
     "error": "Ошибка",
-    "state": "Состояние",
+    "status": "Состояние",
     "email": "email",
     "sms": "sms",
     "push": "push",
