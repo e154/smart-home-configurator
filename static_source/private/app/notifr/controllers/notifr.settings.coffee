@@ -14,6 +14,8 @@ angular
       tw_auth_token: ""
       tw_from: ""
       tw_sid: ""
+      slack_token: ""
+      slack_user_name: ""
 
     getSettings = ->
       success = (result)->

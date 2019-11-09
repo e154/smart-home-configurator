@@ -155,13 +155,18 @@ angular
         'access': {dashboard: ['read']}
         'items': [
           {
+            'label': 'New notify'
+            'route': 'dashboard.notifr.new_notification'
+            'access': {notifr: ['create_notify']}
+          }
+          {
             'label': 'All params'
             'route': 'dashboard.notifr.index'
           }
           {
-            'label': 'Settings'
-            'route': 'dashboard.notifr.settings'
-            'access': {notifr: ['read_config', 'update_config']}
+            'label': 'All items'
+            'route': 'dashboard.notifr.items'
+            'access': {template: ['read']}
           }
           {
             'label': 'All templates'
@@ -174,9 +179,9 @@ angular
             'access': {template: ['read', 'create']}
           }
           {
-            'label': 'All items'
-            'route': 'dashboard.notifr.items'
-            'access': {template: ['read']}
+            'label': 'Settings'
+            'route': 'dashboard.notifr.settings'
+            'access': {notifr: ['read_config', 'update_config']}
           }
         ]
       }

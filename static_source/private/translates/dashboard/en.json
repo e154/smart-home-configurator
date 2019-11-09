@@ -308,10 +308,16 @@
     "settings_tw_from": "From",
     "settings_tw_sid": "SID",
     "settings_telegram_token": "Token",
+    "settings_slack_token": "Token",
+    "settings_slack_user_name": "User name",
     "messagebird": "Messagebird",
     "twilio": "Twilio",
     "telegram": "Telegram",
-    "site": "website"
+    "site": "website",
+    "slack": "Slack",
+    "body_type": "Body type",
+    "body_type_plain": "plain",
+    "body_type_template": "template"
   },
   "map": {
     "name": "Name",

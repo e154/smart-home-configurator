@@ -16,6 +16,11 @@ angular
       method: 'POST'
       responseType: 'json'
 
+    send:
+      url: '/api/v1/notifr'
+      method: 'POST'
+      responseType: 'json'
+
     delete:
       method: 'DELETE'
 

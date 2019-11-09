@@ -94,6 +94,25 @@
           %label {{'notifr.settings_tw_sid' | translate}}
           %input#name.form-control(ng-model="settings.tw_sid" placeholder="{{'notifr.settings_tw_sid' | translate}}" type="text")/
 
+    .panel.panel-default
+      .panel-heading
+        %span
+          {{ 'notifr.slack' | translate }}
+        &nbsp;
+        %a(href="https://api.slack.com/" target="_blank")
+          (
+          {{ 'notifr.site' | translate }}
+          &nbsp;
+          .fa.fa-external-link-square
+          )
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_slack_token' | translate}}
+          %input#name.form-control(ng-model="settings.slack_token" placeholder="{{'notifr.settings_slack_token' | translate}}" type="password")/
+
+        .form-group
+          %label {{'notifr.settings_slack_user_name' | translate}}
+          %input#name.form-control(ng-model="settings.slack_user_name" placeholder="{{'notifr.settings_slack_user_name' | translate}}" type="text")/
 
 .row
   .col-md-12.form-group

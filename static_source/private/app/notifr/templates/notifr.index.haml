@@ -2,13 +2,13 @@
   .col-md-12
     %h3 {{ 'notifr.notifications' | translate }}
 
--#.row(if-can="{notifr:['create_notify']}")
--#  .col-md-12
--#    .form-group
--#      %a(ui-sref="dashboard.notifr.new_notification")
--#        .fa.fa-plus
--#        &nbsp;
--#        {{'notifr.new_notification' | translate}}
+.row(if-can="{notifr:['create_notify']}")
+  .col-md-12
+    .form-group
+      %a(ui-sref="dashboard.notifr.new_notification")
+        .fa.fa-plus
+        &nbsp;
+        {{'notifr.new_notification' | translate}}
 
 .row(if-can="{notifr:['show_notify']}")
   .col-md-12

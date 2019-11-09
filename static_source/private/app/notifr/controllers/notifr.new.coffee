@@ -5,6 +5,7 @@ angular
 
   $scope.message = {
     type: 'email'
+    body_type: 'plain'  # plain|template
     template: ''
     params: {}
   }
@@ -20,7 +21,8 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
-    message = angular.extend $scope.message
+    message = angular.extend {}, $scope.message
     message.params = {} if !message.template?
+    message.template = message.template.name if message.template
     Notifr.send message, success, error
 ]

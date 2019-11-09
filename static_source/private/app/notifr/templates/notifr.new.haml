@@ -4,7 +4,7 @@
 
 .row
   .col-md-6
-    .form-group(ng-if="message.type != 'push'")
+    .form-group
       %label
         {{'notifr.address' | translate}}*
         &nbsp;
@@ -12,15 +12,25 @@
           (john doe &lt;john_doe@example.net&gt;, jeyn doe &lt;jeyn_doe@example.net&gt;)
         %span.text-muted(ng-if="message.type == 'sms'")
           (+12233232332,+12233232334)
+        %span.text-muted(ng-if="message.type == 'slack'")
+          ("@channel")
       %input.form-control(ng-model="message.address")
 
-    .form-group
+    .form-group(ng-if="message.type == 'email'")
       %label {{'notifr.title' | translate}}
-      %input.form-control(ng-model="message.title")
+      %input.form-control(ng-model="message.email_subject")
 
-    .form-group
+    .form-group(ng-if="message.type == 'email'")
       %label {{'notifr.body' | translate}}
-      %textarea.form-control(ng-model="message.body" rows="10" )
+      %textarea.form-control(ng-model="message.email_body" rows="10" )
+
+    .form-group(ng-if="message.type == 'sms'")
+      %label {{'notifr.body' | translate}}
+      %textarea.form-control(ng-model="message.sms_text" rows="10" )
+
+    .form-group(ng-if="message.type == 'slack'")
+      %label {{'notifr.body' | translate}}
+      %textarea.form-control(ng-model="message.slack_text" rows="10" )
 
   .col-md-6
     .form-group
@@ -30,10 +40,18 @@
           {{'notifr.email' | translate}}
         %option(value="sms")
           {{'notifr.sms' | translate}}
-        %option(value="push")
-          {{'notifr.push' | translate}}
+        %option(value="slack")
+          {{'notifr.slack' | translate}}
 
-    .form-group(ng-if="message.type == 'email'")
+    .form-group
+      %label {{'notifr.body_type' | translate}}
+      %select.form-control(ng-model="message.body_type")
+        %option(value="plain")
+          {{'notifr.body_type_plain' | translate}}
+        %option(value="template")
+          {{'notifr.body_type_template' | translate}}
+
+    .form-group(ng-if="message.body_type == 'template'")
       %label {{'notifr.template' | translate}}
       -#
       -#  select2
@@ -51,11 +69,13 @@
         %ui-select-no-choice
           {{'No data' | translate}}
 
-    .form-group(ng-if="message.template.markers.length")
+    .form-group(ng-if="message.template.markers.length && message.body_type == 'template'")
       %label {{'notifr.markers' | translate}}
-    .form-group(ng-repeat="marker in message.template.markers")
-      %label [{{marker}}]
-      %input.form-control(ng-model="message.params[marker]")
+
+    %div(ng-if="message.body_type == 'template'")
+      .form-group(ng-repeat="marker in message.template.markers")
+        %label [{{marker}}]
+        %input.form-control(ng-model="message.params[marker]")
 
 .row
   .col-md-6.form-group
