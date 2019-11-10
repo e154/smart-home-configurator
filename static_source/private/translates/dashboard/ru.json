@@ -272,7 +272,7 @@
     "markers": "Маркеры",
     "refresh": "Обновить",
     "error": "Ошибка",
-    "state": "Состояние",
+    "status": "Состояние",
     "email": "email",
     "sms": "sms",
     "push": "push",
@@ -297,7 +297,29 @@
     "source_code": "Исходный код",
     "package_name": "Управление уведомлениями",
     "template": "Шаблон",
-    "send": "Отправить"
+    "send": "Отправить",
+    "settings": "Настройки",
+    "settings_email_auth": "Логин",
+    "settings_email_pass": "Пароль",
+    "settings_email_port": "Порт",
+    "settings_email_sender": "Отправитель",
+    "settings_email_smtp": "smtp сервер",
+    "settings_mb_access_key": "Access key",
+    "settings_mb_name": "Name",
+    "settings_tw_auth_token": "Auth token",
+    "settings_tw_from": "От",
+    "settings_tw_sid": "SID",
+    "settings_telegram_token": "Токен",
+    "settings_slack_token": "Токен",
+    "settings_slack_user_name": "Имя отправителья",
+    "messagebird": "Messagebird",
+    "twilio": "Twilio",
+    "telegram": "Telegram",
+    "site": "website",
+    "slack": "Slack",
+    "body_type": "тело сообщения",
+    "body_type_plain": "текст",
+    "body_type_template": "шаблон"
   },
   "map": {
     "name": "Название",
@@ -542,7 +564,10 @@
     "delete_mobile": "Удалить мобильный клиент",
     "read_gate": "Прочитать настройки шлюза",
     "update_gate": "Сохранить настройки шлюза",
-    "copy": "Копирование"
+    "copy": "Копирование",
+    "read_config": "Чтение настроек",
+    "update_config": "Сохранение настроек",
+    "preview": "Просмотр"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -578,5 +603,14 @@
     "add_mobile": "Добавить клиента",
     "this_server": "Этот сервер",
     "mobile": "Клиент"
+  },
+  "notify": {
+    "package_name": "Управление уведомлениями"
+  },
+  "template": {
+    "package_name": "Шаблоны"
+  },
+  "map_zone": {
+    "package_name": "Зоны"
   }
 }

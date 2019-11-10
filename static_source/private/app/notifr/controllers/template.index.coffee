@@ -1,14 +1,14 @@
 angular
 .module('appControllers')
-.controller 'emailIndexCtrl', ['$scope', 'EmailTemplate','$state'
-($scope, EmailTemplate, $state) ->
+.controller 'templateIndexCtrl', ['$scope', 'Template','$state'
+($scope, Template, $state) ->
 
   vm = this
 
   tableCallback = {}
   vm.options =
     perPage: 20
-    resource: EmailTemplate
+    resource: Template
     columns: [
       {
         name: 'notifr.system_name'

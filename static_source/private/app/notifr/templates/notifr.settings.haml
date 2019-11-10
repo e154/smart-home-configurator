@@ -1,0 +1,121 @@
+.row
+  .col-md-12
+    %h3 {{ 'notifr.settings' | translate }}
+
+.row
+  .col-md-12.form-group
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="updateSettings()" if-can="{notifr:['update_config']}")
+        {{'Update' | translate}}
+
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        {{ 'notifr.email' | translate }}
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_email_auth' | translate}}
+          %input#name.form-control(ng-model="settings.email_auth" placeholder="{{'notifr.settings_email_auth' | translate}}" type="text")/
+
+        .form-group
+          %label {{'notifr.settings_email_pass' | translate}}
+          %input#name.form-control(ng-model="settings.email_pass" placeholder="{{'notifr.settings_email_pass' | translate}}" type="password")/
+
+        .form-group
+          %label {{'notifr.settings_email_port' | translate}}
+          %input#name.form-control(ng-model="settings.email_port" placeholder="{{'notifr.settings_email_port' | translate}}" type="number")/
+
+        .form-group
+          %label {{'notifr.settings_email_sender' | translate}}
+          %input#name.form-control(ng-model="settings.email_sender" placeholder="{{'notifr.settings_email_sender' | translate}}" type="text")/
+
+        .form-group
+          %label {{'notifr.settings_email_smtp' | translate}}
+          %input#name.form-control(ng-model="settings.email_smtp" placeholder="{{'notifr.settings_email_smtp' | translate}}" type="text")/
+
+    .panel.panel-default
+      .panel-heading
+        {{ 'notifr.telegram' | translate }}
+        &nbsp;
+          %a(href="https://core.telegram.org/bots" target="_blank")
+            (
+            {{ 'notifr.site' | translate }}
+            &nbsp;
+            .fa.fa-external-link-square
+            )
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_telegram_token' | translate}}
+          %input#name.form-control(ng-model="settings.telegram_token" placeholder="{{'notifr.settings_telegram_token' | translate}}" type="password")/
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %span
+          {{ 'notifr.messagebird' | translate }}
+        &nbsp;
+        %a(href="https://www.messagebird.com/en/" target="_blank")
+          (
+          {{ 'notifr.site' | translate }}
+          &nbsp;
+          .fa.fa-external-link-square
+          )
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_mb_access_key' | translate}}
+          %input#name.form-control(ng-model="settings.mb_access_key" placeholder="{{'notifr.settings_mb_access_key' | translate}}" type="password")/
+
+        .form-group
+          %label {{'notifr.settings_mb_name' | translate}}
+          %input#name.form-control(ng-model="settings.mb_name" placeholder="{{'notifr.settings_mb_name' | translate}}" type="text")/
+
+    .panel.panel-default
+      .panel-heading
+        %span
+          {{ 'notifr.twilio' | translate }}
+        &nbsp;
+        %a(href="https://www.twilio.com/" target="_blank")
+          (
+          {{ 'notifr.site' | translate }}
+          &nbsp;
+          .fa.fa-external-link-square
+          )
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_tw_auth_token' | translate}}
+          %input#name.form-control(ng-model="settings.tw_auth_token" placeholder="{{'notifr.settings_tw_auth_token' | translate}}" type="password")/
+
+        .form-group
+          %label {{'notifr.settings_tw_from' | translate}}
+          %input#name.form-control(ng-model="settings.tw_from" placeholder="{{'notifr.settings_tw_from' | translate}}" type="text")/
+
+        .form-group
+          %label {{'notifr.settings_tw_sid' | translate}}
+          %input#name.form-control(ng-model="settings.tw_sid" placeholder="{{'notifr.settings_tw_sid' | translate}}" type="text")/
+
+    .panel.panel-default
+      .panel-heading
+        %span
+          {{ 'notifr.slack' | translate }}
+        &nbsp;
+        %a(href="https://api.slack.com/" target="_blank")
+          (
+          {{ 'notifr.site' | translate }}
+          &nbsp;
+          .fa.fa-external-link-square
+          )
+      .panel-body
+        .form-group
+          %label {{'notifr.settings_slack_token' | translate}}
+          %input#name.form-control(ng-model="settings.slack_token" placeholder="{{'notifr.settings_slack_token' | translate}}" type="password")/
+
+        .form-group
+          %label {{'notifr.settings_slack_user_name' | translate}}
+          %input#name.form-control(ng-model="settings.slack_user_name" placeholder="{{'notifr.settings_slack_user_name' | translate}}" type="text")/
+
+.row
+  .col-md-12.form-group
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="updateSettings()" if-can="{notifr:['update_config']}")
+        {{'Update' | translate}}

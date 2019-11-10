@@ -150,31 +150,40 @@ angular
       {
         'label': 'Notifr'
         'link': 'dashboard.notifr.index'
-        'route': 'dashboard.notifr'
+        'route': 'dashboard.notifr.index'
         'icon': 'fa fa-envelope'
+        'access': {dashboard: ['read']}
         'items': [
           {
-            'label': 'All notifications'
+            'label': 'New notify'
+            'route': 'dashboard.notifr.new_notification'
+            'access': {notifr: ['create_notify']}
+          }
+          {
+            'label': 'All params'
             'route': 'dashboard.notifr.index'
-            'access': {notifr: ['show_notify']}
-          }
-          {
-            'label': 'All templates'
-            'route': 'dashboard.notifr.template_list'
-            'access': {notifr: ['read_notifr_template']}
-          }
-          {
-            'label': 'Add template'
-            'route': 'dashboard.notifr.new_template'
-            'access': {notifr: ['create_notifr_template']}
           }
           {
             'label': 'All items'
             'route': 'dashboard.notifr.items'
-            'access': {notifr: ['read_notifr_item']}
+            'access': {template: ['read']}
+          }
+          {
+            'label': 'All templates'
+            'route': 'dashboard.notifr.template_list'
+            'access': {template: ['read']}
+          }
+          {
+            'label': 'Add template'
+            'route': 'dashboard.notifr.new_template'
+            'access': {template: ['read', 'create']}
+          }
+          {
+            'label': 'Settings'
+            'route': 'dashboard.notifr.settings'
+            'access': {notifr: ['read_config', 'update_config']}
           }
         ]
-        'access': {notifr: ['show_notify']}
       }
       {
         'label': 'Users'

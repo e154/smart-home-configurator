@@ -10,7 +10,7 @@ angular
     columns: [
       {
         name: 'notifr.refresh'
-        field: 'state'
+        field: 'status'
         template: "<button class='btn btn-default btn-xs' ng-if='item[field] == \"error\"'><i class='fa fa-refresh'> repeat</i></button>"
         width: '100px'
         clickCallback: ($event, item)->
@@ -23,18 +23,18 @@ angular
       {
         name: 'notifr.title'
         field: 'message'
-        template: "<span truncate-text='100'>{{item[field].email_title || item[field].sma_text || item[field].ui_title}}</span>"
+        template: "<span truncate-text='100'>{{item[field].email_body || item[field].sms_text || item[field].ui_text || item[field].slack_text}}</span>"
       }
       {
-        name: 'notifr.state'
-        field: 'state'
-        template: "<span class='label' ng-class='{\"label-success\": item[field] == \"succeed\", \"label-danger\": item[field] == \"error\", \"label-default\": item[field] == \"in_process\"}'>{{item[field]}}</span>"
+        name: 'notifr.status'
+        field: 'status'
+        template: "<span class='label' ng-class='{\"label-success\": item[field] == \"succeed\", \"label-danger\": item[field] == \"error\", \"label-default\": item[field] == \"in_progress\"}'>{{item[field]}}</span>"
         width: '100px'
       }
       {
         name: 'notifr.type'
         field: 'message'
-        template: "<span class='label' ng-class='{\"label-email\": item[field].type == \"email\", \"label-push\": item[field].type == \"push\", \"label-sms\": item[field].type == \"sms\"}'>{{item[field].type}}</span>"
+        template: "<span class='label' ng-class='{\"label-email\": item[field].type == \"email\", \"label-push\": item[field].type == \"push\", \"label-sms\": item[field].type == \"sms\",  \"label-slack\": item[field].type == \"slack\"}'>{{item[field].type}}</span>"
         width: '100px'
       }
       {
@@ -61,7 +61,7 @@ angular
       $event.preventDefault()
 
       $scope.notify = item
-      
+
       ngDialog.open
         scope: $scope
         showClose: false

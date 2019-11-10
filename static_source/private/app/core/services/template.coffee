@@ -1,7 +1,7 @@
 angular
 .module('appServices')
-.factory 'EmailTemplate', ['$resource', ($resource) ->
-  $resource '/api/v1/email/template/:name', {id: '@name'},
+.factory 'Template', ['$resource', ($resource) ->
+  $resource '/api/v1/template/:name', {},
     show:
       method: 'GET'
       responseType: 'json'
@@ -9,7 +9,7 @@ angular
         data?.template || data
 
     create:
-      url: '/api/v1/email/template'
+      url: '/api/v1/template'
       method: 'POST'
 
     update:
@@ -19,11 +19,11 @@ angular
       method: 'DELETE'
 
     all:
-      url: '/api/v1/email/templates'
+      url: '/api/v1/templates'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.templates || []
+        items: data?.items || []
 
 ]

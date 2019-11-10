@@ -2,11 +2,14 @@ angular
 .module('appServices')
 .factory 'Notifr', ['$resource', ($resource) ->
   $resource '/api/v1/notifr/:id', {id: '@id'},
-    show:
+    get_config:
+      url: '/api/v1/notifr/config'
       method: 'GET'
       responseType: 'json'
-      transformResponse: (data) ->
-        data?.item || data  
+
+    update_config:
+      url: '/api/v1/notifr/config'
+      method: 'PUT'
 
     repeat:
       url: '/api/v1/notifr/:id/repeat'
@@ -14,20 +17,18 @@ angular
       responseType: 'json'
 
     send:
+      url: '/api/v1/notifr'
       method: 'POST'
       responseType: 'json'
-
-    update:
-      method: 'PUT'
 
     delete:
       method: 'DELETE'
 
     all:
+      url: '/api/v1/notifrs'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
         meta: data?.meta || {}
-        items: data?.notifications || []
-
+        items: data?.items || []
 ]

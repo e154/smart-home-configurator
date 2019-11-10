@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'emailItemCtrl', ['$scope','Message','EmailItem','Notify','$rootScope', '$translate'
-($scope, Message, EmailItem, Notify, $rootScope, $translate) ->
+.controller 'templateItemCtrl', ['$scope','Message','TemplateItem','Notify','$rootScope', '$translate'
+($scope, Message, TemplateItem, Notify, $rootScope, $translate) ->
 
   vm = this
   vm.items = []
@@ -21,17 +21,16 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.show {name: item}, success, error
+    TemplateItem.show {name: item}, success, error
 
   vm.getTree = ->
 
     success =(tree) ->
-      vm.tree = []
-      vm.tree.push tree
+      vm.tree = tree || []
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.get_tree {}, success, error
+    TemplateItem.get_tree {}, success, error
 
   vm.updateTree = ->
     success =(data) ->
@@ -39,7 +38,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.update_tree {}, vm.tree, success, error
+    TemplateItem.update_tree {}, vm.tree, success, error
 
   vm.edit = (name) ->
     vm.isNew = false
@@ -65,7 +64,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.create {}, vm.activeItem, success, error
+    TemplateItem.create {}, vm.activeItem, success, error
 
   vm.update = ->
 
@@ -76,7 +75,7 @@ angular
     error =(response)->
       Message response.data.status, response.data.message
 
-    EmailItem.update {name: vm.activeItem.name}, vm.activeItem, success, error
+    TemplateItem.update {name: vm.activeItem.name}, vm.activeItem, success, error
 
   vm.delete = ->
     success =->
@@ -88,7 +87,7 @@ angular
       Message response.data.status, response.data.message
 
     if confirm('delete the template element?')
-      EmailItem.delete {name: vm.activeItem.name}, vm.activeItem, success, error
+      TemplateItem.delete {name: vm.activeItem.name}, vm.activeItem, success, error
 
   vm.toggleStatus = (item) ->
     success =->
@@ -97,7 +96,7 @@ angular
       Message response.data.status, response.data.message
 
     item.status = if item.status == 'active' then 'inactive' else 'active'
-    EmailItem.update {name: item.name}, item, success, error
+    TemplateItem.update_status {name: item.name}, {name: item.name, status: item.status}, success, error
 
   #init
   vm.getTree()
