@@ -23,7 +23,7 @@
       %label
         {{'notifr.title' | translate}}
       %div
-        {{notify.message.email_title}}
+        {{notify.message.email_subject}}
     .form-group(ng-if="notify.message.type == 'email'")
       %label
         {{'notifr.body' | translate}}
@@ -32,8 +32,8 @@
     .form-group(ng-if="notify.message.type == 'sms'")
       {{notify.message.sms_text}}
 
-    .form-group(ng-if="notify.message.type == 'push'")
-      {{notify.message.ui_text}}
+    .form-group(ng-if="notify.message.type == 'slack'")
+      {{notify.message.slack_text}}
 
 .row
   .col-md-12

@@ -13,7 +13,7 @@
         %span.text-muted(ng-if="message.type == 'sms'")
           (+12233232332,+12233232334)
         %span.text-muted(ng-if="message.type == 'slack'")
-          ("@channel")
+          ("#channel")
       %input.form-control(ng-model="message.address")
 
     .form-group(ng-if="message.type == 'email'")
@@ -73,7 +73,7 @@
       %label {{'notifr.markers' | translate}}
 
     %div(ng-if="message.body_type == 'template'")
-      .form-group(ng-repeat="marker in message.template.markers")
+      .form-group(ng-repeat="marker in message.template.markers track by $index")
         %label [{{marker}}]
         %input.form-control(ng-model="message.params[marker]")
 

@@ -23,7 +23,7 @@ angular
       {
         name: 'notifr.title'
         field: 'message'
-        template: "<span truncate-text='100'>{{item[field].email_body || item[field].sms_text || item[field].ui_text}}</span>"
+        template: "<span truncate-text='100'>{{item[field].email_body || item[field].sms_text || item[field].ui_text || item[field].slack_text}}</span>"
       }
       {
         name: 'notifr.status'
@@ -34,7 +34,7 @@ angular
       {
         name: 'notifr.type'
         field: 'message'
-        template: "<span class='label' ng-class='{\"label-email\": item[field].type == \"email\", \"label-push\": item[field].type == \"push\", \"label-sms\": item[field].type == \"sms\"}'>{{item[field].type}}</span>"
+        template: "<span class='label' ng-class='{\"label-email\": item[field].type == \"email\", \"label-push\": item[field].type == \"push\", \"label-sms\": item[field].type == \"sms\",  \"label-slack\": item[field].type == \"slack\"}'>{{item[field].type}}</span>"
         width: '100px'
       }
       {
