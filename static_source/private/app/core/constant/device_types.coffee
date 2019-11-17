@@ -3,7 +3,8 @@ angular.module('appConstants')
   [
     'default'
     'smartbus'
-    'modbus'
+    'modbus_rtu'
+    'modbus_tcp'
     'command'
   ]
 ]
