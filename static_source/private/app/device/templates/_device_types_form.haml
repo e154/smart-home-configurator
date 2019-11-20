@@ -20,12 +20,21 @@
         %label {{'device.tty' | translate}}
         %input.form-control(ng-model="device.device.properties.tty" type="string" )
 
-%div(ng-if="device.device.type == 'modbus' && device.device.device.id != null")
+%div(ng-if="device.device.type == 'modbus_rtu' || device.device.type == 'modbus_tcp' && device.device.device.id != null")
     .form-group
         %label {{'device.slave_id' | translate}}
         %input.form-control(ng-model="device.device.properties.slave_id" type="number" )
 
-%div(ng-if="device.device.type == 'modbus' && device.device.device.id == null")
+%div(ng-if="device.device.type == 'modbus_tcp' && device.device.device.id == null")
+    .form-group
+        %label {{'device.slave_id' | translate}}
+        %input.form-control(ng-model="device.device.properties.slave_id" type="number" )
+
+    .form-group
+        %label {{'device.address_port' | translate}}
+        %input.form-control(ng-model="device.device.properties.address_port" type="text" )
+
+%div(ng-if="device.device.type == 'modbus_rtu' && device.device.device.id == null")
 
     .form-group
         %label {{'device.slave_id' | translate}}

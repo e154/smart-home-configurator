@@ -18,7 +18,7 @@ angular
     device: null
     node_id: null
     status: "enabled"
-    type: "modbus"
+    type: "modbus_rtu"
     properties:
       baud: 9600
       timeout: 1000

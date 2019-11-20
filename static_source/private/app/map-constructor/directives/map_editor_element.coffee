@@ -71,8 +71,8 @@ angular
         container.resizable
           aspectRatio: true
           stop: (e)=>
-            graph_settings.height = container.height()
-            graph_settings.width = container.width()
+            graph_settings.height = Math.round(container.height())
+            graph_settings.width = Math.round(container.width())
             update()
 
       if isDraggable
