@@ -6,5 +6,6 @@ angular.module('appConstants')
     'modbus_rtu'
     'modbus_tcp'
     'command'
+    'mqtt'
   ]
 ]

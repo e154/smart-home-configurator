@@ -27,13 +27,10 @@ angular
 
   vm.submit =->
     success =(data)->
-      $state.go("dashboard.device.show", {id: data.id})
+      #$state.go("dashboard.device.show", {id: data.id})
 
     error =(result)->
       Message result.data.status, result.data.message
-
-    if vm.device?.device?.id != null
-      vm.device.properties = {}
 
     vm.device.$create(success, error)
 
