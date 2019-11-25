@@ -32,41 +32,13 @@
       %span.label.label-default(ng-if="device.status == 'disabled'")
         {{"device.disabled" | translate}}
 
-    .form-group(ng-if="device.address")
-      .text-muted
-        {{'device.address' | translate}}
-      %div
-        {{::device.address}}
-
-    .form-group(ng-if="device.baud")
-      .text-muted
-        {{'device.baud' | translate}}
-      %div
-        {{::device.baud}}
-
-    .form-group(ng-if="device.stop_bite")
-      .text-muted
-        {{'device.stop_bite' | translate}}
-      %div
-        {{::device.stop_bite}}
-
-    .form-group(ng-if="device.timeout")
-      .text-muted
-        {{'device.timeout' | translate}}
-      %div
-        {{::device.timeout}}
-
-    .form-group(ng-if="device.tty")
-      .text-muted
-        {{'device.tty' | translate}}
-      %div
-        {{::device.tty}}
-
     .form-group(ng-if="device.description")
       .text-muted
         {{'device.description' | translate}}
       %div
         {{::device.description}}
+
+    %div(ng-include="'/device/templates/_properties_info2.html'")
 
   .col-sm-10
     .form-group

@@ -1,0 +1,77 @@
+%div(ng-if="device.type == 'smartbus'")
+
+    .form-group
+        %label {{'device.node' | translate}}
+        %div
+            %a(href="" ui-sref="dashboard.node.show({id: device.node.id})" )
+                {{device.node.name}}
+
+    .form-group
+        %label {{'device.baud' | translate}}
+        %div {{device.properties.baud}}
+
+    .form-group(ng-if="device.properties.stop_bits")
+        %label {{'device.stop_bite' | translate}}
+        %div {{device.properties.stop_bits}}
+
+    .form-group(ng-if="device.properties.tty")
+        %label {{'device.tty' | translate}}
+        %div {{device.properties.tty}}
+
+    .form-group(ng-if="device.properties.timeout")
+        %label {{'device.timeout' | translate}}
+        %div {{device.properties.timeout}}
+
+    .form-group(ng-if="device.properties.sleep")
+        %label {{'device.sleep' | translate}}
+        %div {{device.properties.sleep}}
+
+%div(ng-if="device.type == 'modbus_tcp'")
+   .form-group(ng-if="device.properties.address_port")
+        %label {{'device.address_port' | translate}}
+        %div {{device.properties.address_port}}
+
+%div(ng-if="device.type == 'modbus_rtu'")
+
+    .form-group
+        %label {{'device.node' | translate}}
+        %div
+            %a(href="" ui-sref="dashboard.node.show({id: device.node.id})" )
+                {{device.node.name}}
+
+    .form-group
+        %label {{'device.baud' | translate}}
+        %div {{device.properties.baud}}
+
+    .form-group(ng-if="device.properties.stop_bits")
+        %label {{'device.stop_bite' | translate}}
+        %div {{device.properties.stop_bits}}
+
+    .form-group(ng-if="device.properties.tty")
+        %label {{'device.tty' | translate}}
+        %div {{device.properties.tty}}
+
+    .form-group(ng-if="device.properties.data_bits")
+        %label {{'device.data_bits' | translate}}
+        %div {{device.properties.data_bits}}
+
+    .form-group(ng-if="device.properties.parity")
+        %label {{'device.parity' | translate}}
+        %div {{device.properties.parity}}
+
+    .form-group(ng-if="device.properties.timeout")
+        %label {{'device.timeout' | translate}}
+        %div {{device.properties.timeout}}
+
+%div(ng-if="device.type == 'default' || device.type == 'command'")
+    .form-group
+        %label {{'device.no_params' | translate}}
+
+%div(ng-if="device.type == 'mqtt'")
+     .form-group
+        %label {{'device.user' | translate}}
+        %div {{device.properties.user}}
+
+    .form-group
+        %label {{'device.password' | translate}}
+        %div {{device.properties.password}}
