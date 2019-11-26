@@ -30,6 +30,7 @@ angular
         properties = {}
       when 'mqtt'
         properties =
+          address: prop.address
           user: prop.user
           password: prop.password
 

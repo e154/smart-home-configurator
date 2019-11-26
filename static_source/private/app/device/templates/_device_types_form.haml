@@ -67,7 +67,7 @@
 %div(ng-if="device.device.type == 'mqtt'")
 
     .form-group
-        %label {{'device.address' | translate}}
+        %label {{'device.mqtt_address' | translate}}
         %input.form-control(ng-model="device.device.properties.address" type="text" )
 
     .form-group

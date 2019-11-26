@@ -69,6 +69,10 @@
 
 %div(ng-if="device.device.type == 'mqtt'")
      .form-group
+        %label {{'device.mqtt_address' | translate}}
+        %div {{device.device.device.properties.address}}
+
+     .form-group
         %label {{'device.user' | translate}}
         %div {{device.device.device.properties.user}}
 

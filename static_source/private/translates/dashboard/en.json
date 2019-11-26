@@ -106,6 +106,7 @@
     "user": "Пользователь",
     "password": "Пароль",
     "address": "Address (device group if null)",
+    "mqtt_address": "Address",
     "group": "Group",
     "tty": "/dev/tty...",
     "description": "Description",
