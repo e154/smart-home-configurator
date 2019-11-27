@@ -32,9 +32,6 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
-    if vm.device?.device?.id != null
-      vm.device.properties = {}
-
     vm.device.$create(success, error)
 
   vm.getNodeInfo =->

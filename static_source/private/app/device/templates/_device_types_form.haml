@@ -20,7 +20,7 @@
         %label {{'device.tty' | translate}}
         %input.form-control(ng-model="device.device.properties.tty" type="string" )
 
-%div(ng-if="device.device.type == 'modbus_rtu' || device.device.type == 'modbus_tcp' && device.device.device.id != null")
+%div(ng-if="device.device.type == 'modbus_rtu' && device.device.device.id != null || device.device.type == 'modbus_tcp' && device.device.device.id != null")
     .form-group
         %label {{'device.slave_id' | translate}}
         %input.form-control(ng-model="device.device.properties.slave_id" type="number" )
@@ -63,6 +63,20 @@
     .form-group
         %label {{'device.timeout' | translate}}
         %input.form-control(ng-model="device.device.properties.timeout" type="number" )
+
+%div(ng-if="device.device.type == 'mqtt'")
+
+    .form-group
+        %label {{'device.mqtt_address' | translate}}
+        %input.form-control(ng-model="device.device.properties.address" type="text" )
+
+    .form-group
+        %label {{'device.user' | translate}}
+        %input.form-control(ng-model="device.device.properties.user" type="text" )
+
+    .form-group
+        %label {{'device.password' | translate}}
+        %input.form-control(ng-model="device.device.properties.password" type="password" )
 
 %div(ng-if="device.device.device.id == null && device.device.type == 'default' || device.device.type == 'command'")
     .form-group

@@ -67,3 +67,15 @@
     .form-group
         %label {{'device.no_params' | translate}}
 
+%div(ng-if="device.device.type == 'mqtt'")
+     .form-group
+        %label {{'device.mqtt_address' | translate}}
+        %div {{device.device.device.properties.address}}
+
+     .form-group
+        %label {{'device.user' | translate}}
+        %div {{device.device.device.properties.user}}
+
+    .form-group
+        %label {{'device.password' | translate}}
+        %div {{device.device.device.properties.password}}
