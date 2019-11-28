@@ -1,0 +1,184 @@
+.row
+  .col-md-12
+    %h3
+      %a(href="" ui-sref="dashboard.mqtt.index")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+      {{'mqtt.client_show' | translate}} ID: {{mqtt.client.client_id}}
+
+
+.row(if-can="{mqtt:['read']}")
+  .col-md-12
+    .form-group
+      %h4
+        {{'mqtt.client.subscriptions' | translate}}:
+
+.row(if-can="{mqtt:['read']}")
+  .col-md-12
+    .table(table="mqtt.SubscriptionsOptions")
+
+.row
+  .col-md-12
+     .form-group
+      %h4
+         {{'mqtt.client.detail' | translate}}:
+.row
+  .col-md-3
+     .form-group
+        .text-muted
+          {{'mqtt.client.client_id' | translate}}
+        %div
+          {{::mqtt.client.client_id}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.clean_session' | translate}}
+        %div
+          {{::mqtt.client.clean_session}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.keep_alive' | translate}}
+        %div
+          {{::mqtt.client.keep_alive}}
+
+     .form-group(ng-if="mqtt.client.connected_at != '1970-01-01T07:00:00+07:00'")
+        .text-muted
+          {{'mqtt.client.connected_at' | translate}}
+        %div
+          {{mqtt.client.connected_at | readableDateTime}}
+
+     .form-group(ng-if="mqtt.client.disconnected_at != '1970-01-01T07:00:00+07:00'")
+        .text-muted
+          {{'mqtt.client.disconnected_at' | translate}}
+        %div
+          {{mqtt.client.disconnected_at | readableDateTime}}
+
+  .col-md-3
+     .form-group
+        .text-muted
+          {{'mqtt.client.local_addr' | translate}}
+        %div
+          {{::mqtt.client.local_addr}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.remote_addr' | translate}}
+        %div
+          {{::mqtt.client.remote_addr}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.username' | translate}}
+        %div
+          {{::mqtt.client.username}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.password' | translate}}
+        %div
+          {{::mqtt.client.password}}
+
+  .col-md-3
+     .form-group
+        .text-muted
+          {{'mqtt.client.will_flag' | translate}}
+        %div
+          {{::mqtt.client.will_flag}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.will_payload' | translate}}
+        %div
+          {{::mqtt.client.will_payload}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.will_qos' | translate}}
+        %div
+          {{::mqtt.client.will_qos}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.will_retain' | translate}}
+        %div
+          {{::mqtt.client.will_retain}}
+
+     .form-group
+        .text-muted
+          {{'mqtt.client.will_topic' | translate}}
+        %div
+          {{::mqtt.client.will_topic}}
+
+
+.row
+  .col-md-12
+    .form-group
+      %h4
+        {{'mqtt.client.session' | translate}}:
+
+.row
+  .col-md-3
+    .form-group
+      .text-muted
+        {{'mqtt.client.await_rel_len' | translate}}
+      %div
+        {{::mqtt.session.await_rel_len}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.clean_session' | translate}}
+      %div
+        {{::mqtt.session.clean_session}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.client_id' | translate}}
+      %div
+        {{::mqtt.session.client_id}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.inflight_len' | translate}}
+      %div
+        {{::mqtt.session.inflight_len}}
+  .col-md-3
+    .form-group
+      .text-muted
+        {{'mqtt.client.max_await_rel' | translate}}
+      %div
+        {{::mqtt.session.max_await_rel}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.max_inflight' | translate}}
+      %div
+        {{::mqtt.session.max_inflight}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.max_msg_queue' | translate}}
+      %div
+        {{::mqtt.session.max_msg_queue}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_delivered_total' | translate}}
+      %div
+        {{::mqtt.session.msg_delivered_total}}
+
+  .col-md-3
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_dropped_total' | translate}}
+      %div
+        {{::mqtt.session.msg_dropped_total}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_queue_len' | translate}}
+      %div
+        {{::mqtt.session.msg_queue_len}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.status' | translate}}
+      %div
+        {{::mqtt.session.status}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.subscriptions' | translate}}
+      %div
+        {{::mqtt.session.subscriptions}}

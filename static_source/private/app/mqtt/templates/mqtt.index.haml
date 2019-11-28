@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    %h3 {{'mqtt.index_form' | translate}}
+
+.row(if-can="{mqtt:['read']}")
+  .col-md-12
+    .table(table="mqtt.options")
