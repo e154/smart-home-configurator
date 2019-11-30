@@ -26,8 +26,15 @@ angular
 
     .state(
       name: "dashboard.mqtt.client_show"
-      url: "/:id"
+      url: "/client/:id"
       templateUrl: '/mqtt/templates/mqtt_client_show.html'
       controller: 'mqttClientShowCtrl as mqtt'
+    )
+
+    .state(
+      name: "dashboard.mqtt.publish"
+      url: "/publish"
+      templateUrl: '/mqtt/templates/mqtt_publish.html'
+      controller: 'mqttPublishCtrl'
     )
 ]

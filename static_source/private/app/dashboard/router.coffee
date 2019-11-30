@@ -36,4 +36,11 @@ angular
       onEnter: ()->
         window.location = "#{window.location.origin}/signout"
     )
+
+    .state(
+      name: "dashboard.menu"
+      url: "menu"
+      controller: 'dashboardMenuCtrl'
+      templateUrl: '/dashboard/templates/dashboard.menu.html'
+    )
 ]

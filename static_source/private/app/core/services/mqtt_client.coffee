@@ -9,6 +9,18 @@ angular
       transformResponse: (data) ->
         data?.client || data
 
+    close:
+      url: '/api/v1/mqtt/client/:id'
+      method: 'DELETE'
+      responseType: 'json'
+      transformResponse: (data) ->
+        data?.client || data
+
+    unsubscribe:
+      url: "/api/v1/mqtt/client/:id/topic"
+      method: 'DELETE'
+      responseType: 'json'
+
     all:
       url: '/api/v1/mqtt/clients'
       method: 'GET'

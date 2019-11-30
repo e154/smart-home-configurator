@@ -4,7 +4,7 @@ angular
 ($scope, Stream, authForm, ifCan) ->
   vm = this
 
-  vm.menu =
+  vm.mainMenu =
     'name': 'Main Menu'
     'items': [
       {
@@ -45,6 +45,18 @@ angular
         ]
         'access': {map: ['read_map']}
       }
+      {
+        'label': 'Settings'
+        'route': 'dashboard.menu'
+        'link': 'dashboard.menu'
+        'icon': 'fa fa-cogs'
+        'access': {dashboard: ['read']}
+      }
+    ]
+
+  vm.secondMenu =
+    'name': 'Second Menu'
+    'items': [
       {
         'label': 'Devices'
         'route': 'dashboard.device'
@@ -141,6 +153,23 @@ angular
         'access': {script: ['read']}
       }
       {
+        'label': 'Mqtt'
+        'route': 'dashboard.mqtt.index'
+        'icon': 'fa fa-tree'
+        'access': {mqtt: ['read']}
+        'items': [
+          {
+            'label': 'All clients'
+            'route': 'dashboard.mqtt.index'
+          }
+          {
+            'label': 'Publish message'
+            'route': 'dashboard.mqtt.publish'
+            'access': {mqtt: ['publish']}
+          }
+        ]
+      }
+      {
         'label': 'Logs'
         'route': 'dashboard.log.index'
         'icon': 'fa fa-file-text-o'
@@ -152,7 +181,7 @@ angular
         'link': 'dashboard.notifr.index'
         'route': 'dashboard.notifr.index'
         'icon': 'fa fa-envelope'
-        'access': {dashboard: ['read']}
+        'access': {notifr: ['read']}
         'items': [
           {
             'label': 'New notify'
@@ -210,6 +239,11 @@ angular
             'label': 'Add role'
             'route': 'dashboard.role.new'
             'access': {user: ['create_role']}
+          }
+          {
+            'label': 'Permissions'
+            'route': 'dashboard.permissions'
+            'access': {user: ['read']}
           }
         ]
         'access': {user: ['read']}

@@ -1,8 +1,16 @@
 angular
 .module('appControllers')
-.controller 'mqttClientShowCtrl', ['$scope', 'Notify', 'MqttClient', '$stateParams', '$state', 'MqttClientSubscriptions'
-($scope, Notify, MqttClient, $stateParams, $state, MqttClientSubscriptions) ->
+.controller 'mqttClientShowCtrl', ['$scope', 'Notify', 'MqttClient', '$stateParams', '$state', 'MqttClientSubscriptions', '$filter', 'ifCan'
+($scope, Notify, MqttClient, $stateParams, $state, MqttClientSubscriptions, $filter, ifCan) ->
   vm = this
+
+  tableCallback = {}
+  unsubscribe =(clientId, topic)->
+    success = (client) ->
+      tableCallback.update()
+    error = ->
+      $state.go 'dashboard.mqtt.index'
+    MqttClient.unsubscribe {id: clientId, topic: topic}, success, error
 
   getClient =->
     success = (client) ->
@@ -18,7 +26,6 @@ angular
 
     MqttClient.session {id: $stateParams.id}, success, error
 
-  tableCallback = {}
   vm.SubscriptionsOptions =
     perPage: 20
     resource: MqttClientSubscriptions($stateParams.id)
@@ -26,6 +33,7 @@ angular
       {
         name: 'mqtt.topic.qos'
         field: 'qos'
+        width: '180px'
       }
       {
         name: 'mqtt.topic.name'
@@ -37,7 +45,19 @@ angular
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
     ]
-    menu:null
+    menu:
+      column: 0
+      buttons: [
+        {
+          name: $filter('translate')('mqtt.menu.unsubscribe')
+          showIf: ()->
+            ifCan.check({mqtt: ['close_topic']})
+          clickCallback: ($event, item)->
+            $event.preventDefault()
+            unsubscribe($stateParams.id, item.name)
+            false
+        }
+      ]
     callback: tableCallback
     onLoad: (result)->
 

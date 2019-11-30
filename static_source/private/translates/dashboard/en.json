@@ -569,7 +569,10 @@
     "copy": "Copy",
     "read_config": "Read config",
     "update_config": "Update config",
-    "preview": "Preview"
+    "preview": "Preview",
+    "close_client": "Close client",
+    "close_topic": "Close topic",
+    "publish": "Publish"
   },
   "access_list": {
     "package_name": "Access rule list"
@@ -616,10 +619,14 @@
     "package_name": "Map zone"
   },
   "mqtt": {
+    "package_name": "Mqtt",
     "index_form": "Mqtt client list",
     "connected_at": "Connected at",
     "disconnected_at": "Disconnected at",
     "client_show": "Mqtt client",
+    "publish": "Publish message",
+    "topic_name": "Topic name",
+    "payload": "Payload",
     "topic": {
       "qos": "QOS",
       "name": "Name",
@@ -652,6 +659,13 @@
       "msg_queue_len": "msg queue len",
       "status": "Status",
       "subscriptions": "Subscriptions"
+    },
+    "menu": {
+      "close": "Close",
+      "unsubscribe": "Unsubscribe"
     }
+  },
+  "menu": {
+    "index_form": "Menu"
   }
 }
