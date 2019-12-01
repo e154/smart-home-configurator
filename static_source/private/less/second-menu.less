@@ -3,7 +3,7 @@
 ul.second-menu {
   li.second-menu-item {
     float: left;
-    /* background-color: red; */
+    background-color: @brand-primary;
     width: 250px;
     height: auto;
     list-style: none;
@@ -11,14 +11,12 @@ ul.second-menu {
      display: block;
     }
     .second-menu-item-inner {
-      min-height: 300px;
-      margin: 10px;
-      background-color: @brand-primary;
+      margin: 10px 0;
       .label {
         width: 100%;
         text-align: center;
         display: block;
-        font-size: 28px;
+        font-size: 2.0vw;
         font-weight: 100;
         color: #fff;
       }
@@ -27,7 +25,7 @@ ul.second-menu {
         width: 100%;
         text-align: center;
         display: block;
-        font-size: 45px;
+        font-size: 4.0vw;
         font-weight: 100;
         color: #fff;
       }
@@ -43,13 +41,16 @@ ul.second-menu {
           padding: 5px 0;
           text-decoration: none;
           color: @color_5;
+          font-size: 1vw;
           &:hover {
             background: #59646e;
             color: @color_7;
+            font-size: 1vw;
           }
         }
         a.active {
           color: @color_7;
+          font-size: 1vw;
         }
       }
     }

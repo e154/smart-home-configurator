@@ -58,6 +58,11 @@ angular
     'name': 'Second Menu'
     'items': [
       {
+        'id': 1
+        'col': 0
+        'row': 0
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Devices'
         'route': 'dashboard.device'
         'link': 'dashboard.device.index'
@@ -77,6 +82,11 @@ angular
         'access': {device: ['read']}
       }
       {
+        'id': 2
+        'col': 1
+        'row': 0
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Nodes'
         'route': 'dashboard.node'
         'link': 'dashboard.node.index'
@@ -96,6 +106,11 @@ angular
         'access': {node: ['read']}
       }
       {
+        'id': 3
+        'col': 2
+        'row': 0
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Flows'
         'route': 'dashboard.flow'
         'link': 'dashboard.flow.index'
@@ -115,6 +130,11 @@ angular
         'access': {flow: ['read']}
       }
       {
+        'id': 4
+        'col': 3
+        'row': 0
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Workflow'
         'route': 'dashboard.workflow'
         'link': 'dashboard.workflow.index'
@@ -134,6 +154,11 @@ angular
         'access': {workflow: ['read']}
       }
       {
+        'id': 5
+        'col': 4
+        'row': 0
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Scripts'
         'route': 'dashboard.script'
         'link': 'dashboard.script.index'
@@ -153,6 +178,11 @@ angular
         'access': {script: ['read']}
       }
       {
+        'id': 6
+        'col': 0
+        'row': 1
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Mqtt'
         'route': 'dashboard.mqtt.index'
         'icon': 'fa fa-tree'
@@ -170,6 +200,11 @@ angular
         ]
       }
       {
+        'id': 7
+        'col': 3
+        'row': 1
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Logs'
         'route': 'dashboard.log.index'
         'icon': 'fa fa-file-text-o'
@@ -177,6 +212,12 @@ angular
 
       }
       {
+        'id': 8
+        'col': 2
+        'row': 1
+        'sizeY': 2
+        'sizeX': 1
+
         'label': 'Notifr'
         'link': 'dashboard.notifr.index'
         'route': 'dashboard.notifr.index'
@@ -215,6 +256,11 @@ angular
         ]
       }
       {
+        'id': 9
+        'col': 1
+        'row': 1
+        'sizeY': 2
+        'sizeX': 1
         'label': 'Users'
         'link': 'dashboard.user.index'
         'route': 'dashboard.user'
@@ -249,6 +295,11 @@ angular
         'access': {user: ['read']}
       }
       {
+        'id': 10
+        'col': 4
+        'row': 1
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Gate'
         'route': 'dashboard.gate.index'
         'icon': 'fa fa-cloud'
@@ -256,6 +307,11 @@ angular
 
       }
       {
+        'id': 10
+        'col': 0
+        'row': 2
+        'sizeY': 1
+        'sizeX': 1
         'label': 'Swagger'
         'route': 'dashboard.swagger.index'
         'icon': 'fa fa-file-text-o'
