@@ -1,0 +1,12 @@
+.row
+  .col-md-12
+    %h3 {{'mqtt.index_form' | translate}}
+
+.row(if-can="{mqtt:['publish']}")
+  .col-md-12.form-group
+    %a(href="" ui-sref="dashboard.mqtt.publish")
+      {{'mqtt.publish' | translate}}
+
+.row(if-can="{mqtt:['read']}")
+  .col-md-12
+    .table(table="mqtt.options")

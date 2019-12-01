@@ -467,7 +467,7 @@
     "password_repeat": "Password repeat",
     "set_password": "Specify a password in both fields",
     "history": "History",
-    "sign_in_count": "Dign in count",
+    "sign_in_count": "Sign in count",
     "last_sign_in_at": "Last sign in at",
     "last_sign_in_ip": "Last sign in ip",
     "current_sign_in_at": "Current sign in at",
@@ -569,7 +569,10 @@
     "copy": "Copy",
     "read_config": "Read config",
     "update_config": "Update config",
-    "preview": "Preview"
+    "preview": "Preview",
+    "close_client": "Close client",
+    "close_topic": "Close topic",
+    "publish": "Publish"
   },
   "access_list": {
     "package_name": "Access rule list"
@@ -614,5 +617,55 @@
   },
   "map_zone": {
     "package_name": "Map zone"
+  },
+  "mqtt": {
+    "package_name": "Mqtt",
+    "index_form": "Mqtt client list",
+    "connected_at": "Connected at",
+    "disconnected_at": "Disconnected at",
+    "client_show": "Mqtt client",
+    "publish": "Publish message",
+    "topic_name": "Topic name",
+    "payload": "Payload",
+    "topic": {
+      "qos": "QOS",
+      "name": "Name",
+      "created_at": "Created at"
+    },
+    "client": {
+      "detail": "Detail",
+      "session": "Session",
+      "client_id": "Client id",
+      "clean_session": "Clean session",
+      "keep_alive": "Keep alive",
+      "local_addr": "Local addr",
+      "username": "Username",
+      "password": "Password",
+      "remote_addr": "Remote addr",
+      "will_flag": "Will flag",
+      "will_payload": "Will payload",
+      "will_qos": "Will qos",
+      "will_retain": "Will retain",
+      "will_topic": "Will topic",
+      "connected_at": "Connected at",
+      "disconnected_at": "Disconnected at",
+      "await_rel_len": "Await rel len",
+      "inflight_len": "Inflight len",
+      "max_await_rel": "Max await rel",
+      "max_inflight": "Max inflight",
+      "max_msg_queue": "Max msg queue",
+      "msg_delivered_total": "Msg delivered total",
+      "msg_dropped_total": "Msg dropped total",
+      "msg_queue_len": "msg queue len",
+      "status": "Status",
+      "subscriptions": "Subscriptions"
+    },
+    "menu": {
+      "close": "Close",
+      "unsubscribe": "Unsubscribe"
+    }
+  },
+  "menu": {
+    "index_form": "Menu"
   }
 }

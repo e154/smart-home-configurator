@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    %h3
+      %a(href="" ui-sref="dashboard.mqtt.index")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+      {{'mqtt.publish' | translate}}
+
+.row
+  .col-md-6
+    .form-group
+      %label {{'mqtt.topic.qos' | translate}}*
+      %input.form-control(ng-model="msg.qos" type="number")
+    .form-group
+      %label {{'mqtt.topic_name' | translate}}*
+      %input.form-control(ng-model="msg.topic" type="text")
+    .form-group
+      %label {{'mqtt.payload' | translate}}
+      %textarea.form-control(ng-model="msg.payload" rows="10" )
+
+.row
+  .col-md-6
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{mqtt:['publish']}")
+        {{'Submit' | translate}}

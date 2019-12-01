@@ -571,7 +571,10 @@
     "copy": "Копирование",
     "read_config": "Чтение настроек",
     "update_config": "Сохранение настроек",
-    "preview": "Просмотр"
+    "preview": "Просмотр",
+    "close_client": "Отключить клиента",
+    "close_topic": "Удалить канал",
+    "publish": "Послать сообщение"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -616,5 +619,55 @@
   },
   "map_zone": {
     "package_name": "Зоны"
+  },
+  "mqtt": {
+    "package_name": "Mqtt",
+    "index_form": "Mqtt список клиентов",
+    "connected_at": "Подключился в",
+    "disconnected_at": "Отключился в",
+    "client_show": "Mqtt клиент",
+    "publish": "Отправить сообщение",
+    "topic_name": "Канал",
+    "payload": "Сообщение",
+    "topic": {
+      "qos": "QOS",
+      "name": "Название",
+      "created_at": "Создан"
+    },
+    "client": {
+      "detail": "Детали",
+      "session": "Сессия",
+      "client_id": "Client id",
+      "clean_session": "Clean session",
+      "keep_alive": "Keep alive",
+      "local_addr": "Локальный адрес",
+      "username": "Пользователь",
+      "password": "Пароль",
+      "remote_addr": "Удаленный адрес",
+      "will_flag": "Will flag",
+      "will_payload": "Will payload",
+      "will_qos": "Will qos",
+      "will_retain": "Will retain",
+      "will_topic": "Will topic",
+      "connected_at": "Подключился в",
+      "disconnected_at": "Отключился в",
+      "await_rel_len": "Await rel len",
+      "inflight_len": "Inflight len",
+      "max_await_rel": "Max await rel",
+      "max_inflight": "Max inflight",
+      "max_msg_queue": "Max msg queue",
+      "msg_delivered_total": "Msg delivered total",
+      "msg_dropped_total": "Msg dropped total",
+      "msg_queue_len": "msg queue len",
+      "status": "Состояние",
+      "subscriptions": "Подписки"
+    },
+    "menu": {
+      "close": "Закрыть",
+      "unsubscribe": "Отписаться"
+    }
+  },
+  "menu": {
+    "index_form": "Меню"
   }
 }
