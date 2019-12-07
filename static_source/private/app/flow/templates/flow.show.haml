@@ -58,5 +58,14 @@
       %div
         {{::flow.description}}
 
+    .form-group
+      .text-muted
+        {{'flow.subscriptions' | translate}}
+      %div(ng-if="!flow.subscriptions.length")
+        {{'No data' | translate}}
+      %div(ng-repeat="sub in flow.subscriptions")
+        %small
+          {{sub.topic}}
+
   .col-md-10(ng-controller="bpmnViewerCtrl" )
     #scheme1.scheme(style="height:400px;")

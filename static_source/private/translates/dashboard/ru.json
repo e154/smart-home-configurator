@@ -208,6 +208,7 @@
     "show_form": "Процесс",
     "new_form": "Новый процесс",
     "index_form": "Список процессов",
+    "subscriptions": "Подписки",
     "element": {
       "title": "Название",
       "script": "Скрипт",
