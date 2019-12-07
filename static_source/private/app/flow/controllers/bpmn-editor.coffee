@@ -1,9 +1,10 @@
 angular
 .module('appControllers')
 .controller 'bpmnEditorCtrl', ['$scope', 'Notify', 'Flow', '$stateParams', '$state', '$timeout', 'bpmnMock'
-'bpmnScheme', 'bpmnSettings', '$http', 'log', 'Worker', 'ngDialog', '$filter', 'Stream', 'DeviceActionSelect2', 'ScriptSelect2', 'FlowSelect2'
+'bpmnScheme', 'bpmnSettings', '$http', 'log', 'Worker', 'ngDialog', '$filter', 'Stream', 'DeviceActionSelect2',
+'ScriptSelect2', 'FlowSelect2', 'MqttTopicSelect2'
 ($scope, Notify, Flow, $stateParams, $state, $timeout, bpmnMock, bpmnScheme, bpmnSettings, $http
-log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, FlowSelect2) ->
+log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, FlowSelect2, MqttTopicSelect2) ->
   vm = this
 
   $scope.selected = []
@@ -286,6 +287,38 @@ log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, Flow
     angular.forEach flows, (flow)->
       if flow.id != $scope.flow.id
         $scope.flows.push flow
+
+  # mqtt topics
+  #------------------------------------------------------------------------------
+  $scope.mqttSelect =
+    current: {}
+
+  $scope.mqttTopics = []
+
+  $scope.refreshMqttTopics = MqttTopicSelect2 (topics)->
+    $scope.mqttTopics = []
+    angular.forEach topics, (topic)->
+      obj =
+        topic: topic.name
+      $scope.mqttTopics.push obj
+
+  $scope.removeTopic =(topic, $index)->
+    $scope.flow.subscriptions.splice($index, 1)
+    return
+
+  $scope.addTopic =(e)->
+    e.preventDefault()
+
+    contains = false
+    angular.forEach $scope.flow.subscriptions, (sub)->
+      if sub.topic == $scope.mqttSelect.current.topic
+        contains = true
+        return
+
+    if !contains
+      $scope.flow.subscriptions.push $scope.mqttSelect.current
+
+
 
   vm
 ]

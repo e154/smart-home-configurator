@@ -209,6 +209,10 @@
     "new_form": "Новый процесс",
     "index_form": "Список процессов",
     "subscriptions": "Подписки",
+    "find_topic": "Добавить канал",
+    "mqtt_topic": "mqtt канал",
+    "add_topic": "Добавить",
+    "find_subscription": "Каналы",
     "element": {
       "title": "Название",
       "script": "Скрипт",
