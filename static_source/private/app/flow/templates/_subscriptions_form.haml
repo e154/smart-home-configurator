@@ -24,3 +24,7 @@
 .form-group
   %a.btn.btn-default.full-width(ng-click="addTopic($event)")
     {{'flow.add_topic' | translate}}
+
+.form-group
+  %a(ng-click="showMqttPublishDialog($event)" href="#")
+    {{'mqtt.publish' | translate}}

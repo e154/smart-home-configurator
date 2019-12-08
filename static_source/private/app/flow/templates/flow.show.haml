@@ -67,5 +67,9 @@
         %small
           {{sub.topic}}
 
+    .form-group
+      %a(ng-click="showMqttPublishDialog($event)" href="#")
+        {{'mqtt.publish' | translate}}
+
   .col-md-10(ng-controller="bpmnViewerCtrl" )
     #scheme1.scheme(style="height:400px;")
