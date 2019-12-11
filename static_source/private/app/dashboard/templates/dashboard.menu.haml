@@ -8,17 +8,14 @@
     .widgets-grid(gridster="gridsterOptions")
       %ul.second-menu
         %li.second-menu-item(gridster-item="item" ng-repeat="item in dashboard.secondMenu.items" if-can="item.access")
-          .second-menu-item-inner(ng-if="item.items" )
-            .label
-              {{item.label | translate}}
-            .icon-wrap(ng-if="item.icon")
-              .i(ng-class="[item.icon]")
+          .second-menu-item-inner
+            %a(ui-sref="{{item.link}}")
+              .label
+                {{item.label | translate}}
+              .icon-wrap(ng-if="item.icon")
+                .i(ng-class="[item.icon]")
+
             %ul.submenu
               %li(ng-repeat="subitem in item.items" if-can="item.access")
                 %a(ui-sref="{{subitem.route}}")
                   {{subitem.label}}
-          %a.second-menu-item-inner(ng-if="item.items==null" ui-sref="{{item.route}}")
-            .label
-              {{item.label | translate}}
-            .icon-wrap(ng-if="item.icon")
-              .i(ng-class="[item.icon]")

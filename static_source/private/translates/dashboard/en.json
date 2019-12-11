@@ -206,6 +206,11 @@
     "show_form": "Show form",
     "new_form": "New form",
     "index_form": "Index form",
+    "subscriptions": "Subscriptions",
+    "find_topic": "Find topic",
+    "mqtt_topic": "mqtt topic",
+    "add_topic": "Add topic",
+    "find_subscription": "Topics",
     "element": {
       "title": "Title",
       "script": "Script",

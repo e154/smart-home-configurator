@@ -184,7 +184,8 @@ angular
         'sizeY': 1
         'sizeX': 1
         'label': 'Mqtt'
-        'route': 'dashboard.mqtt.index'
+        'route': 'dashboard.mqtt'
+        'link': 'dashboard.mqtt.index'
         'icon': 'fa fa-tree'
         'access': {mqtt: ['read']}
         'items': [
@@ -207,6 +208,7 @@ angular
         'sizeX': 1
         'label': 'Logs'
         'route': 'dashboard.log.index'
+        'link': 'dashboard.log.index'
         'icon': 'fa fa-file-text-o'
         'access': {log: ['read']}
 
@@ -220,7 +222,7 @@ angular
 
         'label': 'Notifr'
         'link': 'dashboard.notifr.index'
-        'route': 'dashboard.notifr.index'
+        'route': 'dashboard.notifr'
         'icon': 'fa fa-envelope'
         'access': {notifr: ['read']}
         'items': [
@@ -301,7 +303,8 @@ angular
         'sizeY': 1
         'sizeX': 1
         'label': 'Gate'
-        'route': 'dashboard.gate.index'
+        'link': 'dashboard.gate.index'
+        'route': 'dashboard.gate'
         'icon': 'fa fa-cloud'
         'access': {gate: ['read']}
 
@@ -313,7 +316,8 @@ angular
         'sizeY': 1
         'sizeX': 1
         'label': 'Swagger'
-        'route': 'dashboard.swagger.index'
+        'link': 'dashboard.swagger.index'
+        'route': 'dashboard.swagger'
         'icon': 'fa fa-file-text-o'
         'access': {swagger: ['read']}
 

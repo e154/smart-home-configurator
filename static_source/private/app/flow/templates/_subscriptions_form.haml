@@ -1,0 +1,30 @@
+.form-group
+  %div(ng-if="!flow.subscriptions.length")
+    {{'No data' | translate}}
+
+  %div(ng-repeat="sub in flow.subscriptions")
+    %a( href="#" truncate-text="23" ng-click="removeTopic(sub, $index)")
+      {{sub.topic}}
+
+.form-group
+  %label.clearfix
+    {{'flow.find_subscription' | translate}}
+
+  -#
+  -#  select2
+  -#
+  %ui-select(ng-model="mqttSelect.current" theme="bootstrap")
+    %ui-select-match(placeholder="{{'flow.mqtt_topic' | translate}}")
+      {{mqttSelect.current.topic}}
+    %ui-select-choices(repeat="item in mqttTopics | filter: $select.search" refresh="refreshMqttTopics($select.search)" refresh-delay="0")
+      %div(ng-bind-html="item.topic | highlight: $select.search")
+    %ui-select-no-choice
+      {{'No data' | translate}}
+
+.form-group
+  %a.btn.btn-default.full-width(ng-click="addTopic($event)")
+    {{'flow.add_topic' | translate}}
+
+.form-group
+  %a(ng-click="showMqttPublishDialog($event)" href="#")
+    {{'mqtt.publish' | translate}}

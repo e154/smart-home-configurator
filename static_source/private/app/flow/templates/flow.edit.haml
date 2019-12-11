@@ -25,6 +25,9 @@
         .fa.fa-plus &nbsp;
         {{'flow.add_worker' | translate}}
 
+    .dark(accordion-v1="flow-subscriptions" title="{{'flow.subscriptions' | translate}}" expand=true)
+      %div(ng-include="'/flow/templates/_subscriptions_form.html'")
+
   .col-md-10
     -# ---------------------------------------------
     -# redactor
