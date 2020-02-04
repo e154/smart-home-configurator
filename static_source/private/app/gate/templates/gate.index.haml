@@ -15,7 +15,7 @@
           %i.fa.fa-refresh
         .gate-map-arrow-status.success(ng-if="gateStatus=='connected'")
           %i.fa.fa-check
-        .gate-map-arrow-status.error(ng-if="gateStatus=='disabled'")
+        .gate-map-arrow-status.error(ng-if="gateStatus=='not connected'")
           %i.fa.fa-remove
       .gate-map-server
         %img(src="/static/images/gate/gate_cloud_orange.svg" alt="gate server")
