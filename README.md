@@ -11,7 +11,7 @@ Smart home configurator
 
 [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator)
 ![status](https://img.shields.io/badge/status-beta-yellow.svg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Attention! The project is under active development.
 ---------
@@ -93,4 +93,4 @@ It's all
 
 ### LICENSE
 
-[MIT Public License](https://github.com/e154/smart-home-configurator/blob/master/LICENSE)
+[GPLv3 Public License](https://github.com/e154/smart-home-configurator/blob/master/LICENSE)
