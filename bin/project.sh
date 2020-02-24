@@ -73,7 +73,7 @@ __init() {
     npm install
 
     cd ${ROOT}
-    dep ensure
+    go mod vendor
 
     cp ${ROOT}/conf/config.dev.json ${ROOT}/conf/config.json
 }

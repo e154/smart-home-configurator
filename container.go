@@ -19,12 +19,12 @@
 package main
 
 import (
-	"github.com/e154/smart-home-configurator/system/dig"
 	"github.com/e154/smart-home-configurator/system/config"
 	"github.com/e154/smart-home-configurator/system/graceful_service"
 	"github.com/e154/smart-home-configurator/system/logging"
 	"github.com/e154/smart-home-configurator/system/server"
 	"github.com/e154/smart-home-configurator/system/server/controllers"
+	"go.uber.org/dig"
 )
 
 func BuildContainer() (container *dig.Container) {
@@ -41,6 +41,3 @@ func BuildContainer() (container *dig.Container) {
 
 	return
 }
-
-
-

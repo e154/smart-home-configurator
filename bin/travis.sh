@@ -112,7 +112,7 @@ __init() {
 
     mkdir -p ${TMP_DIR}
     cd ${ROOT}
-    dep ensure
+    go mod vendor
     cd ${ROOT}/static_source/private
     bower install
     cd ${ROOT}/static_source/public

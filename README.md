@@ -9,9 +9,14 @@ Smart home configurator
 [Modbus device controller](https://github.com/e154/smart-home-modbus-ctrl-v1/) |
 [Mobile app](https://github.com/e154/smart-home-app/)
 
-[![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator)
 ![status](https://img.shields.io/badge/status-beta-yellow.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+|Branch      |Status   |
+|------------|---------|
+|master      | [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator?branch=master)   |
+|dev         | [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=develop)](https://travis-ci.org/e154/smart-home-configurator?branch=develop) |
+
 
 Attention! The project is under active development.
 ---------
@@ -24,13 +29,11 @@ Attention! The project is under active development.
 ### Installation for development
 
 ```bash
-go get -u github.com/golang/dep/cmd/dep
-
 git clone https://github.com/e154/smart-home-configurator $GOPATH/src/github.com/e154/smart-home-configurator
 
 cd $GOPATH/src/github.com/e154/smart-home-configurator
 
-dep ensure
+go mod vendor
 
 go build
 ```
