@@ -213,6 +213,10 @@
     "mqtt_topic": "mqtt канал",
     "add_topic": "Добавить",
     "find_subscription": "Каналы",
+    "find_zigbee2mqtt_devices": "Zigbee2mqtt устройства",
+    "zigbee2mqtt_device": "Zigbee2mqtt устройство",
+    "zigbee2mqtt": "Zigbee2mqtt",
+    "add_device": "Добавить",
     "element": {
       "title": "Название",
       "script": "Скрипт",

@@ -68,6 +68,15 @@
           {{sub.topic}}
 
     .form-group
+      .text-muted
+        {{'flow.zigbee2mqtt' | translate}}
+      %div(ng-if="!flow.zigbee2mqtt_devices.length")
+        {{'No data' | translate}}
+      %div(ng-repeat="dev in flow.zigbee2mqtt_devices")
+        %small
+          {{dev.name}}, {{dev.description}}
+
+    .form-group
       %a(ng-click="showMqttPublishDialog($event)" href="#")
         {{'mqtt.publish' | translate}}
 

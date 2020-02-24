@@ -211,6 +211,10 @@
     "mqtt_topic": "mqtt topic",
     "add_topic": "Add topic",
     "find_subscription": "Topics",
+    "find_zigbee2mqtt_devices": "Zigbee2mqtt devices",
+    "zigbee2mqtt_device": "Zigbee2mqtt device",
+    "zigbee2mqtt": "Zigbee2mqtt",
+    "add_device": "Add device",
     "element": {
       "title": "Title",
       "script": "Script",
