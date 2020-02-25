@@ -581,7 +581,8 @@
     "preview": "Preview",
     "close_client": "Close client",
     "close_topic": "Close topic",
-    "publish": "Publish"
+    "publish": "Publish",
+    "rename_device": "Rename device"
   },
   "access_list": {
     "package_name": "Access rule list"
@@ -676,5 +677,8 @@
   },
   "menu": {
     "index_form": "Menu"
+  },
+  "zigbee2mqtt": {
+    "package_name": "zigbee2mqtt"
   }
 }

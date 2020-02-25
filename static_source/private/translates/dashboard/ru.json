@@ -583,7 +583,8 @@
     "preview": "Просмотр",
     "close_client": "Отключить клиента",
     "close_topic": "Удалить канал",
-    "publish": "Послать сообщение"
+    "publish": "Послать сообщение",
+    "rename_device": "Переименовать устройство"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -678,5 +679,8 @@
   },
   "menu": {
     "index_form": "Меню"
+  },
+  "zigbee2mqtt": {
+    "package_name": "zigbee2mqtt"
   }
 }
