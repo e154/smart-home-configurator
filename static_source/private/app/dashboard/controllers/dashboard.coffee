@@ -181,7 +181,7 @@ angular
         'id': 6
         'col': 0
         'row': 1
-        'sizeY': 1
+        'sizeY': 2
         'sizeX': 1
         'label': 'Mqtt'
         'route': 'dashboard.mqtt'
@@ -197,6 +197,10 @@ angular
             'label': 'Publish message'
             'route': 'dashboard.mqtt.publish'
             'access': {mqtt: ['publish']}
+          }
+          {
+            'label': 'Zigbee2mqtt'
+            'route': 'dashboard.mqtt.zigbee2mqtt'
           }
         ]
       }
@@ -311,8 +315,8 @@ angular
       }
       {
         'id': 10
-        'col': 0
-        'row': 2
+        'col': 3
+        'row': 3
         'sizeY': 1
         'sizeX': 1
         'label': 'Swagger'

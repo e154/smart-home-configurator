@@ -1,0 +1,48 @@
+.form-group
+    %label {{'zigbee2mqtt.name' | translate}}*
+    %input.form-control(ng-model="br.name")
+
+.form-group
+    %label {{'zigbee2mqtt.base_topic' | translate}}*
+    %input.form-control(ng-model="br.base_topic")
+
+.form-group
+    %label {{'zigbee2mqtt.login' | translate}}
+    %input.form-control(ng-model="br.login" type="text")
+
+.row
+  .col-lg-12
+    .form-group
+      {{'zigbee2mqtt.set_password' | translate}}
+
+-#
+-# password
+-#
+.row
+  %password-check(nickname="input#nickname" password-input="input#password" confirm-input="input#password_repeat" password-recommendation="#pass-recommendation" password-confirm-recommendation="#pass-confirm-recommendation" strength-recommendation="#strength-recommendation" auto_disable="br.isNew" submit_button="button.submit_button")
+  .col-lg-6
+    .form-group
+      %label {{'zigbee2mqtt.password' | translate}}
+      %input#password.form-control(ng-model="br.password" type="password" )
+
+  .col-lg-6
+    .form-group
+      #pass-recommendation
+      .clearfix
+
+.row
+  .col-lg-6
+    .form-group
+      %label {{'zigbee2mqtt.password_repeat' | translate}}
+      %input#password_repeat.form-control(ng-model="br.password_repeat" type="password" )
+
+  .col-lg-6
+    .form-group
+      #pass-confirm-recommendation
+      .clearfix
+
+.row
+  .col-lg-12
+    .form-group
+      #strength-recommendation
+      .clearfix

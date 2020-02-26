@@ -679,6 +679,22 @@
     "index_form": "Menu"
   },
   "zigbee2mqtt": {
-    "package_name": "zigbee2mqtt"
+    "package_name": "zigbee2mqtt",
+    "index_form": "Zigbee2mqtt list",
+    "base_topic": "Base topic",
+    "created_at": "Created at",
+    "updated_at": "Update at",
+    "show": "Bridge",
+    "status": "Status",
+    "permit_join": "permit join",
+    "online": "online",
+    "offline": "offline",
+    "login": "login",
+    "name": "Name",
+    "edit_form": "Edit bridge",
+    "new_form": "New bridge",
+    "password": "Password",
+    "password_repeat": "Password repeat",
+    "set_password": "Specify a password in both fields"
   }
 }

@@ -10,10 +10,43 @@ angular
 
     create:
       method: 'POST'
+      url: '/api/v1/zigbee2mqtt'
+      responseType: 'json'
+
+    reset:
+      method: 'POST'
+      url: '/api/v1/zigbee2mqtt/:id/reset'
+      responseType: 'json'
+
+    device_ban:
+      method: 'POST'
+      url: '/api/v1/zigbee2mqtt/:id/device_ban'
+      responseType: 'json'
+
+    device_whitelist:
+      method: 'POST'
+      url: '/api/v1/zigbee2mqtt/:id/device_whitelist'
+      responseType: 'json'
+
+    update_networkmap:
+      method: 'POST'
+      url: '/api/v1/zigbee2mqtt/:id/update_networkmap'
+      responseType: 'json'
+
+    networkmap:
+      method: 'GET'
+      url: '/api/v1/zigbee2mqtt/:id/networkmap'
+      responseType: 'json'
+
+    device_rename:
+      method: 'PATCH'
+      url: '/api/v1/zigbee2mqtt/:id/device_rename'
       responseType: 'json'
 
     update:
-        method: 'PUT'
+      method: 'PUT'
+      url: '/api/v1/zigbee2mqtt/:id'
+      responseType: 'json'
 
     delete:
       method: 'DELETE'

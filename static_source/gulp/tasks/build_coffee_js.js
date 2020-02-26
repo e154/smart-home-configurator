@@ -25,7 +25,9 @@ var gulp = require('gulp'),
     inject = require('gulp-inject'),
     coffee = require('gulp-coffee'),
     uglify = require('gulp-uglify'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    ngAnnotate = require('gulp-ng-annotate'),
+    plumber = require('gulp-plumber');
 
 var date = new Date();
 
@@ -42,9 +44,12 @@ for (var key in conf) {
             return gulp.src(source)
                 .pipe(coffee({bare: true})
                     .on('error', done))     // Compile coffeescript
-                // .pipe(ngconcat(filename))
-                .pipe(concat(filename))
-                .pipe(uglify())
+                .pipe(plumber())
+                    .pipe(ngconcat(filename))
+                    .pipe(ngAnnotate({add: true}))
+                .pipe(plumber.stop())
+                // .pipe(concat(filename))
+                // .pipe(uglify())
                 //.pipe(ngClassify())
                 .pipe(replace('__CURRENT_TIME__', date))
                 .pipe(gulp.dest(dest));
