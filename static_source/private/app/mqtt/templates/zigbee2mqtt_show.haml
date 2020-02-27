@@ -17,7 +17,7 @@
           {{'Updated at' | translate}} {{br.model.updated_at | readableDateTime}}
 
 .row
-  .col-md-12
+  .col-md-2
     .form-group
       .text-muted
         {{'zigbee2mqtt.status' | translate}}
@@ -52,3 +52,43 @@
         {{'zigbee2mqtt.login' | translate}}
       %div
         {{::br.model.login}}
+
+  .col-md-6
+    .row
+      .col-md-12
+        %h4
+          {{'zigbee2mqtt.devices' | translate}}
+
+    .row(ng-repeat="device in br.model.devices")
+
+      .col-md-8.zigbee2mqtt-device-card
+
+        %dl
+          %dt {{'zigbee2mqtt.device.id' | translate}}
+          %dd {{::device.id}}
+
+          %dt {{'zigbee2mqtt.device.name' | translate}}
+          %dd {{::device.name}}
+
+          %dt {{'zigbee2mqtt.device.model' | translate}}
+          %dd {{::device.model}}
+
+          %dt {{'zigbee2mqtt.device.description' | translate}}
+          %dd {{::device.description}}
+
+          %dt {{'zigbee2mqtt.device.manufacturer' | translate}}
+          %dd {{::device.manufacturer}}
+
+          %dt {{'zigbee2mqtt.device.functions' | translate}}
+          %dd
+            %span(ng-repeat="item in device.functions")
+              {{item}}&nbsp;
+        %br
+        %br
+
+      .col-md-4.zigbee2mqtt-device-image
+        %span.label.label-success(ng-if="device.status == 'active'")
+          {{::device.status}}
+        %span.label.label-default(ng-if="device.status != 'active'")
+          {{::device.status}}
+        %img(ng-src="{{device.image_url}}" err-src="/static/images/placeholder_file_not_found.svg")

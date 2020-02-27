@@ -695,6 +695,17 @@
     "new_form": "New bridge",
     "password": "Password",
     "password_repeat": "Password repeat",
-    "set_password": "Specify a password in both fields"
+    "set_password": "Specify a password in both fields",
+    "devices": "Devices",
+    "device": {
+      "id": "id",
+      "name": "name",
+      "model": "model",
+      "description": "description",
+      "manufacturer": "manufacturer",
+      "functions": "functions",
+      "status": "status",
+      "active": "active"
+    }
   }
 }
