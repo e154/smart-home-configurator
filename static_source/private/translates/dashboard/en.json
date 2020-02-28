@@ -697,6 +697,8 @@
     "password_repeat": "Password repeat",
     "set_password": "Specify a password in both fields",
     "devices": "Devices",
+    "no_devices": "No devices",
+    "network_map":"Network map",
     "device": {
       "id": "id",
       "name": "name",

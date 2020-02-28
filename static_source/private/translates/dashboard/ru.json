@@ -681,6 +681,35 @@
     "index_form": "Меню"
   },
   "zigbee2mqtt": {
-    "package_name": "zigbee2mqtt"
+    "package_name": "zigbee2mqtt",
+    "index_form": "Zigbee2mqtt список",
+    "base_topic": "Главный топик",
+    "created_at": "Создан",
+    "updated_at": "Обновлён",
+    "show": "Мост",
+    "status": "Статус",
+    "permit_join": "Разрешить присоединиться",
+    "online": "В сети",
+    "offline": "Не в сети",
+    "login": "Логин",
+    "name": "Название",
+    "edit_form": "Редактировать",
+    "new_form": "Новый мост",
+    "password": "Пароль",
+    "password_repeat": "Пароль повторно",
+    "set_password": "Укажите пароль в обоих полях.",
+    "devices": "Устройства",
+    "no_devices": "Нет устройств",
+    "network_map":"Карта сети",
+    "device": {
+      "id": "id",
+      "name": "Название",
+      "model": "Модель",
+      "description": "Описание",
+      "manufacturer": "Производитель",
+      "functions": "Функции",
+      "status": "Статус",
+      "active": "Активный"
+    }
   }
 }
