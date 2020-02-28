@@ -1,0 +1,57 @@
+.row
+  .col-md-12
+    %h4
+      %a(href="" ng-click="unselect()")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+        {{'zigbee2mqtt.devices' | translate}}
+.row
+  .col-md-6.zigbee2mqtt-device-card
+
+    %dl
+      %dt {{'zigbee2mqtt.device.id' | translate}}
+      %dd {{::selected.id}}
+
+      %dt {{'zigbee2mqtt.device.name' | translate}}
+      %dd {{selected.name}}
+
+      %dt {{'zigbee2mqtt.device.model' | translate}}
+      %dd {{::selected.model}}
+
+      %dt {{'zigbee2mqtt.device.description' | translate}}
+      %dd {{::selected.description}}
+
+      %dt {{'zigbee2mqtt.device.manufacturer' | translate}}
+      %dd {{::selected.manufacturer}}
+
+      %dt {{'zigbee2mqtt.device.functions' | translate}}
+      %dd
+        %span(ng-repeat="item in selected.functions")
+          {{item}}&nbsp;
+
+      %dt {{'Created at' | translate}}
+      %dd {{selected.created_at | readableDateTime}}
+
+      %dt {{'Updated at' | translate}}
+      %dd {{selected.updated_at | readableDateTime}}
+    %br
+    %br
+
+  .col-md-6.zigbee2mqtt-device-image
+    %span.label.label-success(ng-if="selected.status == 'active'")
+      {{::selected.status}}
+    %span.label.label-default(ng-if="selected.status != 'active'")
+      {{::selected.status}}
+    %img(ng-src="{{selected.image_url}}" err-src="/static/images/placeholder_file_not_found.svg")
+
+.row
+  .col-md-6
+    .form-group
+      %label {{'zigbee2mqtt.name' | translate}}
+      %input.form-control(ng-model="selected.name")
+
+.row
+  .col-md-6
+    .pull-right
+      %a.btn.btn-primary(href="" role="button" ng-click="renameDevice()" if-can="{zigbee2mqtt:['update']}")
+        {{'Update' | translate}}

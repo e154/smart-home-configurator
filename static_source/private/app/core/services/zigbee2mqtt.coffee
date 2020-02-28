@@ -40,7 +40,7 @@ angular
 
     device_rename:
       method: 'PATCH'
-      url: '/api/v1/zigbee2mqtt/:id/device_rename'
+      url: '/api/v1/zigbee2mqtts/device_rename'
       responseType: 'json'
 
     update:
@@ -52,7 +52,7 @@ angular
       method: 'DELETE'
 
     all:
-      url: '/api/v1/zigbee2mqtts'
+      url: '/api/v1/zigbee2mqtts?friendly_name'
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->

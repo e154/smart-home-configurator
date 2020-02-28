@@ -53,42 +53,69 @@
       %div
         {{::br.model.login}}
 
-  .col-md-6
+    .form-group
+      .text-muted
+        {{'zigbee2mqtt.permit_join' | translate}}
+      %div
+        {{::br.model.permit_join}}
+
+    -#.form-group
+    -#  .text-muted
+    -#    {{'zigbee2mqtt.network_map' | translate}}
+    -#  %div(ng-if="br.networkmap == ''")
+    -#    No map
+    -#  %div(ng-if="br.networkmap != ''")
+    -#    -#{{::br.networkmap}}
+    -#    show
+    -#
+    -#.form-group
+    -#  %a.btn.btn-default(href="" role="button" ng-click="updateMap()" if-can="{mqtt:['publish']}")
+    -#    {{'Update map' | translate}}
+
+
+  .col-md-10(ng-if="selected")
+
+    %div(ng-include="'/mqtt/templates/_zigbee2mqtt_device_show.html'")
+
+  .col-md-10(ng-if="!selected")
     .row
       .col-md-12
         %h4
           {{'zigbee2mqtt.devices' | translate}}
 
-    .row(ng-repeat="device in br.model.devices")
+    .row
 
-      .col-md-8.zigbee2mqtt-device-card
+      .col-md-12
+        %div(ng-if="br.model.devices.length == 0")
+          {{'zigbee2mqtt.no_devices' | translate}}
 
-        %dl
-          %dt {{'zigbee2mqtt.device.id' | translate}}
-          %dd {{::device.id}}
+        %table.table.list-table(ng-if="br.model.devices.length > 0")
+          %thead
+            %th
+              {{'zigbee2mqtt.device.name' | translate}}
+            %th
+              {{'zigbee2mqtt.device.description' | translate}}
 
-          %dt {{'zigbee2mqtt.device.name' | translate}}
-          %dd {{::device.name}}
-
-          %dt {{'zigbee2mqtt.device.model' | translate}}
-          %dd {{::device.model}}
-
-          %dt {{'zigbee2mqtt.device.description' | translate}}
-          %dd {{::device.description}}
-
-          %dt {{'zigbee2mqtt.device.manufacturer' | translate}}
-          %dd {{::device.manufacturer}}
-
-          %dt {{'zigbee2mqtt.device.functions' | translate}}
-          %dd
-            %span(ng-repeat="item in device.functions")
-              {{item}}&nbsp;
-        %br
-        %br
-
-      .col-md-4.zigbee2mqtt-device-image
-        %span.label.label-success(ng-if="device.status == 'active'")
-          {{::device.status}}
-        %span.label.label-default(ng-if="device.status != 'active'")
-          {{::device.status}}
-        %img(ng-src="{{device.image_url}}" err-src="/static/images/placeholder_file_not_found.svg")
+            %th
+              {{'zigbee2mqtt.device.status' | translate}}
+            %th
+              {{'Created at' | translate}}
+            %th
+              {{'Updated at' | translate}}
+          %tbody
+            %tr(ng-repeat="device in br.model.devices")
+              %td
+                %a(href="#" ng-click="select(device)")
+                  {{::device.name}}
+              %td
+                %a(href="#" ng-click="select(device)")
+                  {{::device.description}}
+              %td
+                %span.label.label-success(ng-if="device.status == 'active'")
+                  {{::device.status}}
+                %span.label.label-default(ng-if="device.status != 'active'")
+                  {{::device.status}}
+              %td
+                {{::device.created_at | readableDateTime}}
+              %td
+                {{::device.updated_at | readableDateTime}}
