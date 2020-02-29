@@ -6,6 +6,8 @@ angular
 
   Zigbee2mqtt.show {id: $stateParams.id}, (data)->
     $scope.br = data.model
+    $scope.br.password = ''
+    $scope.br.password_repeat = ''
 
   $scope.remove =->
     $translate('Delete this item').then (text)->

@@ -56,8 +56,7 @@
     .form-group
       .text-muted
         {{'zigbee2mqtt.permit_join' | translate}}
-      %div
-        {{::br.model.permit_join}}
+      %i.fa.fa-toggle-on(ng-class="br.model.permit_join?'active':'fa-rotate-180 inactive'" ng-click="update_permit_join()")
 
     -#.form-group
     -#  .text-muted

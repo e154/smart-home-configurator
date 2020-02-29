@@ -700,6 +700,8 @@
     "no_devices": "No devices",
     "network_map":"Network map",
     "soft_reset":"Soft reset",
+    "on": "On",
+    "off": "Off",
     "device": {
       "id": "id",
       "name": "name",

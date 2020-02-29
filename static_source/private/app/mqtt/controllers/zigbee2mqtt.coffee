@@ -27,7 +27,8 @@ angular
         name: 'zigbee2mqtt.permit_join'
         field: 'permit_join'
         width: '100px'
-        template: '<span>{{item.model[field]}}</span>'
+        template: '<span class=\'label label-default\' ng-if=\'item[\"status\"]\'>{{\"zigbee2mqtt.off\" | translate}}</span>
+<span class=\'label label-success\' ng-if=\'!item[\"status\"]\'>{{\"zigbee2mqtt.on\" | translate}}</span>'
       }
       {
         name: 'zigbee2mqtt.created_at'

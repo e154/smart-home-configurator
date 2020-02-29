@@ -35,6 +35,16 @@ angular
       Message result.data.status, result.data.message
     Zigbee2mqtt.reset {id: $stateParams.id}, {}, success, error
 
+  $scope.update_permit_join =->
+    $scope.br.model.permit_join = !$scope.br.model.permit_join
+    success =->
+      getBridge()
+    error =(result)->
+      Message result.data.status, result.data.message
+      $scope.br.model.password = null
+      $scope.br.model.password_repeat = null
+    Zigbee2mqtt.update {id: $stateParams.id}, $scope.br.model, success, error
+
   getBridge =->
     success = (br) ->
       $scope.br = br
