@@ -700,7 +700,8 @@
     "set_password": "Укажите пароль в обоих полях.",
     "devices": "Устройства",
     "no_devices": "Нет устройств",
-    "network_map":"Карта сети",
+    "network_map": "Карта сети",
+    "soft_reset": "Перезагрузить",
     "device": {
       "id": "id",
       "name": "Название",

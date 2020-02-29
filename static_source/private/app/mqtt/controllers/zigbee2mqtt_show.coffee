@@ -28,6 +28,13 @@ angular
       Message result.data.status, result.data.message
     Zigbee2mqtt.update_networkmap {id: $stateParams.id}, {}, success, error
 
+  $scope.reset =->
+    success =->
+      getBridge()
+    error =(result)->
+      Message result.data.status, result.data.message
+    Zigbee2mqtt.reset {id: $stateParams.id}, {}, success, error
+
   getBridge =->
     success = (br) ->
       $scope.br = br

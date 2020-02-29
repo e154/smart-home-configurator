@@ -72,6 +72,10 @@
     -#  %a.btn.btn-default(href="" role="button" ng-click="updateMap()" if-can="{mqtt:['publish']}")
     -#    {{'Update map' | translate}}
 
+    .form-group
+      %a.btn.btn-warning(href="" role="button" ng-click="reset()" if-can="{mqtt:['publish']}")
+        {{'zigbee2mqtt.soft_reset' | translate}}
+
 
   .col-md-10(ng-if="selected")
 

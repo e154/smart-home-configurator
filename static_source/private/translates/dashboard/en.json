@@ -699,6 +699,7 @@
     "devices": "Devices",
     "no_devices": "No devices",
     "network_map":"Network map",
+    "soft_reset":"Soft reset",
     "device": {
       "id": "id",
       "name": "name",
