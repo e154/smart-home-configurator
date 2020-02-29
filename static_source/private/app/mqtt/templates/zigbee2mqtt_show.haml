@@ -1,0 +1,124 @@
+.row
+  .col-md-12
+    %h3
+      %a(href="" ui-sref="dashboard.mqtt.zigbee2mqtt")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+      {{'zigbee2mqtt.show' | translate}} №{{br.model.id}}
+      .edit-icon-link(if-can="{zigbee2mqtt:['update']}")
+        %a(ui-sref="dashboard.mqtt.zigbee2mqtt_edit({id:br.model.id})")
+          %span.fa.fa-pencil
+
+    .pull-right.date-info-block
+      .form-group
+        %small
+          {{'Created at' | translate}} {{br.model.created_at | readableDateTime}}
+        %small
+          {{'Updated at' | translate}} {{br.model.updated_at | readableDateTime}}
+
+.row
+  .col-md-2
+    .form-group
+      .text-muted
+        {{'zigbee2mqtt.status' | translate}}
+      %div(ng-if="br.status == 'online'")
+        %span.label.label-success
+          {{"zigbee2mqtt.online" | translate}}
+
+      %div(ng-if="br.status != 'online'")
+        %span.label.label-default
+          {{"zigbee2mqtt.offline" | translate}}
+
+    .form-group
+      .text-muted
+        {{'zigbee2mqtt.base_topic' | translate}}
+      %div
+        {{::br.model.base_topic}}
+
+    .form-group(ng-if="br.model.name")
+      .text-muted
+        {{'zigbee2mqtt.name' | translate}}
+      %div
+        {{::br.model.name}}
+
+    .form-group(ng-if="br.description")
+      .text-muted
+        {{'zigbee2mqtt.description' | translate}}
+      %div
+        {{::br.description}}
+
+    .form-group(ng-if="br.model.login")
+      .text-muted
+        {{'zigbee2mqtt.login' | translate}}
+      %div
+        {{::br.model.login}}
+
+    .form-group
+      .text-muted
+        {{'zigbee2mqtt.permit_join' | translate}}
+      %i.fa.fa-toggle-on(ng-class="br.model.permit_join?'active':'fa-rotate-180 inactive'" ng-click="update_permit_join()")
+
+    -#.form-group
+    -#  .text-muted
+    -#    {{'zigbee2mqtt.network_map' | translate}}
+    -#  %div(ng-if="br.networkmap == ''")
+    -#    No map
+    -#  %div(ng-if="br.networkmap != ''")
+    -#    -#{{::br.networkmap}}
+    -#    show
+    -#
+    -#.form-group
+    -#  %a.btn.btn-default(href="" role="button" ng-click="updateMap()" if-can="{mqtt:['publish']}")
+    -#    {{'Update map' | translate}}
+
+    .form-group
+      %a.btn.btn-warning(href="" role="button" ng-click="reset()" if-can="{mqtt:['publish']}")
+        {{'zigbee2mqtt.soft_reset' | translate}}
+
+
+  .col-md-10(ng-if="selected")
+
+    %div(ng-include="'/mqtt/templates/_zigbee2mqtt_device_show.html'")
+
+  .col-md-10(ng-if="!selected")
+    .row
+      .col-md-12
+        %h4
+          {{'zigbee2mqtt.devices' | translate}}
+
+    .row
+
+      .col-md-12
+        %div(ng-if="br.model.devices.length == 0")
+          {{'zigbee2mqtt.no_devices' | translate}}
+
+        %table.table.list-table(ng-if="br.model.devices.length > 0")
+          %thead
+            %th
+              {{'zigbee2mqtt.device.name' | translate}}
+            %th
+              {{'zigbee2mqtt.device.description' | translate}}
+
+            %th
+              {{'zigbee2mqtt.device.status' | translate}}
+            %th
+              {{'Created at' | translate}}
+            %th
+              {{'Updated at' | translate}}
+          %tbody
+            %tr(ng-repeat="device in br.model.devices")
+              %td
+                %a(href="#" ng-click="select(device)")
+                  {{::device.name}}
+              %td
+                %a(href="#" ng-click="select(device)")
+                  {{::device.description}}
+              %td
+                %span.label.label-success(ng-if="device.status == 'active'")
+                  {{::device.status}}
+                %span.label.label-default(ng-if="device.status != 'active'")
+                  {{::device.status}}
+              %td
+                {{::device.created_at | readableDateTime}}
+              %td
+                {{::device.updated_at | readableDateTime}}

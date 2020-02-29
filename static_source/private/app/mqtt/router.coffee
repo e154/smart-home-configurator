@@ -37,4 +37,33 @@ angular
       templateUrl: '/mqtt/templates/mqtt_publish.html'
       controller: 'mqttPublishCtrl'
     )
+
+    .state(
+      name: "dashboard.mqtt.zigbee2mqtt"
+      url: "/zigbee2mqtt"
+      templateUrl: '/mqtt/templates/zigbee2mqtt.html'
+      controller: 'zigbee2mqttCtrl'
+    )
+
+    .state(
+      name: "dashboard.mqtt.zigbee2mqtt_new"
+      url: "/zigbee2mqtt/new"
+      templateUrl: '/mqtt/templates/zigbee2mqtt_new.html'
+      controller: 'zigbee2mqttNewCtrl'
+    )
+
+    .state(
+      name: "dashboard.mqtt.zigbee2mqtt_show"
+      url: "/zigbee2mqtt/:id"
+      templateUrl: '/mqtt/templates/zigbee2mqtt_show.html'
+      controller: 'zigbee2mqttShowCtrl'
+    )
+
+    .state(
+      name: "dashboard.mqtt.zigbee2mqtt_edit"
+      url: "/zigbee2mqtt/:id/edit"
+      templateUrl: '/mqtt/templates/zigbee2mqtt_edit.html'
+      controller: 'zigbee2mqttEditCtrl'
+    )
+
 ]

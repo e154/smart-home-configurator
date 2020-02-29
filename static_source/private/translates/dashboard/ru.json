@@ -213,6 +213,10 @@
     "mqtt_topic": "mqtt канал",
     "add_topic": "Добавить",
     "find_subscription": "Каналы",
+    "find_zigbee2mqtt_devices": "Zigbee2mqtt устройства",
+    "zigbee2mqtt_device": "Zigbee2mqtt устройство",
+    "zigbee2mqtt": "Zigbee2mqtt",
+    "add_device": "Добавить",
     "element": {
       "title": "Название",
       "script": "Скрипт",
@@ -579,7 +583,8 @@
     "preview": "Просмотр",
     "close_client": "Отключить клиента",
     "close_topic": "Удалить канал",
-    "publish": "Послать сообщение"
+    "publish": "Послать сообщение",
+    "rename_device": "Переименовать устройство"
   },
   "access_list": {
     "package_name": "Список правил доступа"
@@ -674,5 +679,40 @@
   },
   "menu": {
     "index_form": "Меню"
+  },
+  "zigbee2mqtt": {
+    "package_name": "zigbee2mqtt",
+    "index_form": "Zigbee2mqtt список",
+    "base_topic": "Главный топик",
+    "created_at": "Создан",
+    "updated_at": "Обновлён",
+    "show": "Мост",
+    "status": "Статус",
+    "permit_join": "Разрешить присоединиться",
+    "online": "В сети",
+    "offline": "Не в сети",
+    "login": "Логин",
+    "name": "Название",
+    "edit_form": "Редактировать",
+    "new_form": "Новый мост",
+    "password": "Пароль",
+    "password_repeat": "Пароль повторно",
+    "set_password": "Укажите пароль в обоих полях.",
+    "devices": "Устройства",
+    "no_devices": "Нет устройств",
+    "network_map": "Карта сети",
+    "soft_reset": "Перезагрузить",
+    "on": "Вкл",
+    "off": "Выкл",
+    "device": {
+      "id": "id",
+      "name": "Название",
+      "model": "Модель",
+      "description": "Описание",
+      "manufacturer": "Производитель",
+      "functions": "Функции",
+      "status": "Статус",
+      "active": "Активный"
+    }
   }
 }

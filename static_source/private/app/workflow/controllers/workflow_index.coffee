@@ -29,11 +29,13 @@ angular
       {
         name: 'workflow.created_at'
         field: 'created_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
         name: 'workflow.updated_at'
         field: 'updated_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {

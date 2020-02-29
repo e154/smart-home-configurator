@@ -1,0 +1,26 @@
+.form-group
+  %div(ng-if="!flow.zigbee2mqtt_devices.length")
+    {{'No data' | translate}}
+
+  %div(ng-repeat="dev in flow.zigbee2mqtt_devices")
+    %a( href="#" truncate-text="23" ng-click="removeZigbee2mqttDevice(dev, $index)")
+      {{dev.name}}
+
+.form-group
+  %label.clearfix
+    {{'flow.find_zigbee2mqtt_devices' | translate}}
+
+  -#
+  -#  select2
+  -#
+  %ui-select(ng-model="zigbee2mqttSelect.current" theme="bootstrap")
+    %ui-select-match(placeholder="{{'flow.zigbee2mqtt_device' | translate}}")
+      {{zigbee2mqttSelect.current.name}}
+    %ui-select-choices(repeat="item in zigbee2mqttDevices | filter: $select.search" refresh="refreshZigbee2mqttDeviceList($select.search)" refresh-delay="0")
+      %div(ng-bind-html="item.name | highlight: $select.search")
+    %ui-select-no-choice
+      {{'No data' | translate}}
+
+.form-group
+  %a.btn.btn-default.full-width(ng-click="addZigbee2mqttDevice($event)")
+    {{'flow.add_device' | translate}}

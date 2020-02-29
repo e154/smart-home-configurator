@@ -39,11 +39,18 @@ for (var key in conf) {
             dest = _dest;
 
         gulp.task(task, function(done) {
+
+            var l = ngconcat(filename);
+            l.on('error',function(e){
+                gutil.log(e);
+                l.end();
+            });
+
             return gulp.src(source)
                 .pipe(coffee({bare: true})
                     .on('error', done))     // Compile coffeescript
-                // .pipe(ngconcat(filename))
-                .pipe(concat(filename))
+                .pipe(l)
+                // .pipe(concat(filename))
                 .pipe(uglify())
                 //.pipe(ngClassify())
                 .pipe(replace('__CURRENT_TIME__', date))

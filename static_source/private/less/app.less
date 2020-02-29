@@ -39,6 +39,7 @@
 @import "script-editor";
 @import "gate-map";
 @import "second-menu";
+@import "toggle";
 
 html,
 body {
@@ -316,5 +317,29 @@ dd {
   }
   &.label-slack {
     background-color: #611f69;
+  }
+}
+
+// zigbee2mqtt
+.zigbee2mqtt-device-card {
+  dl {
+    dt {
+      text-align: right;
+      padding-right: 10px;
+      color: gray;
+
+    }
+  }
+}
+.zigbee2mqtt-device-image {
+  position: relative;
+  height: 100px;
+  img {
+    height: 100%;
+  }
+  .label {
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 }

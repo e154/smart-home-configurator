@@ -121,6 +121,19 @@
   .col-md-3
     .form-group
       .text-muted
+        {{'mqtt.client.client_id' | translate}}
+      %div
+        {{::mqtt.session.client_id}}
+
+    .form-group
+      .text-muted
+        {{'mqtt.client.status' | translate}}
+      %div
+        %span.badge
+          {{::mqtt.session.status}}
+
+    .form-group
+      .text-muted
         {{'mqtt.client.await_rel_len' | translate}}
       %div
         {{::mqtt.session.await_rel_len}}
@@ -129,16 +142,13 @@
         {{'mqtt.client.clean_session' | translate}}
       %div
         {{::mqtt.session.clean_session}}
-    .form-group
-      .text-muted
-        {{'mqtt.client.client_id' | translate}}
-      %div
-        {{::mqtt.session.client_id}}
+
     .form-group
       .text-muted
         {{'mqtt.client.inflight_len' | translate}}
       %div
         {{::mqtt.session.inflight_len}}
+
   .col-md-3
     .form-group
       .text-muted
@@ -157,26 +167,42 @@
         {{::mqtt.session.max_msg_queue}}
     .form-group
       .text-muted
-        {{'mqtt.client.msg_delivered_total' | translate}}
+        {{'mqtt.client.msg_delivered_total' | translate}} (qos0)
       %div
-        {{::mqtt.session.msg_delivered_total}}
+        {{::mqtt.session.qos0_msg_delivered_total}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_delivered_total' | translate}} (qos1)
+      %div
+        {{::mqtt.session.qos1_msg_delivered_total}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_delivered_total' | translate}} (qos2)
+      %div
+        {{::mqtt.session.qos2_msg_delivered_total}}
 
   .col-md-3
     .form-group
       .text-muted
-        {{'mqtt.client.msg_dropped_total' | translate}}
+        {{'mqtt.client.msg_dropped_total' | translate}} (qos0)
       %div
-        {{::mqtt.session.msg_dropped_total}}
+        {{::mqtt.session.qos0_msg_dropped_total}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_dropped_total' | translate}} (qos1)
+      %div
+        {{::mqtt.session.qos1_msg_dropped_total}}
+    .form-group
+      .text-muted
+        {{'mqtt.client.msg_dropped_total' | translate}} (qos2)
+      %div
+        {{::mqtt.session.qos2_msg_dropped_total}}
     .form-group
       .text-muted
         {{'mqtt.client.msg_queue_len' | translate}}
       %div
         {{::mqtt.session.msg_queue_len}}
-    .form-group
-      .text-muted
-        {{'mqtt.client.status' | translate}}
-      %div
-        {{::mqtt.session.status}}
+
     .form-group
       .text-muted
         {{'mqtt.client.subscriptions' | translate}}

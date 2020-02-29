@@ -2,9 +2,11 @@ angular
 .module('appControllers')
 .controller 'bpmnEditorCtrl', ['$scope', 'Notify', 'Flow', '$stateParams', '$state', '$timeout', 'bpmnMock'
 'bpmnScheme', 'bpmnSettings', '$http', 'log', 'Worker', 'ngDialog', '$filter', 'Stream', 'DeviceActionSelect2',
-'ScriptSelect2', 'FlowSelect2', 'MqttTopicSelect2'
+'ScriptSelect2', 'FlowSelect2', 'MqttTopicSelect2', 'Zigbee2mqttSelect2'
 ($scope, Notify, Flow, $stateParams, $state, $timeout, bpmnMock, bpmnScheme, bpmnSettings, $http
-log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, FlowSelect2, MqttTopicSelect2) ->
+log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, FlowSelect2, MqttTopicSelect2,
+Zigbee2mqttSelect2) ->
+
   vm = this
 
   $scope.selected = []
@@ -318,7 +320,35 @@ log, Worker, ngDialog, $filter, Stream, DeviceActionSelect2, ScriptSelect2, Flow
     if !contains
       $scope.flow.subscriptions.push $scope.mqttSelect.current
 
+  # zigbee2mqtt subscribe
+  #------------------------------------------------------------------------------
+  $scope.zigbee2mqttSelect =
+    current: {}
 
+  $scope.zigbee2mqttDevices = []
+
+  $scope.refreshZigbee2mqttDeviceList = Zigbee2mqttSelect2 (devices)->
+    $scope.zigbee2mqttDevices = []
+    angular.forEach devices, (device)->
+      obj =
+        id: device.id
+        name: device.name
+        description: device.description
+      $scope.zigbee2mqttDevices.push obj
+
+  $scope.addZigbee2mqttDevice =(e)->
+    e.preventDefault()
+
+    angular.forEach $scope.flow.zigbee2mqtt_devices, (dev)->
+      if dev.id == $scope.zigbee2mqttSelect.current.id
+        return
+
+    $scope.flow.zigbee2mqtt_devices.push $scope.zigbee2mqttSelect.current
+
+
+  $scope.removeZigbee2mqttDevice =(topic, $index)->
+    $scope.flow.zigbee2mqtt_devices.splice($index, 1)
+    return
 
   vm
 ]

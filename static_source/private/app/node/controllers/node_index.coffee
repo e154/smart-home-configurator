@@ -24,11 +24,13 @@ angular
       {
         name: 'node.created_at'
         field: 'created_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
         name: 'node.updated_at'
         field: 'updated_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
