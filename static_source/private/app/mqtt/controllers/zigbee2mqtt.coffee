@@ -27,8 +27,8 @@ angular
         name: 'zigbee2mqtt.permit_join'
         field: 'permit_join'
         width: '100px'
-        template: '<span class=\'label label-default\' ng-if=\'item.model.permit_join\'>{{\"zigbee2mqtt.on\" | translate}}</span>
-<span class=\'label label-success\' ng-if=\'!item.model.permit_join\'>{{\"zigbee2mqtt.off\" | translate}}</span>'
+        template: '<span class=\'label label-success\' ng-if=\'item.model.permit_join\'>{{\"zigbee2mqtt.on\" | translate}}</span>
+<span class=\'label label-default\' ng-if=\'!item.model.permit_join\'>{{\"zigbee2mqtt.off\" | translate}}</span>'
       }
       {
         name: 'zigbee2mqtt.created_at'
