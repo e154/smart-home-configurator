@@ -15,14 +15,14 @@
       %dt {{'zigbee2mqtt.device.name' | translate}}
       %dd {{selected.name}}
 
-      %dt {{'zigbee2mqtt.device.model' | translate}}
-      %dd {{::selected.model}}
+      %dt(ng-if="selected.model != ''") {{'zigbee2mqtt.device.model' | translate}}
+      %dd(ng-if="selected.model != ''") {{::selected.model}}
 
-      %dt {{'zigbee2mqtt.device.description' | translate}}
-      %dd {{::selected.description}}
+      %dt(ng-if="selected.description != ''") {{'zigbee2mqtt.device.description' | translate}}
+      %dd(ng-if="selected.description != ''") {{::selected.description}}
 
-      %dt {{'zigbee2mqtt.device.manufacturer' | translate}}
-      %dd {{::selected.manufacturer}}
+      %dt(ng-if="selected.manufacturer != ''") {{'zigbee2mqtt.device.manufacturer' | translate}}
+      %dd(ng-if="selected.manufacturer != ''") {{::selected.manufacturer}}
 
       %dt {{'zigbee2mqtt.device.functions' | translate}}
       %dd
@@ -42,7 +42,7 @@
       {{::selected.status}}
     %span.label.label-default(ng-if="selected.status != 'active'")
       {{::selected.status}}
-    %img(ng-src="{{selected.image_url}}" err-src="/static/images/placeholder_file_not_found.svg")
+    %img(ng-src="{{selected.image_url}}" ng-if="selected.image_url != ''")
 
 .row
   .col-md-6
