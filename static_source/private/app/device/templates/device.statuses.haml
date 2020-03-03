@@ -7,6 +7,10 @@
             .fa.fa-plus &nbsp;
             {{'device.status.add' | translate}}
 
+.row(ng-if="!device.states.length")
+  .col-md-6
+    {{'No statuses' | translate}}
+
 .row(if-can="{device_state:['read']}")
   .col-md-12
     .row(ng-repeat="_state in device.states" )
