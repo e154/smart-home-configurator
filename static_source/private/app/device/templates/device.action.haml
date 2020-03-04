@@ -33,7 +33,8 @@
             {{'Cancel' | translate}}
         .clearfix
 
-  .col-md-6(ng-if="!device.actions.length && action.state == 'show'")
+.row(ng-if="!device.actions.length && action.state == 'show'")
+  .col-md-6
     {{'No actions' | translate}}
 
 .row(ng-if="device.actions.length && action.state == 'show'")

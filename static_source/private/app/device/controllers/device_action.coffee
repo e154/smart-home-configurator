@@ -23,8 +23,6 @@ angular
   vm.getDeviceActions =->
     DeviceAction.get_by_device {id: deviceId}, (actions)->
       $scope.device.actions = actions
-      if actions.length == 0
-        vm.state = 'edit'
       return
 
   vm.getDefaultAction =->
