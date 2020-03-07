@@ -23,6 +23,6 @@
               {{folder.total/1024 | readableBytes}}
 
         .progress
-          .progress-bar(role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': folder.usedPercent + '%' }")
-            %span.lg-only(ng-class="{'danger' : folder.usedPercent >= 90}")
-              {{floor(folder.usedPercent)}}%
+          .progress-bar(role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': folder.used_percent + '%' }")
+            %span.lg-only(ng-class="{'danger' : folder.used_percent >= 90}")
+              {{floor(folder.used_percent)}}%

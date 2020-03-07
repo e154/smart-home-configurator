@@ -20,18 +20,8 @@ angular
       $scope.disabled = 0
       $scope.error = 0
       $scope.total = data.devices.total if data.devices.total
-      angular.forEach data.devices.status, (status, device)->
-        return if !status
-        switch status.system_name
-          when 'ENABLED'
-            $scope.online++
-          when 'DISABLED'
-            break
-          when 'ERROR'
-            $scope.error++
-
-        $scope.disabled = $scope.total - ($scope.online + $scope.error)
-
+      $scope.disabled = data.devices.disabled if data.devices.disabled
+      $scope.online = $scope.total - $scope.disabled
 
     $scope.openSettings =()->
       console.log 'open settings', widget

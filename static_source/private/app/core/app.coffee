@@ -20,7 +20,6 @@ app = angular.module('app', [
   'appServices'
   'ui.router'
   'toaster'
-  'bd.sockjs'
   'angular-bpmn'
   'ui.select'
   'ngSanitize'

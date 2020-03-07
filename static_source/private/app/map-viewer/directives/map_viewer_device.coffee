@@ -33,9 +33,13 @@ angular
     # stream
     # --------------------
     setState =(_state)->
-      return if !_state || !_state?.id
+      return if !_state || !_state.status_id
       for map_element_state in $scope.element.prototype.states
-        if map_element_state.device_state.id == _state.id
+        if map_element_state.device_state.id == _state.status_id
+          #console.log map_element_state.device_state
+          $scope.current_status = _state
+          $scope.current_status.description = map_element_state.device_state.description
+
           # update element state
           $timeout ()->
             $scope.$apply(
@@ -44,10 +48,9 @@ angular
           break
 
     $scope.$on 'broadcast_device_state', (e, data)->
-      return if !data || !data?.status
+      return if !data
       if $scope.element.prototype.device.id == data.id && $scope.element.name == data.element_name
-        $scope.current_status = data
-        setState data.status
+        setState(data)
 
     $scope.doAction =(action, $event)->
       Stream.sendRequest("do.action", {action_id: action.device_action.id, device_id: $scope.element.prototype.device.id}).then (result)->

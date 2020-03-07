@@ -34,9 +34,9 @@ angular
     # stream
     # --------------------
     $timeout ()->
-      Stream.sendRequest("map.get.devices.states", {}).then (data)->
-        return if !data.states
-        broadcastDeviceState(data.states.device_stats)
+      Stream.sendRequest("map.get.devices", {}).then (data)->
+        return if !data.devices
+        broadcastDeviceState(data.devices)
     , 1000
 
     Stream.subscribe 'map.telemetry', (data)->
