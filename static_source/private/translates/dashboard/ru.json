@@ -415,7 +415,8 @@
       "workflows": "Workflows",
       "devices": "Устройства",
       "uptime": "Время работы",
-      "disk": "Диск"
+      "disk": "Диск",
+      "mqtt": "Mqtt"
     },
     "memory": {
       "total": "Всего",
@@ -460,6 +461,13 @@
       "heap_alloc": "Heap alloc",
       "alloc": "Alloc",
       "sys": "Sys"
+    },
+    "mqtt": {
+      "client": {
+        "connected_total": "Подключено",
+        "disconnected_total": "Отключено",
+        "inactive_current": "Не активные"
+      }
     }
   },
   "uptime": {

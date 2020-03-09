@@ -31,6 +31,7 @@ angular
     {id: 70, col: 0, row: 2, sizeY: 1, sizeX: 2, name: 'app_memory', type: 'app_memory' }
     {id: 80, col: 2, row: 2, sizeY: 1, sizeX: 1, name: 'flows', type: 'flows' }
     {id: 90, col: 3, row: 2, sizeY: 1, sizeX: 1, name: 'workflows', type: 'workflows' }
+    {id: 100, col: 0, row: 3, sizeY: 1, sizeX: 1, name: 'mqtt', type: 'mqtt' }
   ]
 
   #TODO remove hard code

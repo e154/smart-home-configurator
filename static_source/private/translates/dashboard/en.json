@@ -413,7 +413,8 @@
       "workflows": "workflows",
       "devices": "devices",
       "uptime": "uptime",
-      "disk": "disk"
+      "disk": "disk",
+      "mqtt": "mqtt"
     },
     "memory": {
       "total": "Total",
@@ -458,6 +459,13 @@
       "heap_alloc": "Heap alloc",
       "alloc": "Alloc",
       "sys": "Sys"
+    },
+    "mqtt": {
+      "client": {
+        "connected_total": "Total",
+        "disconnected_total": "Disconnected",
+        "inactive_current": "Inactive"
+      }
     }
   },
   "uptime": {

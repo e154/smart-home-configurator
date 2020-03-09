@@ -13,15 +13,15 @@
 
     .widget-content
       .counter
-        {{total_alloc | readableBytes}}
+        {{alloc | readableBytes}}
 
   %ul.widget-footer
     %li
       .label {{'widget.app_memory.heap_alloc' | translate}}
       .counter {{heap_alloc | readableBytes}}
     %li
-      .label {{'widget.app_memory.alloc' | translate}}
-      .counter {{alloc | readableBytes}}
+      .label {{'widget.app_memory.total_alloc' | translate}}
+      .counter {{total_alloc | readableBytes}}
     %li
       .label {{'widget.app_memory.sys' | translate}}
       .counter {{sys | readableBytes}}

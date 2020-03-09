@@ -1,0 +1,26 @@
+.widget-header
+  %i.fa.fa-dot-circle-o.status-icon
+  .title
+    %strong(translate="widget.name.{{widget.name}}")
+  .widget-header-btns
+    %a(title="settings" ng-click="openSettings()" href="#" )
+      %i.fa.fa-cog
+    %a(title="remove widget" ng-click="removeWidget()" href="#" )
+      %i.fa.fa-trash
+  .clearfix
+
+  .widget-container
+    .widget-content
+      .counter {{client_state.active_current}}
+
+  %ul.widget-footer
+    %li
+      .label {{'widget.mqtt.client.connected_total' | translate}}
+      .counter {{client_state.connected_total}}
+    %li
+      .label {{'widget.mqtt.client.disconnected_total' | translate}}
+      .counter {{client_state.disconnected_total}}
+    %li
+      .label {{'widget.mqtt.client.inactive_current' | translate}}
+      .counter
+        {{client_state.inactive_current}}
