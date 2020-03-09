@@ -52,7 +52,6 @@ angular
     return defer.promise
 
   Stream.subscribe 'dashboard.telemetry', (data)->
-    console.log data.gate
     return if !data.gate?.status
     if data.gate.status == 'connected' && $scope.gateStatus != data.gate.status
       getMobileList()
@@ -68,7 +67,6 @@ angular
 
   $timeout ()->
     Stream.sendRequest("dashboard.get.gate.status", {}).then (data)->
-      console.log data
       $scope.settings.gate_server_token = data.gate.access_token
       $scope.gateStatus = data.gate.status
   , 1000
