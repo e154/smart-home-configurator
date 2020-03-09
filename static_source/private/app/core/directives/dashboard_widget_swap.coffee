@@ -17,7 +17,8 @@ angular
       return if !data.memory
       $scope.mem_total = data.memory?.swap_total || data.memory?.swap_total || 0
       $scope.mem_free = data.memory?.swap_free || data.memory?.swap_free || 0
-      $scope.percent = (($scope.mem_total - $scope.mem_free) / ($scope.mem_total/100)).toFixed(2)
+      if $scope.mem_total > 0 && $scope.mem_free > 0
+        $scope.percent = (($scope.mem_total - $scope.mem_free) / ($scope.mem_total/100)).toFixed(2)
       $scope.usage = $scope.mem_total - $scope.mem_free
 
     $scope.openSettings =()->

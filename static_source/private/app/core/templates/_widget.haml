@@ -1,7 +1,10 @@
 %div
   %div(dashboard-widget-memory="widget" ng-if="widget.type == 'memory'")
+  %div(dashboard-widget-app-memory="widget" ng-if="widget.type == 'app_memory'")
   %div(dashboard-widget-swap="widget" ng-if="widget.type == 'swap'")
   %div(dashboard-widget-cpu="widget" ng-if="widget.type == 'cpu_dig'")
   %div(dashboard-widget-nodes="widget" ng-if="widget.type == 'nodes'")
   %div(dashboard-widget-devices="widget" ng-if="widget.type == 'devices'")
   %div(dashboard-widget-disk="widget" ng-if="widget.type == 'disk'")
+  %div(dashboard-widget-flows="widget" ng-if="widget.type == 'flows'")
+  %div(dashboard-widget-workflows="widget" ng-if="widget.type == 'workflows'")
