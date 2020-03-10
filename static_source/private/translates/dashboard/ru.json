@@ -408,11 +408,15 @@
     "name": {
       "swap": "swap",
       "memory": "Оперативная память",
+      "app_memory": "App memory",
       "cpu": "Процессор",
       "nodes": "Ноды",
+      "flows": "Процессы",
+      "workflows": "Workflows",
       "devices": "Устройства",
       "uptime": "Время работы",
-      "disk": "Диск"
+      "disk": "Диск",
+      "mqtt": "Mqtt"
     },
     "memory": {
       "total": "Всего",
@@ -434,11 +438,36 @@
       "online": "В сети",
       "disabled": "Отключены"
     },
+    "flows": {
+      "total": "Всего",
+      "error": "Ошибка",
+      "online": "В сети",
+      "disabled": "Отключены"
+    },
+    "workflows": {
+      "total": "Всего",
+      "error": "Ошибка",
+      "online": "В сети",
+      "disabled": "Отключены"
+    },
     "devices": {
       "total": "Всего",
       "error": "Ошибка",
       "online": "В сети",
       "disabled": "Отключены"
+    },
+    "app_memory": {
+      "total_alloc": "Total alloc",
+      "heap_alloc": "Heap alloc",
+      "alloc": "Alloc",
+      "sys": "Sys"
+    },
+    "mqtt": {
+      "client": {
+        "connected_total": "Подключено",
+        "disconnected_total": "Отключено",
+        "inactive_current": "Не активные"
+      }
     }
   },
   "uptime": {
