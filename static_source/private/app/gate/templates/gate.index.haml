@@ -48,7 +48,7 @@
     .pull-right
       .form-group
         %a.btn.btn-primary(href="" role="button" ng-click="update()" if-can="{gate:['update']}")
-            {{'Update' | translate}}
+          {{'Update' | translate}}
 
   .col-md-6
 
@@ -63,7 +63,7 @@
 .row(ng-if="gateStatus=='connected'")
   .col-md-6
     %div(ng-if="mobileList.token_list.length == 0")
-        {{'empty' | translate}}
+      {{'empty' | translate}}
     .form-group(ng-repeat="item in mobileList.token_list" )
       %a(href="#" ng-click="show(item)")
         %span

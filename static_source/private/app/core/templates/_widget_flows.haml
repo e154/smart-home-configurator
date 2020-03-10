@@ -15,12 +15,12 @@
 
   %ul.widget-footer
     %li
-      .label {{'widget.devices.total' | translate}}
+      .label {{'widget.flows.total' | translate}}
       .counter {{total}}
     %li
-      .label {{'widget.devices.disabled' | translate}}
+      .label {{'widget.flows.disabled' | translate}}
       .counter {{disabled}}
     %li
-      .label {{'widget.devices.error' | translate}}
+      .label {{'widget.flows.error' | translate}}
       .counter(ng-class="{'danger' : error > 0}" )
         {{error}}

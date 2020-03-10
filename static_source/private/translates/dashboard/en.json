@@ -406,11 +406,15 @@
     "name": {
       "swap": "swap",
       "memory": "memory",
+      "app_memory": "App memory",
       "cpu": "cpu",
       "nodes": "nodes",
+      "flows": "flows",
+      "workflows": "workflows",
       "devices": "devices",
       "uptime": "uptime",
-      "disk": "disk"
+      "disk": "disk",
+      "mqtt": "mqtt"
     },
     "memory": {
       "total": "Total",
@@ -432,11 +436,36 @@
       "online": "Online",
       "disabled": "Disabled"
     },
+    "flows": {
+      "total": "Total",
+      "error": "Error",
+      "online": "Online",
+      "disabled": "Disabled"
+    },
+    "workflows": {
+      "total": "Total",
+      "error": "Error",
+      "online": "Online",
+      "disabled": "Disabled"
+    },
     "devices": {
       "total": "Total",
       "error": "Error",
       "online": "Online",
       "disabled": "Disabled"
+    },
+    "app_memory": {
+      "total_alloc": "Total alloc",
+      "heap_alloc": "Heap alloc",
+      "alloc": "Alloc",
+      "sys": "Sys"
+    },
+    "mqtt": {
+      "client": {
+        "connected_total": "Total",
+        "disconnected_total": "Disconnected",
+        "inactive_current": "Inactive"
+      }
     }
   },
   "uptime": {
