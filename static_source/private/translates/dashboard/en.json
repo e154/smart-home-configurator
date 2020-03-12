@@ -414,7 +414,9 @@
       "devices": "devices",
       "uptime": "uptime",
       "disk": "disk",
-      "mqtt": "mqtt"
+      "mqtt": "mqtt",
+      "configurator_version": "configurator version",
+      "server_version": "server version"
     },
     "memory": {
       "total": "Total",
@@ -466,6 +468,15 @@
         "disconnected_total": "Disconnected",
         "inactive_current": "Inactive"
       }
+    },
+    "version": {
+      "version": "version",
+      "revision": "revision",
+      "revision_url": "revision_url",
+      "generated": "generated",
+      "developers": "developers",
+      "build_num": "build_num",
+      "docker_image": "docker_image"
     }
   },
   "uptime": {
@@ -727,8 +738,8 @@
     "set_password": "Specify a password in both fields",
     "devices": "Devices",
     "no_devices": "No devices",
-    "network_map":"Network map",
-    "soft_reset":"Soft reset",
+    "network_map": "Network map",
+    "soft_reset": "Soft reset",
     "on": "On",
     "off": "Off",
     "device": {

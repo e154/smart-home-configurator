@@ -3,6 +3,8 @@ module github.com/e154/smart-home-configurator
 go 1.13
 
 require (
+	github.com/elazarl/goproxy v0.0.0-20200310082302-296d8939dc5a // indirect
+	github.com/fortytw2/leaktest v1.3.0 // indirect
 	github.com/gin-contrib/sessions v0.0.0-20181124110724-7687b645ca6b
 	github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7 // indirect
 	github.com/gin-gonic/contrib v0.0.0-20181101072842-54170a7b0b4b
@@ -22,7 +24,9 @@ require (
 	github.com/pkg/errors v0.8.0 // indirect
 	github.com/quasoft/memstore v0.0.0-20180925164028-84a050167438 // indirect
 	github.com/sirupsen/logrus v1.2.0
+	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/ugorji/go v1.1.1 // indirect
 	go.uber.org/dig v1.8.0
+	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 )

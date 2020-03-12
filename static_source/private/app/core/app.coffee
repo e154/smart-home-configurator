@@ -39,7 +39,7 @@ app = angular.module('app', [
   'ngTagsInput'
 ])
 
-app.version = window.app_settings.info
+app.version = window.app_settings.configurator_version
 app.access_token = window.app_settings.access_token
 app.current_user = window.app_settings.current_user
 app.debug = window.app_settings.debug
