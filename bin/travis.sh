@@ -28,6 +28,15 @@ EXEC="configurator"
 TMP_DIR="${ROOT}/tmp/${EXEC}"
 ARCHIVE="smart-home-${EXEC}.tar.gz"
 
+#
+# docker params
+#
+DEPLOY_IMAGE=smart-home-${EXEC}
+DOCKER_VERSION="${VERSION_VALUE//-dirty}"
+IMAGE=smart-home-${EXEC}
+DOCKER_ACCOUNT=e154
+DOCKER_IMAGE_VER=${DOCKER_ACCOUNT}/${IMAGE}:${DOCKER_VERSION}
+DOCKER_IMAGE_LATEST=${DOCKER_ACCOUNT}/${IMAGE}:latest
 
 #
 # build version variables
@@ -39,6 +48,7 @@ REV_URL_VAR="${PACKAGE}/version.RevisionURLString"
 GENERATED_VAR="${PACKAGE}/version.GeneratedString"
 DEVELOPERS_VAR="${PACKAGE}/version.DevelopersString"
 BUILD_NUMBER_VAR="${PACKAGE}/version.BuildNumString"
+DOCKER_IMAGE_VAR="${PACKAGE}/version.DockerImageString"
 VERSION_VALUE="$(git describe --always --dirty --tags 2>/dev/null)"
 REV_VALUE="$(git rev-parse HEAD 2> /dev/null || echo "???")"
 REV_URL_VALUE="https://${PACKAGE}/commit/${REV_VALUE}"
@@ -52,17 +62,8 @@ GOBUILD_LDFLAGS="\
         -X ${GENERATED_VAR}=${GENERATED_VALUE} \
         -X ${DEVELOPERS_VAR}=${DEVELOPERS_VALUE} \
         -X ${BUILD_NUMBER_VAR}=${BUILD_NUMBER_VALUE} \
+        -X ${DOCKER_IMAGE_VAR}=${DOCKER_IMAGE_VER} \
 "
-
-#
-# docker params
-#
-DEPLOY_IMAGE=smart-home-${EXEC}
-DOCKER_VERSION="${VERSION_VALUE//-dirty}"
-IMAGE=smart-home-${EXEC}
-DOCKER_ACCOUNT=e154
-DOCKER_IMAGE_VER=${DOCKER_ACCOUNT}/${IMAGE}:${DOCKER_VERSION}
-DOCKER_IMAGE_LATEST=${DOCKER_ACCOUNT}/${IMAGE}:latest
 
 main() {
 
@@ -160,7 +161,7 @@ __build_back() {
 
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
-    cp ${ROOT}/conf/config.dev.json ${TMP_DIR}/config.json
+    cp ${ROOT}/conf/config.dev.json ${TMP_DIR}/conf/config.json
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
