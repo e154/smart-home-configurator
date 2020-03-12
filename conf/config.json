@@ -2,8 +2,8 @@
   "httpaddr": "127.0.0.1",
   "httpport": 8080,
   "runmode": "debug",
-  "api_addr": "sh.e154.ru",
-  "api_port": 80,
+  "api_addr": "127.0.0.1",
+  "api_port": 3000,
   "api_scheme": "http",
   "mem_story_secret": "secret",
   "session_story": "mysession"
