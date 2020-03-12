@@ -29,7 +29,6 @@ import (
 	"github.com/op/go-logging"
 	"github.com/parnurzeal/gorequest"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -72,33 +71,19 @@ func (c *ControllerCommon) showPage(ctx *gin.Context) {
 		page = "private_base.tpl.html"
 		jcu, _ := json.Marshal(userinfo)
 		params = gin.H{
-			"current_user": string(jcu),
-			"access_token": accessToken,
-			"debug":        c.cfg.Runmode == config.DebugMode,
-			"language":     user.Lang,
-			"server_url":   fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
-			"info": map[string]string{
-				"version":      os.Getenv("VERSION"),
-				"revision":     os.Getenv("REVISION"),
-				"revision_url": os.Getenv("REVISION_URL"),
-				"generated":    os.Getenv("GENERATED"),
-				"developers":   os.Getenv("DEVELOPERS"),
-				"build_number": os.Getenv("BUILD_NUMBER"),
-			},
-			"t": time.Now().Unix(),
+			"current_user":         string(jcu),
+			"access_token":         accessToken,
+			"debug":                c.cfg.Runmode == config.DebugMode,
+			"language":             user.Lang,
+			"server_url":           fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
+			"configurator_version": m.GetServerVersion(),
+			"t":                    time.Now().Unix(),
 		}
 	} else {
 		params = gin.H{
-			"server_url": fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
-			"info": map[string]string{
-				"version":      os.Getenv("VERSION"),
-				"revision":     os.Getenv("REVISION"),
-				"revision_url": os.Getenv("REVISION_URL"),
-				"generated":    os.Getenv("GENERATED"),
-				"developers":   os.Getenv("DEVELOPERS"),
-				"build_number": os.Getenv("BUILD_NUMBER"),
-			},
-			"t": time.Now().Unix(),
+			"server_url":           fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
+			"configurator_version": m.GetServerVersion(),
+			"t":                    time.Now().Unix(),
 		}
 	}
 	ctx.HTML(200, page, params)

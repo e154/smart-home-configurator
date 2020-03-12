@@ -416,7 +416,9 @@
       "devices": "Устройства",
       "uptime": "Время работы",
       "disk": "Диск",
-      "mqtt": "Mqtt"
+      "mqtt": "Mqtt",
+      "configurator_version": "Версия конфигуратора",
+      "server_version": "Версия сервера"
     },
     "memory": {
       "total": "Всего",
@@ -468,6 +470,15 @@
         "disconnected_total": "Отключено",
         "inactive_current": "Не активные"
       }
+    },
+    "version": {
+      "version": "Версия",
+      "revision": "Ревизия",
+      "revision_url": "Ссылка на рев.",
+      "generated": "Дата сборки",
+      "developers": "Разработчик",
+      "build_num": "Номер сборки",
+      "docker_image": "Докер образ"
     }
   },
   "uptime": {

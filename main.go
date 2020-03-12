@@ -19,13 +19,14 @@
 package main
 
 import (
-	"os"
 	"fmt"
-	"github.com/op/go-logging"
-	"github.com/sirupsen/logrus"
 	"github.com/e154/smart-home-configurator/system/graceful_service"
 	l "github.com/e154/smart-home-configurator/system/logging"
 	"github.com/e154/smart-home-configurator/system/server"
+	"github.com/e154/smart-home-configurator/version"
+	"github.com/op/go-logging"
+	"github.com/sirupsen/logrus"
+	"os"
 )
 
 var (
@@ -38,10 +39,10 @@ func main() {
 	for _, arg := range args {
 		switch arg {
 		case "-v", "--version":
-			fmt.Printf(shortVersionBanner, GetHumanVersion())
+			fmt.Printf(version.ShortVersionBanner, version.GetHumanVersion())
 			return
 		default:
-			fmt.Printf(verboseVersionBanner, "v2", os.Args[0])
+			fmt.Printf(version.VerboseVersionBanner, "v2", os.Args[0])
 			return
 		}
 	}
@@ -51,7 +52,7 @@ func main() {
 
 func start() {
 
-	fmt.Printf(shortVersionBanner, "")
+	fmt.Printf(version.ShortVersionBanner, "")
 
 	container := BuildContainer()
 	container.Invoke(func(
