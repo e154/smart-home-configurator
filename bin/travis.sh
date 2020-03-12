@@ -161,7 +161,7 @@ __build_back() {
 
     cp -r ${ROOT}/views ${TMP_DIR}
     cp -r ${ROOT}/conf ${TMP_DIR}
-    cp ${ROOT}/conf/config.dev.json ${TMP_DIR}/config.json
+    cp ${ROOT}/conf/config.dev.json ${TMP_DIR}/conf/config.json
     cp ${ROOT}/LICENSE ${TMP_DIR}
     cp ${ROOT}/README.md ${TMP_DIR}
     cp ${ROOT}/contributors.txt ${TMP_DIR}
