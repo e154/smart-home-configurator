@@ -19,8 +19,8 @@ angular
       docker_image: ""
 
     $scope.$on 'telemetry_update', (e, data)->
-      return if !app.version
-      $scope.ver = app.version
+      return if !app?.version
+      $scope.ver = angular.copy(app.version)
 
     $scope.openSettings =()->
       console.log 'open settings', widget
