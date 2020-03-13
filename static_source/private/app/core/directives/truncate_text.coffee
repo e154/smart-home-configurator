@@ -10,9 +10,10 @@ angular
   restrict: 'A'
   link: ($scope, element, attrs) ->
 # http://stackoverflow.com/questions/17138868/how-to-trigger-a-directive-when-updating-a-model-in-angularjs
-    $scope.$watch 'someValue', (value) ->
+    $scope.$watch ->
       len = parseInt(attrs.truncateText)
       text = element.text().trim()
+      return if !text
       trunc = undefined
       if text.length > len
         trunc = text.substring(0, len) + ' ...'

@@ -14,25 +14,25 @@
 
       %dl
         %dt {{'widget.version.version' | translate}}
-        %dd {{::ver.version}}
+        %dd {{ver.version}}
 
         %dt {{'widget.version.revision' | translate}}
         %dd(truncate-text="30")
-          {{::ver.revision}}
+          {{ver.revision}}
 
         %dt {{'widget.version.revision_url' | translate}}
-        %dd
-          %a(target="_blank" truncate-text="30" ng-href="{{ver.revision_url}}")
+        %dd(truncate-text="30")
+          %a(target="_blank" ng-href="{{ver.revision_url}}")
             {{ver.revision_url}}
 
         %dt {{'widget.version.generated' | translate}}
-        %dd {{::ver.generated | readableDateTime}}
+        %dd {{ver.generated | readableDateTime}}
 
         %dt {{'widget.version.developers' | translate}}
-        %dd {{::ver.developers}}
+        %dd {{ver.developers}}
 
         %dt {{'widget.version.build_num' | translate}}
-        %dd {{::ver.build_num}}
+        %dd {{ver.build_num}}
 
         %dt {{'widget.version.docker_image' | translate}}
-        %dd {{::ver.docker_image}}
+        %dd {{ver.docker_image}}
