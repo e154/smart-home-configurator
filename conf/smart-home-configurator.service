@@ -1,0 +1,17 @@
+[Unit]
+Description=Smart home configurator
+After=multi-user.target
+
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/opt/smart-home/configurator
+ExecStart=/opt/smart-home/configurator/configurator
+
+User=smart_home
+Group=smart_home
+
+
+[Install]
+WantedBy=multi-user.target
