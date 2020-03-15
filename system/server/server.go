@@ -19,19 +19,19 @@
 package server
 
 import (
-	"fmt"
-	"net/http"
-	"time"
 	"context"
-	"github.com/op/go-logging"
-	"github.com/gin-gonic/gin"
+	"fmt"
+	"github.com/e154/smart-home-configurator/common"
+	"github.com/e154/smart-home-configurator/system/config"
 	"github.com/e154/smart-home-configurator/system/graceful_service"
 	"github.com/e154/smart-home-configurator/system/server/controllers"
-	"github.com/e154/smart-home-configurator/system/config"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"time"
 )
 
 var (
-	log = logging.MustGetLogger("server")
+	log = common.MustGetLogger("server")
 )
 
 type Server struct {
@@ -72,7 +72,7 @@ func NewServer(cfg *ServerConfig,
 	ctrls *controllers.Controllers,
 	graceful *graceful_service.GracefulService) (newServer *Server) {
 
-	logger := &ServerLogger{log}
+	logger := NewLogger()
 
 	gin.DisableConsoleColor()
 	gin.DefaultWriter = logger

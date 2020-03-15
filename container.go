@@ -34,10 +34,10 @@ func BuildContainer() (container *dig.Container) {
 	container.Provide(graceful_service.NewGracefulService)
 	container.Provide(graceful_service.NewGracefulServicePool)
 	container.Provide(graceful_service.NewGracefulServiceConfig)
-	container.Provide(logging.NewLogrus)
 	container.Provide(server.NewServer)
 	container.Provide(server.NewServerConfig)
 	container.Provide(controllers.NewControllers)
+	container.Provide(logging.NewLogger)
 
 	return
 }

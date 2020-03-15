@@ -22,18 +22,18 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"github.com/e154/smart-home-configurator/common"
 	m "github.com/e154/smart-home-configurator/models"
 	"github.com/e154/smart-home-configurator/system/config"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/op/go-logging"
 	"github.com/parnurzeal/gorequest"
 	"net/http"
 	"time"
 )
 
 var (
-	log = logging.MustGetLogger("controllers")
+	log = common.MustGetLogger("controllers")
 )
 
 type ControllerCommon struct {
