@@ -51,7 +51,7 @@ angular
         return
     return defer.promise
 
-  Stream.subscribe 'dashboard.telemetry', (data)->
+  Stream.subscribe 'dashboard.telemetry', 'gate', (data)->
     return if !data.gate?.status
     if data.gate.status == 'connected' && $scope.gateStatus != data.gate.status
       getMobileList()
@@ -63,7 +63,7 @@ angular
     )
 
   $scope.$on '$stateChangeSuccess', ()->
-    Stream.unsubscribe 'dashboard.telemetry'
+    Stream.unsubscribe 'dashboard.telemetry', 'gate'
 
   $timeout ()->
     Stream.sendRequest("dashboard.get.gate.status", {}).then (data)->

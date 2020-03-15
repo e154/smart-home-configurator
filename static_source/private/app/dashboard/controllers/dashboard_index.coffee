@@ -52,7 +52,7 @@ angular
       broadcastDeviceState(data)
   , 1000
 
-  Stream.subscribe 'dashboard.telemetry', (data)->
+  Stream.subscribe 'dashboard.telemetry', 'dashboard', (data)->
     $scope.total_uptime = data.uptime.total if data.uptime?.total
     $scope.$apply()
     broadcastDeviceState(data)
@@ -61,7 +61,7 @@ angular
     $scope.$broadcast 'telemetry_update', data
 
   $scope.$on '$stateChangeSuccess', ()->
-    Stream.unsubscribe 'dashboard.telemetry'
+    Stream.unsubscribe 'dashboard.telemetry', 'dashboard'
 
   # crud
   # --------------------

@@ -39,9 +39,12 @@ angular
         broadcastDeviceState(data.devices)
     , 1000
 
-    Stream.subscribe 'map.telemetry', (data)->
+    Stream.subscribe 'map.telemetry', 'map_view', (data)->
       return if !data.device
       broadcastDeviceState([data.device])
+
+    $scope.$on '$stateChangeSuccess', ()->
+      Stream.unsubscribe 'map.telemetry', 'map_view'
 
     broadcastDeviceState =(states)->
       angular.forEach states, (state, id)->

@@ -330,8 +330,11 @@ angular
 
 
   $scope.nodes = {}
-  Stream.subscribe "nodes", (nodes)->
+  Stream.subscribe "nodes", 'dashboard', (nodes)->
     $scope.nodes = nodes
+
+  $scope.$on '$stateChangeSuccess', ()->
+    Stream.unsubscribe 'nodes', 'dashboard'
 
   # show signin dialog
   if !app_settings.current_user.id

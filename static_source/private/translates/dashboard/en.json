@@ -416,7 +416,8 @@
       "disk": "disk",
       "mqtt": "mqtt",
       "configurator_version": "configurator version",
-      "server_version": "server version"
+      "server_version": "server version",
+      "history": "History"
     },
     "memory": {
       "total": "Total",

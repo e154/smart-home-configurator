@@ -65,7 +65,8 @@ angular
           Notify m.payload.type, m.payload.body
         when "broadcast"
           if (m.command in Object.keys(@subscribers))
-            @subscribers[m.command](m.payload)
+            for own key, f of @subscribers[m.command]
+              f(m.payload)
 
       if !m.id || m.id == "" || m.id == "00000000-0000-0000-0000-000000000000"
         return
@@ -123,15 +124,15 @@ angular
 
       defer.promise
 
-    subscribe: (name, func)=>
+    subscribe: (name, id, func)=>
       if !(name in @subscribers)
-        @subscribers[name] = func
-      else
-        Notify "Ошибка", "Subscriber #{name} is already in the list"
+        @subscribers[name] = {}
+      @subscribers[name][id] = func
 
-    unsubscribe: (name)->
+    unsubscribe: (name, id)->
       if (name in @subscribers)
-        delete @subscribers[name]
+        if (id in @subscribers[id])
+          delete @subscribers[name][id]
 
 
   new Stream('websock')

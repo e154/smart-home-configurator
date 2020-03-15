@@ -107,10 +107,13 @@ angular
       style
 
   $timeout ()->
-    Stream.subscribe 'dashboard.telemetry', (data)->
+    Stream.subscribe 'dashboard.telemetry', 'map_show', (data)->
       return if !data?.history
       tableCallback.update()
   , 1000
+
+  $scope.$on '$stateChangeSuccess', ()->
+    Stream.unsubscribe 'dashboard.telemetry', 'map_show'
 
   #------------------------------------------------------------------------------
   # init
