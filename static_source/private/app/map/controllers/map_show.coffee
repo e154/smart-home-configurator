@@ -107,8 +107,8 @@ angular
       style
 
   $timeout ()->
-    Stream.subscribe 'map.telemetry', (data)->
-      return if !data.device
+    Stream.subscribe 'dashboard.telemetry', (data)->
+      return if !data?.history
       tableCallback.update()
   , 1000
 

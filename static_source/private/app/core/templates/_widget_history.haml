@@ -1,0 +1,23 @@
+.widget-header
+  %i.fa.fa-dot-circle-o.status-icon
+  .title
+    %strong(translate="widget.name.{{widget.name}}")
+  .widget-header-btns
+    %a(title="settings" ng-click="openSettings()" href="#" )
+      %i.fa.fa-cog
+    %a(title="remove widget" ng-click="removeWidget()" href="#" )
+      %i.fa.fa-trash
+  .clearfix
+
+  .widget-container
+    .widget-content
+      .story-table
+        .story-table-row(ng-repeat="item in history")
+          .story-table-col
+            {{item.type}}
+          .story-table-col(truncate-text="15")
+            {{item.device_description}}
+          .story-table-col(truncate-text="15")
+            {{item.description}}
+          .story-table-col
+            {{item.created_at | readableDateTime}}

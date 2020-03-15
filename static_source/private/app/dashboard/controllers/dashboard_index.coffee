@@ -32,6 +32,7 @@ angular
     {id: 100, col: 0, row: 2, sizeY: 1, sizeX: 1, name: 'mqtt', type: 'mqtt' }
     {id: 40, col: 1, row: 2, sizeY: 1, sizeX: 1, name: 'nodes', type: 'nodes' }
     {id: 50, col: 2, row: 2, sizeY: 1, sizeX: 1, name: 'devices', type: 'devices' }
+    {id: 130, col: 3, row: 2, sizeY: 1, sizeX: 2, name: 'history', type: 'history' }
     {id: 110, col: 0, row: 3, sizeY: 1, sizeX: 2, name: 'server_version', type: 'server_version' }
     {id: 120, col: 2, row: 3, sizeY: 1, sizeX: 2, name: 'configurator_version', type: 'configurator_version' }
   ]
