@@ -753,5 +753,12 @@
       "status": "status",
       "active": "active"
     }
+  },
+  "history": {
+    "list": "History list",
+    "type": "Type",
+    "device": "Device",
+    "description": "Description",
+    "created_at": "Created at"
   }
 }

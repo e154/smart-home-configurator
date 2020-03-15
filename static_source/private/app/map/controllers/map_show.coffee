@@ -63,20 +63,20 @@ angular
     resource: HistoryResource($stateParams.id)
     columns: [
       {
-        name: 'type'
+        name: 'history.type'
         field: 'type'
       }
       {
-        name: 'device'
+        name: 'history.device'
         field: 'description'
         template: '<span>{{item.map_element[field]}}</span>'
       }
       {
-        name: 'description'
+        name: 'history.description'
         field: 'description'
       }
       {
-        name: 'created_at'
+        name: 'history.created_at'
         field: 'created_at'
         width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
