@@ -20,6 +20,7 @@
 package websocketproxy
 
 import (
+	"github.com/e154/smart-home-configurator/common"
 	"io"
 	"net"
 	"net/http"
@@ -27,7 +28,6 @@ import (
 	"strings"
 
 	"github.com/gorilla/websocket"
-	"github.com/op/go-logging"
 )
 
 var (
@@ -41,7 +41,7 @@ var (
 	// DefaultDialer is a dialer with all fields set to the default zero values.
 	DefaultDialer = websocket.DefaultDialer
 
-	log = logging.MustGetLogger("websocketproxy")
+	log = common.MustGetLogger("websocketproxy")
 )
 
 // WebsocketProxy is an HTTP Handler that takes an incoming WebSocket
@@ -87,14 +87,14 @@ func NewProxy(target *url.URL) *WebsocketProxy {
 // ServeHTTP implements the http.Handler that proxies WebSocket connections.
 func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if w.Backend == nil {
-		log.Warning("backend function is not defined")
+		log.Warn("backend function is not defined")
 		http.Error(rw, "internal server error (code: 1)", http.StatusInternalServerError)
 		return
 	}
 
 	backendURL := w.Backend(req)
 	if backendURL == nil {
-		log.Warning("backend URL is nil")
+		log.Warn("backend URL is nil")
 		http.Error(rw, "internal server error (code: 2)", http.StatusInternalServerError)
 		return
 	}
@@ -153,7 +153,7 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// http://tools.ietf.org/html/draft-ietf-hybi-websocket-multiplexing-01
 	connBackend, resp, err := dialer.Dial(backendURL.String(), requestHeader)
 	if err != nil {
-		log.Warningf("couldn't dial to remote backend url %s", err)
+		log.Warnf("couldn't dial to remote backend url %s", err)
 		return
 	}
 	defer connBackend.Close()
@@ -176,7 +176,7 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// Also pass the header that we gathered from the Dial handshake.
 	connPub, err := upgrader.Upgrade(rw, req, upgradeHeader)
 	if err != nil {
-		log.Warningf("couldn't upgrade %s", err)
+		log.Warnf("couldn't upgrade %s", err)
 		return
 	}
 	defer connPub.Close()

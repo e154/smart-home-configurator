@@ -15,8 +15,6 @@ angular
     update:
       method: 'PUT'
       responseType: 'json'
-      transformResponse: (data) ->
-        @
 
     delete:
       method: 'DELETE'

@@ -418,7 +418,8 @@
       "disk": "Диск",
       "mqtt": "Mqtt",
       "configurator_version": "Версия конфигуратора",
-      "server_version": "Версия сервера"
+      "server_version": "Версия сервера",
+      "history": "История"
     },
     "memory": {
       "total": "Всего",
@@ -754,5 +755,12 @@
       "status": "Статус",
       "active": "Активный"
     }
+  },
+  "history": {
+    "list": "Список событий",
+    "type": "Тип",
+    "device": "Устройство",
+    "description": "Описание",
+    "created_at": "Создан"
   }
 }

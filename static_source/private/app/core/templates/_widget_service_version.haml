@@ -21,8 +21,8 @@
           {{ver.revision}}
 
         %dt {{'widget.version.revision_url' | translate}}
-        %dd(truncate-text="30")
-          %a(target="_blank" ng-href="{{ver.revision_url}}")
+        %dd
+          %a(target="_blank" truncate-text="30" ng-href="{{ver.revision_url}}")
             {{ver.revision_url}}
 
         %dt {{'widget.version.generated' | translate}}

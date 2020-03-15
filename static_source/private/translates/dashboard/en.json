@@ -416,7 +416,8 @@
       "disk": "disk",
       "mqtt": "mqtt",
       "configurator_version": "configurator version",
-      "server_version": "server version"
+      "server_version": "server version",
+      "history": "History"
     },
     "memory": {
       "total": "Total",
@@ -752,5 +753,12 @@
       "status": "status",
       "active": "active"
     }
+  },
+  "history": {
+    "list": "History list",
+    "type": "Type",
+    "device": "Device",
+    "description": "Description",
+    "created_at": "Created at"
   }
 }

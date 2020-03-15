@@ -20,17 +20,16 @@ package main
 
 import (
 	"fmt"
+	"github.com/e154/smart-home-configurator/common"
 	"github.com/e154/smart-home-configurator/system/graceful_service"
-	l "github.com/e154/smart-home-configurator/system/logging"
+	"github.com/e154/smart-home-configurator/system/logging"
 	"github.com/e154/smart-home-configurator/system/server"
 	"github.com/e154/smart-home-configurator/version"
-	"github.com/op/go-logging"
-	"github.com/sirupsen/logrus"
 	"os"
 )
 
 var (
-	log = logging.MustGetLogger("main")
+	log = common.MustGetLogger("main")
 )
 
 func main() {
@@ -57,9 +56,9 @@ func start() {
 	container := BuildContainer()
 	container.Invoke(func(
 		graceful *graceful_service.GracefulService,
-		lx *logrus.Logger,
+		logger *logging.Logging,
 		server *server.Server) {
-		l.Initialize(lx)
+
 		server.Start()
 		graceful.Wait()
 	})
