@@ -28,11 +28,16 @@
   left: 0;
   right: 0;
   .story-table-row {
-    margin-bottom: 4px;
     padding: 0 5px;
     .story-table-col{
       display: inline-block;
-      width: 25%;
+      width: 35%;
+      &:first-child {
+        width: 7%;
+      }
+      &:last-child {
+        width: 23%;
+      }
     }
   }
 }

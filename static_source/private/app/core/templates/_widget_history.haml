@@ -13,11 +13,11 @@
     .widget-content
       .story-table
         .story-table-row(ng-repeat="item in history")
-          .story-table-col
+          .story-table-col(truncate-text="5")
             {{item.type}}
-          .story-table-col(truncate-text="15")
+          .story-table-col(truncate-text="22")
             {{item.device_description}}
-          .story-table-col(truncate-text="15")
+          .story-table-col(truncate-text="22")
             {{item.description}}
           .story-table-col
             {{item.created_at | readableDateTime}}
