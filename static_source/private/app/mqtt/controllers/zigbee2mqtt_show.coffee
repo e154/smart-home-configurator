@@ -53,8 +53,8 @@ angular
     Zigbee2mqtt.show {id: $stateParams.id}, success, error
 
   Stream.subscribe 'dashboard.telemetry', 'zigbee2mqtt', (data)->
-    return !data?.zigbee2mqtt
-    getBridge()
+    if data.hasOwnProperty('zigbee2mqtt')
+      getBridge()
 
   $scope.$on '$stateChangeSuccess', ()->
     Stream.unsubscribe 'dashboard.telemetry', 'zigbee2mqtt'
