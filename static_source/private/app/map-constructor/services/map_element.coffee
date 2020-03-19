@@ -27,8 +27,8 @@ angular
       weight: 0
       zone: []
       graph_settings:
-        width: null
-        height: null
+        width: 30
+        height: 30
         position:
           top: 0
           left: 0
