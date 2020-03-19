@@ -24,10 +24,12 @@
       %dt(ng-if="selected.manufacturer != ''") {{'zigbee2mqtt.device.manufacturer' | translate}}
       %dd(ng-if="selected.manufacturer != ''") {{::selected.manufacturer}}
 
-      %dt {{'zigbee2mqtt.device.functions' | translate}}
-      %dd
-        %span(ng-repeat="item in selected.functions")
-          {{item}}&nbsp;
+
+      %div(ng-if="selected.functions.length")
+        %dt {{'zigbee2mqtt.device.functions' | translate}}
+        %dd
+          %span(ng-repeat="item in selected.functions")
+            {{item}}&nbsp;
 
       %dt {{'Created at' | translate}}
       %dd {{selected.created_at | readableDateTime}}

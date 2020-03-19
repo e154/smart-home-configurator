@@ -1,58 +1,58 @@
 .row
-    .col-md-6
-        .form-group
-            %label {{'device.name' | translate}}*
-            %input.form-control(ng-model="device.device.name")
+  .col-md-6
+    .form-group
+      %label {{'device.name' | translate}}*
+      %input.form-control(ng-model="device.device.name")
 
-        .form-group
-            %label {{'device.group' | translate}}
-            -#%select.form-control(ng-model="device.device.device" ng-options="dev as dev.name for dev in devices track by dev.id")
-            -#
-            -#  select2
-            -#
-            %ui-select(ng-model="device.device.device" theme="bootstrap")
-                %ui-select-match(placeholder="{{'device.device' | translate}}")
-                    {{device.device.device.name}}
-                %ui-select-choices(repeat="item in devices | filter: $select.search" refresh="refreshDevices($select.search)" refresh-delay="0")
-                    %div(ng-bind-html="item.name | highlight: $select.search")
-                %ui-select-no-choice
-                    {{'No data' | translate}}
+    .form-group(ng-if="device.device.type == 'modbus_rtu'")
+      %label {{'device.group' | translate}}
+      -#%select.form-control(ng-model="device.device.device" ng-options="dev as dev.name for dev in devices track by dev.id")
+      -#
+      -#  select2
+      -#
+      %ui-select(ng-model="device.device.device" theme="bootstrap")
+        %ui-select-match(placeholder="{{'device.device' | translate}}")
+          {{device.device.device.name}}
+        %ui-select-choices(repeat="item in devices | filter: $select.search" refresh="refreshDevices($select.search)" refresh-delay="0")
+          %div(ng-bind-html="item.name | highlight: $select.search")
+        %ui-select-no-choice
+          {{'No data' | translate}}
 
-        .form-group
-            %label {{'device.status.name' | translate}}
-            %select.form-control(ng-model="device.device.status")
-                %option(value="enabled")
-                    {{'device.enabled' | translate}}
-                %option(value="disabled")
-                    {{'device.disabled' | translate}}
+    .form-group
+      %label {{'device.status.name' | translate}}
+      %select.form-control(ng-model="device.device.status")
+        %option(value="enabled")
+          {{'device.enabled' | translate}}
+        %option(value="disabled")
+          {{'device.disabled' | translate}}
 
-        %div(ng-if="device.device.device.id == null && device.device.type != 'mqtt'")
+    %div(ng-if="device.device.device.id == null && device.device.type != 'mqtt'")
 
-            .form-group
-              %label {{'device.node' | translate}}
-              -#
-              -#  select2
-              -#
-              %ui-select(ng-model="device.device.node" theme="bootstrap")
-                %ui-select-match(placeholder="{{'device.node' | translate}}")
-                  {{device.device.node.name}}
-                %ui-select-choices(repeat="item in nodes | filter: $select.search" refresh="refreshNodes($select.search)" refresh-delay="0")
-                  %div(ng-bind-html="item.name | highlight: $select.search")
-                %ui-select-no-choice
-                  {{'No data' | translate}}
+      .form-group
+        %label {{'device.node' | translate}}
+        -#
+        -#  select2
+        -#
+        %ui-select(ng-model="device.device.node" theme="bootstrap")
+          %ui-select-match(placeholder="{{'device.node' | translate}}")
+            {{device.device.node.name}}
+          %ui-select-choices(repeat="item in nodes | filter: $select.search" refresh="refreshNodes($select.search)" refresh-delay="0")
+            %div(ng-bind-html="item.name | highlight: $select.search")
+          %ui-select-no-choice
+            {{'No data' | translate}}
 
-        .form-group(ng-if="device.device.device.id == null")
-            %label {{'device.type' | translate}}
-            %select.form-control(ng-model="device.device.type" ng-options="item for item in device.deviceTypes" ng-change="device.changeDeviceType()")
+    .form-group(ng-if="device.device.device.id == null")
+      %label {{'device.type' | translate}}
+      %select.form-control(ng-model="device.device.type" ng-options="item for item in device.deviceTypes" ng-change="device.changeDeviceType()")
 
         -#
         -# device types form
         -#
-        %div(ng-include="'/device/templates/_device_types_form.html'")
+    %div(ng-include="'/device/templates/_device_types_form.html'")
 
-        .form-group
-            %label {{'device.description' | translate}}
-            %textarea.form-control(ng-model="device.device.description" rows="10" )
+    .form-group
+      %label {{'device.description' | translate}}
+      %textarea.form-control(ng-model="device.device.description" rows="10" )
 
-    .col-md-6(ng-if="device.device.device.id != null")
-        %div(ng-include="'/device/templates/_properties_info.html'")
+  .col-md-6(ng-if="device.device.device.id != null")
+    %div(ng-include="'/device/templates/_properties_info.html'")

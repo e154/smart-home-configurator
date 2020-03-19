@@ -1,45 +1,46 @@
 .form-group
-    %label {{'flow.name' | translate}}*
-    %input.form-control(ng-model="flow.name")
+  %label {{'flow.name' | translate}}*
+  %input.form-control(ng-model="flow.name")
 
 .form-group
-    %label {{'flow.status' | translate}}
-    %select.form-control(ng-model="flow.status")
-        %option(value="enabled")
-            {{'flow.enabled' | translate}}
-        %option(value="disabled")
-            {{'flow.disabled' | translate}}
+  %label {{'flow.status' | translate}}
+  %select.form-control(ng-model="flow.status")
+    %option(value="enabled")
+      {{'flow.enabled' | translate}}
+    %option(value="disabled")
+      {{'flow.disabled' | translate}}
 
 .form-group
-    %label {{'flow.workflow' | translate}}
+  %label {{'flow.workflow' | translate}}
     -#%select.form-control(ng-model="flow.workflow.id" ng-options="wf.id as wf.name for wf in workflows")
 
-    -#
-    -#  select2
-    -#
-    %ui-select(ng-model="flow.workflow" theme="bootstrap")
-        %ui-select-match(placeholder="{{'flow.workflow' | translate}}")
-            {{flow.workflow.name}}
-        %ui-select-choices(repeat="item in workflows | filter: $select.search" refresh="refreshWorkflows($select.search)" refresh-delay="0")
-            %div(ng-bind-html="item.name | highlight: $select.search")
-        %ui-select-no-choice
-            {{'No data' | translate}}
+  -#
+  -#  select2
+  -#
+  %ui-select(ng-model="flow.workflow" theme="bootstrap")
+    %ui-select-match(placeholder="{{'flow.workflow' | translate}}")
+      {{flow.workflow.name}}
+    %ui-select-choices(repeat="item in workflows | filter: $select.search" refresh="refreshWorkflows($select.search)" refresh-delay="0")
+      %div(ng-bind-html="item.name | highlight: $select.search")
+    %ui-select-no-choice
+      {{'No data' | translate}}
 
 .form-group(ng-if="flow.workflow")
-    %label {{'workflow.scenario' | translate}}
+  %label {{'workflow.scenario' | translate}}
 
-    -#
-    -#  select2
-    -#
-    %ui-select(ng-model="flow.scenario" theme="bootstrap")
-        %ui-select-match(placeholder="{{'workflow.scenario' | translate}}")
-            {{flow.scenario.name}}
-        %ui-select-choices(repeat="item in scenarios | filter: $select.search" refresh="refreshScenarios($select.search)" refresh-delay="0")
-            %div(ng-bind-html="item.name | highlight: $select.search")
-        %ui-select-no-choice
-            {{'No data' | translate}}
+  -#
+  -#  select2
+  -#
+  %ui-select(ng-model="flow.scenario" theme="bootstrap")
+    %ui-select-match(placeholder="{{'workflow.scenario' | translate}}")
+      {{flow.scenario.name}} ({{flow.scenario.system_name}})
+    %ui-select-choices(repeat="item in scenarios | filter: $select.search" refresh="refreshScenarios($select.search)" refresh-delay="0")
+      %div
+        {{item.name}} ({{item.system_name}})
+    %ui-select-no-choice
+      {{'No data' | translate}}
 
 .form-group
-    %label {{'flow.description' | translate}}
-    %textarea.form-control(ng-model="flow.description" rows="2" )
+  %label {{'flow.description' | translate}}
+  %textarea.form-control(ng-model="flow.description" rows="2" )
 

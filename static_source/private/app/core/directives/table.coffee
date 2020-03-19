@@ -130,14 +130,14 @@ angular
   ($log, Message)->
     restrict: 'A'
     template: '
-<div class="clearfix" ng-if="pagination.objects_count >= perPage">
+<div class="clearfix" ng-if="pagination.objects_count >= perPage.value">
     <div class="pull-left">
  <ul uib-pagination boundary-links="true" direction-links="true" total-items="pagination.objects_count" ng-model="currentPage" num-pages="smallnumPages" ng-change="tableUpdate(currentPage)"
-max-size="maxSize" class="pagination-sm" items-per-page="perPage" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+max-size="maxSize" class="pagination-sm" items-per-page="perPage.value" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
     </div>
 
     <div class="pull-right">
-        <select class="form-control" name="amount" ng-model="perPage" ng-options="item for item in itemsPerPage"
+        <select class="form-control" name="amount" ng-model="perPage.value" ng-options="item for item in itemsPerPage"
 ng-change="tableUpdate()"></select>
     </div>
 </div>
@@ -198,14 +198,18 @@ ng-class="{ \'sorted desc\': order == \'desc\' && sortby.indexOf(column.field) !
 
     link: ($scope, $element, attrs) ->
 
+      $scope.perPage = {
+        value: 20
+      }
+
       pageRecalc =(perPage)->
-        $scope.perPage = perPage
+        $scope.perPage.value = perPage
         $scope.itemsPerPage = [
-          1 * $scope.perPage
-          2 * $scope.perPage
-          3 * $scope.perPage
-          5 * $scope.perPage
-          6 * $scope.perPage
+          1 * perPage
+          2 * perPage
+          3 * perPage
+          5 * perPage
+          6 * perPage
         ]
 
       $scope.pagination =
@@ -252,8 +256,8 @@ ng-class="{ \'sorted desc\': order == \'desc\' && sortby.indexOf(column.field) !
           query: $scope.query
           sortby: $scope.sortby
           order: $scope.order
-          limit: $scope.perPage
-          offset: ($scope.currentPage - 1) * $scope.perPage
+          limit: $scope.perPage.value
+          offset: ($scope.currentPage - 1) * $scope.perPage.value
 
         if $scope.table.query
           request.query = $scope.table.query

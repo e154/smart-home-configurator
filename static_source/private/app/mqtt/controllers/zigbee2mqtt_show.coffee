@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'zigbee2mqttShowCtrl', ['$scope', 'Notify', 'Zigbee2mqtt', '$state', '$stateParams', 'ifCan'
-($scope, Notify, Zigbee2mqtt, $state, $stateParams, ifCan) ->
+.controller 'zigbee2mqttShowCtrl', ['$scope', 'Notify', 'Zigbee2mqtt', '$state', '$stateParams', 'ifCan', 'Stream'
+($scope, Notify, Zigbee2mqtt, $state, $stateParams, ifCan, Stream) ->
 
   $scope.selected = null
 
@@ -51,6 +51,13 @@ angular
     error = ->
       $state.go 'dashboard.mqtt.zigbee2mqtt'
     Zigbee2mqtt.show {id: $stateParams.id}, success, error
+
+  Stream.subscribe 'dashboard.telemetry', 'zigbee2mqtt', (data)->
+    if data.hasOwnProperty('zigbee2mqtt')
+      getBridge()
+
+  $scope.$on '$stateChangeSuccess', ()->
+    Stream.unsubscribe 'dashboard.telemetry', 'zigbee2mqtt'
 
   getBridge()
 

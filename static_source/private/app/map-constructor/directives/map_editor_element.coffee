@@ -40,8 +40,8 @@ angular
         when 'device'
           template = $templateCache.get('/map-constructor/templates/_map_device_template.html')
           $element.css
-            width: graph_settings.width || 'auto'
-            height: graph_settings.height || 'auto'
+            width: graph_settings.width || '33px'
+            height: graph_settings.height || '33px'
         when 'script'
           break
 
