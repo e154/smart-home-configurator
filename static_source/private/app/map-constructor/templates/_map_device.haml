@@ -1,19 +1,6 @@
 .row
   .col-md-6
     .form-group
-      %label {{'map.element.system_name' | translate}}*
-      %input.form-control(ng-model="element.prototype.system_name")
-
-  .col-md-6
-    .form-group
-      %label
-        {{'map.zone' | translate}}
-      %tags-input(ng-model="element.zone" display-property="name" replace-spaces-with-dashes="false" add-on-paste="true" placeholder="{{'map.zone' | translate}}" on-tag-added="element.onZoneAdded($tag)" on-tag-removed="element.onZoneRemoved($tag)")
-        %auto-complete(source="element.refreshMapZones($query)")
-
-.row
-  .col-md-6
-    .form-group
       %label.clearfix
         .pull-left
           {{'map.element.device' | translate}}
@@ -35,6 +22,13 @@
             ({{item.device.name}})
         %ui-select-no-choice
           {{'No data' | translate}}
+
+  .col-md-6
+    .form-group
+      %label
+        {{'map.zone' | translate}}
+      %tags-input(ng-model="element.zone" display-property="name" replace-spaces-with-dashes="false" add-on-paste="true" placeholder="{{'map.zone' | translate}}" on-tag-added="element.onZoneAdded($tag)" on-tag-removed="element.onZoneRemoved($tag)")
+        %auto-complete(source="element.refreshMapZones($query)")
 
 .row(ng-if="element.prototype.device.id")
   .col-md-12
