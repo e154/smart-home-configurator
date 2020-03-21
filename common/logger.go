@@ -71,3 +71,16 @@ func (l *Logger) Fatal(format string, args ...interface{}) {
 func (l *Logger) Fatalf(format string, args ...interface{}) {
 	zap.L().Named(l.p).Sugar().Fatalf(format, args...)
 }
+
+type LogLevel string
+
+const (
+	LogLevelEmergency = LogLevel("Emergency")
+	LogLevelAlert     = LogLevel("Alert")
+	LogLevelCritical  = LogLevel("Critical")
+	LogLevelError     = LogLevel("Error")
+	LogLevelWarning   = LogLevel("Warning")
+	LogLevelNotice    = LogLevel("Notice")
+	LogLevelInfo      = LogLevel("Info")
+	LogLevelDebug     = LogLevel("Debug")
+)
