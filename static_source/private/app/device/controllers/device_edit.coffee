@@ -1,16 +1,19 @@
 angular
 .module('appControllers')
 .controller 'deviceEditCtrl', ['$scope', 'Message', '$stateParams', 'Device', '$state', 'Node'
-'$translate', 'NodeSelect2', 'DeviceSelect2', 'DeviceTypes'
-($scope, Message, $stateParams, Device, $state, Node, $translate, NodeSelect2, DeviceSelect2, DeviceTypes) ->
+'$translate', 'NodeSelect2', 'DeviceSelect2', 'DeviceTypes', 'Zigbee2mqttSelect2'
+($scope, Message, $stateParams, Device, $state, Node, $translate, NodeSelect2, DeviceSelect2, DeviceTypes,
+  Zigbee2mqttSelect2) ->
   vm = this
 
   $scope.devices = []
   $scope.nodes = []
+  $scope.zigbee2mqttDevices = []
   vm.deviceTypes = DeviceTypes
 
   $scope.refreshNodes = NodeSelect2 (nodes)-> $scope.nodes = nodes
   $scope.refreshDevices = DeviceSelect2 (devices)-> $scope.devices = devices
+  $scope.refresZigbee2mqtt = Zigbee2mqttSelect2 (devices)-> $scope.zigbee2mqttDevices = devices
 
   Device.show {id: $stateParams.id}, (device)->
     vm.device = device

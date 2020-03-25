@@ -127,6 +127,7 @@
     "type": "Type",
     "parent": "Parent",
     "no_params": "No params",
+    "zigbee2mqtt_device": "Zigbee2mqtt device",
     "action": {
       "add": "Add action",
       "name": "Name",
