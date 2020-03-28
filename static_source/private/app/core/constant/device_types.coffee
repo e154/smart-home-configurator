@@ -7,5 +7,6 @@ angular.module('appConstants')
     'modbus_tcp'
     'command'
     'mqtt'
+    'zigbee2mqtt'
   ]
 ]

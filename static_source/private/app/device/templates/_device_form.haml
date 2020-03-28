@@ -26,7 +26,7 @@
         %option(value="disabled")
           {{'device.disabled' | translate}}
 
-    %div(ng-if="device.device.device.id == null && device.device.type != 'mqtt'")
+    %div(ng-if="device.device.device.id == null && device.device.type != 'mqtt' && device.device.type != 'zigbee2mqtt'")
 
       .form-group
         %label {{'device.node' | translate}}

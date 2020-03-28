@@ -2,7 +2,7 @@ angular
 .module('appServices')
 .factory 'Device', ['$resource', ($resource) ->
 
-  getProperties =(device)->
+  serialProperties =(device)->
     prop = device.properties
     properties = {}
     switch device.type
@@ -31,8 +31,21 @@ angular
       when 'mqtt'
         properties =
           address: prop.address
-          user: prop.user
-          password: prop.password
+      when 'zigbee2mqtt'
+        properties =
+          zigbee2mqtt_device_id: prop.zigbee2mqtt_device.id
+
+    properties
+
+  deserialProperties =(device)->
+    prop = device.properties
+    properties = {}
+    switch device.type
+      when 'zigbee2mqtt'
+        properties =
+          zigbee2mqtt_device_id: prop.zigbee2mqtt_device_id
+          zigbee2mqtt_device:
+            id: prop.zigbee2mqtt_device_id
 
     properties
 
@@ -41,6 +54,7 @@ angular
       method: 'GET'
       responseType: 'json'
       transformResponse: (data) ->
+        data.properties = deserialProperties(data)
         data
 
     group:
@@ -52,17 +66,23 @@ angular
       method: 'POST'
       responseType: 'json'
       transformRequest: (data) ->
-        data.properties = getProperties(data)
+        data.properties = serialProperties(data)
         result = angular.toJson(data);
         result
+      transformResponse: (data) ->
+        data.properties = deserialProperties(data)
+        data
 
     update:
       method: 'PUT'
       responseType: 'json'
       transformRequest: (data) ->
-        data.properties = getProperties(data)
+        data.properties = serialProperties(data)
         result = angular.toJson(data);
         result
+      transformResponse: (data) ->
+        data.properties = deserialProperties(data)
+        data
 
     delete:
       method: 'DELETE'
