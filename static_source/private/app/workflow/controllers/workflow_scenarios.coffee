@@ -1,7 +1,7 @@
 angular
 .module('appControllers')
-.controller 'workflowScenariosCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', 'Notify', '$translate'
-($scope, Message, $stateParams, Workflow, Notify, $translate) ->
+.controller 'workflowScenariosCtrl', ['$scope', 'Message', '$stateParams', 'Workflow', 'Notify', '$translate', 'Stream', '$timeout'
+($scope, Message, $stateParams, Workflow, Notify, $translate, Stream, $timeout) ->
 
   vm = this
   vm.current = {}
@@ -18,8 +18,8 @@ angular
     return if !item.id?
 
     success =->
-      $scope.workflow.workflow.scenario = item
-      vm.current = angular.copy item
+      #$scope.workflow.workflow.scenario = item
+      #vm.current = angular.copy item
     error =(result)->
       Message result.data.status, result.data.message
 
@@ -97,6 +97,21 @@ angular
       workflow_id: $scope.workflow.workflow.id
       id: item.id
     Workflow.scenario_show data, success, error
+
+  Stream.subscribe 'dashboard.telemetry', 'workflows', (data)->
+    if data.hasOwnProperty('workflows')
+      if data.workflows.status.hasOwnProperty($scope.workflow.workflow.id)
+        scenarioId = data.workflows.status[$scope.workflow.workflow.id]['scenario_id']
+        for scenario, i in $scope.workflow.workflow.scenarios
+          if scenario.id == scenarioId
+            console.log "change workflow scenario to #{scenario.id}"
+            $scope.workflow.workflow.scenario = angular.copy scenario
+            vm.current = angular.copy scenario
+            $timeout ()->
+              $scope.$apply()
+
+  $scope.$on '$stateChangeSuccess', ()->
+    Stream.unsubscribe 'dashboard.telemetry', 'workflows'
 
   vm
 ]
