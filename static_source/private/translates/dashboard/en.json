@@ -763,15 +763,15 @@
     "created_at": "Created at"
   },
   "alexa": {
-    "index_form": "Alexa application list",
-    "show_form": "Application",
+    "index_form": "Alexa skill list",
+    "show_form": "Skill",
     "description": "Description",
     "created_at": "Created at",
     "updated_at": "Update at",
     "status": "status",
     "enabled": "enabled",
     "disabled": "disabled",
-    "application_id": "Application id",
+    "application_id": "Skill id",
     "on_launch": "On launch",
     "on_session_ended": "On session ended",
     "action": {
