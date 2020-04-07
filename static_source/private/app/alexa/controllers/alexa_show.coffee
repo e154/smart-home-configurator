@@ -30,6 +30,12 @@ angular
       if !intent?.script_id && intent.script
         intent.script_id = intent.script.id
 
+    if $scope.alexa?.on_session_end_script
+      $scope.alexa.on_session_end_script_id = $scope.alexa.on_session_end_script.id
+
+    if $scope.alexa?.on_launch_script
+      $scope.alexa.on_launch_script_id = $scope.alexa.on_launch_script.id
+
     Alexa.update $scope.alexa, success, error
 
   $scope.addNewIntent =->

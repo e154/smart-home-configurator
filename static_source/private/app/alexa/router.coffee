@@ -16,6 +16,13 @@ angular
     )
 
     .state(
+      name: "dashboard.alexa.new"
+      url: "/new"
+      templateUrl: '/alexa/templates/alexa_new.html'
+      controller: 'alexaNewCtrl'
+    )
+
+    .state(
       name: "dashboard.alexa.index"
       url: ""
       views:
