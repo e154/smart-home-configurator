@@ -1,21 +1,21 @@
 .form-group
-    %label {{'node.name' | translate}}*
-    %input.form-control(ng-model="node.node.name")
+  %label {{'node.name' | translate}}*
+  %input.form-control(ng-model="node.node.name")
 
 .form-group
-    %label {{'node.status' | translate}}
-    %select.form-control(ng-model="node.node.status")
-        %option(value="enabled")
-            {{'node.enabled' | translate}}
-        %option(value="disabled")
-            {{'node.disabled' | translate}}
+  %label {{'node.status' | translate}}
+  %select.form-control(ng-model="node.node.status")
+    %option(value="enabled")
+      {{'node.enabled' | translate}}
+    %option(value="disabled")
+      {{'node.disabled' | translate}}
 .form-group
-    %label {{'node.description' | translate}}
-    %textarea.form-control(ng-model="node.node.description" rows="10" )
+  %label {{'node.description' | translate}}
+  %textarea.form-control(ng-model="node.node.description" rows="10" )
 
 .form-group
-    %label {{'node.login' | translate}}*
-    %input.form-control(ng-model="node.node.login" type="text")
+  %label {{'node.login' | translate}}*
+  %input.form-control(ng-model="node.node.login" type="text")
 
 .row
   .col-lg-12

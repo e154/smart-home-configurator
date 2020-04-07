@@ -12,6 +12,7 @@ angular
       {
         name: '#'
         field: 'id'
+        width: '50px'
       }
       {
         name: 'node.name'

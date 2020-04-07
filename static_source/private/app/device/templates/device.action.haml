@@ -56,9 +56,11 @@
               {{'device.action.do_action' | translate}}
           .pull-left.list-group-item-text
             .small
-              {{'device.device' | translate}} {{item.device.name}}
+              action id: {{::item.id}}
             .small
               {{item.description}}
+            .small
+              scripts:
             .small(ng-if="item.script")
               %span
                 {{item.script.name}}

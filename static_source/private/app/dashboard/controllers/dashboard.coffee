@@ -311,6 +311,18 @@ angular
         'route': 'dashboard.gate'
         'icon': 'fa fa-cloud'
         'access': {gate: ['read']}
+        'items': [
+          {
+            'label': 'Settings'
+            'route': 'dashboard.gate.index'
+            'access': {gate: ['read']}
+          }
+          {
+            'label': 'Alexa'
+            'route': 'dashboard.alexa.index'
+            'access': {alexa: ['create']}
+          }
+        ]
 
       }
       {
