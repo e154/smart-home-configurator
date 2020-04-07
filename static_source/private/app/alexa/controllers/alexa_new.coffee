@@ -18,6 +18,12 @@ angular
     error =(result)->
       Message result.data.status, result.data.message
 
+    if $scope.alexa?.on_session_end_script
+      $scope.alexa.on_session_end_script_id = $scope.alexa.on_session_end_script.id
+
+    if $scope.alexa?.on_launch_script
+      $scope.alexa.on_launch_script_id = $scope.alexa.on_launch_script.id
+
     $scope.alexa.$create(success, error)
 
 
