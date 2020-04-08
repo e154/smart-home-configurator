@@ -43,7 +43,7 @@ angular
       name: 'new intent'
       description: 'new intent'
       script: null
-      alexa_application_id: $scope.alexa.id
+      alexa_skill_id: $scope.alexa.id
 
     if !$scope.alexa?.intents
       $scope.alexa.intents = []

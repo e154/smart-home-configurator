@@ -771,7 +771,7 @@
     "status": "Status",
     "enabled": "enabled",
     "disabled": "disabled",
-    "application_id": "Skill id",
+    "skill_id": "Skill id",
     "on_launch": "On launch",
     "on_session_ended": "On session ended",
     "action": {

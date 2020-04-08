@@ -1,6 +1,6 @@
 .form-group
-  %label {{'alexa.application_id' | translate}}*
-  %input.form-control(ng-model="alexa.application_id")
+  %label {{'alexa.skill_id' | translate}}*
+  %input.form-control(ng-model="alexa.skill_id")
 
 .form-group(ng-init="endpoint='${gate_address}/alexa?server_access_token=${mobile_token}'")
   %label {{'alexa.endpoint' | translate}}

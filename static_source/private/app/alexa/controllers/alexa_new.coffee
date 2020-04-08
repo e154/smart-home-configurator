@@ -4,9 +4,9 @@ angular
 ($scope, Notify, Alexa, $state, Message) ->
 
   $scope.alexa = new Alexa({
-    application_id: 'application'
+    skill_id: 'skill'
     status: "enabled"
-    description: "application"
+    description: "skill"
     on_session_end_script_id: null
     on_launch_script_id: null
   })

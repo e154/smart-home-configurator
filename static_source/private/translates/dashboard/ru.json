@@ -772,7 +772,7 @@
     "status": "Статус",
     "enabled": "включен",
     "disabled": "выключен",
-    "application_id": "Новык id",
+    "skill_id": "Новык id",
     "on_launch": "При запуске",
     "on_session_ended": "По окончании сессии",
     "action": {
