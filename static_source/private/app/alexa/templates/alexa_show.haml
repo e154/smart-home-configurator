@@ -1,0 +1,54 @@
+.row
+  .col-md-12
+    %h3
+      %a(href="" ui-sref="dashboard.alexa.index")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+      {{'alexa.show_form' | translate}} ID{{alexa.id}}
+
+    .pull-right.date-info-block
+      .form-group
+        %small
+          {{'Created at' | translate}} {{alexa.created_at | readableDateTime}}
+        %small
+          {{'Updated at' | translate}} {{alexa.updated_at | readableDateTime}}
+
+.row
+  .col-md-6
+    %div(ng-include="'/alexa/templates/_alexa_form.html'")
+  .col-md-6
+    .row
+      .col-md-12
+        %h3
+          {{'alexa.intents' | translate}}
+
+    .row(if-can="{alexa:['create']}")
+      .col-md-12
+        .form-group
+          %a(href="#" ng-click="addNewIntent()")
+            .fa.fa-plus &nbsp;
+            {{'alexa.add_intent' | translate}}
+
+    .row(ng-if="!alexa.intents.length")
+      .col-md-6
+        {{'No actions' | translate}}
+    .row(ng-if="alexa.intents.length")
+      .col-md-12
+        .list-group
+          .panel.panel-default
+            .list-group-item( ng-repeat="intent in alexa.intents" )
+              %div(ng-include="'/alexa/templates/_alexa_intent_form.html'")
+              .pull-right
+                %a.btn.btn-default.btn-xs(href="" role="button" ng-click="removeIntent($event, intent)" if-can="{alexa:['delete']}")
+                  {{'Delete' | translate}}
+              .clearfix
+
+.row
+  .col-md-6
+    .pull-right
+      %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{alexa:['delete']}")
+        {{'Delete' | translate}}
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.alexa.index")
+        {{'Cancel' | translate}}
+      %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{alexa:['update']}")
+        {{'Update' | translate}}

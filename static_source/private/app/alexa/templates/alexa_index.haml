@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    %h3 {{'alexa.index_form' | translate}}
+
+.row(if-can="{alexa:['create']}")
+  .col-md-12
+    .form-group
+      %a(ui-sref="dashboard.alexa.new")
+        %i.fa.fa-plus
+        &nbsp;
+        {{'Add new' | translate}}
+
+.row(if-can="{alexa:['read']}")
+  .col-md-12
+    .table(table="options")

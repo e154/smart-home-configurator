@@ -1,0 +1,42 @@
+.form-group
+  %label {{'alexa.intent_name' | translate}}*
+  %input.form-control(ng-model="intent.name")
+
+.form-group
+  %label {{'alexa.intent_description' | translate}}
+  %textarea.form-control(ng-model="alexa.description" rows="2" )
+
+-#`
+-#  onLaunch Script
+-#
+.form-group
+  %label
+    {{'alexa.intent_script' | translate}} &nbsp;&nbsp;
+    .pull-right
+      .dropdown
+        %a.dropdown-toggle( data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#")
+          {{'alexa.action.menu' | translate}}
+          %span.caret
+        %ul.dropdown-menu(aria-labelledby="dropdownMenu1")
+          %li
+            %a(href="#" ng-click="addScript($event)")
+              {{'alexa.action.add_script' | translate}}
+            %a(href="#" ng-click="showScript(intent.script, $event)" ng-if="intent.script")
+              {{'alexa.action.show_script' | translate}}
+            %a(href="#" ng-click="editScript(intent.script, $event)" ng-if="intent.script")
+              {{'alexa.action.edit_script' | translate}}
+  -#
+  -#  select2
+  -#
+  %ui-select(ng-model="intent.script" theme="bootstrap")
+    %ui-select-match(placeholder="{{'alexa.action.script' | translate}}")
+      %div(ng-if="intent.script")
+        {{intent.script.name}} ({{intent.script.lang}})
+    %ui-select-choices(repeat="item in scripts | filter: $select.search" refresh="refreshScripts($select.search)" refresh-delay="0")
+      %div
+        %span(ng-bind-html="item.name | highlight: $select.search")
+        (
+        %small.text-muted(ng-bind-html="item.lang | highlight: $select.search")
+        )
+    %ui-select-no-choice
+      {{'No data' | translate}}

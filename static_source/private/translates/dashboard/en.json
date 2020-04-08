@@ -761,5 +761,31 @@
     "device": "Device",
     "description": "Description",
     "created_at": "Created at"
+  },
+  "alexa": {
+    "index_form": "Alexa skill list",
+    "show_form": "Skill",
+    "description": "Description",
+    "created_at": "Created at",
+    "updated_at": "Update at",
+    "status": "Status",
+    "enabled": "enabled",
+    "disabled": "disabled",
+    "skill_id": "Skill id",
+    "on_launch": "On launch",
+    "on_session_ended": "On session ended",
+    "action": {
+      "menu": "menu",
+      "script": "script",
+      "add_script": "Add script",
+      "show_script": "Show script",
+      "edit_script": "Edit script"
+    },
+    "intents":"Intents",
+    "intent_name": "Intent name",
+    "intent_description": "Intent description",
+    "intent_script": "Intent script",
+    "add_intent": "Add intent",
+    "endpoint": "Endpoint (example)"
   }
 }

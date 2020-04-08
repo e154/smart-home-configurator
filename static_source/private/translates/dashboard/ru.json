@@ -762,5 +762,31 @@
     "device": "Устройство",
     "description": "Описание",
     "created_at": "Создан"
+  },
+  "alexa": {
+    "index_form": "Alexa список навыков",
+    "show_form": "Навык",
+    "description": "Описаник",
+    "created_at": "Создан",
+    "updated_at": "Обновлён",
+    "status": "Статус",
+    "enabled": "включен",
+    "disabled": "выключен",
+    "skill_id": "Новык id",
+    "on_launch": "При запуске",
+    "on_session_ended": "По окончании сессии",
+    "action": {
+      "menu": "меню",
+      "script": "скрипт",
+      "add_script": "Добавить скрипт",
+      "show_script": "Просмотреть скрипт",
+      "edit_script": "Редактировать скрипт"
+    },
+    "intents":"Намерение",
+    "intent_name": "Наименование",
+    "intent_description": "Описание",
+    "intent_script": "Скрипт",
+    "add_intent": "Добавить намерение",
+    "endpoint": "Точка доступа (пример)"
   }
 }
