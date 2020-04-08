@@ -769,7 +769,7 @@
     "description": "Описаник",
     "created_at": "Создан",
     "updated_at": "Обновлён",
-    "status": "статус",
+    "status": "Статус",
     "enabled": "включен",
     "disabled": "выключен",
     "application_id": "Новык id",
@@ -786,6 +786,7 @@
     "intent_name": "Наименование",
     "intent_description": "Описание",
     "intent_script": "Скрипт",
-    "add_intent": "Добавить намерение"
+    "add_intent": "Добавить намерение",
+    "endpoint": "Точка доступа (пример)"
   }
 }

@@ -768,7 +768,7 @@
     "description": "Description",
     "created_at": "Created at",
     "updated_at": "Update at",
-    "status": "status",
+    "status": "Status",
     "enabled": "enabled",
     "disabled": "disabled",
     "application_id": "Skill id",
@@ -785,6 +785,7 @@
     "intent_name": "Intent name",
     "intent_description": "Intent description",
     "intent_script": "Intent script",
-    "add_intent": "Add intent"
+    "add_intent": "Add intent",
+    "endpoint": "Endpoint (example)"
   }
 }

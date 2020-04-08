@@ -2,6 +2,10 @@
   %label {{'alexa.application_id' | translate}}*
   %input.form-control(ng-model="alexa.application_id")
 
+.form-group(ng-init="endpoint='${gate_address}/alexa?server_access_token=${mobile_token}'")
+  %label {{'alexa.endpoint' | translate}}
+  %input.form-control(ng-model="endpoint" disabled="true")
+
 .form-group
   %label {{'alexa.status' | translate}}
   %select.form-control(ng-model="alexa.status")

@@ -1,11 +1,11 @@
 .qrcode-header
-    %span.title
-    %a.cross(href="#" ng-click="closeThisDialog()")
-        %span
-            esc
+  %span.title
+  %a.cross(href="#" ng-click="closeThisDialog()")
+    %span
+      esc
 
 .qrcode-body(perfect-scrollbar="true")
-    %qrcode(data="{{token}}" version="6" error-correction-level="L" size="300" color="#000" background="#fff" download=true)
+  %qrcode(data="{{token}}" version="6" error-correction-level="L" size="300" color="#000" background="#fff" download=true)
 
 .qrcode-footer
-    %button.btn.btn-warning.full-width( ng-click="deleteMobile($event)" if-can="{gate:['delete_mobile']}") {{'delete' | translate}}
+  %button.btn.btn-warning.full-width( ng-click="deleteMobile($event)" if-can="{gate:['delete_mobile']}") {{'delete' | translate}}
