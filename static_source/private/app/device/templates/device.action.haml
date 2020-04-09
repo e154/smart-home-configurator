@@ -1,3 +1,14 @@
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'device.action.help1.title' | translate}}
+      %p
+        {{'device.action.help1.message1' | translate}}
+      %p
+        {{'device.action.help1.message2' | translate}}
+
 .row(if-can="{device_action:['read', 'create']}")
   .col-md-6
     .row(if-can="{device_action:['create']}")

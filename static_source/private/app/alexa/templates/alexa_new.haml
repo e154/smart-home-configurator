@@ -3,6 +3,32 @@
     %h3 {{'alexa.new_form' | translate}}
 
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'alexa.help1.title' | translate}}
+      %p
+        {{'alexa.help1.message' | translate}}
+      %p
+        %a(href="https://developer.amazon.com/alexa/console/ask" target="_blank")
+          alexa developer console
+
+.row
+  .col-md-12
+    .alert.alert-warning(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-warning &nbsp;
+        {{'alexa.warn1.title' | translate}}
+      %p
+        {{'alexa.warn1.message1' | translate}}
+      %p
+        {{'alexa.warn1.message2' | translate}}
+      %p
+        {{'alexa.warn1.message3' | translate}}
+
+
+.row
   .col-md-6
     %div(ng-include="'/alexa/templates/_alexa_form.html'")
 .row
