@@ -12,6 +12,17 @@
         %a(href="" ui-sref="dashboard.permissions.show({name: role.name})")
           %small.fa.fa-key
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'role.help2.title' | translate}}
+      %p
+        {{'role.help2.message1' | translate}}
+
+.row
+  .col-md-12
     .pull-right.date-info-block
       .form-group
         %small

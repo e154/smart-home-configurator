@@ -2,6 +2,15 @@
   .col-md-12
     %h3 {{'role.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'role.help1.title' | translate}}
+      %p
+        {{'role.help1.message1' | translate}}
+
 .row(if-can="{user:['create_role']}")
   .col-md-12
     .form-group
