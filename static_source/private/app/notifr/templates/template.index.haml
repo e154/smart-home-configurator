@@ -4,6 +4,17 @@
 
 .row
   .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'notifr.help2.title' | translate}}
+      %p
+        {{'notifr.help2.message1' | translate}}
+      %p
+        {{'notifr.help2.message2' | translate}}
+
+.row
+  .col-md-12
     .form-group
       %a(ui-sref="dashboard.notifr.new_template" if-can="{template:['create']}")
         .fa.fa-plus
