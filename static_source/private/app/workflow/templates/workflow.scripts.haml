@@ -1,4 +1,13 @@
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'workflow.help3.title' | translate}}
+      %p
+        {{'workflow.help3.message1' | translate}}
+
+.row
   .col-lg-12
     %script-editor(ng-model="workflow.workflow.scripts" options="{isArray:true}")
 
