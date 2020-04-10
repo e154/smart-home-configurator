@@ -2,6 +2,20 @@
   .col-md-12
     %h3 {{'script.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'script.help1.title' | translate}}
+      %p
+        {{'script.help1.message1' | translate}}
+      %p
+        {{'script.help1.message2' | translate}}
+      %p
+        %a(href="https://e154.github.io/smart-home/javascript/" target="_blank")
+          Javascript documentation
+
 .row(if-can="{script:['create']}")
   .col-md-12
     .form-group
