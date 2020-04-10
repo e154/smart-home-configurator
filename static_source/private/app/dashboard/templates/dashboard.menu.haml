@@ -18,4 +18,4 @@
             %ul.submenu
               %li(ng-repeat="subitem in item.items" if-can="item.access")
                 %a(ui-sref="{{subitem.route}}")
-                  {{subitem.label}}
+                  {{subitem.label | translate}}
