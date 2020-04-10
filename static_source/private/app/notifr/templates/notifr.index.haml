@@ -2,6 +2,18 @@
   .col-md-12
     %h3 {{ 'notifr.notifications' | translate }}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'notifr.help1.title' | translate}}
+      %p
+        {{'notifr.help1.message1' | translate}}
+      %p
+        %a(ui-sref="dashboard.notifr.settings")
+          {{ 'notifr.settings' | translate }}
+
 .row(if-can="{notifr:['create_notify']}")
   .col-md-12
     .form-group
