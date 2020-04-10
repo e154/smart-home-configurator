@@ -12,13 +12,13 @@
     .form-group
       %a(href="#" ng-click="ctrl.getTree()" if-can="{template:['read']}")
         %span.icon
-          %i.fa.fa-refresh
+          %i.fa.fa-refresh &nbsp;&nbsp;
           {{'notifr.refrash_list' | translate}}
 
 
       %a.pull-right(href="#" ng-click="ctrl.addNew()" ng-show="!ctrl.isNew" if-can="{template:['create']}")
         %span.icon
-          %i.fa.fa-plus
+          %i.fa.fa-plus &nbsp;&nbsp;
           {{'Add new' | translate}}
 .row
   .col-md-4
