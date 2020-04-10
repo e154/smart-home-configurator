@@ -2,6 +2,20 @@
   .col-md-12
     %h3 {{'zigbee2mqtt.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'zigbee2mqtt.help1.title' | translate}}
+      %p
+        {{'zigbee2mqtt.help1.message1' | translate}}
+      %p
+        {{'zigbee2mqtt.help1.message2' | translate}}
+      %p
+        %a(href="https://www.zigbee2mqtt.io/" target="_blank")
+          Zigbee2mqtt documentation
+
 .row(if-can="{zigbee2mqtt:['create']}")
   .col-md-12
     .form-group

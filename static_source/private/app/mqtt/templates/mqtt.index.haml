@@ -2,6 +2,20 @@
   .col-md-12
     %h3 {{'mqtt.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'mqtt.help1.title' | translate}}
+      %p
+        {{'mqtt.help1.message1' | translate}}
+      %p
+        {{'mqtt.help1.message2' | translate}}
+      %p
+        %a(href="https://ru.wikipedia.org/wiki/MQTT" target="_blank")
+          wiki
+
 .row(if-can="{mqtt:['publish']}")
   .col-md-12.form-group
     %a(href="" ui-sref="dashboard.mqtt.publish")
