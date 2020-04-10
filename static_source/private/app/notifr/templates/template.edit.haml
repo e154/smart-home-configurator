@@ -9,11 +9,11 @@
 .row.section
   .col-md-8
     .form-group(ng-if="ctrl.template.markers.length")
-      %label Основные переменные:
+      %label {{'notifr.markers' | translate}}:
       %div
-        %span(ng-repeat="marker in ctrl.template.markers")
+        %span(ng-repeat="marker in ctrl.template.markers track by $index")
           [{{marker}}]
-          %span(ng-if="!$last") ,
+          %span(ng-if="!$last"),&nbsp;
 
     .form-group
       %label(for="title") {{'notifr.title' | translate}}
