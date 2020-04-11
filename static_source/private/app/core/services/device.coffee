@@ -46,6 +46,28 @@ angular
           zigbee2mqtt_device_id: prop.zigbee2mqtt_device_id
           zigbee2mqtt_device:
             id: prop.zigbee2mqtt_device_id
+      when 'modbus_tcp'
+        properties =
+          slave_id: prop.slave_id
+          address_port: prop.address_port
+      when 'modbus_rtu'
+        properties =
+          slave_id: prop.slave_id
+          baud: prop.baud
+          data_bits: prop.data_bits
+          stop_bits: prop.stop_bits
+          parity: prop.parity
+          tty: prop.tty
+          timeout: prop.timeout
+      when 'smartbus'
+        properties =
+          baud: prop.baud
+          timeout: prop.timeout
+          sleep: prop.sleep
+          stop_bits: prop.stop_bits
+      when 'mqtt'
+        properties =
+          address: prop.address
 
     properties
 
