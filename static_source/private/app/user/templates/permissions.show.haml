@@ -13,12 +13,21 @@
 
 .row
   .col-md-12
-    .form-group
-      .alert.alert-danger(role="alert")
-        %h5
-          %i.fa.fa-exclamation-triangle
-          &nbsp;
-          {{'permission.warning_message' | translate}}
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'permission.help1.title' | translate}}
+      %p
+        {{'permission.help1.message1' | translate}}
+
+.row
+  .col-md-12
+    .alert.alert-danger(role="alert")
+      %h4.alert-heading
+        %i.fa.fa-exclamation-triangle &nbsp;
+        {{'permission.warn1.title' | translate}}
+      %p
+        {{'permission.warn1.message1' | translate}}
 
 .row
   .col-md-6

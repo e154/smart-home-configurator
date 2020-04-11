@@ -1,4 +1,19 @@
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'workflow.help2.title' | translate}}
+      %p
+        {{'workflow.help2.message1' | translate}}
+      %p
+        {{'workflow.help2.message2' | translate}}
+      %p
+        {{'workflow.help2.message3' | translate}}
+      %p
+        {{'workflow.help2.message4' | translate}}
+
+.row
   .col-md-6
     .row(if-can="{scenarios:['create']}")
       .col-md-12

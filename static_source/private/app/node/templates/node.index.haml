@@ -2,6 +2,15 @@
   .col-md-12
     %h3 {{'node.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'node.help1.title' | translate}}
+      %p
+        {{'node.help1.message1' | translate}}
+
 .row(if-can="{node:['create']}")
   .col-md-12
     .form-group

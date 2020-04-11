@@ -2,6 +2,17 @@
   .col-md-12
     %h3 {{'user.index_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'user.help1.title' | translate}}
+      %p
+        {{'user.help1.message1' | translate}}
+      %p
+        {{'user.help1.message2' | translate}}
+
 .row(if-can="{user:['create']}")
   .col-md-12
     .form-group

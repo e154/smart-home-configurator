@@ -6,14 +6,25 @@
           &nbsp;
       {{ 'notifr.email_template' | translate }}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'notifr.help3.title' | translate}}
+      %p
+        {{'notifr.help3.message1' | translate}}
+      %p
+        {{'notifr.help3.message2' | translate}}
+
 .row.section
   .col-md-8
     .form-group(ng-if="ctrl.template.markers.length")
-      %label Основные переменные:
+      %label {{'notifr.markers' | translate}}:
       %div
-        %span(ng-repeat="marker in ctrl.template.markers")
+        %span(ng-repeat="marker in ctrl.template.markers track by $index")
           [{{marker}}]
-          %span(ng-if="!$last") ,
+          %span(ng-if="!$last"),&nbsp;
 
     .form-group
       %label(for="title") {{'notifr.title' | translate}}

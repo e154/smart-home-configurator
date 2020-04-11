@@ -1,4 +1,17 @@
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'device.help1.title' | translate}}
+      %p
+        {{'device.help1.message1' | translate}}
+      %p
+        {{'device.help1.message2' | translate}}
+      %p
+        {{'device.help1.message3' | translate}}
+
+.row
   .col-md-6
     .form-group
       %label {{'device.name' | translate}}*

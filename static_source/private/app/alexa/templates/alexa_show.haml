@@ -4,8 +4,35 @@
       %a(href="" ui-sref="dashboard.alexa.index")
         %small.fa.fa-long-arrow-left
           &nbsp;
-      {{'alexa.show_form' | translate}} ID{{alexa.id}}
+      {{'alexa.show_form' | translate}}
 
+.row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'alexa.help1.title' | translate}}
+      %p
+        {{'alexa.help1.message' | translate}}
+      %p
+        %a(href="https://developer.amazon.com/alexa/console/ask" target="_blank")
+          alexa developer console
+
+.row
+  .col-md-12
+    .alert.alert-warning(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-warning &nbsp;
+        {{'alexa.warn1.title' | translate}}
+      %p
+        {{'alexa.warn1.message1' | translate}}
+      %p
+        {{'alexa.warn1.message2' | translate}}
+      %p
+        {{'alexa.warn1.message3' | translate}}
+
+.row
+  .col-md-12
     .pull-right.date-info-block
       .form-group
         %small
@@ -49,6 +76,6 @@
       %a.btn.btn-danger(href="" role="button" ng-click="remove()" if-can="{alexa:['delete']}")
         {{'Delete' | translate}}
       %a.btn.btn-default(href="" role="button" ui-sref="dashboard.alexa.index")
-        {{'Cancel' | translate}}
+        {{'Close' | translate}}
       %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{alexa:['update']}")
         {{'Update' | translate}}

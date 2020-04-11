@@ -3,10 +3,32 @@
     %h3 {{'gate.index_form' | translate}}
 
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'gate.help1.title' | translate}}
+      %p
+        {{'gate.help1.message1' | translate}}
+      %p
+        {{'gate.help1.message2' | translate}}
+      %p
+        {{'gate.help1.message3' | translate}}
+
+.row
+  .col-md-12
+    .alert.alert-warning(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-warning &nbsp;
+        {{'gate.warn1.title' | translate}}
+      %p
+        {{'gate.warn1.message' | translate}}
+
+.row
   .col-md-6.gate-map
     .gate-map-wrapper
       .gate-map-smart-home-server
-        %img(src="/static/images/gate/gate_net_icon.svg" alt="smart home server")
+        %span.fa.fa-server
         .description
           {{'gate.this_server' | translate}}
       .gate-map-arrows
@@ -18,7 +40,7 @@
         .gate-map-arrow-status.error(ng-if="gateStatus=='not connected'")
           %i.fa.fa-remove
       .gate-map-server
-        %img(src="/static/images/gate/gate_cloud_orange.svg" alt="gate server")
+        %span.fa.fa-cloud
         .description
           {{settings.address}}
       .gate-map-arrows

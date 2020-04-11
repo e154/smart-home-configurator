@@ -17,6 +17,15 @@
           {{'Updated at' | translate}} {{role.updated_at | readableDateTime}}
 
 .row
+  .col-md-12
+    .alert.alert-success(role="alert")
+      %h4.alert-heading
+        %span.fa.fa-lightbulb-o &nbsp;
+        {{'role.help2.title' | translate}}
+      %p
+        {{'role.help2.message1' | translate}}
+
+.row
   .col-md-6
     %div(ng-include="'/user/templates/_role_form.html'")
 

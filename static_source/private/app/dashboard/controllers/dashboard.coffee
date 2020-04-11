@@ -215,7 +215,12 @@ angular
         'link': 'dashboard.log.index'
         'icon': 'fa fa-file-text-o'
         'access': {log: ['read']}
-
+        'items': [
+          {
+            'label': 'All logs'
+            'route': 'dashboard.log.index'
+          }
+        ]
       }
       {
         'id': 8
@@ -231,13 +236,13 @@ angular
         'access': {notifr: ['read']}
         'items': [
           {
+            'label': 'All Notifications'
+            'route': 'dashboard.notifr.index'
+          }
+          {
             'label': 'New notify'
             'route': 'dashboard.notifr.new_notification'
             'access': {notifr: ['create_notify']}
-          }
-          {
-            'label': 'All params'
-            'route': 'dashboard.notifr.index'
           }
           {
             'label': 'All items'
