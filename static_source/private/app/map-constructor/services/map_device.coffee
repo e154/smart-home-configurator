@@ -1,7 +1,8 @@
 angular
-.module('angular-map')
-.factory 'MapDevice', [ '$http', 'Message', 'Notify', 'DeviceState', 'MapDeviceState', 'DeviceAction', 'MapDeviceAction', 'DeviceSelect2'
-  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction, DeviceSelect2) ->
+  .module('angular-map')
+  .factory 'MapDevice', ['$http', 'Message', 'Notify', 'DeviceState', 'MapDeviceState', 'DeviceAction',
+  'MapDeviceAction', 'DeviceSelect2', 'MapDeviceMetric'
+  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction, DeviceSelect2, MapDeviceMetric) ->
     class MapDevice
 
       id: null
@@ -11,6 +12,7 @@ angular
       devices: []
       states: []
       actions: []
+      metrics: []
       image: null
 
       constructor: (@scope)->
@@ -23,37 +25,37 @@ angular
         )
 
       getDeviceActions: (device)->
-        success =(actions)=>
+        success = (actions)=>
           @device.actions = actions
           @actions = []
           angular.forEach @device.actions, (device_action)=>
             md_action = new MapDeviceAction(@scope, device_action)
             @actions.push md_action
-        error =(result)->
+        error = (result)->
           Message result.data.status, result.data.message
 
         DeviceAction.get_by_device {id: device.device?.id || device.id}, success, error
 
       getDeviceStates: (device)->
-        success =(states)=>
+        success = (states)=>
           @device.states = states
           @states = []
           angular.forEach @device.states, (device_state)=>
             md_state = new MapDeviceState(@scope, device_state)
             @states.push md_state
 
-        error =(result)->
+        error = (result)->
           Message result.data.status, result.data.message
         DeviceState.get_by_device {id: device.device?.id || device.id}, success, error
 
-      # get devices (select2)
+# get devices (select2)
       refreshDevices: (args)=>
         _this = @
 
         DeviceSelect2((devices)=>
           angular.forEach devices, (device, index)->
-            #if !device.device_id? && !device.address?
-            #  devices.splice(index, 1)
+#if !device.device_id? && !device.address?
+#  devices.splice(index, 1)
             _this.devices = devices
         )(args)
 
@@ -73,12 +75,18 @@ angular
           action.map_device = {id: @id} if @id
           actions.push action
 
+        metrics = []
+        angular.forEach @metrics, (_metric)->
+          metric = _metric.serialize()
+          metrics.push metric
+
         {
           id: @id if @id
           device: {id: @device.id} if @device
           device_id: @device.id if @device
           states: states
           actions: actions
+          metrics: metrics
           image: @image
           system_name: @system_name
         }
@@ -106,6 +114,12 @@ angular
               md_action.deserialize action
           @actions.push md_action
 
+        @metrics = []
+        angular.forEach m.metrics, (metric, key)=>
+          md_action = new MapDeviceMetric(@scope, m.id)
+          md_action.deserialize metric
+          @metrics.push md_action
+
         @
 
       removeImage: ()->
@@ -119,6 +133,25 @@ angular
 
       valid: =>
         @device != null
+
+      addNewMetric: ()->
+        md_action = new MapDeviceMetric(@scope, @id)
+        @metrics.push md_action
+
+      removeMetric: ($event, metric)->
+        $event.preventDefault()
+        index = @metrics.indexOf(metric)
+        if index == -1
+          if !$scope.options.multiple && @metrics.length
+            @metrics[0].selected = false
+            @metrics.splice(0, 1)
+
+          @metrics.push(metric)
+          metric.selected = true
+        else
+          @metrics.splice(index, 1)
+          metric.selected = false
+
 
     MapDevice
 ]

@@ -1,0 +1,19 @@
+.row
+  .col-md-6.form-group
+    %label {{'map.element.prototype.metric.name' | translate}}*
+    %input.form-control(ng-model="item.name")
+
+.row
+  .col-md-6.form-group
+    %label {{'map.element.prototype.metric.description' | translate}}
+    %input.form-control(ng-model="item.description")
+
+.row
+  .col-md-6.form-group
+    %label {{'map.element.prototype.metric.translations' | translate}}
+    %textarea.form-control(ng-model="item.translations" rows="5")
+
+.row
+  .col-md-6.form-group
+    %a.btn.btn-default.btn-xs(href="" role="button" ng-click="element.prototype.removeMetric($event, item)" if-can="{map:['delete']}")
+      {{'Delete' | translate}}

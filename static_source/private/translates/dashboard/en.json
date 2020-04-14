@@ -453,6 +453,11 @@
         "image": "Image",
         "text": "Text",
         "state": "State",
+        "metric": {
+          "name": "Name",
+          "description": "Description",
+          "translations": "Translations"
+        },
         "device": {
           "image": "Image",
           "action": "Action",
@@ -461,7 +466,8 @@
           "tab": {
             "base": "Base",
             "states": "States",
-            "actions": "Actions"
+            "actions": "Actions",
+            "metrics": "Metrics"
           }
         }
       }
