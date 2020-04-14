@@ -456,7 +456,7 @@
         "metric": {
           "name": "Name",
           "description": "Description",
-          "translations": "Translations"
+          "options": "Options"
         },
         "device": {
           "image": "Image",

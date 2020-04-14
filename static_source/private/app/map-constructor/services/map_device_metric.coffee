@@ -6,7 +6,7 @@ angular
     id: null
     name: ''
     description: ''
-    translations: "{\"time\":\"time\"}"
+    options: "{\"time\":\"time\"}"
 
     constructor: (@scope, @map_device_id)->
 
@@ -16,14 +16,14 @@ angular
         name: @name
         map_device_id: @map_device_id
         description: @description || ''
-        translations: angular.fromJson(@translations)
+        options: angular.fromJson(@options)
       }
 
     deserialize: (m)->
       @id = m.id if m.id
       @name = m.name if m.name
       @description = m.description || ''
-      @translations = angular.toJson(m.translations)
+      @options = angular.toJson(m.options)
 
       @
 

@@ -464,7 +464,7 @@
         "metric": {
           "name": "Название",
           "description": "Описание",
-          "translations": "Переводы"
+          "Options": "Параметры"
         },
         "device": {
           "image": "Изображение",
