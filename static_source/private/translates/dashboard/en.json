@@ -88,7 +88,7 @@
       "error": "Error"
     },
     "help1": {
-      "title": "Node",
+      "title": "Notice",
       "message1": "A node is the main way of communication between a software package and executable devices (device). The agent allows you to connect devices to the software package via the Internet, wifi, secure channels (openvpn, etc)"
     }
   },
@@ -133,14 +133,14 @@
     "no_params": "No params",
     "zigbee2mqtt_device": "Zigbee2mqtt device",
     "help1": {
-      "title": "Device",
+      "title": "Notice",
       "message1": "The device object describes a smart device, both real and virtual, created by the user (for example, a temperature and humidity sensor). Devices are divided by type (example, default - a virtual device).",
       "message2": "Groups are required for devices of type modbus_rtu.",
       "message3": "Connecting devices requires a node / agent acting as an intermediary in communication between the software package and the device."
     },
     "action": {
       "help1": {
-        "title": "Action",
+        "title": "Notice",
         "message1": "An Action is a property of an object (device) that describes its capabilities. A device may not have any actions at all (example, temperature and humidity sensor). The device can also include the properties and actions of several sensors and devices at once (for example, a door open sensor + motion sensor + load control relay)",
         "message2": "The action has a name, ID is a unique identifier within all actions for calling from scripts using the doAction (id) command, and an executable script (javascript, coffescript, typescript) describes the business logic of the action (example, enable / disable, send a notification, save state )"
       },
@@ -165,7 +165,7 @@
     },
     "status": {
       "help1": {
-        "title": "Status",
+        "title": "Notice",
         "message1": "Status - this is a property of the device in which it can be at a time (example, on or off). With the help of states, you can monitor the status of devices and keep an event log.",
         "message2": "A device may not have statuses, but such devices are less informative."
       },
@@ -208,12 +208,12 @@
       "scripts_title": "Scenario scripts"
     },
     "help1": {
-      "title": "workflow",
+      "title": "Notice",
       "message1": "Business process (workflow) - a process that combines scenarios in order to control the flow of tasks (flow).",
       "message2": "For example, you can create a process (workflow): country_house (country house), and three scenarios for it: 1) nobody is at home (the house is on guard); 2) weekday; 3) weekend."
     },
     "help2": {
-      "title": "Workflow scenario",
+      "title": "Notice",
       "message1": "The scenario describes in detail how tasks should be solved in the context of a workflow",
       "message2": "The script can use scripts, as a rule, to store the global variables associated with the current task, as well as global variables responsible for storing task states (flow)",
       "message3": "There must be at least one scenario so that the workflow can work. Combining scenarios is not possible, there can be only one active.",
@@ -273,7 +273,7 @@
     },
     "package_name": "Flows",
     "help1": {
-      "title": "Flows",
+      "title": "Notice",
       "message1": "A process (flow) is a system of rules describing the business logic of a device or group of devices tied to a specific scenario (scenario) of a workflow.",
       "message2": ""
     }
@@ -312,7 +312,7 @@
       "body": "Body"
     },
     "help1": {
-      "title": "Script",
+      "title": "Notice",
       "message1": "A script is a program or sequence of actions created to automatically complete a task.",
       "message2": "Scripts are used in workflow, scripts (scenario), processes (flow), etc. Scripts are written in Javascript, also CoffeeScript and TypeScript are translated in JavaScript. This is the main way to describe the logic in the software package."
     }
@@ -379,21 +379,21 @@
     "body_type_plain": "plain",
     "body_type_template": "template",
     "help1": {
-      "title": "Notifications",
+      "title": "Notice",
       "message1": "List of all notifications and status sent by the software package."
     },
     "help2": {
-      "title": "Templates",
+      "title": "Notice",
       "message1": "A message template is a ready-made text that the software package can use to automate the notification process by email or using SMS messages. Templates save time because You do not have to type a standard message every time.",
       "message2": "For example, you can create a message about the opening of a garage door, which will warn you in advance. Or you can create a message template about the operation of motion sensors when the system is in the armed state."
     },
     "help3": {
-      "title": "Template",
+      "title": "Notice",
       "message1": "The template is formed from elements (item), and markers - variables that are responsible for filling with the actual value before sending, the system name should be unique within the templates, as it is used when choosing a template.",
       "message2": ""
     },
     "help4": {
-      "title": "Items",
+      "title": "Notice",
       "message1": "Element (item) - the building block of the template, which is strictly dependent on the parent element",
       "message2": ""
     }
@@ -598,7 +598,7 @@
     "updated_at": "Update at",
     "Sign in": "Sign in",
     "help1": {
-      "title": "Users",
+      "title": "Notice",
       "message1": "Users - From a system perspective, a user is not necessarily a person. A user is an object that has certain rights and can run a command through a REST request.",
       "message2": "There is one user in the system with unlimited rights. This is the superuser or system administrator."
     },
@@ -630,11 +630,11 @@
     "name": "Name",
     "package_name": "Roles",
     "help1": {
-      "title": "Roles",
+      "title": "Notice",
       "message1": "RBAC - Access control to the software package is based on roles. Role - are assigned to users, as a result of which users of the complex receive certain permissions through roles."
     },
     "help2": {
-      "title": "Roles",
+      "title": "Notice",
       "message1": "Role inheritance allows you to combine permissions with a parent role."
     }
   },
@@ -710,7 +710,7 @@
     "publish": "Publish",
     "rename_device": "Rename device",
     "help1": {
-      "title": "Access rights",
+      "title": "Notice",
       "message1": "Access settings (permissions) - delegate access privileges only to the information or methods of the complex, which is necessary for the role to work."
     },
     "warn1": {
@@ -753,7 +753,7 @@
     "this_server": "This server",
     "mobile": "Mobile",
     "help1": {
-      "title": "Gate",
+      "title": "Notice",
       "message1": "The gateway has two purposes 1) Providing access to the software package for mobile devices from the Internet 2) Proxying calls from amazon Alexa.",
       "message2": "You do not have to deploy your gateway. You can connect to the free and secure gateway https://gate.e154.ru, the “access token” is the token received during registration on the gateway, it is responsible for storing mobile tokens, the “mobile token” is used to connect mobile clients to this server, it determines the membership of the server, each call to the gateway must be signed with a mobile token, the gateway determines the routing and sends a request to the desired software package.",
       "message3": "For example, enter https://gate.e154.ru in the field, if you do not have an Access Token, leave this field empty and click update. After successful connection, the 'Access Token' will be filled. Then you can add one client, for a mobile application, and one more for Alexa skill."
@@ -819,7 +819,7 @@
       "unsubscribe": "Unsubscribe"
     },
     "help1": {
-      "title": "Mqtt",
+      "title": "Notice",
       "message1": "MQTT is a simplified network protocol running on top of TCP / IP, oriented for the exchange of messages between devices on the principle of publisher-subscriber.",
       "message2": "The protocol focuses on ease of use, low load on communication channels, work in the conditions of constant loss of communication, easy integration into any system. The main purpose is to work with telemetry from various sensors, devices, using a subscriber template allows devices to communicate and publish messages that were not previously known or predetermined, in particular, the protocol does not impose restrictions on the format of the transmitted data."
     }
@@ -862,7 +862,7 @@
       "active": "active"
     },
     "help1": {
-      "title": "Zigbee2mqtt",
+      "title": "Notice",
       "message1": "The bridge links events and allows you to control Zigbee devices through MQTT. Thus, you can integrate your Zigbee devices with the smart home software package.",
       "message2": "If you are not familiar with Zigbee terminology, be sure to read the documentation at the link below."
     }
@@ -900,11 +900,11 @@
     "add_intent": "Add intent",
     "endpoint": "Endpoint (example)",
     "help1": {
-      "title": "Skills",
+      "title": "Notice",
       "message": "With the help of Alexa skills, you can perform any action within the software system. You can turn on the light, send a notification, email, SMS, open or close the garage door, a report on the status of security sensors or the current temperature, any action that can be implemented programmatically in this system.\n\nThe address of the console for setting skills:"
     },
     "warn1": {
-      "title": "Endpoint",
+      "title": "Attention",
       "message1": "A skill system requires a working and configured gateway. The access point to all skills consists of two values: 1) gateway address; 2) mobile access token.",
       "message2": "For example: https://gate.e154.ru/alexa?server_access_token=nQJb-vulnfzgTVxrJrUjAmWTe-1586355603-06150e784df91110a1eb42d11498b9937b442944fae26117272204934de53a14.",
       "message3": "A sample link must be specified in the alexa developer console as endpoint."

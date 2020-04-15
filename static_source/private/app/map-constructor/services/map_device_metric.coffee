@@ -6,7 +6,16 @@ angular
     id: null
     name: ''
     description: ''
-    options: "{\"time\":\"time\"}"
+    options: "{
+  \"items\": [
+    {
+      \"name\": \"\",
+      \"translate\": \"\",
+      \"description\": \"\",
+      \"color\": \"\"
+    }
+  ]
+}"
 
     constructor: (@scope, @map_device_id)->
 
