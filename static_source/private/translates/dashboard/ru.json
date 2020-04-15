@@ -464,7 +464,15 @@
         "metric": {
           "name": "Название",
           "description": "Описание",
-          "Options": "Параметры"
+          "Options": "Параметры",
+          "option_items": "Параметры",
+          "option_item": {
+            "add": "Добавить параметр",
+            "name": "Наименоание",
+            "description": "Описание",
+            "translate": "Перевод",
+            "color": "Цвет"
+          }
         },
         "device": {
           "image": "Изображение",

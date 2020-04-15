@@ -456,7 +456,15 @@
         "metric": {
           "name": "Name",
           "description": "Description",
-          "options": "Options"
+          "options": "Options",
+          "option_items": "Metric Options",
+          "option_item": {
+            "add": "Add option item",
+            "name": "Name",
+            "description": "Description",
+            "translate": "Translate",
+            "color": "color"
+          }
         },
         "device": {
           "image": "Image",
