@@ -341,7 +341,32 @@ angular
         'route': 'dashboard.swagger'
         'icon': 'fa fa-file-text-o'
         'access': {swagger: ['read']}
-
+        'items': [
+          {
+            'label': 'Api'
+            'route': 'dashboard.swagger.index'
+            'access': {swagger: ['read']}
+          }
+        ]
+      }
+      {
+        'id': 10
+        'col': 4
+        'row': 3
+        'sizeY': 1
+        'sizeX': 1
+        'label': 'Metric'
+        'link': 'dashboard.metric.index'
+        'route': 'dashboard.metric'
+        'icon': 'fa fa-area-chart'
+        'access': {metric: ['read']}
+        'items': [
+          {
+            'label': 'All metrics'
+            'route': 'dashboard.metric.index'
+            'access': {metric: ['read']}
+          }
+        ]
       }
     ]
 

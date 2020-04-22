@@ -34,9 +34,10 @@ app = angular.module('app', [
   'gridster'
   'passwordCheck'
   'http-auth-interceptor'
-  'base64',
-  'monospaced.qrcode',
+  'base64'
+  'monospaced.qrcode'
   'ngTagsInput'
+  'chart.js'
 ])
 
 app.version = window.app_settings.configurator_version

@@ -917,5 +917,25 @@
       "message2": "For example: https://gate.e154.ru/alexa?server_access_token=nQJb-vulnfzgTVxrJrUjAmWTe-1586355603-06150e784df91110a1eb42d11498b9937b442944fae26117272204934de53a14.",
       "message3": "A sample link must be specified in the alexa developer console as endpoint."
     }
+  },
+  "metric": {
+    "index_form": "Metric list",
+    "show_form": "Metric",
+    "description": "Description",
+    "created_at": "Created at",
+    "updated_at": "Update at",
+    "name": "Name",
+    "type": "Type",
+    "help1": {
+      "title": "Notice",
+      "message": "to do add"
+    },
+    "items": "Items",
+    "item_name": "Name",
+    "item_description": "Description",
+    "item_color": "Color",
+    "item_translate": "Translate",
+    "item_label": "Label"
+
   }
 }

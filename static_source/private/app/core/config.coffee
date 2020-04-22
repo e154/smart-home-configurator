@@ -1,7 +1,9 @@
 angular
 .module('app')
-.config ['$translatePartialLoaderProvider', '$translateProvider', '$locationProvider', '$routeProvider', 'pikadayConfigProvider'
-($translatePartialLoaderProvider, $translateProvider, $locationProvider, $routeProvider, pikadayConfigProvider) ->
+.config ['$translatePartialLoaderProvider', '$translateProvider', '$locationProvider', '$routeProvider',
+  'pikadayConfigProvider', 'ChartJsProvider'
+($translatePartialLoaderProvider, $translateProvider, $locationProvider, $routeProvider,
+  pikadayConfigProvider, ChartJsProvider) ->
 
   $translatePartialLoaderProvider.addPart('dashboard');
   $translatePartialLoaderProvider.addPart('messages');
@@ -40,6 +42,12 @@ angular
 
   pikadayConfigProvider.setConfig params
 
+#  ChartJsProvider.setOptions
+#    chartColors: ['#FF5252', '#FF8A80'],
+#    responsive: false
+#
+#  ChartJsProvider.setOptions 'line',
+#    showLines: true
 ]
 
 angular

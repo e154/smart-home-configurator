@@ -1,0 +1,62 @@
+.row
+  .col-md-12
+    %h3
+      %a(href="" ui-sref="dashboard.metric.index")
+        %small.fa.fa-long-arrow-left
+          &nbsp;
+      {{'metric.show_form' | translate}}, id: {{metric.id}}
+      .edit-icon-link(if-can="{metric:['update']}")
+        %a(ui-sref="dashboard.metric.edit({id:metric.id})")
+          %span.fa.fa-pencil
+
+    .pull-right.date-info-block
+      .form-group
+        %small
+          {{'Created at' | translate}} {{metric.created_at | readableDateTime}}
+        %small
+          {{'Updated at' | translate}} {{metric.updated_at | readableDateTime}}
+
+.row
+  .col-md-2
+    .form-group
+      .text-muted
+        {{'metric.name' | translate}}
+      %div
+        {{::metric.name}}
+
+    .form-group(ng-if="metric.description")
+      .text-muted
+        {{'metric.description' | translate}}
+      %div
+        {{::metric.description}}
+
+    .form-group
+      %strong
+        {{'metric.items' | translate}}:
+
+    .form-group(ng-repeat="item in metric.options.items")
+      .text-muted
+        {{'metric.item_name' | translate}}
+      %div
+        {{::item.name}}
+      .text-muted
+        {{'metric.item_description' | translate}}
+      %div
+        {{::item.description}}
+      .text-muted
+        {{'metric.item_color' | translate}}
+      %div
+        %i.fa.fa-square(ng-style="{'color': item.color}")&nbsp;
+        {{::item.color}}
+
+      .text-muted
+        {{'metric.item_translate' | translate}}
+      %div
+        {{::item.translate}}
+      .text-muted
+        {{'metric.item_label' | translate}}
+      %div
+        {{::item.label}}
+
+  .col-md-10(ng-if="metric.typre='line'")
+    %canvas.chart.chart-line( chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" )
