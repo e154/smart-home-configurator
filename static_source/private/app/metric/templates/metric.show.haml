@@ -31,6 +31,12 @@
         {{::metric.description}}
 
     .form-group
+      .text-muted
+        {{'metric.type' | translate}}
+      %div
+        {{::metric.type}}
+
+    .form-group
       %strong
         {{'metric.items' | translate}}:
 
@@ -58,5 +64,35 @@
       %div
         {{::item.label}}
 
-  .col-md-10(ng-if="metric.typre='line'")
+  .col-md-10(ng-if="metric.type=='line'")
     %canvas.chart.chart-line( chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" )
+
+  .col-md-10(ng-if="metric.type=='bar'")
+    %canvas.chart.chart-bar( chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" )
+
+  .col-md-10(ng-if="metric.type=='doughnut'")
+    %canvas.chart.chart-doughnut( chart-data="data" chart-labels="labels" chart-colors="colors" )
+
+  .col-md-10(ng-if="metric.type=='radar'")
+    %canvas.chart.chart-radar( chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" )
+
+  .col-md-10(ng-if="metric.type=='pie'")
+    %canvas.chart.chart-pie( chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" )
+
+  .col-md-10(ng-if="metric.type=='horizontal bar'")
+    %canvas.chart.chart-horizontal-bar( chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colors" )
+
+.row
+  .col-md-2
+  .col-md-10
+    .row
+      .col-md-12.form-group
+        %strong
+          {{'metric.select_range' | translate}}:
+      .col-md-12.text-center
+        %span.list-inline(ng-repeat="r in metric.ranges")
+          %button.btn.btn-default.btn-sm( href="#" ng-click="selectRange(r)" ng-class="{active:r == range}")
+            {{r}}
+          &nbsp;
+
+

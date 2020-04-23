@@ -1,0 +1,14 @@
+.row
+  .col-md-12
+    %h3 {{'metric.new_form' | translate}}
+
+.row
+  .col-md-12
+    %div(ng-include="'/metric/templates/_metric_form.html'")
+.row
+  .col-md-12
+    .pull-right
+      %a.btn.btn-default(href="" role="button" ui-sref="dashboard.metric.index")
+        {{'Cancel' | translate}}
+      %a.btn.btn-primary(href="" role="button" ng-click="submit()" if-can="{metric:['create']}")
+        {{'Create' | translate}}

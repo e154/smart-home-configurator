@@ -1,0 +1,67 @@
+.row
+  .col-md-6
+    .form-group
+      %label {{'metric.name' | translate}}*
+      %input.form-control(ng-model="metric.name")
+
+    .form-group
+      %label {{'metric.type' | translate}}
+      %select.form-control(ng-model="metric.type")
+        %option(value="line")
+          {{'metric.line' | translate}}
+        %option(value="bar")
+          {{'metric.bar' | translate}}
+        %option(value="doughnut")
+          {{'metric.doughnut' | translate}}
+        %option(value="radar")
+          {{'metric.radar' | translate}}
+        %option(value="pie")
+          {{'metric.pie' | translate}}
+        %option(value="horizontal bar")
+          {{'metric.horizontal_bar' | translate}}
+
+    .form-group
+      %label {{'metric.description' | translate}}
+      %textarea.form-control(ng-model="metric.description" rows="2" )
+
+
+  .col-md-6
+    .row
+      .col-md-12.form-group
+        %a(href="#" ng-click="addNewOptionItem()")
+          .fa.fa-plus &nbsp;
+          {{'metric.add_option_item' | translate}}
+
+    .panel.panel-default
+      .list-group-item( ng-repeat="optionItem in metric.options.items" )
+
+        .row
+          .col-md-12.form-group
+            %label {{'metric.option_item.name' | translate}}*
+            %input.form-control(ng-model="optionItem.name")
+
+        .row
+          .col-md-12.form-group
+            %label {{'metric.option_item.description' | translate}}
+            %input.form-control(ng-model="optionItem.description")
+
+        .row
+          .col-md-12.form-group
+            %label {{'metric.option_item.color' | translate}}&nbsp;
+            %i.fa.fa-square(ng-style="{'color': optionItem.color}")&nbsp;
+            %input.form-control(ng-model="optionItem.color" type="text")
+
+        .row
+          .col-md-12.form-group
+            %label {{'metric.option_item.translate' | translate}}
+            %input.form-control(ng-model="optionItem.translate")
+
+        .row
+          .col-md-12.form-group
+            %label {{'metric.option_item.label' | translate}}
+            %input.form-control(ng-model="optionItem.label")
+
+        .row
+          .col-md-12.form-group
+            %a.btn.btn-default.btn-xs(href="" role="button" ng-click="removeOptionItem($event, optionItem)" if-can="{metric:['delete']}")
+              {{'Delete' | translate}}

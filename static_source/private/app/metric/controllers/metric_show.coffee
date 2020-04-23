@@ -21,35 +21,41 @@ angular
 
     $scope.colors = []
     $scope.series = []
-    data = {}
+    $scope.data = []
+    $scope.labels = []
+
+    dataItems = {}
+
     angular.forEach $scope.metric.options.items, (item)->
-      $scope.colors.push item.color
-      $scope.series.push item.translate
-      data[item.name] = []
+      dataItems[item.name] =
+        data: []
+        color: item.color
+        translate: item.translate
 
     readableDateTime = $filter('readableDateTime')
-    $scope.labels = []
-    labels = []
+
     angular.forEach $scope.metric.data, (item)->
       angular.forEach item.value, (value, name)->
         #console.log value, name
-        data[name].push value
+        dataItems[name].data.push value
+      $scope.labels.push readableDateTime(item.time)
 
-
-      labels.push readableDateTime(item.time)
-
-    angular.forEach data, (d, n)->
-      #console.log d, n
-      $scope.data.push d
-    $scope.labels = angular.copy labels
+    angular.forEach dataItems, (value, key)->
+      #console.log value, key
+      $scope.data.push value.data
+      $scope.colors.push value.color
+      $scope.series.push value.translate
 
   getMetric =(id, range)->
     success = (metric) ->
       prepareMetric metric
     error = ->
       $state.go 'dashboard.metric.index'
-
     Metric.show {id: id, range: range}, success, error
+
+  $scope.selectRange =(range)->
+    $scope.range = range
+    getMetric($stateParams.id, range)
 
   getMetric($stateParams.id, $scope.range)
 ]

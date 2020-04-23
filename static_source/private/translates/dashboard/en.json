@@ -921,6 +921,8 @@
   "metric": {
     "index_form": "Metric list",
     "show_form": "Metric",
+    "edit_form": "Metric Form",
+    "new_form": "New metric",
     "description": "Description",
     "created_at": "Created at",
     "updated_at": "Update at",
@@ -935,7 +937,22 @@
     "item_description": "Description",
     "item_color": "Color",
     "item_translate": "Translate",
-    "item_label": "Label"
-
+    "item_label": "Label",
+    "select_range": "Select range",
+    "line": "Line",
+    "bar": "Bar",
+    "doughnut":"Doughnut",
+    "radar": "Radar",
+    "pie":"Pie",
+    "horizontal_bar": "Horizontal Bar",
+    "add_option_item": "Add option item",
+    "option_item": {
+      "add": "Add option item",
+      "name": "Name",
+      "description": "Description",
+      "translate": "Translate",
+      "color": "Color",
+      "label": "Label"
+    }
   }
 }
