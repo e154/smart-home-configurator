@@ -32,7 +32,7 @@
           .fa.fa-plus &nbsp;
           {{'metric.add_option_item' | translate}}
 
-    .panel.panel-default
+    .panel.panel-default(ng-if="metric.options.items && metric.options.items.length")
       .list-group-item( ng-repeat="optionItem in metric.options.items" )
 
         .row
