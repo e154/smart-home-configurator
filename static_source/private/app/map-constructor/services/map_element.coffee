@@ -199,8 +199,25 @@ angular
           @metricList = response.data.metrics
 
       addNewMetric: ()=>
+        metric =
+          id: 0
+          name: 'new metric'
+        @metrics.push metric
 
-      removeMetric: (metric)=>
+      removeMetric: ($event, metric)->
+        $event.preventDefault()
+        index = @metrics.indexOf(metric)
+        if index == -1
+          if !$scope.options.multiple && @metrics.length
+            @metrics[0].selected = false
+            @metrics.splice(0, 1)
+
+          @metrics.push(metric)
+          metric.selected = true
+        else
+          @metrics.splice(index, 1)
+          metric.selected = false
+
 
     MapElement
 ]

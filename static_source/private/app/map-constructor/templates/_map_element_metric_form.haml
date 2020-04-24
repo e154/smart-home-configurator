@@ -10,13 +10,13 @@
   .col-md-12.form-group
     {{"No data" | translate}}
 
-.row(ng-repeat="metric in element.metrics")
+.row(ng-repeat="metric in element.metrics track by $index")
   .col-md-12.form-group
     -#
     -#  select2
     -#
     .input-group(ng-init="from = ''")
-      %ui-select(ng-model="metric" theme="bootstrap")
+      %ui-select(ng-model="element.metrics[$index]" theme="bootstrap")
         %ui-select-match(placeholder="{{'map.element.metric' | translate}}")
           %div(ng-if="metric")
             {{metric.name}}&nbsp;
@@ -35,5 +35,5 @@
           {{'No data' | translate}}
 
       %span.input-group-addon
-        %a(ng-click="element.removeMetric(metric)" href="#" )
+        %a(ng-click="element.removeMetric($event, metric)" href="#" )
           .fa.fa-trash
