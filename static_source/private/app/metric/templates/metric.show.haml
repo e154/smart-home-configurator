@@ -17,7 +17,7 @@
           {{'Updated at' | translate}} {{metric.updated_at | readableDateTime}}
 
 .row
-  .col-md-2
+  .col-md-2.col-sm-12
     .form-group
       .text-muted
         {{'metric.name' | translate}}
@@ -34,9 +34,9 @@
       .text-muted
         {{'metric.type' | translate}}
       %div
-        {{::metric.type}}
+        {{'metric.' + metric.type | translate}}
 
-    .form-group
+    .form-group(ng-if="metric.options.items.length")
       %strong
         {{'metric.items' | translate}}:
 
@@ -64,20 +64,36 @@
       %div
         {{::item.label}}
 
-  .col-md-10
+  .col-md-10.form-group(ng-if="data.length")
     %div(ng-include="'/metric/templates/_metric_charts.html'")
 
-.row
+  .col-md-10(ng-if="!data.length")
+    {{'No data' | translate}}
+
+.row(ng-if="data.length")
   .col-md-2
   .col-md-10
     .row
-      .col-md-12.form-group.text-center
-        %strong
-          {{'metric.select_range' | translate}}:
-      .col-md-12.text-center
-        %span.list-inline(ng-repeat="r in metric.ranges")
-          %button.btn.btn-default.btn-sm( href="#" ng-click="selectRange(r)" ng-class="{active:r == range}")
-            {{r}}
-          &nbsp;
+      .col-md-4.form-group
+        %label {{'metric.select_range' | translate}}:
+        .input-group(ng-init="qwe = ''")
+          %span.list-inline(ng-repeat="r in metric.ranges")
+            %button.btn.btn-default.btn-sm( href="#" ng-click="selectRange(r)" ng-class="{active:r == range}")
+              {{r}}
+            &nbsp;
 
+      .col-md-4.form-group
+        %label {{'log.start_date' | translate}}
+        .input-group(ng-init="from = ''")
+          %input.form-control(pikaday="from" ng-model="from" number-of-months="1" on-select="setStartDay(date)")
+          %span.input-group-addon
+            %a(ng-click="setStartDay(null);from=null" href="#" )
+              .fa.fa-close
 
+      .col-md-4.form-group
+        %label {{'log.end_date' | translate}}
+        .input-group
+          %input.form-control(pikaday="to" ng-model="to" number-of-months="1" on-select="setEndDay(date)")
+          %span.input-group-addon
+            %a(ng-click="setEndDay(null);to=null" href="#" )
+              .fa.fa-close

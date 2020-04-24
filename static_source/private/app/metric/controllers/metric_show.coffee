@@ -7,6 +7,8 @@ angular
   $scope.series = []
   $scope.labels = []
   $scope.data = []
+  from = null
+  to = null
 
   $scope.onClick = (points, evt)->
     console.log(points, evt)
@@ -51,11 +53,32 @@ angular
       prepareMetric metric
     error = ->
       $state.go 'dashboard.metric.index'
-    Metric.show {id: id, range: range}, success, error
+    q =
+      id: id
+      range: range
+    if from && to
+      q.from = from
+      q.to = to
+
+    Metric.show q, success, error
 
   $scope.selectRange =(range)->
     $scope.range = range
+    from = null
+    to = null
     getMetric($stateParams.id, range)
 
   getMetric($stateParams.id, $scope.range)
+
+  $scope.setStartDay =(date)->
+    #console.log date
+    from = date
+    if from && to
+      getMetric($stateParams.id, null)
+
+  $scope.setEndDay =(date)->
+    #console.log date
+    to = date
+    if from && to
+      getMetric($stateParams.id, null)
 ]

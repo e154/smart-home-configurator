@@ -18,7 +18,7 @@
         %option(value="pie")
           {{'metric.pie' | translate}}
         %option(value="horizontal bar")
-          {{'metric.horizontal_bar' | translate}}
+          {{'metric.horizontal bar' | translate}}
 
     .form-group
       %label {{'metric.description' | translate}}
@@ -32,7 +32,7 @@
       .col-md-12.form-group
         %a(href="#" ng-click="addNewOptionItem()")
           .fa.fa-plus &nbsp;
-          {{'metric.metric.option_item.add' | translate}}
+          {{'metric.option_item.add' | translate}}
 
     .panel.panel-default(ng-if="metric.options.items && metric.options.items.length")
       .list-group-item( ng-repeat="optionItem in metric.options.items" )
