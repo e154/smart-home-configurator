@@ -24,6 +24,8 @@ angular
       {
         name: 'metric.type'
         field: 'type'
+        width: '100px'
+        template: '<span>{{item[field] | translate}}</span>'
       }
       {
         name: 'metric.created_at'

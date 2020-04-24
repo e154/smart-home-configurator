@@ -24,13 +24,15 @@
       %label {{'metric.description' | translate}}
       %textarea.form-control(ng-model="metric.description" rows="2" )
 
+    -#charts
+    %div(ng-include="'/metric/templates/_metric_charts.html'")
 
   .col-md-6
     .row
       .col-md-12.form-group
         %a(href="#" ng-click="addNewOptionItem()")
           .fa.fa-plus &nbsp;
-          {{'metric.add_option_item' | translate}}
+          {{'metric.metric.option_item.add' | translate}}
 
     .panel.panel-default(ng-if="metric.options.items && metric.options.items.length")
       .list-group-item( ng-repeat="optionItem in metric.options.items" )

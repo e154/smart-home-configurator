@@ -1,0 +1,18 @@
+.row
+  .col-md-12(ng-if="metric.type=='line'")
+    %canvas.chart.chart-line( chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" )
+
+  .col-md-12(ng-if="metric.type=='bar'")
+    %canvas.chart.chart-bar( chart-data="data" chart-labels="labels" chart-series="series" )
+
+  .col-md-12(ng-if="metric.type=='doughnut'")
+    %canvas.chart.chart-doughnut( chart-data="data" chart-labels="labels" chart-colors="colors" )
+
+  .col-md-12(ng-if="metric.type=='radar'")
+    %canvas.chart.chart-radar( chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" )
+
+  .col-md-12(ng-if="metric.type=='pie'")
+    %canvas.chart.chart-pie( chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colors" )
+
+  .col-md-12(ng-if="metric.type=='horizontal bar'")
+    %canvas.chart.chart-horizontal-bar( chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colors" )

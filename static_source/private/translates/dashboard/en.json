@@ -933,11 +933,6 @@
       "message": "to do add"
     },
     "items": "Items",
-    "item_name": "Name",
-    "item_description": "Description",
-    "item_color": "Color",
-    "item_translate": "Translate",
-    "item_label": "Label",
     "select_range": "Select range",
     "line": "Line",
     "bar": "Bar",
@@ -945,7 +940,6 @@
     "radar": "Radar",
     "pie":"Pie",
     "horizontal_bar": "Horizontal Bar",
-    "add_option_item": "Add option item",
     "option_item": {
       "add": "Add option item",
       "name": "Name",
