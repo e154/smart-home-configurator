@@ -456,6 +456,7 @@
       "created_at": "Дата создания",
       "updated_at": "Дата обновления",
       "description": "Описание",
+      "metric": "Графики",
       "prototype": {
         "name": "Название",
         "style": "Стиль",

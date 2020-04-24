@@ -25,23 +25,11 @@
                   .form-group
                     %label {{'map.element.name' | translate}}*
                     %input.form-control(ng-model="element.name")
-                .col-md-6
-                  .form-group
-                    %label {{'map.element.status' | translate}}
-                    %select.form-control(ng-model="element.status")
-                      %option(value="enabled")
-                        {{'map.element.enabled' | translate}}
-                      %option(value="disabled")
-                        {{'map.element.disabled' | translate}}
-                      %option(value="frozen")
-                        {{'map.element.frozen' | translate}}
-              .row
-                .col-md-6
+
                   .form-group
                     %label {{'map.element.description' | translate}}
                     %input.form-control(ng-model="element.description")
-              .row
-                .col-md-6
+
                   .form-group
                     %label {{'map.element.type' | translate}}
                     %select.form-control(ng-model="element.prototype_type")
@@ -53,6 +41,20 @@
                         {{'map.element.device' | translate}}
                       %option(value="script")
                         {{'map.element.script' | translate}}
+
+                .col-md-6
+                  .form-group
+                    %label {{'map.element.status' | translate}}
+                    %select.form-control(ng-model="element.status")
+                      %option(value="enabled")
+                        {{'map.element.enabled' | translate}}
+                      %option(value="disabled")
+                        {{'map.element.disabled' | translate}}
+                      %option(value="frozen")
+                        {{'map.element.frozen' | translate}}
+
+                  .form-group
+                    %div(ng-include="'/map-constructor/templates/_map_element_metric_form.html'")
 
               %hr
 

@@ -1,0 +1,31 @@
+.row
+  .col-md-12
+    %label
+      {{'map.element.metric' | translate}}
+
+.row(ng-if="!element.metrics.length")
+  .col-md-12.form-group
+    {{"No data" | translate}}
+
+.row(ng-repeat="metric in element.metrics")
+  .col-md-12.form-group
+    -#
+    -#  select2
+    -#
+    %ui-select(ng-model="metric" theme="bootstrap")
+      %ui-select-match(placeholder="{{'alexa.action.script' | translate}}")
+        %div(ng-if="metric")
+          {{metric.name}}&nbsp;
+          %span(ng-if="item.description.length")
+            (
+            %small.text-muted(ng-bind-html="item.description")
+            )
+      %ui-select-choices(repeat="item in element.metricList | filter: $select.search" refresh="element.refreshMetrics($select.search)" refresh-delay="0")
+        %div
+          %span(ng-bind-html="item.name | highlight: $select.search")
+          %span(ng-if="item.description.length")
+            (
+            %small.text-muted(ng-bind-html="item.description | highlight: $select.search")
+            )
+      %ui-select-no-choice
+        {{'No data' | translate}}

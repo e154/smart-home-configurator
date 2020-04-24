@@ -43,9 +43,6 @@
         %li(role="presentation" ng-click="element.current_tab = 'actions'" ng-class="{'active' : element.current_tab == 'actions'}" )
           %a(href="#")
             {{'map.element.prototype.device.tab.actions' | translate}}
-        %li(role="presentation" ng-click="element.current_tab = 'metrics'" ng-class="{'active' : element.current_tab == 'metrics'}" )
-          %a(href="#")
-            {{'map.element.prototype.device.tab.metrics' | translate}}
 
 .row(ng-if="element.prototype.device.id && element.current_tab == 'base'")
   .col-md-6
@@ -137,22 +134,3 @@
             {{action.device_action.name}}
         %div
           %small(ng-if="action.device_action.description") {{action.device_action.description}}
-
-%div(ng-if="element.prototype.device.id && element.current_tab == 'metrics'")
-
-  .row
-    .col-md-12.form-group
-      %a(href="#" ng-click="element.prototype.addNewMetric()")
-        .fa.fa-plus &nbsp;
-        {{'device.action.add' | translate}}
-
-  .row(ng-if="!element.prototype.metrics.length")
-    .col-md-6
-      .form-group.text-center
-        {{'No metrics' | translate}}
-
-  .row(ng-if="element.prototype.metrics.length")
-    .col-md-12.form-group
-      .panel.panel-default
-        .list-group-item( ng-repeat="item in element.prototype.metrics" )
-          %div(ng-include="'/map-constructor/templates/_map_device_metric_form.html'")

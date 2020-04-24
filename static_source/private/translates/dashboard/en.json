@@ -447,6 +447,7 @@
       "created_at": "Created at",
       "updated_at": "Updated at",
       "description": "Description",
+      "metric": "Metrics",
       "prototype": {
         "name": "Name",
         "style": "Style",

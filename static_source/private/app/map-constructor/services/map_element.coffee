@@ -1,9 +1,9 @@
 angular
 .module('angular-map')
 .factory 'MapElement', ['$rootScope', '$compile', 'MapElementResource', 'Message'
-'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText', '$translate', 'MapZoneSelect2', 'MapZone'
+'Notify', 'MapImage', 'MapDevice', 'MapScript', 'MapText', '$translate', 'MapZoneSelect2', 'MapZone', '$http'
   ($rootScope, $compile, MapElementResource, Message, Notify, MapImage, MapDevice, MapScript,
-  MapText, $translate, MapZoneSelect2, MapZone) ->
+  MapText, $translate, MapZoneSelect2, MapZone, $http) ->
     class MapElement
 
       scope: null
@@ -26,12 +26,14 @@ angular
       updated_at: null
       weight: 0
       zone: []
+      metrics: []
       graph_settings:
         width: 30
         height: 30
         position:
           top: 0
           left: 0
+      metricList = []
 
       constructor: (@scope, @layer_id)->
         @scope.$watch(()=>
@@ -65,6 +67,7 @@ angular
         updated_at: @updated_at if @updated_at
         weight: @weight
         zone: @zone[0] if @zone && @zone.length
+        metrics: @metrics || []
         prototype_type: @prototype_type
         prototype_id: @prototype_id if @prototype_id
         graph_settings: @graph_settings
@@ -81,6 +84,7 @@ angular
         @prototype_id = element.prototype_id if element.prototype_id
         @weight = element.weight || 0
         @zone = [element.zone] if element.zone
+        @metrics = element.metrics || []
         @created_at = element.created_at || ''
         @updated_at = element.updated_at || ''
         @graph_settings = element.graph_settings
@@ -182,6 +186,18 @@ angular
 
       onZoneRemoved: (args) =>
         @zone = []
+
+      refreshMetrics: (query)=>
+        $http(
+          method: 'GET'
+          url: "/api/v1/metrics/search"
+          params:
+            query: query
+            limit: 5
+            offset: 0
+        ).then (response)=>
+          @metricList = response.data.metrics
+
 
     MapElement
 ]

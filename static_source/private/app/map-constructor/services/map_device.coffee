@@ -115,10 +115,10 @@ angular
           @actions.push md_action
 
         @metrics = []
-        angular.forEach m.metrics, (metric, key)=>
-          md_action = new MapDeviceMetric(@scope, m.id)
-          md_action.deserialize metric
-          @metrics.push md_action
+#        angular.forEach m.metrics, (metric, key)=>
+#          md_action = new MapDeviceMetric(@scope, m.id)
+#          md_action.deserialize metric
+#          @metrics.push md_action
 
         @
 
@@ -135,13 +135,13 @@ angular
         @device != null
 
       addNewMetric: ()->
-        md_action = new MapDeviceMetric(@scope, @id)
-        @metrics.push md_action
+#        md_action = new MapDeviceMetric(@scope, @id)
+#        @metrics.push md_action
 
       removeMetric: ($event, metric)->
-        $event.preventDefault()
-        index = @metrics.indexOf(metric)
-        @metrics.splice(index, 1)
+#        $event.preventDefault()
+#        index = @metrics.indexOf(metric)
+#        @metrics.splice(index, 1)
 
 
     MapDevice
