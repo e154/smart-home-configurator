@@ -198,6 +198,9 @@ angular
         ).then (response)=>
           @metricList = response.data.metrics
 
+      addNewMetric: ()=>
+
+      removeMetric: (metric)=>
 
     MapElement
 ]

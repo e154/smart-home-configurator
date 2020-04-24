@@ -1,8 +1,8 @@
 angular
   .module('angular-map')
   .factory 'MapDevice', ['$http', 'Message', 'Notify', 'DeviceState', 'MapDeviceState', 'DeviceAction',
-  'MapDeviceAction', 'DeviceSelect2', 'MapDeviceMetric'
-  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction, DeviceSelect2, MapDeviceMetric) ->
+  'MapDeviceAction', 'DeviceSelect2'
+  ($http, Message, Notify, DeviceState, MapDeviceState, DeviceAction, MapDeviceAction, DeviceSelect2) ->
     class MapDevice
 
       id: null
@@ -12,7 +12,6 @@ angular
       devices: []
       states: []
       actions: []
-      metrics: []
       image: null
 
       constructor: (@scope)->
@@ -75,18 +74,12 @@ angular
           action.map_device = {id: @id} if @id
           actions.push action
 
-        metrics = []
-        angular.forEach @metrics, (_metric)->
-          metric = _metric.serialize()
-          metrics.push metric
-
         {
           id: @id if @id
           device: {id: @device.id} if @device
           device_id: @device.id if @device
           states: states
           actions: actions
-          metrics: metrics
           image: @image
           system_name: @system_name
         }
@@ -114,12 +107,6 @@ angular
               md_action.deserialize action
           @actions.push md_action
 
-        @metrics = []
-#        angular.forEach m.metrics, (metric, key)=>
-#          md_action = new MapDeviceMetric(@scope, m.id)
-#          md_action.deserialize metric
-#          @metrics.push md_action
-
         @
 
       removeImage: ()->
@@ -133,16 +120,6 @@ angular
 
       valid: =>
         @device != null
-
-      addNewMetric: ()->
-#        md_action = new MapDeviceMetric(@scope, @id)
-#        @metrics.push md_action
-
-      removeMetric: ($event, metric)->
-#        $event.preventDefault()
-#        index = @metrics.indexOf(metric)
-#        @metrics.splice(index, 1)
-
 
     MapDevice
 ]
