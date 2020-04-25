@@ -24,7 +24,7 @@ angular
       {
         name: 'metric.type'
         field: 'type'
-        width: '100px'
+        width: '160px'
         template: '<span>{{\'metric.\' + item[field] | translate}}</span>'
       }
       {

@@ -11,6 +11,7 @@ angular
       {
         name: '#'
         field: 'id'
+        width: '50px'
         template: '<span>{{item.model.id}}</span>'
       }
       {

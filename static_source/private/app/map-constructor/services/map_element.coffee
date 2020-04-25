@@ -204,19 +204,9 @@ angular
           name: 'new metric'
         @metrics.push metric
 
-      removeMetric: ($event, metric)->
+      removeMetric: ($event, index)->
         $event.preventDefault()
-        index = @metrics.indexOf(metric)
-        if index == -1
-          if !$scope.options.multiple && @metrics.length
-            @metrics[0].selected = false
-            @metrics.splice(0, 1)
-
-          @metrics.push(metric)
-          metric.selected = true
-        else
-          @metrics.splice(index, 1)
-          metric.selected = false
+        @metrics.splice(index, 1)
 
 
     MapElement

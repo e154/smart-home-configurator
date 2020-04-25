@@ -920,6 +920,7 @@
     }
   },
   "metric": {
+    "package_name": "Metrics",
     "index_form": "Metric list",
     "show_form": "Metric",
     "edit_form": "Metric Form",

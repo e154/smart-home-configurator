@@ -21,11 +21,13 @@ angular
       {
         name: 'mqtt.connected_at'
         field: 'connected_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
       {
         name: 'mqtt.disconnected_at'
         field: 'disconnected_at'
+        width: '160px'
         template: '<span>{{item[field] | readableDateTime}}</span>'
       }
     ]
