@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    {{template "public_header.tpl.html" .}}
+</head>
+<body>
+
+{{template "public_login.tpl.html" .}}
+
+<script src="/_static/js/lib.min.js?t={{.t}}"></script>
+<script src="/_static/js/app.min.js?t={{.t}}"></script>
+<script src="/_static/js/templates.min.js?t={{.t}}"></script>
+
+<toaster-container></toaster-container>
+</body>
+</html>
