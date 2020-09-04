@@ -1,7 +1,7 @@
 FROM debian
 MAINTAINER Filippov Alex <af@suretly.com>
 
-ENV APP_DIR /opt/smart-home-configurator
+ENV APP_DIR /opt/smart-home-dashboard
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list \
     && apt-get update \
     && apt-get upgrade -y \

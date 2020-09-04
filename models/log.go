@@ -19,7 +19,7 @@
 package models
 
 import (
-	"github.com/e154/smart-home-configurator/common"
+	"github.com/e154/smart-home-dashboard/common"
 	"time"
 )
 

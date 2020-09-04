@@ -20,20 +20,16 @@ package controllers
 
 import (
 	"crypto/tls"
-	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/e154/smart-home-configurator/common"
-	m "github.com/e154/smart-home-configurator/models"
-	"github.com/e154/smart-home-configurator/system/config"
+	m "github.com/e154/smart-home-dashboard/models"
+	"github.com/e154/smart-home-dashboard/system/config"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
+	"html/template"
 	"net/http"
-	"time"
-)
-
-var (
-	log = common.MustGetLogger("controllers")
+	"reflect"
 )
 
 type ControllerCommon struct {
@@ -46,51 +42,15 @@ func NewControllerCommon(cfg *config.AppConfig) *ControllerCommon {
 	}
 }
 
-func (c ControllerCommon) query(ctx *gin.Context, query string) string {
-	return ctx.Request.URL.Query().Get(query)
-}
-
-func (c *ControllerCommon) showPage(ctx *gin.Context) {
-
-	method := ctx.Request.Method
-
-	switch method {
-	case "GET":
-	default:
-		return
-	}
-
+func (c *ControllerCommon) getUser(ctx *gin.Context) (user *m.User, err error) {
 	session := sessions.Default(ctx)
 	userinfo := session.Get("userinfo")
-
-	params := gin.H{}
-	page := "public_base.tpl.html"
-	if userinfo != nil {
-		accessToken := session.Get("access_token")
-		user := userinfo.(*m.User)
-		page = "private_base.tpl.html"
-		jcu, _ := json.Marshal(userinfo)
-		params = gin.H{
-			"current_user":         string(jcu),
-			"access_token":         accessToken,
-			"debug":                c.cfg.Runmode == config.DebugMode,
-			"language":             user.Lang,
-			"server_url":           fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
-			"configurator_version": m.GetServerVersion(),
-			"t":                    time.Now().Unix(),
-		}
-	} else {
-		params = gin.H{
-			"server_url":           fmt.Sprintf("%s://%s:%d", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort),
-			"configurator_version": m.GetServerVersion(),
-			"t":                    time.Now().Unix(),
-		}
+	if userinfo == nil {
+		err = errors.New("userinfo is nil")
+		return
 	}
-	ctx.HTML(200, page, params)
-}
-
-func (c *ControllerCommon) IsAjax(ctx *gin.Context) bool {
-	return ctx.Request.Header.Get("X-Requested-With") == "XMLHttpRequest"
+	user = userinfo.(*m.User)
+	return
 }
 
 func (c ControllerCommon) getAgent() *gorequest.SuperAgent {
@@ -101,4 +61,21 @@ func (c ControllerCommon) getAgent() *gorequest.SuperAgent {
 	}
 
 	return req
+}
+
+func (c ControllerCommon) getApiEndpoint(path string) string {
+	return fmt.Sprintf("%s://%s:%d%s", c.cfg.ApiScheme, c.cfg.ApiAddr, c.cfg.ApiPort, path)
+}
+
+
+func (c ControllerCommon) funcMap() map[string]interface{} {
+	return map[string]interface{}{
+		"safeHtml": func(s string) template.HTML { return template.HTML(s) },
+		"safeCss":  func(s string) template.CSS { return template.CSS(s) },
+		"safeUrl":  func(s string) template.URL { return template.URL(s) },
+		"safeJs":   func(s string) template.JS { return template.JS(s) },
+		"attr":     func(s string) template.HTMLAttr { return template.HTMLAttr(s) },
+		"last":     func(i int, s interface{}) bool { return i == reflect.ValueOf(s).Len()-1 },
+		"len":      func(s interface{}) int { return reflect.ValueOf(s).Len() },
+	}
 }

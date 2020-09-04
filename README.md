@@ -14,8 +14,8 @@ Smart home configurator
 
 |Branch      |Status   |
 |------------|---------|
-|master      | [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=master)](https://travis-ci.org/e154/smart-home-configurator?branch=master)   |
-|dev         | [![Build Status](https://travis-ci.org/e154/smart-home-configurator.svg?branch=develop)](https://travis-ci.org/e154/smart-home-configurator?branch=develop) |
+|master      | [![Build Status](https://travis-ci.org/e154/smart-home-dashboard.svg?branch=master)](https://travis-ci.org/e154/smart-home-dashboard?branch=master)   |
+|dev         | [![Build Status](https://travis-ci.org/e154/smart-home-dashboard.svg?branch=develop)](https://travis-ci.org/e154/smart-home-dashboard?branch=develop) |
 
 
 Attention! The project is under active development.
@@ -29,9 +29,9 @@ Attention! The project is under active development.
 ### Installation for development
 
 ```bash
-git clone https://github.com/e154/smart-home-configurator $GOPATH/src/github.com/e154/smart-home-configurator
+git clone https://github.com/e154/smart-home-dashboard $GOPATH/src/github.com/e154/smart-home-dashboard
 
-cd $GOPATH/src/github.com/e154/smart-home-configurator
+cd $GOPATH/src/github.com/e154/smart-home-dashboard
 
 go mod vendor
 
@@ -60,7 +60,7 @@ run frontend development tools
 run server
 
 ```bash
-./smart-home-configurator
+./smart-home-dashboard
 ```
 
 ### install depends on MAC OS
@@ -96,4 +96,4 @@ It's all
 
 ### LICENSE
 
-[GPLv3 Public License](https://github.com/e154/smart-home-configurator/blob/master/LICENSE)
+[GPLv3 Public License](https://github.com/e154/smart-home-dashboard/blob/master/LICENSE)

@@ -19,7 +19,7 @@
 package logging
 
 import (
-	m "github.com/e154/smart-home-configurator/models"
+	m "github.com/e154/smart-home-dashboard/models"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"

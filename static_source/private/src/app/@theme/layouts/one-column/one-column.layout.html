@@ -1,0 +1,26 @@
+<nb-layout windowMode>
+  <!--      <nb-layout-header fixed>-->
+  <!--        <ngx-header></ngx-header>-->
+  <!--      </nb-layout-header>-->
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" state="compacted" responsive>
+    <nb-sidebar-header>
+      <div class="logo-container">
+        <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+          <nb-icon icon="menu-2-outline"></nb-icon>
+        </a>
+        <a class="logo" href="#" (click)="navigateHome()"><span>Smart Home</span></a>
+      </div>
+    </nb-sidebar-header>
+    <ng-content select="nb-menu"></ng-content>
+    <nb-sidebar-footer>footer</nb-sidebar-footer>
+  </nb-sidebar>
+
+  <nb-layout-column>
+    <ng-content select="router-outlet"></ng-content>
+  </nb-layout-column>
+
+  <!--      <nb-layout-footer fixed>-->
+  <!--        <ngx-footer></ngx-footer>-->
+  <!--      </nb-layout-footer>-->
+</nb-layout>

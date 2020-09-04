@@ -20,11 +20,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/e154/smart-home-configurator/common"
-	"github.com/e154/smart-home-configurator/system/graceful_service"
-	"github.com/e154/smart-home-configurator/system/logging"
-	"github.com/e154/smart-home-configurator/system/server"
-	"github.com/e154/smart-home-configurator/version"
+	"github.com/e154/smart-home-dashboard/common"
+	"github.com/e154/smart-home-dashboard/system/graceful_service"
+	"github.com/e154/smart-home-dashboard/system/logging"
+	"github.com/e154/smart-home-dashboard/system/server"
+	"github.com/e154/smart-home-dashboard/version"
 	"os"
 )
 

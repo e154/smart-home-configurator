@@ -27,6 +27,7 @@ type AppConfig struct {
 	ApiScheme      string  `json:"api_scheme"`
 	MemStorySecret string  `json:"mem_story_secret"`
 	SessionStory   string  `json:"session_story"`
+	BasePath       string  `json:"base_path"`
 }
 
 type RunMode string

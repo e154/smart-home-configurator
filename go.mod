@@ -1,4 +1,4 @@
-module github.com/e154/smart-home-configurator
+module github.com/e154/smart-home-dashboard
 
 go 1.13
 
@@ -30,7 +30,7 @@ require (
 	golang.org/x/lint v0.0.0-20200130185559-910be7a94367 // indirect
 	golang.org/x/net v0.0.0-20190813141303-74dc4d7220e7 // indirect
 	golang.org/x/sys v0.0.0-20200217220822-9197077df867 // indirect
-	golang.org/x/tools v0.0.0-20200221152158-fe62aff31966 // indirect
+	golang.org/x/tools v0.0.0-20200221152158-fe62aff31966
 	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect

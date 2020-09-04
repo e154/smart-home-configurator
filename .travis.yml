@@ -46,19 +46,19 @@ deploy:
     on:
       tags: true
       branch: master
-      repo: e154/smart-home-configurator
+      repo: e154/smart-home-dashboard
     branches:
       only:
         - master
         - /^v\d+(\.\d+)+$/
   - provider: releases
     api_key: $GITHUB_OAUTH_TOKEN
-    file: $HOME/smart-home-configurator.tar.gz
+    file: $HOME/smart-home-dashboard.tar.gz
     skip_cleanup: true
     on:
       tags: true
       branch: master
-      repo: e154/smart-home-configurator
+      repo: e154/smart-home-dashboard
     branches:
       only:
         - master

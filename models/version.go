@@ -18,7 +18,7 @@
 
 package models
 
-import "github.com/e154/smart-home-configurator/version"
+import "github.com/e154/smart-home-dashboard/version"
 
 type Version struct {
 	Version     string `json:"version"`

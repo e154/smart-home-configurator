@@ -19,7 +19,7 @@
 package server
 
 import (
-	"github.com/e154/smart-home-configurator/system/config"
+	"github.com/e154/smart-home-dashboard/system/config"
 )
 
 type Config struct {
@@ -28,6 +28,7 @@ type Config struct {
 	RunMode        config.RunMode
 	MemStorySecret string
 	SessionStory   string
+	BasePath       string
 }
 
 func NewServerConfig(cfg *config.AppConfig) *Config {
@@ -37,5 +38,6 @@ func NewServerConfig(cfg *config.AppConfig) *Config {
 		RunMode:        cfg.Runmode,
 		MemStorySecret: cfg.MemStorySecret,
 		SessionStory:   cfg.SessionStory,
+		BasePath:       cfg.BasePath,
 	}
 }

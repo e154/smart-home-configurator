@@ -43,7 +43,7 @@ DOCKER_IMAGE_LATEST=${DOCKER_ACCOUNT}/${IMAGE}:latest
 #
 # build version variables
 #
-PACKAGE="github.com/e154/smart-home-configurator"
+PACKAGE="github.com/e154/smart-home-dashboard"
 VERSION_VAR="${PACKAGE}/version.VersionString"
 REV_VAR="${PACKAGE}/version.RevisionString"
 REV_URL_VAR="${PACKAGE}/version.RevisionURLString"

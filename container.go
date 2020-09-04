@@ -19,11 +19,11 @@
 package main
 
 import (
-	"github.com/e154/smart-home-configurator/system/config"
-	"github.com/e154/smart-home-configurator/system/graceful_service"
-	"github.com/e154/smart-home-configurator/system/logging"
-	"github.com/e154/smart-home-configurator/system/server"
-	"github.com/e154/smart-home-configurator/system/server/controllers"
+	"github.com/e154/smart-home-dashboard/system/config"
+	"github.com/e154/smart-home-dashboard/system/graceful_service"
+	"github.com/e154/smart-home-dashboard/system/logging"
+	"github.com/e154/smart-home-dashboard/system/server"
+	"github.com/e154/smart-home-dashboard/system/server/controllers"
 	"go.uber.org/dig"
 )
 

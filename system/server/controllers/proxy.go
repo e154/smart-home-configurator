@@ -21,7 +21,7 @@ package controllers
 import (
 	"bytes"
 	"fmt"
-	"github.com/e154/smart-home-configurator/system/websocketproxy"
+	"github.com/e154/smart-home-dashboard/system/websocketproxy"
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
 	"io"
@@ -89,7 +89,7 @@ func (i ControllerProxy) Upload(ctx *gin.Context) {
 	r := ctx.Request
 
 	// destination server url
-	u := fmt.Sprintf("%s://%s:%d%s", i.cfg.ApiScheme, i.cfg.ApiAddr, i.cfg.ApiPort, ctx.Request.RequestURI)
+	u := i.getApiEndpoint(i.cfg.BasePath + ctx.Request.RequestURI)
 	request := gorequest.New().Post(u).Type("multipart")
 	for k, value := range r.Header {
 		if k == "Access_token" {

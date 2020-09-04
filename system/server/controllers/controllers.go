@@ -18,17 +18,26 @@
 
 package controllers
 
-import "github.com/e154/smart-home-configurator/system/config"
+import (
+	"github.com/e154/smart-home-dashboard/common"
+	"github.com/e154/smart-home-dashboard/system/config"
+)
+
+var (
+	log = common.MustGetLogger("controllers")
+)
 
 type Controllers struct {
-	Index *ControllerIndex
-	Proxy *ControllerProxy
+	Public  *ControllerPublic
+	Private *ControllerPrivate
+	Proxy   *ControllerProxy
 }
 
 func NewControllers(cfg *config.AppConfig) *Controllers {
 	common := NewControllerCommon(cfg)
 	return &Controllers{
-		Index: NewControllerIndex(common),
-		Proxy: NewControllerProxy(common),
+		Public:  NewControllerPublic(common),
+		Private: NewControllerPrivate(common),
+		Proxy:   NewControllerProxy(common),
 	}
 }
