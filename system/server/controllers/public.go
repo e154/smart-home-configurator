@@ -10,6 +10,7 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
+	"strings"
 )
 
 type ControllerPublic struct {
@@ -31,8 +32,14 @@ func (p *ControllerPublic) Index(ctx *gin.Context) {
 		p.fileServer = http.FileServer(fs)
 	}
 
-	switch ctx.Request.URL.Path {
-	case "/", "/login", "/request-password", "/reset-password":
+	switch  {
+	case strings.Contains(ctx.Request.URL.Path, "."):
+
+		p.fileServer.ServeHTTP(ctx.Writer, ctx.Request)
+		ctx.Abort()
+
+	default:
+
 		if p.publicIndex == nil {
 			var err error
 			p.publicIndex, err = template.ParseFiles(filepath.Join("build", "public", "index.html"))
@@ -44,10 +51,6 @@ func (p *ControllerPublic) Index(ctx *gin.Context) {
 		}
 
 		p.publicIndex.Execute(ctx.Writer, map[string]interface{}{})
-		ctx.Abort()
-
-	default:
-		p.fileServer.ServeHTTP(ctx.Writer, ctx.Request)
 		ctx.Abort()
 	}
 }

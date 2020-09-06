@@ -8,12 +8,23 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {RequestPasswordComponent} from './request-password/request-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
-import * as GlobalVariable from '../common/globals';
+import * as GlobalVariable from '../@core/common/globals';
+import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
+import {CoreModule} from '../@core/core.module';
+import {UserService} from '../@core/services/user.service';
 
 @NgModule({
-  providers: [NbTokenLocalStorage],
-  declarations: [LoginComponent, RequestPasswordComponent, ResetPasswordComponent],
+  providers: [
+    NbTokenLocalStorage,
+    {provide: NbRoleProvider, useClass: UserService},
+    ],
+  declarations: [
+    LoginComponent,
+    RequestPasswordComponent,
+    ResetPasswordComponent,
+  ],
   imports: [
+    CoreModule,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -22,7 +33,6 @@ import * as GlobalVariable from '../common/globals';
     NbButtonModule,
     NbCheckboxModule,
     NgxAuthRoutingModule,
-
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -43,6 +53,23 @@ import * as GlobalVariable from '../common/globals';
         }),
       ],
       forms: {},
+    }),
+    NbSecurityModule.forRoot({
+      accessControl: {
+        guest: {
+          view: ['news', 'comments'],
+        },
+        user: {
+          parent: 'guest',
+          create: 'comments',
+          view: ['user']
+        },
+        moderator: {
+          parent: 'user',
+          create: 'news',
+          remove: '*',
+        },
+      },
     }),
   ],
 })

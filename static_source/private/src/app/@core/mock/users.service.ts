@@ -2,6 +2,7 @@ import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Contacts, RecentUsers, UserData } from '../data/users';
 
+// TODO remove
 @Injectable()
 export class UserService extends UserData {
 

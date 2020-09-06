@@ -20,6 +20,7 @@
       true,
       "attribute",
       "app",
+      "allow-snake-case",
       "camelCase"
     ],
     "component-selector": [
@@ -120,7 +121,9 @@
       "options": [
         "ban-keywords",
         "check-format",
-        "allow-pascal-case"
+        "allow-pascal-case",
+        "allow-snake-case",
+        "allow-leading-underscore"
       ]
     },
     "whitespace": {

@@ -11,6 +11,7 @@ import {
 } from '@nebular/auth';
 import {RequestPasswordComponent} from './request-password/request-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {NbSecurityModule} from "@nebular/security";
 
 export const routes: Routes = [
   {
@@ -42,7 +43,9 @@ export const routes: Routes = [
     provide: NbTokenStorage,
     useClass: NbTokenLocalStorage
   }, NbAuthTokenParceler],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule],
 })
 export class NgxAuthRoutingModule {

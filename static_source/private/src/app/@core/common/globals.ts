@@ -21,3 +21,5 @@
 declare var window: any;
 
 export const baseEndpoint: string = window.app_settings.base_endpoint;
+
+export const currentUser: any = window.app_settings.current_user;

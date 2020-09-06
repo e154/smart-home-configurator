@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NbAuthService, NbTokenLocalStorage} from '@nebular/auth';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +8,9 @@ import {NbAuthService, NbTokenLocalStorage} from '@nebular/auth';
 export class AppComponent implements OnInit {
   title = 'smart home';
 
-  constructor(private authService: NbAuthService, private localStorage: NbTokenLocalStorage) {
+  constructor() {
   }
 
-  ngOnInit() {
-    this.authService.onAuthenticationChange()
-      .subscribe((isAuthenticated: boolean) => {
-        console.log(`isAuthenticated2: ${isAuthenticated}`);
-
-      });
+  ngOnInit(): void {
   }
 }
