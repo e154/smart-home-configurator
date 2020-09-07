@@ -9,22 +9,36 @@ import {NbLayoutModule, NbThemeModule} from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {AuthModule} from './auth/auth.module';
 
+const SERVICES = [];
+
+const MODULES = [
+  BrowserModule,
+  AppRoutingModule,
+  HttpClientModule,
+  BrowserAnimationsModule,
+  NbThemeModule.forRoot(),
+  NbLayoutModule,
+  NbEvaIconsModule,
+  AuthModule,
+];
+
+const COMPONENTS = [
+  AppComponent
+];
+
 @NgModule({
   declarations: [
-    AppComponent,
+    ...COMPONENTS
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NbThemeModule.forRoot({name: 'dark'}),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    AuthModule,
+    ...MODULES
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ...SERVICES
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {
 }

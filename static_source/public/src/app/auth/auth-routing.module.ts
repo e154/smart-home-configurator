@@ -14,7 +14,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: NbAuthComponent,
     children: [
       {
@@ -34,6 +34,11 @@ export const routes: Routes = [
         component: RequestPasswordComponent
       }
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'auth',
+    pathMatch: 'full',
   }
 ];
 

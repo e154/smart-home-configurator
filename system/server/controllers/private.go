@@ -88,5 +88,6 @@ func (p *ControllerPrivate) Logout(ctx *gin.Context, user *m.User) {
 	session.Delete("access_token")
 	session.Save()
 
-	ctx.Redirect(302, "/login")
+	ctx.JSON(200, struct {
+	}{})
 }
