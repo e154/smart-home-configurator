@@ -7,13 +7,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/dashboard',
   },
   {
-    title: 'Page2',
-    icon: 'keypad-outline',
-    link: '/page2',
-  },
-  {
-    title: 'Page3',
-    icon: 'browser-outline',
-    link: '/page3',
+    title: 'Configurator',
+    icon: 'settings-2-outline',
+    link: '/config',
   },
 ];

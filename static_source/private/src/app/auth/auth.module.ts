@@ -37,6 +37,14 @@ const MODULES = [
           endpoint: '/login',
           method: 'post',
         },
+        logout: {
+          endpoint: '/logout',
+          method: 'post',
+          redirect: {
+            success: '/auth/login',
+            failure: null,
+          },
+        },
         requestPass: {
           endpoint: '/request-pass',
           method: 'post',

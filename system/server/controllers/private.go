@@ -76,7 +76,7 @@ func (p *ControllerPrivate) Index(ctx *gin.Context, user *m.User) {
 	}
 }
 
-func (p *ControllerPublic) Logout(ctx *gin.Context) {
+func (p *ControllerPrivate) Logout(ctx *gin.Context, user *m.User) {
 
 	session := sessions.Default(ctx)
 	userinfo := session.Get("userinfo")

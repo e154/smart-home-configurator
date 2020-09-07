@@ -19,7 +19,6 @@
 package server
 
 import (
-	"fmt"
 	m "github.com/e154/smart-home-dashboard/models"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/memstore"
@@ -53,7 +52,6 @@ func (s *Server) customRouter(ctx *gin.Context) {
 			s.Controllers.Public.Index(ctx)
 		}
 
-		fmt.Println("public")
 		return
 	}
 
@@ -61,8 +59,8 @@ func (s *Server) customRouter(ctx *gin.Context) {
 
 	switch {
 	case r == "/logout":
+		s.Controllers.Private.Logout(ctx, user)
 	default:
-		fmt.Println("private")
 		s.Controllers.Private.Index(ctx, user)
 	}
 }

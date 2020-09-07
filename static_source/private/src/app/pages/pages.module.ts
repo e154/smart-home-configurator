@@ -1,5 +1,14 @@
 import {NgModule} from '@angular/core';
-import {NbMenuModule, NbSidebarModule, NbThemeModule} from '@nebular/theme';
+import {
+  NbActionsModule, NbButtonModule, NbContextMenuModule,
+  NbIconModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbSearchModule, NbSelectModule,
+  NbSidebarModule,
+  NbThemeModule,
+  NbUserModule
+} from '@nebular/theme';
 
 import {ThemeModule} from '../@theme/theme.module';
 import {PagesComponent} from './pages.component';
@@ -8,9 +17,12 @@ import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {UserService} from '../@core/mock/users.service';
 import {LayoutService} from '../@core/utils';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {NbIsGrantedDirective, NbSecurityModule} from '@nebular/security';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
 
 const SERVICES = [
-  PagesComponent
+  UserService,
+  LayoutService,
 ];
 
 const MODULES = [
@@ -23,22 +35,32 @@ const MODULES = [
   NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
   BrowserAnimationsModule,
   NoopAnimationsModule,
+  NbLayoutModule,
+  NbIconModule,
+  NbActionsModule,
+  NbSecurityModule,
+  NbMenuModule,
+  NbUserModule,
+  NbSearchModule,
+  NbContextMenuModule,
+  NbButtonModule,
+  NbSelectModule,
+  NbEvaIconsModule,
 ];
 
 const COMPONENTS = [
-  UserService,
-  LayoutService,
+  PagesComponent,
 ];
 
 @NgModule({
   providers: [
-    ...COMPONENTS
+    ...SERVICES
   ],
   imports: [
     ...MODULES
   ],
   declarations: [
-    ...SERVICES
+    ...COMPONENTS
   ],
 })
 export class PagesModule {

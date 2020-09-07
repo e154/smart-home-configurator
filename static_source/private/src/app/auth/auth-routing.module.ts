@@ -4,7 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {
   NbAuthComponent,
   NbAuthService,
-  NbAuthTokenParceler,
+  NbAuthTokenParceler, NbLogoutComponent,
   NbTokenLocalStorage,
   NbTokenService,
   NbTokenStorage
@@ -24,6 +24,10 @@ export const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'logout',
+        component: NbLogoutComponent,
       },
       {
         path: 'reset-pass',
