@@ -7,19 +7,33 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthModule} from './auth/auth.module';
 import {PagesModule} from './pages/pages.module';
 
+const SERVICES = [];
+
+const MODULES = [
+  BrowserModule,
+  AppRoutingModule,
+  HttpClientModule,
+  AuthModule,
+  PagesModule,
+];
+
+const COMPONENTS = [
+  AppComponent
+];
+
 @NgModule({
   declarations: [
-    AppComponent,
+    ...COMPONENTS
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AuthModule,
-    PagesModule,
+    ...MODULES
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [
+    ...SERVICES
+  ],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule {
 }

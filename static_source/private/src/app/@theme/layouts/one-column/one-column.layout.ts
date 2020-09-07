@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbSidebarService} from '@nebular/theme';
 import {LayoutService} from '../../../@core/utils';
-import {map, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {UserService} from '../../../@core/mock/users.service';
-import {NbAclService, NbRoleProvider} from "@nebular/security";
-import {NbAuthService} from "@nebular/auth";
+import {NbRoleProvider} from '@nebular/security';
+import {NbAuthService} from '@nebular/auth';
 
 @Component({
   selector: 'ngx-one-column-layout',
@@ -18,7 +18,10 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
   userPictureOnly = false;
   user: any;
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [
+    {title: 'Profile', link: '/profile'},
+    {title: 'Log out', link: ''},
+  ];
 
   constructor(private sidebarService: NbSidebarService,
               private userService: UserService,

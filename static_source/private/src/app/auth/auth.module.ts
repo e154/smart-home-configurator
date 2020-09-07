@@ -13,64 +13,76 @@ import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {CoreModule} from '../@core/core.module';
 import {UserService} from '../@core/services/user.service';
 
+const SERVICES = [
+  NbTokenLocalStorage,
+  {provide: NbRoleProvider, useClass: UserService},
+];
+
+const MODULES = [
+  CoreModule,
+  CommonModule,
+  FormsModule,
+  RouterModule,
+  NbAlertModule,
+  NbInputModule,
+  NbButtonModule,
+  NbCheckboxModule,
+  NgxAuthRoutingModule,
+  NbAuthModule.forRoot({
+    strategies: [
+      NbPasswordAuthStrategy.setup({
+        name: 'email',
+        baseEndpoint: GlobalVariable.baseEndpoint,
+        login: {
+          endpoint: '/login',
+          method: 'post',
+        },
+        requestPass: {
+          endpoint: '/request-pass',
+          method: 'post',
+        },
+        resetPass: {
+          endpoint: '/reset-pass',
+          method: 'post',
+        },
+      }),
+    ],
+    forms: {},
+  }),
+  NbSecurityModule.forRoot({
+    accessControl: {
+      guest: {
+        view: ['news', 'comments'],
+      },
+      user: {
+        parent: 'guest',
+        create: 'comments',
+        view: ['user']
+      },
+      moderator: {
+        parent: 'user',
+        create: 'news',
+        remove: '*',
+      },
+    },
+  }),
+];
+
+const COMPONENTS = [
+  LoginComponent,
+  RequestPasswordComponent,
+  ResetPasswordComponent,
+];
+
 @NgModule({
   providers: [
-    NbTokenLocalStorage,
-    {provide: NbRoleProvider, useClass: UserService},
-    ],
+    ...SERVICES
+  ],
   declarations: [
-    LoginComponent,
-    RequestPasswordComponent,
-    ResetPasswordComponent,
+    ...COMPONENTS
   ],
   imports: [
-    CoreModule,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    NbAlertModule,
-    NbInputModule,
-    NbButtonModule,
-    NbCheckboxModule,
-    NgxAuthRoutingModule,
-    NbAuthModule.forRoot({
-      strategies: [
-        NbPasswordAuthStrategy.setup({
-          name: 'email',
-          baseEndpoint: GlobalVariable.baseEndpoint,
-          login: {
-            endpoint: '/login',
-            method: 'post',
-          },
-          requestPass: {
-            endpoint: '/request-pass',
-            method: 'post',
-          },
-          resetPass: {
-            endpoint: '/reset-pass',
-            method: 'post',
-          },
-        }),
-      ],
-      forms: {},
-    }),
-    NbSecurityModule.forRoot({
-      accessControl: {
-        guest: {
-          view: ['news', 'comments'],
-        },
-        user: {
-          parent: 'guest',
-          create: 'comments',
-          view: ['user']
-        },
-        moderator: {
-          parent: 'user',
-          create: 'news',
-          remove: '*',
-        },
-      },
-    }),
+    ...MODULES
   ],
 })
 export class AuthModule {

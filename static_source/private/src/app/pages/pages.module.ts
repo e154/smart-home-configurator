@@ -9,21 +9,36 @@ import {UserService} from '../@core/mock/users.service';
 import {LayoutService} from '../@core/utils';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
+const SERVICES = [
+  PagesComponent
+];
+
+const MODULES = [
+  PagesRoutingModule,
+  ThemeModule,
+  NbMenuModule,
+  MiscellaneousModule,
+  NbThemeModule.forRoot(),
+  NbMenuModule.forRoot(),
+  NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+];
+
+const COMPONENTS = [
+  UserService,
+  LayoutService,
+];
+
 @NgModule({
-  providers: [UserService, LayoutService],
+  providers: [
+    ...COMPONENTS
+  ],
   imports: [
-    PagesRoutingModule,
-    ThemeModule,
-    NbMenuModule,
-    MiscellaneousModule,
-    NbThemeModule.forRoot(),
-    NbMenuModule.forRoot(),
-    NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
-    BrowserAnimationsModule,
-    NoopAnimationsModule,
+    ...MODULES
   ],
   declarations: [
-    PagesComponent,
+    ...SERVICES
   ],
 })
 export class PagesModule {

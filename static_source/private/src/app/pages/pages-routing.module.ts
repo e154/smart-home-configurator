@@ -2,8 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-// import { DashboardComponent } from './dashboard/dashboard.component';
-// import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
@@ -11,14 +9,14 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'miscellaneous',
-      loadChildren: () => import('./miscellaneous/miscellaneous.module')
-        .then(m => m.MiscellaneousModule),
+      path: 'dashboard',
+      loadChildren: () => import('./dashboard/dashboard.module')
+        .then(m => m.DashboardModule),
     },
     {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
+      path: 'profile',
+      loadChildren: () => import('./profile/profile.module')
+        .then(m => m.ProfileModule),
     },
     {
       path: '**',
