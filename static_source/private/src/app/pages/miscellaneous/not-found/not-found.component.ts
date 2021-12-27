@@ -1,17 +1,20 @@
-import { NbMenuService } from '@nebular/theme';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {NbMenuService} from '@nebular/theme';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'ngx-not-found',
-  styleUrls: ['./not-found.component.scss'],
+  selector: 'app-not-found',
   templateUrl: './not-found.component.html',
+  styleUrls: ['./not-found.component.scss']
 })
-export class NotFoundComponent {
+export class NotFoundComponent implements OnInit {
 
-  constructor(private menuService: NbMenuService) {
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
   }
 
-  goToHome() {
-    this.menuService.navigateHome();
+  goToHome(): void {
+    this.router.navigateByUrl('/');
   }
 }

@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'ngx-miscellaneous',
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  selector: 'app-miscellaneous',
+  template: `<router-outlet></router-outlet>`,
 })
-export class MiscellaneousComponent {
+export class MiscellaneousComponent implements OnInit {
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
 }

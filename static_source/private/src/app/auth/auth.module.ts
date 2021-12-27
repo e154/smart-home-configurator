@@ -1,33 +1,42 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+
+import {AuthRoutingModule} from './auth-routing.module';
 import {LoginComponent} from './login/login.component';
-import {NgxAuthRoutingModule} from './auth-routing.module';
-import {NbAuthModule, NbPasswordAuthStrategy, NbTokenLocalStorage} from '@nebular/auth';
-import {NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule} from '@nebular/theme';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {RequestPasswordComponent} from './request-password/request-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {NbAlertModule, NbButtonModule, NbCheckboxModule, NbIconModule, NbInputModule} from '@nebular/theme';
+import {NbAuthModule, NbPasswordAuthStrategy, NbTokenLocalStorage} from '@nebular/auth';
+import {RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 import * as GlobalVariable from '../@core/common/globals';
-import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {CoreModule} from '../@core/core.module';
-import {UserService} from '../@core/services/user.service';
+import {WINDOW_PROVIDERS} from '../@core/services/window.service';
 
 const SERVICES = [
   NbTokenLocalStorage,
-  {provide: NbRoleProvider, useClass: UserService},
+  WINDOW_PROVIDERS
+];
+
+const COMPONENTS = [
+  LoginComponent,
+  RequestPasswordComponent,
+  ResetPasswordComponent,
 ];
 
 const MODULES = [
   CoreModule,
   CommonModule,
+  AuthRoutingModule,
+  CommonModule,
   FormsModule,
   RouterModule,
-  NbAlertModule,
   NbInputModule,
+  NbAlertModule,
   NbButtonModule,
   NbCheckboxModule,
-  NgxAuthRoutingModule,
+  NbIconModule,
+
   NbAuthModule.forRoot({
     strategies: [
       NbPasswordAuthStrategy.setup({
@@ -36,12 +45,8 @@ const MODULES = [
         login: {
           endpoint: '/login',
           method: 'post',
-        },
-        logout: {
-          endpoint: '/logout',
-          method: 'post',
           redirect: {
-            success: '/auth/login',
+            success: '/',
             failure: null,
           },
         },
@@ -57,31 +62,9 @@ const MODULES = [
     ],
     forms: {},
   }),
-  NbSecurityModule.forRoot({
-    accessControl: {
-      guest: {
-        view: ['news', 'comments'],
-      },
-      user: {
-        parent: 'guest',
-        create: 'comments',
-        view: ['user']
-      },
-      moderator: {
-        parent: 'user',
-        create: 'news',
-        remove: '*',
-      },
-    },
-  }),
 ];
 
-const COMPONENTS = [
-  LoginComponent,
-  RequestPasswordComponent,
-  ResetPasswordComponent,
-];
-
+// @ts-ignore
 @NgModule({
   providers: [
     ...SERVICES

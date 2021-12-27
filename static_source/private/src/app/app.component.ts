@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {WINDOW} from './@core/services/window.service';
+import {baseEndpoint, currentUser} from './@core/common/globals';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'smart home';
+export class AppComponent {
+  title = 'private';
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  constructor(@Inject(WINDOW) private window: Window) {
+    // console.log(window);
   }
 }

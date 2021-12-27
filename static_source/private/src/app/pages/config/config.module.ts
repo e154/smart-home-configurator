@@ -1,34 +1,22 @@
-import {NgModule} from '@angular/core';
-import {NbButtonModule, NbCardModule, NbMenuModule} from '@nebular/theme';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {ThemeModule} from '../../@theme/theme.module';
-import {ConfigRoutingModule} from './config-routing.module';
-import {ConfigComponent} from './config.component';
+import { ConfigRoutingModule } from './config-routing.module';
+import { ConfigComponent } from './config.component';
+import {NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule} from '@nebular/theme';
 
-const SERVICES = [];
-
-const MODULES = [
-  ThemeModule,
-  NbCardModule,
-  NbButtonModule,
-  NbMenuModule,
-  ConfigRoutingModule,
-];
-
-const COMPONENTS = [
-  ConfigComponent
-];
 
 @NgModule({
-  imports: [
-    ...MODULES
-  ],
   declarations: [
-    ...COMPONENTS
+    ConfigComponent
   ],
-  providers: [
-    ...SERVICES
-  ],
+  imports: [
+    CommonModule,
+    NbLayoutModule,
+    NbButtonModule,
+    NbCardModule,
+    NbIconModule,
+    ConfigRoutingModule
+  ]
 })
-export class ConfigModule {
-}
+export class ConfigModule { }

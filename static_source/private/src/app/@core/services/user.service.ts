@@ -9,6 +9,7 @@ import {NbAccessControl, NbAclRole} from '@nebular/security/security.options';
 @Injectable()
 export class UserService extends NbRoleProvider {
 
+  // @ts-ignore
   private currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private aclService: NbAclService) {

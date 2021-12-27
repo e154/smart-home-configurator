@@ -1,1 +1,22 @@
-Configurator
+<nb-layout>
+  <nb-layout-header>Настройки</nb-layout-header>
+
+  <nb-layout-column>
+    Ooh there's nothing like the big love singing on the pants. Yarr, yer not hailing me without an adventure! Real, old
+    sea-dogs swiftly love a rough, cold ale.
+  </nb-layout-column>
+
+  <nb-layout-column>
+
+    <nb-card>
+      <nb-card-body *ngFor="let item of menu">
+        <button nbButton fullWidth (click)="btnClick(item)" type="button" class="home-button">
+          {{item.title}}
+        </button>
+      </nb-card-body>
+    </nb-card>
+
+
+  </nb-layout-column>
+
+</nb-layout>

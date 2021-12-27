@@ -1,34 +1,20 @@
-import {NgModule} from '@angular/core';
-import {NbButtonModule, NbCardModule, NbMenuModule} from '@nebular/theme';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {ThemeModule} from '../../@theme/theme.module';
-import {DashboardRoutingModule} from './dashboard-routing.module';
-import {DashboardComponent} from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
+import {NbLayoutModule} from '@nebular/theme';
 
-const SERVICES = [];
-
-const MODULES = [
-  ThemeModule,
-  NbCardModule,
-  NbButtonModule,
-  NbMenuModule,
-  DashboardRoutingModule,
-];
-
-const COMPONENTS = [
-  DashboardComponent
-];
 
 @NgModule({
-  imports: [
-    ...MODULES
-  ],
   declarations: [
-    ...COMPONENTS
+    DashboardComponent,
   ],
-  providers: [
-    ...SERVICES
-  ],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    NbLayoutModule,
+
+  ]
 })
-export class DashboardModule {
-}
+export class DashboardModule { }

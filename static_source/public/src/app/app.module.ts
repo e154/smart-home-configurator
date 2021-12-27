@@ -1,13 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {AuthModule} from './auth/auth.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbLayoutModule, NbThemeModule} from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
-import {AuthModule} from './auth/auth.module';
+import {HttpClientModule} from '@angular/common/http';
 
 const SERVICES = [];
 
@@ -33,9 +33,7 @@ const COMPONENTS = [
   imports: [
     ...MODULES
   ],
-  providers: [
-    ...SERVICES
-  ],
+  providers: [],
   bootstrap: [
     AppComponent
   ]

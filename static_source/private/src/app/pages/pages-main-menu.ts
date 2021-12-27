@@ -1,14 +1,14 @@
 import {NbMenuItem} from '@nebular/theme';
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export const MainMenu: NbMenuItem[] = [
   {
-    title: 'Dashboard',
+    title: 'Обзор',
     icon: 'home-outline',
     link: '/dashboard',
   },
   {
-    title: 'Configurator',
+    title: 'Настройки',
     icon: 'settings-2-outline',
     link: '/config',
-  },
+  }
 ];

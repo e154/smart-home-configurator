@@ -1,16 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from './login/login.component';
-import {
-  NbAuthComponent,
-  NbAuthService,
-  NbAuthTokenParceler,
-  NbTokenLocalStorage,
-  NbTokenService,
-  NbTokenStorage
-} from '@nebular/auth';
-import {RequestPasswordComponent} from './request-password/request-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {RequestPasswordComponent} from './request-password/request-password.component';
+import {NbAuthComponent, NbAuthService, NbAuthTokenParceler, NbTokenLocalStorage, NbTokenService, NbTokenStorage} from '@nebular/auth';
 
 export const routes: Routes = [
   {
@@ -30,10 +23,10 @@ export const routes: Routes = [
         component: ResetPasswordComponent
       },
       {
-        path: 'request-password',
+        path: 'request-pass',
         component: RequestPasswordComponent
       }
-    ],
+    ]
   },
   {
     path: '**',
@@ -48,7 +41,6 @@ export const routes: Routes = [
     useClass: NbTokenLocalStorage
   }, NbAuthTokenParceler],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class NgxAuthRoutingModule {
-}
+export class AuthRoutingModule { }

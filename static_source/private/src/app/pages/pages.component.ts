@@ -1,63 +1,32 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-
-import { MENU_ITEMS } from './pages-menu';
-import {Subject} from 'rxjs';
-import {NbSidebarService} from '@nebular/theme';
-import {UserService} from '../@core/mock/users.service';
-import {LayoutService} from '../@core/utils';
-import {NbRoleProvider} from '@nebular/security';
-import {NbAuthService} from '@nebular/auth';
-import {takeUntil} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import {NbMenuItem, NbSidebarService} from '@nebular/theme';
+import {MainMenu} from './pages-main-menu';
+import {UserMenu} from './pages-user-menu';
 
 @Component({
-  selector: 'ngx-pages',
-  styleUrls: ['./pages.component.scss'],
-  templateUrl: './pages.component.html'
+  selector: 'app-pages',
+  templateUrl: './pages.component.html',
+  styleUrls: ['./pages.component.scss']
 })
-export class PagesComponent implements OnInit, OnDestroy {
+export class PagesComponent implements OnInit {
 
-  menu = MENU_ITEMS;
+  menu = MainMenu;
+  userMenu = UserMenu;
 
-  private destroy$: Subject<void> = new Subject<void>();
-  userPictureOnly = false;
   user: any;
 
-  userMenu = [
-    {title: 'Profile', link: '/profile'},
-    {title: 'Log out', link: '/auth/logout'},
-  ];
+  constructor(private readonly sidebarService: NbSidebarService) { }
 
-  constructor(private sidebarService: NbSidebarService,
-              private userService: UserService,
-              private layoutService: LayoutService,
-              private roleProvider: NbRoleProvider,
-              private authService: NbAuthService) {
+
+  ngOnInit(): void {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    this.layoutService.changeLayoutSize();
-
+    this.sidebarService.toggle();
     return false;
   }
 
-  navigateHome() {
-    //   this.menuService.navigateHome();
-    //   return false;
+  navigateHome(): void {
+
   }
-
-  ngOnInit() {
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
-
-    this.roleProvider.getRole().subscribe((role) => console.log(role));
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
 }
-

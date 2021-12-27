@@ -13,16 +13,6 @@
 
     <nb-menu [items]="menu"></nb-menu>
 
-    <nb-sidebar-footer>
-      <nb-action class="user-action" *nbIsGranted="['read', 'user']">
-        <nb-user [nbContextMenu]="userMenu"
-                 [name]="user?.name"
-                 [showName]=false
-                 [showInitials]=true>
-        </nb-user>
-      </nb-action>
-    </nb-sidebar-footer>
-
   </nb-sidebar>
 
   <nb-layout-column>
