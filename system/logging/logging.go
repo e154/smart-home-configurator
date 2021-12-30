@@ -1,6 +1,6 @@
 // This file is part of the Smart Home
 // Program complex distribution https://github.com/e154/smart-home
-// Copyright (C) 2016-2020, Filippov Alex
+// Copyright (C) 2016-2021, Filippov Alex
 //
 // This library is free software: you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -19,28 +19,30 @@
 package logging
 
 import (
-	m "github.com/e154/smart-home-dashboard/models"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"os"
 	"strings"
 	"sync"
+
+	m "github.com/e154/smart-home-configurator/models"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
+// Logging ...
 type Logging struct {
 	logger     *zap.Logger
 	oldLogLock *sync.Mutex
-	oldLog     m.Log
 }
 
-func NewLogger() (logging *Logging) {
+// NewLogger ...
+func NewLogger(appConfig *m.AppConfig) (logging *Logging) {
 
 	// First, define our level-handling logic.
 	highPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
-		return lvl >= zapcore.ErrorLevel
+		return lvl >= zapcore.WarnLevel
 	})
 	lowPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
-		return lvl < zapcore.ErrorLevel
+		return lvl < zapcore.WarnLevel
 	})
 
 	// High-priority output should also go to standard error, and low-priority
@@ -75,6 +77,7 @@ func NewLogger() (logging *Logging) {
 	return
 }
 
+// CustomLevelEncoder ...
 func CustomLevelEncoder(l zapcore.Level, enc zapcore.PrimitiveArrayEncoder) {
 	s, ok := _levelToCapitalColorString[l]
 	if !ok {
@@ -91,6 +94,7 @@ func CustomNameEncoder(v string, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(builder.String()[0:25])
 }
 
+// CustomCallerEncoder ...
 func CustomCallerEncoder(caller zapcore.EntryCaller, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(caller.TrimmedPath() + " >")
 }

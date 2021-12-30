@@ -1,6 +1,6 @@
 // This file is part of the Smart Home
 // Program complex distribution https://github.com/e154/smart-home
-// Copyright (C) 2016-2020, Filippov Alex
+// Copyright (C) 2016-2021, Filippov Alex
 //
 // This library is free software: you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -20,18 +20,27 @@ package logging
 
 import (
 	"fmt"
+
 	"go.uber.org/zap/zapcore"
 )
 
 // Foreground colors.
 const (
+	// Black ...
 	Black Color = iota + 30
+	// Red ...
 	Red
+	// Green ...
 	Green
+	// Yellow ...
 	Yellow
+	// Blue ...
 	Blue
+	// Magenta ...
 	Magenta
+	// Cyan ...
 	Cyan
+	// White ...
 	White
 )
 
