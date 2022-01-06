@@ -4,8 +4,8 @@ import router, {resetRouter} from '@/router';
 import {PermissionModule} from './permission';
 import {TagsViewModule} from './tags-view';
 import store from '@/store';
-import {IMeta, IRole, IUserHistory} from '@/api/types';
 import api from '@/api/api';
+import {ApiMeta, ApiUserHistory} from '@/api/stub';
 
 export interface IUserState {
   id: number;
@@ -14,8 +14,8 @@ export interface IUserState {
   lang: string;
   status: string;
   email: string;
-  meta: IMeta[];
-  history: IUserHistory[];
+  meta: ApiMeta[];
+  history: ApiUserHistory[];
   // role: IRole;
   created_at: string;
   updated_at: string;

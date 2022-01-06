@@ -71,8 +71,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getArticles } from '@/api/articles'
-import { IArticleData } from '@/api/types'
+// import { getArticles } from '@/api/articles'
+// import { IArticleData } from '@/api/types'
 import { formatJson } from '@/utils'
 import { exportTxt2Zip } from '@/utils/zip'
 
@@ -80,7 +80,7 @@ import { exportTxt2Zip } from '@/utils/zip'
   name: 'ExportZip'
 })
 export default class extends Vue {
-  private list: IArticleData[] = []
+  // private list: IArticleData[] = []
   private listLoading = true
   private downloadLoading = false
   private filename = ''
@@ -91,8 +91,8 @@ export default class extends Vue {
 
   private async fetchData() {
     this.listLoading = true
-    const { data } = await getArticles({ /* Your params here */ })
-    this.list = data.items
+    // const { data } = await getArticles({ /* Your params here */ })
+    // this.list = data.items
     // Just to simulate the time of the request
     setTimeout(() => {
       this.listLoading = false
@@ -100,17 +100,17 @@ export default class extends Vue {
   }
 
   private handleDownload() {
-    this.downloadLoading = true
-    const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-    const filterVal = ['id', 'title', 'author', 'pageviews', 'timestamp']
-    const list = this.list
-    const data = formatJson(filterVal, list)
-    if (this.filename !== '') {
-      exportTxt2Zip(tHeader, data, this.filename, this.filename)
-    } else {
-      exportTxt2Zip(tHeader, data)
-    }
-    this.downloadLoading = false
+    // this.downloadLoading = true
+    // const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
+    // const filterVal = ['id', 'title', 'author', 'pageviews', 'timestamp']
+    // const list = this.list
+    // const data = formatJson(filterVal, list)
+    // if (this.filename !== '') {
+    //   exportTxt2Zip(tHeader, data, this.filename, this.filename)
+    // } else {
+    //   exportTxt2Zip(tHeader, data)
+    // }
+    // this.downloadLoading = false
   }
 }
 </script>

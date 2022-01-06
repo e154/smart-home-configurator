@@ -157,7 +157,6 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import {isValidURL} from '@/utils/validate';
 import {defaultArticleData, getArticle} from '@/api/articles';
-import {IUser} from '@/api/types';
 import {AppModule} from '@/store/modules/app';
 import {ITagView, TagsViewModule} from '@/store/modules/tags-view';
 import MaterialInput from '@/components/MaterialInput/index.vue';

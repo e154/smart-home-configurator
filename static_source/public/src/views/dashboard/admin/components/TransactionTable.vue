@@ -36,7 +36,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getTransactions } from '@/api/transactions'
 import { ITransactionData } from '@/api/types'
 
 @Component({
@@ -64,8 +63,8 @@ export default class extends Vue {
   }
 
   private async fetchData() {
-    const { data } = await getTransactions({ /* Your params here */ })
-    this.list = data.items.slice(0, 8)
+    // const { data } = await getTransactions({ /* Your params here */ })
+    // this.list = data.items.slice(0, 8)
   }
 }
 </script>

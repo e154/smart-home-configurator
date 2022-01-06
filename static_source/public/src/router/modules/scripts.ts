@@ -30,6 +30,15 @@ const scriptsRouter: RouteConfig = {
         hidden: true
       }
     },
+    {
+      path: 'new',
+      component: () => import('@/smart-home/scripts/scripts_new.vue'),
+      props: true,
+      name: 'script new',
+      meta: {
+        title: 'scriptNew',
+      }
+    },
 
   ]
 }

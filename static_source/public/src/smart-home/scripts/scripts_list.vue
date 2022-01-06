@@ -1,106 +1,131 @@
 <template>
-  <div class="app-container">
+  <el-main>
+    <el-row>
+      <el-col>
+        <el-button
+          @click.prevent.stop="add">
+          <i class="el-icon-plus"/> {{ $t('scripts.addNew') }}
+        </el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <pagination
+          v-show="total>listQuery.limit"
+          :total="total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.limit"
+          @pagination="getList"
+        />
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <el-table
+          :key="tableKey"
+          v-loading="listLoading"
+          :data="list"
+          style="width: 100%;"
+          @sort-change="sortChange"
+        >
+          <el-table-column
+            :label="$t('scripts.table.id')"
+            prop="id"
+            sortable="custom"
+            align="center"
+            width="70"
+            :class-name="getSortClass('id')"
+          >
+            <template slot-scope="{row}">
+              <span>{{ row.id }}</span>
+            </template>
+          </el-table-column>
 
-    <pagination
-      v-show="total>listQuery.limit"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
-
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="list"
-      style="width: 100%;"
-    >
-      <el-table-column
-        :label="$t('table.id')"
-        prop="id"
-        sortable="custom"
-        align="center"
-        width="70"
-        :class-name="getSortClass('id')"
-      >
-        <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column
-        :label="$t('table.name')"
-        width="140px"
-        align="left"
-      >
-        <template slot-scope="{row}">
+          <el-table-column
+            :label="$t('scripts.table.name')"
+            width="140px"
+            align="left"
+          >
+            <template slot-scope="{row}">
           <span class="cursor-pointer"
                 @click="goto(row)">
             {{ row.name }}
           </span>
-        </template>
-      </el-table-column>
+            </template>
+          </el-table-column>
 
-      <el-table-column
-        :label="$t('table.lang')"
-        class-name="status-col"
-        width="150px"
-      >
-        <template slot-scope="{row}">
-          <el-tag :type="row.lang">
-            {{ row.lang }}
-          </el-tag>
-        </template>
-      </el-table-column>
+          <el-table-column
+            :label="$t('scripts.table.lang')"
+            class-name="status-col"
+            width="150px"
+          >
+            <template slot-scope="{row}">
+              <el-tag type="info">
+                {{ row.lang }}
+              </el-tag>
+            </template>
+          </el-table-column>
 
-      <el-table-column
-        :label="$t('table.description')"
-        width="auto"
-        align="left"
-      >
-        <template slot-scope="{row}">
-          <span>{{ row.description }}</span>
-        </template>
-      </el-table-column>
+          <el-table-column
+            :label="$t('scripts.table.description')"
+            width="auto"
+            align="left"
+          >
+            <template slot-scope="{row}">
+              <span>{{ row.description }}</span>
+            </template>
+          </el-table-column>
 
-      <el-table-column
-        :label="$t('table.createdAt')"
-        width="160px"
-        align="center"
-      >
-        <template slot-scope="{row}">
-          <span>{{ row.createdAt | parseTime }}</span>
-        </template>
-      </el-table-column>
+          <el-table-column
+            :label="$t('scripts.table.createdAt')"
+            width="160px"
+            align="center"
+            sortable="custom"
+            prop="createdAt"
+            :class-name="getSortClass('createdAt')"
+          >
+            <template slot-scope="{row}">
+              <span>{{ row.createdAt | parseTime }}</span>
+            </template>
+          </el-table-column>
 
-      <el-table-column
-        :label="$t('table.updatedAt')"
-        width="160px"
-        align="center"
-      >
-        <template slot-scope="{row}">
-          <span>{{ row.updatedAt | parseTime }}</span>
-        </template>
-      </el-table-column>
+          <el-table-column
+            :label="$t('scripts.table.updatedAt')"
+            width="160px"
+            align="center"
+            sortable="custom"
+            prop="updatedAt"
+            :class-name="getSortClass('updatedAt')"
+          >
+            <template slot-scope="{row}">
+              <span>{{ row.updatedAt | parseTime }}</span>
+            </template>
+          </el-table-column>
 
-    </el-table>
+        </el-table>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <pagination
+          v-show="total>0"
+          :total="total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.limit"
+          @pagination="getList"
+        />
+      </el-col>
+    </el-row>
+  </el-main>
 
-    <pagination
-      v-show="total>0"
-      :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      @pagination="getList"
-    />
-
-  </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import api, {ApiScript} from '@/api/api';
+import api from '@/api/api';
 import Pagination from '@/components/Pagination/index.vue';
 import router from '@/router';
+import {ApiScript} from '@/api/stub';
 
 @Component({
   name: 'ScriptList',
@@ -133,10 +158,7 @@ export default class extends Vue {
 
     this.list = data.items;
     this.total = data.meta.total;
-    // Just to simulate the time of the request
-    setTimeout(() => {
-      this.listLoading = false;
-    }, 0.5 * 1000);
+    this.listLoading = false;
   }
 
   private handleFilter() {
@@ -148,7 +170,29 @@ export default class extends Vue {
     const {prop, order} = data;
     if (prop === 'id') {
       this.sortByID(order);
+    } else if (prop === 'createdAt') {
+      this.sortByCreatedAt(order);
+    } else if (prop === 'updatedAt') {
+      this.sortByUpdatedAt(order);
     }
+  }
+
+  private sortByCreatedAt(order: string) {
+    if (order === 'ascending') {
+      this.listQuery.sort = '+createdAt';
+    } else {
+      this.listQuery.sort = '-createdAt';
+    }
+    this.handleFilter();
+  }
+
+  private sortByUpdatedAt(order: string) {
+    if (order === 'ascending') {
+      this.listQuery.sort = '+updatedAt';
+    } else {
+      this.listQuery.sort = '-updatedAt';
+    }
+    this.handleFilter();
   }
 
   private sortByID(order: string) {
@@ -167,6 +211,10 @@ export default class extends Vue {
 
   private goto(script: ApiScript) {
     router.push({path: `/scripts/edit/${script.id}`});
+  }
+
+  private add() {
+    router.push({path: `/scripts/new`});
   }
 }
 </script>

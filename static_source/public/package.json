@@ -4,7 +4,8 @@
   "private": true,
   "author": "Chong Guo <armourcy@gmail.com>",
   "scripts": {
-    "serve": "concurrently \"npm:mock\" \"vue-cli-service serve\"",
+    "dev": "concurrently \"npm:mock\" \"vue-cli-service serve\"",
+    "serve": "vue-cli-service serve",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:prod": "vue-cli-service build",
@@ -22,7 +23,7 @@
     "cors": "^2.8.5",
     "driver.js": "^0.9.8",
     "echarts": "^5.0.2",
-    "element-ui": "^2.15.1",
+    "element-ui": "^2.15.6",
     "faker": "^5.5.2",
     "file-saver": "^2.0.5",
     "fuse.js": "^6.4.6",

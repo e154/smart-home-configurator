@@ -104,7 +104,137 @@ paths:
       security:
         - ApiKeyAuth: []
       x-codegen-request-body-name: body
-  /v1/area/search:
+  /v1/area/{id}:
+    get:
+      tags:
+        - AreaService
+      summary: get area by id
+      operationId: AreaService_GetAreaById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: int64
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiArea'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - ApiKeyAuth: []
+    put:
+      tags:
+        - AreaService
+      summary: update area
+      operationId: AreaService_UpdateArea
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiArea'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - ApiKeyAuth: []
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - AreaService
+      summary: delete area
+      operationId: AreaService_DeleteArea
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: int64
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - ApiKeyAuth: []
+  /v1/areas:
+    get:
+      tags:
+        - AreaService
+      summary: get area list
+      operationId: AreaService_GetAreaList
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
+        - name: limit
+          in: query
+          schema:
+            type: string
+            format: uint64
+        - name: sort
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiGetAreaListResult'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - ApiKeyAuth: []
+  /v1/areas/search:
     get:
       tags:
         - AreaService
@@ -140,141 +270,6 @@ paths:
                 $ref: '#/components/schemas/rpcStatus'
       security:
         - ApiKeyAuth: []
-  /v1/area/{id}:
-    get:
-      tags:
-        - AreaService
-      summary: get area by id
-      operationId: AreaService_GetAreaById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: int64
-      responses:
-        200:
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apiArea'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - ApiKeyAuth: []
-    delete:
-      tags:
-        - AreaService
-      summary: delete area
-      operationId: AreaService_DeleteArea
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: int64
-      responses:
-        200:
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - ApiKeyAuth: []
-  /v1/area/{name}:
-    put:
-      tags:
-        - AreaService
-      summary: update area
-      operationId: AreaService_UpdateArea
-      parameters:
-        - name: name
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  format: int64
-                description:
-                  type: string
-        required: true
-      responses:
-        200:
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apiArea'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - ApiKeyAuth: []
-      x-codegen-request-body-name: body
-  /v1/areas:
-    get:
-      tags:
-        - AreaService
-      summary: get area list
-      operationId: AreaService_GetAreaList
-      parameters:
-        - name: limit
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
-          in: query
-          schema:
-            type: string
-      responses:
-        200:
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apiGetAreaListResult'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - ApiKeyAuth: []
   /v1/entities:
     get:
       tags:
@@ -282,21 +277,17 @@ paths:
       summary: get entity list
       operationId: EntityService_GetEntityList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -668,21 +659,17 @@ paths:
       summary: get image list
       operationId: ImageService_GetImageList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -789,21 +776,17 @@ paths:
       summary: get plugin list
       operationId: PluginService_GetPluginList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -841,34 +824,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/apiRole'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - ApiKeyAuth: []
-      x-codegen-request-body-name: body
-  /v1/role/n/access_list:
-    put:
-      tags:
-        - RoleService
-      summary: update role access list
-      operationId: RoleService_UpdateRoleAccessList
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/apiUpdateRoleAccessListRequest'
-        required: true
-      responses:
-        200:
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apiRoleAccessListResult'
         default:
           description: An unexpected error response.
           content:
@@ -996,6 +951,44 @@ paths:
                 $ref: '#/components/schemas/rpcStatus'
       security:
         - ApiKeyAuth: []
+    put:
+      tags:
+        - RoleService
+      summary: update role access list
+      operationId: RoleService_UpdateRoleAccessList
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessListDiff:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/UpdateRoleAccessListRequestAccessListDiff'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiRoleAccessListResult'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - ApiKeyAuth: []
+      x-codegen-request-body-name: body
   /v1/roles:
     get:
       tags:
@@ -1003,21 +996,17 @@ paths:
       summary: get role list
       operationId: RoleService_GetRoleList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -1289,21 +1278,17 @@ paths:
       summary: get script list
       operationId: ScriptService_GetScriptList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -1547,21 +1532,17 @@ paths:
       summary: get task list
       operationId: AutomationService_GetTaskList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -1731,21 +1712,17 @@ paths:
       summary: get user list
       operationId: UserService_GetUserList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -1771,21 +1748,17 @@ paths:
       summary: get bridge list
       operationId: Zigbee2mqttService_GetBridgeList
       parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            format: uint64
         - name: limit
           in: query
           schema:
             type: string
             format: uint64
-        - name: offset
-          in: query
-          schema:
-            type: string
-            format: uint64
-        - name: order
-          in: query
-          schema:
-            type: string
-        - name: sortBy
+        - name: sort
           in: query
           schema:
             type: string
@@ -2180,13 +2153,18 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/apiAccessItem'
+    apiAccessList:
+      type: object
+      properties:
+        levels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/apiAccessLevels'
     apiAccessListResponse:
       type: object
       properties:
         accessList:
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          type: string
-          format: byte
+          $ref: '#/components/schemas/apiAccessList'
     apiAction:
       type: object
       properties:
@@ -2430,19 +2408,7 @@ components:
           items:
             $ref: '#/components/schemas/apiArea'
         meta:
-          $ref: '#/components/schemas/apiGetAreaListResultMeta'
-    apiGetAreaListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetBridgeListResult:
       type: object
       properties:
@@ -2451,19 +2417,7 @@ components:
           items:
             $ref: '#/components/schemas/apiZigbee2mqttShort'
         meta:
-          $ref: '#/components/schemas/apiGetBridgeListResultMeta'
-    apiGetBridgeListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetEntityListResult:
       type: object
       properties:
@@ -2472,19 +2426,7 @@ components:
           items:
             $ref: '#/components/schemas/apiEntity'
         meta:
-          $ref: '#/components/schemas/apiGetEntityListResultMeta'
-    apiGetEntityListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetImageListResult:
       type: object
       properties:
@@ -2493,19 +2435,7 @@ components:
           items:
             $ref: '#/components/schemas/apiImage'
         meta:
-          $ref: '#/components/schemas/apiGetImageListResultMeta'
-    apiGetImageListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetPluginListResult:
       type: object
       properties:
@@ -2514,19 +2444,7 @@ components:
           items:
             $ref: '#/components/schemas/apiPlugin'
         meta:
-          $ref: '#/components/schemas/apiGetPluginListResultMeta'
-    apiGetPluginListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetPluginOptionsResult:
       type: object
       properties:
@@ -2590,19 +2508,7 @@ components:
           items:
             $ref: '#/components/schemas/apiRole'
         meta:
-          $ref: '#/components/schemas/apiGetRoleListResultMeta'
-    apiGetRoleListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetScriptListResult:
       type: object
       properties:
@@ -2611,19 +2517,7 @@ components:
           items:
             $ref: '#/components/schemas/apiScript'
         meta:
-          $ref: '#/components/schemas/apiGetScriptListResultMeta'
-    apiGetScriptListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetTaskListResult:
       type: object
       properties:
@@ -2632,19 +2526,7 @@ components:
           items:
             $ref: '#/components/schemas/apiTask'
         meta:
-          $ref: '#/components/schemas/apiGetTaskListResultMeta'
-    apiGetTaskListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiGetUserListResult:
       type: object
       properties:
@@ -2653,19 +2535,7 @@ components:
           items:
             $ref: '#/components/schemas/apiUserShot'
         meta:
-          $ref: '#/components/schemas/apiGetUserListResultMeta'
-    apiGetUserListResultMeta:
-      type: object
-      properties:
-        limit:
-          type: string
-          format: uint64
-        objectsCount:
-          type: string
-          format: uint64
-        offset:
-          type: string
-          format: uint64
+          $ref: '#/components/schemas/apiMeta'
     apiImage:
       type: object
       properties:
@@ -2690,6 +2560,20 @@ components:
         createdAt:
           type: string
           format: date-time
+    apiMeta:
+      type: object
+      properties:
+        limit:
+          type: string
+          format: uint64
+        page:
+          type: string
+          format: uint64
+        total:
+          type: string
+          format: uint64
+        sort:
+          type: string
     apiNetworkmapResponse:
       type: object
       properties:
@@ -3186,15 +3070,6 @@ components:
           $ref: '#/components/schemas/apiUpdateEntityRequestImage'
         style:
           type: string
-    apiUpdateRoleAccessListRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        accessListDiff:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UpdateRoleAccessListRequestAccessListDiff'
     apiUpdateTaskRequestAction:
       type: object
       properties:

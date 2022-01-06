@@ -16,6 +16,10 @@ client:
 		--go-grpc_out=${ROOT}/system/client/stub --go-grpc_opt=paths=source_relative \
 		*.proto
 
+front_client:
+	@echo MARK: generate front client lib
+	npx swagger-typescript-api --axios -p ./conf/swagger/api.swagger.yml -o ./static_source/public/src/api -n stub.ts
+
 server:
 	@echo MARK: generate server stub
 	mkdir -p ${ROOT}/api/v1/stub
