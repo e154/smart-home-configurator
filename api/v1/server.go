@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/fx"
 	"html/template"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -48,6 +49,12 @@ func (s *Server) Start() {
 	s.echo = echo.New()
 	s.echo.HideBanner = true
 	s.echo.HidePort = true
+
+	// cors
+	s.echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+	}))
 
 	// render
 	renderer := &TemplateRenderer{
