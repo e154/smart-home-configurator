@@ -33,6 +33,13 @@
                 @update-value="changedParent"
               />
             </el-form-item>
+            <el-form-item :label="$t('entities.table.area')" prop="area">
+              <area-search
+                :multiple=false
+                v-model="currentEntity.area"
+                @update-value="changedArea"
+              />
+            </el-form-item>
             <el-form-item :label="$t('entities.table.createdAt')">
               <div>{{ currentEntity.createdAt | parseTime }}</div>
             </el-form-item>
@@ -138,13 +145,14 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiAttribute, ApiEntity, ApiEntityParent, ApiScript,} from '@/api/stub';
+import {ApiArea, ApiAttribute, ApiEntity, ApiEntityParent, ApiScript,} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
 import Actions from './components/actions.vue';
 import States from './components/states.vue';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
+import AreaSearch from '@/smart-home/areas/components/areas_search.vue';
 import EntitySearch from './components/entity_search.vue';
 import Metrics from './components/metrics.vue';
 import {Form} from 'element-ui';
@@ -158,7 +166,8 @@ import {Form} from 'element-ui';
     States,
     ScriptSearch,
     EntitySearch,
-    Metrics
+    Metrics,
+    AreaSearch
   }
 })
 export default class extends Vue {
@@ -230,6 +239,14 @@ export default class extends Vue {
     }
   }
 
+  private changedArea(values: ApiArea, event?: any) {
+    if (values) {
+      this.$set(this.currentEntity, 'area', values);
+    } else {
+      this.$set(this.currentEntity, 'area', undefined);
+    }
+  }
+
   private async fetchEntity() {
     this.listLoading = true;
     const {data} = await api.v1.entityServiceGetEntity(this.id);
@@ -253,7 +270,7 @@ export default class extends Vue {
       const entity = {
         pluginName: this.currentEntity.pluginName,
         description: this.currentEntity.description,
-        // area?: ApiUpdateEntityRequestArea,
+        area: this.currentEntity.area,
         icon: this.currentEntity.icon,
         // image?: ApiUpdateEntityRequestImage,
         autoLoad: this.currentEntity.autoLoad,
