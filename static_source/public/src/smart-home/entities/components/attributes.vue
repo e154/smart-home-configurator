@@ -120,24 +120,37 @@ export default class extends Vue {
   }
 
   set attributes(value: ApiAttribute[]) {
-    let attributes: { [key: string]: ApiAttribute } = {};
-    for (const index in value) {
-      attributes[value[index].name] = value[index];
-    }
 
-    this.$emit('update-value', attributes);
   }
 
   private add() {
-    this.attributes.push(new Attribute('new_value'));
+    this.attributes.push(new Attribute('new_value'))
+    let attributes: { [key: string]: ApiAttribute } = {};
+    for (const index in this.attributes) {
+      attributes[this.attributes[index].name] = this.attributes[index];
+    }
+    this.$emit('update-value', attributes);
+    this.$forceUpdate();
   }
 
   private loadFromPlugin() {
+    this.attributes = [];
     this.$emit('update-value', this.settings);
+    setTimeout(() => {
+      this.$forceUpdate();
+    }, 0.5 * 1000)
   }
 
   private remove(row: Attribute, index: number) {
     this.attributes.splice(index, 1);
+    let attributes: { [key: string]: ApiAttribute } = {};
+    for (const index in this.attributes) {
+      attributes[this.attributes[index].name] = this.attributes[index];
+    }
+    this.$emit('update-value', attributes);
+    setTimeout(() => {
+      this.$forceUpdate();
+    }, 0.5 * 1000)
   }
 }
 </script>
