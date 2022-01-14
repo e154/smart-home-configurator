@@ -14,7 +14,7 @@ const scriptsRouter: RouteConfig = {
   children: [
     {
       path: 'list',
-      component: () => import('@/smart-home/scripts/scripts_list.vue'),
+      component: () => import('@/smart-home/scripts/index.vue'),
       name: 'script list',
       meta: {
         title: 'scriptList',
@@ -22,7 +22,7 @@ const scriptsRouter: RouteConfig = {
     },
     {
       path: 'edit/:id',
-      component: () => import('@/smart-home/scripts/scripts_edit.vue'),
+      component: () => import('@/smart-home/scripts/edit.vue'),
       props: true,
       name: 'script edit',
       meta: {
@@ -32,7 +32,7 @@ const scriptsRouter: RouteConfig = {
     },
     {
       path: 'new',
-      component: () => import('@/smart-home/scripts/scripts_new.vue'),
+      component: () => import('@/smart-home/scripts/new.vue'),
       props: true,
       name: 'script new',
       meta: {

@@ -48,9 +48,9 @@
 
         </el-card>
       </el-col>
-      <el-col   :span="18"
-                :xs="24"
-                class="json-editor">
+      <el-col :span="18"
+              :xs="24"
+              class="json-editor">
         <el-card>
           <textarea ref="textarea"/>
         </el-card>
@@ -59,7 +59,7 @@
 
     <el-row>
       <el-col style="text-align: right" class="buttons">
-          <el-button type="primary" @click.prevent.stop="save">{{ $t('main.create') }}</el-button>
+        <el-button type="primary" @click.prevent.stop="save">{{ $t('main.create') }}</el-button>
       </el-col>
     </el-row>
 
@@ -132,7 +132,15 @@ export default class extends Vue {
 
       this.currentScript.source = this.getValue();
       const {data} = await api.v1.scriptServiceAddScript(this.currentScript);
-      router.push({path: `/scripts/edit/${data.id}`});
+      if (data) {
+        this.$notify({
+          title: 'Success',
+          message: 'script created successfully',
+          type: 'success',
+          duration: 2000
+        });
+        router.push({path: `/scripts/edit/${data.id}`});
+      }
     });
   }
 

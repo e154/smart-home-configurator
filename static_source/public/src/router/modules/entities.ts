@@ -14,7 +14,7 @@ const entitiesRouter: RouteConfig = {
   children: [
     {
       path: 'list',
-      component: () => import('@/smart-home/entities/entities_list.vue'),
+      component: () => import('@/smart-home/entities/index.vue'),
       name: 'entity list',
       meta: {
         title: 'entityList',
@@ -22,7 +22,7 @@ const entitiesRouter: RouteConfig = {
     },
     {
       path: 'edit/:id',
-      component: () => import('@/smart-home/entities/entities_edit.vue'),
+      component: () => import('@/smart-home/entities/edit.vue'),
       props: true,
       name: 'entity edit',
       meta: {
@@ -32,7 +32,7 @@ const entitiesRouter: RouteConfig = {
     },
     {
       path: 'new',
-      component: () => import('@/smart-home/entities/entities_new.vue'),
+      component: () => import('@/smart-home/entities/new.vue'),
       props: true,
       name: 'entity new',
       meta: {

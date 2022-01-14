@@ -132,7 +132,7 @@
 
 import {Component, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiAttribute, ApiEntityParent, ApiNewEntityRequest, ApiPlugin, ApiScript,} from '@/api/stub';
+import {ApiAttribute, ApiEntityParent, ApiEntityShort, ApiNewEntityRequest, ApiPlugin, ApiScript,} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -227,9 +227,9 @@ export default class extends Vue {
     }
   }
 
-  private changedParent(values: ApiEntityParent[], event?: any) {
+  private changedParent(values: ApiEntityShort, event?: any) {
     if (values) {
-      this.$set(this.currentEntity, 'parent', values[0]);
+      this.$set(this.currentEntity, 'parent', values);
     } else {
       this.$set(this.currentEntity, 'parent', '');
     }

@@ -145,7 +145,7 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiArea, ApiAttribute, ApiEntity, ApiEntityParent, ApiScript,} from '@/api/stub';
+import {ApiArea, ApiAttribute, ApiEntity, ApiEntityParent, ApiEntityShort, ApiScript,} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -231,9 +231,9 @@ export default class extends Vue {
     }
   }
 
-  private changedParent(values: ApiEntityParent[], event?: any) {
+  private changedParent(values: ApiEntityShort, event?: any) {
     if (values) {
-      this.$set(this.currentEntity, 'parent', values[0]);
+      this.$set(this.currentEntity, 'parent', values);
     } else {
       this.$set(this.currentEntity, 'parent', undefined);
     }
@@ -282,6 +282,14 @@ export default class extends Vue {
         scripts: this.currentEntity.scripts,
       };
       const {data} = await api.v1.entityServiceUpdateEntity(this.id, entity);
+      if (data) {
+        this.$notify({
+          title: 'Success',
+          message: 'entity updated successfully',
+          type: 'success',
+          duration: 2000
+        });
+      }
     });
   }
 

@@ -22,7 +22,11 @@ export default {
     entities: 'Entities',
     entityList: 'List',
     entityNew: 'New',
-    entityEdit: 'Edit'
+    entityEdit: 'Edit',
+    automation: 'Automation',
+    taskList: 'List',
+    taskNew: 'New',
+    taskEdit: 'Edit'
   },
   navbar: {
     logOut: 'Log Out',
@@ -121,6 +125,25 @@ export default {
       area: 'Area',
       script: 'Script',
       description: 'Description',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
+    }
+  },
+  automation: {
+    addTrigger: "Add trigger",
+    addCondition: "Add condition",
+    addAction: "Add action",
+    addNew: "Add task",
+    table: {
+      id: 'Id',
+      name: 'Name',
+      description: 'Description',
+      enabled: 'Enabled',
+      condition: 'Condition',
+      area: 'Area',
+      pluginName: 'Plugin',
+      script: 'Script',
+      entity: 'Entity',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
     }

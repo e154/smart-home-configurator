@@ -14,7 +14,7 @@ const areasRouter: RouteConfig = {
   children: [
     {
       path: 'list',
-      component: () => import('@/smart-home/areas/areas_list.vue'),
+      component: () => import('@/smart-home/areas/index.vue'),
       name: 'area list',
       meta: {
         title: 'areaList',

@@ -41,6 +41,7 @@
 
             <el-switch
               v-model="row.enabled"
+              :disabled="row.system"
             v-on:change="updateItem(row)">
             </el-switch>
           </template>

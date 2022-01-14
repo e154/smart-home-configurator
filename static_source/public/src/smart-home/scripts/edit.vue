@@ -154,6 +154,14 @@ export default class extends Vue {
         description: this.currentScript.description,
       };
       const {data} = await api.v1.scriptServiceUpdateScriptById(this.id, script);
+      if (data) {
+        this.$notify({
+          title: 'Success',
+          message: 'script updated successfully',
+          type: 'success',
+          duration: 2000
+        });
+      }
     });
   }
 

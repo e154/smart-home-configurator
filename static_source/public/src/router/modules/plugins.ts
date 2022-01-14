@@ -14,7 +14,7 @@ const pluginsRouter: RouteConfig = {
   children: [
     {
       path: 'list',
-      component: () => import('@/smart-home/plugins/plugins_list.vue'),
+      component: () => import('@/smart-home/plugins/index.vue'),
       name: 'plugin list',
       meta: {
         title: 'pluginList',
@@ -22,7 +22,7 @@ const pluginsRouter: RouteConfig = {
     },
     {
       path: 'edit/:name',
-      component: () => import('@/smart-home/plugins/plugins_edit.vue'),
+      component: () => import('@/smart-home/plugins/edit.vue'),
       props: true,
       name: 'plugin edit',
       meta: {

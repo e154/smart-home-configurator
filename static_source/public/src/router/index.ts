@@ -13,6 +13,7 @@ import scriptsRouter from './modules/scripts'
 import pluginsRouter from '@/router/modules/plugins';
 import areasRouter from '@/router/modules/area';
 import entitiesRouter from '@/router/modules/entities';
+import automationRouter from '@/router/modules/automation';
 
 Vue.use(VueRouter)
 
@@ -122,6 +123,7 @@ export const asyncRoutes: RouteConfig[] = [
   scriptsRouter,
   pluginsRouter,
   areasRouter,
+  automationRouter,
   {
     path: '*',
     redirect: '/404',

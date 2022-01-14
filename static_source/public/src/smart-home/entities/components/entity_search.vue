@@ -23,16 +23,16 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import {ApiEntityParent} from '@/api/stub';
+import {ApiEntityShort} from '@/api/stub';
 import api from '@/api/api';
 
 @Component({
   name: 'EntitySearch'
 })
 export default class extends Vue {
-  @Prop() private value?: ApiEntityParent;
+  @Prop() private value?: ApiEntityShort;
 
-  private options?: ApiEntityParent[] = [];
+  private options?: ApiEntityShort[] = [];
   private loading: boolean = true;
 
   private update() {
@@ -50,7 +50,7 @@ export default class extends Vue {
     this.update();
   }
 
-  get currentValue(): ApiEntityParent | undefined {
+  get currentValue(): ApiEntityShort | undefined {
     if (this.value) {
       return this.value;
     } else {
@@ -59,7 +59,7 @@ export default class extends Vue {
   }
 
   set currentValue(value) {
-    this.$emit('update-value', [value]);
+    this.$emit('update-value', value);
   }
 
   private async remoteMethod(query: string) {
