@@ -4,21 +4,11 @@
       <el-col>
         <el-button
           @click.prevent.stop="add">
-          <i class="el-icon-plus"/> {{ $t('scripts.addNew') }}
+          <i class="el-icon-plus"/> {{ $t('zigbee2mqtt.addNew') }}
         </el-button>
       </el-col>
     </el-row>
-    <el-row>
-      <el-col>
-        <pagination
-          v-show="total>listQuery.limit"
-          :total="total"
-          :page.sync="listQuery.page"
-          :limit.sync="listQuery.limit"
-          @pagination="getList"
-        />
-      </el-col>
-    </el-row>
+
     <el-row>
       <el-col>
         <el-table
@@ -29,55 +19,59 @@
           @sort-change="sortChange"
         >
           <el-table-column
-            :label="$t('scripts.table.id')"
+            :label="$t('zigbee2mqtt.table.id')"
             prop="id"
             sortable="custom"
-            align="center"
-            width="70"
+            align="left"
+            width="60px"
             :class-name="getSortClass('id')"
           >
             <template slot-scope="{row}">
-              <span>{{ row.id }}</span>
+              {{ row.id }}
             </template>
           </el-table-column>
 
           <el-table-column
-            :label="$t('scripts.table.name')"
-            width="140px"
-            align="left"
-          >
-            <template slot-scope="{row}">
-          <span class="cursor-pointer"
-                @click="goto(row)">
-            {{ row.name }}
-          </span>
-            </template>
-          </el-table-column>
-
-          <el-table-column
-            :label="$t('scripts.table.lang')"
+            :label="$t('zigbee2mqtt.table.name')"
             class-name="status-col"
+            align="left"
             width="150px"
           >
             <template slot-scope="{row}">
-              <el-tag type="info">
-                {{ row.lang }}
-              </el-tag>
+            <div class="cursor-pointer"
+                  @click="goto(row)">
+              {{ row.name }}
+            </div>
             </template>
           </el-table-column>
 
           <el-table-column
-            :label="$t('scripts.table.description')"
+            :label="$t('zigbee2mqtt.table.login')"
             width="auto"
             align="left"
           >
             <template slot-scope="{row}">
-              <span>{{ row.description }}</span>
+              {{ row.login }}
             </template>
           </el-table-column>
 
           <el-table-column
-            :label="$t('scripts.table.createdAt')"
+            :label="$t('zigbee2mqtt.table.permitJoin')"
+            class-name="status-col"
+            width="150px"
+          >
+            <template slot-scope="{row}">
+              <el-switch
+                v-model="row.permitJoin"
+                @change="onSwitch"
+              >
+
+              </el-switch>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            :label="$t('zigbee2mqtt.table.createdAt')"
             width="160px"
             align="center"
             sortable="custom"
@@ -90,7 +84,7 @@
           </el-table-column>
 
           <el-table-column
-            :label="$t('scripts.table.updatedAt')"
+            :label="$t('zigbee2mqtt.table.updatedAt')"
             width="160px"
             align="center"
             sortable="custom"
@@ -105,6 +99,7 @@
         </el-table>
       </el-col>
     </el-row>
+
     <el-row>
       <el-col>
         <pagination
@@ -117,25 +112,24 @@
       </el-col>
     </el-row>
   </div>
-
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
 import Pagination from '@/components/Pagination/index.vue';
+import api from '@/api/api';
+import {ApiArea, ApiZigbee2MqttShort} from '@/api/stub';
 import router from '@/router';
-import {ApiScript} from '@/api/stub';
 
 @Component({
-  name: 'ScriptList',
+  name: 'Index',
   components: {
     Pagination
   }
 })
 export default class extends Vue {
   private tableKey = 0;
-  private list: ApiScript[] = [];
+  private list: ApiZigbee2MqttShort[] = [];
   private total = 0;
   private listLoading = true;
   private listQuery = {
@@ -150,7 +144,7 @@ export default class extends Vue {
 
   private async getList() {
     this.listLoading = true;
-    const {data} = await api.v1.scriptServiceGetScriptList({
+    const {data} = await api.v1.zigbee2MqttServiceGetBridgeList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
       sort: this.listQuery.sort,
@@ -209,18 +203,26 @@ export default class extends Vue {
     return sort === `+${key}` ? 'ascending' : 'descending';
   }
 
-  private goto(script: ApiScript) {
-    router.push({path: `/scripts/edit/${script.id}`});
+  private goto(entity: ApiZigbee2MqttShort) {
+    router.push({path: `/zigbee2mqtt/edit/${entity.id}`});
   }
 
   private add() {
-    router.push({path: `/scripts/new`});
+    router.push({path: `/zigbee2mqtt/new`});
+  }
+
+  private onSwitch(value: boolean) {
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .cursor-pointer {
   cursor: pointer;
+}
+.pagination-container {
+
 }
 </style>

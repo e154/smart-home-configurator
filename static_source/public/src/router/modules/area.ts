@@ -22,7 +22,7 @@ const areasRouter: RouteConfig = {
     },
     {
       path: 'edit/:id',
-      component: () => import('@/smart-home/areas/areas_edit.vue'),
+      component: () => import('@/smart-home/areas/edit.vue'),
       props: true,
       name: 'area edit',
       meta: {
@@ -32,7 +32,7 @@ const areasRouter: RouteConfig = {
     },
     {
       path: 'new',
-      component: () => import('@/smart-home/areas/areas_new.vue'),
+      component: () => import('@/smart-home/areas/new.vue'),
       props: true,
       name: 'area new',
       meta: {

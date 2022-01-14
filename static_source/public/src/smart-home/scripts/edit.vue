@@ -23,9 +23,9 @@
 
             <el-form-item :label="$t('scripts.table.lang')" prop="lang">
               <el-select v-model="currentScript.lang"
-                         size="medium"
                          placeholder="Language"
                          label="Language"
+                         style="width: 100%"
               >
                 <el-option
                   v-for="item in options"
@@ -35,7 +35,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('scripts.table.lang')" prop="description">
+            <el-form-item :label="$t('scripts.table.description')" prop="description">
               <el-input
                 type="textarea"
                 size="medium"
@@ -51,9 +51,7 @@
       <el-col :span="18"
               :xs="24"
               class="json-editor">
-        <el-card>
-          <textarea ref="textarea"/>
-        </el-card>
+        <textarea ref="textarea"/>
       </el-col>
     </el-row>
 

@@ -50,7 +50,7 @@ import {Form} from 'element-ui';
 require('script-loader!jsonlint');
 
 @Component({
-  name: 'JsonEditor'
+  name: 'New'
 })
 export default class extends Vue {
 

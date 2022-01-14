@@ -202,6 +202,11 @@ export interface ApiGetBridgeListResult {
   meta: ApiMeta;
 }
 
+export interface ApiGetBridgeDeviceListResult {
+  items: ApiZigbee2MqttDevice[];
+  meta: ApiMeta;
+}
+
 export interface ApiGetEntityListResult {
   items: ApiEntity[];
   meta: ApiMeta;
@@ -728,6 +733,7 @@ export interface ApiZigbee2Mqtt {
   login?: string;
   permitJoin?: boolean;
   baseTopic?: string;
+  password?: string;
 
   /** @format date-time */
   createdAt?: string;
@@ -758,17 +764,12 @@ export interface ApiZigbee2MqttDevice {
 }
 
 export interface ApiZigbee2MqttShort {
-  /** @format int64 */
   id?: number;
   name?: string;
   login?: string;
   permitJoin?: boolean;
   baseTopic?: string;
-
-  /** @format date-time */
   createdAt?: string;
-
-  /** @format date-time */
   updatedAt?: string;
 }
 
@@ -2165,6 +2166,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiGetBridgeListResult, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Zigbee2mqttService
+     * @name Zigbee2MqttServiceGetBridgeList
+     * @summary get device list
+     * @request GET:/v1/zigbee2mqtt/bridge/{id}/devices
+     * @secure
+     */
+    zigbee2MqttServiceGetDevices: ( id: number,
+      query?: { page: number; limit: number; sort: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetBridgeDeviceListResult, RpcStatus>({
+        path: `/v1/zigbee2mqtt/bridge/${id}/devices`,
         method: 'GET',
         query: query,
         secure: true,

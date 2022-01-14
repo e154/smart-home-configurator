@@ -26,7 +26,11 @@ export default {
     automation: 'Automation',
     taskList: 'List',
     taskNew: 'New',
-    taskEdit: 'Edit'
+    taskEdit: 'Edit',
+    zigbee2mqtt: 'Zigbee2mqtt',
+    bridgeList: 'List',
+    bridgeNew: 'New',
+    bridgeEdit: 'Edit'
   },
   navbar: {
     logOut: 'Log Out',
@@ -130,10 +134,10 @@ export default {
     }
   },
   automation: {
-    addTrigger: "Add trigger",
-    addCondition: "Add condition",
-    addAction: "Add action",
-    addNew: "Add task",
+    addTrigger: 'Add trigger',
+    addCondition: 'Add condition',
+    addAction: 'Add action',
+    addNew: 'Add task',
     table: {
       id: 'Id',
       name: 'Name',
@@ -144,6 +148,21 @@ export default {
       pluginName: 'Plugin',
       script: 'Script',
       entity: 'Entity',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
+    }
+  },
+  zigbee2mqtt: {
+    addNew: 'Add bridge',
+    table: {
+      id: 'Id',
+      name: 'Name',
+      login: 'Login',
+      password: 'Password',
+      model: "Model",
+      status: "Status",
+      description: "Description",
+      permitJoin: 'Permit join',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
     }

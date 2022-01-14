@@ -35,7 +35,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('scripts.table.lang')" prop="description">
+            <el-form-item :label="$t('scripts.table.description')" prop="description">
               <el-input
                 type="textarea"
                 size="medium"
@@ -51,9 +51,7 @@
       <el-col :span="18"
               :xs="24"
               class="json-editor">
-        <el-card>
-          <textarea ref="textarea"/>
-        </el-card>
+        <textarea ref="textarea"/>
       </el-col>
     </el-row>
 
@@ -95,7 +93,7 @@ class elementOption {
 export default class extends Vue {
 
   private jsonEditor?: Editor;
-  private value?: string = '';
+  private value?: string = "main ->";
   private options: elementOption[] = [
     {value: 'coffeescript', label: 'coffeescript'},
     {value: 'javascript', label: 'javascript'},
