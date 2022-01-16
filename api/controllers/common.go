@@ -19,27 +19,31 @@
 package controllers
 
 import (
+	"github.com/e154/smart-home-configurator/common/logger"
+	m "github.com/e154/smart-home-configurator/models"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 
-	"github.com/e154/smart-home-configurator/common"
 	"github.com/e154/smart-home-configurator/system/client"
 )
 
 var (
-	log = common.MustGetLogger("controllers")
+	log = logger.MustGetLogger("controllers")
 )
 
 // ControllerCommon ...
 type ControllerCommon struct {
 	client *client.Client
+	config *m.AppConfig
 }
 
 // NewControllerCommon ...
-func NewControllerCommon(client *client.Client) *ControllerCommon {
+func NewControllerCommon(client *client.Client,
+	config *m.AppConfig) *ControllerCommon {
 	return &ControllerCommon{
 		client: client,
+		config: config,
 	}
 }
 

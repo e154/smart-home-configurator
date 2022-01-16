@@ -74,6 +74,21 @@
           </el-table-column>
 
           <el-table-column
+            :label="$t('entities.table.operations')"
+            width="90px"
+            align="right"
+          >
+            <template slot-scope="{row}">
+              <el-button
+                type="text" size="small"
+                @click='reloadEntity(row, $index)'
+              >
+                {{ $t('entities.table.reload') }}
+              </el-button>
+            </template>
+          </el-table-column>
+
+          <el-table-column
             :label="$t('entities.table.createdAt')"
             width="160px"
             align="center"
@@ -217,6 +232,18 @@ export default class extends Vue {
   private gotoArea(area: ApiArea) {
     router.push({path: `/areas/edit/${area.id}`});
   }
+
+  private async reloadEntity(entity: ApiEntity, index: number) {
+    if (entity) {
+      await api.v1.entityServiceReloadEntity(entity.id);
+      this.$notify({
+        title: 'Success',
+        message: 'entity reloaded successfully',
+        type: 'success',
+        duration: 2000
+      });
+    }
+  }
 }
 </script>
 
@@ -225,6 +252,7 @@ export default class extends Vue {
 .cursor-pointer {
   cursor: pointer;
 }
+
 .pagination-container {
 
 }

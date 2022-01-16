@@ -16,7 +16,7 @@
 // License along with this library.  If not, see
 // <https://www.gnu.org/licenses/>.
 
-package common
+package logger
 
 import (
 	"go.uber.org/zap"

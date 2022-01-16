@@ -18,8 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StreamServiceClient interface {
-	// stream
-	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (StreamService_SubscribeClient, error)
+	Subscribe(ctx context.Context, opts ...grpc.CallOption) (StreamService_SubscribeClient, error)
 }
 
 type streamServiceClient struct {
@@ -30,23 +29,18 @@ func NewStreamServiceClient(cc grpc.ClientConnInterface) StreamServiceClient {
 	return &streamServiceClient{cc}
 }
 
-func (c *streamServiceClient) Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (StreamService_SubscribeClient, error) {
+func (c *streamServiceClient) Subscribe(ctx context.Context, opts ...grpc.CallOption) (StreamService_SubscribeClient, error) {
 	stream, err := c.cc.NewStream(ctx, &StreamService_ServiceDesc.Streams[0], "/api.StreamService/Subscribe", opts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &streamServiceSubscribeClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 type StreamService_SubscribeClient interface {
-	Recv() (*SubscribeResponse, error)
+	Send(*Request) error
+	Recv() (*Response, error)
 	grpc.ClientStream
 }
 
@@ -54,8 +48,12 @@ type streamServiceSubscribeClient struct {
 	grpc.ClientStream
 }
 
-func (x *streamServiceSubscribeClient) Recv() (*SubscribeResponse, error) {
-	m := new(SubscribeResponse)
+func (x *streamServiceSubscribeClient) Send(m *Request) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *streamServiceSubscribeClient) Recv() (*Response, error) {
+	m := new(Response)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -66,8 +64,7 @@ func (x *streamServiceSubscribeClient) Recv() (*SubscribeResponse, error) {
 // All implementations must embed UnimplementedStreamServiceServer
 // for forward compatibility
 type StreamServiceServer interface {
-	// stream
-	Subscribe(*SubscribeRequest, StreamService_SubscribeServer) error
+	Subscribe(StreamService_SubscribeServer) error
 	mustEmbedUnimplementedStreamServiceServer()
 }
 
@@ -75,7 +72,7 @@ type StreamServiceServer interface {
 type UnimplementedStreamServiceServer struct {
 }
 
-func (UnimplementedStreamServiceServer) Subscribe(*SubscribeRequest, StreamService_SubscribeServer) error {
+func (UnimplementedStreamServiceServer) Subscribe(StreamService_SubscribeServer) error {
 	return status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
 }
 func (UnimplementedStreamServiceServer) mustEmbedUnimplementedStreamServiceServer() {}
@@ -92,15 +89,12 @@ func RegisterStreamServiceServer(s grpc.ServiceRegistrar, srv StreamServiceServe
 }
 
 func _StreamService_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(StreamServiceServer).Subscribe(m, &streamServiceSubscribeServer{stream})
+	return srv.(StreamServiceServer).Subscribe(&streamServiceSubscribeServer{stream})
 }
 
 type StreamService_SubscribeServer interface {
-	Send(*SubscribeResponse) error
+	Send(*Response) error
+	Recv() (*Request, error)
 	grpc.ServerStream
 }
 
@@ -108,8 +102,16 @@ type streamServiceSubscribeServer struct {
 	grpc.ServerStream
 }
 
-func (x *streamServiceSubscribeServer) Send(m *SubscribeResponse) error {
+func (x *streamServiceSubscribeServer) Send(m *Response) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func (x *streamServiceSubscribeServer) Recv() (*Request, error) {
+	m := new(Request)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // StreamService_ServiceDesc is the grpc.ServiceDesc for StreamService service.
@@ -124,6 +126,7 @@ var StreamService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "Subscribe",
 			Handler:       _StreamService_Subscribe_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "stream.proto",

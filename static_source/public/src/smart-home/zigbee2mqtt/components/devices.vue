@@ -15,7 +15,7 @@
             prop="id"
             sortable="custom"
             align="left"
-            width="150px"
+            width="160px"
             :class-name="getSortClass('id')"
           >
             <template slot-scope="{row}">

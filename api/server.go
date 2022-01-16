@@ -1,9 +1,9 @@
-package v1
+package api
 
 import (
 	"context"
-	"github.com/e154/smart-home-configurator/api/v1/controllers"
-	"github.com/e154/smart-home-configurator/common"
+	"github.com/e154/smart-home-configurator/api/controllers"
+	"github.com/e154/smart-home-configurator/common/logger"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/fx"
@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	log = common.MustGetLogger("api/v1")
+	log = logger.MustGetLogger("api")
 )
 
 // Server ...
@@ -64,6 +64,9 @@ func (s *Server) Start() {
 
 	// index
 	s.echo.GET("/", s.controllers.Index)
+
+	// ws
+	s.echo.GET("/ws", s.controllers.Ws)
 
 	if err := s.setUpProxy(); err != nil {
 		log.Error(err.Error())

@@ -18,17 +18,23 @@
 
 package controllers
 
-import "github.com/e154/smart-home-configurator/system/client"
+import (
+	m "github.com/e154/smart-home-configurator/models"
+	"github.com/e154/smart-home-configurator/system/client"
+)
 
 // Controllers ...
 type Controllers struct {
 	*ControllerIndex
+	*ControllerWs
 }
 
 // NewControllers ...
-func NewControllers(client *client.Client) *Controllers {
-	common := NewControllerCommon(client)
+func NewControllers(client *client.Client,
+	config *m.AppConfig) *Controllers {
+	common := NewControllerCommon(client, config)
 	return &Controllers{
 		ControllerIndex: NewIndexController(common),
+		ControllerWs:    NewWsController(common),
 	}
 }

@@ -124,6 +124,7 @@ export default {
       value: 'Value',
       parent: 'Parent',
       operations: 'Operations',
+      reload: 'Reload',
       pluginName: 'Plugin name',
       autoLoad: 'Auto Load',
       area: 'Area',

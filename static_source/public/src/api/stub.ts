@@ -1263,6 +1263,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags EntityService
+     * @name EntityServiceReloadEntity
+     * @summary reload entity
+     * @request GET:/v1/entity/{id}/reload
+     * @secure
+     */
+    entityServiceReloadEntity: (
+      id?: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<object, RpcStatus>({
+        path: `/v1/entity/${id}/reload`,
+        method: 'POST',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityService
      * @name EntityServiceGetEntity
      * @summary get entity
      * @request GET:/v1/entity/{id}
