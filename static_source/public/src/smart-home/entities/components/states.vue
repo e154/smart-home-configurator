@@ -27,8 +27,16 @@
         <el-row>
           <el-col>
             <el-button
-              @click='add()'>
+              @click='add()'
+              v-if="customStates">
               <i class="el-icon-plus"/> {{ $t('entities.addState') }}
+            </el-button>
+
+            <el-button
+              align="left"
+              v-if="settings && Object.keys(settings).length"
+              @click='loadFromPlugin()'>
+              {{ $t('entities.loadFromPlugin') }}
             </el-button>
           </el-col>
         </el-row>
@@ -37,7 +45,7 @@
 
             <el-table
               key="key"
-              :data="value"
+              :data="states"
               style="width: 100%;"
             >
               <el-table-column
@@ -110,7 +118,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import {ApiEntityState, ApiGetPluginOptionsResultEntityState} from '@/api/stub';
 import {Form} from 'element-ui';
 
@@ -126,7 +134,7 @@ export enum Mode {
 export default class extends Vue {
 
   @Prop() private value?: ApiEntityState[];
-  @Prop() private settings?: Map<string, ApiGetPluginOptionsResultEntityState>;
+  @Prop() private settings?: { [key: string]: ApiGetPluginOptionsResultEntityState };
   @Prop({default: false}) private customStates?: boolean;
 
   private mode: Mode = Mode.VIEW;
@@ -143,6 +151,20 @@ export default class extends Vue {
       {max: 255, trigger: 'blur'}
     ]
   };
+
+  get states(): ApiEntityState[] {
+    let states: ApiEntityState[] = [];
+    if (this.value) {
+      for (const key in this.value) {
+        states.push(this.value[key]);
+      }
+    }
+    return states;
+  }
+
+  set states(value: ApiEntityState[]) {
+
+  }
 
   private setState(action: ApiEntityState) {
     //  todo add
@@ -165,35 +187,60 @@ export default class extends Vue {
         return;
       }
       if (this.mode === Mode.NEW) {
-        if (this.value) {
-          this.value.push(this.currentItem);
+        if (this.states) {
+          this.states.push(this.currentItem);
         }
       } else if (this.mode === Mode.EDIT) {
-        if (this.value) {
-          if (this.currentItemIndex) {
-            this.value[this.currentItemIndex] = this.currentItem;
-          }
+        if (this.states && this.currentItemIndex != undefined) {
+          this.states[this.currentItemIndex] = this.currentItem;
         }
       }
+      let states: ApiEntityState[] = [];
+      for (const index in this.states) {
+        states.push(this.states[index]);
+      }
+      this.$emit('update-value', states);
       this.resetForm();
+      setTimeout(() => {
+        this.$forceUpdate();
+      }, 0.5 * 1000);
     });
   }
 
   private resetForm() {
     this.currentItem = {};
     this.mode = Mode.VIEW;
+    this.currentItemIndex = undefined;
   }
 
   private removeItem() {
-    if (this.value) {
-      for (let index in this.value) {
-        if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1);
+    if (this.states) {
+      for (let index in this.states) {
+        if (this.currentItem && this.states[index].name == this.currentItem.name) {
+          this.states.splice(+index, 1);
         }
       }
     }
     this.mode = Mode.VIEW;
     this.currentItem = {};
+  }
+
+  private loadFromPlugin() {
+    let value: ApiEntityState[] = [];
+    if (this.settings) {
+      for (const k in this.settings) {
+        const item = this.settings[k];
+        value.push({
+          name: item.name,
+          description: item.description,
+          icon: item.icon,
+        });
+      }
+    }
+    this.$emit('update-value', value);
+    setTimeout(() => {
+      this.$forceUpdate();
+    }, 0.5 * 1000);
   }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
   <el-main>
-    <el-row v-if="customAttrs">
+    <el-row>
       <el-col>
         <el-button
           align="left"
-          @click='add()'>
+          @click='add()'
+          v-if="customAttrs">
           <i class="el-icon-plus"/> {{ $t('entities.addAttribute') }}
         </el-button>
 

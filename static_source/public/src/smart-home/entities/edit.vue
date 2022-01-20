@@ -60,6 +60,7 @@
             <el-tab-pane
               label="Actions"
               name="actions"
+              v-if="internal.pluginOptions.actorCustomActions || Object.keys(internal.pluginOptions.actorActions).length"
             >
               <actions
                 v-model="currentEntity.actions"
@@ -71,19 +72,20 @@
             <el-tab-pane
               label="States"
               name="states"
-              v-if="internal.pluginOptions.actorCustomStates"
+              v-if="internal.pluginOptions.actorCustomStates || Object.keys(internal.pluginOptions.actorStates).length"
             >
               <states
                 v-model="currentEntity.states"
                 :settings="internal.pluginOptions.actorStates"
                 :customStates="internal.pluginOptions.actorCustomStates"
+                @update-value="changedStates"
               />
             </el-tab-pane>
 
             <el-tab-pane
               label="Attributes"
               name="attributes"
-              v-if="internal.pluginOptions.actorCustomAttrs || internal.pluginOptions.actorAttrs"
+              v-if="internal.pluginOptions.actorCustomAttrs || Object.keys(internal.pluginOptions.actorAttrs).length"
             >
               <attributes
                 v-model="currentEntity.attributes"
@@ -96,7 +98,7 @@
             <el-tab-pane
               label="Settings"
               name="settings"
-              v-if="internal.pluginOptions.actorCustomSetts || internal.pluginOptions.actorSetts"
+              v-if="internal.pluginOptions.actorCustomSetts || Object.keys(internal.pluginOptions.actorSetts).length"
             >
               <attributes
                 v-model="currentEntity.settings"
@@ -145,7 +147,15 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiArea, ApiAttribute, ApiEntity, ApiEntityParent, ApiEntityShort, ApiScript,} from '@/api/stub';
+import {
+  ApiArea,
+  ApiAttribute,
+  ApiEntity,
+  ApiEntityParent,
+  ApiEntityShort,
+  ApiEntityState,
+  ApiScript,
+} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -244,6 +254,14 @@ export default class extends Vue {
       this.$set(this.currentEntity, 'area', values);
     } else {
       this.$set(this.currentEntity, 'area', undefined);
+    }
+  }
+
+  private changedStates(values: ApiEntityState[], event?: any) {
+    if (values) {
+      this.$set(this.currentEntity, 'states', values);
+    } else {
+      this.$set(this.currentEntity, 'states', undefined);
     }
   }
 
