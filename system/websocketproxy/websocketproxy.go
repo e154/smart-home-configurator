@@ -165,6 +165,9 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if w.Upgrader == nil {
 		upgrader = DefaultUpgrader
 	}
+	upgrader.CheckOrigin = func(r *http.Request) bool {
+		return true
+	}
 
 	// Only pass those headers to the upgrader.
 	upgradeHeader := http.Header{}

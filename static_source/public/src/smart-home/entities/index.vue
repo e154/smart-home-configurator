@@ -78,7 +78,7 @@
             width="90px"
             align="right"
           >
-            <template slot-scope="{row}">
+            <template slot-scope="{row, $index}">
               <el-button
                 type="text" size="small"
                 @click='reloadEntity(row, $index)'

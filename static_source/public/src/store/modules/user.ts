@@ -6,6 +6,7 @@ import {TagsViewModule} from './tags-view';
 import store from '@/store';
 import api from '@/api/api';
 import {ApiMeta, ApiUserHistory} from '@/api/stub';
+import stream from '@/smart-home/stream/stream'
 
 export interface IUserState {
   id: number;
@@ -94,6 +95,8 @@ class User extends VuexModule implements IUserState {
     setToken(data.accessToken);
     this.SET_TOKEN(data.accessToken);
     this.SET_ID(data.currentUser.id);
+    // ws
+    stream.connect(process.env.VUE_APP_BASE_API || '', data.accessToken);
   }
 
   @Action
@@ -102,6 +105,8 @@ class User extends VuexModule implements IUserState {
     this.SET_TOKEN('');
     this.SET_ROLES([]);
     this.SET_ID(0);
+    // ws
+    stream.disconnect();
   }
 
   @Action

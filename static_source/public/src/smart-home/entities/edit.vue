@@ -15,7 +15,7 @@
             <el-form-item :label="$t('entities.table.id')" prop="id">
               <el-input disabled v-model.trim="currentEntity.id"/>
             </el-form-item>
-            <el-form-item :label="$t('entities.table.pluginName')" prop="plugin">
+            <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
               <el-input disabled v-model.trim="currentEntity.pluginName"/>
             </el-form-item>
             <el-form-item :label="$t('entities.table.description')" prop="description">

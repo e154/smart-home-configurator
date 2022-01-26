@@ -15,7 +15,7 @@
             <el-form-item :label="$t('entities.table.name')" prop="name">
               <el-input v-model.trim="currentEntity.name"/>
             </el-form-item>
-            <el-form-item :label="$t('entities.table.pluginName')" prop="plugin">
+            <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
               <plugin-search
                 v-model="currentEntity.pluginName"
                 @update-value="changedPlugin"/>

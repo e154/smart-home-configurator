@@ -15,6 +15,7 @@ import areasRouter from '@/router/modules/area';
 import entitiesRouter from '@/router/modules/entities';
 import automationRouter from '@/router/modules/automation';
 import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt';
+import imagesRouter from '@/router/modules/images';
 
 Vue.use(VueRouter)
 
@@ -126,6 +127,7 @@ export const asyncRoutes: RouteConfig[] = [
   areasRouter,
   automationRouter,
   zigbee2mqttRouter,
+  imagesRouter,
   {
     path: '*',
     redirect: '/404',
