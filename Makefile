@@ -75,6 +75,8 @@ build_public:
 	npm -v  && \
 	cd ${ROOT}/static_source/public && \
 	npm i && \
+	npm uninstall webpack && \
+    npm install webpack@^4.0.0 --save-dev && \
 	npm run build:prod && \
 	rm -rf ${ROOT}/build/public && \
 	mv dist ${ROOT}/build/public
