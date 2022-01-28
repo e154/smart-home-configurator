@@ -6,15 +6,10 @@ require (
 	github.com/elazarl/goproxy v0.0.0-20200310082302-296d8939dc5a // indirect
 	github.com/gin-contrib/sessions v0.0.0-20181124110724-7687b645ca6b
 	github.com/gin-gonic/contrib v0.0.0-20181101072842-54170a7b0b4b
-	github.com/gin-gonic/gin v1.5.0
-	github.com/go-playground/universal-translator v0.17.0 // indirect
-	github.com/golang/protobuf v1.3.3 // indirect
+	github.com/gin-gonic/gin v1.7.0
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/gorilla/sessions v1.1.3 // indirect
 	github.com/gorilla/websocket v1.4.1
-	github.com/json-iterator/go v1.1.9 // indirect
-	github.com/leodido/go-urn v1.2.0 // indirect
-	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
@@ -33,7 +28,5 @@ require (
 	golang.org/x/tools v0.0.0-20200221152158-fe62aff31966 // indirect
 	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
-	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
-	gopkg.in/yaml.v2 v2.2.8 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.2 // indirect
 )
