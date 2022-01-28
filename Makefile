@@ -75,7 +75,7 @@ build_public:
 	npm -v  && \
 	cd ${ROOT}/static_source/public && \
 	npm i && \
-	npm run build:production && \
+	npm run build:prod && \
 	rm -rf ${ROOT}/build/public && \
 	mv dist ${ROOT}/build/public
 
