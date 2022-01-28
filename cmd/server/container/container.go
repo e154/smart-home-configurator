@@ -19,8 +19,8 @@
 package container
 
 import (
-	v1 "github.com/e154/smart-home-configurator/api/v1"
-	"github.com/e154/smart-home-configurator/api/v1/controllers"
+	"github.com/e154/smart-home-configurator/api"
+	"github.com/e154/smart-home-configurator/api/controllers"
 	"github.com/e154/smart-home-configurator/models"
 	"github.com/e154/smart-home-configurator/system/client"
 	"github.com/e154/smart-home-configurator/system/config"
@@ -40,7 +40,7 @@ func BuildContainer(opt fx.Option) (app *fx.App) {
 			NewApiConfig,
 			controllers.NewControllers,
 			client.NewClient,
-			v1.NewServer,
+			api.NewServer,
 		),
 		fx.Logger(NewPrinter()),
 		opt,
