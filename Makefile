@@ -69,6 +69,10 @@ build_server:
 
 build_public:
 	@echo MARK: build public
+	echo -e "node version.\n"  && \
+	node -v  && \
+	echo -e "npm version.\n"  && \
+	npm -v  && \
 	cd ${ROOT}/static_source/public && \
 	npm i && \
 	npm run build:production && \
