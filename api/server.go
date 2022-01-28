@@ -58,7 +58,7 @@ func (s *Server) Start() {
 
 	// render
 	renderer := &TemplateRenderer{
-		templates: template.Must(template.ParseGlob("build/public/*.html")),
+		templates: template.Must(template.ParseGlob("build/*/**.html")),
 	}
 	s.echo.Renderer = renderer
 
@@ -73,8 +73,7 @@ func (s *Server) Start() {
 	}
 
 	// static
-	s.echo.Static("static", "build/public/static")
-	s.echo.Static("favicon.ico", "build/public/favicon.ico")
+	s.echo.Static("/public", "build/public")
 
 	go func() {
 		_ = s.echo.Start(s.cfg.String())
