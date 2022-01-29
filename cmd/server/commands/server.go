@@ -20,7 +20,7 @@ package commands
 
 import (
 	"fmt"
-	v1 "github.com/e154/smart-home-configurator/api/v1"
+	"github.com/e154/smart-home-configurator/api"
 
 	. "github.com/e154/smart-home-configurator/cmd/server/container"
 	. "github.com/e154/smart-home-configurator/common"
@@ -41,7 +41,7 @@ var (
 
 			app := BuildContainer(fx.Invoke(func(
 				logger *logging.Logging,
-				server *v1.Server,
+				server *api.Server,
 			) {
 				server.Start()
 			}))

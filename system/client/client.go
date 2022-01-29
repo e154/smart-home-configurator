@@ -1,15 +1,15 @@
 package client
 
 import (
+	"github.com/e154/smart-home-configurator/common/logger"
 	m "github.com/e154/smart-home-configurator/models"
 	"google.golang.org/grpc"
 
-	"github.com/e154/smart-home-configurator/common"
 	pb "github.com/e154/smart-home-configurator/system/client/stub"
 )
 
 var (
-	log = common.MustGetLogger("client")
+	log = logger.MustGetLogger("client")
 )
 
 type Client struct {

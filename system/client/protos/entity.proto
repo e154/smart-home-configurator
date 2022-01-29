@@ -12,6 +12,7 @@ import "area.proto";
 import "image.proto";
 import "script.proto";
 import "attributes.proto";
+import "pagination.proto";
 
 message EntityAction {
   string name = 1;
@@ -48,6 +49,7 @@ message Entity {
   repeated Script scripts = 12;
   map<string, Attribute> attributes = 13;
   map<string, Attribute> settings = 14;
+  map<string, Attribute> metrics = 15;
   google.protobuf.Timestamp created_at = 99;
   google.protobuf.Timestamp updated_at = 100;
 }
@@ -69,9 +71,6 @@ message NewEntityRequest {
   string name = 1;
   string plugin_name = 2;
   string description = 3;
-  message Area {
-    int64 id = 1;
-  }
   optional Area area = 4;
   optional string icon = 5;
   message Image {
@@ -102,7 +101,8 @@ message NewEntityRequest {
   repeated State states = 11;
   map<string, Attribute> attributes = 12;
   map<string, Attribute> settings = 13;
-  repeated Script scripts = 14;
+  map<string, Attribute> metrics = 14;
+  repeated Script scripts = 15;
 }
 
 message UpdateEntityRequest {
@@ -110,9 +110,6 @@ message UpdateEntityRequest {
   string name = 2;
   string plugin_name = 3;
   string description = 4;
-  message Area {
-    int64 id = 1;
-  }
   optional Area area = 5;
   optional string icon = 6;
   message Image {
@@ -126,9 +123,6 @@ message UpdateEntityRequest {
     string description = 2;
     optional string icon = 3;
     optional Image image = 4;
-    message Script {
-      int64 id = 1;
-    }
     optional Script script = 5;
     string type = 6;
   }
@@ -144,27 +138,15 @@ message UpdateEntityRequest {
   map<string, Attribute> attributes = 13;
   map<string, Attribute> settings = 14;
   repeated Script scripts = 15;
+  map<string, Attribute> metrics = 16;
 }
 
 message GetEntityRequest {
   string id = 1;
 }
 
-
-message GetEntityListRequest {
-  uint64 limit = 1;
-  uint64 offset = 2;
-  string order = 3;
-  string sort_by = 4;
-}
-
 message GetEntityListResult {
   repeated Entity items = 1;
-  message Meta {
-    uint64 limit = 1;
-    uint64 objects_count = 2;
-    uint64 offset = 3;
-  }
   Meta meta = 2;
 }
 
@@ -172,14 +154,12 @@ message DeleteEntityRequest {
   string id = 1;
 }
 
-message SearchEntityRequest {
-  string query = 1;
-  int64 limit = 2;
-  int64 offset = 3;
-}
-
 message SearchEntityResult {
   repeated EntityShort items = 1;
+}
+
+message ReloadRequest {
+  string id = 1;
 }
 
 service EntityService {
@@ -232,7 +212,7 @@ service EntityService {
   }
 
   // get entity list
-  rpc GetEntityList (GetEntityListRequest) returns (GetEntityListResult){
+  rpc GetEntityList (PaginationRequest) returns (GetEntityListResult){
     option (google.api.http) = {
       get: "/v1/entities"
     };
@@ -262,9 +242,24 @@ service EntityService {
   }
 
   // search entity
-  rpc SearchEntity (SearchEntityRequest) returns (SearchEntityResult){
+  rpc SearchEntity (SearchRequest) returns (SearchEntityResult){
     option (google.api.http) = {
       get: "/v1/entity/search"
+    };
+    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "ApiKeyAuth"
+          value: {}
+        }
+      }
+    };
+  }
+
+  // reload entity
+  rpc ReloadEntity (ReloadRequest) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/entity/{id}/reload"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
       security: {
