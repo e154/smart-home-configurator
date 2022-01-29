@@ -46,6 +46,12 @@ test:
 install_linter:
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin v1.42.1
 
+lint-todo:
+	@echo MARK: make lint todo
+
+lint:
+	golangci-lint run ./...
+
 get_deps:
 	go mod tidy
 
@@ -63,11 +69,16 @@ build_server:
 
 build_public:
 	@echo MARK: build public
+	echo -e "node version.\n"  && \
+	node -v  && \
+	echo -e "npm version.\n"  && \
+	npm -v  && \
 	cd ${ROOT}/static_source/public && \
 	npm i && \
-	npm run build:production && \
+	npm run build:prod && \
 	rm -rf ${ROOT}/build/public && \
-	mv dist ${ROOT}/build/public
+	mkdir -p ${ROOT}/build && \
+	mv ${ROOT}/static_source/public/dist ${ROOT}/build/public
 
 build_structure:
 	@echo MARK: create app structure
