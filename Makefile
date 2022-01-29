@@ -77,7 +77,7 @@ build_public:
 	npm i && \
 	npm run build:prod && \
 	rm -rf ${ROOT}/build/public && \
-	mv dist ${ROOT}/build/public
+	mv ${ROOT}/static_source/public/dist ${ROOT}/build/public
 
 build_structure:
 	@echo MARK: create app structure
