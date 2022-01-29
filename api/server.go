@@ -91,6 +91,8 @@ func (s *Server) Shutdown(ctx context.Context) error {
 
 func (s *Server) setUpProxy() (err error) {
 
+	log.Infof("set proxy http requests to %s", s.cfg.ApiHostPort)
+
 	var url1 *url.URL
 	url1, err = url.Parse(s.cfg.ApiHostPort)
 	if err != nil {
