@@ -50,6 +50,20 @@ func (s *Server) Start() {
 	s.echo.HideBanner = true
 	s.echo.HidePort = true
 
+	if s.cfg.Debug {
+		var format = `INFO	api	[${method}] ${uri} ${status} ${latency_human} ${error}` + "\n"
+		log.Info("debug enabled")
+		DefaultLoggerConfig := middleware.LoggerConfig{
+			Skipper:          middleware.DefaultSkipper,
+			Format:           format,
+			CustomTimeFormat: "2006-01-02 15:04:05.00000",
+		}
+		s.echo.Use(middleware.LoggerWithConfig(DefaultLoggerConfig))
+		s.echo.Debug = true
+	} else {
+		log.Info("debug disabled")
+	}
+
 	// cors
 	s.echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},

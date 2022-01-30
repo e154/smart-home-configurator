@@ -3,8 +3,8 @@ import {UserModule} from '@/store/modules/user';
 import {Message, MessageBox, Notification} from 'element-ui';
 
 const api = new Api({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  timeout: 5000
+  baseURL: process.env.VUE_APP_BASE_API || '/', // url = base url + request url
+  timeout: 10000
   // withCredentials: true // send cookies when cross-domain requests
 });
 

@@ -17,7 +17,7 @@ type Client struct {
 }
 
 func NewClient(config *m.AppConfig) *Client {
-	log.Infof("grpc client started at %s", config.ApiGrpcHostPort)
+	log.Infof("grpc client connects to server %s", config.ApiGrpcHostPort)
 	return &Client{
 		serverAddr: config.ApiGrpcHostPort,
 	}

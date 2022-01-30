@@ -12,6 +12,27 @@
 <!--    window.__VUE_DEVTOOLS_PORT__ = '8098' // default: 8098-->
 <!--  </script>-->
 <!--  <script src="http://localhost:8098"></script>-->
+
+  <script type="text/javascript">
+    window.app_settings = Object.create(Object.prototype, {
+      server_url: {
+        get: function(){
+          return {{index . "server_url"}};
+        }
+      },
+      debug: {
+        get: function(){
+          return {{index . "debug"}};
+        }
+      },
+      configurator_version: {
+        get: function () {
+          return {{index . "configurator_version"}};
+        }
+      }
+    });
+  </script>
+
 </head>
 
 <body>
