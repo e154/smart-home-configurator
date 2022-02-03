@@ -66,6 +66,7 @@
                 v-model="currentEntity.actions"
                 :settings="internal.pluginOptions.actorActions"
                 :customActions="internal.pluginOptions.actorCustomActions"
+                v-on:call-action="callAction"
               />
             </el-tab-pane>
 
@@ -79,6 +80,7 @@
                 :settings="internal.pluginOptions.actorStates"
                 :customStates="internal.pluginOptions.actorCustomStates"
                 @update-value="changedStates"
+                v-on:set-state="setState"
               />
             </el-tab-pane>
 
@@ -320,6 +322,26 @@ export default class extends Vue {
       duration: 2000
     });
     router.push({path: `/entities`});
+  }
+
+  private async callAction(name: string) {
+    await api.v1.interactServiceEntityCallAction({id: this.currentEntity.id, name: name});
+    this.$notify({
+      title: 'Success',
+      message: 'Call Successfully',
+      type: 'success',
+      duration: 2000
+    });
+  }
+
+  private async setState(name: string) {
+    await api.v1.developerToolsServiceEntitySetState({id: this.currentEntity.id, name: name});
+    this.$notify({
+      title: 'Success',
+      message: 'Call Successfully',
+      type: 'success',
+      duration: 2000
+    });
   }
 }
 </script>

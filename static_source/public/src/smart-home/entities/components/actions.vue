@@ -137,7 +137,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiScript} from '@/api/stub';
+import {ApiAction, ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiScript} from '@/api/stub';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import {Form} from 'element-ui';
 
@@ -231,6 +231,10 @@ export default class extends Vue {
     }
     this.mode = Mode.VIEW;
     this.currentItem = {};
+  }
+
+  private callAction(action: ApiEntityAction) {
+    this.$emit('call-action', action.name);
   }
 }
 </script>

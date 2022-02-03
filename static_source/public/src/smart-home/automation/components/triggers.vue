@@ -96,7 +96,7 @@
               :label="$t('automation.table.name')"
               prop="name"
               align="left"
-              width="150px"
+              width="200px"
             >
               <template slot-scope="{row}">
                <span> {{ row.name }}</span>
@@ -145,6 +145,7 @@
               width="auto"
             >
               <template slot-scope="{row, $index}">
+                <el-button type="text" size="small" @click='callTrigger(row, $index)'>{{ $t('main.call') }}</el-button>
                 <el-button type="text" size="small" @click='editTrigger(row, $index)'>{{ $t('main.edit') }}</el-button>
               </template>
             </el-table-column>
@@ -159,7 +160,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes} from '@/api/stub';
+import {ApiAction, ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import EntitySearch from '@/smart-home/entities/components/entity_search.vue';
@@ -333,6 +334,10 @@ export default class extends Vue {
       this.resetForm();
     });
     return;
+  }
+
+  private callTrigger(tr: ApiTrigger, index: number) {
+    this.$emit('call-trigger', tr.name);
   }
 }
 </script>

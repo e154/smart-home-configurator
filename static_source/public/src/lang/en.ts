@@ -175,6 +175,8 @@ export default {
     copy: 'Copy',
     remove: 'Remove',
     update: 'Update',
-    save: 'Save'
+    save: 'Save',
+    exec: 'Exec',
+    call: 'Call'
   }
 };

@@ -52,7 +52,7 @@
               :label="$t('automation.table.name')"
               prop="name"
               align="left"
-              width="auto"
+              width="200px"
             >
               <template slot-scope="{row}">
                 <div>{{ row.name }}</div>
@@ -60,13 +60,25 @@
             </el-table-column>
 
             <el-table-column
+              :label="$t('automation.table.script')"
+              prop="script"
+              align="left"
+              width="auto"
+            >
+              <template slot-scope="{row}">
+                <span v-if="row.script && row.script.name">{{ row.script.name }}</span>
+              </template>
+            </el-table-column>
+
+            <el-table-column
               :label="$t('entities.table.operations')"
               prop="description"
               align="left"
-              width="100px"
+              width="200px"
             >
               <template slot-scope="{row, $index}">
-                <el-button type="text" size="small" @click='editTrigger(row, $index)'>{{ $t('main.edit') }}</el-button>
+                <el-button type="text" size="small" @click='callAction(row, $index)'>{{ $t('main.call') }}</el-button>
+                <el-button type="text" size="small" @click='editAction(row, $index)'>{{ $t('main.edit') }}</el-button>
               </template>
             </el-table-column>
 
@@ -80,9 +92,10 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiScript, ApiAction} from '@/api/stub';
+import {ApiAction, ApiScript} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
+import api from '@/api/api';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -114,10 +127,14 @@ export default class extends Vue {
   };
 
 
-  private editTrigger(action: ApiAction, index: number) {
+  private editAction(action: ApiAction, index: number) {
     this.currentItem = Object.assign({}, action);
     this.currentItemIndex = index;
     this.mode = Mode.EDIT;
+  }
+
+  private callAction(action: ApiAction, index: number) {
+    this.$emit('call-action', action.name);
   }
 
   private add() {

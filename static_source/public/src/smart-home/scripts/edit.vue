@@ -57,6 +57,7 @@
 
     <el-row>
       <el-col :span="24" align="right" class="buttons">
+        <el-button type="success" @click.prevent.stop="execById">{{ $t('main.exec') }}</el-button>
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
         <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
         <el-button @click.prevent.stop="copy">{{ $t('main.copy') }}</el-button>
@@ -220,6 +221,16 @@ export default class extends Vue {
       return this.jsonEditor.getValue();
     }
     return '';
+  }
+
+  private async execById() {
+    await api.v1.scriptServiceExecScriptById(this.currentScript.id || 0);
+    this.$notify({
+      title: 'Success',
+      message: 'Call Successfully',
+      type: 'success',
+      duration: 2000
+    });
   }
 }
 </script>

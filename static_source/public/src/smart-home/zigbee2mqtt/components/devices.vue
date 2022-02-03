@@ -109,7 +109,7 @@ export default class extends Vue {
 
   private async getList() {
     this.listLoading = true;
-    const {data} = await api.v1.zigbee2MqttServiceGetDevices(this.id,{
+    const {data} = await api.v1.zigbee2MqttServiceDeviceList(this.id,{
       limit: this.listQuery.limit,
       page: this.listQuery.page,
       sort: this.listQuery.sort,

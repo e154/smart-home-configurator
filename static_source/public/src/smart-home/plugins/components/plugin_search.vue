@@ -54,7 +54,7 @@ export default class extends Vue {
     if (query !== '') {
       this.loading = true;
       const params = {query: query, limit: 25, offset: 0};
-      const {data} = await api.v1.pluginsServiceSearchPlugin(params);
+      const {data} = await api.v1.pluginServiceSearchPlugin(params);
       this.options = data.items;
       this.loading = false;
     } else {

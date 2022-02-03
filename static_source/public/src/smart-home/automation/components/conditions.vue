@@ -52,10 +52,21 @@
               :label="$t('automation.table.name')"
               prop="name"
               align="left"
-              width="auto"
+              width="200px"
             >
               <template slot-scope="{row}">
                 <div>{{ row.name }}</div>
+              </template>
+            </el-table-column>
+
+            <el-table-column
+              :label="$t('automation.table.script')"
+              prop="script"
+              align="left"
+              width="auto"
+            >
+              <template slot-scope="{row}">
+                <span v-if="row.script && row.script.name">{{ row.script.name }}</span>
               </template>
             </el-table-column>
 
@@ -80,7 +91,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiScript, ApiTaskCondition} from '@/api/stub';
+import {ApiScript, ApiCondition} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 
@@ -97,10 +108,10 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: () => []}) private value?: ApiTaskCondition[];
+  @Prop({required: false, default: () => []}) private value?: ApiCondition[];
 
   private mode: Mode = Mode.VIEW;
-  private currentItem: ApiTaskCondition = {};
+  private currentItem: ApiCondition = {};
   private currentItemIndex?: number;
 
   private rules = {
@@ -114,7 +125,7 @@ export default class extends Vue {
   };
 
 
-  private editTrigger(action: ApiTaskCondition, index: number) {
+  private editTrigger(action: ApiCondition, index: number) {
     this.currentItem = Object.assign({}, action);
     this.currentItemIndex = index;
     this.mode = Mode.EDIT;

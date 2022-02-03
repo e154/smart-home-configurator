@@ -97,7 +97,7 @@
 
 import {Component, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiAction, ApiArea, ApiNewTaskRequest, ApiTaskCondition, ApiTrigger,} from '@/api/stub';
+import {ApiAction, ApiArea, ApiNewTaskRequest, ApiCondition, ApiTrigger,} from '@/api/stub';
 import router from '@/router';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import AreaSearch from '@/smart-home/areas/components/areas_search.vue';
@@ -164,7 +164,7 @@ export default class extends Vue {
     }
   }
 
-  private changedConditions(values: ApiTaskCondition[], event?: any) {
+  private changedConditions(values: ApiCondition[], event?: any) {
     if (values) {
       this.$set(this.currentTask, 'conditions', values);
     } else {
