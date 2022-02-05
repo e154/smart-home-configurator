@@ -235,7 +235,7 @@ export default class extends Vue {
 
   private async reloadEntity(entity: ApiEntity, index: number) {
     if (entity) {
-      await api.v1.developerToolsServiceReloadEntity(entity.id);
+      await api.v1.developerToolsServiceReloadEntity({id: entity.id});
       this.$notify({
         title: 'Success',
         message: 'entity reloaded successfully',

@@ -93,7 +93,7 @@ class elementOption {
 export default class extends Vue {
 
   private jsonEditor?: Editor;
-  private value?: string = "main ->";
+  private value?: string = undefined;
   private options: elementOption[] = [
     {value: 'coffeescript', label: 'coffeescript'},
     {value: 'javascript', label: 'javascript'},

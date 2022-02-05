@@ -12,6 +12,26 @@
         </el-form-item>
 
         <el-form-item :label="$t('automation.table.script')" prop="script">
+
+          <span slot="label"  v-if="currentItem.script && currentItem.script.id">
+            {{ $t('entities.table.script') }}
+           <el-dialog
+             :title="currentItem.script.name"
+             :visible.sync="dialogVisible"
+             width="80%"
+             append-to-body
+             destroy-on-close
+           >
+            <script-edit-modal :id="currentItem.script.id"/>
+          </el-dialog>
+            <el-button
+              type="text"
+              @click="dialogVisible=true">
+             {{ $t('scripts.view') }}   <svg-icon name="link" />
+            </el-button>
+          </span>
+
+
           <script-search
             :multiple="false"
             v-model="currentItem.script"
@@ -95,7 +115,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import {ApiAction, ApiScript} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
-import api from '@/api/api';
+import ScriptEditModal from '@/smart-home/scripts/edit-modal.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -106,7 +126,8 @@ export enum Mode {
 @Component({
   name: 'Actions',
   components: {
-    ScriptSearch
+    ScriptSearch,
+    ScriptEditModal
   }
 })
 export default class extends Vue {
@@ -115,6 +136,7 @@ export default class extends Vue {
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiAction = {};
   private currentItemIndex?: number;
+  private dialogVisible: boolean = false;
 
   private rules = {
     name: [

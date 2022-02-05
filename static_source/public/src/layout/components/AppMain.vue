@@ -8,6 +8,18 @@
         <router-view :key="key" />
       </keep-alive>
     </transition>
+
+    <el-drawer
+      :visible.sync="drawer"
+      :direction="direction"
+      :show-close="false"
+      :withHeader="false"
+      :before-close="handleClose">
+     <div class="terminal-viewer">
+
+     </div>
+    </el-drawer>
+
   </section>
 </template>
 
@@ -16,15 +28,32 @@ import { Component, Vue } from 'vue-property-decorator'
 import { TagsViewModule } from '@/store/modules/tags-view'
 
 @Component({
-  name: 'AppMain'
+  name: 'AppMain',
+  components: {
+  }
 })
 export default class extends Vue {
+  private drawer: boolean = false
+  private direction: string = 'btt'
+
   get cachedViews() {
     return TagsViewModule.cachedViews
   }
 
   get key() {
     return this.$route.path
+  }
+
+  private handleClose(done: any) {
+    done();
+  }
+
+  created() {
+    this.$root.$on('update-drawer', this.toggleDriver)
+  }
+
+  private toggleDriver(event: any) {
+    this.drawer = !this.drawer;
   }
 }
 </script>
@@ -53,5 +82,13 @@ export default class extends Vue {
   .fixed-header+.app-main {
     padding-top: 84px;
   }
+}
+
+.terminal-viewer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  height: 100%;
+  min-height: 100%;
 }
 </style>

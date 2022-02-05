@@ -151,8 +151,18 @@ export interface ApiEntityAction {
   type?: string;
 }
 
+export interface ApiEntityCallActionRequest {
+  id?: string;
+  name?: string;
+}
+
 export interface ApiEntityParent {
   id?: string;
+}
+
+export interface ApiEntityRequest {
+  id?: string;
+  name?: string;
 }
 
 export interface ApiEntityShort {
@@ -185,9 +195,9 @@ export interface ApiExecScriptResult {
 }
 
 export interface ApiExecSrcScriptRequest {
-  lang?: string;
+  lang: string;
   name?: string;
-  source?: string;
+  source: string;
   description?: string;
 }
 
@@ -216,6 +226,11 @@ export interface ApiGetImageListByDateResult {
 
 export interface ApiGetImageListResult {
   items: ApiImage[];
+  meta: ApiMeta;
+}
+
+export interface ApiGetLogListResult {
+  items: ApiLog[];
   meta: ApiMeta;
 }
 
@@ -285,6 +300,13 @@ export interface ApiImage {
 
   /** @format date-time */
   createdAt?: string;
+}
+
+export interface ApiLog {
+  id: number;
+  level: string;
+  body: string;
+  createdAt: string;
 }
 
 export interface ApiMeta {
@@ -417,6 +439,10 @@ export interface ApiPlugin {
   system: boolean;
   actor: boolean;
   settings: Record<string, ApiAttribute>;
+}
+
+export interface ApiReloadRequest {
+  id?: string;
 }
 
 export interface ApiResponse {
@@ -1089,6 +1115,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags DeveloperToolsService
+     * @name DeveloperToolsServiceReloadEntity
+     * @summary reload entity
+     * @request POST:/v1/developer_tools/entity_reload
+     * @secure
+     */
+    developerToolsServiceReloadEntity: (body: ApiReloadRequest, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/developer_tools/entity_reload`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DeveloperToolsService
      * @name DeveloperToolsServiceEntitySetState
      * @summary entity set state
      * @request POST:/v1/developer_tools/entity_set_state
@@ -1284,24 +1330,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags DeveloperToolsService
-     * @name DeveloperToolsServiceReloadEntity
-     * @summary reload entity
-     * @request POST:/v1/developer_tools/entity_reload
-     * @secure
-     */
-    developerToolsServiceReloadEntity: (id?: string, params: RequestParams = {}) =>
-      this.request<any, RpcStatus>({
-        path: `/v1/developer_tools/entity_reload`,
-        method: 'POST',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags ImageService
      * @name ImageServiceAddImage
      * @summary add new image
@@ -1473,6 +1501,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags LogService
+     * @name LogServiceGetLogList
+     * @request GET:/v1/logs
+     * @secure
+     */
+    logServiceGetLogList: (
+      query?: { page?: number; limit?: number; sort?: string; query?: string; startDate?: string; endDate?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetLogListResult, RpcStatus>({
+        path: `/v1/logs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
 
     /**
      * No description

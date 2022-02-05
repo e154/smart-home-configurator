@@ -57,9 +57,9 @@
 
     <el-row>
       <el-col :span="24" align="right" class="buttons">
-        <el-button type="success" @click.prevent.stop="execById">{{ $t('main.exec') }}</el-button>
+        <el-button type="success" @click.prevent.stop="exec">{{ $t('main.exec') }}</el-button>
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
-        <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
+        <el-button @click.prevent.stop="reload">{{ $t('main.reload') }}</el-button>
         <el-button @click.prevent.stop="copy">{{ $t('main.copy') }}</el-button>
         <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
       </el-col>
@@ -164,7 +164,7 @@ export default class extends Vue {
     });
   }
 
-  private cancel() {
+  private reload() {
     this.fetch();
   }
 
@@ -223,8 +223,12 @@ export default class extends Vue {
     return '';
   }
 
-  private async execById() {
-    await api.v1.scriptServiceExecScriptById(this.currentScript.id || 0);
+  private async exec() {
+    await api.v1.scriptServiceExecSrcScriptById({
+      name: this.currentScript.name,
+      source: this.getValue(),
+      lang: this.currentScript.lang,
+    });
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
