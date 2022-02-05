@@ -30,7 +30,9 @@ export default {
     zigbee2mqtt: 'Zigbee2mqtt',
     bridgeList: 'List',
     bridgeNew: 'New',
-    bridgeEdit: 'Edit'
+    bridgeEdit: 'Edit',
+    logs: "Logs",
+    logList: 'List'
   },
   navbar: {
     logOut: 'Log Out',
@@ -78,6 +80,7 @@ export default {
   scripts: {
     addNew: 'Add script',
     newScript: 'New script',
+    view: "View",
     edit: 'Edit',
     name: 'Name',
     language: 'Language',
@@ -168,13 +171,24 @@ export default {
       updatedAt: 'Updated at'
     }
   },
+  log: {
+    table: {
+      id: 'Id',
+      level: 'Level',
+      body: 'Body',
+      createdAt: 'Created at',
+    }
+  },
   main: {
     create: 'Create',
     cancel: 'Cancel',
     edit: 'Edit',
     copy: 'Copy',
+    reload: 'Reload',
     remove: 'Remove',
     update: 'Update',
-    save: 'Save'
+    save: 'Save',
+    exec: 'Exec',
+    call: 'Call'
   }
 };

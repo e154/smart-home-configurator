@@ -38,10 +38,10 @@
             width="150px"
           >
             <template slot-scope="{row}">
-            <div class="cursor-pointer"
-                  @click="goto(row)">
-              {{ row.name }}
-            </div>
+              <div class="cursor-pointer"
+                   @click="goto(row)">
+                {{ row.name }}
+              </div>
             </template>
           </el-table-column>
 
@@ -63,8 +63,8 @@
             <template slot-scope="{row}">
               <el-switch
                 v-model="row.enabled"
-                @change="onSwitch"
-              >
+                v-on:change="onSwitch(row)"
+                >
 
               </el-switch>
             </template>
@@ -215,10 +215,18 @@ export default class extends Vue {
     router.push({path: `/areas/edit/${area.id}`});
   }
 
-  private onSwitch(state: boolean) {
-    // if (state) {
-    //   const {data} = await api.v1.automationServiceUpdateTask({});
-    // }
+  private async onSwitch(event: ApiTask) {
+    if (event.enabled) {
+      await api.v1.automationServiceEnableTask(event.id || 0);
+    } else {
+      await api.v1.automationServiceDisableTask(event.id || 0);
+    }
+    this.$notify({
+      title: 'Success',
+      message: 'Update Successfully',
+      type: 'success',
+      duration: 2000
+    });
   }
 }
 </script>
@@ -228,6 +236,7 @@ export default class extends Vue {
 .cursor-pointer {
   cursor: pointer;
 }
+
 .pagination-container {
 
 }

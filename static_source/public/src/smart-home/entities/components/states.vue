@@ -166,8 +166,8 @@ export default class extends Vue {
 
   }
 
-  private setState(action: ApiEntityState) {
-    //  todo add
+  private setState(state: ApiEntityState) {
+    this.$emit('set-state', state.name);
   }
 
   private editState(state: ApiEntityState, index: number) {

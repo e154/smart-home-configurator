@@ -12,6 +12,14 @@
     />
     <div class="right-menu">
       <template v-if="device!=='mobile'">
+        <el-button
+          class="right-menu-item hover-effect"
+          @click="updateDrawer" type="text">
+            <i
+              class="el-icon-d-arrow-right"
+            />
+        </el-button>
+
         <header-search class="right-menu-item" />
         <error-log class="errLog-container right-menu-item hover-effect" />
         <screenfull class="right-menu-item hover-effect" />
@@ -120,6 +128,10 @@ export default class extends Vue {
     this.$router.push(`/login?redirect=${this.$route.fullPath}`).catch(err => {
       console.warn(err)
     })
+  }
+
+  private updateDrawer() {
+    this.$root.$emit('update-drawer', 1);
   }
 }
 </script>

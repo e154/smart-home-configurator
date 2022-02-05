@@ -51,7 +51,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiZigbee2Mqtt} from '@/api/stub';
+import {ApiNewZigbee2MqttRequest, ApiZigbee2Mqtt} from '@/api/stub';
 import router from '@/router';
 import {Form} from 'element-ui';
 
@@ -64,7 +64,7 @@ require('script-loader!jsonlint');
 })
 export default class extends Vue {
 
-  private currentBridge: ApiZigbee2Mqtt = {
+  private currentBridge: ApiNewZigbee2MqttRequest = {
     name: '',
     login: '',
     password: '',

@@ -46,7 +46,7 @@ class Stream {
   }
 
   private onMessage(ws: Websocket, ev: MessageEvent): any {
-    ws.send(ev.data);
+    // ws.send(ev.data);
     console.log('message received');
   }
 

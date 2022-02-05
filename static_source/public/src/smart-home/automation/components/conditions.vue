@@ -12,6 +12,25 @@
         </el-form-item>
 
         <el-form-item :label="$t('automation.table.script')" prop="script">
+
+          <span slot="label"  v-if="currentItem.script && currentItem.script.id">
+            {{ $t('entities.table.script') }}
+           <el-dialog
+             :title="currentItem.script.name"
+             :visible.sync="dialogVisible"
+             width="80%"
+             append-to-body
+             destroy-on-close
+           >
+            <script-edit-modal :id="currentItem.script.id"/>
+          </el-dialog>
+            <el-button
+              type="text"
+              @click="dialogVisible=true">
+             {{ $t('scripts.view') }}   <svg-icon name="link" />
+            </el-button>
+          </span>
+
           <script-search
             :multiple="false"
             v-model="currentItem.script"
@@ -52,10 +71,21 @@
               :label="$t('automation.table.name')"
               prop="name"
               align="left"
-              width="auto"
+              width="200px"
             >
               <template slot-scope="{row}">
                 <div>{{ row.name }}</div>
+              </template>
+            </el-table-column>
+
+            <el-table-column
+              :label="$t('automation.table.script')"
+              prop="script"
+              align="left"
+              width="auto"
+            >
+              <template slot-scope="{row}">
+                <span v-if="row.script && row.script.name">{{ row.script.name }}</span>
               </template>
             </el-table-column>
 
@@ -80,9 +110,10 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiScript, ApiTaskCondition} from '@/api/stub';
+import {ApiScript, ApiCondition} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
+import ScriptEditModal from '@/smart-home/scripts/edit-modal.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -93,15 +124,17 @@ export enum Mode {
 @Component({
   name: 'Triggers',
   components: {
-    ScriptSearch
+    ScriptSearch,
+    ScriptEditModal
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: () => []}) private value?: ApiTaskCondition[];
+  @Prop({required: false, default: () => []}) private value?: ApiCondition[];
 
   private mode: Mode = Mode.VIEW;
-  private currentItem: ApiTaskCondition = {};
+  private currentItem: ApiCondition = {};
   private currentItemIndex?: number;
+  private dialogVisible: boolean = false;
 
   private rules = {
     name: [
@@ -114,7 +147,7 @@ export default class extends Vue {
   };
 
 
-  private editTrigger(action: ApiTaskCondition, index: number) {
+  private editTrigger(action: ApiCondition, index: number) {
     this.currentItem = Object.assign({}, action);
     this.currentItemIndex = index;
     this.mode = Mode.EDIT;

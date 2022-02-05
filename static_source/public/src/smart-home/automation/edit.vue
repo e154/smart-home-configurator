@@ -60,6 +60,7 @@
               <triggers
                 v-model="currentTask.triggers"
                 @update-value="changedTriggers"
+                v-on:call-trigger="callTrigger"
               />
             </el-tab-pane>
 
@@ -80,6 +81,7 @@
               <actions
                 v-model="currentTask.actions"
                 @update-value="changedActions"
+                v-on:call-action="callAction"
               />
             </el-tab-pane>
 
@@ -103,7 +105,7 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiAction, ApiArea, ApiTask, ApiTaskCondition, ApiTrigger,} from '@/api/stub';
+import {ApiAction, ApiArea, ApiTask, ApiCondition, ApiTrigger,} from '@/api/stub';
 import router from '@/router';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import AreaSearch from '@/smart-home/areas/components/areas_search.vue';
@@ -174,7 +176,7 @@ export default class extends Vue {
     }
   }
 
-  private changedConditions(values: ApiTaskCondition[], event?: any) {
+  private changedConditions(values: ApiCondition[], event?: any) {
     if (values) {
       this.$set(this.currentTask, 'conditions', values);
     } else {
@@ -233,6 +235,29 @@ export default class extends Vue {
       duration: 2000
     });
     router.push({path: `/automation`});
+  }
+
+  private async callAction(name: string) {
+    await api.v1.developerToolsServiceTaskCallAction({id: this.currentTask.id || 0, name: name});
+    this.$notify({
+      title: 'Success',
+      message: 'Call Successfully',
+      type: 'success',
+      duration: 2000
+    });
+  }
+
+  private async callTrigger(name: string) {
+
+
+
+    await api.v1.developerToolsServiceTaskCallTrigger({id: this.currentTask.id || 0, name: name});
+    this.$notify({
+      title: 'Success',
+      message: 'Call Successfully',
+      type: 'success',
+      duration: 2000
+    });
   }
 
   private cancel() {
