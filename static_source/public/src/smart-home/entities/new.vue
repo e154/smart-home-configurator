@@ -23,6 +23,12 @@
             <el-form-item :label="$t('entities.table.description')" prop="description">
               <el-input v-model.trim="currentEntity.description"/>
             </el-form-item>
+            <el-form-item :label="$t('entities.table.icon')" prop="icon">
+              <el-input v-model.trim="currentEntity.icon"/>
+            </el-form-item>
+            <el-form-item :label="$t('entities.table.image')" prop="image">
+              <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
+            </el-form-item>
             <el-form-item :label="$t('entities.table.autoLoad')" prop="description">
               <el-switch v-model="currentEntity.autoLoad"></el-switch>
             </el-form-item>
@@ -65,6 +71,7 @@
                 v-model="currentEntity.states"
                 :settings="internal.pluginOptions.actorStates"
                 :customStates="internal.pluginOptions.actorCustomStates"
+                @update-value="changedStates"
               />
             </el-tab-pane>
 
@@ -132,7 +139,15 @@
 
 import {Component, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {ApiAttribute, ApiEntityParent, ApiEntityShort, ApiNewEntityRequest, ApiPlugin, ApiScript,} from '@/api/stub';
+import {
+  ApiAttribute, ApiEntity,
+  ApiEntityParent,
+  ApiEntityShort, ApiEntityState,
+  ApiImage,
+  ApiNewEntityRequest,
+  ApiPlugin,
+  ApiScript,
+} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -143,6 +158,8 @@ import PluginSearch from '@/smart-home/plugins/components/plugin_search.vue';
 import EntitySearch from './components/entity_search.vue';
 import Metrics from './components/metrics.vue';
 import {Form} from 'element-ui';
+import AreaSearch from '@/smart-home/areas/components/areas_search.vue';
+import ImagePreview from '@/smart-home/images/preview.vue';
 
 @Component({
   name: 'EntityEditor',
@@ -154,7 +171,9 @@ import {Form} from 'element-ui';
     ScriptSearch,
     EntitySearch,
     PluginSearch,
-    Metrics
+    Metrics,
+    AreaSearch,
+    ImagePreview
   }
 })
 export default class extends Vue {
@@ -235,6 +254,14 @@ export default class extends Vue {
     }
   }
 
+  private changedStates(values: ApiEntityState[], event?: any) {
+    if (values) {
+      this.$set(this.currentEntity, 'states', values);
+    } else {
+      this.$set(this.currentEntity, 'states', undefined);
+    }
+  }
+
   private async fetchPlugin() {
     if (!this.currentEntity || !this.currentEntity.pluginName) {
       return;
@@ -248,7 +275,49 @@ export default class extends Vue {
       if (!valid) {
         return;
       }
-      const {data} = await api.v1.entityServiceAddEntity(this.currentEntity);
+      let entity: ApiNewEntityRequest = {
+        name: this.currentEntity.name,
+        pluginName: this.currentEntity.pluginName,
+        description: this.currentEntity.description,
+        area: this.currentEntity.area,
+        icon: this.currentEntity.icon,
+        image: this.currentEntity.image,
+        autoLoad: this.currentEntity.autoLoad,
+        parent: this.currentEntity.parent || undefined,
+        actions: [],
+        states: [],
+        attributes: this.currentEntity.attributes,
+        settings: this.currentEntity.settings,
+        scripts: this.currentEntity.scripts,
+      };
+
+      // update image
+      if (entity.image) {
+        entity.image = {id: entity.image.id}
+      }
+
+      // update actions
+      for (const i in this.currentEntity.actions) {
+        let action = Object.assign({}, this.currentEntity.actions[<any>i]);
+        if (action.image?.id ) {
+          action.image = {id: action.image?.id}
+        }
+        if (action.script?.id ) {
+          action.script = {id: action.script?.id}
+        }
+        entity.actions?.push(action);
+      }
+
+      // update states
+      for (const i in this.currentEntity.states) {
+        let state = Object.assign({}, this.currentEntity.states[<any>i]);
+        if (state.image?.id ) {
+          state.image = {id: state.image?.id}
+        }
+        entity.states?.push(state);
+      }
+
+      const {data} = await api.v1.entityServiceAddEntity(entity);
       if (data) {
         router.push({path: `/entities/edit/${data.id}`});
       }
@@ -258,6 +327,11 @@ export default class extends Vue {
   private cancel() {
     router.push({path: `/entities/list`});
   }
+
+  private onSelectImage(value: ApiImage, event?: any) {
+    this.$set(this.currentEntity, 'image', value);
+  }
+
 }
 </script>
 

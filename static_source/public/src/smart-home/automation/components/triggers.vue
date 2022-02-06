@@ -15,18 +15,14 @@
 
           <span slot="label"  v-if="currentItem.script && currentItem.script.id">
             {{ $t('entities.table.script') }}
-           <el-dialog
-             :title="currentItem.script.name"
-             :visible.sync="dialogVisible"
-             width="80%"
-             append-to-body
-             destroy-on-close
-           >
-            <script-edit-modal :id="currentItem.script.id"/>
-          </el-dialog>
+             <script-dialog
+               :visible.sync="dialogScriptVisible"
+               :script="currentItem.script"
+               @on-close="dialogScriptVisible=false"
+             />
             <el-button
               type="text"
-              @click="dialogVisible=true">
+              @click="dialogScriptVisible=true">
              {{ $t('scripts.view') }}   <svg-icon name="link" />
             </el-button>
           </span>
@@ -186,6 +182,7 @@ import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import EntitySearch from '@/smart-home/entities/components/entity_search.vue';
 import Attributes from '@/smart-home/entities/components/attributes.vue';
 import ScriptEditModal from '@/smart-home/scripts/edit-modal.vue';
+import ScriptDialog from '@/smart-home/scripts/dialog.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -199,7 +196,8 @@ export enum Mode {
     ScriptSearch,
     EntitySearch,
     Attributes,
-    ScriptEditModal
+    ScriptEditModal,
+    ScriptDialog
   }
 })
 export default class extends Vue {
@@ -214,7 +212,7 @@ export default class extends Vue {
     cron: '',
     alexa: 0
   };
-  private dialogVisible: boolean = false;
+  private dialogScriptVisible: boolean = false;
 
   private rules = {
     name: [

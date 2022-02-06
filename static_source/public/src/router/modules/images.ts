@@ -14,7 +14,7 @@ const imagesRouter: RouteConfig = {
   children: [
     {
       path: 'list',
-      component: () => import('@/smart-home/images/index.vue'),
+      component: () => import('@/smart-home/images/browser.vue'),
       name: 'image list',
       meta: {
         title: 'imageList',

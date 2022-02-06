@@ -15,18 +15,14 @@
 
           <span slot="label"  v-if="currentItem.script && currentItem.script.id">
             {{ $t('entities.table.script') }}
-           <el-dialog
-             :title="currentItem.script.name"
-             :visible.sync="dialogVisible"
-             width="80%"
-             append-to-body
-             destroy-on-close
-           >
-            <script-edit-modal :id="currentItem.script.id"/>
-          </el-dialog>
+          <script-dialog
+            :visible.sync="dialogScriptVisible"
+            :script="currentItem.script"
+            @on-close="dialogScriptVisible=false"
+          />
             <el-button
               type="text"
-              @click="dialogVisible=true">
+              @click="dialogScriptVisible=true">
              {{ $t('scripts.view') }}   <svg-icon name="link" />
             </el-button>
           </span>
@@ -114,6 +110,7 @@ import {ApiScript, ApiCondition} from '@/api/stub';
 import {Form} from 'element-ui';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import ScriptEditModal from '@/smart-home/scripts/edit-modal.vue';
+import ScriptDialog from '@/smart-home/scripts/dialog.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -125,7 +122,8 @@ export enum Mode {
   name: 'Triggers',
   components: {
     ScriptSearch,
-    ScriptEditModal
+    ScriptEditModal,
+    ScriptDialog
   }
 })
 export default class extends Vue {
@@ -134,7 +132,7 @@ export default class extends Vue {
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiCondition = {};
   private currentItemIndex?: number;
-  private dialogVisible: boolean = false;
+  private dialogScriptVisible: boolean = false;
 
   private rules = {
     name: [

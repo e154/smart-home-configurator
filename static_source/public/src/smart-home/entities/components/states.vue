@@ -13,6 +13,9 @@
         <el-form-item :label="$t('entities.table.description')" prop="description">
           <el-input v-model="currentItem.description"></el-input>
         </el-form-item>
+        <el-form-item :label="$t('entities.table.image')" prop="image">
+          <image-preview :image="currentItem.image" @on-select="onSelectImage"/>
+        </el-form-item>
         <el-form-item>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
           <el-button @click="resetForm()">{{ $t('main.cancel') }}</el-button>
@@ -119,8 +122,9 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiEntityState, ApiGetPluginOptionsResultEntityState} from '@/api/stub';
+import {ApiEntityState, ApiGetPluginOptionsResultEntityState, ApiImage} from '@/api/stub';
 import {Form} from 'element-ui';
+import ImagePreview from '@/smart-home/images/preview.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -129,7 +133,10 @@ export enum Mode {
 }
 
 @Component({
-  name: 'States'
+  name: 'States',
+  components: {
+    ImagePreview
+  }
 })
 export default class extends Vue {
 
@@ -241,6 +248,10 @@ export default class extends Vue {
     setTimeout(() => {
       this.$forceUpdate();
     }, 0.5 * 1000);
+  }
+
+  private onSelectImage(value: ApiImage, event?: any) {
+    this.$set(this.currentItem, 'image', value);
   }
 }
 </script>

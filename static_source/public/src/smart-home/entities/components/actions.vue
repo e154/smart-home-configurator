@@ -15,22 +15,21 @@
         <el-form-item :label="$t('entities.table.icon')" prop="icon">
           <el-input v-model="currentItem.icon"></el-input>
         </el-form-item>
+        <el-form-item :label="$t('entities.table.image')" prop="image">
+          <image-preview :image="currentItem.image" @on-select="onSelectImage"/>
+        </el-form-item>
         <el-form-item :label="$t('entities.table.script')" prop="script">
-          <span slot="label"  v-if="currentItem.script && currentItem.script.id">
+          <span slot="label" v-if="currentItem.script && currentItem.script.id">
             {{ $t('entities.table.script') }}
-           <el-dialog
-             :title="currentItem.script.name"
-             :visible.sync="dialogVisible"
-             width="80%"
-             append-to-body
-             destroy-on-close
-           >
-            <script-edit-modal :id="currentItem.script.id"/>
-          </el-dialog>
+            <script-dialog
+              :visible.sync="dialogScriptVisible"
+              :script="currentItem.script"
+              @on-close="dialogScriptVisible=false"
+            />
             <el-button
               type="text"
-              @click="dialogVisible=true">
-             {{ $t('scripts.view') }}   <svg-icon name="link" />
+              @click="dialogScriptVisible=true">
+             {{ $t('scripts.view') }}   <svg-icon name="link"/>
             </el-button>
           </span>
 
@@ -155,9 +154,11 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiScript} from '@/api/stub';
+import {ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiImage, ApiScript} from '@/api/stub';
 import ScriptSearch from '@/smart-home/scripts/components/script_search.vue';
 import ScriptEditModal from '@/smart-home/scripts/edit-modal.vue';
+import ScriptDialog from '@/smart-home/scripts/dialog.vue';
+import ImagePreview from '@/smart-home/images/preview.vue';
 import {Form} from 'element-ui';
 
 export enum Mode {
@@ -170,7 +171,9 @@ export enum Mode {
   name: 'Actions',
   components: {
     ScriptSearch,
-    ScriptEditModal
+    ScriptEditModal,
+    ScriptDialog,
+    ImagePreview
   }
 })
 export default class extends Vue {
@@ -182,7 +185,7 @@ export default class extends Vue {
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiEntityAction = {};
   private currentItemIndex?: number;
-  private dialogVisible = false
+  private dialogScriptVisible = false;
 
   private rules = {
     name: [
@@ -257,6 +260,11 @@ export default class extends Vue {
   private callAction(action: ApiEntityAction) {
     this.$emit('call-action', action.name);
   }
+
+  private onSelectImage(value: ApiImage, event?: any) {
+    this.$set(this.currentItem, 'image', value);
+  }
+
 }
 </script>
 
