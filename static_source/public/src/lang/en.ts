@@ -32,7 +32,9 @@ export default {
     bridgeNew: 'New',
     bridgeEdit: 'Edit',
     logs: "Logs",
-    logList: 'List'
+    logList: 'List',
+    images: 'Images',
+    imageList: 'List'
   },
   navbar: {
     logOut: 'Log Out',

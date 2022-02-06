@@ -119,7 +119,13 @@ func (s *Server) setUpProxy() (err error) {
 		Skipper: func(e echo.Context) bool {
 			r := e.Request()
 			//fmt.Println("url:", r.URL.String())
-			if strings.Contains(r.URL.String(), "/v1/") || strings.Contains(r.URL.String(), "swagger") {
+			if strings.Contains(r.URL.String(), "/v1/") {
+				return false
+			}
+			if strings.Contains(r.URL.String(), "swagger") {
+				return false
+			}
+			if strings.Contains(r.URL.String(), "upload") && r.Method == "GET" {
 				return false
 			}
 			return true

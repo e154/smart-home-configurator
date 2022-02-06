@@ -24,6 +24,9 @@
             <el-form-item :label="$t('entities.table.icon')" prop="icon">
               <el-input v-model.trim="currentEntity.icon"/>
             </el-form-item>
+            <el-form-item :label="$t('entities.table.image')" prop="image">
+              <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
+            </el-form-item>
             <el-form-item :label="$t('entities.table.autoLoad')" prop="autoLoad">
               <el-switch v-model="currentEntity.autoLoad"></el-switch>
             </el-form-item>
@@ -152,10 +155,10 @@ import api from '@/api/api';
 import {
   ApiArea,
   ApiAttribute,
-  ApiEntity,
+  ApiEntity, ApiEntityAction,
   ApiEntityParent,
   ApiEntityShort,
-  ApiEntityState,
+  ApiEntityState, ApiImage,
   ApiScript,
 } from '@/api/stub';
 import router from '@/router';
@@ -168,6 +171,7 @@ import AreaSearch from '@/smart-home/areas/components/areas_search.vue';
 import EntitySearch from './components/entity_search.vue';
 import Metrics from './components/metrics.vue';
 import {Form} from 'element-ui';
+import ImagePreview from '@/smart-home/images/preview.vue';
 
 @Component({
   name: 'EntityEditor',
@@ -179,7 +183,8 @@ import {Form} from 'element-ui';
     ScriptSearch,
     EntitySearch,
     Metrics,
-    AreaSearch
+    AreaSearch,
+    ImagePreview
   }
 })
 export default class extends Vue {
@@ -287,20 +292,44 @@ export default class extends Vue {
       if (!valid) {
         return;
       }
-      const entity = {
+      let entity: ApiEntity = {
         pluginName: this.currentEntity.pluginName,
         description: this.currentEntity.description,
         area: this.currentEntity.area,
         icon: this.currentEntity.icon,
-        // image?: ApiUpdateEntityRequestImage,
+        image: this.currentEntity.image,
         autoLoad: this.currentEntity.autoLoad,
         parent: this.currentEntity.parent || undefined,
-        actions: this.currentEntity.actions,
-        states: this.currentEntity.states,
+        actions: [],
+        states: [],
         attributes: this.currentEntity.attributes,
         settings: this.currentEntity.settings,
         scripts: this.currentEntity.scripts,
       };
+
+      // update image
+      if (entity.image) {
+        entity.image = {id: entity.image.id}
+      }
+
+      // update actions
+      for (const i in this.currentEntity.actions) {
+        let action = Object.assign({}, this.currentEntity.actions[<any>i]);
+        if (action.image?.id ) {
+          action.image = {id: action.image?.id}
+        }
+        entity.actions?.push(action);
+      }
+
+      // update states
+      for (const i in this.currentEntity.states) {
+        let state = Object.assign({}, this.currentEntity.states[<any>i]);
+        if (state.image?.id ) {
+          state.image = {id: state.image?.id}
+        }
+        entity.states?.push(state);
+      }
+
       const {data} = await api.v1.entityServiceUpdateEntity(this.id, entity);
       if (data) {
         this.$notify({
@@ -343,6 +372,11 @@ export default class extends Vue {
       duration: 2000
     });
   }
+
+  private onSelectImage(value: ApiImage, event?: any) {
+    this.$set(this.currentEntity, 'image', value);
+  }
+
 }
 </script>
 

@@ -19,6 +19,18 @@ import '@/pwa/register-service-worker'
 import * as directives from '@/directives'
 import * as filters from '@/filters'
 
+(function () {
+  if (window.console && 'undefined' != typeof console.log) {
+    let url: string = `https://github.com/e154/smart-home`;
+    let i: string = `Modern smart systems for life - ${url}`;
+    console.log(`%c Smart home %c Copyright © 2014-%s`,
+      `font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:62px;color:#303E4D;-webkit-text-fill-color:#303E4D;-webkit-text-stroke: 1px #303E4D;`,
+      `font-size:12px;color:#a9a9a9;`,
+      (new Date).getFullYear());
+    console.log(`%c ${i}`, 'color:#333;');
+  }
+})();
+
 Vue.use(ElementUI, {
   size: AppModule.size, // Set element-ui default size
   i18n: (key: string, value: string) => i18n.t(key, value)

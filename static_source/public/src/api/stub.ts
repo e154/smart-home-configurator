@@ -15,10 +15,8 @@ export interface AccessListListOfString {
 }
 
 export interface GetImageFilterListResultfilter {
-  date?: string;
-
-  /** @format int32 */
-  count?: number;
+  date: string;
+  count: number;
 }
 
 export interface NewEntityRequestActionScript {
@@ -1376,7 +1374,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/image/{id}
      * @secure
      */
-    imageServiceGetImageById: (id: string, params: RequestParams = {}) =>
+    imageServiceGetImageById: (id: number, params: RequestParams = {}) =>
       this.request<ApiImage, RpcStatus>({
         path: `/v1/image/${id}`,
         method: 'GET',
@@ -1394,7 +1392,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/image/{id}
      * @secure
      */
-    imageServiceDeleteImageById: (id: string, params: RequestParams = {}) =>
+    imageServiceDeleteImageById: (id: number, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/image/${id}`,
         method: 'DELETE',
