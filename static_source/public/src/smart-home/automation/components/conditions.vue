@@ -35,13 +35,10 @@
         </el-form-item>
 
         <el-form-item>
+          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{$t('entities.addAction') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
           <el-button @click="resetForm()">{{ $t('main.cancel') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="danger" @click="removeItem()">{{ $t('main.remove') }}</el-button>
-          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{
-              $t('entities.addAction')
-            }}
-          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -176,7 +173,7 @@ export default class extends Vue {
 
   private changedScript(value: ApiScript, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', {id: value.id});
+      this.$set(this.currentItem, 'script', value);
     } else {
       this.$set(this.currentItem, 'script', undefined);
     }

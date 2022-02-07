@@ -2,11 +2,16 @@
   <div class="app-container" v-if="!listLoading">
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
+        <el-tabs v-model="internal.activeTab">
+          <el-tab-pane
+            label="Main"
+            name="main"
+          >
+
           <el-form label-position="top"
                    ref="currentBridge"
                    :model="currentBridge"
@@ -34,32 +39,24 @@
               <div>{{ currentBridge.updatedAt | parseTime }}</div>
             </el-form-item>
           </el-form>
-        </el-card>
 
-      </el-col>
-      <el-col
-        :span="18"
-        :xs="24"
-      >
+          </el-tab-pane>
 
-        <el-card style="margin-bottom:20px;">
-          <el-tabs v-model="internal.activeTab">
+          <el-tab-pane
+            label="Devices"
+            name="devices"
+          >
 
-            <el-tab-pane
-              label="Devices"
-              name="devices"
-            >
               <devices
                 :id="id"
               />
-            </el-tab-pane>
 
-          </el-tabs>
-        </el-card>
+          </el-tab-pane>
+        </el-tabs>
 
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-top: 20px">
       <el-col :span="24" align="right">
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
         <el-button @click.prevent.stop="fetchBridge">{{ $t('main.load_from_server') }}</el-button>

@@ -3,11 +3,10 @@
 
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
           <el-form label-position="top"
                    ref="currentArea"
                    :model="currentArea"
@@ -22,7 +21,6 @@
             </el-form-item>
 
           </el-form>
-        </el-card>
 
       </el-col>
     </el-row>
