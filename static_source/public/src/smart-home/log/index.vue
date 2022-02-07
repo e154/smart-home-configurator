@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container logging">
 
     <el-row>
       <el-col>
@@ -94,7 +94,7 @@
       </el-col>
     </el-row>
 
-    <el-row>
+    <el-row style="margin-top: 20px">
       <el-col>
         <pagination
           v-show="total>0"
@@ -258,15 +258,18 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+.app-container.logging {
+  .pagination-container {
+    padding: 5px 0;
+  }
+}
 
 .log-table {
 
-  .el-table--small .el-table__cell {
-    padding: 0;
-  }
-
   td.el-table__cell {
+    padding: 0;
     border-bottom: none !important;
   }
 
@@ -283,8 +286,7 @@ export default class extends Vue {
   }
 
   .log-error {
-    /*background-color: #ffc9c9;*/
-    background-color: red;
+    background-color: #ffc9c9;
   }
 
   .log-warning {

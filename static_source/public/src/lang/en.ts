@@ -34,7 +34,9 @@ export default {
     logs: "Logs",
     logList: 'List',
     images: 'Images',
-    imageList: 'List'
+    imageList: 'List',
+    swagger: 'Swagger',
+    swaggerList: 'List'
   },
   navbar: {
     logOut: 'Log Out',
@@ -129,11 +131,12 @@ export default {
       value: 'Value',
       parent: 'Parent',
       operations: 'Operations',
-      reload: 'Reload',
+      restart: 'Restart',
       pluginName: 'Plugin name',
       autoLoad: 'Auto Load',
       area: 'Area',
       script: 'Script',
+      scripts: 'Scripts',
       description: 'Description',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
@@ -191,6 +194,11 @@ export default {
     update: 'Update',
     save: 'Save',
     exec: 'Exec',
-    call: 'Call'
+    load_from_server: 'Load from server',
+    restart: 'Restart',
+    call: 'Call',
+    ok: 'OK',
+    no: 'No, Thanks',
+    'are_you_sure_to_do_want_this?': 'Are you sure to do want this?'
   }
 };

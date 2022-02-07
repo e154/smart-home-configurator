@@ -1,57 +1,55 @@
 <template>
   <div class="app-container" v-if="!listLoading">
     <el-row :gutter="20">
+
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
-          <el-form label-position="top"
-                   ref="currentTask"
-                   :model="currentTask"
-                   :rules="rules"
-                   style="width: 100%">
-            <el-form-item :label="$t('automation.table.name')" prop="name">
-              <el-input disabled v-model.trim="currentTask.name"/>
-            </el-form-item>
-            <el-form-item :label="$t('automation.table.description')" prop="description">
-              <el-input v-model.trim="currentTask.description"/>
-            </el-form-item>
-            <el-form-item :label="$t('automation.table.enabled')" prop="autoLoad">
-              <el-switch v-model="currentTask.enabled"></el-switch>
-            </el-form-item>
-            <el-form-item :label="$t('automation.table.condition')" prop="icon">
-              <el-select v-model="currentTask.condition" placeholder="please select type">
-                <el-option label="OR" value="or"></el-option>
-                <el-option label="AND" value="and"></el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item :label="$t('automation.table.area')" prop="area">
-              <area-search
-                :multiple=false
-                v-model="currentTask.area"
-                @update-value="changedArea"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('automation.table.createdAt')">
-              <div>{{ currentTask.createdAt | parseTime }}</div>
-            </el-form-item>
-            <el-form-item :label="$t('automation.table.updatedAt')">
-              <div>{{ currentTask.updatedAt | parseTime }}</div>
-            </el-form-item>
-          </el-form>
-        </el-card>
-
-      </el-col>
-      <el-col
-        :span="18"
-        :xs="24"
-      >
-
-        <el-card style="margin-bottom:20px;">
           <el-tabs v-model="internal.activeTab">
+
+            <el-tab-pane
+              label="Main"
+              name="main"
+            >
+              <el-form label-position="top"
+                       ref="currentTask"
+                       :model="currentTask"
+                       :rules="rules"
+                       style="width: 100%">
+                <el-form-item :label="$t('automation.table.name')" prop="name">
+                  <el-input disabled v-model.trim="currentTask.name"/>
+                </el-form-item>
+                <el-form-item :label="$t('automation.table.description')" prop="description">
+                  <el-input v-model.trim="currentTask.description"/>
+                </el-form-item>
+                <el-form-item :label="$t('automation.table.enabled')" prop="autoLoad">
+                  <el-switch v-model="currentTask.enabled"></el-switch>
+                </el-form-item>
+                <el-form-item :label="$t('automation.table.condition')" prop="icon">
+                  <el-select v-model="currentTask.condition" placeholder="please select type">
+                    <el-option label="OR" value="or"></el-option>
+                    <el-option label="AND" value="and"></el-option>
+                  </el-select>
+                </el-form-item>
+
+                <el-form-item :label="$t('automation.table.area')" prop="area">
+                  <area-search
+                    :multiple=false
+                    v-model="currentTask.area"
+                    @update-value="changedArea"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('automation.table.createdAt')">
+                  <div>{{ currentTask.createdAt | parseTime }}</div>
+                </el-form-item>
+                <el-form-item :label="$t('automation.table.updatedAt')">
+                  <div>{{ currentTask.updatedAt | parseTime }}</div>
+                </el-form-item>
+              </el-form>
+
+            </el-tab-pane>
 
             <el-tab-pane
               label="Triggers"
@@ -87,15 +85,25 @@
 
 
           </el-tabs>
-        </el-card>
 
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-top: 20px">
       <el-col :span="24" align="right">
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
+        <el-button @click.prevent.stop="fetchTask">{{ $t('main.load_from_server') }}</el-button>
         <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
-        <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
+        <el-popconfirm
+          :confirm-button-text="$t('main.ok')"
+          :cancel-button-text="$t('main.no')"
+          icon="el-icon-info"
+          icon-color="red"
+          style="margin-left: 10px;"
+          :title="$t('main.are_you_sure_to_do_want_this?')"
+          v-on:confirm="remove"
+        >
+          <el-button type="danger" icon="el-icon-delete" slot="reference">{{ $t('main.remove') }}</el-button>
+        </el-popconfirm>
       </el-col>
     </el-row>
   </div>
@@ -130,7 +138,7 @@ export default class extends Vue {
   private listLoading: boolean = true;
 
   private internal = {
-    activeTab: 'triggers',
+    activeTab: 'main',
     pluginOptions: undefined
   };
 
@@ -177,6 +185,8 @@ export default class extends Vue {
   }
 
   private changedConditions(values: ApiCondition[], event?: any) {
+    console.log('------')
+    console.log(values)
     if (values) {
       this.$set(this.currentTask, 'conditions', values);
     } else {
@@ -248,9 +258,6 @@ export default class extends Vue {
   }
 
   private async callTrigger(name: string) {
-
-
-
     await api.v1.developerToolsServiceTaskCallTrigger({id: this.currentTask.id || 0, name: name});
     this.$notify({
       title: 'Success',
@@ -261,6 +268,7 @@ export default class extends Vue {
   }
 
   private cancel() {
+    router.push({path: `/automation/list`});
   }
 }
 </script>

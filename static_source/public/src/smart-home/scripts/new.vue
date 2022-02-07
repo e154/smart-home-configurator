@@ -2,62 +2,72 @@
   <div class="app-container">
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
-        <el-card style="margin-bottom:20px;">
 
-          <el-form label-position="top"
-                   ref="currentScript"
-                   :model="currentScript"
-                   :rules="rules"
-                   style="width: 100%">
-            <el-form-item :label="$t('scripts.table.name')" prop="name">
-              <el-input
-                size="medium"
-                placeholder="Name"
-                label="Name"
-                v-model="currentScript.name">
-              </el-input>
-            </el-form-item>
+        <el-tabs v-model="internal.activeTab">
 
-            <el-form-item :label="$t('scripts.table.lang')" prop="lang">
-              <el-select v-model="currentScript.lang"
-                         size="medium"
-                         placeholder="Language"
-                         label="Language"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item :label="$t('scripts.table.description')" prop="description">
-              <el-input
-                type="textarea"
-                size="medium"
-                placeholder="Description"
-                label="Description"
-                v-model="currentScript.description">
-              </el-input>
-            </el-form-item>
-          </el-form>
+          <el-tab-pane
+            label="Main"
+            name="main"
+          >
+            <el-form label-position="top"
+                     ref="currentScript"
+                     :model="currentScript"
+                     :rules="rules"
+                     style="width: 100%">
+              <el-form-item :label="$t('scripts.table.name')" prop="name">
+                <el-input
+                  size="medium"
+                  placeholder="Name"
+                  label="Name"
+                  v-model="currentScript.name">
+                </el-input>
+              </el-form-item>
 
-        </el-card>
-      </el-col>
-      <el-col :span="18"
-              :xs="24"
-              class="json-editor">
-        <textarea ref="textarea"/>
+              <el-form-item :label="$t('scripts.table.lang')" prop="lang">
+                <el-select v-model="currentScript.lang"
+                           size="medium"
+                           placeholder="Language"
+                           label="Language"
+                           style="width: 100%">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item :label="$t('scripts.table.description')" prop="description">
+                <el-input
+                  type="textarea"
+                  size="medium"
+                  placeholder="Description"
+                  label="Description"
+                  v-model="currentScript.description">
+                </el-input>
+              </el-form-item>
+            </el-form>
+          </el-tab-pane>
+
+          <el-tab-pane
+            label="Source"
+            name="source"
+          >
+
+            <textarea ref="textarea"/>
+          </el-tab-pane>
+
+        </el-tabs>
       </el-col>
     </el-row>
 
     <el-row>
       <el-col style="text-align: right" class="buttons">
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.create') }}</el-button>
+        <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
       </el-col>
     </el-row>
 
@@ -99,6 +109,9 @@ export default class extends Vue {
     {value: 'javascript', label: 'javascript'},
     {value: 'typescript', label: 'typescript'},
   ];
+  private internal = {
+    activeTab: 'main',
+  };
 
   private currentScript: ApiScript = {
     name: '',
@@ -179,6 +192,10 @@ export default class extends Vue {
       return this.jsonEditor.getValue();
     }
     return '';
+  }
+
+  private cancel() {
+    router.push({path: `/scripts/list`});
   }
 }
 </script>

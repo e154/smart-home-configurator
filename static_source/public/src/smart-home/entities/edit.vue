@@ -2,64 +2,66 @@
   <div class="app-container" v-if="!listLoading">
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
-          <el-form label-position="top"
-                   ref="currentEntity"
-                   :model="currentEntity"
-                   :rules="rules"
-                   style="width: 100%">
-            <el-form-item :label="$t('entities.table.id')" prop="id">
-              <el-input disabled v-model.trim="currentEntity.id"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
-              <el-input disabled v-model.trim="currentEntity.pluginName"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.description')" prop="description">
-              <el-input v-model.trim="currentEntity.description"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.icon')" prop="icon">
-              <el-input v-model.trim="currentEntity.icon"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.image')" prop="image">
-              <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.autoLoad')" prop="autoLoad">
-              <el-switch v-model="currentEntity.autoLoad"></el-switch>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.parent')" prop="parent">
-              <entity-search
-                v-model="currentEntity.parent"
-                @update-value="changedParent"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.area')" prop="area">
-              <area-search
-                :multiple=false
-                v-model="currentEntity.area"
-                @update-value="changedArea"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.createdAt')">
-              <div>{{ currentEntity.createdAt | parseTime }}</div>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.updatedAt')">
-              <div>{{ currentEntity.updatedAt | parseTime }}</div>
-            </el-form-item>
-          </el-form>
-        </el-card>
+        <el-tabs v-model="internal.activeTab">
+            <el-tab-pane
+              label="Main"
+              name="main"
+            >
+              <el-form label-position="top"
+                       ref="currentEntity"
+                       :model="currentEntity"
+                       :rules="rules"
+                       style="width: 100%">
+                <el-form-item :label="$t('entities.table.id')" prop="id">
+                  <el-input disabled v-model.trim="currentEntity.id"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
+                  <el-input disabled v-model.trim="currentEntity.pluginName"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.scripts')" prop="scripts">
+                  <scripts
+                    v-model="currentEntity.scripts"
+                    @update-value="changedScript"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.description')" prop="description">
+                  <el-input v-model.trim="currentEntity.description"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.icon')" prop="icon">
+                  <el-input v-model.trim="currentEntity.icon"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.image')" prop="image">
+                  <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.autoLoad')" prop="autoLoad">
+                  <el-switch v-model="currentEntity.autoLoad"></el-switch>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.parent')" prop="parent">
+                  <entity-search
+                    v-model="currentEntity.parent"
+                    @update-value="changedParent"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.area')" prop="area">
+                  <area-search
+                    :multiple=false
+                    v-model="currentEntity.area"
+                    @update-value="changedArea"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.createdAt')">
+                  <div>{{ currentEntity.createdAt | parseTime }}</div>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.updatedAt')">
+                  <div>{{ currentEntity.updatedAt | parseTime }}</div>
+                </el-form-item>
+              </el-form>
+            </el-tab-pane>
 
-      </el-col>
-      <el-col
-        :span="18"
-        :xs="24"
-      >
-
-        <el-card style="margin-bottom:20px;">
-          <el-tabs v-model="internal.activeTab">
             <el-tab-pane
               label="Actions"
               name="actions"
@@ -114,16 +116,6 @@
             </el-tab-pane>
 
             <el-tab-pane
-              label="Scripts"
-              name="scripts"
-            >
-              <scripts
-                v-model="currentEntity.scripts"
-                @update-value="changedScript"
-              />
-            </el-tab-pane>
-
-            <el-tab-pane
               label="Metrics"
               name="metrics"
             >
@@ -134,15 +126,27 @@
             </el-tab-pane>
 
           </el-tabs>
-        </el-card>
 
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-top: 20px">
       <el-col :span="24" align="right">
+
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
+        <el-button icon="el-icon-refresh" type="primary" @click.prevent.stop='restart'>{{ $t('main.restart') }}</el-button>
+        <el-button @click.prevent.stop="fetchEntity">{{ $t('main.load_from_server') }}</el-button>
         <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
-        <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
+        <el-popconfirm
+          :confirm-button-text="$t('main.ok')"
+          :cancel-button-text="$t('main.no')"
+          icon="el-icon-info"
+          icon-color="red"
+          style="margin-left: 10px;"
+          :title="$t('main.are_you_sure_to_do_want_this?')"
+          v-on:confirm="remove"
+        >
+          <el-button type="danger" icon="el-icon-delete" slot="reference">{{ $t('main.remove') }}</el-button>
+        </el-popconfirm>
       </el-col>
     </el-row>
   </div>
@@ -152,15 +156,7 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {
-  ApiArea,
-  ApiAttribute,
-  ApiEntity, ApiEntityAction,
-  ApiEntityParent,
-  ApiEntityShort,
-  ApiEntityState, ApiImage,
-  ApiScript,
-} from '@/api/stub';
+import {ApiArea, ApiAttribute, ApiEntity, ApiEntityShort, ApiEntityState, ApiImage, ApiScript,} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -193,7 +189,7 @@ export default class extends Vue {
   private listLoading: boolean = true;
 
   private internal = {
-    activeTab: 'actions',
+    activeTab: 'main',
     pluginOptions: undefined
   };
 
@@ -309,23 +305,23 @@ export default class extends Vue {
 
       // update image
       if (entity.image) {
-        entity.image = {id: entity.image.id}
+        entity.image = {id: entity.image.id};
       }
 
       // update actions
       for (const i in this.currentEntity.actions) {
-        let action = Object.assign({}, this.currentEntity.actions[<any>i]);
-        if (action.image?.id ) {
-          action.image = {id: action.image?.id}
+        let action = Object.assign({}, this.currentEntity.actions[<any> i]);
+        if (action.image?.id) {
+          action.image = {id: action.image?.id};
         }
         entity.actions?.push(action);
       }
 
       // update states
       for (const i in this.currentEntity.states) {
-        let state = Object.assign({}, this.currentEntity.states[<any>i]);
-        if (state.image?.id ) {
-          state.image = {id: state.image?.id}
+        let state = Object.assign({}, this.currentEntity.states[<any> i]);
+        if (state.image?.id) {
+          state.image = {id: state.image?.id};
         }
         entity.states?.push(state);
       }
@@ -377,6 +373,19 @@ export default class extends Vue {
     this.$set(this.currentEntity, 'image', value);
   }
 
+  private async restart() {
+    await api.v1.developerToolsServiceReloadEntity({id: this.currentEntity.id});
+    this.$notify({
+      title: 'Success',
+      message: 'entity reloaded successfully',
+      type: 'success',
+      duration: 2000
+    });
+  }
+
+  private cancel() {
+    router.push({path: `/entities/list`});
+  }
 }
 </script>
 

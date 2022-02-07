@@ -1,6 +1,6 @@
 <template>
-  <div class="image-preview">
-    <div v-if="currentUrl !== ''">
+  <div>
+    <div v-if="currentUrl !== ''" class="image-preview">
       <el-image
         :src="currentUrl"
         fit="fil"
@@ -13,8 +13,7 @@
     </div>
     <div v-else>
       <el-button
-        class="upload-button"
-        type="text"
+        style="width: 100%"
         @click="visible=true">
         <i class="el-icon-upload"/> {{$t('upload')}}
       </el-button>

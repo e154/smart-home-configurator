@@ -3,11 +3,10 @@
 
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
           <el-form label-position="top"
                    ref="currentArea"
                    :model="currentArea"
@@ -22,7 +21,6 @@
             </el-form-item>
 
           </el-form>
-        </el-card>
 
       </el-col>
     </el-row>
@@ -31,7 +29,6 @@
       <el-col :span="24" align="right">
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
         <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
-        <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
       </el-col>
     </el-row>
 
@@ -78,6 +75,10 @@ export default class extends Vue {
       const {data} = await api.v1.areaServiceAddArea(this.currentArea);
       router.push({path: `/areas/edit/${data.id}`});
     });
+  }
+
+  private cancel() {
+    router.push({path: `/areas/list`});
   }
 }
 </script>
