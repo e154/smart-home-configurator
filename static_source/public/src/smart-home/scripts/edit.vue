@@ -59,9 +59,20 @@
       <el-col :span="24" align="right" class="buttons">
         <el-button type="success" @click.prevent.stop="exec">{{ $t('main.exec') }}</el-button>
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
-        <el-button @click.prevent.stop="reload">{{ $t('main.reload') }}</el-button>
         <el-button @click.prevent.stop="copy">{{ $t('main.copy') }}</el-button>
-        <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
+        <el-button @click.prevent.stop="fetch">{{ $t('main.load_from_server') }}</el-button>
+        <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
+        <el-popconfirm
+          :confirm-button-text="$t('main.ok')"
+          :cancel-button-text="$t('main.no')"
+          icon="el-icon-info"
+          icon-color="red"
+          style="margin-left: 10px;"
+          :title="$t('main.are_you_sure_to_do_want_this?')"
+          v-on:confirm="remove"
+        >
+          <el-button type="danger" icon="el-icon-delete" slot="reference">{{ $t('main.remove') }}</el-button>
+        </el-popconfirm>
       </el-col>
     </el-row>
 
@@ -235,6 +246,10 @@ export default class extends Vue {
       type: 'success',
       duration: 2000
     });
+  }
+
+  private cancel() {
+    router.push({path: `/scripts/list`});
   }
 }
 </script>

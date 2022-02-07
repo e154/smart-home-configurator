@@ -140,9 +140,22 @@
     </el-row>
     <el-row>
       <el-col :span="24" align="right">
+
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
+        <el-button icon="el-icon-refresh" type="primary" @click.prevent.stop='restart'>{{ $t('main.restart') }}</el-button>
+        <el-button @click.prevent.stop="fetchEntity">{{ $t('main.load_from_server') }}</el-button>
         <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
-        <el-button @click.prevent.stop="remove" type="danger">{{ $t('main.remove') }}</el-button>
+        <el-popconfirm
+          :confirm-button-text="$t('main.ok')"
+          :cancel-button-text="$t('main.no')"
+          icon="el-icon-info"
+          icon-color="red"
+          style="margin-left: 10px;"
+          :title="$t('main.are_you_sure_to_do_want_this?')"
+          v-on:confirm="remove"
+        >
+          <el-button type="danger" icon="el-icon-delete" slot="reference">{{ $t('main.remove') }}</el-button>
+        </el-popconfirm>
       </el-col>
     </el-row>
   </div>
@@ -152,15 +165,7 @@
 
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
-import {
-  ApiArea,
-  ApiAttribute,
-  ApiEntity, ApiEntityAction,
-  ApiEntityParent,
-  ApiEntityShort,
-  ApiEntityState, ApiImage,
-  ApiScript,
-} from '@/api/stub';
+import {ApiArea, ApiAttribute, ApiEntity, ApiEntityShort, ApiEntityState, ApiImage, ApiScript,} from '@/api/stub';
 import router from '@/router';
 import Attributes from './components/attributes.vue';
 import Scripts from './components/scripts.vue';
@@ -309,23 +314,23 @@ export default class extends Vue {
 
       // update image
       if (entity.image) {
-        entity.image = {id: entity.image.id}
+        entity.image = {id: entity.image.id};
       }
 
       // update actions
       for (const i in this.currentEntity.actions) {
-        let action = Object.assign({}, this.currentEntity.actions[<any>i]);
-        if (action.image?.id ) {
-          action.image = {id: action.image?.id}
+        let action = Object.assign({}, this.currentEntity.actions[<any> i]);
+        if (action.image?.id) {
+          action.image = {id: action.image?.id};
         }
         entity.actions?.push(action);
       }
 
       // update states
       for (const i in this.currentEntity.states) {
-        let state = Object.assign({}, this.currentEntity.states[<any>i]);
-        if (state.image?.id ) {
-          state.image = {id: state.image?.id}
+        let state = Object.assign({}, this.currentEntity.states[<any> i]);
+        if (state.image?.id) {
+          state.image = {id: state.image?.id};
         }
         entity.states?.push(state);
       }
@@ -377,6 +382,19 @@ export default class extends Vue {
     this.$set(this.currentEntity, 'image', value);
   }
 
+  private async restart() {
+    await api.v1.developerToolsServiceReloadEntity({id: this.currentEntity.id});
+    this.$notify({
+      title: 'Success',
+      message: 'entity reloaded successfully',
+      type: 'success',
+      duration: 2000
+    });
+  }
+
+  private cancel() {
+    router.push({path: `/entities/list`});
+  }
 }
 </script>
 

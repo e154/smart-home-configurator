@@ -195,8 +195,6 @@ export default class extends Vue {
         actions: this.currentTask.actions,
         area: this.currentTask.area,
       };
-      console.log('-------');
-      console.log(task);
       const {data} = await api.v1.automationServiceAddTask(task);
       if (data) {
         this.$notify({
@@ -211,6 +209,7 @@ export default class extends Vue {
   }
 
   private cancel() {
+    router.push({path: `/automation/list`});
   }
 }
 </script>

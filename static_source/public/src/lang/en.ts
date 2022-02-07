@@ -129,7 +129,7 @@ export default {
       value: 'Value',
       parent: 'Parent',
       operations: 'Operations',
-      reload: 'Reload',
+      restart: 'Restart',
       pluginName: 'Plugin name',
       autoLoad: 'Auto Load',
       area: 'Area',
@@ -191,6 +191,11 @@ export default {
     update: 'Update',
     save: 'Save',
     exec: 'Exec',
-    call: 'Call'
+    load_from_server: 'Load from server',
+    restart: 'Restart',
+    call: 'Call',
+    ok: 'OK',
+    no: 'No, Thanks',
+    'are_you_sure_to_do_want_this?': 'Are you sure to do want this?'
   }
 };

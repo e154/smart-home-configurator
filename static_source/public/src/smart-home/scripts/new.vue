@@ -58,6 +58,7 @@
     <el-row>
       <el-col style="text-align: right" class="buttons">
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.create') }}</el-button>
+        <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
       </el-col>
     </el-row>
 
@@ -179,6 +180,10 @@ export default class extends Vue {
       return this.jsonEditor.getValue();
     }
     return '';
+  }
+
+  private cancel() {
+    router.push({path: `/scripts/list`});
   }
 }
 </script>

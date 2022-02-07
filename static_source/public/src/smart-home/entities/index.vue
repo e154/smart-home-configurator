@@ -83,7 +83,7 @@
                 type="text" size="small"
                 @click='reloadEntity(row, $index)'
               >
-                {{ $t('entities.table.reload') }}
+                {{ $t('entities.table.restart') }}
               </el-button>
             </template>
           </el-table-column>
