@@ -268,11 +268,8 @@ export default class extends Vue {
 
 .log-table {
 
-  .el-table--small .el-table__cell {
-    padding: 0;
-  }
-
   td.el-table__cell {
+    padding: 0;
     border-bottom: none !important;
   }
 

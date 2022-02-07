@@ -34,7 +34,9 @@ export default {
     logs: "Logs",
     logList: 'List',
     images: 'Images',
-    imageList: 'List'
+    imageList: 'List',
+    swagger: 'Swagger',
+    swaggerList: 'List'
   },
   navbar: {
     logOut: 'Log Out',

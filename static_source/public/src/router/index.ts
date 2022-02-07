@@ -17,6 +17,7 @@ import automationRouter from '@/router/modules/automation';
 import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt';
 import imagesRouter from '@/router/modules/images';
 import logsRouter from '@/router/modules/log';
+import swaggerRouter from '@/router/modules/swagger';
 
 Vue.use(VueRouter)
 
@@ -130,6 +131,7 @@ export const asyncRoutes: RouteConfig[] = [
   zigbee2mqttRouter,
   imagesRouter,
   logsRouter,
+  swaggerRouter,
   {
     path: '*',
     redirect: '/404',
