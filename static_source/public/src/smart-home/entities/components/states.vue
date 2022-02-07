@@ -17,10 +17,10 @@
           <image-preview :image="currentItem.image" @on-select="onSelectImage"/>
         </el-form-item>
         <el-form-item>
+          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{ $t('entities.addState') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
           <el-button @click="resetForm()">{{ $t('main.cancel') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="danger" @click="removeItem()">{{ $t('main.remove') }}</el-button>
-          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{ $t('entities.addState') }}</el-button>
         </el-form-item>
       </el-form>
     </div>

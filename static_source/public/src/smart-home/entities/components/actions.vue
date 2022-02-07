@@ -42,13 +42,10 @@
 
 
         <el-form-item>
+          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{$t('entities.addAction') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
           <el-button @click="resetForm()">{{ $t('main.cancel') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="danger" @click="removeItem()">{{ $t('main.remove') }}</el-button>
-          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{
-              $t('entities.addAction')
-            }}
-          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -136,8 +133,7 @@
                 width="180px"
               >
                 <template slot-scope="{row, $index}">
-                  <el-button @click="callAction(row)" type="text" size="small">{{ $t('entities.callAction') }}
-                  </el-button>
+                  <el-button @click="callAction(row)" type="text" size="small">{{ $t('entities.callAction') }}</el-button>
                   <el-button type="text" size="small" @click='editAction(row, $index)'>{{ $t('main.edit') }}</el-button>
                 </template>
               </el-table-column>

@@ -2,127 +2,117 @@
   <div class="app-container">
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
-          <el-form label-position="top"
-                   ref="currentEntity"
-                   :model="currentEntity"
-                   :rules="rules"
-                   style="width: 100%">
-            <el-form-item :label="$t('entities.table.name')" prop="name">
-              <el-input v-model.trim="currentEntity.name"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
-              <plugin-search
-                v-model="currentEntity.pluginName"
-                @update-value="changedPlugin"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.description')" prop="description">
-              <el-input v-model.trim="currentEntity.description"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.icon')" prop="icon">
-              <el-input v-model.trim="currentEntity.icon"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.image')" prop="image">
-              <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.autoLoad')" prop="description">
-              <el-switch v-model="currentEntity.autoLoad"></el-switch>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.parent')" prop="parent">
-              <entity-search
-                v-model="currentEntity.parent"
-                @update-value="changedParent"
-              />
-            </el-form-item>
-          </el-form>
+        <el-tabs v-model="internal.activeTab">
+          <el-tab-pane
+            label="Main"
+            name="main"
+          >
+            <el-form label-position="top"
+                     ref="currentEntity"
+                     :model="currentEntity"
+                     :rules="rules"
+                     style="width: 100%">
+              <el-form-item :label="$t('entities.table.name')" prop="name">
+                <el-input v-model.trim="currentEntity.name"/>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
+                <plugin-search
+                  v-model="currentEntity.pluginName"
+                  @update-value="changedPlugin"/>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.scripts')" prop="scripts">
+                <scripts
+                  v-model="currentEntity.scripts"
+                  @update-value="changedScript"
+                />
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.description')" prop="description">
+                <el-input v-model.trim="currentEntity.description"/>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.icon')" prop="icon">
+                <el-input v-model.trim="currentEntity.icon"/>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.image')" prop="image">
+                <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.autoLoad')" prop="description">
+                <el-switch v-model="currentEntity.autoLoad"></el-switch>
+              </el-form-item>
+              <el-form-item :label="$t('entities.table.parent')" prop="parent">
+                <entity-search
+                  v-model="currentEntity.parent"
+                  @update-value="changedParent"
+                />
+              </el-form-item>
+            </el-form>
+          </el-tab-pane>
 
-        </el-card>
+          <el-tab-pane
+            label="Actions"
+            name="actions"
+            v-if="this.internal.pluginOptions"
+          >
+            <actions
+              v-model="currentEntity.actions"
+              :settings="internal.pluginOptions.actorActions"
+              :customActions="internal.pluginOptions.actorCustomActions"
+            />
+          </el-tab-pane>
 
-      </el-col>
-      <el-col
-        :span="18"
-        :xs="24"
-        v-if="this.internal.pluginOptions"
-      >
+          <el-tab-pane
+            label="States"
+            name="states"
+            v-if="this.internal.pluginOptions && internal.pluginOptions.actorCustomStates"
+          >
+            <states
+              v-model="currentEntity.states"
+              :settings="internal.pluginOptions.actorStates"
+              :customStates="internal.pluginOptions.actorCustomStates"
+              @update-value="changedStates"
+            />
+          </el-tab-pane>
 
-        <el-card style="margin-bottom:20px;">
-          <el-tabs v-model="internal.activeTab">
-            <el-tab-pane
-              label="Actions"
-              name="actions"
-            >
-              <actions
-                v-model="currentEntity.actions"
-                :settings="internal.pluginOptions.actorActions"
-                :customActions="internal.pluginOptions.actorCustomActions"
-              />
-            </el-tab-pane>
+          <el-tab-pane
+            label="Attributes"
+            name="attributes"
+            v-if="this.internal.pluginOptions && (internal.pluginOptions.actorCustomAttrs || internal.pluginOptions.actorAttrs)"
+          >
+            <attributes
+              v-model="currentEntity.attributes"
+              :settings="internal.pluginOptions.actorAttrs"
+              :customAttrs="internal.pluginOptions.actorCustomAttrs"
+              @update-value="changedAttributes($event, 'attributes')"
+            />
+          </el-tab-pane>
 
-            <el-tab-pane
-              label="States"
-              name="states"
-              v-if="internal.pluginOptions.actorCustomStates"
-            >
-              <states
-                v-model="currentEntity.states"
-                :settings="internal.pluginOptions.actorStates"
-                :customStates="internal.pluginOptions.actorCustomStates"
-                @update-value="changedStates"
-              />
-            </el-tab-pane>
+          <el-tab-pane
+            label="Settings"
+            name="settings"
+            v-if="this.internal.pluginOptions && (internal.pluginOptions.actorCustomSetts || internal.pluginOptions.actorSetts)"
+          >
+            <attributes
+              v-model="currentEntity.settings"
+              :settings="internal.pluginOptions.actorSetts"
+              :customAttrs="internal.pluginOptions.actorCustomSetts"
+              @update-value="changedAttributes($event, 'settings')"
+            />
+          </el-tab-pane>
 
-            <el-tab-pane
-              label="Attributes"
-              name="attributes"
-              v-if="internal.pluginOptions.actorCustomAttrs || internal.pluginOptions.actorAttrs"
-            >
-              <attributes
-                v-model="currentEntity.attributes"
-                :settings="internal.pluginOptions.actorAttrs"
-                :customAttrs="internal.pluginOptions.actorCustomAttrs"
-                @update-value="changedAttributes($event, 'attributes')"
-              />
-            </el-tab-pane>
+          <el-tab-pane
+            label="Metrics"
+            name="metrics"
+          >
+            <metrics
+              v-model="currentEntity.metrics"
+              @update-value="changedScript"
+            />
+          </el-tab-pane>
 
-            <el-tab-pane
-              label="Settings"
-              name="settings"
-              v-if="internal.pluginOptions.actorCustomSetts || internal.pluginOptions.actorSetts"
-            >
-              <attributes
-                v-model="currentEntity.settings"
-                :settings="internal.pluginOptions.actorSetts"
-                :customAttrs="internal.pluginOptions.actorCustomSetts"
-                @update-value="changedAttributes($event, 'settings')"
-              />
-            </el-tab-pane>
-
-            <el-tab-pane
-              label="Scripts"
-              name="scripts"
-            >
-              <scripts
-                v-model="currentEntity.scripts"
-                @update-value="changedScript"
-              />
-            </el-tab-pane>
-
-            <el-tab-pane
-              label="Metrics"
-              name="metrics"
-            >
-              <metrics
-                v-model="currentEntity.metrics"
-                @update-value="changedScript"
-              />
-            </el-tab-pane>
-
-          </el-tabs>
-        </el-card>
+        </el-tabs>
 
       </el-col>
     </el-row>
@@ -140,9 +130,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
 import {
-  ApiAttribute, ApiEntity,
-  ApiEntityParent,
-  ApiEntityShort, ApiEntityState,
+  ApiAttribute,
+  ApiEntityShort,
+  ApiEntityState,
   ApiImage,
   ApiNewEntityRequest,
   ApiPlugin,
@@ -179,7 +169,7 @@ import ImagePreview from '@/smart-home/images/preview.vue';
 export default class extends Vue {
 
   private internal = {
-    activeTab: 'actions',
+    activeTab: 'main',
     pluginOptions: undefined
   };
 
@@ -293,26 +283,26 @@ export default class extends Vue {
 
       // update image
       if (entity.image) {
-        entity.image = {id: entity.image.id}
+        entity.image = {id: entity.image.id};
       }
 
       // update actions
       for (const i in this.currentEntity.actions) {
-        let action = Object.assign({}, this.currentEntity.actions[<any>i]);
-        if (action.image?.id ) {
-          action.image = {id: action.image?.id}
+        let action = Object.assign({}, this.currentEntity.actions[<any> i]);
+        if (action.image?.id) {
+          action.image = {id: action.image?.id};
         }
-        if (action.script?.id ) {
-          action.script = {id: action.script?.id}
+        if (action.script?.id) {
+          action.script = {id: action.script?.id};
         }
         entity.actions?.push(action);
       }
 
       // update states
       for (const i in this.currentEntity.states) {
-        let state = Object.assign({}, this.currentEntity.states[<any>i]);
-        if (state.image?.id ) {
-          state.image = {id: state.image?.id}
+        let state = Object.assign({}, this.currentEntity.states[<any> i]);
+        if (state.image?.id) {
+          state.image = {id: state.image?.id};
         }
         entity.states?.push(state);
       }

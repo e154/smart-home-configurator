@@ -2,64 +2,66 @@
   <div class="app-container" v-if="!listLoading">
     <el-row :gutter="20">
       <el-col
-        :span="6"
+        :span="24"
         :xs="24"
       >
 
-        <el-card>
-          <el-form label-position="top"
-                   ref="currentEntity"
-                   :model="currentEntity"
-                   :rules="rules"
-                   style="width: 100%">
-            <el-form-item :label="$t('entities.table.id')" prop="id">
-              <el-input disabled v-model.trim="currentEntity.id"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
-              <el-input disabled v-model.trim="currentEntity.pluginName"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.description')" prop="description">
-              <el-input v-model.trim="currentEntity.description"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.icon')" prop="icon">
-              <el-input v-model.trim="currentEntity.icon"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.image')" prop="image">
-              <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.autoLoad')" prop="autoLoad">
-              <el-switch v-model="currentEntity.autoLoad"></el-switch>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.parent')" prop="parent">
-              <entity-search
-                v-model="currentEntity.parent"
-                @update-value="changedParent"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.area')" prop="area">
-              <area-search
-                :multiple=false
-                v-model="currentEntity.area"
-                @update-value="changedArea"
-              />
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.createdAt')">
-              <div>{{ currentEntity.createdAt | parseTime }}</div>
-            </el-form-item>
-            <el-form-item :label="$t('entities.table.updatedAt')">
-              <div>{{ currentEntity.updatedAt | parseTime }}</div>
-            </el-form-item>
-          </el-form>
-        </el-card>
+        <el-tabs v-model="internal.activeTab">
+            <el-tab-pane
+              label="Main"
+              name="main"
+            >
+              <el-form label-position="top"
+                       ref="currentEntity"
+                       :model="currentEntity"
+                       :rules="rules"
+                       style="width: 100%">
+                <el-form-item :label="$t('entities.table.id')" prop="id">
+                  <el-input disabled v-model.trim="currentEntity.id"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.pluginName')" prop="pluginName">
+                  <el-input disabled v-model.trim="currentEntity.pluginName"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.scripts')" prop="scripts">
+                  <scripts
+                    v-model="currentEntity.scripts"
+                    @update-value="changedScript"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.description')" prop="description">
+                  <el-input v-model.trim="currentEntity.description"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.icon')" prop="icon">
+                  <el-input v-model.trim="currentEntity.icon"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.image')" prop="image">
+                  <image-preview :image="currentEntity.image" @on-select="onSelectImage"/>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.autoLoad')" prop="autoLoad">
+                  <el-switch v-model="currentEntity.autoLoad"></el-switch>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.parent')" prop="parent">
+                  <entity-search
+                    v-model="currentEntity.parent"
+                    @update-value="changedParent"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.area')" prop="area">
+                  <area-search
+                    :multiple=false
+                    v-model="currentEntity.area"
+                    @update-value="changedArea"
+                  />
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.createdAt')">
+                  <div>{{ currentEntity.createdAt | parseTime }}</div>
+                </el-form-item>
+                <el-form-item :label="$t('entities.table.updatedAt')">
+                  <div>{{ currentEntity.updatedAt | parseTime }}</div>
+                </el-form-item>
+              </el-form>
+            </el-tab-pane>
 
-      </el-col>
-      <el-col
-        :span="18"
-        :xs="24"
-      >
-
-        <el-card style="margin-bottom:20px;">
-          <el-tabs v-model="internal.activeTab">
             <el-tab-pane
               label="Actions"
               name="actions"
@@ -114,16 +116,6 @@
             </el-tab-pane>
 
             <el-tab-pane
-              label="Scripts"
-              name="scripts"
-            >
-              <scripts
-                v-model="currentEntity.scripts"
-                @update-value="changedScript"
-              />
-            </el-tab-pane>
-
-            <el-tab-pane
               label="Metrics"
               name="metrics"
             >
@@ -134,11 +126,10 @@
             </el-tab-pane>
 
           </el-tabs>
-        </el-card>
 
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-top: 20px">
       <el-col :span="24" align="right">
 
         <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
@@ -198,7 +189,7 @@ export default class extends Vue {
   private listLoading: boolean = true;
 
   private internal = {
-    activeTab: 'actions',
+    activeTab: 'main',
     pluginOptions: undefined
   };
 

@@ -134,6 +134,7 @@ export default {
       autoLoad: 'Auto Load',
       area: 'Area',
       script: 'Script',
+      scripts: 'Scripts',
       description: 'Description',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
