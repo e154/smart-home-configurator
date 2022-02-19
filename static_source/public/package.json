@@ -58,7 +58,7 @@
     "vuex-module-decorators": "^1.0.1",
     "vuex-persistedstate": "^4.1.0",
     "websocket-ts": "^1.1.1",
-    "xlsx": "^0.16.9",
+    "xlsx": "^0.17.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
