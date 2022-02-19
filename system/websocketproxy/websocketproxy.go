@@ -17,10 +17,11 @@
 // <https://www.gnu.org/licenses/>.
 
 // Package websocketproxy is a reverse proxy for WebSocket connections.
+
 package websocketproxy
 
 import (
-	"github.com/e154/smart-home-dashboard/common"
+	"github.com/e154/smart-home-configurator/common/logger"
 	"io"
 	"net"
 	"net/http"
@@ -28,6 +29,10 @@ import (
 	"strings"
 
 	"github.com/gorilla/websocket"
+)
+
+var (
+	log = logger.MustGetLogger("websocketproxy")
 )
 
 var (
@@ -40,8 +45,6 @@ var (
 
 	// DefaultDialer is a dialer with all fields set to the default zero values.
 	DefaultDialer = websocket.DefaultDialer
-
-	log = common.MustGetLogger("websocketproxy")
 )
 
 // WebsocketProxy is an HTTP Handler that takes an incoming WebSocket
@@ -161,6 +164,9 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	upgrader := w.Upgrader
 	if w.Upgrader == nil {
 		upgrader = DefaultUpgrader
+	}
+	upgrader.CheckOrigin = func(r *http.Request) bool {
+		return true
 	}
 
 	// Only pass those headers to the upgrader.

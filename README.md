@@ -63,6 +63,24 @@ run server
 ./smart-home-dashboard
 ```
 
+new module
+
+```bash
+ng g m config --route config --module=app
+```
+
+new component
+
+```bash
+ng g c auth/base --module=auth
+```
+
+new service
+
+```bash
+ng g service @core/services/window
+```
+
 ### install depends on MAC OS
 
 ```bash

@@ -8,5 +8,7 @@ vendor/*
 build
 tmp
 .idea
-/smart-home-dashboard
+/smart-home-configurator
 conf/config.json
+configurator-linux-*
+configurator-darwin-*
