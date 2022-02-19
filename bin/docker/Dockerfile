@@ -1,28 +1,21 @@
-FROM debian
-MAINTAINER Filippov Alex <af@suretly.com>
+FROM golang:1.17 as build
+RUN update-ca-certificates
+MAINTAINER Filippov Alex <support@e154.ru>
 
-ENV APP_DIR /opt/smart-home-dashboard
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install ca-certificates -y \
-    && mkdir -p $APP_DIR
-
-WORKDIR $APP_DIR
-
-ADD . $APP_DIR
-
-ENTRYPOINT (cd $APP_DIR && ./configurator)
+FROM scratch
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /etc/passwd /etc/passwd
+ENTRYPOINT ["/configurator"]
+USER nobody
+ADD . /
 
 EXPOSE 8080
 
-ENV HTTP_ADDR="0.0.0.0"
-ENV HTTP_PORT="8080"
-ENV RUNMODE="debug"
-ENV API_ADDR="smart_home_server"
-ENV API_PORT="3000"
-ENV API_SCHEME="http"
-ENV MEM_STORY_SECRET="secret"
-ENV SESSION_STORY="mysession"
+ENV WEB_HOST_PORT=":8080"
+ENV API_HTTP_HOST_PORT="http://localhost:3001"
+ENV API_GRPC_HOST_PORT="localhost:3000"
+ENV API_WS_HOST_PORT="localhost:3003"
+ENV WEB_SWAGGER="true"
+ENV DEBUG="true"
 
 VOLUME $APP_DIR/conf

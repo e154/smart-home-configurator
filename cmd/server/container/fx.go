@@ -19,11 +19,11 @@
 package container
 
 import (
-	"github.com/e154/smart-home-configurator/common"
+	"github.com/e154/smart-home-configurator/common/logger"
 )
 
 var (
-	log = common.MustGetLogger("fx")
+	log = logger.MustGetLogger("fx")
 )
 
 // Printer ...

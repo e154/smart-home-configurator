@@ -10,3 +10,5 @@ tmp
 .idea
 /smart-home-configurator
 conf/config.json
+configurator-linux-*
+configurator-darwin-*
