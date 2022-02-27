@@ -1,6 +1,5 @@
 /* eslint-disable */
 /* tslint:disable */
-
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -11,20 +10,23 @@
  */
 
 export interface AccessListListOfString {
-  items: string[];
+  items?: string[];
 }
 
 export interface GetImageFilterListResultfilter {
-  date: string;
-  count: number;
+  date?: string;
+
+  /** @format int32 */
+  count?: number;
 }
 
 export interface NewEntityRequestActionScript {
-  id?: number;
+  /** @format int64 */
+  id?: string;
 }
 
 export interface UpdateRoleAccessListRequestAccessListDiff {
-  items: Record<string, boolean>;
+  items?: Record<string, boolean>;
 }
 
 export interface ApiAccessItem {
@@ -35,7 +37,7 @@ export interface ApiAccessItem {
 }
 
 export interface ApiAccessLevels {
-  items: Record<string, ApiAccessItem>;
+  items?: Record<string, ApiAccessItem>;
 }
 
 export interface ApiAccessList {
@@ -47,124 +49,200 @@ export interface ApiAccessListResponse {
 }
 
 export interface ApiAction {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   name?: string;
   script?: ApiScript;
 }
 
 export interface ApiArea {
-  id?: number;
-  name: string;
-  description: string;
+  /** @format int64 */
+  id?: string;
+  name?: string;
+  description?: string;
 }
 
 export interface ApiAttribute {
-  name: string;
+  name?: string;
   type?: ApiTypes;
-  int?: number;
+
+  /** @format int64 */
+  int?: string;
   string?: string;
   bool?: boolean;
+
+  /** @format float */
   float?: number;
   array?: ApiAttribute[];
 }
 
+export interface ApiAutomationRequest {
+  /** @format int64 */
+  id?: string;
+  name?: string;
+}
+
 export interface ApiCondition {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   name?: string;
   script?: ApiScript;
 }
 
 export interface ApiCurrentUser {
-  id: number;
-  nickname: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  status: string;
-  history: ApiUserHistory[];
-  image: ApiImage;
-  signInCount: number;
-  meta: ApiUserMeta[];
-  role: ApiRole;
-  lang: string;
+  /** @format int64 */
+  id?: string;
+  nickname?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  status?: string;
+  history?: ApiUserHistory[];
+  image?: ApiImage;
+
+  /** @format int64 */
+  signInCount?: string;
+  meta?: ApiUserMeta[];
+  role?: ApiRole;
+  lang?: string;
+
+  /** @format date-time */
   createdAt?: string;
+
+  /** @format date-time */
   updatedAt?: string;
+
+  /** @format date-time */
   currentSignInAt?: string;
+
+  /** @format date-time */
   lastSignInAt?: string;
 }
 
 export interface ApiDashboard {
-  id: number;
-  name: string;
-  description: string;
-  enabled: boolean;
-  areaId?: number;
+  /** @format int64 */
+  id?: string;
+  name?: string;
+  description?: string;
+  enabled?: boolean;
+
+  /** @format int64 */
+  areaId?: string;
   area?: ApiArea;
-  tabs: ApiDashboardTab[];
-  createdAt: string;
-  updatedAt: string;
+  tabs?: ApiDashboardTab[];
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiDashboardCard {
-  id: number;
-  title: string;
-  height: number;
-  width: number;
-  background: string;
-  weight: number;
-  enabled: boolean;
-  dashboardTabId: string;
-  payload: string;
-  createdAt: string;
-  updatedAt: string;
+  /** @format int64 */
+  id?: string;
+  title?: string;
+
+  /** @format int32 */
+  height?: number;
+  background?: string;
+
+  /** @format int32 */
+  weight?: number;
+  enabled?: boolean;
+
+  /** @format int64 */
+  dashboardTabId?: string;
+  payload?: string;
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiDashboardShort {
-  id: number;
-  name: string;
-  description: string;
-  areaId: number;
-  createdAt: string;
-  updatedAt: string;
+  /** @format int64 */
+  id?: string;
+  name?: string;
+  description?: string;
+  enabled?: boolean;
+
+  /** @format int64 */
+  areaId?: string;
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiDashboardTab {
-  id: number;
-  name: string;
-  columnWidth: number;
-  gap: number;
-  background: string;
-  icon: string;
-  enabled: boolean;
-  weight: number;
-  dashboardId: number;
-  cards: ApiDashboardCard[];
-  createdAt: string;
-  updatedAt: string;
+  /** @format int64 */
+  id?: string;
+  name?: string;
+
+  /** @format int32 */
+  columnWidth?: number;
+
+  /** @format int32 */
+  gap?: number;
+  background?: string;
+  icon?: string;
+  enabled?: boolean;
+
+  /** @format int32 */
+  weight?: number;
+
+  /** @format int64 */
+  dashboardId?: string;
+  cards?: ApiDashboardCard[];
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiDashboardTabShort {
-  id: number;
-  name: string;
-  columnWidth: number;
-  gap: number;
-  background: string;
-  icon: string;
-  enabled: boolean;
-  weight: number;
-  dashboardId: string;
-  createdAt: string;
-  updatedAt: string;
+  /** @format int64 */
+  id?: string;
+  name?: string;
+
+  /** @format int32 */
+  columnWidth?: number;
+
+  /** @format int32 */
+  gap?: number;
+  background?: string;
+  icon?: string;
+  enabled?: boolean;
+
+  /** @format int32 */
+  weight?: number;
+
+  /** @format int64 */
+  dashboardId?: string;
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiDeviceBanRequest {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   friendlyName?: string;
 }
 
 export interface ApiDeviceListResult {
-  items: ApiZigbee2MqttDevice[];
-  meta: ApiMeta;
+  items?: ApiZigbee2MqttDevice[];
+  meta?: ApiMeta;
 }
 
 export interface ApiDeviceRenameRequest {
@@ -173,7 +251,8 @@ export interface ApiDeviceRenameRequest {
 }
 
 export interface ApiDeviceWhitelistRequest {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   friendlyName?: string;
 }
 
@@ -183,19 +262,19 @@ export type ApiEnablePluginResult = object;
 
 export interface ApiEntity {
   id?: string;
-  pluginName: string;
+  pluginName?: string;
   description?: string;
   area?: ApiArea;
   image?: ApiImage;
   icon?: string;
-  autoLoad: boolean;
+  autoLoad?: boolean;
   parent?: ApiEntityParent;
   actions?: ApiEntityAction[];
   states?: ApiEntityState[];
   scripts?: ApiScript[];
-  attributes?: Map<string, ApiAttribute>;
-  settings?: Map<string, ApiAttribute>;
-  metrics?: Map<string, ApiAttribute>;
+  attributes?: Record<string, ApiAttribute>;
+  settings?: Record<string, ApiAttribute>;
+  metrics?: Record<string, ApiAttribute>;
 
   /** @format date-time */
   createdAt?: string;
@@ -257,63 +336,63 @@ export interface ApiExecScriptResult {
 }
 
 export interface ApiExecSrcScriptRequest {
-  lang: string;
+  lang?: string;
   name?: string;
-  source: string;
+  source?: string;
   description?: string;
 }
 
 export interface ApiGetAreaListResult {
-  items: ApiArea[];
-  meta: ApiMeta;
+  items?: ApiArea[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetBridgeListResult {
-  items: ApiZigbee2MqttShort[];
-  meta: ApiMeta;
+  items?: ApiZigbee2MqttShort[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetDashboardCardListResult {
-  items: ApiDashboardCard[];
-  meta: ApiMeta;
+  items?: ApiDashboardCard[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetDashboardListResult {
-  items: ApiDashboardShort[];
-  meta: ApiMeta;
+  items?: ApiDashboardShort[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetDashboardTabListResult {
-  items: ApiDashboardTabShort[];
-  meta: ApiMeta;
+  items?: ApiDashboardTabShort[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetEntityListResult {
-  items: ApiEntity[];
-  meta: ApiMeta;
+  items?: ApiEntity[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetImageFilterListResult {
-  items: GetImageFilterListResultfilter[];
+  items?: GetImageFilterListResultfilter[];
 }
 
 export interface ApiGetImageListByDateResult {
-  items: ApiImage[];
+  items?: ApiImage[];
 }
 
 export interface ApiGetImageListResult {
-  items: ApiImage[];
-  meta: ApiMeta;
+  items?: ApiImage[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetLogListResult {
-  items: ApiLog[];
-  meta: ApiMeta;
+  items?: ApiLog[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetPluginListResult {
-  items: ApiPlugin[];
-  meta: ApiMeta;
+  items?: ApiPlugin[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetPluginOptionsResult {
@@ -345,18 +424,18 @@ export interface ApiGetPluginOptionsResultEntityState {
 }
 
 export interface ApiGetRoleListResult {
-  items: ApiRole[];
-  meta: ApiMeta;
+  items?: ApiRole[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetScriptListResult {
-  items: ApiScript[];
-  meta: ApiMeta;
+  items?: ApiScript[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetTaskListResult {
-  items: ApiTask[];
-  meta: ApiMeta;
+  items?: ApiTask[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetUserListResult {
@@ -370,14 +449,16 @@ export interface ApiGetVariableListResult {
 }
 
 export interface ApiImage {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   thumb?: string;
   url?: string;
   image?: string;
   mimeType?: string;
   title?: string;
 
-  size?: number;
+  /** @format int64 */
+  size?: string;
   name?: string;
 
   /** @format date-time */
@@ -385,22 +466,25 @@ export interface ApiImage {
 }
 
 export interface ApiLog {
-  id: number;
-  level: string;
-  body: string;
-  createdAt: string;
+  /** @format int64 */
+  id?: string;
+  level?: string;
+  body?: string;
+
+  /** @format date-time */
+  createdAt?: string;
 }
 
 export interface ApiMeta {
   /** @format uint64 */
-  limit: number;
+  limit?: string;
 
   /** @format uint64 */
-  page: number;
+  page?: string;
 
   /** @format uint64 */
-  total: number;
-  sort: string;
+  total?: string;
+  sort?: string;
 }
 
 export interface ApiNetworkmapResponse {
@@ -414,7 +498,10 @@ export interface ApiNewAreaRequest {
 
 export interface ApiNewDashboardCardRequest {
   title?: string;
-  type?: string;
+
+  /** @format int32 */
+  height?: number;
+  background?: string;
 
   /** @format int32 */
   weight?: number;
@@ -435,19 +522,27 @@ export interface ApiNewDashboardRequest {
 }
 
 export interface ApiNewDashboardTabRequest {
-  name: string;
+  name?: string;
+
+  /** @format int32 */
+  columnWidth?: number;
+
+  /** @format int32 */
+  gap?: number;
+  background?: string;
   icon?: string;
-  columnWidth: number;
-  gap: number;
-  background: string;
-  enabled: boolean;
-  weight: number;
-  dashboardId: number;
+  enabled?: boolean;
+
+  /** @format int32 */
+  weight?: number;
+
+  /** @format int64 */
+  dashboardId?: string;
 }
 
 export interface ApiNewEntityRequest {
-  name: string;
-  pluginName: string;
+  name?: string;
+  pluginName?: string;
   description?: string;
   area?: ApiArea;
   icon?: string;
@@ -456,9 +551,9 @@ export interface ApiNewEntityRequest {
   parent?: ApiEntityParent;
   actions?: ApiNewEntityRequestAction[];
   states?: ApiNewEntityRequestState[];
-  attributes?: Map<string, ApiAttribute>;
-  settings?: Map<string, ApiAttribute>;
-  metrics?: Map<string, ApiAttribute>;
+  attributes?: Record<string, ApiAttribute>;
+  settings?: Record<string, ApiAttribute>;
+  metrics?: Record<string, ApiAttribute>;
   scripts?: ApiScript[];
 }
 
@@ -472,7 +567,8 @@ export interface ApiNewEntityRequestAction {
 }
 
 export interface ApiNewEntityRequestImage {
-  id?: number;
+  /** @format int64 */
+  id?: string;
 }
 
 export interface ApiNewEntityRequestState {
@@ -489,7 +585,8 @@ export interface ApiNewImageRequest {
   mimeType?: string;
   title?: string;
 
-  size?: number;
+  /** @format int64 */
+  size?: string;
   name?: string;
 }
 
@@ -523,9 +620,9 @@ export interface ApiNewVariableRequest {
 }
 
 export interface ApiNewZigbee2MqttRequest {
-  name: string;
-  login: string;
-  password: string;
+  name?: string;
+  login?: string;
+  password?: string;
   permitJoin?: boolean;
   baseTopic?: string;
 }
@@ -541,11 +638,12 @@ export interface ApiNewtUserRequest {
   lang?: string;
   image?: ApiNewtUserRequestImage;
   role?: ApiNewtUserRequestRole;
-  meta: ApiUserMeta[];
+  meta?: ApiUserMeta[];
 }
 
 export interface ApiNewtUserRequestImage {
-  id?: number;
+  /** @format int64 */
+  id?: string;
 }
 
 export interface ApiNewtUserRequestRole {
@@ -553,12 +651,12 @@ export interface ApiNewtUserRequestRole {
 }
 
 export interface ApiPlugin {
-  name: string;
-  version: string;
-  enabled: boolean;
-  system: boolean;
-  actor: boolean;
-  settings: Record<string, ApiAttribute>;
+  name?: string;
+  version?: string;
+  enabled?: boolean;
+  system?: boolean;
+  actor?: boolean;
+  settings?: Record<string, ApiAttribute>;
 }
 
 export interface ApiReloadRequest {
@@ -596,11 +694,12 @@ export interface ApiRoleAccessListResult {
 }
 
 export interface ApiScript {
-  id?: number;
-  lang: string;
-  name: string;
-  source: string;
-  description: string;
+  /** @format int64 */
+  id?: string;
+  lang?: string;
+  name?: string;
+  source?: string;
+  description?: string;
 
   /** @format date-time */
   createdAt?: string;
@@ -610,50 +709,56 @@ export interface ApiScript {
 }
 
 export interface ApiSearchAreaResult {
-  items: ApiArea[];
+  items?: ApiArea[];
 }
 
 export interface ApiSearchDeviceResult {
-  items: ApiZigbee2MqttDevice[];
+  items?: ApiZigbee2MqttDevice[];
 }
 
 export interface ApiSearchEntityResult {
-  items: ApiEntityShort[];
+  items?: ApiEntityShort[];
 }
 
 export interface ApiSearchPluginResult {
-  items: ApiPlugin[];
+  items?: ApiPlugin[];
 }
 
 export interface ApiSearchRoleListResult {
-  items: ApiRole[];
+  items?: ApiRole[];
 }
 
 export interface ApiSearchScriptListResult {
-  items: ApiScript[];
+  items?: ApiScript[];
 }
 
 export interface ApiSigninResponse {
-  currentUser: ApiCurrentUser;
-  accessToken: string;
+  currentUser?: ApiCurrentUser;
+  accessToken?: string;
 }
 
 export interface ApiTask {
-  id?: number;
-  name: string;
+  /** @format int64 */
+  id?: string;
+  name?: string;
   description?: string;
-  enabled: boolean;
-  condition: string;
+  enabled?: boolean;
+  condition?: string;
   triggers?: ApiTrigger[];
   conditions?: ApiCondition[];
   actions?: ApiAction[];
   area?: ApiArea;
+
+  /** @format date-time */
   createdAt?: string;
+
+  /** @format date-time */
   updatedAt?: string;
 }
 
 export interface ApiTrigger {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   name?: string;
   entity?: ApiTriggerEntity;
   script?: ApiScript;
@@ -666,11 +771,11 @@ export interface ApiTriggerEntity {
 }
 
 export enum ApiTypes {
-  INT = 'INT',
-  STRING = 'STRING',
-  FLOAT = 'FLOAT',
-  BOOL = 'BOOL',
-  ARRAY = 'ARRAY',
+  INT = "INT",
+  STRING = "STRING",
+  FLOAT = "FLOAT",
+  BOOL = "BOOL",
+  ARRAY = "ARRAY",
 }
 
 export interface ApiUpdateEntityRequestAction {
@@ -683,7 +788,8 @@ export interface ApiUpdateEntityRequestAction {
 }
 
 export interface ApiUpdateEntityRequestImage {
-  id?: number;
+  /** @format int64 */
+  id?: string;
 }
 
 export interface ApiUpdateEntityRequestState {
@@ -695,7 +801,8 @@ export interface ApiUpdateEntityRequestState {
 }
 
 export interface ApiUpdateUserRequestImage {
-  id?: number;
+  /** @format int64 */
+  id?: string;
 }
 
 export interface ApiUpdateUserRequestRole {
@@ -708,23 +815,26 @@ export interface ApiUploadImageRequest {
 }
 
 export interface ApiUserFull {
-  id: number;
-  nickname: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  status: string;
-  history: ApiUserHistory[];
-  image: ApiImage;
-  signInCount: number;
-  meta: ApiUserMeta[];
-  role: ApiRole;
-  roleName: string;
-  lang: string;
-  authenticationToken: string;
-  currentSignInIp: string;
-  lastSignInIp: string;
-  user: ApiUserFullParent;
+  /** @format int64 */
+  id?: string;
+  nickname?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  status?: string;
+  history?: ApiUserHistory[];
+  image?: ApiImage;
+
+  /** @format int64 */
+  signInCount?: string;
+  meta?: ApiUserMeta[];
+  role?: ApiRole;
+  roleName?: string;
+  lang?: string;
+  authenticationToken?: string;
+  currentSignInIp?: string;
+  lastSignInIp?: string;
+  user?: ApiUserFullParent;
 
   /** @format date-time */
   createdAt?: string;
@@ -746,7 +856,8 @@ export interface ApiUserFull {
 }
 
 export interface ApiUserFullParent {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   nickname?: string;
 }
 
@@ -763,7 +874,8 @@ export interface ApiUserMeta {
 }
 
 export interface ApiUserShot {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   nickname?: string;
   firstName?: string;
   lastName?: string;
@@ -783,7 +895,8 @@ export interface ApiUserShot {
 }
 
 export interface ApiUserShotParent {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   nickname?: string;
 }
 
@@ -807,12 +920,12 @@ export interface ApiZigbee2Mqtt {
   networkmap?: string;
   status?: string;
 
-  id?: number;
+  /** @format int64 */
+  id?: string;
   name?: string;
   login?: string;
   permitJoin?: boolean;
   baseTopic?: string;
-  password?: string;
 
   /** @format date-time */
   createdAt?: string;
@@ -824,7 +937,8 @@ export interface ApiZigbee2Mqtt {
 export interface ApiZigbee2MqttDevice {
   id?: string;
 
-  zigbee2mqttId?: number;
+  /** @format int64 */
+  zigbee2mqttId?: string;
   name?: string;
   type?: string;
   model?: string;
@@ -842,7 +956,8 @@ export interface ApiZigbee2MqttDevice {
 }
 
 export interface ApiZigbee2MqttShort {
-  id?: number;
+  /** @format int64 */
+  id?: string;
   name?: string;
   login?: string;
   permitJoin?: boolean;
@@ -856,89 +971,89 @@ export interface ApiZigbee2MqttShort {
 }
 
 /**
- * `Any` contains an arbitrary serialized protocol buffer message along with a
- URL that describes the type of the serialized message.
+* `Any` contains an arbitrary serialized protocol buffer message along with a
+URL that describes the type of the serialized message.
 
- Protobuf library provides support to pack/unpack Any values in the form
- of utility functions or additional generated methods of the Any type.
+Protobuf library provides support to pack/unpack Any values in the form
+of utility functions or additional generated methods of the Any type.
 
- Example 1: Pack and unpack a message in C++.
+Example 1: Pack and unpack a message in C++.
 
- Foo foo = ...;
- Any any;
- any.PackFrom(foo);
- ...
- if (any.UnpackTo(&foo)) {
+    Foo foo = ...;
+    Any any;
+    any.PackFrom(foo);
+    ...
+    if (any.UnpackTo(&foo)) {
       ...
     }
 
- Example 2: Pack and unpack a message in Java.
+Example 2: Pack and unpack a message in Java.
 
- Foo foo = ...;
- Any any = Any.pack(foo);
- ...
- if (any.is(Foo.class)) {
+    Foo foo = ...;
+    Any any = Any.pack(foo);
+    ...
+    if (any.is(Foo.class)) {
       foo = any.unpack(Foo.class);
     }
 
  Example 3: Pack and unpack a message in Python.
 
- foo = Foo(...)
- any = Any()
- any.Pack(foo)
- ...
- if any.Is(Foo.DESCRIPTOR):
- any.Unpack(foo)
- ...
+    foo = Foo(...)
+    any = Any()
+    any.Pack(foo)
+    ...
+    if any.Is(Foo.DESCRIPTOR):
+      any.Unpack(foo)
+      ...
 
  Example 4: Pack and unpack a message in Go
 
- foo := &pb.Foo{...}
- any, err := anypb.New(foo)
- if err != nil {
+     foo := &pb.Foo{...}
+     any, err := anypb.New(foo)
+     if err != nil {
        ...
      }
- ...
- foo := &pb.Foo{}
- if err := any.UnmarshalTo(foo); err != nil {
+     ...
+     foo := &pb.Foo{}
+     if err := any.UnmarshalTo(foo); err != nil {
        ...
      }
 
- The pack methods provided by protobuf library will by default use
- 'type.googleapis.com/full.type.name' as the type URL and the unpack
- methods only use the fully qualified type name after the last '/'
- in the type URL, for example "foo.bar.com/x/y.z" will yield type
- name "y.z".
+The pack methods provided by protobuf library will by default use
+'type.googleapis.com/full.type.name' as the type URL and the unpack
+methods only use the fully qualified type name after the last '/'
+in the type URL, for example "foo.bar.com/x/y.z" will yield type
+name "y.z".
 
 
- JSON
- ====
- The JSON representation of an `Any` value uses the regular
- representation of the deserialized, embedded message, with an
- additional field `@type` which contains the type URL. Example:
+JSON
+====
+The JSON representation of an `Any` value uses the regular
+representation of the deserialized, embedded message, with an
+additional field `@type` which contains the type URL. Example:
 
- package google.profile;
- message Person {
+    package google.profile;
+    message Person {
       string first_name = 1;
       string last_name = 2;
     }
 
- {
+    {
       "@type": "type.googleapis.com/google.profile.Person",
       "firstName": <string>,
       "lastName": <string>
     }
 
- If the embedded message type is well-known and has a custom JSON
- representation, that representation will be embedded adding a field
- `value` which holds the custom JSON in addition to the `@type`
- field. Example (for message [google.protobuf.Duration][]):
+If the embedded message type is well-known and has a custom JSON
+representation, that representation will be embedded adding a field
+`value` which holds the custom JSON in addition to the `@type`
+field. Example (for message [google.protobuf.Duration][]):
 
- {
+    {
       "@type": "type.googleapis.com/google.protobuf.Duration",
       "value": "1.212s"
     }
- */
+*/
 export interface ProtobufAny {
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
@@ -982,11 +1097,11 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType} from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
 
 export type QueryParamsType = Record<string | number, any>;
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -1001,9 +1116,9 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'pa
   body?: unknown;
 }
 
-export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
   securityWorker?: (
     securityData: SecurityDataType | null,
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
@@ -1012,20 +1127,20 @@ export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequest
 }
 
 export enum ContentType {
-  Json = 'application/json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
+  Json = "application/json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
   public instance: AxiosInstance;
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
+  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private secure?: boolean;
   private format?: ResponseType;
 
-  constructor({securityWorker, secure, format, ...axiosConfig}: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({...axiosConfig, baseURL: axiosConfig.baseURL || ''});
+  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
+    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "" });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -1055,33 +1170,33 @@ export class HttpClient<SecurityDataType = unknown> {
         key,
         property instanceof Blob
           ? property
-          : typeof property === 'object' && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+          : typeof property === "object" && property !== null
+          ? JSON.stringify(property)
+          : `${property}`,
       );
       return formData;
     }, new FormData());
   }
 
   public request = async <T = any, _E = any>({
-                                               secure,
-                                               path,
-                                               type,
-                                               query,
-                                               format,
-                                               body,
-                                               ...params
-                                             }: FullRequestParams): Promise<AxiosResponse<T>> => {
+    secure,
+    path,
+    type,
+    query,
+    format,
+    body,
+    ...params
+  }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.secure) &&
+      ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = (format && this.format) || void 0;
 
-    if (type === ContentType.FormData && body && body !== null && typeof body === 'object') {
-      requestParams.headers.common = {Accept: '*/*'};
+    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
+      requestParams.headers.common = { Accept: "*/*" };
       requestParams.headers.post = {};
       requestParams.headers.put = {};
 
@@ -1091,7 +1206,7 @@ export class HttpClient<SecurityDataType = unknown> {
     return this.instance.request({
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? {'Content-Type': type} : {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
       },
       params: query,
@@ -1123,9 +1238,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     authServiceAccessList: (params: RequestParams = {}) =>
       this.request<ApiAccessListResponse, RpcStatus>({
         path: `/v1/access_list`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1141,11 +1256,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     areaServiceAddArea: (body: ApiNewAreaRequest, params: RequestParams = {}) =>
       this.request<ApiArea, RpcStatus>({
         path: `/v1/area`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1158,12 +1273,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/area/{id}
      * @secure
      */
-    areaServiceGetAreaById: (id: number, params: RequestParams = {}) =>
+    areaServiceGetAreaById: (id: string, params: RequestParams = {}) =>
       this.request<ApiArea, RpcStatus>({
         path: `/v1/area/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1176,12 +1291,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/area/{id}
      * @secure
      */
-    areaServiceDeleteArea: (id: number, params: RequestParams = {}) =>
+    areaServiceDeleteArea: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/area/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1194,14 +1309,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/v1/area/{id}
      * @secure
      */
-    areaServiceUpdateArea: (id: number, body: { name?: string; description?: string }, params: RequestParams = {}) =>
+    areaServiceUpdateArea: (id: string, body: { name?: string; description?: string }, params: RequestParams = {}) =>
       this.request<ApiArea, RpcStatus>({
         path: `/v1/area/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1214,13 +1329,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/areas
      * @secure
      */
-    areaServiceGetAreaList: (query?: { page?: number; limit?: number; sort?: string }, params: RequestParams = {}) =>
+    areaServiceGetAreaList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
       this.request<ApiGetAreaListResult, RpcStatus>({
         path: `/v1/areas`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1233,13 +1348,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/areas/search
      * @secure
      */
-    areaServiceSearchArea: (query?: { query?: string; limit?: number; offset?: number }, params: RequestParams = {}) =>
+    areaServiceSearchArea: (query?: { query?: string; limit?: string; offset?: string }, params: RequestParams = {}) =>
       this.request<ApiSearchAreaResult, RpcStatus>({
         path: `/v1/areas/search`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1255,11 +1370,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardServiceAddDashboard: (body: ApiNewDashboardRequest, params: RequestParams = {}) =>
       this.request<ApiDashboard, RpcStatus>({
         path: `/v1/dashboard`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1272,12 +1387,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/dashboard/{id}
      * @secure
      */
-    dashboardServiceGetDashboardById: (id: number, params: RequestParams = {}) =>
+    dashboardServiceGetDashboardById: (id: string, params: RequestParams = {}) =>
       this.request<ApiDashboard, RpcStatus>({
         path: `/v1/dashboard/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1290,12 +1405,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/dashboard/{id}
      * @secure
      */
-    dashboardServiceDeleteDashboard: (id: number, params: RequestParams = {}) =>
+    dashboardServiceDeleteDashboard: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/dashboard/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1310,16 +1425,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     dashboardServiceUpdateDashboard: (
       id: string,
-      body: { name?: string; description?: string; enabled?: boolean; areaId?: number },
+      body: { name?: string; description?: string; enabled?: boolean; areaId?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiDashboard, RpcStatus>({
         path: `/v1/dashboard/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1335,11 +1450,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardCardServiceAddDashboardCard: (body: ApiNewDashboardCardRequest, params: RequestParams = {}) =>
       this.request<ApiDashboardCard, RpcStatus>({
         path: `/v1/dashboard_card`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1352,12 +1467,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/dashboard_card/{id}
      * @secure
      */
-    dashboardCardServiceGetDashboardCardById: (id: number, params: RequestParams = {}) =>
+    dashboardCardServiceGetDashboardCardById: (id: string, params: RequestParams = {}) =>
       this.request<ApiDashboardCard, RpcStatus>({
         path: `/v1/dashboard_card/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1370,12 +1485,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/dashboard_card/{id}
      * @secure
      */
-    dashboardCardServiceDeleteDashboardCard: (id: number, params: RequestParams = {}) =>
+    dashboardCardServiceDeleteDashboardCard: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/dashboard_card/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1392,7 +1507,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       body: {
         title?: string;
-        type?: string;
+        height?: number;
+        background?: string;
         weight?: number;
         enabled?: boolean;
         dashboardTabId?: string;
@@ -1402,11 +1518,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiDashboardCard, RpcStatus>({
         path: `/v1/dashboard_card/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1420,15 +1536,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardCardServiceGetDashboardCardList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardCardListResult, RpcStatus>({
         path: `/v1/dashboard_cards`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1444,11 +1560,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardTabServiceAddDashboardTab: (body: ApiNewDashboardTabRequest, params: RequestParams = {}) =>
       this.request<ApiDashboardTab, RpcStatus>({
         path: `/v1/dashboard_tab`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1464,9 +1580,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardTabServiceGetDashboardTabById: (id: string, params: RequestParams = {}) =>
       this.request<ApiDashboardTab, RpcStatus>({
         path: `/v1/dashboard_tab/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1479,12 +1595,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/dashboard_tab/{id}
      * @secure
      */
-    dashboardTabServiceDeleteDashboardTab: (id: number, params: RequestParams = {}) =>
+    dashboardTabServiceDeleteDashboardTab: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/dashboard_tab/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1498,26 +1614,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardTabServiceUpdateDashboardTab: (
-      id: number,
+      id: string,
       body: {
-        name: string;
-        background: string;
-        icon: string;
-        enabled: boolean;
-        weight: number;
-        columnWidth: number;
-        gap: number;
-        dashboardId: number;
+        name?: string;
+        columnWidth?: number;
+        gap?: number;
+        background?: string;
+        icon?: string;
+        enabled?: boolean;
+        weight?: number;
+        dashboardId?: string;
       },
       params: RequestParams = {},
     ) =>
       this.request<ApiDashboardTab, RpcStatus>({
         path: `/v1/dashboard_tab/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1531,15 +1647,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardTabServiceGetDashboardTabList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardTabListResult, RpcStatus>({
         path: `/v1/dashboard_tabs`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1553,15 +1669,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardServiceGetDashboardList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardListResult, RpcStatus>({
         path: `/v1/dashboards`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1577,11 +1693,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     developerToolsServiceReloadEntity: (body: ApiReloadRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/developer_tools/entity_reload`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1594,13 +1710,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/developer_tools/entity_set_state
      * @secure
      */
-    developerToolsServiceEntitySetState: (body: { id?: string; name: string }, params: RequestParams = {}) =>
+    developerToolsServiceEntitySetState: (body: ApiEntityRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/developer_tools/entity_set_state`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
-        format: 'json',
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -1613,13 +1730,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/developer_tools/task_call_action
      * @secure
      */
-    developerToolsServiceTaskCallAction: (body: { id: number; name: string }, params: RequestParams = {}) =>
+    developerToolsServiceTaskCallAction: (body: ApiAutomationRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/developer_tools/task_call_action`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1632,13 +1749,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/developer_tools/task_call_trigger
      * @secure
      */
-    developerToolsServiceTaskCallTrigger: (body: { id: number; name: string }, params: RequestParams = {}) =>
+    developerToolsServiceTaskCallTrigger: (body: ApiAutomationRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/developer_tools/task_call_trigger`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1652,15 +1769,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     entityServiceGetEntityList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetEntityListResult, RpcStatus>({
         path: `/v1/entities`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1676,11 +1793,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     entityServiceAddEntity: (body: ApiNewEntityRequest, params: RequestParams = {}) =>
       this.request<ApiEntity, RpcStatus>({
         path: `/v1/entity`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1694,15 +1811,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     entityServiceSearchEntity: (
-      query?: { query?: string; limit?: number; offset?: number },
+      query?: { query?: string; limit?: string; offset?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchEntityResult, RpcStatus>({
         path: `/v1/entity/search`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1718,9 +1835,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     entityServiceGetEntity: (id: string, params: RequestParams = {}) =>
       this.request<ApiEntity, RpcStatus>({
         path: `/v1/entity/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1736,9 +1853,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     entityServiceDeleteEntity: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/entity/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1764,20 +1881,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         parent?: ApiEntityParent;
         actions?: ApiUpdateEntityRequestAction[];
         states?: ApiUpdateEntityRequestState[];
-        attributes?: Map<string, ApiAttribute>;
-        settings?: Map<string, ApiAttribute>;
+        attributes?: Record<string, ApiAttribute>;
+        settings?: Record<string, ApiAttribute>;
         scripts?: ApiScript[];
-        metrics?: Map<string, ApiAttribute>;
+        metrics?: Record<string, ApiAttribute>;
       },
       params: RequestParams = {},
     ) =>
       this.request<ApiEntity, RpcStatus>({
         path: `/v1/entity/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1793,11 +1910,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     imageServiceAddImage: (body: ApiNewImageRequest, params: RequestParams = {}) =>
       this.request<ApiImage, RpcStatus>({
         path: `/v1/image`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1813,11 +1930,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     imageServiceUploadImage: (body: ApiUploadImageRequest, params: RequestParams = {}) =>
       this.request<ApiImage, RpcStatus>({
         path: `/v1/image/upload`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1830,12 +1947,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/image/{id}
      * @secure
      */
-    imageServiceGetImageById: (id: number, params: RequestParams = {}) =>
+    imageServiceGetImageById: (id: string, params: RequestParams = {}) =>
       this.request<ApiImage, RpcStatus>({
         path: `/v1/image/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1848,12 +1965,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/image/{id}
      * @secure
      */
-    imageServiceDeleteImageById: (id: number, params: RequestParams = {}) =>
+    imageServiceDeleteImageById: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/image/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1873,11 +1990,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiImage, RpcStatus>({
         path: `/v1/image/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1890,13 +2007,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/images
      * @secure
      */
-    imageServiceGetImageList: (query?: { page?: number; limit?: number; sort?: string }, params: RequestParams = {}) =>
+    imageServiceGetImageList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
       this.request<ApiGetImageListResult, RpcStatus>({
         path: `/v1/images`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1912,9 +2029,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     imageServiceGetImageFilterList: (params: RequestParams = {}) =>
       this.request<ApiGetImageFilterListResult, RpcStatus>({
         path: `/v1/images/filter_list`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1930,10 +2047,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     imageServiceGetImageListByDate: (query?: { filter?: string }, params: RequestParams = {}) =>
       this.request<ApiGetImageListByDateResult, RpcStatus>({
         path: `/v1/images/filtered`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -1946,13 +2063,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/interact/entity_call_action
      * @secure
      */
-    interactServiceEntityCallAction: (body: { id?: string; name: string }, params: RequestParams = {}) =>
+    interactServiceEntityCallAction: (body: ApiEntityCallActionRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/interact/entity_call_action`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
-        format: 'json',
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -1965,18 +2083,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     logServiceGetLogList: (
-      query?: { page?: number; limit?: number; sort?: string; query?: string; startDate?: string; endDate?: string },
+      query?: { page?: string; limit?: string; sort?: string; query?: string; startDate?: string; endDate?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetLogListResult, RpcStatus>({
         path: `/v1/logs`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
-
 
     /**
      * No description
@@ -1990,9 +2107,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pluginServiceDisablePlugin: (name: string, params: RequestParams = {}) =>
       this.request<ApiDisablePluginResult, RpcStatus>({
         path: `/v1/plugin/${name}/disable`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2008,9 +2125,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pluginServiceEnablePlugin: (name: string, params: RequestParams = {}) =>
       this.request<ApiEnablePluginResult, RpcStatus>({
         path: `/v1/plugin/${name}/enable`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2026,9 +2143,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pluginServiceGetPluginOptions: (name: string, params: RequestParams = {}) =>
       this.request<ApiGetPluginOptionsResult, RpcStatus>({
         path: `/v1/plugin/${name}/options`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2042,15 +2159,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     pluginServiceGetPluginList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetPluginListResult, RpcStatus>({
         path: `/v1/plugins`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2064,15 +2181,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     pluginServiceSearchPlugin: (
-      query?: { query?: string; limit?: number; offset?: number },
+      query?: { query?: string; limit?: string; offset?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchPluginResult, RpcStatus>({
         path: `/v1/plugins/search`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2088,11 +2205,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     roleServiceAddRole: (body: ApiNewRoleRequest, params: RequestParams = {}) =>
       this.request<ApiRole, RpcStatus>({
         path: `/v1/role`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2108,9 +2225,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     roleServiceGetRoleByName: (name: string, params: RequestParams = {}) =>
       this.request<ApiRole, RpcStatus>({
         path: `/v1/role/${name}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2126,9 +2243,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     roleServiceDeleteRoleByName: (name: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/role/${name}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2148,11 +2265,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiRole, RpcStatus>({
         path: `/v1/role/${name}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2168,9 +2285,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     roleServiceGetRoleAccessList: (name: string, params: RequestParams = {}) =>
       this.request<ApiRoleAccessListResult, RpcStatus>({
         path: `/v1/role/${name}/access_list`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2190,11 +2307,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiRoleAccessListResult, RpcStatus>({
         path: `/v1/role/${name}/access_list`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2207,13 +2324,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/roles
      * @secure
      */
-    roleServiceGetRoleList: (query?: { page?: number; limit?: number; sort?: string }, params: RequestParams = {}) =>
+    roleServiceGetRoleList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
       this.request<ApiGetRoleListResult, RpcStatus>({
         path: `/v1/roles`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2227,15 +2344,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     roleServiceSearchRoleByName: (
-      query?: { query?: string; limit?: number; offset?: number },
+      query?: { query?: string; limit?: string; offset?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchRoleListResult, RpcStatus>({
         path: `/v1/roles/search`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2251,11 +2368,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     scriptServiceAddScript: (body: ApiNewScriptRequest, params: RequestParams = {}) =>
       this.request<ApiScript, RpcStatus>({
         path: `/v1/script`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2271,11 +2388,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     scriptServiceExecSrcScriptById: (body: ApiExecSrcScriptRequest, params: RequestParams = {}) =>
       this.request<ApiExecScriptResult, RpcStatus>({
         path: `/v1/script/exec_src`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2288,12 +2405,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/script/{id}
      * @secure
      */
-    scriptServiceGetScriptById: (id: number, params: RequestParams = {}) =>
+    scriptServiceGetScriptById: (id: string, params: RequestParams = {}) =>
       this.request<ApiScript, RpcStatus>({
         path: `/v1/script/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2306,12 +2423,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/script/{id}
      * @secure
      */
-    scriptServiceDeleteScriptById: (id: number, params: RequestParams = {}) =>
+    scriptServiceDeleteScriptById: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/script/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2325,17 +2442,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     scriptServiceUpdateScriptById: (
-      id: number,
+      id: string,
       body: { lang?: string; name?: string; source?: string; description?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiScript, RpcStatus>({
         path: `/v1/script/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2348,12 +2465,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/script/{id}/copy
      * @secure
      */
-    scriptServiceCopyScriptById: (id: number, params: RequestParams = {}) =>
+    scriptServiceCopyScriptById: (id: string, params: RequestParams = {}) =>
       this.request<ApiScript, RpcStatus>({
         path: `/v1/script/${id}/copy`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2366,12 +2483,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/script/{id}/exec
      * @secure
      */
-    scriptServiceExecScriptById: (id: number, params: RequestParams = {}) =>
+    scriptServiceExecScriptById: (id: string, params: RequestParams = {}) =>
       this.request<ApiExecScriptResult, RpcStatus>({
         path: `/v1/script/${id}/exec`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2385,15 +2502,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     scriptServiceGetScriptList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetScriptListResult, RpcStatus>({
         path: `/v1/scripts`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2407,15 +2524,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     scriptServiceSearchScript: (
-      query?: { query?: string; limit?: number; offset?: number },
+      query?: { query?: string; limit?: string; offset?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchScriptListResult, RpcStatus>({
         path: `/v1/scripts/search`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2431,9 +2548,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     authServiceSignin: (params: RequestParams = {}) =>
       this.request<ApiSigninResponse, RpcStatus>({
         path: `/v1/signin`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2449,9 +2566,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     authServiceSignout: (params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/signout`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2467,11 +2584,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     automationServiceAddTask: (body: ApiNewTaskRequest, params: RequestParams = {}) =>
       this.request<ApiTask, RpcStatus>({
         path: `/v1/task`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2484,12 +2601,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/task/{id}
      * @secure
      */
-    automationServiceGetTask: (id: number, params: RequestParams = {}) =>
+    automationServiceGetTask: (id: string, params: RequestParams = {}) =>
       this.request<ApiTask, RpcStatus>({
         path: `/v1/task/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2502,12 +2619,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/task/{id}
      * @secure
      */
-    automationServiceDeleteTask: (id: number, params: RequestParams = {}) =>
+    automationServiceDeleteTask: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/task/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2521,7 +2638,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     automationServiceUpdateTask: (
-      id: number,
+      id: string,
       body: {
         name?: string;
         description?: string;
@@ -2536,11 +2653,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiTask, RpcStatus>({
         path: `/v1/task/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2553,12 +2670,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/task/{id}/disable
      * @secure
      */
-    automationServiceDisableTask: (id: number, params: RequestParams = {}) =>
+    automationServiceDisableTask: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/task/${id}/disable`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2571,12 +2688,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/task/{id}/enable
      * @secure
      */
-    automationServiceEnableTask: (id: number, params: RequestParams = {}) =>
+    automationServiceEnableTask: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/task/${id}/enable`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2590,15 +2707,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     automationServiceGetTaskList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetTaskListResult, RpcStatus>({
         path: `/v1/tasks`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2614,11 +2731,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     userServiceAddUser: (body: ApiNewtUserRequest, params: RequestParams = {}) =>
       this.request<ApiUserFull, RpcStatus>({
         path: `/v1/user`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2631,12 +2748,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/user/{id}
      * @secure
      */
-    userServiceGetUserById: (id: number, params: RequestParams = {}) =>
+    userServiceGetUserById: (id: string, params: RequestParams = {}) =>
       this.request<ApiUserFull, RpcStatus>({
         path: `/v1/user/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2649,12 +2766,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/user/{id}
      * @secure
      */
-    userServiceDeleteUserById: (id: number, params: RequestParams = {}) =>
+    userServiceDeleteUserById: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/user/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2668,7 +2785,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     userServiceUpdateUserById: (
-      id: number,
+      id: string,
       body: {
         nickname?: string;
         firstName?: string;
@@ -2680,17 +2797,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         lang?: string;
         image?: ApiUpdateUserRequestImage;
         role?: ApiUpdateUserRequestRole;
-        meta: ApiUserMeta[];
+        meta?: ApiUserMeta[];
       },
       params: RequestParams = {},
     ) =>
       this.request<ApiUserFull, RpcStatus>({
         path: `/v1/user/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2703,13 +2820,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/users
      * @secure
      */
-    userServiceGetUserList: (query?: { page?: number; limit?: number; sort?: string }, params: RequestParams = {}) =>
+    userServiceGetUserList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
       this.request<ApiGetUserListResult, RpcStatus>({
         path: `/v1/users`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2725,11 +2842,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     variableServiceAddVariable: (body: ApiNewVariableRequest, params: RequestParams = {}) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2745,9 +2862,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     variableServiceGetVariableByName: (name: string, params: RequestParams = {}) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable/${name}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2763,9 +2880,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     variableServiceDeleteVariable: (name: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/variable/${name}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2781,11 +2898,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     variableServiceUpdateVariable: (name: string, body: { value?: string }, params: RequestParams = {}) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable/${name}`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2804,10 +2921,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiGetVariableListResult, RpcStatus>({
         path: `/v1/variables`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2821,15 +2938,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceGetBridgeList: (
-      query?: { page?: number; limit?: number; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetBridgeListResult, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2845,11 +2962,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     zigbee2MqttServiceAddZigbee2MqttBridge: (body: ApiNewZigbee2MqttRequest, params: RequestParams = {}) =>
       this.request<ApiZigbee2Mqtt, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2862,12 +2979,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/zigbee2mqtt/bridge/{id}
      * @secure
      */
-    zigbee2MqttServiceGetZigbee2MqttBridge: (id: number, params: RequestParams = {}) =>
+    zigbee2MqttServiceGetZigbee2MqttBridge: (id: string, params: RequestParams = {}) =>
       this.request<ApiZigbee2Mqtt, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2880,12 +2997,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/v1/zigbee2mqtt/bridge/{id}
      * @secure
      */
-    zigbee2MqttServiceDeleteBridgeById: (id: number, params: RequestParams = {}) =>
+    zigbee2MqttServiceDeleteBridgeById: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2899,17 +3016,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceUpdateBridgeById: (
-      id: number,
+      id: string,
       body: { name?: string; login?: string; password?: string; permitJoin?: boolean; baseTopic?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiZigbee2Mqtt, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}/bridge`,
-        method: 'PUT',
+        method: "PUT",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2923,16 +3040,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceDeviceList: (
-      id: number,
-      query?: { page?: number; limit?: number; sort?: string },
+      id: string,
+      query?: { page?: string; limit?: string; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiDeviceListResult, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}/devices`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2945,12 +3062,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/zigbee2mqtt/bridge/{id}/networkmap
      * @secure
      */
-    zigbee2MqttServiceNetworkmap: (id: number, params: RequestParams = {}) =>
+    zigbee2MqttServiceNetworkmap: (id: string, params: RequestParams = {}) =>
       this.request<ApiNetworkmapResponse, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}/networkmap`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2963,12 +3080,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/zigbee2mqtt/bridge/{id}/networkmap
      * @secure
      */
-    zigbee2MqttServiceUpdateNetworkmap: (id: number, params: RequestParams = {}) =>
+    zigbee2MqttServiceUpdateNetworkmap: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}/networkmap`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -2981,12 +3098,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/v1/zigbee2mqtt/bridge/{id}/reset
      * @secure
      */
-    zigbee2MqttServiceResetBridgeById: (id: number, params: RequestParams = {}) =>
+    zigbee2MqttServiceResetBridgeById: (id: string, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/bridge/${id}/reset`,
-        method: 'POST',
+        method: "POST",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -3002,11 +3119,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     zigbee2MqttServiceDeviceBan: (body: ApiDeviceBanRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/device_ban`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -3022,11 +3139,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     zigbee2MqttServiceDeviceRename: (body: ApiDeviceRenameRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/device_rename`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -3042,11 +3159,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     zigbee2MqttServiceDeviceWhitelist: (body: ApiDeviceWhitelistRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/zigbee2mqtt/device_whitelist`,
-        method: 'POST',
+        method: "POST",
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -3060,15 +3177,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceSearchDevice: (
-      query?: { query?: string; limit?: number; offset?: number },
+      query?: { query?: string; limit?: string; offset?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchDeviceResult, RpcStatus>({
         path: `/v1/zigbee2mqtt/search_device`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
   };
@@ -3084,10 +3201,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     streamServiceSubscribe: (query?: { id?: string; query?: string; body?: string }, params: RequestParams = {}) =>
       this.request<{ result?: ApiResponse; error?: RpcStatus }, RpcStatus>({
         path: `/ws`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
   };

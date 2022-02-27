@@ -63,7 +63,16 @@ export const constantRoutes: RouteConfig[] = [
           icon: 'dashboard',
           affix: true
         }
-      }
+      },
+      {
+        path: '/dashboard/edit',
+        component: () => import('@/views/dashboard/editor.vue'),
+        name: 'editor',
+        meta: {
+          hidden: true,
+          title: 'editor',
+        }
+      },
     ]
   },
   {
@@ -133,7 +142,7 @@ export const dashboardRoutes: RouteConfig[] = [
     path: '/profile',
     component: Dashboard,
     redirect: '/profile/index',
-    meta: { hidden: false },
+    meta: { hidden: true },
     children: [
       {
         path: 'index',

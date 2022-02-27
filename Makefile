@@ -106,7 +106,7 @@ svgo:
 	cd ${ROOT} && svgo ${DIR} --enable=inlineStyles  --config '{ "plugins": [ { "inlineStyles": { "onlyMatchedOnce": false } }] }' --pretty
 
 
-client:
+clientclient:
 	@echo "Building protobuf files"
 	cd ${ROOT}/system/client/protos && \
 	mkdir -p ${ROOT}/system/client/stub && \
@@ -132,12 +132,6 @@ client:
 front_client:
 	@echo MARK: generate front client lib
 	npx swagger-typescript-api --axios -p ./conf/swagger/api.swagger.yml -o ./static_source/public/src/api -n stub_new.ts
-
-server:
-	@echo MARK: generate server stub
-	mkdir -p ${ROOT}/api/v1/stub
-	oapi-codegen -generate server ${ROOT}/conf/swagger/api.swagger.yml > api/v1/stub/server.go
-	oapi-codegen -generate types ${ROOT}/conf/swagger/api.swagger.yml > api/v1/stub/types.go
 
 lint:
 	golangci-lint run ./...

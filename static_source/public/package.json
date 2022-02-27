@@ -46,8 +46,10 @@
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
     "vue-count-to": "^1.0.13",
+    "vue-grid-layout": "^2.3.12",
     "vue-i18n": "^8.24.2",
     "vue-image-crop-upload": "^2.5.0",
+    "vue-moveable": "^1.8.7",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.1",
     "vue-splitpane": "^1.0.6",
@@ -57,6 +59,7 @@
     "vuex": "^3.6.2",
     "vuex-module-decorators": "^1.0.1",
     "vuex-persistedstate": "^4.1.0",
+    "vuuri": "^0.3.3",
     "websocket-ts": "^1.1.1",
     "xlsx": "^0.16.9",
     "yamljs": "^0.3.0"

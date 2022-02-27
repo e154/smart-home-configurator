@@ -414,7 +414,10 @@ paths:
             properties:
               title:
                 type: string
-              type:
+              height:
+                type: integer
+                format: int32
+              background:
                 type: string
               weight:
                 type: integer
@@ -556,11 +559,15 @@ paths:
             properties:
               name:
                 type: string
-              description:
+              columnWidth:
+                type: integer
+                format: int32
+              gap:
+                type: integer
+                format: int32
+              background:
                 type: string
               icon:
-                type: string
-              theme:
                 type: string
               enabled:
                 type: boolean
@@ -2866,7 +2873,10 @@ definitions:
         format: int64
       title:
         type: string
-      type:
+      height:
+        type: integer
+        format: int32
+      background:
         type: string
       weight:
         type: integer
@@ -2913,11 +2923,15 @@ definitions:
         format: int64
       name:
         type: string
-      description:
+      columnWidth:
+        type: integer
+        format: int32
+      gap:
+        type: integer
+        format: int32
+      background:
         type: string
       icon:
-        type: string
-      theme:
         type: string
       enabled:
         type: boolean
@@ -2945,11 +2959,15 @@ definitions:
         format: int64
       name:
         type: string
-      description:
+      columnWidth:
+        type: integer
+        format: int32
+      gap:
+        type: integer
+        format: int32
+      background:
         type: string
       icon:
-        type: string
-      theme:
         type: string
       enabled:
         type: boolean
@@ -3403,7 +3421,10 @@ definitions:
     properties:
       title:
         type: string
-      type:
+      height:
+        type: integer
+        format: int32
+      background:
         type: string
       weight:
         type: integer
@@ -3432,11 +3453,15 @@ definitions:
     properties:
       name:
         type: string
-      description:
+      columnWidth:
+        type: integer
+        format: int32
+      gap:
+        type: integer
+        format: int32
+      background:
         type: string
       icon:
-        type: string
-      theme:
         type: string
       enabled:
         type: boolean
