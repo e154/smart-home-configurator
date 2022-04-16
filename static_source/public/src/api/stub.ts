@@ -113,10 +113,10 @@ export interface ApiDashboardCard {
   background: string;
   weight: number;
   enabled: boolean;
-  dashboardTabId: string;
-  payload: string;
-  createdAt: string;
-  updatedAt: string;
+  dashboardTabId: number;
+  payload: {} ;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ApiDashboardShort {
@@ -136,11 +136,12 @@ export interface ApiDashboardTab {
   background: string;
   icon: string;
   enabled: boolean;
+  dragEnabled: boolean;
   weight: number;
   dashboardId: number;
   cards: ApiDashboardCard[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ApiDashboardTabShort {
@@ -153,8 +154,8 @@ export interface ApiDashboardTabShort {
   enabled: boolean;
   weight: number;
   dashboardId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ApiDeviceBanRequest {
@@ -413,16 +414,14 @@ export interface ApiNewAreaRequest {
 }
 
 export interface ApiNewDashboardCardRequest {
-  title?: string;
-  type?: string;
-
-  /** @format int32 */
-  weight?: number;
-  enabled?: boolean;
-
-  /** @format int64 */
-  dashboardTabId?: string;
+  title: string;
+  background: string;
+  weight: number;
+  height: number;
+  enabled: boolean;
+  dashboardTabId: number;
   payload?: string;
+  width: number;
 }
 
 export interface ApiNewDashboardRequest {
@@ -1389,14 +1388,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardCardServiceUpdateDashboardCard: (
-      id: string,
+      id: number,
       body: {
-        title?: string;
-        type?: string;
-        weight?: number;
-        enabled?: boolean;
-        dashboardTabId?: string;
-        payload?: string;
+        title: string;
+        weight: number;
+        height: number;
+        width: number;
+        enabled: boolean;
+        dashboardTabId: number;
+        payload?: any;
       },
       params: RequestParams = {},
     ) =>

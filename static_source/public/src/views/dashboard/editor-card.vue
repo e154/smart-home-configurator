@@ -1,13 +1,16 @@
 <template>
 
-  <div class="item-card" :style="{'background-color': item.background || 'white'}">
+  <div
+    class="item-card"
+    :style="{'background-color': item.background || 'white'}"
+    v-on:click="select($event)"
+  >
     <div class="item-card-title">
       <span>{{ item.title }}</span>
-      <el-button class="edit-button" type="text" @click.prevent.stop="editCard()">edit</el-button>
     </div>
 
     <div class="item-card-body">
-      card body
+      <!--      card body-->
     </div>
   </div>
 
@@ -54,7 +57,7 @@ export default class extends Vue {
     // console.log(m)
   }
 
-  private editCard() {
+  private select(event?: any) {
     // console.log('select_card', this.itemIndex)
     this.bus.$emit('selected_card', this.item.id);
   }
@@ -76,11 +79,6 @@ export default class extends Vue {
   width: 100%;
 }
 
-button.edit-button {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
 
 
 </style>

@@ -1,10 +1,13 @@
 <template>
   <vuuri
-    v-model="item.cards"
+    v-model="tab.cards"
     item-key="id"
     :get-item-width="getItemWidth"
     :get-item-height="getItemHeight"
-    drag-enabled
+    @updated="onUpdated"
+    @move="move"
+    :drag-enabled="true"
+    ref="grid"
   >
     <template #item="{ item }">
         <editor-card :item="item" :bus="bus"/>
@@ -17,6 +20,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import EditorCard from './editor-card.vue';
 import {ApiDashboardCard, ApiDashboardTab} from '@/api/stub';
 import vuuri from 'vuuri'
+import stream from '@/api/stream';
 
 // register globally
 Vue.component('vuuri', vuuri);
@@ -29,18 +33,41 @@ Vue.component('vuuri', vuuri);
   }
 })
 export default class extends Vue {
-  @Prop() private item!: ApiDashboardTab;
+  @Prop() private tab!: ApiDashboardTab;
   @Prop() private bus!: Vue;
 
+  created() {
+    this.bus.$on("update_tab", this.update)
+  }
+
   getItemWidth(item:ApiDashboardCard) {
-    console.log('getItemWidth', item.width)
-    return `${item.width}px`;
+    // console.log('getItemWidth', this.tab.columnWidth)
+    return `${this.tab.columnWidth}px`;
   }
   getItemHeight(item:ApiDashboardCard) {
-    console.log('getItemHeight', item.height)
+    // console.log('getItemHeight', item.height)
     return `${item.height}px`;
   }
 
+  update(tabId: number) {
+    if (this.tab.id != tabId) {
+      return
+    }
+    // console.log('update tab', tabId)
+    if (!this.tab.cards || this.tab.cards.length == 0) {
+      return;
+    }
+    this.$refs.grid.update();
+  }
+
+  onUpdated() {
+
+  }
+
+  move(event: any) {
+    console.log('move', event)
+    console.log(this.tab.cards)
+  }
 }
 </script>
 
