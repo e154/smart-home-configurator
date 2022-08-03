@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/e154/smart-home-configurator/version"
 	"github.com/labstack/echo/v4"
-	"net/http"
 )
 
 // ControllerIndex ...

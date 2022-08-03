@@ -1,12 +1,12 @@
-import {RouteConfig} from 'vue-router';
-import Develop from '@/layout/develop.vue';
+import { RouteConfig } from 'vue-router'
+import Develop from '@/layout/develop.vue'
 
 const logsRouter: RouteConfig = {
   path: '/logs',
   component: Develop,
   redirect: '/logs/list',
   name: 'logs',
-  meta: {hidden: false},
+  meta: { hidden: false },
   children: [
     {
       path: 'index',
@@ -14,11 +14,11 @@ const logsRouter: RouteConfig = {
       name: 'Logs',
       meta: {
         title: 'logs',
-        icon: 'table',
+        icon: 'log',
         noCache: true
       }
-    },
+    }
   ]
-};
+}
 
-export default logsRouter;
+export default logsRouter

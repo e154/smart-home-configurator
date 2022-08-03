@@ -11,7 +11,7 @@
         <ul class="list-unstyled filters">
           <li
             v-for="item of filterList.slice().reverse()"
-            v-bind:class="{ selected: getActiveFilter(item) }"
+            v-bind:class="{selected: getActiveFilter(item)}"
           >
             <el-button
               type="text"
@@ -106,15 +106,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiImage, GetImageFilterListResultfilter} from '@/api/stub';
+import { Component, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiImage, GetImageFilterListResultfilter } from '@/api/stub'
 
 @Component({
-  name: 'ImageBrowser',
+  name: 'ImageBrowser'
 })
 export default class extends Vue {
-  private mode: string = 'view';
+  private mode = 'view';
   private list: ApiImage[] = [];
   private filterList: GetImageFilterListResultfilter[] = [];
   private filterListLoading = true;
@@ -123,92 +123,90 @@ export default class extends Vue {
   private selected?: ApiImage = {};
   private currentFilter?: GetImageFilterListResultfilter;
 
-  private dialogImageUrl: string = '';
-  private dialogVisible: boolean = false;
+  private dialogImageUrl = '';
+  private dialogVisible = false;
 
   async created() {
-    this.fetch();
+    this.fetch()
   }
 
   private async fetch() {
-    await this.getFilterList();
+    await this.getFilterList()
     if (this.filterList && this.filterList.length > 0) {
-      this.getList(this.filterList[this.filterList.length - 1]);
+      this.getList(this.filterList[this.filterList.length - 1])
     }
   }
 
   private async getList(filter?: GetImageFilterListResultfilter) {
     if (filter) {
-      this.currentFilter = filter;
-      this.listLoading = true;
-      const {data} = await api.v1.imageServiceGetImageListByDate({filter: filter.date});
-      this.list = data.items;
-      this.listLoading = false;
+      this.currentFilter = filter
+      this.listLoading = true
+      const { data } = await api.v1.imageServiceGetImageListByDate({ filter: filter.date })
+      this.list = data.items
+      this.listLoading = false
     }
   }
 
   private async getFilterList() {
-    this.filterListLoading = true;
-    const {data} = await api.v1.imageServiceGetImageFilterList();
-    this.filterList = data.items;
-    this.filterListLoading = false;
+    this.filterListLoading = true
+    const { data } = await api.v1.imageServiceGetImageFilterList()
+    this.filterList = data.items
+    this.filterListLoading = false
   }
 
   private getUrl(image: ApiImage): string {
-    return this.basePath + image.url;
+    return this.basePath + image.url
   }
 
   private select(image: ApiImage) {
     if (image) {
       if (this.selected && this.selected.id === image.id) {
-        this.selected = undefined;
-        return;
+        this.selected = undefined
+        return
       }
-      this.selected = image;
+      this.selected = image
     } else {
-      this.selected = undefined;
+      this.selected = undefined
     }
-    this.$emit('on-select', this.selected);
+    this.$emit('on-select', this.selected)
   }
 
   private async removeFromServer(image: ApiImage) {
-    await api.v1.imageServiceDeleteImageById(image.id || 0);
-    this.getList(this.currentFilter);
-    this.getFilterList();
+    await api.v1.imageServiceDeleteImageById(image.id || 0)
+    this.getList(this.currentFilter)
+    this.getFilterList()
   }
 
   private handlePictureCardPreview(file: any) {
-    this.dialogImageUrl = file.url;
-    this.dialogVisible = true;
+    this.dialogImageUrl = file.url
+    this.dialogVisible = true
   }
 
   private getUploadURL(): string {
-    return (process.env.VUE_APP_BASE_API || '') + '/v1/image/upload';
+    return (process.env.VUE_APP_BASE_API || '') + '/v1/image/upload'
   }
 
   private onSuccess() {
-    this.getFilterList();
-    this.getList(this.currentFilter);
+    this.getFilterList()
+    this.getList(this.currentFilter)
     this.$notify({
       title: 'Success',
       message: 'Upload successfully',
       type: 'success',
       duration: 2000
-    });
+    })
   }
 
   private getActiveFilter(item: GetImageFilterListResultfilter): boolean {
     if (this.currentFilter) {
-      return this.currentFilter.date === item.date;
+      return this.currentFilter.date === item.date
     }
-    return false;
+    return false
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
-
 
 .list-unstyled {
   list-style: none;

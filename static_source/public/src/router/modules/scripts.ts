@@ -8,7 +8,7 @@ const scriptsRouter: RouteConfig = {
   name: 'scripts',
   meta: {
     title: 'scripts',
-    icon: 'table',
+    icon: 'script-13',
     alwaysShow: true
   },
   children: [
@@ -17,8 +17,8 @@ const scriptsRouter: RouteConfig = {
       component: () => import('@/views/scripts/index.vue'),
       name: 'script list',
       meta: {
-        title: 'scriptList',
-        }
+        title: 'scriptList'
+      }
     },
     {
       path: 'edit/:id',
@@ -36,9 +36,9 @@ const scriptsRouter: RouteConfig = {
       props: true,
       name: 'script new',
       meta: {
-        title: 'scriptNew',
+        title: 'scriptNew'
       }
-    },
+    }
 
   ]
 }

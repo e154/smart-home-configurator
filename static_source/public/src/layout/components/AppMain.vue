@@ -22,7 +22,6 @@ import { TagsViewModule } from '@/store/modules/tags-view'
   }
 })
 export default class extends Vue {
-
   get cachedViews() {
     return TagsViewModule.cachedViews
   }
@@ -30,7 +29,6 @@ export default class extends Vue {
   get key() {
     return this.$route.path
   }
-
 }
 </script>
 

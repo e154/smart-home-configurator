@@ -13,9 +13,9 @@
 
 <script lang="ts">
 
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiAttribute, ApiScript} from '@/api/stub';
-import ScriptEditModal from '@/views/scripts/edit-modal.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiAttribute, ApiScript } from '@/api/stub'
+import ScriptEditModal from '@/views/scripts/edit-modal.vue'
 
 @Component({
   name: 'ScriptDialog',
@@ -24,16 +24,15 @@ import ScriptEditModal from '@/views/scripts/edit-modal.vue';
   }
 })
 export default class extends Vue {
-  @Prop({required: true}) private visible: boolean = false;
-  @Prop({required: true}) private script?: ApiScript;
+  @Prop({ required: true }) private visible = false;
+  @Prop({ required: true }) private script?: ApiScript;
 
   get vis(): boolean {
-    return this.visible;
+    return this.visible
   }
 
   set vis(value: boolean) {
-    this.$emit('on-close', false);
+    this.$emit('on-close', false)
   }
-
 }
 </script>

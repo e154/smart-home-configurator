@@ -7,7 +7,7 @@ import { UserModule } from '@/store/modules/user'
 import { PermissionModule } from '@/store/modules/permission'
 import i18n from '@/lang' // Internationalization
 import settings from './settings'
-import stream from '@/api/stream';
+import stream from '@/api/stream'
 
 NProgress.configure({ showSpinner: false })
 
@@ -40,7 +40,7 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           await UserModule.GetUserInfo()
           const roles = UserModule.roles
           // ws
-          stream.connect(process.env.VUE_APP_BASE_API || window.location.origin, UserModule.token);
+          stream.connect(process.env.VUE_APP_BASE_API || window.location.origin, UserModule.token)
           // Generate accessible routes map based on role
           PermissionModule.GenerateRoutes(roles)
           // Dynamically add accessible routes
@@ -54,7 +54,7 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           // Remove token and redirect to login page
           UserModule.ResetToken()
           // ws
-          stream.disconnect();
+          stream.disconnect()
           // message
           Message.error(err || 'Has Error')
           next(`/login?redirect=${to.path}`)

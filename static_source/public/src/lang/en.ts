@@ -1,6 +1,9 @@
 export default {
   route: {
     dashboard: 'Dashboard',
+    dashboards: 'Dashboards',
+    dashboardEdit: 'Edit',
+    dashboardList: 'Dashboards',
     development: 'Development',
     documentation: 'Documentation',
     errorPages: 'Error Pages',
@@ -44,7 +47,8 @@ export default {
     mapList: 'List',
     mqtt: 'Mqtt',
     mqttList: 'List',
-    settings: 'Settings'
+    settings: 'Settings',
+    UserList: 'List'
   },
   navbar: {
     logOut: 'Log Out',
@@ -148,6 +152,18 @@ export default {
       description: 'Description',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
+    },
+    metric: {
+      name: 'Name',
+      description: 'Description',
+      type: 'Type',
+      ranges: 'Ranges',
+      addProp: 'Add prop',
+      color: 'Color',
+      label: 'Label',
+      addMetric: 'Add metric',
+      translate: 'Translate',
+      list: 'Matric list'
     }
   },
   automation: {
@@ -189,7 +205,7 @@ export default {
       id: 'Id',
       level: 'Level',
       body: 'Body',
-      createdAt: 'Created at',
+      createdAt: 'Created at'
     }
   },
   dashboard: {
@@ -197,6 +213,124 @@ export default {
       'frontend-version': {
         name: 'Frontend'
       }
+    },
+    addNew: 'Add dashboard',
+    table: {
+      id: 'Id',
+      name: 'Name',
+      edit: 'Edit',
+      operations: 'Operations',
+      description: 'Description',
+      enabled: 'Active',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
+    },
+    editor: {
+      getEvent: 'Get event',
+      html: 'html',
+      addProp: 'Add prop',
+      please_add_tab: 'Please add tab',
+      currentTab: 'Current tab',
+      tabList: 'Tab list',
+      tabSettings: 'Tab settings',
+      addTab: 'Add tab',
+      name: 'Name',
+      text: 'Text',
+      description: 'Description',
+      area: 'Area',
+      defaultText: 'Default text',
+      asButton: 'As button',
+      addAction: 'Add action',
+      action: 'Action',
+      icon: 'Icon',
+      enabled: 'Enabled',
+      dragEnabled: 'Drag Enabled',
+      gap: 'Gap',
+      columnWidth: 'Column Width',
+      background: 'Background color',
+      addNewCard: 'Add new card',
+      addCardItem: 'Add card item',
+      currentCard: 'Current card',
+      cardList: 'Card list',
+      title: 'Title',
+      height: 'Height',
+      width: 'Width',
+      hidden: 'Hidden',
+      disabled: 'Disabled',
+      frozen: 'Frozen',
+      type: 'Type',
+      items: 'Items',
+      cardItems: 'Card items',
+      itemDetail: 'Item detail',
+      itemList: 'Item list',
+      dashboardSettings: 'Dashboard settings',
+      cardSettings: 'Card settings',
+      pleaseSelectType: 'Please select type',
+      buttonOptions: 'Button options',
+      selectAction: 'Select action',
+      mainOptions: 'Main options',
+      size: 'Size',
+      entity: 'Entity',
+      image: 'Image',
+      value: 'Value',
+      comparison: 'Comparison',
+      selectStatus: 'Select status',
+      showOn: 'Show on',
+      hideOn: 'Hide on',
+      tokens: 'Tokens',
+      defaultImage: 'Default image',
+      imageOptions: 'Image options',
+      stateOptions: 'State options',
+      addNewProp: 'Add new prop',
+      textOptions: 'Text options',
+      eventstateJSONobject: 'Event state JSON object',
+      round: 'Round'
+    }
+  },
+  settings: {
+    sidebarTextTheme: 'Sidebar text theme',
+    fixedHeader: 'Fixed header',
+    showSidebarLogo: 'Show sidebar logo',
+    showTagsView: 'Show tags view',
+    theme: 'Theme',
+    title: 'Title'
+  },
+  entityStorage: {
+    table: {
+      operations: 'Operations',
+      nothing: 'Nothing',
+      state: 'State',
+      attributes: 'Attributes',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at',
+      entityId: 'Entity Id'
+    }
+  },
+  users: {
+    addNew: 'Add user',
+    table: {
+      id: 'ID',
+      nickname: 'Nick',
+      email: 'Email',
+      status: 'Status',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      lang: 'Lang',
+      image: 'Image',
+      role: 'Role',
+      password: 'Password',
+      passwordRepeat: 'Password Repeat',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
+    }
+  },
+  roles: {
+    addNew: 'Add role',
+    table: {
+      name: 'Name',
+      description: 'Description',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
     }
   },
   main: {
@@ -218,4 +352,4 @@ export default {
     no: 'No',
     'are_you_sure_to_do_want_this?': 'Are you sure to do want this?'
   }
-};
+}

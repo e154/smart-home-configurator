@@ -8,7 +8,7 @@ const usersRouter: RouteConfig = {
   name: 'users',
   meta: {
     title: 'users',
-    icon: 'table',
+    icon: 'user',
     alwaysShow: true
   },
   children: [
@@ -17,9 +17,28 @@ const usersRouter: RouteConfig = {
       component: () => import('@/views/users/index.vue'),
       name: 'user list',
       meta: {
-        title: 'userList',
-        }
+        title: 'UserList'
+      }
     },
+    {
+      path: 'edit/:id',
+      component: () => import('@/views/users/edit.vue'),
+      props: true,
+      name: 'user edit',
+      meta: {
+        title: 'UserEdit',
+        hidden: true
+      }
+    },
+    {
+      path: 'new',
+      component: () => import('@/views/users/new.vue'),
+      name: 'user new',
+      meta: {
+        hidden: true,
+        title: 'UserNew'
+      }
+    }
   ]
 }
 

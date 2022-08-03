@@ -22,22 +22,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import {ApiPlugin} from '@/api/stub';
-import api from '@/api/api';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { ApiPlugin } from '@/api/stub'
+import api from '@/api/api'
 
 @Component({
   name: 'PluginSearch'
 })
 export default class extends Vue {
-  @Prop({required: false}) private value?: ApiPlugin;
+  @Prop({ required: false }) private value?: ApiPlugin;
 
   private options?: ApiPlugin[] = [];
-  private loading: boolean = true;
+  private loading = true;
 
   get currentValue() {
     if (this.value) {
-      this.options = [this.value];
+      this.options = [this.value]
       return this.value
     } else {
       this.options = []
@@ -47,18 +47,18 @@ export default class extends Vue {
   }
 
   set currentValue(value) {
-    this.$emit('update-value', value);
+    this.$emit('update-value', value)
   }
 
   private async remoteMethod(query: string) {
     if (query !== '') {
-      this.loading = true;
-      const params = {query: query, limit: 25, offset: 0};
-      const {data} = await api.v1.pluginServiceSearchPlugin(params);
-      this.options = data.items;
-      this.loading = false;
+      this.loading = true
+      const params = { query: query, limit: 25, offset: 0 }
+      const { data } = await api.v1.pluginServiceSearchPlugin(params)
+      this.options = data.items
+      this.loading = false
     } else {
-      this.options = [];
+      this.options = []
     }
   }
 }

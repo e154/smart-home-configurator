@@ -11,9 +11,9 @@
 
 <script lang="ts">
 
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import ImageBrowser from '@/views/images/browser.vue';
-import {ApiImage} from '@/api/stub';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import ImageBrowser from '@/views/images/browser.vue'
+import { ApiImage } from '@/api/stub'
 
 @Component({
   name: 'ImageDialog',
@@ -22,18 +22,18 @@ import {ApiImage} from '@/api/stub';
   }
 })
 export default class extends Vue {
-  @Prop() private visible: boolean = false;
+  @Prop() private visible = false;
 
   get vis(): boolean {
-    return this.visible;
+    return this.visible
   }
 
   set vis(value: boolean) {
-    this.$emit('on-close', false);
+    this.$emit('on-close', false)
   }
 
   private onSelect(value: ApiImage, event?: any) {
-    this.$emit('on-select', value);
+    this.$emit('on-select', value)
   }
 }
 </script>

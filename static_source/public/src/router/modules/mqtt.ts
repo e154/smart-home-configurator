@@ -6,7 +6,7 @@ const mqttRouter: RouteConfig = {
   component: Develop,
   redirect: '/mqtt/index',
   name: 'mqtt',
-  meta: {hidden: false},
+  meta: { hidden: false },
   children: [
     {
       path: 'index',
@@ -16,8 +16,8 @@ const mqttRouter: RouteConfig = {
         title: 'mqtt',
         icon: 'table',
         noCache: true
-        }
-    },
+      }
+    }
   ]
 }
 

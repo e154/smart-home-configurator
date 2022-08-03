@@ -6,7 +6,7 @@ const imagesRouter: RouteConfig = {
   component: Develop,
   redirect: '/images/browsers',
   name: 'images',
-  meta: {hidden: false},
+  meta: { hidden: false },
   children: [
     {
       path: 'browsers',
@@ -14,10 +14,10 @@ const imagesRouter: RouteConfig = {
       name: 'images',
       meta: {
         title: 'images',
-        icon: 'table',
+        icon: 'image',
         noCache: true
-        }
-    },
+      }
+    }
   ]
 }
 

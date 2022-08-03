@@ -27,7 +27,6 @@
             </el-button>
           </span>
 
-
           <script-search
             :multiple="false"
             v-model="currentItem.script"
@@ -172,14 +171,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiAction, ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes} from '@/api/stub';
-import {Form} from 'element-ui';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import EntitySearch from '@/views/entities/components/entity_search.vue';
-import Attributes from '@/views/entities/components/attributes.vue';
-import ScriptEditModal from '@/views/scripts/edit-modal.vue';
-import ScriptDialog from '@/views/scripts/dialog.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiAction, ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes } from '@/api/stub'
+import { Form } from 'element-ui'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import EntitySearch from '@/views/entities/components/entity_search.vue'
+import AttributesEditor from '@/views/entities/components/attributes_editor.vue'
+import ScriptEditModal from '@/views/scripts/edit-modal.vue'
+import ScriptDialog from '@/views/scripts/dialog.vue'
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -192,170 +191,170 @@ export enum Mode {
   components: {
     ScriptSearch,
     EntitySearch,
-    Attributes,
+    AttributesEditor,
     ScriptEditModal,
     ScriptDialog
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: () => []}) private value?: ApiTrigger[];
+  @Prop({ required: false, default: () => [] }) private value?: ApiTrigger[];
 
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiTrigger = {
-    name: '',
+    name: ''
   };
+
   private currentItemIndex?: number;
   private attributes = {
     cron: '',
     alexa: 0
   };
-  private dialogScriptVisible: boolean = false;
+
+  private dialogScriptVisible = false;
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     script: [
-      {required: true, trigger: 'blur'},
+      { required: true, trigger: 'blur' }
     ],
     entity: [
-      {required: true, trigger: 'blur'},
+      { required: true, trigger: 'blur' }
     ],
     pluginName: [
-      {required: true, trigger: 'blur'},
+      { required: true, trigger: 'blur' }
     ]
   };
 
-
   private editTrigger(trigger: ApiTrigger, index: number) {
-    this.currentItem = Object.assign({}, trigger);
-    this.currentItemIndex = index;
-    this.mode = Mode.EDIT;
+    this.currentItem = Object.assign({}, trigger)
+    this.currentItemIndex = index
+    this.mode = Mode.EDIT
     if (this.currentItem && this.currentItem.pluginName) {
-      this.changedPlugin(this.currentItem.pluginName);
+      this.changedPlugin(this.currentItem.pluginName)
     }
   }
 
   private add() {
     this.currentItem = {
-      name: '',
-    };
-    this.mode = Mode.NEW;
+      name: ''
+    }
+    this.mode = Mode.NEW
   }
 
   private resetForm() {
-    this.currentItem = {};
-    this.mode = Mode.VIEW;
-    this.currentItemIndex = undefined;
+    this.currentItem = {}
+    this.mode = Mode.VIEW
+    this.currentItemIndex = undefined
   }
 
   private removeItem() {
     if (this.value) {
       for (const index in this.value) {
         if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1);
+          this.value.splice(+index, 1)
         }
       }
     }
-    this.mode = Mode.VIEW;
-    this.currentItem = {};
+    this.mode = Mode.VIEW
+    this.currentItem = {}
   }
 
   private changedScript(value: ApiScript, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', {id: value.id, name: value.name});
+      this.$set(this.currentItem, 'script', { id: value.id, name: value.name })
     } else {
-      this.$set(this.currentItem, 'script', undefined);
+      this.$set(this.currentItem, 'script', undefined)
     }
   }
 
   private changedEntity(value: ApiEntity, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'entity', {id: value.id});
+      this.$set(this.currentItem, 'entity', { id: value.id })
     } else {
-      this.$set(this.currentItem, 'entity', undefined);
+      this.$set(this.currentItem, 'entity', undefined)
     }
   }
 
   private changedPlugin(value: string) {
     switch (value) {
       case 'state_change':
-        break;
+        break
       case 'time':
-        if (this.currentItem.attributes && this.currentItem.attributes['cron']) {
-          this.$set(this.attributes, 'time', this.currentItem.attributes['cron'].string);
+        if (this.currentItem.attributes && this.currentItem.attributes.cron) {
+          this.$set(this.attributes, 'time', this.currentItem.attributes.cron.string)
         }
-        break;
+        break
       case 'system':
-        break;
+        break
       case 'alexa':
-        if (this.currentItem.attributes && this.currentItem.attributes['skillId']) {
-          this.$set(this.attributes, 'alexa', this.currentItem.attributes['skillId'].int);
+        if (this.currentItem.attributes && this.currentItem.attributes.skillId) {
+          this.$set(this.attributes, 'alexa', this.currentItem.attributes.skillId.int)
         }
-        break;
+        break
       default:
-        console.log('unknown plugin name', value);
+        console.log('unknown plugin name', value)
     }
   }
 
   private changedAttrParams(value: any) {
     if (value) {
-      let attributes: { [key: string]: ApiAttribute } = {};
+      const attributes: { [key: string]: ApiAttribute } = {}
 
       switch (value) {
         case 'state_change':
-          break;
+          break
         case 'time':
-          attributes['cron'] = {
+          attributes.cron = {
             name: 'cron',
             type: ApiTypes.STRING,
-            string: value,
-          };
-          break;
+            string: value
+          }
+          break
         case 'system':
-          break;
+          break
         case 'alexa':
-          attributes['skillId'] = {
+          attributes.skillId = {
             name: 'skillId',
             type: ApiTypes.INT,
-            int: value,
-          };
-          break;
+            int: value
+          }
+          break
         default:
-          console.log('unknown plugin name', value);
+          console.log('unknown plugin name', value)
       }
 
-      this.$set(this.currentItem, 'attributes', attributes);
+      this.$set(this.currentItem, 'attributes', attributes)
     } else {
-      this.$set(this.currentItem, 'attributes', undefined);
+      this.$set(this.currentItem, 'attributes', undefined)
     }
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return;
+        return
       }
 
       if (this.mode === Mode.NEW) {
         if (this.value) {
-          this.value.push(Object.assign({}, this.currentItem));
+          this.value.push(Object.assign({}, this.currentItem))
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.value) {
           if (this.currentItemIndex != undefined) {
-            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem);
+            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem)
           }
         }
       }
-      this.resetForm();
-    });
-    return;
+      this.resetForm()
+    })
   }
 
   private callTrigger(tr: ApiTrigger, index: number) {
-    this.$emit('call-trigger', tr.name);
+    this.$emit('call-trigger', tr.name)
   }
 }
 </script>

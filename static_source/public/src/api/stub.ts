@@ -1,6 +1,5 @@
 /* eslint-disable */
 /* tslint:disable */
-
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -9,6 +8,9 @@
  * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
  * ---------------------------------------------------------------
  */
+
+import {ApiGetDashboardCardItemListResult} from '@/api/stub_new';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType} from 'axios';
 
 export interface AccessListListOfString {
   items: string[];
@@ -101,6 +103,7 @@ export interface ApiDashboard {
   areaId?: number;
   area?: ApiArea;
   tabs: ApiDashboardTab[];
+  entities: Map<string, ApiEntity>;
   createdAt: string;
   updatedAt: string;
 }
@@ -114,7 +117,26 @@ export interface ApiDashboardCard {
   weight: number;
   enabled: boolean;
   dashboardTabId: number;
-  payload: {} ;
+  payload: {};
+  items: ApiDashboardCardItem[];
+  entities: Map<string, ApiEntity>;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ApiDashboardCardItem {
+  id: number;
+  title: string;
+  type: string;
+  weight: number;
+  enabled: boolean;
+  dashboardCardId: number;
+  entityId: string;
+  payload: string;
+  hidden: boolean;
+  frozen: boolean;
+  showOn: string[];
+  hideOn: string[];
   createdAt?: string;
   updatedAt?: string;
 }
@@ -132,7 +154,7 @@ export interface ApiDashboardTab {
   id: number;
   name: string;
   columnWidth: number;
-  gap: number;
+  gap: boolean;
   background: string;
   icon: string;
   enabled: boolean;
@@ -140,6 +162,7 @@ export interface ApiDashboardTab {
   weight: number;
   dashboardId: number;
   cards: ApiDashboardCard[];
+  entities: Map<string, ApiEntity>;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -148,7 +171,7 @@ export interface ApiDashboardTabShort {
   id: number;
   name: string;
   columnWidth: number;
-  gap: number;
+  gap: boolean;
   background: string;
   icon: string;
   enabled: boolean;
@@ -196,7 +219,7 @@ export interface ApiEntity {
   scripts?: ApiScript[];
   attributes?: Map<string, ApiAttribute>;
   settings?: Map<string, ApiAttribute>;
-  metrics?: Map<string, ApiAttribute>;
+  metrics?: ApiMetric[];
 
   /** @format date-time */
   createdAt?: string;
@@ -206,7 +229,7 @@ export interface ApiEntity {
 }
 
 export interface ApiEntityAction {
-  name?: string;
+  name: string;
   description?: string;
   icon?: string;
   image?: ApiImage;
@@ -246,11 +269,19 @@ export interface ApiEntityShort {
 }
 
 export interface ApiEntityState {
-  name?: string;
+  name: string;
   description?: string;
   icon?: string;
   image?: ApiImage;
   style?: string;
+}
+
+export interface ApiEntityStorage {
+  id: string;
+  entityId: string;
+  state: string;
+  attributes: Record<string, ApiAttribute>;
+  createdAt: string;
 }
 
 export interface ApiExecScriptResult {
@@ -292,6 +323,16 @@ export interface ApiGetDashboardTabListResult {
 export interface ApiGetEntityListResult {
   items: ApiEntity[];
   meta: ApiMeta;
+}
+
+export interface ApiGetEntityStorageResult {
+  items?: ApiEntityStorage[];
+  meta?: ApiMeta;
+}
+
+export interface ApiGetEntityStorageResult {
+  items?: ApiEntityStorage[];
+  meta?: ApiMeta;
 }
 
 export interface ApiGetImageFilterListResult {
@@ -377,11 +418,8 @@ export interface ApiImage {
   image?: string;
   mimeType?: string;
   title?: string;
-
   size?: number;
   name?: string;
-
-  /** @format date-time */
   createdAt?: string;
 }
 
@@ -404,6 +442,45 @@ export interface ApiMeta {
   sort: string;
 }
 
+export interface ApiMetric {
+  /** @format int64 */
+  id?: string;
+  name?: string;
+  description?: string;
+  options?: ApiMetricOption;
+  data?: ApiMetricOptionData[];
+  type?: string;
+  ranges?: string[];
+
+  /** @format date-time */
+  createdAt?: string;
+
+  /** @format date-time */
+  updatedAt?: string;
+}
+
+export interface ApiMetricOption {
+  items?: ApiMetricOptionItem[];
+}
+
+export interface ApiMetricOptionData {
+  value?: Record<string, number>;
+
+  /** @format int64 */
+  metricId?: string;
+
+  /** @format date-time */
+  time?: string;
+}
+
+export interface ApiMetricOptionItem {
+  name?: string;
+  description?: string;
+  color?: string;
+  translate?: string;
+  label?: string;
+}
+
 export interface ApiNetworkmapResponse {
   networkmap?: string;
 }
@@ -411,6 +488,20 @@ export interface ApiNetworkmapResponse {
 export interface ApiNewAreaRequest {
   name?: string;
   description?: string;
+}
+
+export interface ApiNewDashboardCardItemRequest {
+  title: string;
+  type: string;
+  weight: number;
+  enabled: boolean;
+  dashboardCardId?: number;
+  entityId?: string;
+  payload?: any;
+  hidden: boolean;
+  frozen: boolean;
+  showOn: string[];
+  hideOn: string[];
 }
 
 export interface ApiNewDashboardCardRequest {
@@ -428,8 +519,6 @@ export interface ApiNewDashboardRequest {
   name?: string;
   description?: string;
   enabled?: boolean;
-
-  /** @format int64 */
   areaId?: string;
 }
 
@@ -437,7 +526,7 @@ export interface ApiNewDashboardTabRequest {
   name: string;
   icon?: string;
   columnWidth: number;
-  gap: number;
+  gap: boolean;
   background: string;
   enabled: boolean;
   weight: number;
@@ -457,7 +546,7 @@ export interface ApiNewEntityRequest {
   states?: ApiNewEntityRequestState[];
   attributes?: Map<string, ApiAttribute>;
   settings?: Map<string, ApiAttribute>;
-  metrics?: Map<string, ApiAttribute>;
+  metrics?: ApiMetric[];
   scripts?: ApiScript[];
 }
 
@@ -981,8 +1070,6 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType} from 'axios';
-
 export type QueryParamsType = Record<string | number, any>;
 
 export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
@@ -1308,7 +1395,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardServiceUpdateDashboard: (
-      id: string,
+      id: number,
       body: { name?: string; description?: string; enabled?: boolean; areaId?: number },
       params: RequestParams = {},
     ) =>
@@ -1339,6 +1426,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         secure: true,
         type: ContentType.Json,
         format: 'json',
+        ...params,
+      }),
+
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardService
+     * @name DashboardCardServiceImportDashboardCard
+     * @summary import dashboard_card
+     * @request POST:/v1/dashboard_card/import
+     * @secure
+     */
+    dashboardCardServiceImportDashboardCard: (body: ApiDashboardCard, params: RequestParams = {}) =>
+      this.request<ApiDashboardCard, RpcStatus>({
+        path: `/v1/dashboard_card/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -1409,6 +1517,121 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardItemService
+     * @name DashboardCardItemServiceAddDashboardCardItem
+     * @summary add new dashboard_card
+     * @request POST:/v1/dashboard_card_item
+     * @secure
+     */
+    dashboardCardItemServiceAddDashboardCardItem: (body: ApiNewDashboardCardItemRequest, params: RequestParams = {}) =>
+      this.request<ApiDashboardCardItem, RpcStatus>({
+        path: `/v1/dashboard_card_item`,
+        method: 'POST',
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardItemService
+     * @name DashboardCardItemServiceGetDashboardCardItemById
+     * @summary get dashboard_card_item by id
+     * @request GET:/v1/dashboard_card_item/{id}
+     * @secure
+     */
+    dashboardCardItemServiceGetDashboardCardItemById: (id: number, params: RequestParams = {}) =>
+      this.request<ApiDashboardCardItem, RpcStatus>({
+        path: `/v1/dashboard_card_item/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardItemService
+     * @name DashboardCardItemServiceDeleteDashboardCardItem
+     * @summary delete dashboard_card_item
+     * @request DELETE:/v1/dashboard_card_item/{id}
+     * @secure
+     */
+    dashboardCardItemServiceDeleteDashboardCardItem: (id: number, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/dashboard_card_item/${id}`,
+        method: 'DELETE',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardItemService
+     * @name DashboardCardItemServiceUpdateDashboardCardItem
+     * @summary update dashboard_card_item
+     * @request PUT:/v1/dashboard_card_item/{id}
+     * @secure
+     */
+    dashboardCardItemServiceUpdateDashboardCardItem: (
+      id: string,
+      body: {
+        title?: string;
+        type?: string;
+        weight?: number;
+        enabled?: boolean;
+        dashboardCardId?: number;
+        entityId?: string;
+        payload?: string;
+        hidden: boolean;
+        frozen: boolean;
+        showOn: string[];
+        hideOn: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiDashboardCardItem, RpcStatus>({
+        path: `/v1/dashboard_card_item/${id}`,
+        method: 'PUT',
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardCardItemService
+     * @name DashboardCardItemServiceGetDashboardCardItemList
+     * @summary get dashboard_card_item list
+     * @request GET:/v1/dashboard_cards
+     * @secure
+     */
+    dashboardCardItemServiceGetDashboardCardItemList: (
+      query?: { page?: number; limit?: number; sort?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetDashboardCardItemListResult, RpcStatus>({
+        path: `/v1/dashboard_card_item`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
 
     /**
      * No description
@@ -1506,7 +1729,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         enabled: boolean;
         weight: number;
         columnWidth: number;
-        gap: number;
+        gap: boolean;
         dashboardId: number;
       },
       params: RequestParams = {},
@@ -1562,6 +1785,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query: query,
         secure: true,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardService
+     * @name DashboardServiceImportDashboard
+     * @summary import dashboard
+     * @request POST:/v1/dashboards/import
+     * @secure
+     */
+    dashboardServiceImportDashboard: (body: ApiDashboard, params: RequestParams = {}) =>
+      this.request<ApiDashboard, RpcStatus>({
+        path: `/v1/dashboards/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -1767,7 +2010,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         attributes?: Map<string, ApiAttribute>;
         settings?: Map<string, ApiAttribute>;
         scripts?: ApiScript[];
-        metrics?: Map<string, ApiAttribute>;
+        metrics?: ApiMetric[];
       },
       params: RequestParams = {},
     ) =>
@@ -1778,6 +2021,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         secure: true,
         type: ContentType.Json,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityStorageService
+     * @name EntityStorageServiceGetEntityStorageList
+     * @request GET:/v1/entity_storage/{entityId}
+     * @secure
+     */
+    entityStorageServiceGetEntityStorageList: (
+      entityId: string,
+      query?: { page?: number; limit?: number; sort?: string; startDate?: string; endDate?: string; },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetEntityStorageResult, RpcStatus>({
+        path: `/v1/entity_storage/${entityId}`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
         ...params,
       }),
 

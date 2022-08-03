@@ -33,7 +33,7 @@ import { SettingsModule } from '@/store/modules/settings'
 import { AppMain, NavbarDashboard, Settings, Sidebar, TagsView } from './components'
 import RightPanel from '@/components/RightPanel/index.vue'
 import ResizeMixin from './mixin/resize'
-import {constantRoutes, dashboardRoutes} from '@/router';
+import { constantRoutes, dashboardRoutes } from '@/router'
 
 @Component({
   name: 'Dashboard',

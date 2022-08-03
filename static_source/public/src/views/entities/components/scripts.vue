@@ -8,20 +8,19 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiScript} from '@/api/stub';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiScript } from '@/api/stub'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
 
 @Component({
   name: 'Scripts',
-  components: {ScriptSearch}
+  components: { ScriptSearch }
 })
 export default class extends Vue {
-
-  @Prop({required: true}) private value!: ApiScript[];
+  @Prop({ required: true }) private value!: ApiScript[];
 
   private changedScript(value: any, event: any) {
-    this.$emit('update-value', value);
+    this.$emit('update-value', value)
   }
 }
 </script>

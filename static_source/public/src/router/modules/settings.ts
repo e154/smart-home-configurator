@@ -1,5 +1,5 @@
-import {RouteConfig} from 'vue-router';
-import Develop from '@/layout/develop.vue';
+import { RouteConfig } from 'vue-router'
+import Develop from '@/layout/develop.vue'
 
 const settingsRouter: RouteConfig = {
   path: '/settings',
@@ -14,11 +14,11 @@ const settingsRouter: RouteConfig = {
       name: 'settings',
       meta: {
         title: 'settings',
-        icon: 'table',
+        icon: 'settings',
         noCache: true
       }
-    },
+    }
   ]
-};
+}
 
-export default settingsRouter;
+export default settingsRouter

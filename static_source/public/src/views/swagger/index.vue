@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   name: 'Swagger',
@@ -21,7 +21,7 @@ import {Component, Vue} from 'vue-property-decorator';
 })
 export default class extends Vue {
   private myIframe?: string;
-  private src: string = (process.env.VUE_APP_BASE_API || window.location.origin) + "/swagger-ui"
+  private src: string = (process.env.VUE_APP_BASE_API || window.location.origin) + '/swagger-ui'
 
   private onLoad(frame: any) {
     this.myIframe = frame.contentWindow

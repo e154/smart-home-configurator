@@ -121,12 +121,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Pagination from '@/components/Pagination/index.vue';
-import api from '@/api/api';
-import {ApiArea, ApiTask} from '@/api/stub';
-import router from '@/router';
-import ExportTool from '@/components/export-tool/index.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import Pagination from '@/components/Pagination/index.vue'
+import api from '@/api/api'
+import { ApiArea, ApiTask } from '@/api/stub'
+import router from '@/router'
+import ExportTool from '@/components/export-tool/index.vue'
 
 @Component({
   name: 'Index',
@@ -145,105 +145,106 @@ export default class extends Vue {
     limit: 20,
     sort: '-createdAt'
   };
+
   private internal = {
     importValue: ''
   };
 
   created() {
-    this.getList();
+    this.getList()
   }
 
   private async getList() {
-    this.listLoading = true;
-    const {data} = await api.v1.automationServiceGetTaskList({
+    this.listLoading = true
+    const { data } = await api.v1.automationServiceGetTaskList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
-      sort: this.listQuery.sort,
-    });
+      sort: this.listQuery.sort
+    })
 
-    this.list = data.items;
-    this.total = data.meta.total;
-    this.listLoading = false;
+    this.list = data.items
+    this.total = data.meta.total
+    this.listLoading = false
   }
 
   private handleFilter() {
-    this.listQuery.page = 1;
-    this.getList();
+    this.listQuery.page = 1
+    this.getList()
   }
 
   private sortChange(data: any) {
-    const {prop, order} = data;
+    const { prop, order } = data
     if (prop === 'id') {
-      this.sortByID(order);
+      this.sortByID(order)
     } else if (prop === 'createdAt') {
-      this.sortByCreatedAt(order);
+      this.sortByCreatedAt(order)
     } else if (prop === 'updatedAt') {
-      this.sortByUpdatedAt(order);
+      this.sortByUpdatedAt(order)
     }
   }
 
   private sortByCreatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+createdAt';
+      this.listQuery.sort = '+createdAt'
     } else {
-      this.listQuery.sort = '-createdAt';
+      this.listQuery.sort = '-createdAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByUpdatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+updatedAt';
+      this.listQuery.sort = '+updatedAt'
     } else {
-      this.listQuery.sort = '-updatedAt';
+      this.listQuery.sort = '-updatedAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByID(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+id';
+      this.listQuery.sort = '+id'
     } else {
-      this.listQuery.sort = '-id';
+      this.listQuery.sort = '-id'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private getSortClass(key: string) {
-    const sort = this.listQuery.sort;
-    return sort === `+${key}` ? 'ascending' : 'descending';
+    const sort = this.listQuery.sort
+    return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
   private goto(entity: ApiTask) {
-    router.push({path: `/automation/edit/${entity.id}`});
+    router.push({ path: `/automation/edit/${entity.id}` })
   }
 
   private add() {
-    router.push({path: `/automation/new`});
+    router.push({ path: '/automation/new' })
   }
 
   private gotoArea(area: ApiArea) {
-    router.push({path: `/areas/edit/${area.id}`});
+    router.push({ path: `/areas/edit/${area.id}` })
   }
 
   private async onSwitch(event: ApiTask) {
     if (event.enabled) {
-      await api.v1.automationServiceEnableTask(event.id || 0);
+      await api.v1.automationServiceEnableTask(event.id || 0)
     } else {
-      await api.v1.automationServiceDisableTask(event.id || 0);
+      await api.v1.automationServiceDisableTask(event.id || 0)
     }
     this.$notify({
       title: 'Success',
       message: 'Update Successfully',
       type: 'success',
       duration: 2000
-    });
+    })
   }
 
-  private showImport: boolean = false;
+  private showImport = false;
 
   private async onImport(value: string, event?: any) {
-    const val: ApiTask = JSON.parse(value);
+    const val: ApiTask = JSON.parse(value)
     const task = {
       name: val.name,
       description: val.description,
@@ -252,17 +253,17 @@ export default class extends Vue {
       triggers: val.triggers,
       conditions: val.conditions,
       actions: val.actions,
-      area: val.area,
-    };
-    const {data} = await api.v1.automationServiceAddTask(task);
+      area: val.area
+    }
+    const { data } = await api.v1.automationServiceAddTask(task)
     if (data) {
       this.$notify({
         title: 'Success',
         message: 'task imported successfully',
         type: 'success',
         duration: 2000
-      });
-      this.getList();
+      })
+      this.getList()
     }
   }
 }

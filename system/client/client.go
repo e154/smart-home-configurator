@@ -29,7 +29,6 @@ func (c *Client) Conn() (*grpc.ClientConn, error) {
 	return grpc.Dial(c.serverAddr, opts...)
 }
 
-
 func (c *Client) NewAuthServiceClient(conn *grpc.ClientConn) pb.AuthServiceClient {
 	return pb.NewAuthServiceClient(conn)
 }

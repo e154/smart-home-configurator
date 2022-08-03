@@ -16,7 +16,7 @@ export const parseTime = (
         // support "1548221490638"
       } else {
         // '2012-07-04T18:10:00.000+09:00'
-        time = Date.parse(time);
+        time = Date.parse(time)
       }
     }
     if (typeof time === 'number' && time.toString().length === 10) {

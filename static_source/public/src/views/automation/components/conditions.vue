@@ -102,12 +102,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiScript, ApiCondition} from '@/api/stub';
-import {Form} from 'element-ui';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import ScriptEditModal from '@/views/scripts/edit-modal.vue';
-import ScriptDialog from '@/views/scripts/dialog.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiScript, ApiCondition } from '@/api/stub'
+import { Form } from 'element-ui'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import ScriptEditModal from '@/views/scripts/edit-modal.vue'
+import ScriptDialog from '@/views/scripts/dialog.vue'
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -124,81 +124,79 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: () => []}) private value?: ApiCondition[];
+  @Prop({ required: false, default: () => [] }) private value?: ApiCondition[];
 
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiCondition = {};
   private currentItemIndex?: number;
-  private dialogScriptVisible: boolean = false;
+  private dialogScriptVisible = false;
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     script: [
-      {required: true, trigger: 'blur'},
+      { required: true, trigger: 'blur' }
     ]
   };
 
-
   private editTrigger(action: ApiCondition, index: number) {
-    this.currentItem = Object.assign({}, action);
-    this.currentItemIndex = index;
-    this.mode = Mode.EDIT;
+    this.currentItem = Object.assign({}, action)
+    this.currentItemIndex = index
+    this.mode = Mode.EDIT
   }
 
   private add() {
-    this.currentItem = {};
-    this.mode = Mode.NEW;
+    this.currentItem = {}
+    this.mode = Mode.NEW
   }
 
   private resetForm() {
-    this.currentItem = {};
-    this.mode = Mode.VIEW;
-    this.currentItemIndex = undefined;
+    this.currentItem = {}
+    this.mode = Mode.VIEW
+    this.currentItemIndex = undefined
   }
 
   private removeItem() {
     if (this.value) {
       for (const index in this.value) {
         if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1);
+          this.value.splice(+index, 1)
         }
       }
     }
-    this.mode = Mode.VIEW;
-    this.currentItem = {};
+    this.mode = Mode.VIEW
+    this.currentItem = {}
   }
 
   private changedScript(value: ApiScript, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', value);
+      this.$set(this.currentItem, 'script', value)
     } else {
-      this.$set(this.currentItem, 'script', undefined);
+      this.$set(this.currentItem, 'script', undefined)
     }
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return;
+        return
       }
 
       if (this.mode === Mode.NEW) {
         if (this.value) {
-          this.value.push(Object.assign({}, this.currentItem));
+          this.value.push(Object.assign({}, this.currentItem))
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.value) {
           if (this.currentItemIndex != undefined) {
-            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem);
+            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem)
           }
         }
       }
-      this.resetForm();
-    });
-    return;
+      this.resetForm()
+    })
   }
 }
 </script>

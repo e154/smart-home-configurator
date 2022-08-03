@@ -75,7 +75,6 @@
               />
             </el-tab-pane>
 
-
           </el-tabs>
 
         </el-col>
@@ -92,17 +91,17 @@
 
 <script lang="ts">
 
-import {Component, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiAction, ApiArea, ApiCondition, ApiNewTaskRequest, ApiTrigger,} from '@/api/stub';
-import router from '@/router';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import AreaSearch from '@/views/areas/components/areas_search.vue';
-import {Form} from 'element-ui';
-import Triggers from '@/views/automation/components/triggers.vue';
-import Conditions from '@/views/automation/components/conditions.vue';
-import Actions from '@/views/automation/components/actions.vue';
-import CardWrapper from '@/components/card-wrapper/index.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiAction, ApiArea, ApiCondition, ApiNewTaskRequest, ApiTrigger } from '@/api/stub'
+import router from '@/router'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import AreaSearch from '@/views/areas/components/areas_search.vue'
+import { Form } from 'element-ui'
+import Triggers from '@/views/automation/components/triggers.vue'
+import Conditions from '@/views/automation/components/conditions.vue'
+import Actions from '@/views/automation/components/actions.vue'
+import CardWrapper from '@/components/card-wrapper/index.vue'
 
 @Component({
   name: 'Editor',
@@ -116,7 +115,6 @@ import CardWrapper from '@/components/card-wrapper/index.vue';
   }
 })
 export default class extends Vue {
-
   private internal = {
     activeTab: 'main',
     pluginOptions: undefined
@@ -134,55 +132,55 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ],
     plugin: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   private changedArea(values: ApiArea, event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'area', values);
+      this.$set(this.currentTask, 'area', values)
     } else {
-      this.$set(this.currentTask, 'area', undefined);
+      this.$set(this.currentTask, 'area', undefined)
     }
   }
 
   private changedTriggers(values: ApiTrigger[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'triggers', values);
+      this.$set(this.currentTask, 'triggers', values)
     } else {
-      this.$set(this.currentTask, 'triggers', undefined);
+      this.$set(this.currentTask, 'triggers', undefined)
     }
   }
 
   private changedConditions(values: ApiCondition[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'conditions', values);
+      this.$set(this.currentTask, 'conditions', values)
     } else {
-      this.$set(this.currentTask, 'conditions', undefined);
+      this.$set(this.currentTask, 'conditions', undefined)
     }
   }
 
   private changedActions(values: ApiAction[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'action', values);
+      this.$set(this.currentTask, 'action', values)
     } else {
-      this.$set(this.currentTask, 'action', undefined);
+      this.$set(this.currentTask, 'action', undefined)
     }
   }
 
   private async save() {
     (this.$refs.currentTask as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
       const task = {
         name: this.currentTask.name,
@@ -192,25 +190,23 @@ export default class extends Vue {
         triggers: this.currentTask.triggers,
         conditions: this.currentTask.conditions,
         actions: this.currentTask.actions,
-        area: this.currentTask.area,
-      };
-      const {data} = await api.v1.automationServiceAddTask(task);
+        area: this.currentTask.area
+      }
+      const { data } = await api.v1.automationServiceAddTask(task)
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'task created successfully',
           type: 'success',
           duration: 2000
-        });
-        router.push({path: `/automation/edit/${data.id}`});
+        })
+        router.push({ path: `/automation/edit/${data.id}` })
       }
-    });
+    })
   }
 
   private cancel() {
-    router.push({path: `/automation/list`});
+    router.push({ path: '/automation/list' })
   }
 }
 </script>
-
-

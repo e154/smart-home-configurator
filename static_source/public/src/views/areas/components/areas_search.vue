@@ -23,59 +23,59 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiArea} from '@/api/stub';
-import api from '@/api/api';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiArea } from '@/api/stub'
+import api from '@/api/api'
 
 @Component({
   name: 'AreaSearch'
 })
 export default class extends Vue {
-  @Prop({required: true}) private value!: any;
-  @Prop({required: false, default: () => true}) private multiple?: boolean;
+  @Prop({ required: true }) private value!: any;
+  @Prop({ required: false, default: () => true }) private multiple?: boolean;
 
   private options?: ApiArea[] = [];
-  private loading: boolean = true;
+  private loading = true;
 
   get currentValue() {
     // array
     if (this.multiple) {
-      this.options = this.value as ApiArea[];
-      return this.value;
+      this.options = this.value as ApiArea[]
+      return this.value
     }
     // object
     if (this.value) {
-      this.options = [this.value as ApiArea];
-      return this.value as ApiArea;
+      this.options = [this.value as ApiArea]
+      return this.value as ApiArea
     } else {
-      this.options = undefined;
+      this.options = undefined
     }
 
-    return undefined;
+    return undefined
   }
 
   set currentValue(value) {
     // array
     if (this.multiple) {
-      let result: ApiArea[] = [];
+      const result: ApiArea[] = []
       for (const item in value) {
-        result.push(value[+item]);
+        result.push(value[+item])
       }
-      this.$emit('update-value', result);
+      this.$emit('update-value', result)
     }
     // object
-    this.$emit('update-value', value);
+    this.$emit('update-value', value)
   }
 
   private async remoteMethod(query: string) {
     if (query !== '') {
-      this.loading = true;
-      const params = {query: query, limit: 25, offset: 0};
-      const {data} = await api.v1.areaServiceSearchArea(params);
-      this.options = data.items;
-      this.loading = false;
+      this.loading = true
+      const params = { query: query, limit: 25, offset: 0 }
+      const { data } = await api.v1.areaServiceSearchArea(params)
+      this.options = data.items
+      this.loading = false
     } else {
-      this.options = [];
+      this.options = []
     }
   }
 }

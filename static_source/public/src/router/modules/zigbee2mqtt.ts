@@ -8,7 +8,7 @@ const zigbee2mqttRouter: RouteConfig = {
   name: 'zigbee2mqtt',
   meta: {
     title: 'zigbee2mqtt',
-    icon: 'table',
+    icon: 'zigbee',
     alwaysShow: true
   },
   children: [
@@ -17,8 +17,8 @@ const zigbee2mqttRouter: RouteConfig = {
       component: () => import('@/views/zigbee2mqtt/index.vue'),
       name: 'bridge list',
       meta: {
-        title: 'bridgeList',
-        }
+        title: 'bridgeList'
+      }
     },
     {
       path: 'edit/:id',
@@ -36,9 +36,9 @@ const zigbee2mqttRouter: RouteConfig = {
       props: true,
       name: 'bridge new',
       meta: {
-        title: 'bridgeNew',
+        title: 'bridgeNew'
       }
-    },
+    }
   ]
 }
 

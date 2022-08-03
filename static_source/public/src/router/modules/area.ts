@@ -8,7 +8,7 @@ const areasRouter: RouteConfig = {
   name: 'areas',
   meta: {
     title: 'areas',
-    icon: 'table',
+    icon: 'area-4',
     alwaysShow: true
   },
   children: [
@@ -17,8 +17,8 @@ const areasRouter: RouteConfig = {
       component: () => import('@/views/areas/index.vue'),
       name: 'area list',
       meta: {
-        title: 'areaList',
-        }
+        title: 'areaList'
+      }
     },
     {
       path: 'edit/:id',
@@ -36,9 +36,9 @@ const areasRouter: RouteConfig = {
       props: true,
       name: 'area new',
       meta: {
-        title: 'areaNew',
+        title: 'areaNew'
       }
-    },
+    }
   ]
 }
 

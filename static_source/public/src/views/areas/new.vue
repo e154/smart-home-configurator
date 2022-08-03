@@ -36,23 +36,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiArea} from '@/api/stub';
-import router from '@/router';
-import {Form} from 'element-ui';
-import CardWrapper from '@/components/card-wrapper/index.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiArea } from '@/api/stub'
+import router from '@/router'
+import { Form } from 'element-ui'
+import CardWrapper from '@/components/card-wrapper/index.vue'
 
 // HACK: have to use script-loader to load jsonlint
 /* eslint-disable import/no-webpack-loader-syntax */
-require('script-loader!jsonlint');
+require('script-loader!jsonlint')
 
 @Component({
   name: 'New',
-  components: {CardWrapper}
+  components: { CardWrapper }
 })
 export default class extends Vue {
-
   private currentArea: ApiArea = {
     name: '',
     description: ''
@@ -60,27 +59,27 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   private async save() {
     (this.$refs.currentArea as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
-      const {data} = await api.v1.areaServiceAddArea(this.currentArea);
-      router.push({path: `/areas/edit/${data.id}`});
-    });
+      const { data } = await api.v1.areaServiceAddArea(this.currentArea)
+      router.push({ path: `/areas/edit/${data.id}` })
+    })
   }
 
   private cancel() {
-    router.push({path: `/areas/list`});
+    router.push({ path: '/areas/list' })
   }
 }
 </script>

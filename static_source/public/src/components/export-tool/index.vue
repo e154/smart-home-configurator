@@ -19,39 +19,37 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import JsonEditor from '@/components/JsonEditor/index.vue';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import JsonEditor from '@/components/JsonEditor/index.vue'
 
 @Component({
   name: 'ExportTool',
   components: {
-    JsonEditor,
-  },
+    JsonEditor
+  }
 })
 export default class extends Vue {
-  @Prop({default: () => false}) private importDialog!: boolean;
+  @Prop({ default: () => false }) private importDialog!: boolean;
   @Prop() private visible!: boolean;
   @Prop() private value?: string;
-  @Prop({default: () => ''}) private title!: string;
-
+  @Prop({ default: () => '' }) private title!: string;
 
   get vis(): boolean {
-    return this.visible;
+    return this.visible
   }
 
   set vis(value: boolean) {
-    this.$emit('on-close', false);
+    this.$emit('on-close', false)
   }
 
-  private currentValue: string = '';
+  private currentValue = '';
   private changed(value: string) {
-    this.currentValue = value;
+    this.currentValue = value
   }
 
   private _import() {
-    this.$emit('on-import', this.currentValue);
+    this.$emit('on-import', this.currentValue)
   }
-
 }
 </script>
 

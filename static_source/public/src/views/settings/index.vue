@@ -3,6 +3,13 @@
     <card-wrapper>
       <el-tabs v-model="internal.activeTab">
 
+<!--        <el-tab-pane-->
+<!--          label="Dashboards"-->
+<!--          name="dashboards"-->
+<!--        >-->
+<!--          <dashboard-list/>-->
+<!--        </el-tab-pane>-->
+
         <el-tab-pane
           label="Plugins"
           name="plugins"
@@ -17,23 +24,34 @@
           <variables/>
         </el-tab-pane>
 
+        <el-tab-pane
+          label="Areas"
+          name="areas"
+        >
+          <areas-list/>
+        </el-tab-pane>
+
       </el-tabs>
     </card-wrapper>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Plugins from '@/views/plugins/index.vue';
-import Variables from '@/views/variables/index.vue';
-import CardWrapper from '@/components/card-wrapper/index.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import Plugins from '@/views/plugins/index.vue'
+import Variables from '@/views/variables/index.vue'
+import CardWrapper from '@/components/card-wrapper/index.vue'
+import DashboardList from '@/views/dashboard/index.vue'
+import AreasList from '@/views/areas/index.vue'
 
 @Component({
   name: 'Settings',
   components: {
+    AreasList,
+    DashboardList,
     CardWrapper,
     Plugins,
-    Variables,
+    Variables
   }
 })
 export default class extends Vue {
@@ -41,8 +59,6 @@ export default class extends Vue {
     activeTab: 'plugins',
     pluginOptions: undefined
   };
-
-
 }
 </script>
 

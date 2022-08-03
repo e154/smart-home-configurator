@@ -83,44 +83,44 @@
 </template>
 
 <script lang="ts">
-import CodeMirror, {Editor} from 'codemirror';
-import 'codemirror/addon/lint/lint.css';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/darcula.css';
-import 'codemirror/mode/coffeescript/coffeescript';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
-import {Component, Vue, Watch} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiScript} from '@/api/stub';
-import router from '@/router';
-import {Form} from 'element-ui';
-import CardWrapper from '@/components/card-wrapper/index.vue';
-import ScriptEditor from '@/components/script_editor/index.vue';
-import stream from '@/api/stream';
+import CodeMirror, { Editor } from 'codemirror'
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/darcula.css'
+import 'codemirror/mode/coffeescript/coffeescript'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/json-lint'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiScript } from '@/api/stub'
+import router from '@/router'
+import { Form } from 'element-ui'
+import CardWrapper from '@/components/card-wrapper/index.vue'
+import ScriptEditor from '@/components/script_editor/index.vue'
+import stream from '@/api/stream'
 
 // HACK: have to use script-loader to load jsonlint
 /* eslint-disable import/no-webpack-loader-syntax */
-require('script-loader!jsonlint');
+require('script-loader!jsonlint')
 
 class elementOption {
-  public value: string = '';
-  public label: string = '';
+  public value = '';
+  public label = '';
 }
 
 @Component({
   name: 'ScriptNew',
-  components: {ScriptEditor, CardWrapper}
+  components: { ScriptEditor, CardWrapper }
 })
 export default class extends Vue {
-
   private options: elementOption[] = [
-    {value: 'coffeescript', label: 'coffeescript'},
-    {value: 'javascript', label: 'javascript'},
-    {value: 'typescript', label: 'typescript'},
+    { value: 'coffeescript', label: 'coffeescript' },
+    { value: 'javascript', label: 'javascript' },
+    { value: 'typescript', label: 'typescript' }
   ];
+
   private internal = {
-    activeTab: 'main',
+    activeTab: 'main'
   };
 
   private currentScript: ApiScript = {
@@ -132,16 +132,16 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ],
     lang: [
-      {required: true, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
@@ -150,30 +150,30 @@ export default class extends Vue {
   }
 
   private changed(value: string, event?: any) {
-    this.currentScript.source = value;
+    this.currentScript.source = value
   }
 
   private async save() {
     (this.$refs.currentScript as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
 
-      const {data} = await api.v1.scriptServiceAddScript(this.currentScript);
+      const { data } = await api.v1.scriptServiceAddScript(this.currentScript)
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'script created successfully',
           type: 'success',
           duration: 2000
-        });
-        router.push({path: `/scripts/edit/${data.id}`});
+        })
+        router.push({ path: `/scripts/edit/${data.id}` })
       }
-    });
+    })
   }
 
   private cancel() {
-    router.push({path: `/scripts/list`});
+    router.push({ path: '/scripts/list' })
   }
 }
 </script>

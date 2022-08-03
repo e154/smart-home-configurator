@@ -35,15 +35,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
 import { PermissionModule } from '@/store/modules/permission'
 import { SettingsModule } from '@/store/modules/settings'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 import variables from '@/styles/_variables.scss'
-import {RouteConfig} from 'vue-router';
-import Hamburger from '@/components/Hamburger/index.vue';
+import { RouteConfig } from 'vue-router'
+import Hamburger from '@/components/Hamburger/index.vue'
 
 @Component({
   name: 'SideBar',
@@ -54,7 +54,7 @@ import Hamburger from '@/components/Hamburger/index.vue';
   }
 })
 export default class extends Vue {
-  @Prop({required: true}) private routes!: RouteConfig[];
+  @Prop({ required: true }) private routes!: RouteConfig[];
 
   get sidebar() {
     return AppModule.sidebar
@@ -117,7 +117,6 @@ export default class extends Vue {
      background: rgba(0, 0, 0, .025)
    }
   }
-
 
 // reset element-ui css
   .horizontal-collapse-transition {

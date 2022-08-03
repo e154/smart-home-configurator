@@ -23,11 +23,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import Pagination from '@/components/Pagination/index.vue';
-import stream from '@/api/stream';
-import {LogObject} from '@/models';
-import {parseTime} from '@/utils';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import Pagination from '@/components/Pagination/index.vue'
+import stream from '@/api/stream'
+import { LogObject } from '@/models'
+import { parseTime } from '@/utils'
 
 @Component({
   name: 'Terminal',
@@ -36,39 +36,38 @@ import {parseTime} from '@/utils';
   }
 })
 export default class extends Vue {
-  @Prop() private show: boolean = false;
+  @Prop() private show = false;
 
   get visible(): boolean {
-    return this.show;
+    return this.show
   }
 
   set visible(val: boolean) {
-    this.$emit('on-hidden', false);
+    this.$emit('on-hidden', false)
   }
 
-  private direction: string = 'btt';
+  private direction = 'btt';
 
   private items: string[] = [];
-  private load: boolean = true;
+  private load = true;
 
   private created() {
-    //todo id
+    // todo id
     setTimeout(() => {
-      stream.subscribe('log', '1', this.onMessage);
-    }, 1000);
+      stream.subscribe('log', '1', this.onMessage)
+    }, 1000)
   }
 
   private destroyed() {
-    stream.unsubscribe('log', '1');
+    stream.unsubscribe('log', '1')
   }
 
   private onMessage(m: LogObject) {
-    const t = `${parseTime(m.created_at)}        `.substring(0, 33);
-    const l = `[${m.level}]       `.substring(0, 9);
-    const b = `${m.body}`;
-    this.items.unshift(t + l + b);
+    const t = `${parseTime(m.created_at)}        `.substring(0, 33)
+    const l = `[${m.level}]       `.substring(0, 9)
+    const b = `${m.body}`
+    this.items.unshift(t + l + b)
   }
-
 }
 </script>
 

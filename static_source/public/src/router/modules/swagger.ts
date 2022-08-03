@@ -1,11 +1,11 @@
-import {RouteConfig} from 'vue-router';
-import Develop from '@/layout/develop.vue';
+import { RouteConfig } from 'vue-router'
+import Develop from '@/layout/develop.vue'
 
 const swaggerRouter: RouteConfig = {
   path: '/swagger',
   component: Develop,
   redirect: '/swagger/index',
-  meta: {hidden: false},
+  meta: { hidden: false },
   children: [
     {
       path: 'index',
@@ -13,11 +13,11 @@ const swaggerRouter: RouteConfig = {
       name: 'Swagger',
       meta: {
         title: 'swagger',
-        icon: 'table',
+        icon: 'swagger',
         noCache: true
       }
     }
   ]
-};
+}
 
-export default swaggerRouter;
+export default swaggerRouter

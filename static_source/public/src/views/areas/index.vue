@@ -64,11 +64,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Pagination from '@/components/Pagination/index.vue';
-import api from '@/api/api';
-import {ApiArea} from '@/api/stub';
-import router from '@/router';
+import { Component, Vue } from 'vue-property-decorator'
+import Pagination from '@/components/Pagination/index.vue'
+import api from '@/api/api'
+import { ApiArea } from '@/api/stub'
+import router from '@/router'
 
 @Component({
   name: 'AreasList',
@@ -88,54 +88,54 @@ export default class extends Vue {
   };
 
   created() {
-    this.getList();
+    this.getList()
   }
 
   private async getList() {
-    this.listLoading = true;
-    const {data} = await api.v1.areaServiceGetAreaList({
+    this.listLoading = true
+    const { data } = await api.v1.areaServiceGetAreaList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
-      sort: this.listQuery.sort,
-    });
+      sort: this.listQuery.sort
+    })
 
-    this.list = data.items;
-    this.total = data.meta.total;
-    this.listLoading = false;
+    this.list = data.items
+    this.total = data.meta.total
+    this.listLoading = false
   }
 
   private handleFilter() {
-    this.listQuery.page = 1;
-    this.getList();
+    this.listQuery.page = 1
+    this.getList()
   }
 
   private sortChange(data: any) {
-    const {prop, order} = data;
+    const { prop, order } = data
     if (prop === 'name') {
-      this.sortByName(order);
+      this.sortByName(order)
     }
   }
 
   private sortByName(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+name';
+      this.listQuery.sort = '+name'
     } else {
-      this.listQuery.sort = '-name';
+      this.listQuery.sort = '-name'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private getSortClass(key: string) {
-    const sort = this.listQuery.sort;
-    return sort === `+${key}` ? 'ascending' : 'descending';
+    const sort = this.listQuery.sort
+    return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
   private goto(area: ApiArea) {
-    router.push({path: `/areas/edit/${area.id}`});
+    router.push({ path: `/areas/edit/${area.id}` })
   }
 
   private add() {
-    router.push({path: `/areas/new`});
+    router.push({ path: '/areas/new' })
   }
 }
 </script>

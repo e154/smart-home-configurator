@@ -8,7 +8,7 @@ const entitiesRouter: RouteConfig = {
   name: 'entities',
   meta: {
     title: 'entities',
-    icon: 'table',
+    icon: 'entity2',
     alwaysShow: true
   },
   children: [
@@ -17,8 +17,8 @@ const entitiesRouter: RouteConfig = {
       component: () => import('@/views/entities/index.vue'),
       name: 'entity list',
       meta: {
-        title: 'entityList',
-        }
+        title: 'entityList'
+      }
     },
     {
       path: 'edit/:id',
@@ -36,9 +36,9 @@ const entitiesRouter: RouteConfig = {
       props: true,
       name: 'entity new',
       meta: {
-        title: 'entityNew',
+        title: 'entityNew'
       }
-    },
+    }
   ]
 }
 

@@ -141,13 +141,13 @@
 </template>
 
 <script lang="ts">
-import api from '@/api/api';
-import router from '@/router';
-import {Component, Vue} from 'vue-property-decorator';
-import Pagination from '@/components/Pagination/index.vue';
-import {ApiArea, ApiEntity} from '@/api/stub';
-import ExportTool from '@/components/export-tool/index.vue';
-import {createCard} from '@/views/entities/common';
+import api from '@/api/api'
+import router from '@/router'
+import { Component, Vue } from 'vue-property-decorator'
+import Pagination from '@/components/Pagination/index.vue'
+import { ApiArea, ApiEntity } from '@/api/stub'
+import ExportTool from '@/components/export-tool/index.vue'
+import { createCard } from '@/views/entities/common'
 
 @Component({
   name: 'EntitiesList',
@@ -166,113 +166,113 @@ export default class extends Vue {
     limit: 20,
     sort: '-createdAt'
   };
+
   private internal = {
     importValue: ''
   };
 
   created() {
-    this.getList();
+    this.getList()
   }
 
   private async getList() {
-    this.listLoading = true;
-    const {data} = await api.v1.entityServiceGetEntityList({
+    this.listLoading = true
+    const { data } = await api.v1.entityServiceGetEntityList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
-      sort: this.listQuery.sort,
-    });
+      sort: this.listQuery.sort
+    })
 
-    this.list = data.items;
-    this.total = data.meta.total;
-    this.listLoading = false;
+    this.list = data.items
+    this.total = data.meta.total
+    this.listLoading = false
   }
 
   private handleFilter() {
-    this.listQuery.page = 1;
-    this.getList();
+    this.listQuery.page = 1
+    this.getList()
   }
 
   private sortChange(data: any) {
-    const {prop, order} = data;
+    const { prop, order } = data
     if (prop === 'id') {
-      this.sortByID(order);
+      this.sortByID(order)
     } else if (prop === 'createdAt') {
-      this.sortByCreatedAt(order);
+      this.sortByCreatedAt(order)
     } else if (prop === 'updatedAt') {
-      this.sortByUpdatedAt(order);
+      this.sortByUpdatedAt(order)
     }
   }
 
   private sortByCreatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+createdAt';
+      this.listQuery.sort = '+createdAt'
     } else {
-      this.listQuery.sort = '-createdAt';
+      this.listQuery.sort = '-createdAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByUpdatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+updatedAt';
+      this.listQuery.sort = '+updatedAt'
     } else {
-      this.listQuery.sort = '-updatedAt';
+      this.listQuery.sort = '-updatedAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByID(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+id';
+      this.listQuery.sort = '+id'
     } else {
-      this.listQuery.sort = '-id';
+      this.listQuery.sort = '-id'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private getSortClass(key: string) {
-    const sort = this.listQuery.sort;
-    return sort === `+${key}` ? 'ascending' : 'descending';
+    const sort = this.listQuery.sort
+    return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
   private goto(entity: ApiEntity) {
-    router.push({path: `/entities/edit/${entity.id}`});
+    router.push({ path: `/entities/edit/${entity.id}` })
   }
 
   private add() {
-    router.push({path: `/entities/new`});
+    router.push({ path: '/entities/new' })
   }
 
   private gotoArea(area: ApiArea) {
-    router.push({path: `/areas/edit/${area.id}`});
+    router.push({ path: `/areas/edit/${area.id}` })
   }
 
   private async reloadEntity(entity: ApiEntity, index: number) {
     if (entity) {
-      await api.v1.developerToolsServiceReloadEntity({id: entity.id});
+      await api.v1.developerToolsServiceReloadEntity({ id: entity.id })
       this.$notify({
         title: 'Success',
         message: 'entity reloaded successfully',
         type: 'success',
         duration: 2000
-      });
+      })
     }
   }
 
-  private showImport: boolean = false;
+  private showImport = false;
 
   private async onImport(value: string, event?: any) {
-    const json = JSON.parse(value);
-    const {data} = await createCard(json);
+    const json = JSON.parse(value)
+    const { data } = await createCard(json)
     if (data) {
-      this.getList();
+      this.getList()
       this.$notify({
         title: 'Success',
         message: 'entity imported successfully',
         type: 'success',
         duration: 2000
-      });
-
+      })
     }
   }
 }

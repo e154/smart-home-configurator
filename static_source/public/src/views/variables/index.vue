@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import Pagination from '@/components/Pagination/index.vue';
-import api from '@/api/api';
-import {ApiLog} from '@/api/stub';
+import { Component, Vue } from 'vue-property-decorator'
+import Pagination from '@/components/Pagination/index.vue'
+import api from '@/api/api'
+import { ApiLog } from '@/api/stub'
 
 @Component({
   name: 'Variables',

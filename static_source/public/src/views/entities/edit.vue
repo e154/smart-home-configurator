@@ -95,9 +95,9 @@
               name="attributes"
               v-if="internal.pluginOptions.actorCustomAttrs || Object.keys(internal.pluginOptions.actorAttrs).length"
             >
-              <attributes
-                v-model="currentEntity.attributes"
-                :settings="internal.pluginOptions.actorAttrs"
+              <AttributesEditor
+                v-model="internal.attributes"
+                :attrs="internal.pluginOptions.actorAttrs"
                 :customAttrs="internal.pluginOptions.actorCustomAttrs"
                 @update-value="changedAttributes($event, 'attributes')"
               />
@@ -108,9 +108,9 @@
               name="settings"
               v-if="internal.pluginOptions.actorCustomSetts || Object.keys(internal.pluginOptions.actorSetts).length"
             >
-              <attributes
-                v-model="currentEntity.settings"
-                :settings="internal.pluginOptions.actorSetts"
+              <AttributesEditor
+                v-model="internal.settings"
+                :attrs="internal.pluginOptions.actorSetts"
                 :customAttrs="internal.pluginOptions.actorCustomSetts"
                 @update-value="changedAttributes($event, 'settings')"
               />
@@ -121,8 +121,29 @@
               name="metrics"
             >
               <metrics
-                v-model="currentEntity.metrics"
-                @update-value="changedScript"
+                :metrics="internal.metrics"
+                @update-value="changedMetrics"
+              />
+            </el-tab-pane>
+
+            <el-tab-pane
+              label="Storage"
+              name="storage"
+            >
+              <storage :entity="currentEntity"/>
+            </el-tab-pane>
+
+            <el-tab-pane
+              label="Current event"
+              name="current_event"
+            >
+              <el-button type="default" @click.prevent.stop="requestCurrentState()" style="margin-bottom: 20px"><i
+                class="el-icon-refresh"/> {{ $t('dashboard.editor.getEvent') }}
+              </el-button>
+
+              <json-editor
+                ref="jsoneditor"
+                :value="lastEvent"
               />
             </el-tab-pane>
 
@@ -140,8 +161,14 @@
             @on-close="showExport=false"/>
 
           <el-button type="primary" @click.prevent.stop="save">{{ $t('main.save') }}</el-button>
-          <el-button type="primary" icon="el-icon-refresh" @click.prevent.stop='restart'>{{$t('main.restart') }}</el-button>
-          <el-button type="primary" icon="el-icon-document" @click.prevent.stop='_export'>{{$t('main.export') }}</el-button>
+          <el-button type="primary" icon="el-icon-refresh" @click.prevent.stop='restart'>{{
+              $t('main.restart')
+            }}
+          </el-button>
+          <el-button type="primary" icon="el-icon-document" @click.prevent.stop='_export'>{{
+              $t('main.export')
+            }}
+          </el-button>
           <el-button @click.prevent.stop="fetchEntity">{{ $t('main.load_from_server') }}</el-button>
           <el-button @click.prevent.stop="cancel">{{ $t('main.cancel') }}</el-button>
           <el-popconfirm
@@ -171,12 +198,13 @@ import {
   ApiEntity,
   ApiEntityShort,
   ApiEntityState,
+  ApiGetPluginOptionsResult,
   ApiImage,
-  ApiNewEntityRequest,
+  ApiMetric,
   ApiScript,
 } from '@/api/stub';
 import router from '@/router';
-import Attributes from './components/attributes.vue';
+import AttributesEditor from './components/attributes_editor.vue';
 import Scripts from './components/scripts.vue';
 import Actions from './components/actions.vue';
 import States from './components/states.vue';
@@ -188,13 +216,20 @@ import {Form} from 'element-ui';
 import ImagePreview from '@/views/images/preview.vue';
 import CardWrapper from '@/components/card-wrapper/index.vue';
 import ExportTool from '@/components/export-tool/index.vue';
+import stream from '@/api/stream';
+import {UUID} from 'uuid-generator-ts';
+import JsonEditor from '@/components/JsonEditor/index.vue';
+import {EventStateChange} from '@/api/stream_types';
+import Storage from '@/views/entities/components/storage.vue';
 
 @Component({
   name: 'EntityEditor',
   components: {
+    Storage,
+    JsonEditor,
     ExportTool,
     CardWrapper,
-    Attributes,
+    AttributesEditor,
     Scripts,
     Actions,
     States,
@@ -210,16 +245,31 @@ export default class extends Vue {
 
   private listLoading: boolean = true;
 
-  private internal = {
+  // id for streaming subscribe
+  private currentID: string = '';
+
+  private internal: {
+    activeTab: string,
+    pluginOptions?: ApiGetPluginOptionsResult,
+    exportValue?: ApiEntity,
+    attributes: ApiAttribute[],
+    settings: ApiAttribute[],
+    metrics: ApiMetric[],
+  } = {
     activeTab: 'main',
-    pluginOptions: undefined,
-    exportValue: {},
+    pluginOptions: {} as ApiGetPluginOptionsResult,
+    exportValue: {} as ApiEntity,
+    attributes: [],
+    settings: [],
+    metrics: [],
   };
 
   // entity params
   private currentEntity: ApiEntity = {
     pluginName: '',
-    autoLoad: true
+    autoLoad: true,
+    parent: {},
+    metrics: []
   };
 
   private rules = {
@@ -238,23 +288,43 @@ export default class extends Vue {
   };
 
   created() {
+    let uuid = new UUID();
+    this.currentID = uuid.getDashFreeUUID();
+
     this.fetchEntity();
+
+    setTimeout(() => {
+      stream.subscribe('state_changed', this.currentID, this.onStateChanged);
+      this.requestCurrentState();
+    }, 1000);
   }
 
-  private changedAttributes(value: Map<string, ApiAttribute>, event: any) {
+  private destroyed() {
+    stream.unsubscribe('state_changed', this.currentID);
+  }
+
+  private onStateChanged(event: EventStateChange) {
+    if (event.entity_id != this.currentEntity.id) {
+      return;
+    }
+
+    this.lastEvent = event;
+  }
+
+  private changedAttributes(attributes: ApiAttribute[], event: any) {
     if (event == 'attributes') {
-      if (value) {
-        this.$set(this.currentEntity, 'attributes', value);
-        // this.currentEntity = Object.assign({}, this.currentEntity, {attributes: value})
+      if (attributes) {
+        this.$set(this.internal, 'attributes', attributes);
+        // this.internal = Object.assign({}, this.internal, {attributes: attributes})
       } else {
-        this.$set(this.currentEntity, 'attributes', undefined);
+        this.$set(this.internal, 'attributes', undefined);
       }
     } else if (event == 'settings') {
-      if (value) {
-        this.$set(this.currentEntity, 'settings', value);
-        // this.currentEntity = Object.assign({}, this.currentEntity, {settings: value})
+      if (attributes) {
+        this.$set(this.internal, 'settings', attributes);
+        // this.internal = Object.assign({}, this.internal, {settings: value})
       } else {
-        this.$set(this.currentEntity, 'settings', undefined);
+        this.$set(this.internal, 'settings', undefined);
       }
     }
   }
@@ -268,6 +338,7 @@ export default class extends Vue {
   }
 
   private changedParent(values: ApiEntityShort, event?: any) {
+    console.log('changedParent', values);
     if (values) {
       this.$set(this.currentEntity, 'parent', values);
     } else {
@@ -291,10 +362,46 @@ export default class extends Vue {
     }
   }
 
+  private changedMetrics(values: ApiMetric[], event?: any) {
+    if (values) {
+      this.$set(this.internal, 'metrics', values);
+    } else {
+      this.$set(this.internal, 'metrics', undefined);
+    }
+  }
+
   private async fetchEntity() {
     this.listLoading = true;
     const {data} = await api.v1.entityServiceGetEntity(this.id);
     this.currentEntity = data;
+
+    // attributes
+    let attr: ApiAttribute[] = [];
+    if (this.currentEntity.attributes) {
+      for (const key in this.currentEntity.attributes) {
+        attr.push(this.currentEntity.attributes[key]);
+      }
+    }
+    this.$set(this.internal, 'attributes', attr);
+
+    // settings
+    let setts: ApiAttribute[] = [];
+    if (this.currentEntity.settings) {
+      for (const key in this.currentEntity.settings) {
+        setts.push(this.currentEntity.settings[key]);
+      }
+    }
+    this.$set(this.internal, 'settings', setts);
+
+    // metrics
+    let metrics: ApiMetric[] = [];
+    if (this.currentEntity.metrics) {
+      for (const key in this.currentEntity.metrics) {
+        metrics.push(this.currentEntity.metrics[key]);
+      }
+    }
+    this.$set(this.internal, 'metrics', metrics);
+
     await this.fetchPlugin();
     this.listLoading = false;
   }
@@ -317,10 +424,22 @@ export default class extends Vue {
       parent: this.currentEntity.parent || undefined,
       actions: [],
       states: [],
-      attributes: this.currentEntity.attributes,
-      settings: this.currentEntity.settings,
       scripts: this.currentEntity.scripts,
     };
+
+    // attributes
+    let attributes: { [key: string]: ApiAttribute } = {};
+    for (const index in this.internal.attributes) {
+      attributes[this.internal.attributes[index].name] = this.internal.attributes[index];
+    }
+    this.$set(entity, 'attributes', attributes);
+
+    // settings
+    let settings: { [key: string]: ApiAttribute } = {};
+    for (const index in this.internal.settings) {
+      settings[this.internal.settings[index].name] = this.internal.settings[index];
+    }
+    this.$set(entity, 'settings', settings);
 
     // update image
     if (entity.image) {
@@ -344,6 +463,15 @@ export default class extends Vue {
       }
       entity.states?.push(state);
     }
+
+    // metrics
+    let metrics: ApiMetric[] = [];
+    if (this.internal.metrics) {
+      for (const key in this.internal.metrics) {
+        metrics.push(this.internal.metrics[key]);
+      }
+    }
+    this.$set(entity, 'metrics', metrics);
 
     return entity;
   }
@@ -416,12 +544,23 @@ export default class extends Vue {
   }
 
   private showExport: boolean = false;
+
   private _export() {
-    let entity: any
+    let entity: any;
     entity = this.prepareSave();
-    entity.name = this.currentEntity.id?.replaceAll(entity.pluginName + ".", "");
+    entity.name = this.currentEntity.id?.replaceAll(entity.pluginName + '.', '');
     this.internal.exportValue = entity;
     this.showExport = true;
+  }
+
+  private lastEvent: EventStateChange = {} as EventStateChange;
+
+  private requestCurrentState() {
+    stream.send({
+      id: UUID.createUUID(),
+      query: 'event_get_last_state',
+      body: btoa(JSON.stringify({'entity_id': this.currentEntity.id}))
+    });
   }
 }
 </script>

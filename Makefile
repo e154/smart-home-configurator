@@ -106,7 +106,7 @@ svgo:
 	cd ${ROOT} && svgo ${DIR} --enable=inlineStyles  --config '{ "plugins": [ { "inlineStyles": { "onlyMatchedOnce": false } }] }' --pretty
 
 
-clientclient:
+client:
 	@echo "Building protobuf files"
 	cd ${ROOT}/system/client/protos && \
 	mkdir -p ${ROOT}/system/client/stub && \

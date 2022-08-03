@@ -13,7 +13,7 @@
         :key="element.id"
         class="board-item"
       >
-        {{ element.name }} {{ element.id }}
+        {{ element.title }} {{ element.id }}
       </div>
     </draggable>
   </div>

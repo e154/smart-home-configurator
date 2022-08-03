@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/e154/smart-home-configurator/system/websocketproxy"
-	"github.com/labstack/echo/v4"
 	"net/http"
 	"net/url"
+
+	"github.com/e154/smart-home-configurator/system/websocketproxy"
+	"github.com/labstack/echo/v4"
 )
 
 // ControllerWs ...

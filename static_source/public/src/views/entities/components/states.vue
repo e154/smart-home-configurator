@@ -109,7 +109,6 @@
                 </template>
               </el-table-column>
 
-
             </el-table>
 
           </el-col>
@@ -121,10 +120,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiEntityState, ApiGetPluginOptionsResultEntityState, ApiImage} from '@/api/stub';
-import {Form} from 'element-ui';
-import ImagePreview from '@/views/images/preview.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiEntityState, ApiGetPluginOptionsResultEntityState, ApiImage } from '@/api/stub'
+import { Form } from 'element-ui'
+import ImagePreview from '@/views/images/preview.vue'
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -139,34 +138,33 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-
   @Prop() private value?: ApiEntityState[];
   @Prop() private settings?: { [key: string]: ApiGetPluginOptionsResultEntityState };
-  @Prop({default: false}) private customStates?: boolean;
+  @Prop({ default: false }) private customStates?: boolean;
 
   private mode: Mode = Mode.VIEW;
-  private currentItem: ApiEntityState = {};
+  private currentItem: ApiEntityState = {} as ApiEntityState;
   private currentItemIndex?: number;
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   get states(): ApiEntityState[] {
-    let states: ApiEntityState[] = [];
+    const states: ApiEntityState[] = []
     if (this.value) {
       for (const key in this.value) {
-        states.push(this.value[key]);
+        states.push(this.value[key])
       }
     }
-    return states;
+    return states
   }
 
   set states(value: ApiEntityState[]) {
@@ -174,84 +172,84 @@ export default class extends Vue {
   }
 
   private setState(state: ApiEntityState) {
-    this.$emit('set-state', state.name);
+    this.$emit('set-state', state.name)
   }
 
   private editState(state: ApiEntityState, index: number) {
-    this.currentItem = Object.assign({}, state);
-    this.currentItemIndex = index;
-    this.mode = Mode.EDIT;
+    this.currentItem = Object.assign({}, state)
+    this.currentItemIndex = index
+    this.mode = Mode.EDIT
   }
 
   private add() {
-    this.currentItem = {};
-    this.mode = Mode.NEW;
+    this.currentItem = {} as ApiEntityState
+    this.mode = Mode.NEW
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return;
+        return
       }
       if (this.mode === Mode.NEW) {
         if (this.states) {
-          this.states.push(this.currentItem);
+          this.states.push(this.currentItem)
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.states && this.currentItemIndex != undefined) {
-          this.states[this.currentItemIndex] = this.currentItem;
+          this.states[this.currentItemIndex] = this.currentItem
         }
       }
-      let states: ApiEntityState[] = [];
+      const states: ApiEntityState[] = []
       for (const index in this.states) {
-        states.push(this.states[index]);
+        states.push(this.states[index])
       }
-      this.$emit('update-value', states);
-      this.resetForm();
+      this.$emit('update-value', states)
+      this.resetForm()
       setTimeout(() => {
-        this.$forceUpdate();
-      }, 0.5 * 1000);
-    });
+        this.$forceUpdate()
+      }, 0.5 * 1000)
+    })
   }
 
   private resetForm() {
-    this.currentItem = {};
-    this.mode = Mode.VIEW;
-    this.currentItemIndex = undefined;
+    this.currentItem = {} as ApiEntityState
+    this.mode = Mode.VIEW
+    this.currentItemIndex = undefined
   }
 
   private removeItem() {
     if (this.states) {
-      for (let index in this.states) {
+      for (const index in this.states) {
         if (this.currentItem && this.states[index].name == this.currentItem.name) {
-          this.states.splice(+index, 1);
+          this.states.splice(+index, 1)
         }
       }
     }
-    this.mode = Mode.VIEW;
-    this.currentItem = {};
+    this.mode = Mode.VIEW
+    this.currentItem = {} as ApiEntityState
   }
 
   private loadFromPlugin() {
-    let value: ApiEntityState[] = [];
+    const value: ApiEntityState[] = []
     if (this.settings) {
       for (const k in this.settings) {
-        const item = this.settings[k];
+        const item = this.settings[k]
         value.push({
-          name: item.name,
+          name: item.name || '',
           description: item.description,
-          icon: item.icon,
-        });
+          icon: item.icon
+        })
       }
     }
-    this.$emit('update-value', value);
+    this.$emit('update-value', value)
     setTimeout(() => {
-      this.$forceUpdate();
-    }, 0.5 * 1000);
+      this.$forceUpdate()
+    }, 0.5 * 1000)
   }
 
   private onSelectImage(value: ApiImage, event?: any) {
-    this.$set(this.currentItem, 'image', value);
+    this.$set(this.currentItem, 'image', value)
   }
 }
 </script>

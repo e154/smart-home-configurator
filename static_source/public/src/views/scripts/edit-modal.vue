@@ -19,26 +19,26 @@
 </template>
 
 <script lang="ts">
-import CodeMirror, {Editor} from 'codemirror';
-import 'codemirror/addon/lint/lint.css';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/darcula.css';
-import 'codemirror/mode/coffeescript/coffeescript';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiScript} from '@/api/stub';
+import CodeMirror, { Editor } from 'codemirror'
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/darcula.css'
+import 'codemirror/mode/coffeescript/coffeescript'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/json-lint'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiScript } from '@/api/stub'
 
 // HACK: have to use script-loader to load jsonlint
 /* eslint-disable import/no-webpack-loader-syntax */
-require('script-loader!jsonlint');
+require('script-loader!jsonlint')
 
 @Component({
   name: 'ScriptEditModal'
 })
 export default class extends Vue {
-  @Prop({required: true}) private id!: number;
+  @Prop({ required: true }) private id!: number;
 
   private jsonEditor?: Editor;
   private value?: string = '';
@@ -52,50 +52,50 @@ export default class extends Vue {
   };
 
   private async fetch() {
-    this.listLoading = true;
-    const {data} = await api.v1.scriptServiceGetScriptById(this.id);
-    this.currentScript = data;
-    this.setValue(data.source);
-    this.listLoading = false;
+    this.listLoading = true
+    const { data } = await api.v1.scriptServiceGetScriptById(this.id)
+    this.currentScript = data
+    this.setValue(data.source)
+    this.listLoading = false
   }
 
   created() {
-    this.fetch();
+    this.fetch()
   }
 
   private async save() {
-    let script: ApiScript = {
+    const script: ApiScript = {
       name: this.currentScript.name,
       lang: this.currentScript.lang,
       source: this.getValue(),
-      description: this.currentScript.description,
-    };
-    const {data} = await api.v1.scriptServiceUpdateScriptById(this.id, script);
+      description: this.currentScript.description
+    }
+    const { data } = await api.v1.scriptServiceUpdateScriptById(this.id, script)
     if (data) {
       this.$notify({
         title: 'Success',
         message: 'script updated successfully',
         type: 'success',
         duration: 2000
-      });
+      })
     }
   }
 
   private reload() {
-    this.fetch();
+    this.fetch()
   }
 
   @Watch('id')
   private onIdChange(id: number) {
-    this.fetch();
+    this.fetch()
   }
 
   @Watch('value')
   private onValueChange(value: string) {
     if (this.jsonEditor) {
-      const editorValue = this.jsonEditor.getValue();
+      const editorValue = this.jsonEditor.getValue()
       if (value !== editorValue) {
-        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2));
+        this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
       }
     }
   }
@@ -107,28 +107,27 @@ export default class extends Vue {
       gutters: ['CodeMirror-lint-markers'],
       theme: 'darcula',
       lint: true
-    });
+    })
 
-    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2));
+    this.jsonEditor.setValue(JSON.stringify(this.value, null, 2))
     this.jsonEditor.on('change', editor => {
-      this.$emit('changed', editor.getValue());
-      this.$emit('input', editor.getValue());
-    });
+      this.$emit('changed', editor.getValue())
+      this.$emit('input', editor.getValue())
+    })
   }
 
   public setValue(value: string) {
     if (this.jsonEditor) {
-      this.jsonEditor.setValue(value);
+      this.jsonEditor.setValue(value)
     }
   }
 
   public getValue() {
     if (this.jsonEditor) {
-      return this.jsonEditor.getValue();
+      return this.jsonEditor.getValue()
     }
-    return '';
+    return ''
   }
-
 }
 </script>
 

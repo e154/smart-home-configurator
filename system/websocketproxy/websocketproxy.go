@@ -21,12 +21,13 @@
 package websocketproxy
 
 import (
-	"github.com/e154/smart-home-configurator/common/logger"
 	"io"
 	"net"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/e154/smart-home-configurator/common/logger"
 
 	"github.com/gorilla/websocket"
 )

@@ -74,11 +74,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiPlugin} from '@/api/stub';
-import Pagination from '@/components/Pagination/index.vue';
-import router from '@/router';
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiPlugin } from '@/api/stub'
+import Pagination from '@/components/Pagination/index.vue'
+import router from '@/router'
 
 @Component({
   name: 'Plugins',
@@ -98,68 +98,68 @@ export default class extends Vue {
   };
 
   created() {
-    this.getList();
+    this.getList()
   }
 
   private async getList() {
-    this.listLoading = true;
-    const {data} = await api.v1.pluginServiceGetPluginList({
+    this.listLoading = true
+    const { data } = await api.v1.pluginServiceGetPluginList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
-      sort: this.listQuery.sort,
-    });
+      sort: this.listQuery.sort
+    })
 
-    this.list = data.items;
-    this.total = data.meta.total;
-    this.listLoading = false;
+    this.list = data.items
+    this.total = data.meta.total
+    this.listLoading = false
   }
 
   private handleFilter() {
-    this.listQuery.page = 1;
-    this.getList();
+    this.listQuery.page = 1
+    this.getList()
   }
 
   private sortChange(data: any) {
-    const {prop, order} = data;
+    const { prop, order } = data
     if (prop === 'name') {
-      this.sortByName(order);
+      this.sortByName(order)
     }
   }
 
   private sortByName(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+name';
+      this.listQuery.sort = '+name'
     } else {
-      this.listQuery.sort = '-name';
+      this.listQuery.sort = '-name'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private getSortClass(key: string) {
-    const sort = this.listQuery.sort;
-    return sort === `+${key}` ? 'ascending' : 'descending';
+    const sort = this.listQuery.sort
+    return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
   private goto(plugin: ApiPlugin) {
-    router.push({path: `/plugins/edit/${plugin.name}`});
+    router.push({ path: `/plugins/edit/${plugin.name}` })
   }
 
   private updateItem(plugin: ApiPlugin) {
-   if (plugin.enabled) {
-     this.enable(plugin);
-   } else {
-     this.disable(plugin);
-   }
+    if (plugin.enabled) {
+      this.enable(plugin)
+    } else {
+      this.disable(plugin)
+    }
   }
 
   private async enable(plugin: ApiPlugin) {
-    const {data} = await api.v1.pluginServiceEnablePlugin(plugin.name)
-    this.getList();
+    const { data } = await api.v1.pluginServiceEnablePlugin(plugin.name)
+    this.getList()
   }
 
   private async disable(plugin: ApiPlugin) {
-    const {data} = await api.v1.pluginServiceDisablePlugin(plugin.name)
-    this.getList();
+    const { data } = await api.v1.pluginServiceDisablePlugin(plugin.name)
+    this.getList()
   }
 }
 </script>

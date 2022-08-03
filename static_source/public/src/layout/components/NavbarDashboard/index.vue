@@ -117,7 +117,7 @@ export default class extends Vue {
   }
 
   private updateDrawer() {
-    this.$root.$emit('update-drawer', 1);
+    this.$root.$emit('update-drawer', 1)
   }
 }
 </script>

@@ -81,91 +81,95 @@
 
 <script lang="ts">
 
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiZigbee2Mqtt} from '@/api/stub';
-import router from '@/router';
-import {Form} from 'element-ui';
-import Devices from '@/views/zigbee2mqtt/components/devices.vue';
-import CardWrapper from '@/components/card-wrapper/index.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiZigbee2Mqtt } from '@/api/stub'
+import router from '@/router'
+import { Form } from 'element-ui'
+import Devices from '@/views/zigbee2mqtt/components/devices.vue'
+import CardWrapper from '@/components/card-wrapper/index.vue'
 
 @Component({
   name: 'Editor',
   components: {
     CardWrapper,
-    Devices,
+    Devices
   }
 })
 export default class extends Vue {
-  @Prop({required: true}) private id!: number;
+  @Prop({ required: true }) private id!: number;
 
-  private listLoading: boolean = true;
+  private listLoading = true;
 
   private internal = {
-    activeTab: 'devices',
+    activeTab: 'devices'
   };
 
   // entity params
   private currentBridge: ApiZigbee2Mqtt = {
     name: '',
-    password: '',
+    password: ''
   };
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     login: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   created() {
-    this.fetchBridge();
+    this.fetchBridge()
   }
 
   private async fetchBridge() {
-    this.listLoading = true;
-    const {data} = await api.v1.zigbee2MqttServiceGetZigbee2MqttBridge(this.id);
-    this.currentBridge = data;
-    this.listLoading = false;
+    this.listLoading = true
+    const { data } = await api.v1.zigbee2MqttServiceGetZigbee2MqttBridge(this.id)
+    this.currentBridge = data
+    this.listLoading = false
   }
 
   private async save() {
     (this.$refs.currentBridge as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
-      const bridge = {};
-      const {data} = await api.v1.zigbee2MqttServiceUpdateBridgeById(this.id, bridge);
+      const bridge = {
+        name: this.currentBridge.name,
+        login: this.currentBridge.login,
+        password: this.currentBridge.password,
+        permitJoin: this.currentBridge.permitJoin,
+        baseTopic: this.currentBridge.baseTopic
+      }
+      const { data } = await api.v1.zigbee2MqttServiceUpdateBridgeById(this.id, bridge)
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'bridge updated successfully',
           type: 'success',
           duration: 2000
-        });
+        })
       }
-    });
+    })
   }
 
   private async remove() {
-    const {data} = await api.v1.zigbee2MqttServiceDeleteBridgeById(this.id);
+    const { data } = await api.v1.zigbee2MqttServiceDeleteBridgeById(this.id)
     this.$notify({
       title: 'Success',
       message: 'Delete Successfully',
       type: 'success',
       duration: 2000
-    });
-    router.push({path: `/zigbee2mqtt`});
+    })
+    router.push({ path: '/zigbee2mqtt' })
   }
 
   private cancel() {
-    router.push({path: `/zigbee2mqtt/list`});
+    router.push({ path: '/zigbee2mqtt/list' })
   }
 }
 </script>
-
-

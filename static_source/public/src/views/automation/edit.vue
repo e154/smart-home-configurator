@@ -84,7 +84,6 @@
               />
             </el-tab-pane>
 
-
           </el-tabs>
 
         </el-col>
@@ -121,18 +120,18 @@
 
 <script lang="ts">
 
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiAction, ApiArea, ApiCondition, ApiTask, ApiTrigger,} from '@/api/stub';
-import router from '@/router';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import AreaSearch from '@/views/areas/components/areas_search.vue';
-import {Form} from 'element-ui';
-import Triggers from '@/views/automation/components/triggers.vue';
-import Conditions from '@/views/automation/components/conditions.vue';
-import Actions from '@/views/automation/components/actions.vue';
-import CardWrapper from '@/components/card-wrapper/index.vue';
-import ExportTool from '@/components/export-tool/index.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiAction, ApiArea, ApiCondition, ApiTask, ApiTrigger } from '@/api/stub'
+import router from '@/router'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import AreaSearch from '@/views/areas/components/areas_search.vue'
+import { Form } from 'element-ui'
+import Triggers from '@/views/automation/components/triggers.vue'
+import Conditions from '@/views/automation/components/conditions.vue'
+import Actions from '@/views/automation/components/actions.vue'
+import CardWrapper from '@/components/card-wrapper/index.vue'
+import ExportTool from '@/components/export-tool/index.vue'
 
 @Component({
   name: 'Editor',
@@ -147,9 +146,9 @@ import ExportTool from '@/components/export-tool/index.vue';
   }
 })
 export default class extends Vue {
-  @Prop({required: true}) private id!: number;
+  @Prop({ required: true }) private id!: number;
 
-  private listLoading: boolean = true;
+  private listLoading = true;
 
   private internal = {
     activeTab: 'main',
@@ -166,66 +165,66 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ],
     plugin: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   created() {
-    this.fetchTask();
+    this.fetchTask()
   }
 
   private changedArea(values: ApiArea, event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'area', values);
+      this.$set(this.currentTask, 'area', values)
     } else {
-      this.$set(this.currentTask, 'area', undefined);
+      this.$set(this.currentTask, 'area', undefined)
     }
   }
 
   private changedTriggers(values: ApiTrigger[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'triggers', values);
+      this.$set(this.currentTask, 'triggers', values)
     } else {
-      this.$set(this.currentTask, 'triggers', undefined);
+      this.$set(this.currentTask, 'triggers', undefined)
     }
   }
 
   private changedConditions(values: ApiCondition[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'conditions', values);
+      this.$set(this.currentTask, 'conditions', values)
     } else {
-      this.$set(this.currentTask, 'conditions', undefined);
+      this.$set(this.currentTask, 'conditions', undefined)
     }
   }
 
   private changedActions(values: ApiAction[], event?: any) {
     if (values) {
-      this.$set(this.currentTask, 'action', values);
+      this.$set(this.currentTask, 'action', values)
     } else {
-      this.$set(this.currentTask, 'action', undefined);
+      this.$set(this.currentTask, 'action', undefined)
     }
   }
 
   private async fetchTask() {
-    this.listLoading = true;
-    const {data} = await api.v1.automationServiceGetTask(this.id);
-    this.currentTask = data;
-    this.listLoading = false;
+    this.listLoading = true
+    const { data } = await api.v1.automationServiceGetTask(this.id)
+    this.currentTask = data
+    this.listLoading = false
   }
 
   private async save() {
     (this.$refs.currentTask as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
       const task = {
         name: this.currentTask.name,
@@ -235,63 +234,61 @@ export default class extends Vue {
         triggers: this.currentTask.triggers || [],
         conditions: this.currentTask.conditions || [],
         actions: this.currentTask.actions || [],
-        area: this.currentTask.area,
-      };
-      const {data} = await api.v1.automationServiceUpdateTask(this.id, task);
+        area: this.currentTask.area
+      }
+      const { data } = await api.v1.automationServiceUpdateTask(this.id, task)
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'task updated successfully',
           type: 'success',
           duration: 2000
-        });
+        })
       }
-    });
+    })
   }
 
   private async remove() {
-    const {data} = await api.v1.automationServiceDeleteTask(this.id);
+    const { data } = await api.v1.automationServiceDeleteTask(this.id)
     this.$notify({
       title: 'Success',
       message: 'Delete Successfully',
       type: 'success',
       duration: 2000
-    });
-    router.push({path: `/automation`});
+    })
+    router.push({ path: '/automation' })
   }
 
   private async callAction(name: string) {
-    await api.v1.developerToolsServiceTaskCallAction({id: this.currentTask.id || 0, name: name});
+    await api.v1.developerToolsServiceTaskCallAction({ id: this.currentTask.id || 0, name: name })
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
       type: 'success',
       duration: 2000
-    });
+    })
   }
 
   private async callTrigger(name: string) {
-    await api.v1.developerToolsServiceTaskCallTrigger({id: this.currentTask.id || 0, name: name});
+    await api.v1.developerToolsServiceTaskCallTrigger({ id: this.currentTask.id || 0, name: name })
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
       type: 'success',
       duration: 2000
-    });
+    })
   }
 
   private cancel() {
-    router.push({path: `/automation/list`});
+    router.push({ path: '/automation/list' })
   }
 
-  private showExport: boolean = false;
+  private showExport = false;
   private async _export() {
     let task: any
     task = this.currentTask
-    this.internal.exportValue = task;
-    this.showExport = true;
+    this.internal.exportValue = task
+    this.showExport = true
   }
 }
 </script>
-
-

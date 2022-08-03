@@ -19,9 +19,10 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/e154/smart-home-configurator/common/logger"
 	m "github.com/e154/smart-home-configurator/models"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 

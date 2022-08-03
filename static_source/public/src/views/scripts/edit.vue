@@ -88,44 +88,45 @@
 </template>
 
 <script lang="ts">
-import 'codemirror/addon/lint/lint.css';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/darcula.css';
-import 'codemirror/mode/coffeescript/coffeescript';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import api from '@/api/api';
-import {ApiScript} from '@/api/stub';
-import router from '@/router';
-import {Form} from 'element-ui';
-import CardWrapper from '@/components/card-wrapper/index.vue';
-import ScriptEditor from '@/components/script_editor/index.vue';
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/darcula.css'
+import 'codemirror/mode/coffeescript/coffeescript'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/lint/json-lint'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import api from '@/api/api'
+import { ApiScript } from '@/api/stub'
+import router from '@/router'
+import { Form } from 'element-ui'
+import CardWrapper from '@/components/card-wrapper/index.vue'
+import ScriptEditor from '@/components/script_editor/index.vue'
 
 // HACK: have to use script-loader to load jsonlint
 /* eslint-disable import/no-webpack-loader-syntax */
-require('script-loader!jsonlint');
+require('script-loader!jsonlint')
 
 class elementOption {
-  public value: string = '';
-  public label: string = '';
+  public value = '';
+  public label = '';
 }
 
 @Component({
   name: 'ScriptEdit',
-  components: {ScriptEditor, CardWrapper}
+  components: { ScriptEditor, CardWrapper }
 })
 export default class extends Vue {
-  @Prop({required: true}) private id!: number;
+  @Prop({ required: true }) private id!: number;
 
   private listLoading = true;
   private options: elementOption[] = [
-    {value: 'coffeescript', label: 'coffeescript'},
-    {value: 'javascript', label: 'javascript'},
-    {value: 'typescript', label: 'typescript'},
+    { value: 'coffeescript', label: 'coffeescript' },
+    { value: 'javascript', label: 'javascript' },
+    { value: 'typescript', label: 'typescript' }
   ];
+
   private internal = {
-    activeTab: 'source',
+    activeTab: 'source'
   };
 
   private currentScript: ApiScript = {
@@ -137,90 +138,90 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ],
     lang: [
-      {required: true, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   private async fetch() {
-    this.listLoading = true;
-    const {data} = await api.v1.scriptServiceGetScriptById(this.id);
-    this.currentScript = data;
-    this.listLoading = false;
+    this.listLoading = true
+    const { data } = await api.v1.scriptServiceGetScriptById(this.id)
+    this.currentScript = data
+    this.listLoading = false
   }
 
   created() {
-    this.fetch();
+    this.fetch()
   }
 
   private async save() {
     (this.$refs.currentScript as Form).validate(async valid => {
       if (!valid) {
-        return;
+        return
       }
 
-      let script: ApiScript = {
+      const script: ApiScript = {
         name: this.currentScript.name,
         lang: this.currentScript.lang,
         source: this.currentScript.source,
-        description: this.currentScript.description,
-      };
-      const {data} = await api.v1.scriptServiceUpdateScriptById(this.id, script);
+        description: this.currentScript.description
+      }
+      const { data } = await api.v1.scriptServiceUpdateScriptById(this.id, script)
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'script updated successfully',
           type: 'success',
           duration: 2000
-        });
+        })
       }
-    });
+    })
   }
 
   private async copy() {
-    const {data} = await api.v1.scriptServiceCopyScriptById(this.id);
-    router.push({path: `/scripts/edit/${data.id}`});
+    const { data } = await api.v1.scriptServiceCopyScriptById(this.id)
+    router.push({ path: `/scripts/edit/${data.id}` })
   }
 
   private async remove() {
-    await api.v1.scriptServiceDeleteScriptById(this.id);
+    await api.v1.scriptServiceDeleteScriptById(this.id)
     this.$notify({
       title: 'Success',
       message: 'Delete Successfully',
       type: 'success',
       duration: 2000
-    });
-    router.push({path: `/scripts`});
+    })
+    router.push({ path: '/scripts' })
   }
 
   private changed(value: string, event?: any) {
-    this.currentScript.source = value;
+    this.currentScript.source = value
   }
 
   private async exec() {
     await api.v1.scriptServiceExecSrcScriptById({
       name: this.currentScript.name,
       source: this.currentScript.source,
-      lang: this.currentScript.lang,
-    });
+      lang: this.currentScript.lang
+    })
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
       type: 'success',
       duration: 2000
-    });
+    })
   }
 
   private cancel() {
-    router.push({path: `/scripts/list`});
+    router.push({ path: '/scripts/list' })
   }
 }
 </script>

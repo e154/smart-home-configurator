@@ -7,16 +7,16 @@ import Dashboard from '@/layout/dashboard.vue'
 
 /* Router modules */
 import scriptsRouter from './modules/scripts'
-import areasRouter from '@/router/modules/area';
-import entitiesRouter from '@/router/modules/entities';
-import automationRouter from '@/router/modules/automation';
-import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt';
-import imagesRouter from '@/router/modules/images';
-import logsRouter from '@/router/modules/log';
-import swaggerRouter from '@/router/modules/swagger';
-import usersRouter from '@/router/modules/users';
-import mapsRouter from '@/router/modules/maps';
-import settingsRouter from '@/router/modules/settings';
+import areasRouter from '@/router/modules/area'
+import entitiesRouter from '@/router/modules/entities'
+import automationRouter from '@/router/modules/automation'
+import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt'
+import imagesRouter from '@/router/modules/images'
+import logsRouter from '@/router/modules/log'
+import swaggerRouter from '@/router/modules/swagger'
+import usersRouter from '@/router/modules/users'
+import settingsRouter from '@/router/modules/settings'
+import dashboardsRouter from '@/router/modules/dashboard'
 
 Vue.use(VueRouter)
 
@@ -52,27 +52,18 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/',
     component: Dashboard,
-    redirect: '/dashboard',
+    redirect: '/board',
     children: [
       {
-        path: 'dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-        name: 'Dashboard',
+        path: 'board',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/view.vue'),
+        name: 'dashboard view',
         meta: {
           title: 'dashboard',
           icon: 'dashboard',
           affix: true
         }
-      },
-      {
-        path: '/dashboard/edit',
-        component: () => import('@/views/dashboard/editor.vue'),
-        name: 'editor',
-        meta: {
-          hidden: true,
-          title: 'editor',
-        }
-      },
+      }
     ]
   },
   {
@@ -104,7 +95,7 @@ export const constantRoutes: RouteConfig[] = [
     children: [
       {
         path: 'error',
-        component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue'),
+        component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue')
       }
     ]
   },
@@ -132,7 +123,7 @@ export const dashboardRoutes: RouteConfig[] = [
         name: 'Development',
         meta: {
           title: 'development',
-          icon: 'dashboard',
+          icon: 'development-kit',
           noCache: true
         }
       }
@@ -172,7 +163,7 @@ export const developRoutes: RouteConfig[] = [
     path: '/development',
     component: Develop,
     redirect: '/development/index',
-    meta: { hidden: true },
+    meta: { hidden: false },
     children: [
       {
         path: 'index',
@@ -192,9 +183,9 @@ export const developRoutes: RouteConfig[] = [
   automationRouter,
   zigbee2mqttRouter,
   usersRouter,
-  mapsRouter,
   imagesRouter,
   settingsRouter,
+  dashboardsRouter,
   logsRouter,
   swaggerRouter,
   {

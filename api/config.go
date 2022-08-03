@@ -2,10 +2,10 @@ package api
 
 // Config ...
 type Config struct {
-	HostPort string
+	HostPort    string
 	ApiHostPort string
-	Debug    bool
-	Swagger  bool
+	Debug       bool
+	Swagger     bool
 }
 
 // String ...

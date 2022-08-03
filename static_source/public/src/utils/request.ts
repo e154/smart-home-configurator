@@ -13,7 +13,7 @@ service.interceptors.request.use(
   (config) => {
     // Add X-Access-Token header to every request, you can add other custom headers here
     if (UserModule.token) {
-      config.headers['Authorization'] = UserModule.token
+      config.headers.Authorization = UserModule.token
     }
     return config
   },
@@ -40,7 +40,7 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-      if (response.status === 401 || response.status === 400 ) {
+      if (response.status === 401 || response.status === 400) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',

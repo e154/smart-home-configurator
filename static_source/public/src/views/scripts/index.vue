@@ -120,11 +120,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import api from '@/api/api';
-import Pagination from '@/components/Pagination/index.vue';
-import router from '@/router';
-import {ApiScript} from '@/api/stub';
+import { Component, Vue } from 'vue-property-decorator'
+import api from '@/api/api'
+import Pagination from '@/components/Pagination/index.vue'
+import router from '@/router'
+import { ApiScript } from '@/api/stub'
 
 @Component({
   name: 'ScriptList',
@@ -144,76 +144,76 @@ export default class extends Vue {
   };
 
   created() {
-    this.getList();
+    this.getList()
   }
 
   private async getList() {
-    this.listLoading = true;
-    const {data} = await api.v1.scriptServiceGetScriptList({
+    this.listLoading = true
+    const { data } = await api.v1.scriptServiceGetScriptList({
       limit: this.listQuery.limit,
       page: this.listQuery.page,
-      sort: this.listQuery.sort,
-    });
+      sort: this.listQuery.sort
+    })
 
-    this.list = data.items;
-    this.total = data.meta.total;
-    this.listLoading = false;
+    this.list = data.items
+    this.total = data.meta.total
+    this.listLoading = false
   }
 
   private handleFilter() {
-    this.listQuery.page = 1;
-    this.getList();
+    this.listQuery.page = 1
+    this.getList()
   }
 
   private sortChange(data: any) {
-    const {prop, order} = data;
+    const { prop, order } = data
     if (prop === 'id') {
-      this.sortByID(order);
+      this.sortByID(order)
     } else if (prop === 'createdAt') {
-      this.sortByCreatedAt(order);
+      this.sortByCreatedAt(order)
     } else if (prop === 'updatedAt') {
-      this.sortByUpdatedAt(order);
+      this.sortByUpdatedAt(order)
     }
   }
 
   private sortByCreatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+createdAt';
+      this.listQuery.sort = '+createdAt'
     } else {
-      this.listQuery.sort = '-createdAt';
+      this.listQuery.sort = '-createdAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByUpdatedAt(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+updatedAt';
+      this.listQuery.sort = '+updatedAt'
     } else {
-      this.listQuery.sort = '-updatedAt';
+      this.listQuery.sort = '-updatedAt'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private sortByID(order: string) {
     if (order === 'ascending') {
-      this.listQuery.sort = '+id';
+      this.listQuery.sort = '+id'
     } else {
-      this.listQuery.sort = '-id';
+      this.listQuery.sort = '-id'
     }
-    this.handleFilter();
+    this.handleFilter()
   }
 
   private getSortClass(key: string) {
-    const sort = this.listQuery.sort;
-    return sort === `+${key}` ? 'ascending' : 'descending';
+    const sort = this.listQuery.sort
+    return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
   private goto(script: ApiScript) {
-    router.push({path: `/scripts/edit/${script.id}`});
+    router.push({ path: `/scripts/edit/${script.id}` })
   }
 
   private add() {
-    router.push({path: `/scripts/new`});
+    router.push({ path: '/scripts/new' })
   }
 }
 </script>

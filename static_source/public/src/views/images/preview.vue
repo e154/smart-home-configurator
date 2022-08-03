@@ -28,10 +28,10 @@
 
 <script lang="ts">
 
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import ImageBrowser from '@/views/images/browser.vue';
-import {ApiImage} from '@/api/stub';
-import ImageDialog from '@/views/images/dialog.vue';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import ImageBrowser from '@/views/images/browser.vue'
+import { ApiImage } from '@/api/stub'
+import ImageDialog from '@/views/images/dialog.vue'
 
 @Component({
   name: 'ImagePreview',
@@ -43,40 +43,39 @@ import ImageDialog from '@/views/images/dialog.vue';
 export default class extends Vue {
   @Prop() private image?: ApiImage;
 
-  private currentUrl: string = '';
+  private currentUrl = '';
   private currentImage?: ApiImage;
-  private visible: boolean = false;
+  private visible = false;
   private basePath: string = process.env.VUE_APP_BASE_API || window.location.origin;
 
   private created() {
     if (this.image) {
-      this.currentImage = this.image;
-      this.getUrl();
+      this.currentImage = this.image
+      this.getUrl()
     }
   }
 
   @Watch('image')
   private watchImage(image: ApiImage) {
-    this.currentImage = image;
-    this.getUrl();
+    this.currentImage = image
+    this.getUrl()
   }
 
   private getUrl() {
     if (this.currentImage) {
-      this.currentUrl = this.basePath + this.currentImage.url;
+      this.currentUrl = this.basePath + this.currentImage.url
     } else {
-      this.currentUrl = '';
+      this.currentUrl = ''
     }
   }
 
   private onSelect(image: ApiImage, event?: any) {
-    this.$emit('on-select', image);
+    this.$emit('on-select', image)
   }
 
   private remove() {
-    this.$emit('on-select', undefined);
+    this.$emit('on-select', undefined)
   }
-
 }
 </script>
 

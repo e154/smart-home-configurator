@@ -27,7 +27,6 @@
             </el-button>
           </span>
 
-
           <script-search
             :multiple="false"
             v-model="currentItem.script"
@@ -104,12 +103,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiAction, ApiScript} from '@/api/stub';
-import {Form} from 'element-ui';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import ScriptEditModal from '@/views/scripts/edit-modal.vue';
-import ScriptDialog from '@/views/scripts/dialog.vue';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiAction, ApiScript } from '@/api/stub'
+import { Form } from 'element-ui'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import ScriptEditModal from '@/views/scripts/edit-modal.vue'
+import ScriptDialog from '@/views/scripts/dialog.vue'
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -126,85 +125,83 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: () => []}) private value?: ApiAction[];
+  @Prop({ required: false, default: () => [] }) private value?: ApiAction[];
 
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiAction = {};
   private currentItemIndex?: number;
-  private dialogScriptVisible: boolean = false;
+  private dialogScriptVisible = false;
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     script: [
-      {required: true, trigger: 'blur'},
+      { required: true, trigger: 'blur' }
     ]
   };
 
-
   private editAction(action: ApiAction, index: number) {
-    this.currentItem = Object.assign({}, action);
-    this.currentItemIndex = index;
-    this.mode = Mode.EDIT;
+    this.currentItem = Object.assign({}, action)
+    this.currentItemIndex = index
+    this.mode = Mode.EDIT
   }
 
   private callAction(action: ApiAction, index: number) {
-    this.$emit('call-action', action.name);
+    this.$emit('call-action', action.name)
   }
 
   private add() {
-    this.currentItem = {};
-    this.mode = Mode.NEW;
+    this.currentItem = {}
+    this.mode = Mode.NEW
   }
 
   private resetForm() {
-    this.currentItem = {};
-    this.mode = Mode.VIEW;
-    this.currentItemIndex = undefined;
+    this.currentItem = {}
+    this.mode = Mode.VIEW
+    this.currentItemIndex = undefined
   }
 
   private removeItem() {
     if (this.value) {
       for (const index in this.value) {
         if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1);
+          this.value.splice(+index, 1)
         }
       }
     }
-    this.mode = Mode.VIEW;
-    this.currentItem = {};
+    this.mode = Mode.VIEW
+    this.currentItem = {}
   }
 
   private changedScript(value: ApiScript, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', value);
+      this.$set(this.currentItem, 'script', value)
     } else {
-      this.$set(this.currentItem, 'script', undefined);
+      this.$set(this.currentItem, 'script', undefined)
     }
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return;
+        return
       }
 
       if (this.mode === Mode.NEW) {
         if (this.value) {
-          this.value.push(Object.assign({}, this.currentItem));
+          this.value.push(Object.assign({}, this.currentItem))
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.value) {
           if (this.currentItemIndex != undefined) {
-            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem);
+            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem)
           }
         }
       }
-      this.resetForm();
-    });
-    return;
+      this.resetForm()
+    })
   }
 }
 </script>

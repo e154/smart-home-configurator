@@ -2,15 +2,16 @@ package api
 
 import (
 	"context"
+	"html/template"
+	"net/http"
+	"net/url"
+	"strings"
+
 	"github.com/e154/smart-home-configurator/api/controllers"
 	"github.com/e154/smart-home-configurator/common/logger"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/fx"
-	"html/template"
-	"net/http"
-	"net/url"
-	"strings"
 )
 
 var (

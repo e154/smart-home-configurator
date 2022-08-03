@@ -40,7 +40,6 @@
           />
         </el-form-item>
 
-
         <el-form-item>
           <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{$t('entities.addAction') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
@@ -138,7 +137,6 @@
                 </template>
               </el-table-column>
 
-
             </el-table>
 
           </el-col>
@@ -149,13 +147,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiImage, ApiScript} from '@/api/stub';
-import ScriptSearch from '@/views/scripts/components/script_search.vue';
-import ScriptEditModal from '@/views/scripts/edit-modal.vue';
-import ScriptDialog from '@/views/scripts/dialog.vue';
-import ImagePreview from '@/views/images/preview.vue';
-import {Form} from 'element-ui';
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ApiEntityAction, ApiGetPluginOptionsResultEntityAction, ApiImage, ApiScript } from '@/api/stub'
+import ScriptSearch from '@/views/scripts/components/script_search.vue'
+import ScriptEditModal from '@/views/scripts/edit-modal.vue'
+import ScriptDialog from '@/views/scripts/dialog.vue'
+import ImagePreview from '@/views/images/preview.vue'
+import { Form } from 'element-ui'
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -173,94 +171,91 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-
   @Prop() private value?: ApiEntityAction[];
   @Prop() private settings?: Map<string, ApiGetPluginOptionsResultEntityAction>;
-  @Prop({default: false}) private customActions?: boolean;
+  @Prop({ default: false }) private customActions?: boolean;
 
   private mode: Mode = Mode.VIEW;
-  private currentItem: ApiEntityAction = {};
+  private currentItem: ApiEntityAction = {} as ApiEntityAction;
   private currentItemIndex?: number;
   private dialogScriptVisible = false;
 
   private rules = {
     name: [
-      {required: true, trigger: 'blur'},
-      {min: 4, max: 255, trigger: 'blur'}
+      { required: true, trigger: 'blur' },
+      { min: 4, max: 255, trigger: 'blur' }
     ],
     description: [
-      {required: false, trigger: 'blur'},
-      {max: 255, trigger: 'blur'}
+      { required: false, trigger: 'blur' },
+      { max: 255, trigger: 'blur' }
     ]
   };
 
   private changedScript(value: ApiScript, event: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', value);
+      this.$set(this.currentItem, 'script', value)
     } else {
-      this.$set(this.currentItem, 'script', undefined);
+      this.$set(this.currentItem, 'script', undefined)
     }
   }
 
   private editAction(action: ApiEntityAction, index: number) {
-    this.currentItem = Object.assign({}, action);
-    this.currentItemIndex = index;
-    this.mode = Mode.EDIT;
+    this.currentItem = Object.assign({}, action)
+    this.currentItemIndex = index
+    this.mode = Mode.EDIT
   }
 
   private add() {
-    this.currentItem = {};
-    this.mode = Mode.NEW;
+    this.currentItem = {} as ApiEntityAction
+    this.mode = Mode.NEW
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return;
+        return
       }
 
       if (this.mode === Mode.NEW) {
         if (this.value) {
-          this.value.push(Object.assign({}, this.currentItem));
+          this.value.push(Object.assign({}, this.currentItem))
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.value) {
           if (this.currentItemIndex != undefined) {
-            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem);
+            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem)
           }
         }
       }
-      this.resetForm();
-    });
-    return;
+      this.resetForm()
+    })
   }
 
   private resetForm() {
-    this.currentItem = {};
-    this.mode = Mode.VIEW;
-    this.currentItemIndex = undefined;
+    this.currentItem = {} as ApiEntityAction
+    this.mode = Mode.VIEW
+    this.currentItemIndex = undefined
   }
 
   private removeItem() {
     if (this.value) {
       for (const index in this.value) {
         if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1);
+          this.value.splice(+index, 1)
         }
       }
     }
-    this.mode = Mode.VIEW;
-    this.currentItem = {};
+    this.mode = Mode.VIEW
+    this.currentItem = {} as ApiEntityAction
   }
 
   private callAction(action: ApiEntityAction) {
-    this.$emit('call-action', action.name);
+    this.$emit('call-action', action.name)
   }
 
   private onSelectImage(value: ApiImage, event?: any) {
-    this.$set(this.currentItem, 'image', value);
+    this.$set(this.currentItem, 'image', value)
   }
-
 }
 </script>
 
