@@ -1,4 +1,4 @@
-Smart home configurator
+`Smart home configurator
 -----------------------
 
 [Project site](https://e154.github.io/smart-home/) |
@@ -14,9 +14,8 @@ Smart home configurator
 
 |Branch      |Status   |
 |------------|---------|
-|master      | [![Build Status](https://travis-ci.org/e154/smart-home-dashboard.svg?branch=master)](https://travis-ci.org/e154/smart-home-dashboard?branch=master)   |
-|dev         | [![Build Status](https://travis-ci.org/e154/smart-home-dashboard.svg?branch=develop)](https://travis-ci.org/e154/smart-home-dashboard?branch=develop) |
-
+|master      | ![Build Status](https://github.com/e154/smart-home-configurator/actions/workflows/test.yml/badge.svg?branch=master)   |
+|dev         | ![Build Status](https://github.com/e154/smart-home-configurator/actions/workflows/test.yml/badge.svg?branch=develop)  |
 
 Attention! The project is under active development.
 ---------
@@ -29,9 +28,9 @@ Attention! The project is under active development.
 ### Installation for development
 
 ```bash
-git clone https://github.com/e154/smart-home-dashboard $GOPATH/src/github.com/e154/smart-home-dashboard
+git clone https://github.com/e154/smart-home-configurator $GOPATH/src/github.com/e154/smart-home-configurator
 
-cd $GOPATH/src/github.com/e154/smart-home-dashboard
+cd $GOPATH/src/github.com/e154/smart-home-configurator
 
 go mod vendor
 
@@ -60,7 +59,7 @@ run frontend development tools
 run server
 
 ```bash
-./smart-home-dashboard
+./smart-home-configurator
 ```
 
 new module
@@ -114,4 +113,4 @@ It's all
 
 ### LICENSE
 
-[GPLv3 Public License](https://github.com/e154/smart-home-dashboard/blob/master/LICENSE)
+[GPLv3 Public License](https://github.com/e154/smart-home-configurator/blob/master/LICENSE)
