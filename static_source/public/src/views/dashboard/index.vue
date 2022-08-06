@@ -259,10 +259,6 @@ export default class extends Vue {
     }
   }
 
-  private activate(item: ApiDashboardShort) {
-
-  }
-
   private showImport = false;
   private importValue = '';
 

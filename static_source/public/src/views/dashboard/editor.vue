@@ -693,7 +693,7 @@ export default class extends Vue {
       duration: 2000
     })
 
-    this.$router.push('/settings/index')
+    this.$router.go(-1)
   }
 
   // ---------------------------------
