@@ -14,25 +14,25 @@ export default {
     externalLink: 'External Link',
     profile: 'Profile',
     scripts: 'Scripts',
-    scriptList: 'List',
+    scriptList: 'Scripts',
     scriptNew: 'New',
     scriptEdit: 'Edit',
     plugins: 'Plugins',
-    pluginList: 'List',
+    pluginList: 'Plugins',
     areas: 'Areas',
-    areaList: 'List',
+    areaList: 'Areas',
     areaNew: 'New',
     areaEdit: 'Edit',
     entities: 'Entities',
-    entityList: 'List',
+    entityList: 'Entities',
     entityNew: 'New',
     entityEdit: 'Edit',
     automation: 'Automation',
-    taskList: 'List',
+    taskList: 'Automation',
     taskNew: 'New',
     taskEdit: 'Edit',
     zigbee2mqtt: 'Zigbee2mqtt',
-    bridgeList: 'List',
+    bridgeList: 'Zigbee2mqtt',
     bridgeNew: 'New',
     bridgeEdit: 'Edit',
     logs: 'Logs',
@@ -40,15 +40,14 @@ export default {
     images: 'Images',
     imageList: 'List',
     swagger: 'Swagger',
-    swaggerList: 'List',
+    swaggerList: 'Swagger',
     users: 'Users',
-    userList: 'List',
+    userList: 'Users',
     maps: 'Maps',
     mapList: 'List',
     mqtt: 'Mqtt',
     mqttList: 'List',
-    settings: 'Settings',
-    UserList: 'List'
+    settings: 'Settings'
   },
   navbar: {
     logOut: 'Log Out',
@@ -116,6 +115,13 @@ export default {
       version: 'Version',
       enabled: 'Enabled',
       system: 'System'
+    }
+  },
+  variables: {
+    addNew: 'Add variable',
+    table: {
+      name: 'Name',
+      value: 'Value'
     }
   },
   areas: {

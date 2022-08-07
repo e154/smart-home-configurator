@@ -14,7 +14,7 @@ const usersRouter: RouteConfig = {
       name: 'user list',
       meta: {
         icon: 'user',
-        title: 'UserList'
+        title: 'userList'
       }
     },
     {
