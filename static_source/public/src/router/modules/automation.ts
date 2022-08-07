@@ -6,17 +6,14 @@ const automationRouter: RouteConfig = {
   component: Develop,
   redirect: '/automation/list',
   name: 'automation',
-  meta: {
-    title: 'automation',
-    icon: 'automation',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/automation/index.vue'),
       name: 'task list',
       meta: {
+        icon: 'automation',
         title: 'taskList'
       }
     },
@@ -36,7 +33,8 @@ const automationRouter: RouteConfig = {
       props: true,
       name: 'task new',
       meta: {
-        title: 'taskNew'
+        title: 'taskNew',
+        hidden: true
       }
     }
   ]

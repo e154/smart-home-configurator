@@ -515,17 +515,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import EditorTabMuu from './editor/tab-muu.vue'
-import stream from '@/api/stream'
-import { UUID } from 'uuid-generator-ts'
-import Editor from '@/views/automation/new.vue'
-import api from '@/api/api'
-import { Form } from 'element-ui'
-import { Card, Core, requestCurrentState, Tab } from '@/views/dashboard/core'
-import ImagePreview from '@/views/images/preview.vue'
-import CardWrapper from '@/components/card-wrapper/index.vue'
-import EntitySearch from '@/views/entities/components/entity_search.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import EditorTabMuu from './editor/tab-muu.vue';
+import stream from '@/api/stream';
+import {UUID} from 'uuid-generator-ts';
+import Editor from '@/views/automation/new.vue';
+import api from '@/api/api';
+import {Form} from 'element-ui';
+import {Card, Core, requestCurrentState, Tab} from '@/views/dashboard/core';
+import ImagePreview from '@/views/images/preview.vue';
+import CardWrapper from '@/components/card-wrapper/index.vue';
+import EntitySearch from '@/views/entities/components/entity_search.vue';
 import {
   CardEditorName,
   CardItemList,
@@ -535,12 +535,12 @@ import {
   IProgressEditor,
   IStateEditor,
   ITextEditor
-} from '@/views/dashboard/card_items'
-import { EventStateChange } from '@/api/stream_types'
-import ExportTool from '@/components/export-tool/index.vue'
-import { ApiArea } from '@/api/stub'
-import AreaSearch from '@/views/areas/components/areas_search.vue'
-import SplitPane from 'vue-splitpane'
+} from '@/views/dashboard/card_items';
+import {EventStateChange} from '@/api/stream_types';
+import ExportTool from '@/components/export-tool/index.vue';
+import {ApiArea} from '@/api/stub';
+import AreaSearch from '@/views/areas/components/areas_search.vue';
+import SplitPane from 'vue-splitpane';
 
 @Component({
   name: 'DashboardEditor',
@@ -562,7 +562,7 @@ import SplitPane from 'vue-splitpane'
   }
 })
 export default class extends Vue {
-  @Prop({ required: true }) private id!: number;
+  @Prop({required: true}) private id!: number;
 
   private loading = true;
   private bus: Vue = new Vue();
@@ -576,26 +576,26 @@ export default class extends Vue {
 
   private tabRules = {
     name: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ]
   };
 
   private cardRules = {
     title: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ]
   };
 
   private boardRules = {
     name: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ],
     description: [
-      { required: false, trigger: 'blur' },
-      { min: 0, max: 255, trigger: 'blur' }
+      {required: false, trigger: 'blur'},
+      {min: 0, max: 255, trigger: 'blur'}
     ]
   };
 
@@ -604,26 +604,26 @@ export default class extends Vue {
   }
 
   created() {
-    const uuid = new UUID()
-    this.currentID = uuid.getDashFreeUUID()
+    const uuid = new UUID();
+    this.currentID = uuid.getDashFreeUUID();
 
-    this.fetchDashboard()
+    this.fetchDashboard();
 
     this.bus.$on('selected_card', (m: any) => {
-      this.onSelectedCard(m)
-    })
+      this.onSelectedCard(m);
+    });
 
     setTimeout(() => {
-      stream.subscribe('state_changed', this.currentID, this.onStateChanged)
+      stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
       for (const entityId in this.board.current.entities) {
-        requestCurrentState(entityId)
+        requestCurrentState(entityId);
       }
-    }, 1000)
+    }, 1000);
   }
 
   private destroyed() {
-    stream.unsubscribe('state_changed', this.currentID)
+    stream.unsubscribe('state_changed', this.currentID);
   }
 
   resize() {
@@ -631,12 +631,12 @@ export default class extends Vue {
   }
 
   private onStateChanged(event: EventStateChange) {
-    this.bus.$emit('state_changed', event)
-    this.board.onStateChanged(event)
+    this.bus.$emit('state_changed', event);
+    this.board.onStateChanged(event);
   }
 
   private getCardEditorName(name: string): string {
-    return CardEditorName(name)
+    return CardEditorName(name);
   }
 
   // ---------------------------------
@@ -644,56 +644,56 @@ export default class extends Vue {
   // ---------------------------------
 
   private async fetchDashboard() {
-    this.loading = true
-    const { data } = await api.v1.dashboardServiceGetDashboardById(this.id)
-    this.board.currentBoard(data)
-    this.loading = false
+    this.loading = true;
+    const {data} = await api.v1.dashboardServiceGetDashboardById(this.id);
+    this.board.currentBoard(data);
+    this.loading = false;
   }
 
   private showExport = false;
   private exportValue = {};
 
   private _exportDashbord() {
-    this.exportValue = this.board.serialize()
-    this.showExport = true
+    this.exportValue = this.board.serialize();
+    this.showExport = true;
   }
 
   private cancel() {
-    this.$router.push('/settings/index')
+    this.$router.go(-1);
   }
 
   private async updateBoard() {
-    const { data } = await this.board.update()
+    const {data} = await this.board.update();
     if (data) {
       this.$notify({
         title: 'Success',
         message: 'dashboard updated successfully',
         type: 'success',
         duration: 2000
-      })
+      });
     }
   }
 
   private changedArea(values: ApiArea, event?: any) {
     if (values) {
-      this.$set(this.board.current, 'area', values)
-      this.$set(this.board.current, 'areaId', values.id)
+      this.$set(this.board.current, 'area', values);
+      this.$set(this.board.current, 'areaId', values.id);
     } else {
-      this.$set(this.board.current, 'area', undefined)
-      this.$set(this.board.current, 'areaId', undefined)
+      this.$set(this.board.current, 'area', undefined);
+      this.$set(this.board.current, 'areaId', undefined);
     }
   }
 
   private async removeBoard() {
-    await this.board.removeBoard()
+    await this.board.removeBoard();
     this.$notify({
       title: 'Success',
       message: 'dashboard deleted successfully',
       type: 'success',
       duration: 2000
-    })
+    });
 
-    this.$router.go(-1)
+    this.$router.go(-1);
   }
 
   // ---------------------------------
@@ -701,84 +701,84 @@ export default class extends Vue {
   // ---------------------------------
 
   private handleTabsEdit(targetName: string, action: string) {
-    console.log('targetName', targetName, 'action', action)
+    console.log('targetName', targetName, 'action', action);
     switch (action) {
       case 'add':
-        this.createTab()
-        break
+        this.createTab();
+        break;
       case 'remove':
     }
   }
 
   private updateCurrentTab(tab: any) {
-    this.board.updateCurrentTab()
+    this.board.updateCurrentTab();
   }
 
   private async createTab() {
-    await this.board.createTab()
+    await this.board.createTab();
 
     this.$notify({
       title: 'Success',
       message: 'tab created successfully',
       type: 'success',
       duration: 2000
-    })
+    });
   }
 
   private async updateTab() {
     if (!this.board.activeTab || !this.board.tabs[this.board.activeTab]) {
-      return
+      return;
     }
 
     (this.$refs.tabForm as Form).validate(async valid => {
       if (!valid) {
-        return
+        return;
       }
 
-      const { data } = await this.board.updateTab()
+      const {data} = await this.board.updateTab();
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'tab updated successfully',
           type: 'success',
           duration: 2000
-        })
+        });
       }
-    })
+    });
   }
 
   private async removeTab() {
     if (!this.board.tabs[this.board.activeTab]) {
-      return
+      return;
     }
-    await this.board.removeTab()
+    await this.board.removeTab();
 
-    await this.fetchDashboard()
+    await this.fetchDashboard();
   }
 
   private menuTabClick(index: string, tab: Tab) {
-    this.board.activeTab = index + ''
-    this.board.updateCurrentTab()
+    this.board.activeTab = index + '';
+    this.board.updateCurrentTab();
   }
 
   // ---------------------------------
   // cards
   // ---------------------------------
   private onSelectedCard(id: number) {
-    this.board.onSelectedCard(id)
+    this.board.onSelectedCard(id);
   }
 
   private async addCard() {
-    return this.board.createCard()
+    return this.board.createCard();
   }
 
   private async updateCard() {
     (this.$refs.cardForm as Form).validate(async valid => {
       if (!valid) {
-        return
+        return;
       }
 
-      const { data } = await this.board.updateCard()
+      const {data} = await this.board.updateCard();
 
       if (data) {
         this.$notify({
@@ -786,24 +786,24 @@ export default class extends Vue {
           message: 'card updated successfully',
           type: 'success',
           duration: 2000
-        })
+        });
       }
-    })
+    });
   }
 
   private async removeCard() {
-    await this.board.removeCard()
+    await this.board.removeCard();
 
     this.$notify({
       title: 'Success',
       message: 'card removed successfully',
       type: 'success',
       duration: 2000
-    })
+    });
   }
 
   private menuCardsClick(card: Card) {
-    this.bus.$emit('selected_card', card.id)
+    this.bus.$emit('selected_card', card.id);
   }
 
   // export card
@@ -812,10 +812,10 @@ export default class extends Vue {
 
   private exportCard() {
     if (this.board.activeTab == undefined || this.board.activeCard == undefined) {
-      return
+      return;
     }
-    this.exportCardValue = this.board.tabs[this.board.activeTab].cards[this.board.activeCard].serialize()
-    this.showExportCard = true
+    this.exportCardValue = this.board.tabs[this.board.activeTab].cards[this.board.activeCard].serialize();
+    this.showExportCard = true;
   }
 
   // import card
@@ -823,132 +823,132 @@ export default class extends Vue {
   private importCardValue = '';
 
   private async importCard(value: string, event?: any) {
-    const card = JSON.parse(value)
-    const data = await this.board.importCard(card)
+    const card = JSON.parse(value);
+    const data = await this.board.importCard(card);
     if (data) {
       this.$notify({
         title: 'Success',
         message: 'card imported successfully',
         type: 'success',
         duration: 2000
-      })
+      });
     }
   }
 
   private async copyCard() {
     if (this.board.activeTab == undefined || this.board.activeCard == undefined) {
-      return
+      return;
     }
 
-    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard].serialize()
+    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard].serialize();
 
-    const data = await this.board.importCard(card)
+    const data = await this.board.importCard(card);
     if (data) {
       this.$notify({
         title: 'Success',
         message: 'card copied successfully',
         type: 'success',
         duration: 2000
-      })
+      });
     }
   }
 
   private sortCardUp(card: Card, index: number) {
     if (!this.board.tabs || !this.board.activeTab) {
-      return
+      return;
     }
 
     if (!this.board.tabs[this.board.activeTab].cards[index - 1]) {
-      return
+      return;
     }
 
-    const wd = this.board.tabs[this.board.activeTab].cards[index - 1].weight
-    this.board.tabs[this.board.activeTab].cards[index - 1].weight = card.weight
-    this.board.tabs[this.board.activeTab].cards[index].weight = wd
-    this.board.tabs[this.board.activeTab].cards[index].update()
-    this.board.tabs[this.board.activeTab].cards[index - 1].update()
+    const wd = this.board.tabs[this.board.activeTab].cards[index - 1].weight;
+    this.board.tabs[this.board.activeTab].cards[index - 1].weight = card.weight;
+    this.board.tabs[this.board.activeTab].cards[index].weight = wd;
+    this.board.tabs[this.board.activeTab].cards[index].update();
+    this.board.tabs[this.board.activeTab].cards[index - 1].update();
 
-    this.board.tabs[this.board.activeTab].sortCards()
-    this.board.updateCurrentTab()
+    this.board.tabs[this.board.activeTab].sortCards();
+    this.board.updateCurrentTab();
   }
 
   private sortCardDown(card: Card, index: number) {
     if (!this.board.tabs || !this.board.activeTab) {
-      return
+      return;
     }
 
     if (!this.board.tabs[this.board.activeTab].cards[index + 1]) {
-      return
+      return;
     }
 
-    const wd = this.board.tabs[this.board.activeTab].cards[index + 1].weight
-    this.board.tabs[this.board.activeTab].cards[index + 1].weight = card.weight
-    this.board.tabs[this.board.activeTab].cards[index].weight = wd
-    this.board.tabs[this.board.activeTab].cards[index].update()
-    this.board.tabs[this.board.activeTab].cards[index + 1].update()
+    const wd = this.board.tabs[this.board.activeTab].cards[index + 1].weight;
+    this.board.tabs[this.board.activeTab].cards[index + 1].weight = card.weight;
+    this.board.tabs[this.board.activeTab].cards[index].weight = wd;
+    this.board.tabs[this.board.activeTab].cards[index].update();
+    this.board.tabs[this.board.activeTab].cards[index + 1].update();
 
-    this.board.tabs[this.board.activeTab].sortCards()
-    this.board.updateCurrentTab()
+    this.board.tabs[this.board.activeTab].sortCards();
+    this.board.updateCurrentTab();
   }
 
   // ---------------------------------
   // card items
   // ---------------------------------
   private addCardItem() {
-    this.board.createCardItem()
+    this.board.createCardItem();
   }
 
   private removeCardItem(index: number) {
-    this.board.removeCardItem(index)
+    this.board.removeCardItem(index);
   }
 
   private itemPosition(): string {
-    const defaultValue = 'L:0,T:0,W:0,H:0'
+    const defaultValue = 'L:0,T:0,W:0,H:0';
 
     if (!this.board.activeTab || this.board.activeCard == undefined) {
-      return defaultValue
+      return defaultValue;
     }
 
     if (!this.board.tabs || !this.board.tabs[this.board.activeTab] || !this.board.tabs[this.board.activeTab].cards) {
-      return defaultValue
+      return defaultValue;
     }
 
-    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard]
+    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard];
     if (!card) {
-      return defaultValue
+      return defaultValue;
     }
 
     if (card.selectedItem == -1 || card.selectedItem == undefined) {
-      return defaultValue
+      return defaultValue;
     }
 
-    const currentItem = card.items[card.selectedItem]
+    const currentItem = card.items[card.selectedItem];
     if (!currentItem) {
-      return defaultValue
+      return defaultValue;
     }
-    const info = currentItem.positionInfo
-    return `L:${info.left},T:${info.top},W:${info.width},H:${info.height}`
+    const info = currentItem.positionInfo;
+    return `L:${info.left},T:${info.top},W:${info.width},H:${info.height}`;
   }
 
   private copyCardItem(index: number) {
     if (!this.board.activeTab || this.board.activeCard == undefined) {
-      return
+      return;
     }
 
-    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard]
+    const card = this.board.tabs[this.board.activeTab].cards[this.board.activeCard];
     if (card.selectedItem == -1 || card.selectedItem == undefined) {
-      return
+      return;
     }
 
-    card.copyItem(index)
+    card.copyItem(index);
   }
 
   private menuCardItemClick(index: number) {
     if (!this.board.activeTab || this.board.activeCard == undefined) {
-      return
+      return;
     }
 
-    this.board.tabs[this.board.activeTab].cards[this.board.activeCard].selectedItem = index
+    this.board.tabs[this.board.activeTab].cards[this.board.activeCard].selectedItem = index;
   }
 }
 </script>

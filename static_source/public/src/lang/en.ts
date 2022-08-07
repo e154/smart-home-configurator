@@ -285,7 +285,9 @@ export default {
       textOptions: 'Text options',
       eventstateJSONobject: 'Event state JSON object',
       round: 'Round'
-    }
+    },
+    mainDashboard: 'main dashboard',
+    devDashboard: 'development dashboard'
   },
   settings: {
     sidebarTextTheme: 'Sidebar text theme',
@@ -352,4 +354,4 @@ export default {
     no: 'No',
     'are_you_sure_to_do_want_this?': 'Are you sure to do want this?'
   }
-}
+};

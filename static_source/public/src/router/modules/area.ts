@@ -6,17 +6,14 @@ const areasRouter: RouteConfig = {
   component: Develop,
   redirect: '/areas/list',
   name: 'areas',
-  meta: {
-    title: 'areas',
-    icon: 'area-4',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/areas/index.vue'),
       name: 'area list',
       meta: {
+        icon: 'area-4',
         title: 'areaList'
       }
     },
@@ -36,7 +33,8 @@ const areasRouter: RouteConfig = {
       props: true,
       name: 'area new',
       meta: {
-        title: 'areaNew'
+        title: 'areaNew',
+        hidden: true
       }
     }
   ]

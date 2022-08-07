@@ -72,10 +72,23 @@ export default class extends Vue {
   }
 
   private async fetchDashboard() {
-    this.loading = true
-    const { data } = await api.v1.dashboardServiceGetDashboardById(this.id)
-    this.board.currentBoard(data)
-    this.loading = false
+    this.loading = true;
+
+    api.v1.variableServiceGetVariableByName('mainDashboard').then((resp) => {
+
+      if (!resp?.data?.value) {
+        this.loading = false;
+        return;
+      }
+
+      const id = parseInt(resp?.data?.value);
+
+      api.v1.dashboardServiceGetDashboardById(id).then((resp) => {
+        this.loading = false;
+
+        this.board.currentBoard(resp.data);
+      });
+    });
   }
 
   private onStateChanged(event: EventStateChange) {

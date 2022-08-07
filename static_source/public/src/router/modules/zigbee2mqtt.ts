@@ -6,17 +6,14 @@ const zigbee2mqttRouter: RouteConfig = {
   component: Develop,
   redirect: '/zigbee2mqtt/list',
   name: 'zigbee2mqtt',
-  meta: {
-    title: 'zigbee2mqtt',
-    icon: 'zigbee',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/zigbee2mqtt/index.vue'),
       name: 'bridge list',
       meta: {
+        icon: 'zigbee',
         title: 'bridgeList'
       }
     },
@@ -36,7 +33,8 @@ const zigbee2mqttRouter: RouteConfig = {
       props: true,
       name: 'bridge new',
       meta: {
-        title: 'bridgeNew'
+        title: 'bridgeNew',
+        hidden: true
       }
     }
   ]

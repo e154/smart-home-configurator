@@ -6,17 +6,14 @@ const usersRouter: RouteConfig = {
   component: Develop,
   redirect: '/users/list',
   name: 'users',
-  meta: {
-    title: 'users',
-    icon: 'user',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/users/index.vue'),
       name: 'user list',
       meta: {
+        icon: 'user',
         title: 'UserList'
       }
     },

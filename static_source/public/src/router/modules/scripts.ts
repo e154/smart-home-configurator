@@ -6,17 +6,14 @@ const scriptsRouter: RouteConfig = {
   component: Develop,
   redirect: '/scripts/list',
   name: 'scripts',
-  meta: {
-    title: 'scripts',
-    icon: 'script-13',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/scripts/index.vue'),
       name: 'script list',
       meta: {
+        icon: 'script-13',
         title: 'scriptList'
       }
     },
@@ -36,7 +33,8 @@ const scriptsRouter: RouteConfig = {
       props: true,
       name: 'script new',
       meta: {
-        title: 'scriptNew'
+        title: 'scriptNew',
+        hidden: true
       }
     }
 

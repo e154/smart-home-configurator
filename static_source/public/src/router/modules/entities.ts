@@ -1,22 +1,19 @@
-import { RouteConfig } from 'vue-router'
-import Develop from '@/layout/develop.vue'
+import {RouteConfig} from 'vue-router';
+import Develop from '@/layout/develop.vue';
 
 const entitiesRouter: RouteConfig = {
   path: '/entities',
   component: Develop,
   redirect: '/entities/list',
   name: 'entities',
-  meta: {
-    title: 'entities',
-    icon: 'entity2',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
       path: 'list',
       component: () => import('@/views/entities/index.vue'),
       name: 'entity list',
       meta: {
+        icon: 'entity2',
         title: 'entityList'
       }
     },
@@ -36,10 +33,11 @@ const entitiesRouter: RouteConfig = {
       props: true,
       name: 'entity new',
       meta: {
-        title: 'entityNew'
+        title: 'entityNew',
+        hidden: true
       }
     }
   ]
-}
+};
 
-export default entitiesRouter
+export default entitiesRouter;
