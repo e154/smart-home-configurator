@@ -15,17 +15,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItem } from '@/views/dashboard/core'
-import api from '@/api/api'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {CardItem} from '@/views/dashboard/core';
+import api from '@/api/api';
 
 @Component({
-  name: 'IButton',
+  name: 'IChart',
   components: {}
 })
 export default class extends Vue {
   @Prop() private item?: CardItem;
-  @Prop({ default: false }) private disabled!: boolean;
+  @Prop({default: false}) private disabled!: boolean;
 
   private created() {
   }
@@ -37,17 +37,17 @@ export default class extends Vue {
     await api.v1.interactServiceEntityCallAction({
       id: this.item?.entityId,
       name: this.item?.payload.button?.action || ''
-    })
+    });
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
       type: 'success',
       duration: 2000
-    })
+    });
   }
 
   private onClick() {
-    this.callAction()
+    this.callAction();
   }
 }
 </script>

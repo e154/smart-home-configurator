@@ -35,9 +35,9 @@ const dashboardsRouter: RouteConfig = {
       path: 'view/:id',
       component: () => import('@/views/dashboard/view.vue'),
       props: true,
-      name: 'dashboard edit',
+      name: 'dashboard view',
       meta: {
-        title: 'dashboardEdit',
+        title: 'dashboardView',
         hidden: true
       }
     }

@@ -88,11 +88,13 @@ export const constantRoutes: RouteConfig[] = [
     path: '/404',
     component: Dashboard,
     meta: {hidden: true},
-    redirect: 'error',
+    redirect: '/404',
     children: [
       {
-        path: 'error',
-        component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue')
+        path: '',
+        component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue'),
+        name: '404',
+        meta: {hidden: true}
       }
     ]
   },
@@ -144,11 +146,11 @@ export const dashboardRoutes: RouteConfig[] = [
       }
     ]
   },
-  {
-    path: '*',
-    redirect: '/404',
-    meta: {hidden: true}
-  }
+  // {
+  //   path: '*',
+  //   redirect: '/404',
+  //   meta: {hidden: true}
+  // }
 ];
 
 /**

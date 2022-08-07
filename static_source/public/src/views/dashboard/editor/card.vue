@@ -55,10 +55,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItemName, Dummy, IButton, IImage, ILogs, IProgress, IState, IText } from '@/views/dashboard/card_items'
-import { Card } from '@/views/dashboard/core'
-import Moveable from 'vue-moveable'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {
+  CardItemName,
+  Dummy,
+  IButton,
+  IChart,
+  IImage,
+  ILogs,
+  IProgress,
+  IState,
+  IText
+} from '@/views/dashboard/card_items';
+import {Card} from '@/views/dashboard/core';
+import Moveable from 'vue-moveable';
 
 class elementOption {
   public value = '';
@@ -75,7 +85,8 @@ class elementOption {
     IButton,
     IState,
     ILogs,
-    IProgress
+    IProgress,
+    IChart
   }
 })
 export default class extends Vue {
@@ -86,13 +97,13 @@ export default class extends Vue {
   private zoom = 1;
 
   private getCardItemName(name: string): string {
-    return CardItemName(name)
+    return CardItemName(name);
   }
 
   private created() {
     this.bus.$on('selected_card', (cardId: number) => {
-      this.card.active = this.card.id == cardId
-    })
+      this.card.active = this.card.id == cardId;
+    });
   }
 
   private destroyed() {
@@ -101,48 +112,48 @@ export default class extends Vue {
 
   private select(event?: any) {
     // console.log('select_card', this.itemIndex)
-    this.bus.$emit('selected_card', this.card.id)
+    this.bus.$emit('selected_card', this.card.id);
   }
 
   private selectItem(index: number) {
-    this.card.selectedItem = index
+    this.card.selectedItem = index;
     // console.log('selected', index);
   }
 
-  handleDrag({ target, transform, beforeTranslate, left, top }: any) {
+  handleDrag({target, transform, beforeTranslate, left, top}: any) {
     // console.log('onDrag', transform, 'left, top', left, top);
-    this.card.items[this.card.selectedItem].transform = transform
-    target.style.transform = transform
+    this.card.items[this.card.selectedItem].transform = transform;
+    target.style.transform = transform;
   }
 
-  handleResize({ target, width, height, clientX, clientY }: any) {
+  handleResize({target, width, height, clientX, clientY}: any) {
     // console.log('resize');
-    width = Math.round(width)
-    height = Math.round(height)
+    width = Math.round(width);
+    height = Math.round(height);
 
-    this.card.items[this.card.selectedItem].width = width
-    this.card.items[this.card.selectedItem].height = height
-    target.style.width = `${width}px`
-    target.style.height = `${height}px`
+    this.card.items[this.card.selectedItem].width = width;
+    this.card.items[this.card.selectedItem].height = height;
+    target.style.width = `${width}px`;
+    target.style.height = `${height}px`;
     // this.setDataLabel(clientX, clientY, `${width} x ${height}`);
   }
 
-  handleRotate({ target, transform, beforeRotate, clientX, clientY }: any) {
-    this.card.items[this.card.selectedItem].transform = transform
-    target.style.transform = transform
+  handleRotate({target, transform, beforeRotate, clientX, clientY}: any) {
+    this.card.items[this.card.selectedItem].transform = transform;
+    target.style.transform = transform;
     // this.setDataLabel(clientX, clientY, `${beforeRotate}°`);
   }
 
-  handleWarp({ target, transform }: any) {
+  handleWarp({target, transform}: any) {
     // console.log('onWarp', transform);
-    this.card.items[this.card.selectedItem].transform = transform
-    target.style.transform = transform
+    this.card.items[this.card.selectedItem].transform = transform;
+    target.style.transform = transform;
   }
 
   private dataLabel = null;
 
   private hideDataLabel() {
-    this.dataLabel = null
+    this.dataLabel = null;
   }
 }
 </script>

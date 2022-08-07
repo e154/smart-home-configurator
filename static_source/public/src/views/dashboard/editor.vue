@@ -502,6 +502,24 @@
                     </el-menu>
 
                   </el-card>
+
+
+                  <!-- TODO: fix -->
+                  <table style="margin-top: 20px" class="filter-list">
+                    <thead style="background: #d7d7d7">
+                    <tr>
+                      <td>name</td>
+                      <td>description</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(filter, index) in getFilterList()">
+                      <td><strong>{{ filter.name }}</strong></td>
+                      <td>{{ filter.description }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
                 </el-col>
               </el-row>
             </el-tab-pane>
@@ -534,13 +552,15 @@ import {
   ILogsEditor,
   IProgressEditor,
   IStateEditor,
-  ITextEditor
+  ITextEditor,
+  IChartEditor
 } from '@/views/dashboard/card_items';
 import {EventStateChange} from '@/api/stream_types';
 import ExportTool from '@/components/export-tool/index.vue';
 import {ApiArea} from '@/api/stub';
 import AreaSearch from '@/views/areas/components/areas_search.vue';
 import SplitPane from 'vue-splitpane';
+import {filterInfo, filterList} from '@/views/dashboard/filters';
 
 @Component({
   name: 'DashboardEditor',
@@ -558,6 +578,7 @@ import SplitPane from 'vue-splitpane';
     IStateEditor,
     ILogsEditor,
     IProgressEditor,
+    IChartEditor,
     SplitPane
   }
 })
@@ -950,6 +971,10 @@ export default class extends Vue {
 
     this.board.tabs[this.board.activeTab].cards[this.board.activeCard].selectedItem = index;
   }
+
+  private getFilterList(): filterInfo[] {
+    return filterList();
+  }
 }
 </script>
 
@@ -983,5 +1008,9 @@ export default class extends Vue {
   height: 100%;
   padding: 0 20px;
   overflow: scroll;
+}
+
+.filter-list {
+
 }
 </style>
