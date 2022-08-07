@@ -1,24 +1,47 @@
 import {RouteConfig} from 'vue-router';
 import Develop from '@/layout/develop.vue';
 
-const settingsRouter: RouteConfig = {
-  path: '/settings',
+const etcRouter: RouteConfig = {
+  path: '/etc',
   component: Develop,
-  redirect: '/settings',
-  name: 'settings',
+  redirect: '/etc',
+  name: 'etc',
   meta: {
     icon: 'settings',
-    title: 'settings',
+    title: 'etc',
     noCache: true,
   },
   children: [
-
     {
       path: 'variables',
       component: () => import('@/views/variables/index.vue'),
       name: 'variables',
       meta: {
         title: 'variables'
+      }
+    },
+    {
+      path: 'plugins',
+      component: () => import('@/views/plugins/index.vue'),
+      name: 'plugins',
+      meta: {
+        title: 'plugins'
+      }
+    },
+    {
+      path: 'swagger',
+      component: () => import('@/views/swagger/index.vue'),
+      name: 'swagger',
+      meta: {
+        title: 'swagger'
+      }
+    },
+    {
+      path: 'images',
+      component: () => import('@/views/images/index.vue'),
+      name: 'images',
+      meta: {
+        title: 'images'
       }
     },
     {
@@ -52,4 +75,4 @@ const settingsRouter: RouteConfig = {
   ]
 };
 
-export default settingsRouter;
+export default etcRouter;

@@ -48,6 +48,18 @@
               />
             </el-form-item>
 
+            <el-form-item :label="$t('user.table.status')" prop="status">
+              <el-select
+                v-model="currentUser.status"
+                placeholder="please select status"
+                style="width: 100%"
+                @change="changedStatus"
+              >
+                <el-option label="ACTIVE" value="active"></el-option>
+                <el-option label="BLOCKED" value="blocked"></el-option>
+              </el-select>
+            </el-form-item>
+
             <el-form-item :label="$t('users.table.image')" prop="image">
               <image-preview :image="currentUser.image" @on-select="onSelectImage"/>
             </el-form-item>
@@ -133,7 +145,8 @@ export default class extends Vue {
     lang: '',
     password: '',
     passwordRepeat: '',
-    meta: []
+    meta: [],
+    status: ''
   };
 
   private validatePasswordRepeat = (rule: any, value: string, callback: Function) => {
@@ -196,7 +209,8 @@ export default class extends Vue {
         passwordRepeat: this.currentUser.passwordRepeat,
         role: { name: this.currentUser?.role?.name },
         image: { id: this.currentUser?.image?.id },
-        meta: this.currentUser.meta
+        meta: this.currentUser.meta,
+        status: this.currentUser.status
       }
       const { data } = await api.v1.userServiceUpdateUserById(this.id, user)
       if (data) {
@@ -244,6 +258,12 @@ export default class extends Vue {
       duration: 2000
     })
     router.push({ path: '/users/list' })
+  }
+
+  private changedStatus(status: string) {
+    console.log('-----')
+    console.log(status)
+    console.log('-----')
   }
 }
 </script>

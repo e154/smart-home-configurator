@@ -1,24 +1,21 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from 'vue';
+import VueRouter, {RouteConfig} from 'vue-router';
 
 /* Develop */
-import Develop from '@/layout/develop.vue'
-import Dashboard from '@/layout/dashboard.vue'
+import Develop from '@/layout/develop.vue';
+import Dashboard from '@/layout/dashboard.vue';
 
 /* Router modules */
-import scriptsRouter from './modules/scripts'
-import areasRouter from '@/router/modules/area'
-import entitiesRouter from '@/router/modules/entities'
-import automationRouter from '@/router/modules/automation'
-import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt'
-import imagesRouter from '@/router/modules/images'
-import logsRouter from '@/router/modules/log'
-import swaggerRouter from '@/router/modules/swagger'
-import usersRouter from '@/router/modules/users'
-import settingsRouter from '@/router/modules/settings'
-import dashboardsRouter from '@/router/modules/dashboard'
+import scriptsRouter from './modules/scripts';
+import entitiesRouter from '@/router/modules/entities';
+import automationRouter from '@/router/modules/automation';
+import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt';
+import logsRouter from '@/router/modules/log';
+import usersRouter from '@/router/modules/users';
+import etcRouter from '@/router/modules/etc';
+import dashboardsRouter from '@/router/modules/dashboard';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 /*
   Note: sub-menu only appear when children.length>=1
@@ -44,10 +41,10 @@ Vue.use(VueRouter)
 */
 
 /**
-  ConstantRoutes
-  a base page that does not have permission requirements
-  all roles can be accessed
-*/
+ ConstantRoutes
+ a base page that does not have permission requirements
+ all roles can be accessed
+ */
 export const constantRoutes: RouteConfig[] = [
   {
     path: '/',
@@ -69,7 +66,7 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/redirect',
     component: Develop,
-    meta: { hidden: true },
+    meta: {hidden: true},
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -80,17 +77,17 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/login',
     component: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue'),
-    meta: { hidden: true }
+    meta: {hidden: true}
   },
   {
     path: '/auth-redirect',
     component: () => import(/* webpackChunkName: "auth-redirect" */ '@/views/login/auth-redirect.vue'),
-    meta: { hidden: true }
+    meta: {hidden: true}
   },
   {
     path: '/404',
     component: Dashboard,
-    meta: { hidden: true },
+    meta: {hidden: true},
     redirect: 'error',
     children: [
       {
@@ -102,9 +99,9 @@ export const constantRoutes: RouteConfig[] = [
   {
     path: '/401',
     component: () => import(/* webpackChunkName: "401" */ '@/views/error-page/401.vue'),
-    meta: { hidden: true }
+    meta: {hidden: true}
   }
-]
+];
 
 /**
  * dashboardRoutes
@@ -115,7 +112,7 @@ export const dashboardRoutes: RouteConfig[] = [
     path: '/development',
     component: Develop,
     redirect: '/development/index',
-    meta: { hidden: false },
+    meta: {hidden: false},
     children: [
       {
         path: 'index',
@@ -133,7 +130,7 @@ export const dashboardRoutes: RouteConfig[] = [
     path: '/profile',
     component: Dashboard,
     redirect: '/profile/index',
-    meta: { hidden: true },
+    meta: {hidden: true},
     children: [
       {
         path: 'index',
@@ -150,20 +147,20 @@ export const dashboardRoutes: RouteConfig[] = [
   {
     path: '*',
     redirect: '/404',
-    meta: { hidden: true }
+    meta: {hidden: true}
   }
-]
+];
 
 /**
  * developRoutes
  * the routes that need to be dynamically loaded based on user roles
-*/
+ */
 export const developRoutes: RouteConfig[] = [
   {
     path: '/development',
     component: Develop,
     redirect: '/development/index',
-    meta: { hidden: false },
+    meta: {hidden: false},
     children: [
       {
         path: 'index',
@@ -182,17 +179,15 @@ export const developRoutes: RouteConfig[] = [
   // areasRouter,
   automationRouter,
   zigbee2mqttRouter,
-  usersRouter,
-  imagesRouter,
-  settingsRouter,
   dashboardsRouter,
+  usersRouter,
   logsRouter,
-  swaggerRouter,
+  etcRouter,
   {
     path: '/profile',
     component: Dashboard,
     redirect: '/profile/index',
-    meta: { hidden: true },
+    meta: {hidden: true},
     children: [
       {
         path: 'index',
@@ -209,29 +204,29 @@ export const developRoutes: RouteConfig[] = [
   {
     path: '*',
     redirect: '/404',
-    meta: { hidden: true }
+    meta: {hidden: true}
   }
-]
+];
 
 const createRouter = () => new VueRouter({
   // mode: 'history',  // Disabled due to Github Pages doesn't support this, enable this if you need.
   scrollBehavior: (to, from, savedPosition) => {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return {x: 0, y: 0};
     }
   },
   base: process.env.BASE_URL,
   routes: constantRoutes
-})
+});
 
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter();
-  (router as any).matcher = (newRouter as any).matcher // reset router
+  (router as any).matcher = (newRouter as any).matcher; // reset router
 }
 
-export default router
+export default router;

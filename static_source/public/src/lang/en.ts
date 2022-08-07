@@ -47,7 +47,7 @@ export default {
     mapList: 'List',
     mqtt: 'Mqtt',
     mqttList: 'List',
-    settings: 'Settings',
+    etc: 'etc',
     variables: 'Variables'
   },
   navbar: {
