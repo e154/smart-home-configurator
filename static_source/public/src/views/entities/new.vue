@@ -185,7 +185,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.push({path: '/entities/list'});
+    router.go(-1)
   }
 
   private onSelectImage(value: ApiImage, event?: any) {

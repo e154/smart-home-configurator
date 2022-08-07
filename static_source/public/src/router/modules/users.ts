@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue'
 const usersRouter: RouteConfig = {
   path: '/users',
   component: Develop,
-  redirect: '/users/list',
+  redirect: '/users',
   name: 'users',
   meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/users/index.vue'),
       name: 'user list',
       meta: {

@@ -171,7 +171,7 @@ export const developRoutes: RouteConfig[] = [
         name: 'Development',
         meta: {
           title: 'development',
-          icon: 'dashboard',
+          icon: 'development-kit',
           noCache: true
         }
       }
@@ -179,7 +179,7 @@ export const developRoutes: RouteConfig[] = [
   },
   entitiesRouter,
   scriptsRouter,
-  areasRouter,
+  // areasRouter,
   automationRouter,
   zigbee2mqttRouter,
   usersRouter,

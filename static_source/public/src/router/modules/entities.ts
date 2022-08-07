@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue';
 const entitiesRouter: RouteConfig = {
   path: '/entities',
   component: Develop,
-  redirect: '/entities/list',
+  redirect: '/entities',
   name: 'entities',
   meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/entities/index.vue'),
       name: 'entity list',
       meta: {

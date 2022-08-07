@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue'
 const zigbee2mqttRouter: RouteConfig = {
   path: '/zigbee2mqtt',
   component: Develop,
-  redirect: '/zigbee2mqtt/list',
+  redirect: '/zigbee2mqtt',
   name: 'zigbee2mqtt',
   meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/zigbee2mqtt/index.vue'),
       name: 'bridge list',
       meta: {

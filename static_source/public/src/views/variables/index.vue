@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
 
     <el-row>
       <el-col>
@@ -130,8 +130,8 @@ export default class extends Vue {
     return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
-  private goto(area: ApiVariable) {
-    router.push({ path: `/variables/edit/${area.id}` })
+  private goto(variable: ApiVariable) {
+    router.push({ path: `/variables/edit/${variable.name}` })
   }
 
   private add() {

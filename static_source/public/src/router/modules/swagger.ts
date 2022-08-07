@@ -4,11 +4,11 @@ import Develop from '@/layout/develop.vue'
 const swaggerRouter: RouteConfig = {
   path: '/swagger',
   component: Develop,
-  redirect: '/swagger/index',
+  redirect: '/swagger',
   meta: { hidden: false },
   children: [
     {
-      path: 'index',
+      path: '',
       component: () => import(/* webpackChunkName: "swagger" */ '@/views/swagger/index.vue'),
       name: 'Swagger',
       meta: {

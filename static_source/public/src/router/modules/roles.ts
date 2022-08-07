@@ -4,7 +4,7 @@ import Develop from '@/layout/develop.vue'
 const rolesRouter: RouteConfig = {
   path: '/roles',
   component: Develop,
-  redirect: '/roles/list',
+  redirect: '/roles',
   name: 'roles',
   meta: {
     title: 'roles',
@@ -13,7 +13,7 @@ const rolesRouter: RouteConfig = {
   },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/roles/index.vue'),
       name: 'role list',
       meta: {

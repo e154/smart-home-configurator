@@ -74,12 +74,12 @@ export default class extends Vue {
         return
       }
       const { data } = await api.v1.areaServiceAddArea(this.currentArea)
-      router.push({ path: `/areas/edit/${data.id}` })
+      router.push({ path: `/settings/areas/edit/${data.id}` })
     })
   }
 
   private cancel() {
-    router.push({ path: '/areas/list' })
+    router.go(-1)
   }
 }
 </script>

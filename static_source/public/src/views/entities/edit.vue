@@ -540,7 +540,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.push({path: `/entities/list`});
+    router.go(-1)
   }
 
   private showExport: boolean = false;

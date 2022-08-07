@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue'
 const scriptsRouter: RouteConfig = {
   path: '/scripts',
   component: Develop,
-  redirect: '/scripts/list',
+  redirect: '/scripts/',
   name: 'scripts',
   meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/scripts/index.vue'),
       name: 'script list',
       meta: {

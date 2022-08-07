@@ -4,7 +4,7 @@ import Develop from '@/layout/develop.vue'
 const dashboardsRouter: RouteConfig = {
   path: '/dashboards',
   component: Develop,
-  redirect: '/dashboards/list',
+  redirect: '/dashboards',
   name: 'dashboards',
   meta: {
     title: 'dashboards',
@@ -13,7 +13,7 @@ const dashboardsRouter: RouteConfig = {
   },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/dashboard/index.vue'),
       name: 'dashboard list',
       meta: {
