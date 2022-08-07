@@ -176,7 +176,6 @@ export const developRoutes: RouteConfig[] = [
   },
   entitiesRouter,
   scriptsRouter,
-  // areasRouter,
   automationRouter,
   zigbee2mqttRouter,
   dashboardsRouter,
