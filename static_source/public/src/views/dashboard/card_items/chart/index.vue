@@ -10,8 +10,8 @@
       />
     </div>
     <div v-if="item.payload.chart.type === 'line'">
-      <LineChart :chart-data="chartData"
-                 :chart-options="chartOptions"
+      <LineChart :chart-data="chartDataLine"
+                 :chart-options="chartOptionsLine"
                  :width="600"
                  :height="400"
                  :plugins="plugins"
@@ -69,11 +69,40 @@ export default class extends Vue {
     this.callAction();
   }
 
-  chartData!: {
+  //BAR
+  chartDataBar!: {
     labels: Array<string>
     datasets: Array<ChartDataSet>
   };
-  chartOptions = {
+  chartOptionsBar = {
+    responsive: true,
+    plugins: {
+      legend: false
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: false,
+          // text: 'Month'
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          // text: 'Value'
+        }
+      }
+    }
+  };
+
+  //LINE
+  chartDataLine!: {
+    labels: Array<string>
+    datasets: Array<ChartDataSet>
+  };
+  chartOptionsLine = {
     interaction: {
       intersect: false
     },
@@ -85,7 +114,7 @@ export default class extends Vue {
     scales: {
       x: {
         display: true,
-        // type: 'linear',
+        type: 'linear',
         title: {
           display: false,
           // text: 'Month'
@@ -106,11 +135,11 @@ export default class extends Vue {
       return;
     }
 
-    this.$set(this.chartOptions, 'plugins', {legend: this.item.payload.chart?.legend || false});
-    this.chartOptions.scales.x.display = this.item.payload.chart?.xAxis || false;
-    this.chartOptions.scales.y.display = this.item.payload.chart?.yAxis || false;
+    this.$set(this.chartOptionsLine, 'plugins', {legend: this.item.payload.chart?.legend || false});
+    this.chartOptionsLine.scales.x.display = this.item.payload.chart?.xAxis || false;
+    this.chartOptionsLine.scales.y.display = this.item.payload.chart?.yAxis || false;
 
-    this.chartData = {
+    this.chartDataLine = {
       labels: [],
       datasets: [],
     };
@@ -134,19 +163,63 @@ export default class extends Vue {
 
     // add data to sets
     for (const t in metric.data) {
-      // todo: add data filter
-      // this.chartData.labels.push(metric.data[t].time);
-      this.chartData.labels.push(t);
+      // this.chartDataLine.labels.push(metric.data[t].time);
+      this.chartDataLine.labels.push(t);
       for (const l in totalLabels) {
         dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
       }
     }
 
     for (const l in totalLabels) {
-      this.chartData.datasets.push(dataSets[totalLabels[l]]);
+      this.chartDataLine.datasets.push(dataSets[totalLabels[l]]);
     }
-    // console.log(this.chartData);
+    // console.log(this.chartDataLine);
     this.bus.$emit('updateChart', 'line');
+  }
+
+  private prepareBarData() {
+    if (!this.item?.entity?.metrics) {
+      return;
+    }
+
+    // this.chartOptionsBar.plugins.legend = this.item.payload.chart?.legend || false;
+    this.chartOptionsBar.scales.x.display = this.item.payload.chart?.xAxis || false;
+    this.chartOptionsBar.scales.y.display = this.item.payload.chart?.yAxis || false;
+
+    this.chartDataBar = {
+      labels: [],
+      datasets: [],
+
+    };
+
+    const metric = this.item.entity.metrics[this.item.payload.chart?.index || 0];
+    let totalLabels = Array<string>();
+    let dataSets = new Map<string, ChartDataSet>();
+
+    // create data sets
+    for (const i in metric.options?.items) {
+      totalLabels.push(metric.options?.items[i].name);
+      dataSets[metric.options?.items[i].name] = {
+        label: metric.options?.items[i].name,
+        borderColor: metric.options?.items[i].color,
+        backgroundColor: metric.options?.items[i].color,
+        data: new Array<number>(),
+      };
+    }
+
+    // add data to sets
+    for (const t in metric.data) {
+      this.chartDataBar.labels.push(metric.data[t].time);
+      for (const l in totalLabels) {
+        dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
+      }
+    }
+
+    for (const l in totalLabels) {
+      this.chartDataBar.datasets.push(dataSets[totalLabels[l]]);
+    }
+    console.log(this.chartDataBar);
+    this.bus.$emit('updateChart', 'bar');
   }
 
   private prepareData() {
@@ -166,6 +239,7 @@ export default class extends Vue {
 
         break;
       case 'bar':
+        this.prepareBarData();
         break;
       default:
         console.warn(`unknown chart type ${this.item.entity.metrics[this.item.payload.chart?.index || 0].type}`);
