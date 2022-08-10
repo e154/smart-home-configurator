@@ -1,12 +1,11 @@
 <template>
-  <div class="app-container dashboard-container" v-if="!loading">
+  <div class="app-container dashboard-container" v-if="!loading" :style="{backgroundColor: board.tabs[0].background}">
 
     <el-tabs type="card" v-model="board.activeTab" v-if="board.tabs.length > 1">
       <el-tab-pane
         v-for="(tab, index) in board.tabs"
         :label="tab.name"
         :key="index"
-        :style="{backgroundColor: tab.background}"
         :class="[{'gap': tab.gap}]"
       >
         <dashboard-tab-muu :tab="tab" :bus="bus"/>

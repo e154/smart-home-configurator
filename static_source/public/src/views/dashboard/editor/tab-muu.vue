@@ -82,14 +82,23 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+/*.gap {*/
+/*.muuri-item {*/
+/*  padding: 5px;*/
+/*.muuri-item-content {*/
+/*  !*border: 1px #e9e9e9 solid;*!*/
+/*  -webkit-box-shadow: 1px 1px 9px 0px #777;*/
+/*  -moz-box-shadow: 1px 1px 9px 0px #777;*/
+/*  box-shadow: 1px 1px 9px 0px #777;*/
+/*}*/
+/*}*/
+/*}*/
 .gap {
 .muuri-item {
   padding: 5px;
 .muuri-item-content {
   /*border: 1px #e9e9e9 solid;*/
-  -webkit-box-shadow: 1px 1px 9px 0px #777;
-  -moz-box-shadow: 1px 1px 9px 0px #777;
-  box-shadow: 1px 1px 9px 0px #777;
+  border: 1px solid #e9edf3;
 }
 }
 }

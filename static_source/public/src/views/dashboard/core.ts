@@ -9,37 +9,38 @@ import {
   ApiNewDashboardCardRequest,
   ApiNewDashboardRequest,
   ApiNewDashboardTabRequest
-} from '@/api/stub'
-import api from '@/api/api'
-import { randColor } from '@/utils/rans'
-import { Vue } from 'vue-property-decorator'
-import { EventStateChange } from '@/api/stream_types'
-import { UUID } from 'uuid-generator-ts'
-import { Compare, Resolve } from '@/views/dashboard/render'
-import stream from '@/api/stream'
-import { ItemPayloadButton } from '@/views/dashboard/card_items/button/types'
-import { ItemPayloadText } from '@/views/dashboard/card_items/text/types'
-import { ItemPayloadState } from '@/views/dashboard/card_items/state/types'
-import { ItemPayloadLogs } from '@/views/dashboard/card_items/logs/types'
-import { ItemPayloadProgress } from '@/views/dashboard/card_items/progress/types'
+} from '@/api/stub';
+import api from '@/api/api';
+import {randColor} from '@/utils/rans';
+import {Vue} from 'vue-property-decorator';
+import {EventStateChange} from '@/api/stream_types';
+import {UUID} from 'uuid-generator-ts';
+import {Compare, Resolve} from '@/views/dashboard/render';
+import stream from '@/api/stream';
+import {ItemPayloadButton} from '@/views/dashboard/card_items/button/types';
+import {ItemPayloadText} from '@/views/dashboard/card_items/text/types';
+import {ItemPayloadState} from '@/views/dashboard/card_items/state/types';
+import {ItemPayloadLogs} from '@/views/dashboard/card_items/logs/types';
+import {ItemPayloadProgress} from '@/views/dashboard/card_items/progress/types';
+import {ItemPayloadChart} from '@/views/dashboard/card_items/chart/types';
 
 export interface ButtonAction {
-  entityId: string
-  action: string
-  image?: ApiImage
+  entityId: string;
+  action: string;
+  image?: ApiImage;
 }
 
 export interface Position {
-  width: string
-  height: string
-  transform: string
+  width: string;
+  height: string;
+  transform: string;
 }
 
 export interface PositionInfo {
-  left: string
-  top: string
-  width: string
-  height: string
+  left: string;
+  top: string;
+  width: string;
+  height: string;
 }
 
 // eq: равно равно равно
@@ -58,41 +59,42 @@ export enum comparisonType {
 }
 
 export interface CompareProp {
-  key: string
-  comparison: comparisonType
-  value: string
+  key: string;
+  comparison: comparisonType;
+  value: string;
 }
 
 export interface ItemPayload {
-  text?: ItemPayloadText
-  image?: ApiImage
-  button?: ItemPayloadButton
-  state?: ItemPayloadState
-  logs?: ItemPayloadLogs
-  progress?: ItemPayloadProgress
+  text?: ItemPayloadText;
+  image?: ApiImage;
+  button?: ItemPayloadButton;
+  state?: ItemPayloadState;
+  logs?: ItemPayloadLogs;
+  progress?: ItemPayloadProgress;
+  chart?: ItemPayloadChart;
 }
 
 export interface ItemParams {
-  style: object
-  payload: ItemPayload
-  type?: string
-  width: number
-  height: number
-  transform: string
-  showOn: CompareProp[]
-  hideOn: CompareProp[]
-  asButton: boolean
-  buttonActions: ButtonAction[]
+  style: object;
+  payload: ItemPayload;
+  type?: string;
+  width: number;
+  height: number;
+  transform: string;
+  showOn: CompareProp[];
+  hideOn: CompareProp[];
+  asButton: boolean;
+  buttonActions: ButtonAction[];
 }
 
 export interface Action {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 export interface State {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 export class CardItem {
@@ -122,61 +124,61 @@ export class CardItem {
   private _lastEvent?: EventStateChange = {} as EventStateChange;
 
   constructor(item: ApiDashboardCardItem) {
-    this.id = item.id
-    this.title = item.title
-    this._type = item.type
-    this.enabled = item.enabled
-    this.dashboardCardId = item.dashboardCardId
-    this._entityId = item.entityId
-    this.hidden = item.hidden
-    this.frozen = item.frozen
+    this.id = item.id;
+    this.title = item.title;
+    this._type = item.type;
+    this.enabled = item.enabled;
+    this.dashboardCardId = item.dashboardCardId;
+    this._entityId = item.entityId;
+    this.hidden = item.hidden;
+    this.frozen = item.frozen;
     if (this._entityId) {
-      this._entity = { id: this._entityId } as ApiEntity
+      this._entity = {id: this._entityId} as ApiEntity;
     }
 
     if (item.payload) {
-      const result: any = JSON.parse(decodeURIComponent(escape(atob(item.payload))))
-      const payload = result as ItemParams
-      this.width = payload.width
-      this.height = payload.height
-      this.transform = payload.transform
-      this.payload = payload.payload
-      this.styleObj = payload.style
-      this.asButton = payload.asButton || false
-      this.buttonActions = payload.buttonActions || []
-      this.styleString = JSON.stringify(payload.style || {}, null, 2)
+      const result: any = JSON.parse(decodeURIComponent(escape(atob(item.payload))));
+      const payload = result as ItemParams;
+      this.width = payload.width;
+      this.height = payload.height;
+      this.transform = payload.transform;
+      this.payload = payload.payload;
+      this.styleObj = payload.style;
+      this.asButton = payload.asButton || false;
+      this.buttonActions = payload.buttonActions || [];
+      this.styleString = JSON.stringify(payload.style || {}, null, 2);
       if (payload.showOn) {
-        this.showOn = payload.showOn
+        this.showOn = payload.showOn;
       }
       if (payload.hideOn) {
-        this.hideOn = payload.hideOn
+        this.hideOn = payload.hideOn;
       }
       if (payload.hideOn) {
-        this.hideOn = payload.hideOn
+        this.hideOn = payload.hideOn;
       }
       if (!this.payload.image) {
-        this.payload.image = undefined
+        this.payload.image = undefined;
       }
       if (!this.payload.button) {
-        this.payload.button = {} as ItemPayloadButton
+        this.payload.button = {} as ItemPayloadButton;
       }
       if (!this.payload.state) {
         this.payload.state = {
           items: [],
           default_image: undefined
-        } as ItemPayloadState
+        } as ItemPayloadState;
       }
       if (!this.payload.text) {
         this.payload.text = {
           items: [],
           default_text: 'default text',
           current_text: ''
-        } as ItemPayloadText
+        } as ItemPayloadText;
       }
       if (!this.payload.logs) {
         this.payload.logs = {
           limit: 20
-        } as ItemPayloadLogs
+        } as ItemPayloadLogs;
       }
       if (!this.payload.progress) {
         this.payload.progress = {
@@ -184,14 +186,25 @@ export class CardItem {
           textInside: true,
           strokeWidth: 26,
           width: 100
-        } as ItemPayloadProgress
+        } as ItemPayloadProgress;
+      }
+      if (!this.payload.chart) {
+        this.payload.chart = {
+          type: 'line',
+          index: 0,
+          width: 400,
+          height: 400,
+          xAxis: false,
+          yAxis: false,
+          legend: false,
+        } as ItemPayloadChart;
       }
     }
   }
 
   serialize(): ApiDashboardCardItem {
-    const style = JSON.parse(this.styleString || '{}')
-    this.styleObj = style
+    const style = JSON.parse(this.styleString || '{}');
+    this.styleObj = style;
     const payload = btoa(unescape(encodeURIComponent(JSON.stringify({
       width: this.width,
       height: this.height,
@@ -202,7 +215,7 @@ export class CardItem {
       hideOn: this.hideOn,
       asButton: this.asButton,
       buttonActions: this.buttonActions
-    }))))
+    }))));
     const item = {
       id: this.id,
       title: this.title,
@@ -214,12 +227,12 @@ export class CardItem {
       hidden: this.hidden,
       frozen: this.frozen
 
-    } as ApiDashboardCardItem
-    return item
+    } as ApiDashboardCardItem;
+    return item;
   }
 
   static async createNew(title: string, type: string,
-    dashboardCardId: number, weight: number): Promise<CardItem> {
+                         dashboardCardId: number, weight: number): Promise<CardItem> {
     const request = {
       title: title,
       type: type,
@@ -239,116 +252,116 @@ export class CardItem {
         },
         transform: 'matrix(1, 0, 0, 1, 0, 0) translate(10px, 10px)'
       }))
-    } as ApiNewDashboardCardItemRequest
-    const { data } = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request)
+    } as ApiNewDashboardCardItemRequest;
+    const {data} = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request);
 
-    return new CardItem(data)
+    return new CardItem(data);
   }
 
   async copy(): Promise<CardItem> {
-    const serialized = this.serialize()
-    serialized.title = serialized.title + ' [COPY]'
+    const serialized = this.serialize();
+    serialized.title = serialized.title + ' [COPY]';
     // @ts-ignore
-    delete serialized.id
-    const request = serialized as ApiNewDashboardCardItemRequest
-    request.dashboardCardId = this.dashboardCardId
+    delete serialized.id;
+    const request = serialized as ApiNewDashboardCardItemRequest;
+    request.dashboardCardId = this.dashboardCardId;
 
-    const { data } = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request)
+    const {data} = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request);
 
-    return new CardItem(data)
+    return new CardItem(data);
   }
 
   static async create(item: ApiDashboardCardItem): Promise<CardItem> {
     if (item.id) {
       // @ts-ignore
-      delete item.id
+      delete item.id;
     }
 
-    const request = item as ApiNewDashboardCardItemRequest
-    const { data } = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request)
+    const request = item as ApiNewDashboardCardItemRequest;
+    const {data} = await api.v1.dashboardCardItemServiceAddDashboardCardItem(request);
 
-    return new CardItem(data)
+    return new CardItem(data);
   }
 
   private basePath: string = process.env.VUE_APP_BASE_API || window.location.origin;
 
   getUrl(image: ApiImage | undefined): string {
     if (!image || !image.url) {
-      return ''
+      return '';
     }
-    return this.basePath + image.url
+    return this.basePath + image.url;
   }
 
   private clearActions() {
-    this._entityActions = []
-    this._entityStates = []
-    this.showOn = []
-    this.hideOn = []
+    this._entityActions = [];
+    this._entityStates = [];
+    this.showOn = [];
+    this.hideOn = [];
     if (this.payload.button) {
-      this.payload.button.action = undefined
+      this.payload.button.action = undefined;
     }
   }
 
   // style
   get style(): object {
-    return this.styleObj
+    return this.styleObj;
   }
 
   // entity
   get entity(): ApiEntity | undefined {
-    return this._entity
+    return this._entity;
   }
 
   set entity(entity: ApiEntity | undefined) {
     // console.log('set entity', entity);
-    this._entityId = entity?.id || ''
+    this._entityId = entity?.id || '';
     if (entity?.id) {
-      this._entity = entity
+      this._entity = entity;
     } else {
-      this._entity = undefined
-      this.clearActions()
-      return
+      this._entity = undefined;
+      this.clearActions();
+      return;
     }
 
     // update actions
-    this._entityActions = []
+    this._entityActions = [];
     if (this._entity.actions) {
       for (const item of this._entity.actions) {
-        this._entityActions.push({ label: item.description || item.name, value: item.name || 'no name' })
+        this._entityActions.push({label: item.description || item.name, value: item.name || 'no name'});
       }
     }
 
     // update states
-    this._entityStates = []
+    this._entityStates = [];
     if (this._entity.states) {
       for (const item of this._entity.states) {
-        this._entityStates.push({ label: item.description || item.name, value: item.name || 'no name' })
+        this._entityStates.push({label: item.description || item.name, value: item.name || 'no name'});
       }
     }
   }
 
   // entityId
   get entityId(): string {
-    return this._entityId
+    return this._entityId;
   }
 
   // entityActions
   get entityActions(): Action[] {
-    return this._entityActions
+    return this._entityActions;
   }
 
   // entityStates
   get entityStates(): State[] {
-    return this._entityStates
+    return this._entityStates;
   }
 
   // type
   set type(t: string) {
-    this._type = t
+    this._type = t;
   }
 
   get type(): string {
-    return this._type
+    return this._type;
   }
 
   // position
@@ -357,7 +370,7 @@ export class CardItem {
       width: `${this.width}px`,
       height: `${this.height}px`,
       transform: this.transform
-    }
+    };
   }
 
   // positionInfo
@@ -382,17 +395,17 @@ export class CardItem {
       top: '0',
       width: `${this.width}`,
       height: `${this.height}`
-    }
+    };
   }
 
   // lastEvent
   get lastEvent(): EventStateChange | undefined {
-    return this._lastEvent
+    return this._lastEvent;
   }
 
   update() {
     // console.log('update item', this.title)
-    this.uuid = new UUID()
+    this.uuid = new UUID();
   }
 
   // ---------------------------------
@@ -400,40 +413,40 @@ export class CardItem {
   // ---------------------------------
   onStateChanged(event: EventStateChange) {
     if (!this.entityId || event.entity_id != this.entityId) {
-      return
+      return;
     }
 
     // console.log(event);
 
-    this.update()
+    this.update();
 
-    this._lastEvent = event
+    this._lastEvent = event;
 
     // hide
     for (const prop of this.hideOn) {
-      const val = Resolve(prop.key, event)
+      const val = Resolve(prop.key, event);
       if (!val) {
-        continue
+        continue;
       }
 
-      const tr = Compare(val, prop.value, prop.comparison)
+      const tr = Compare(val, prop.value, prop.comparison);
       if (tr) {
-        this.hidden = true
-        return
+        this.hidden = true;
+        return;
       }
     }
 
     // show
     for (const prop of this.showOn) {
-      const val = Resolve(prop.key, event)
+      const val = Resolve(prop.key, event);
       if (!val) {
-        continue
+        continue;
       }
 
-      const tr = Compare(val, prop.value, prop.comparison)
+      const tr = Compare(val, prop.value, prop.comparison);
       if (tr) {
-        this.hidden = false
-        return
+        this.hidden = false;
+        return;
       }
     }
   }
@@ -457,31 +470,31 @@ export class Card {
   items: CardItem[] = [];
 
   constructor(card: ApiDashboardCard) {
-    this.id = card.id
-    this.title = card.title
-    this.height = card.height
-    this.width = card.width
-    this.background = card.background
-    this.weight = card.weight
-    this.enabled = card.enabled
-    this.dashboardTabId = card.dashboardTabId
-    this.payload = card.payload
-    this.entities = card.entities
-    this.items = []
+    this.id = card.id;
+    this.title = card.title;
+    this.height = card.height;
+    this.width = card.width;
+    this.background = card.background;
+    this.weight = card.weight;
+    this.enabled = card.enabled;
+    this.dashboardTabId = card.dashboardTabId;
+    this.payload = card.payload;
+    this.entities = card.entities;
+    this.items = [];
 
     for (const index in card.items) {
-      this.items.push(new CardItem(card.items[index]))
+      this.items.push(new CardItem(card.items[index]));
     }
   }
 
   addItem(item: CardItem) {
-    this.items.push(item)
+    this.items.push(item);
   }
 
   settings(index: number) {
-    const selected = index === this.selectedItem
+    const selected = index === this.selectedItem;
 
-    const grid = 20
+    const grid = 20;
 
     return {
       // container: this.$refs.editorContainer,
@@ -510,11 +523,11 @@ export class Card {
       //   null,
       //   document.querySelectorAll('.item-element')
       // )
-    }
+    };
   }
 
   static async createNew(title: string, background: string, width: number,
-    height: number, dashboardTabId: number, weight: number): Promise<Card> {
+                         height: number, dashboardTabId: number, weight: number): Promise<Card> {
     const request = {
       title: title,
       background: background,
@@ -524,17 +537,17 @@ export class Card {
       dashboardTabId: dashboardTabId,
       weight: weight,
       payload: btoa(JSON.stringify({}))
-    } as ApiNewDashboardCardRequest
-    const { data } = await api.v1.dashboardCardServiceAddDashboardCard(request)
+    } as ApiNewDashboardCardRequest;
+    const {data} = await api.v1.dashboardCardServiceAddDashboardCard(request);
 
-    return new Card(data)
+    return new Card(data);
   }
 
   serialize(): ApiDashboardCard {
-    const items: ApiDashboardCardItem[] = []
+    const items: ApiDashboardCardItem[] = [];
 
     for (const index in this.items) {
-      items.push(this.items[index].serialize())
+      items.push(this.items[index].serialize());
     }
 
     const card = {
@@ -548,16 +561,16 @@ export class Card {
       title: this.title,
       width: this.width,
       items: items
-    } as ApiDashboardCard
-    return card
+    } as ApiDashboardCard;
+    return card;
   }
 
   async update() {
-    return await api.v1.dashboardCardServiceUpdateDashboardCard(this.id, this.serialize())
+    return await api.v1.dashboardCardServiceUpdateDashboardCard(this.id, this.serialize());
   }
 
   copy(): Card {
-    return new Card(this.serialize())
+    return new Card(this.serialize());
   }
 
   static async import(card: ApiDashboardCard) {
@@ -573,36 +586,36 @@ export class Card {
       'text',
       this.id,
       -1
-    )
+    );
 
-    this.items.push(item)
-    this.selectedItem = this.items.length - 1
+    this.items.push(item);
+    this.selectedItem = this.items.length - 1;
 
-    console.log('card item created, id:', item.id)
+    console.log('card item created, id:', item.id);
 
-    return item
+    return item;
   }
 
   async removeItem(index: number) {
-    console.log('remove card item id:', this.items[index].id)
+    console.log('remove card item id:', this.items[index].id);
 
-    const { data } = await api.v1.dashboardCardItemServiceDeleteDashboardCardItem(this.items[index].id)
+    const {data} = await api.v1.dashboardCardItemServiceDeleteDashboardCardItem(this.items[index].id);
     if (data) {
-      this.items.splice(index, 1)
-      this.selectedItem = -1
+      this.items.splice(index, 1);
+      this.selectedItem = -1;
     }
   }
 
   async copyItem(index: number) {
     if (!this.items[index] && this.items[index].id) {
-      return
+      return;
     }
 
-    console.log('copy card item id:', this.items[index].id)
+    console.log('copy card item id:', this.items[index].id);
 
-    const item = await this.items[index].copy()
-    this.items.push(item)
-    this.selectedItem = this.items.length
+    const item = await this.items[index].copy();
+    this.items.push(item);
+    this.selectedItem = this.items.length;
   }
 
   // ---------------------------------
@@ -610,7 +623,7 @@ export class Card {
   // ---------------------------------
   onStateChanged(event: EventStateChange) {
     for (const index in this.items) {
-      this.items[index].onStateChanged(event)
+      this.items[index].onStateChanged(event);
     }
   }
 }
@@ -630,24 +643,24 @@ export class Tab {
   weight: number;
 
   constructor(tab: ApiDashboardTab) {
-    this.background = tab.background
-    this.cards = []
-    this.columnWidth = tab.columnWidth
-    this.dashboardId = tab.dashboardId
-    this.dragEnabled = tab.dragEnabled
-    this.enabled = tab.enabled
-    this.entities = tab.entities
-    this.gap = tab.gap
-    this.icon = tab.icon
-    this.id = tab.id
-    this.name = tab.name
-    this.weight = tab.weight
+    this.background = tab.background;
+    this.cards = [];
+    this.columnWidth = tab.columnWidth;
+    this.dashboardId = tab.dashboardId;
+    this.dragEnabled = tab.dragEnabled;
+    this.enabled = tab.enabled;
+    this.entities = tab.entities;
+    this.gap = tab.gap;
+    this.icon = tab.icon;
+    this.id = tab.id;
+    this.name = tab.name;
+    this.weight = tab.weight;
 
     for (const index in tab.cards) {
-      this.cards.push(new Card(tab.cards[index]))
+      this.cards.push(new Card(tab.cards[index]));
     }
 
-    this.sortCards()
+    this.sortCards();
   }
 
   static async createNew(boardId: number, name: string, columnWidth: number, weight: number): Promise<Tab> {
@@ -660,10 +673,10 @@ export class Tab {
       enabled: true,
       weight: weight,
       dashboardId: boardId
-    }
-    const { data } = await api.v1.dashboardTabServiceAddDashboardTab(request)
+    };
+    const {data} = await api.v1.dashboardTabServiceAddDashboardTab(request);
 
-    return new Tab(data)
+    return new Tab(data);
   }
 
   async update() {
@@ -676,15 +689,15 @@ export class Tab {
       enabled: this.enabled,
       weight: this.weight,
       dashboardId: this.dashboardId
-    }
-    return api.v1.dashboardTabServiceUpdateDashboardTab(this.id, request)
+    };
+    return api.v1.dashboardTabServiceUpdateDashboardTab(this.id, request);
   }
 
   serialize(): ApiDashboardTab {
-    const cards: ApiDashboardCard[] = []
+    const cards: ApiDashboardCard[] = [];
 
     for (const index in this.cards) {
-      cards.push(this.cards[index].serialize())
+      cards.push(this.cards[index].serialize());
     }
 
     return {
@@ -700,15 +713,15 @@ export class Tab {
       dashboardId: this.dashboardId,
       cards: cards,
       entities: this.entities
-    } as ApiDashboardTab
+    } as ApiDashboardTab;
   }
 
   copy(): Tab {
-    return new Tab(this.serialize())
+    return new Tab(this.serialize());
   }
 
   sortCards() {
-    this.cards.sort(sortCards)
+    this.cards.sort(sortCards);
   }
 
   // ---------------------------------
@@ -716,7 +729,7 @@ export class Tab {
   // ---------------------------------
   onStateChanged(event: EventStateChange) {
     for (const index in this.cards) {
-      this.cards[index].onStateChanged(event)
+      this.cards[index].onStateChanged(event);
     }
   }
 }
@@ -739,33 +752,48 @@ export class Core {
   editorDisabled = false;
 
   constructor(bus: Vue) {
-    this.bus = bus
+    this.bus = bus;
   }
 
   currentBoard(current: ApiDashboard) {
-    this.current = current
-    this.tabs = []
-    this.activeTab = '0'
-    this.currentTabId = undefined
+    this.current = current;
+    this.tabs = [];
+    this.activeTab = '0';
+    this.currentTabId = undefined;
     if (current.tabs && current.tabs.length > 0) {
       for (const index in current.tabs) {
-        this.tabs.push(new Tab(current.tabs[index]))
+        this.tabs.push(new Tab(current.tabs[index]));
       }
-      this.currentTabId = this.tabs[this.activeTab].id
+      this.currentTabId = this.tabs[this.activeTab].id;
 
       if (this.tabs[this.activeTab].cards.length > 0) {
-        this.activeCard = 0
+        this.activeCard = 0;
       }
     }
-    this.updateCurrentTab()
+
+    // get entity for card item
+    for (const t in this.tabs) {
+      for (const c in this.tabs[t].cards) {
+        for (const i in this.tabs[t].cards[c].items) {
+          (async (id: string) => {
+            if (!id) {
+              return;
+            }
+            this.tabs[t].cards[c].items[i].entity = await this.fetchEntity(id);
+          })(this.tabs[t].cards[c].items[i].entityId);
+        }
+      }
+    }
+
+    this.updateCurrentTab();
   }
 
   async fetchEntity(id: string): Promise<ApiEntity> {
     if (this.current.entities && this.current.entities[id]) {
-      return this.current.entities[id]
+      return this.current.entities[id];
     }
-    const { data } = await api.v1.entityServiceGetEntity(id)
-    return data
+    const {data} = await api.v1.entityServiceGetEntity(id);
+    return data;
   }
 
   // ---------------------------------
@@ -774,9 +802,9 @@ export class Core {
   static async createNew(name: string): Promise<ApiDashboard> {
     const request: ApiNewDashboardRequest = {
       name: name
-    }
-    const { data } = await api.v1.dashboardServiceAddDashboard(request)
-    return data
+    };
+    const {data} = await api.v1.dashboardServiceAddDashboard(request);
+    return data;
   }
 
   async update() {
@@ -785,14 +813,14 @@ export class Core {
       description: this.current.description,
       enabled: this.current.enabled,
       areaId: this.current.areaId || undefined
-    }
-    return await api.v1.dashboardServiceUpdateDashboard(this.current.id, request)
+    };
+    return await api.v1.dashboardServiceUpdateDashboard(this.current.id, request);
   }
 
   serialize(): ApiDashboard {
-    const tabs: ApiDashboardTab[] = []
+    const tabs: ApiDashboardTab[] = [];
     for (const index in this.tabs) {
-      tabs.push(this.tabs[index].serialize())
+      tabs.push(this.tabs[index].serialize());
     }
 
     return {
@@ -804,20 +832,20 @@ export class Core {
       tabs: tabs,
       createdAt: this.current.createdAt,
       updatedAt: this.current.updatedAt
-    } as ApiDashboard
+    } as ApiDashboard;
   }
 
   static async _import(dashboard: ApiDashboard): Promise<ApiDashboard> {
-    const { data } = await api.v1.dashboardServiceImportDashboard(dashboard)
+    const {data} = await api.v1.dashboardServiceImportDashboard(dashboard);
 
-    return data
+    return data;
   }
 
   async removeBoard() {
     if (!this.current || !this.current.id) {
-      return
+      return;
     }
-    return await api.v1.dashboardServiceDeleteDashboard(this.current.id)
+    return await api.v1.dashboardServiceDeleteDashboard(this.current.id);
   }
 
   // ---------------------------------
@@ -825,7 +853,7 @@ export class Core {
   // ---------------------------------
   onStateChanged(event: EventStateChange) {
     for (const index in this.tabs) {
-      this.tabs[index].onStateChanged(event)
+      this.tabs[index].onStateChanged(event);
     }
   }
 
@@ -833,46 +861,46 @@ export class Core {
   // tabs
   // ---------------------------------
   async createTab() {
-    const tab = await Tab.createNew(this.current.id, 'NEW_TAB' + (this.tabs.length + 1), 300, this.tabs.length)
-    this.tabs.push(tab)
-    this.activeTab = '' + (this.tabs.length - 1)
-    this.currentTabId = tab.id
-    this.currentCardId = undefined
+    const tab = await Tab.createNew(this.current.id, 'NEW_TAB' + (this.tabs.length + 1), 300, this.tabs.length);
+    this.tabs.push(tab);
+    this.activeTab = '' + (this.tabs.length - 1);
+    this.currentTabId = tab.id;
+    this.currentCardId = undefined;
   }
 
   async updateTab() {
     if (!this.activeTab) {
-      return
+      return;
     }
 
-    this.bus.$emit('update_tab', this.currentTabId)
+    this.bus.$emit('update_tab', this.currentTabId);
     if (this.tabs[this.activeTab]) {
-      return this.tabs[this.activeTab].update()
+      return this.tabs[this.activeTab].update();
     }
   }
 
   async removeTab() {
     if (!this.currentTabId) {
-      return
+      return;
     }
 
-    this.currentCardId = undefined
-    this.activeCard = undefined
+    this.currentCardId = undefined;
+    this.activeCard = undefined;
 
-    this.bus.$emit('remove_tab', this.currentTabId)
+    this.bus.$emit('remove_tab', this.currentTabId);
 
-    return api.v1.dashboardTabServiceDeleteDashboardTab(this.currentTabId)
+    return api.v1.dashboardTabServiceDeleteDashboardTab(this.currentTabId);
   }
 
   updateCurrentTab() {
     if (!this.tabs.length) {
-      this.currentTabId = undefined
-      return
+      this.currentTabId = undefined;
+      return;
     }
 
-    this.currentTabId = this.tabs[this.activeTab].id
+    this.currentTabId = this.tabs[this.activeTab].id;
 
-    this.bus.$emit('update_tab', this.currentTabId)
+    this.bus.$emit('update_tab', this.currentTabId);
   }
 
   // ---------------------------------
@@ -880,20 +908,20 @@ export class Core {
   // ---------------------------------
   onSelectedCard(id: number) {
     if (!this.activeTab) {
-      return
+      return;
     }
-    console.log('select card id:', id)
+    console.log('select card id:', id);
     for (const index in this.tabs[this.activeTab].cards) {
       if (this.tabs[this.activeTab].cards[index].id === id) {
-        this.activeCard = index as unknown as number
-        this.currentCardId = this.tabs[this.activeTab].cards[index].id
+        this.activeCard = index as unknown as number;
+        this.currentCardId = this.tabs[this.activeTab].cards[index].id;
       }
     }
   }
 
   async createCard() {
     if (!this.activeTab) {
-      return
+      return;
     }
 
     const card = await Card.createNew(
@@ -903,21 +931,21 @@ export class Core {
       getSize(),
       this.tabs[this.activeTab].id,
       10 * this.tabs[this.activeTab].cards.length || 0
-    )
+    );
 
-    this.tabs[this.activeTab].cards.push(card)
-    this.activeCard = this.tabs[this.activeTab].cards.length - 1
-    this.currentCardId = card.id
+    this.tabs[this.activeTab].cards.push(card);
+    this.activeCard = this.tabs[this.activeTab].cards.length - 1;
+    this.currentCardId = card.id;
   }
 
   async updateCard() {
     if (!this.activeTab || this.activeCard == undefined) {
-      return
+      return;
     }
 
     // this.bus.$emit('update_tab', this.currentTabId);
 
-    return this.tabs[this.activeTab].cards[this.activeCard].update()
+    return this.tabs[this.activeTab].cards[this.activeCard].update();
   }
 
   updateCardCancel() {
@@ -926,38 +954,38 @@ export class Core {
 
   async removeCard() {
     if (!this.activeTab || !this.currentCardId) {
-      return
+      return;
     }
 
-    console.log('remove card id:', this.currentCardId)
+    console.log('remove card id:', this.currentCardId);
 
-    const { data } = await api.v1.dashboardCardServiceDeleteDashboardCard(this.currentCardId)
+    const {data} = await api.v1.dashboardCardServiceDeleteDashboardCard(this.currentCardId);
     if (data) {
       for (const index in this.tabs[this.activeTab].cards) {
         if (this.tabs[this.activeTab].cards[index].id == this.currentCardId) {
-          this.tabs[this.activeTab].cards.splice(index, 1)
+          this.tabs[this.activeTab].cards.splice(index, 1);
         }
       }
 
-      this.currentCardId = undefined
-      this.activeCard = undefined
+      this.currentCardId = undefined;
+      this.activeCard = undefined;
     }
 
     if (this.currentTabId) {
-      this.bus.$emit('update_tab', this.currentTabId)
+      this.bus.$emit('update_tab', this.currentTabId);
     }
   }
 
   async importCard(card: ApiDashboardCard) {
     if (!this.activeTab || !this.currentTabId) {
-      return
+      return;
     }
-    card.dashboardTabId = this.currentTabId
-    const { data } = await api.v1.dashboardCardServiceImportDashboardCard(card)
+    card.dashboardTabId = this.currentTabId;
+    const {data} = await api.v1.dashboardCardServiceImportDashboardCard(card);
     if (data) {
-      this.tabs[this.activeTab].cards.push(new Card(data))
+      this.tabs[this.activeTab].cards.push(new Card(data));
     }
-    return data
+    return data;
   }
 
   // ---------------------------------
@@ -965,59 +993,59 @@ export class Core {
   // ---------------------------------
   async createCardItem() {
     if (!this.activeTab || this.activeCard == undefined) {
-      return
+      return;
     }
 
-    const card = await this.tabs[this.activeTab].cards[this.activeCard]
+    const card = await this.tabs[this.activeTab].cards[this.activeCard];
     if (!card) {
-      return
+      return;
     }
 
-    await this.tabs[this.activeTab].cards[this.activeCard].createCardItem()
+    await this.tabs[this.activeTab].cards[this.activeCard].createCardItem();
 
-    this.bus.$emit('update_tab', this.currentTabId)
+    this.bus.$emit('update_tab', this.currentTabId);
   }
 
   async removeCardItem(index: number) {
     if (!this.activeTab || this.activeCard == undefined) {
-      return
+      return;
     }
 
-    await this.tabs[this.activeTab].cards[this.activeCard].removeItem(index)
+    await this.tabs[this.activeTab].cards[this.activeCard].removeItem(index);
 
-    this.bus.$emit('update_tab', this.currentTabId)
+    this.bus.$emit('update_tab', this.currentTabId);
   }
 }
 
 function sortCards(n1: Card, n2: Card) {
   if (n1.weight > n2.weight) {
-    return 1
+    return 1;
   }
 
   if (n1.weight < n2.weight) {
-    return -1
+    return -1;
   }
 
-  return 0
+  return 0;
 }
 
 function getSize(): number {
-  const number = Math.random()
+  const number = Math.random();
   if (number < 0.333) {
-    return 100
+    return 100;
   }
 
   if (number < 0.666) {
-    return 150
+    return 150;
   }
 
-  return 200
+  return 200;
 }
 
 export function requestCurrentState(entityId: string) {
   stream.send({
     id: UUID.createUUID(),
     query: 'event_get_last_state',
-    body: btoa(JSON.stringify({ entity_id: entityId }))
-  })
+    body: btoa(JSON.stringify({entity_id: entityId}))
+  });
 }
