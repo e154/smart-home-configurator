@@ -1,5 +1,5 @@
 <template>
-  <LineChartGenerator
+  <Doughnut
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -9,47 +9,39 @@
     :styles="styles"
     :width="width"
     :height="height"
-    ref="line"
+    ref="doughnut"
   />
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {Line as LineChartGenerator} from 'vue-chartjs/legacy';
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip
-} from 'chart.js';
 
-ChartJS.register(
+import { Doughnut } from 'vue-chartjs/legacy'
+
+import {
+  Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  LinearScale,
-  CategoryScale,
-  PointElement
-);
+  ArcElement,
+  CategoryScale
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
 
 @Component({
-  name: 'LineChart',
-  components: {LineChartGenerator}
+  name: 'DoughnutChart',
+  components: {Doughnut}
 })
 export default class extends Vue {
 
   @Prop() private bus!: Vue;
-  @Prop({default: 'line-chart'}) private chartId!: string;
+  @Prop({default: 'doughnut-chart'}) private chartId!: string;
   @Prop({default: 'label'}) private datasetIdKey!: string;
   @Prop({default: '400'}) private width!: number;
   @Prop({default: '400'}) private height!: number;
-  @Prop({default: 'line-chart'}) private cssClasses!: string;
+  @Prop({default: 'doughnut-chart'}) private cssClasses!: string;
   @Prop({
     default: () => {
     }
@@ -75,11 +67,11 @@ export default class extends Vue {
 
   public updateChart() {
     // @ts-ignore
-    if (!this.$refs.line) {
-      return;
+    if (! this.$refs.doughnut) {
+      return
     }
     // @ts-ignore
-    this.$refs.line.updateChart();
+    this.$refs.doughnut.updateChart();
   }
 }
 </script>

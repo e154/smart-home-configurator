@@ -291,7 +291,16 @@ export default {
       addNewProp: 'Add new prop',
       textOptions: 'Text options',
       eventstateJSONobject: 'Event state JSON object',
-      round: 'Round'
+      round: 'Round',
+      chart: {
+        type: 'Chart type',
+        entity_metric: 'Entity metric',
+        metric_props: 'Metric props',
+        borderWidth: 'Border width',
+        xAxis: "Show X axis",
+        yAxis: "Show Y axis",
+        legend: "Show legend"
+      }
     },
     mainDashboard: 'main dashboard',
     devDashboard: 'development dashboard'

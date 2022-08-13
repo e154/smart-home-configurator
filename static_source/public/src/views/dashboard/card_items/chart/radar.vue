@@ -1,5 +1,5 @@
 <template>
-  <LineChartGenerator
+  <Radar
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -9,47 +9,38 @@
     :styles="styles"
     :width="width"
     :height="height"
-    ref="line"
+    ref="radar"
   />
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {Line as LineChartGenerator} from 'vue-chartjs/legacy';
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip
-} from 'chart.js';
+
+import {Radar} from 'vue-chartjs/legacy';
+
+import {Chart as ChartJS, Legend, LineElement, PointElement, RadialLinearScale, Title, Tooltip} from 'chart.js';
 
 ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  LinearScale,
-  CategoryScale,
-  PointElement
+  PointElement,
+  RadialLinearScale,
+  LineElement
 );
 
-
 @Component({
-  name: 'LineChart',
-  components: {LineChartGenerator}
+  name: 'RadarChart',
+  components: {Radar}
 })
 export default class extends Vue {
 
   @Prop() private bus!: Vue;
-  @Prop({default: 'line-chart'}) private chartId!: string;
+  @Prop({default: 'radar-chart'}) private chartId!: string;
   @Prop({default: 'label'}) private datasetIdKey!: string;
   @Prop({default: '400'}) private width!: number;
   @Prop({default: '400'}) private height!: number;
-  @Prop({default: 'line-chart'}) private cssClasses!: string;
+  @Prop({default: 'radar-chart'}) private cssClasses!: string;
   @Prop({
     default: () => {
     }
@@ -75,11 +66,11 @@ export default class extends Vue {
 
   public updateChart() {
     // @ts-ignore
-    if (!this.$refs.line) {
+    if (!this.$refs.radar) {
       return;
     }
     // @ts-ignore
-    this.$refs.line.updateChart();
+    this.$refs.radar.updateChart();
   }
 }
 </script>

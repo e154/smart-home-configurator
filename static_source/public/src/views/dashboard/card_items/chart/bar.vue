@@ -59,6 +59,10 @@ export default class extends Vue {
 
   public updateChart() {
     // @ts-ignore
+    if (!this.$refs.bar) {
+      return;
+    }
+    // @ts-ignore
     this.$refs.bar.updateChart();
   }
 }

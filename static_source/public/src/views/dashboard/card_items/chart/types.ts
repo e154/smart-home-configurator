@@ -1,7 +1,7 @@
 export interface ItemPayloadChart {
   type: string,
-  select: Array<string>,
-  index: number,
+  props: Array<string>,
+  metric_index: number,
   width: number,
   height: number,
   borderWidth: number,

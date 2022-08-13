@@ -2,9 +2,9 @@
   <div>
     <common-editor :item="item" :board="board"></common-editor>
 
-    <el-divider content-position="left">Progress options</el-divider>
+    <el-divider content-position="left">Chart options</el-divider>
 
-    <el-form-item :label="$t('dashboard.editor.type')" prop="type">
+    <el-form-item :label="$t('dashboard.editor.chart.type')" prop="type">
       <el-select
         v-model="item.payload.chart.type"
         placeholder="please select type"
@@ -12,55 +12,54 @@
       >
         <el-option label="linear" value="line"></el-option>
         <el-option label="bar" value="bar"></el-option>
+        <el-option label="radar" value="radar"></el-option>
+        <el-option label="doughnut" value="doughnut"></el-option>
       </el-select>
     </el-form-item>
 
-    <el-form-item :label="$t('dashboard.editor.index')" prop="index">
-      <el-input-number size="small"
-                       v-model="item.payload.chart.index"></el-input-number>
+    <el-form-item :label="$t('dashboard.editor.chart.entity_metric')" prop="index">
+      <el-select v-model="item.payload.chart.metric_index" placeholder="Select">
+        <el-option
+          v-for="(prop, index) in item.entity.metrics"
+          :key="index"
+          :label="prop.name"
+          :value="index">
+        </el-option>
+      </el-select>
     </el-form-item>
 
-    <!--    <el-form-item :label="$t('dashboard.editor.select')" prop="index">-->
-    <!--      <el-select v-model="item.payload.chart.select" multiple placeholder="Select">-->
-    <!--        <el-option-->
-    <!--          v-for="item in item.entity.m"-->
-    <!--          :key="item.value"-->
-    <!--          :label="item.label"-->
-    <!--          :value="item.value">-->
-    <!--        </el-option>-->
-    <!--      </el-select>-->
-    <!--    </el-form-item>-->
+    <div v-if="item.entity.metrics && item.payload.chart.metric_index !== undefined">
+      <el-form-item :label="$t('dashboard.editor.chart.metric_props')" prop="index">
+        <el-select v-model="item.payload.chart.props" multiple placeholder="Select">
+          <el-option
+            v-for="(props, index) in item.entity.metrics[item.payload.chart.metric_index].options.items"
+            :key="props.name"
+            :label="props.name"
+            :value="props.name">
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </div>
 
-    <!--    <el-form-item :label="$t('dashboard.editor.width')" prop="width">-->
-    <!--      <el-input-number size="small"-->
-    <!--                       v-model="item.payload.chart.width"></el-input-number>-->
-    <!--    </el-form-item>-->
-
-    <!--    <el-form-item :label="$t('dashboard.editor.height')" prop="height">-->
-    <!--      <el-input-number size="small"-->
-    <!--                       v-model="item.payload.chart.height"></el-input-number>-->
-    <!--    </el-form-item>-->
-
-    <el-form-item :label="$t('dashboard.editor.borderWidth')" prop="borderWidth">
+    <el-form-item :label="$t('dashboard.editor.chart.borderWidth')" prop="borderWidth">
       <el-input-number size="small"
                        v-model="item.payload.chart.borderWidth"></el-input-number>
     </el-form-item>
 
-    <el-form-item :label="$t('dashboard.editor.legend')" prop="legend">
+    <el-form-item :label="$t('dashboard.editor.chart.legend')" prop="legend">
       <el-switch
         v-model="item.payload.chart.legend"></el-switch>
     </el-form-item>
 
-    <el-form-item :label="$t('dashboard.editor.xAxis')" prop="xAxis">
+    <el-form-item :label="$t('dashboard.editor.chart.xAxis')" prop="xAxis">
       <el-switch
         v-model="item.payload.chart.xAxis"></el-switch>
     </el-form-item>
 
-    <el-form-item :label="$t('dashboard.editor.yAxis')" prop="yAxis">
+    <el-form-item :label="$t('dashboard.editor.chart.yAxis')" prop="yAxis">
       <el-switch
         v-model="item.payload.chart.yAxis"></el-switch>
     </el-form-item>
-
 
     <el-row style="padding-bottom: 20px">
       <el-col>

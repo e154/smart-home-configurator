@@ -1,8 +1,8 @@
 <template>
   <div v-if="item.entity && !loading">
     <div v-if="item.payload.chart.type === 'bar'">
-      <BarChart :chart-data="chartDataBar"
-                :chart-options="chartOptionsBar"
+      <BarChart :chart-data="chartData"
+                :chart-options="chartOptions"
                 :width="600"
                 :height="400"
                 :bus="bus"
@@ -10,13 +10,33 @@
       />
     </div>
     <div v-if="item.payload.chart.type === 'line'">
-      <LineChart :chart-data="chartDataLine"
-                 :chart-options="chartOptionsLine"
+      <LineChart :chart-data="chartData"
+                 :chart-options="chartOptions"
                  :width="600"
                  :height="400"
                  :plugins="plugins"
                  :bus="bus"
                  ref="line"
+      />
+    </div>
+    <div v-if="item.payload.chart.type === 'doughnut'">
+      <DoughnutChart :chart-data="chartData"
+                     :chart-options="chartOptions"
+                     :width="600"
+                     :height="400"
+                     :plugins="plugins"
+                     :bus="bus"
+                     ref="doughnut"
+      />
+    </div>
+    <div v-if="item.payload.chart.type === 'radar'">
+      <RadarChart :chart-data="chartData"
+                  :chart-options="chartOptions"
+                  :width="600"
+                  :height="400"
+                  :plugins="plugins"
+                  :bus="bus"
+                  ref="radar"
       />
     </div>
   </div>
@@ -29,10 +49,18 @@ import api from '@/api/api';
 import BarChart from '@/views/dashboard/card_items/chart/bar.vue';
 import LineChart from '@/views/dashboard/card_items/chart/line.vue';
 import {ChartDataSet} from '@/views/dashboard/card_items/chart/types';
+import DoughnutChart from '@/views/dashboard/card_items/chart/doughnut.vue';
+import RadarChart from '@/views/dashboard/card_items/chart/radar.vue';
+import {UUID} from 'uuid-generator-ts';
+
+export interface ChartDataInterface {
+  labels: Array<string>;
+  datasets: Array<ChartDataSet>;
+}
 
 @Component({
   name: 'IChart',
-  components: {LineChart, BarChart}
+  components: {RadarChart, DoughnutChart, LineChart, BarChart}
 })
 export default class extends Vue {
   @Prop() private item?: CardItem;
@@ -40,7 +68,7 @@ export default class extends Vue {
 
   private plugins: Array<Object> = [];
   private bus: Vue = new Vue();
-  private loading!: boolean = true;
+  private loading: boolean = true;
 
   private created() {
     if (!this.item) {
@@ -69,88 +97,29 @@ export default class extends Vue {
     this.callAction();
   }
 
-  //BAR
-  chartDataBar!: {
+  chartData!: {
     labels: Array<string>
     datasets: Array<ChartDataSet>
   };
-  chartOptionsBar = {
-    responsive: true,
-    plugins: {
-      legend: false
-    },
-    scales: {
-      x: {
-        display: true,
-        title: {
-          display: false,
-          // text: 'Month'
-        }
-      },
-      y: {
-        display: true,
-        title: {
-          display: true,
-          // text: 'Value'
-        }
-      }
-    }
-  };
+  chartOptions: any = {};
 
-  //LINE
-  chartDataLine!: {
-    labels: Array<string>
-    datasets: Array<ChartDataSet>
-  };
-  chartOptionsLine = {
-    interaction: {
-      intersect: false
-    },
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: {
-      legend: false
-    },
-    scales: {
-      x: {
-        display: true,
-        type: 'linear',
-        title: {
-          display: false,
-          // text: 'Month'
-        }
-      },
-      y: {
-        display: true,
-        title: {
-          display: false,
-          // text: 'Value'
-        }
-      }
-    }
-  };
-
-  private prepareLiteData() {
-    if (!this.item?.entity?.metrics) {
-      return;
-    }
-
-    this.$set(this.chartOptionsLine, 'plugins', {legend: this.item.payload.chart?.legend || false});
-    this.chartOptionsLine.scales.x.display = this.item.payload.chart?.xAxis || false;
-    this.chartOptionsLine.scales.y.display = this.item.payload.chart?.yAxis || false;
-
-    this.chartDataLine = {
+  private prepareLiteData(): ChartDataInterface {
+    let chartData: ChartDataInterface = {
       labels: [],
       datasets: [],
     };
 
-    const metric = this.item.entity.metrics[this.item.payload.chart?.index || 0];
-    let totalLabels = Array<string>();
+    if (!this.item?.entity?.metrics || !this.item.payload.chart?.props || this.item.payload.chart?.props.length == 0) {
+      return chartData;
+    }
+
+    const metric = this.item.entity.metrics[this.item.payload.chart?.metric_index || 0];
+    let totalLabels: Array<string> = this.item.payload.chart?.props;
     let dataSets = new Map<string, ChartDataSet>();
 
     // create data sets
     for (const i in metric.options?.items) {
-      totalLabels.push(metric.options?.items[i].name);
+      // totalLabels.push(metric.options?.items[i].name);
       dataSets[metric.options?.items[i].name] = {
         label: metric.options?.items[i].name,
         borderColor: metric.options?.items[i].color,
@@ -163,63 +132,18 @@ export default class extends Vue {
 
     // add data to sets
     for (const t in metric.data) {
-      // this.chartDataLine.labels.push(metric.data[t].time);
-      this.chartDataLine.labels.push(t);
+      // this.chartData.labels.push(metric.data[t].time);
+      chartData.labels.push(t);
       for (const l in totalLabels) {
         dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
       }
     }
 
     for (const l in totalLabels) {
-      this.chartDataLine.datasets.push(dataSets[totalLabels[l]]);
+      chartData.datasets.push(dataSets[totalLabels[l]]);
     }
-    // console.log(this.chartDataLine);
-    this.bus.$emit('updateChart', 'line');
-  }
-
-  private prepareBarData() {
-    if (!this.item?.entity?.metrics) {
-      return;
-    }
-
-    // this.chartOptionsBar.plugins.legend = this.item.payload.chart?.legend || false;
-    this.chartOptionsBar.scales.x.display = this.item.payload.chart?.xAxis || false;
-    this.chartOptionsBar.scales.y.display = this.item.payload.chart?.yAxis || false;
-
-    this.chartDataBar = {
-      labels: [],
-      datasets: [],
-
-    };
-
-    const metric = this.item.entity.metrics[this.item.payload.chart?.index || 0];
-    let totalLabels = Array<string>();
-    let dataSets = new Map<string, ChartDataSet>();
-
-    // create data sets
-    for (const i in metric.options?.items) {
-      totalLabels.push(metric.options?.items[i].name);
-      dataSets[metric.options?.items[i].name] = {
-        label: metric.options?.items[i].name,
-        borderColor: metric.options?.items[i].color,
-        backgroundColor: metric.options?.items[i].color,
-        data: new Array<number>(),
-      };
-    }
-
-    // add data to sets
-    for (const t in metric.data) {
-      this.chartDataBar.labels.push(metric.data[t].time);
-      for (const l in totalLabels) {
-        dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
-      }
-    }
-
-    for (const l in totalLabels) {
-      this.chartDataBar.datasets.push(dataSets[totalLabels[l]]);
-    }
-    console.log(this.chartDataBar);
-    this.bus.$emit('updateChart', 'bar');
+    // console.log(chartData);
+    return chartData;
   }
 
   private prepareData() {
@@ -233,16 +157,85 @@ export default class extends Vue {
 
     this.loading = true;
 
+    this.chartData = this.prepareLiteData();
+
     switch (this.item.payload.chart.type) {
       case 'line':
-        this.prepareLiteData();
-
+        this.chartOptions = {
+          interaction: {
+            intersect: false
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: this.item.payload.chart?.legend || false
+          },
+          scales: {
+            x: {
+              display: this.item.payload.chart?.xAxis || false,
+              type: 'linear',
+              title: {
+                display: false,
+                // text: 'Month'
+              }
+            },
+            y: {
+              display: this.item.payload.chart?.yAxis || false,
+              title: {
+                display: false,
+                // text: 'Value'
+              }
+            }
+          }
+        };
+        this.bus.$emit('updateChart', 'line');
         break;
       case 'bar':
-        this.prepareBarData();
+        this.bus.$emit('updateChart', 'bar');
+        this.chartOptions = {
+          interaction: {
+            intersect: false
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: this.item.payload.chart?.legend || false
+          },
+          scales: {
+            x: {
+              display: this.item.payload.chart?.xAxis || false,
+              type: 'linear',
+              title: {
+                display: false,
+                // text: 'Month'
+              }
+            },
+            y: {
+              display: this.item.payload.chart?.yAxis || false,
+              title: {
+                display: false,
+                // text: 'Value'
+              }
+            }
+          }
+        };
+        break;
+      case 'radar':
+        this.bus.$emit('updateChart', 'radar');
+        this.chartOptions = {
+          responsive: true,
+          maintainAspectRatio: true,
+        };
+        break;
+      case 'doughnut':
+        this.bus.$emit('updateChart', 'doughnut');
+        this.chartOptions = {
+          responsive: true,
+          maintainAspectRatio: true,
+        };
         break;
       default:
-        console.warn(`unknown chart type ${this.item.entity.metrics[this.item.payload.chart?.index || 0].type}`);
+        console.warn(`unknown chart type ${this.item.entity.metrics[this.item.payload.chart?.metric_index || 0].type}`);
     }
 
     this.loading = false;
@@ -251,6 +244,11 @@ export default class extends Vue {
   @Watch('item', {deep: true})
   private onUpdateItem(item: CardItem) {
     this.prepareData();
+  }
+
+  private genId(): string {
+    const uuid = new UUID();
+    return uuid.getDashFreeUUID();
   }
 }
 </script>

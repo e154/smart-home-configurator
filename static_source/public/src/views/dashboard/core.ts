@@ -191,7 +191,7 @@ export class CardItem {
       if (!this.payload.chart) {
         this.payload.chart = {
           type: 'line',
-          index: 0,
+          metric_index: 0,
           width: 400,
           height: 400,
           xAxis: false,
