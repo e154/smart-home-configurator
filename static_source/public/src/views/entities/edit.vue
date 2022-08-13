@@ -109,7 +109,7 @@
               v-if="internal.pluginOptions.actorCustomSetts || Object.keys(internal.pluginOptions.actorSetts).length"
             >
               <AttributesEditor
-                v-model="internal.settings"
+                  v-model="internal.settings"
                 :attrs="internal.pluginOptions.actorSetts"
                 :customAttrs="internal.pluginOptions.actorCustomSetts"
                 @update-value="changedAttributes($event, 'settings')"
@@ -121,7 +121,7 @@
               name="metrics"
             >
               <metrics
-                :metrics="internal.metrics"
+                v-model="internal.metrics"
                 @update-value="changedMetrics"
               />
             </el-tab-pane>
@@ -423,6 +423,7 @@ export default class extends Vue {
       autoLoad: this.currentEntity.autoLoad,
       parent: this.currentEntity.parent || undefined,
       actions: [],
+      metrics: [],
       states: [],
       scripts: this.currentEntity.scripts,
     };
@@ -471,7 +472,7 @@ export default class extends Vue {
         metrics.push(this.internal.metrics[key]);
       }
     }
-    this.$set(entity, 'metrics', metrics);
+    entity.metrics = metrics;
 
     return entity;
   }

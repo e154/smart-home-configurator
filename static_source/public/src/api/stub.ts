@@ -431,31 +431,21 @@ export interface ApiLog {
 }
 
 export interface ApiMeta {
-  /** @format uint64 */
   limit: number;
-
-  /** @format uint64 */
   page: number;
-
-  /** @format uint64 */
   total: number;
   sort: string;
 }
 
 export interface ApiMetric {
-  /** @format int64 */
-  id?: string;
+  id?: number;
   name?: string;
   description?: string;
   options?: ApiMetricOption;
   data?: ApiMetricOptionData[];
   type?: string;
   ranges?: string[];
-
-  /** @format date-time */
   createdAt?: string;
-
-  /** @format date-time */
   updatedAt?: string;
 }
 
@@ -465,11 +455,7 @@ export interface ApiMetricOption {
 
 export interface ApiMetricOptionData {
   value?: Record<string, number>;
-
-  /** @format int64 */
-  metricId?: string;
-
-  /** @format date-time */
+  metricId?: number;
   time?: string;
 }
 
