@@ -206,7 +206,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.push({ path: '/automation/list' })
+    router.go(-1)
   }
 }
 </script>

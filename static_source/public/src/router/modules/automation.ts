@@ -4,19 +4,16 @@ import Develop from '@/layout/develop.vue'
 const automationRouter: RouteConfig = {
   path: '/automation',
   component: Develop,
-  redirect: '/automation/list',
+  redirect: '/automation',
   name: 'automation',
-  meta: {
-    title: 'automation',
-    icon: 'automation',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/automation/index.vue'),
       name: 'task list',
       meta: {
+        icon: 'automation',
         title: 'taskList'
       }
     },
@@ -36,7 +33,8 @@ const automationRouter: RouteConfig = {
       props: true,
       name: 'task new',
       meta: {
-        title: 'taskNew'
+        title: 'taskNew',
+        hidden: true
       }
     }
   ]

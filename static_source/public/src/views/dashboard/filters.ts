@@ -87,7 +87,7 @@ export interface filterInfo {
   args?: string[]
 }
 
-function filterList(): filterInfo[] {
+export function filterList(): filterInfo[] {
   const info: filterInfo[] = [
     {
       name: 'secToTime',

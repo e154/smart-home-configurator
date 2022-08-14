@@ -21,6 +21,7 @@ tags:
   - name: ImageService
   - name: InteractService
   - name: LogService
+  - name: MetricService
   - name: PluginService
   - name: RoleService
   - name: ScriptService
@@ -713,8 +714,7 @@ paths:
                 type: integer
                 format: int32
               gap:
-                type: integer
-                format: int32
+                type: boolean
               background:
                 type: string
               icon:
@@ -814,6 +814,38 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/apiDashboard'
+      tags:
+        - DashboardService
+      security:
+        - ApiKeyAuth: []
+  /v1/dashboards/search:
+    get:
+      summary: search area
+      operationId: DashboardService_SearchDashboard
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiSearchDashboardResult'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: query
+          in: query
+          required: false
+          type: string
+        - name: limit
+          in: query
+          required: false
+          type: string
+          format: int64
+        - name: offset
+          in: query
+          required: false
+          type: string
+          format: int64
       tags:
         - DashboardService
       security:
@@ -1138,6 +1170,14 @@ paths:
           in: query
           required: false
           type: string
+        - name: startDate
+          in: query
+          required: false
+          type: string
+        - name: endDate
+          in: query
+          required: false
+          type: string
       tags:
         - EntityStorageService
       security:
@@ -1409,6 +1449,43 @@ paths:
           type: string
       tags:
         - LogService
+      security:
+        - ApiKeyAuth: []
+  /v1/metric:
+    get:
+      summary: get metric
+      operationId: MetricService_GetMetric
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiMetric'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: id
+          in: query
+          required: false
+          type: string
+          format: int64
+        - name: range
+          in: query
+          required: false
+          type: string
+        - name: from
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: to
+          in: query
+          required: false
+          type: string
+          format: date-time
+      tags:
+        - MetricService
       security:
         - ApiKeyAuth: []
   /v1/plugin/{name}/disable:
@@ -3216,8 +3293,7 @@ definitions:
         type: integer
         format: int32
       gap:
-        type: integer
-        format: int32
+        type: boolean
       background:
         type: string
       icon:
@@ -3256,8 +3332,7 @@ definitions:
         type: integer
         format: int32
       gap:
-        type: integer
-        format: int32
+        type: boolean
       background:
         type: string
       icon:
@@ -3876,8 +3951,7 @@ definitions:
         type: integer
         format: int32
       gap:
-        type: integer
-        format: int32
+        type: boolean
       background:
         type: string
       icon:
@@ -4180,6 +4254,13 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/apiArea'
+  apiSearchDashboardResult:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/apiDashboard'
   apiSearchDeviceResult:
     type: object
     properties:

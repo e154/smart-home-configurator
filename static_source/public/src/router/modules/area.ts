@@ -2,21 +2,18 @@ import { RouteConfig } from 'vue-router'
 import Develop from '@/layout/develop.vue'
 
 const areasRouter: RouteConfig = {
-  path: '/areas',
+  path: 'areas',
   component: Develop,
-  redirect: '/areas/list',
+  redirect: 'areas',
   name: 'areas',
-  meta: {
-    title: 'areas',
-    icon: 'area-4',
-    alwaysShow: true
-  },
+  meta: { hidden: false },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/areas/index.vue'),
       name: 'area list',
       meta: {
+        icon: 'area-4',
         title: 'areaList'
       }
     },
@@ -36,7 +33,8 @@ const areasRouter: RouteConfig = {
       props: true,
       name: 'area new',
       meta: {
-        title: 'areaNew'
+        title: 'areaNew',
+        hidden: true
       }
     }
   ]

@@ -14,41 +14,41 @@ export default {
     externalLink: 'External Link',
     profile: 'Profile',
     scripts: 'Scripts',
-    scriptList: 'List',
-    scriptNew: 'New',
-    scriptEdit: 'Edit',
+    scriptList: 'Scripts',
+    scriptNew: 'New script',
+    scriptEdit: 'Edit script',
     plugins: 'Plugins',
-    pluginList: 'List',
+    pluginList: 'Plugins',
     areas: 'Areas',
-    areaList: 'List',
-    areaNew: 'New',
-    areaEdit: 'Edit',
+    areaList: 'Areas',
+    areaNew: 'New Area',
+    areaEdit: 'Edit area',
     entities: 'Entities',
-    entityList: 'List',
-    entityNew: 'New',
-    entityEdit: 'Edit',
+    entityList: 'Entities',
+    entityNew: 'New entity',
+    entityEdit: 'Edit entity',
     automation: 'Automation',
-    taskList: 'List',
-    taskNew: 'New',
-    taskEdit: 'Edit',
+    taskList: 'Automation',
+    taskNew: 'New automation',
+    taskEdit: 'Edit automation',
     zigbee2mqtt: 'Zigbee2mqtt',
-    bridgeList: 'List',
-    bridgeNew: 'New',
-    bridgeEdit: 'Edit',
+    bridgeList: 'Zigbee2mqtt',
+    bridgeNew: 'New zigbee2mqtt',
+    bridgeEdit: 'Edit zigbee2mqtt',
     logs: 'Logs',
     logList: 'List',
     images: 'Images',
     imageList: 'List',
     swagger: 'Swagger',
-    swaggerList: 'List',
+    swaggerList: 'Swagger',
     users: 'Users',
-    userList: 'List',
+    userList: 'Users',
     maps: 'Maps',
     mapList: 'List',
     mqtt: 'Mqtt',
     mqttList: 'List',
-    settings: 'Settings',
-    UserList: 'List'
+    etc: 'etc',
+    variables: 'Variables'
   },
   navbar: {
     logOut: 'Log Out',
@@ -116,6 +116,13 @@ export default {
       version: 'Version',
       enabled: 'Enabled',
       system: 'System'
+    }
+  },
+  variables: {
+    addNew: 'Add variable',
+    table: {
+      name: 'Name',
+      value: 'Value'
     }
   },
   areas: {
@@ -284,8 +291,21 @@ export default {
       addNewProp: 'Add new prop',
       textOptions: 'Text options',
       eventstateJSONobject: 'Event state JSON object',
-      round: 'Round'
-    }
+      round: 'Round',
+      chart: {
+        type: 'Chart type',
+        entity_metric: 'Entity metric',
+        metric_props: 'Metric props',
+        borderWidth: 'Border width',
+        xAxis: 'Show X axis',
+        yAxis: 'Show Y axis',
+        legend: 'Show legend',
+        range: 'Range',
+        filter: 'Filter'
+      }
+    },
+    mainDashboard: 'main dashboard',
+    devDashboard: 'development dashboard'
   },
   settings: {
     sidebarTextTheme: 'Sidebar text theme',
@@ -352,4 +372,4 @@ export default {
     no: 'No',
     'are_you_sure_to_do_want_this?': 'Are you sure to do want this?'
   }
-}
+};

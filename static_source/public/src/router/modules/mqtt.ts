@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue'
 const mqttRouter: RouteConfig = {
   path: '/mqtt',
   component: Develop,
-  redirect: '/mqtt/index',
+  redirect: '/mqtt',
   name: 'mqtt',
   meta: { hidden: false },
   children: [
     {
-      path: 'index',
+      path: '',
       component: () => import('@/views/mqtt/index.vue'),
       name: 'mqtt list',
       meta: {

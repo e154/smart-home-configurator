@@ -23,10 +23,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItemName, Dummy, IButton, IImage, ILogs, IProgress, IState, IText } from '@/views/dashboard/card_items'
-import { Card } from '@/views/dashboard/core'
-import Moveable from 'vue-moveable'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {
+  CardItemName,
+  Dummy,
+  IButton,
+  IChart,
+  IImage,
+  ILogs,
+  IProgress,
+  IState,
+  IText
+} from '@/views/dashboard/card_items';
+import {Card} from '@/views/dashboard/core';
+import Moveable from 'vue-moveable';
 
 class elementOption {
   public value = '';
@@ -43,7 +53,8 @@ class elementOption {
     IButton,
     IState,
     ILogs,
-    IProgress
+    IProgress,
+    IChart
   }
 })
 export default class extends Vue {
@@ -53,7 +64,7 @@ export default class extends Vue {
   private zoom = 1;
 
   private getCardItemName(name: string): string {
-    return CardItemName(name)
+    return CardItemName(name);
   }
 
   private created() {
