@@ -20,30 +20,30 @@
         <el-form-item :label="$t('entities.metric.description')" prop="description">
           <el-input size="small" v-model="value[selectedMetric].description"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('entities.metric.type')" prop="type">
-          <el-select v-model="value[selectedMetric].type" placeholder="please select type" default-first-option
-                     style="width: 100%">
-            <el-option label="LINE" value="line"></el-option>
-            <el-option label="PIE" value="pie"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="$t('entities.metric.ranges')" prop="ranges">
-          <el-select
-            v-model="value[selectedMetric].ranges"
-            placeholder="please select type"
-            :multiple="true"
-            remote
-            clearable
-            style="width: 100%"
-          >
-            <el-option label="1h" value="1h"></el-option>
-            <el-option label="6h" value="6h"></el-option>
-            <el-option label="12h" value="12h"></el-option>
-            <el-option label="24h" value="24h"></el-option>
-            <el-option label="7d" value="7d"></el-option>
-            <el-option label="30d" value="30d"></el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item :label="$t('entities.metric.type')" prop="type">-->
+<!--          <el-select v-model="value[selectedMetric].type" placeholder="please select type" default-first-option-->
+<!--                     style="width: 100%">-->
+<!--            <el-option label="LINE" value="line"></el-option>-->
+<!--            <el-option label="PIE" value="pie"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item :label="$t('entities.metric.ranges')" prop="ranges">-->
+<!--          <el-select-->
+<!--            v-model="value[selectedMetric].ranges"-->
+<!--            placeholder="please select type"-->
+<!--            :multiple="true"-->
+<!--            remote-->
+<!--            clearable-->
+<!--            style="width: 100%"-->
+<!--          >-->
+<!--            <el-option label="1h" value="1h"></el-option>-->
+<!--            <el-option label="6h" value="6h"></el-option>-->
+<!--            <el-option label="12h" value="12h"></el-option>-->
+<!--            <el-option label="24h" value="24h"></el-option>-->
+<!--            <el-option label="7d" value="7d"></el-option>-->
+<!--            <el-option label="30d" value="30d"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
       </el-form>
 
       <el-divider v-if="selectedMetric >= 0" content-position="left">Properties</el-divider>

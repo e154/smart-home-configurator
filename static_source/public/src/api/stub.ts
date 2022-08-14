@@ -2251,6 +2251,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
 
+    /**
+     * No description
+     *
+     * @tags MetricService
+     * @name MetricServiceGetMetric
+     * @summary get metric
+     * @request GET:/v1/metric
+     * @secure
+     */
+    metricServiceGetMetric: (
+      query?: { id?: number; range?: string; from?: string; to?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiMetric, RpcStatus>({
+        path: `/v1/metric`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
 
     /**
      * No description

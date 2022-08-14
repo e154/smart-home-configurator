@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item.entity && !loading">
+  <div v-if="item.entity">
     <div v-if="item.payload.chart.type === 'bar'">
       <BarChart :chart-data="chartData"
                 :chart-options="chartOptions"
@@ -51,7 +51,8 @@ import LineChart from '@/views/dashboard/card_items/chart/line.vue';
 import {ChartDataSet} from '@/views/dashboard/card_items/chart/types';
 import DoughnutChart from '@/views/dashboard/card_items/chart/doughnut.vue';
 import RadarChart from '@/views/dashboard/card_items/chart/radar.vue';
-import {UUID} from 'uuid-generator-ts';
+import {ApiMetric} from '@/api/stub';
+import {parseTime} from '@/utils';
 
 export interface ChartDataInterface {
   labels: Array<string>;
@@ -103,7 +104,7 @@ export default class extends Vue {
   };
   chartOptions: any = {};
 
-  private prepareLiteData(): ChartDataInterface {
+  private prepareMetric(metric: ApiMetric): ChartDataInterface {
     let chartData: ChartDataInterface = {
       labels: [],
       datasets: [],
@@ -113,7 +114,6 @@ export default class extends Vue {
       return chartData;
     }
 
-    const metric = this.item.entity.metrics[this.item.payload.chart?.metric_index || 0];
     let totalLabels: Array<string> = this.item.payload.chart?.props;
     let dataSets = new Map<string, ChartDataSet>();
 
@@ -133,9 +133,15 @@ export default class extends Vue {
     // add data to sets
     for (const t in metric.data) {
       // this.chartData.labels.push(metric.data[t].time);
-      chartData.labels.push(t);
+      chartData.labels.push(parseTime(metric.data[t].time) as string);
+      // chartData.labels.push(t);
       for (const l in totalLabels) {
-        dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
+        if (!this.item.payload.chart?.filter) {
+          dataSets[totalLabels[l]].data.push(metric.data[t].value[totalLabels[l]]);
+        } else {
+          const qwe = this.applyFilter(metric.data[t].value[totalLabels[l]], this.item.payload.chart?.filter);
+          dataSets[totalLabels[l]].data.push(qwe);
+        }
       }
     }
 
@@ -146,22 +152,35 @@ export default class extends Vue {
     return chartData;
   }
 
-  private prepareData() {
-    if (!this.item?.entity?.metrics) {
-      return;
-    }
+  private async fetchMetric(id: number): Promise<ApiMetric> {
+    const {data} = await api.v1.metricServiceGetMetric({
+      id: id,
+      range: this.item?.payload?.chart?.range || '24h',
+    });
 
-    if (!this.item.payload?.chart?.type) {
+    return data;
+  }
+
+  private fistTime: boolean = true;
+
+  private async prepareData() {
+    if (!this.item?.entity?.metrics || !this.item.payload?.chart?.type) {
       return;
     }
 
     this.loading = true;
 
-    this.chartData = this.prepareLiteData();
+    let metric = this.item.entity.metrics[this.item.payload.chart?.metric_index || 0];
+
+    if (!this.fistTime) {
+      metric = await this.fetchMetric(metric.id!);
+    }
+    this.chartData = this.prepareMetric(metric);
 
     switch (this.item.payload.chart.type) {
       case 'line':
         this.chartOptions = {
+          animation: false,
           interaction: {
             intersect: false
           },
@@ -173,7 +192,7 @@ export default class extends Vue {
           scales: {
             x: {
               display: this.item.payload.chart?.xAxis || false,
-              type: 'linear',
+              // type: 'linear',
               title: {
                 display: false,
                 // text: 'Month'
@@ -193,6 +212,7 @@ export default class extends Vue {
       case 'bar':
         this.bus.$emit('updateChart', 'bar');
         this.chartOptions = {
+          animation: false,
           interaction: {
             intersect: false
           },
@@ -204,7 +224,7 @@ export default class extends Vue {
           scales: {
             x: {
               display: this.item.payload.chart?.xAxis || false,
-              type: 'linear',
+              // type: 'linear',
               title: {
                 display: false,
                 // text: 'Month'
@@ -223,6 +243,7 @@ export default class extends Vue {
       case 'radar':
         this.bus.$emit('updateChart', 'radar');
         this.chartOptions = {
+          animation: false,
           responsive: true,
           maintainAspectRatio: true,
         };
@@ -230,15 +251,23 @@ export default class extends Vue {
       case 'doughnut':
         this.bus.$emit('updateChart', 'doughnut');
         this.chartOptions = {
+          animation: false,
           responsive: true,
           maintainAspectRatio: true,
         };
         break;
       default:
+        this.bus.$emit('updateChart', 'xxx');
+        this.chartOptions = {
+          animation: false,
+          responsive: true,
+          maintainAspectRatio: true,
+        };
         console.warn(`unknown chart type ${this.item.entity.metrics[this.item.payload.chart?.metric_index || 0].type}`);
     }
 
     this.loading = false;
+    this.fistTime = false;
   }
 
   @Watch('item', {deep: true})
@@ -246,9 +275,25 @@ export default class extends Vue {
     this.prepareData();
   }
 
-  private genId(): string {
-    const uuid = new UUID();
-    return uuid.getDashFreeUUID();
+  private applyFilter(value: any, filter: string): any {
+    switch (filter) {
+      case 'formatBytes':
+        const bytes = parseInt(value);
+        if (bytes === 0) {
+          return '0 Bytes';
+        }
+        const decimals = 2;
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        // const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) /*+ ' ' + sizes[i]*/;
+      default:
+        console.warn(`unknown filter "${filter}"!`);
+        return value;
+    }
   }
 }
 </script>

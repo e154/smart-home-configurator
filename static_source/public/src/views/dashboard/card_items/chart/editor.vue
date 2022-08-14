@@ -41,6 +41,28 @@
       </el-form-item>
     </div>
 
+    <el-form-item :label="$t('dashboard.editor.chart.range')" prop="index">
+      <el-select v-model="item.payload.chart.range" placeholder="Select">
+        <el-option
+          v-for="(props, index) in rangeList"
+          :key="props.value"
+          :label="props.label"
+          :value="props.value">
+        </el-option>
+      </el-select>
+    </el-form-item>
+
+    <el-form-item :label="$t('dashboard.editor.chart.filter')" prop="index">
+      <el-select v-model="item.payload.chart.filter" placeholder="Select">
+        <el-option
+          v-for="(props, index) in filterList"
+          :key="props.value"
+          :label="props.label"
+          :value="props.value">
+        </el-option>
+      </el-select>
+    </el-form-item>
+
     <el-form-item :label="$t('dashboard.editor.chart.borderWidth')" prop="borderWidth">
       <el-input-number size="small"
                        v-model="item.payload.chart.borderWidth"></el-input-number>
@@ -75,6 +97,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import {CardItem, Core} from '@/views/dashboard/core';
 import CommonEditor from '@/views/dashboard/card_items/common/editor.vue';
 import EventViewer from '@/views/dashboard/card_items/common/event_viewer.vue';
+import {RangeList, FilterList} from '@/views/dashboard/card_items/chart/types';
 
 @Component({
   name: 'IChartEditor',
@@ -86,6 +109,9 @@ import EventViewer from '@/views/dashboard/card_items/common/event_viewer.vue';
 export default class extends Vue {
   @Prop() private item!: CardItem;
   @Prop() private board!: Core;
+
+  private rangeList = RangeList;
+  private filterList = FilterList;
 
   private created() {
   }

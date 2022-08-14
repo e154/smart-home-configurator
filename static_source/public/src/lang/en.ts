@@ -297,9 +297,11 @@ export default {
         entity_metric: 'Entity metric',
         metric_props: 'Metric props',
         borderWidth: 'Border width',
-        xAxis: "Show X axis",
-        yAxis: "Show Y axis",
-        legend: "Show legend"
+        xAxis: 'Show X axis',
+        yAxis: 'Show Y axis',
+        legend: 'Show legend',
+        range: 'Range',
+        filter: 'Filter'
       }
     },
     mainDashboard: 'main dashboard',

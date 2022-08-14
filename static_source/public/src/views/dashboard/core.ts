@@ -197,6 +197,7 @@ export class CardItem {
           xAxis: false,
           yAxis: false,
           legend: false,
+          range: '24h'
         } as ItemPayloadChart;
       }
     }

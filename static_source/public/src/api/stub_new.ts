@@ -239,9 +239,7 @@ export interface ApiDashboardTab {
 
   /** @format int32 */
   columnWidth?: number;
-
-  /** @format int32 */
-  gap?: number;
+  gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
@@ -268,9 +266,7 @@ export interface ApiDashboardTabShort {
 
   /** @format int32 */
   columnWidth?: number;
-
-  /** @format int32 */
-  gap?: number;
+  gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
@@ -666,9 +662,7 @@ export interface ApiNewDashboardTabRequest {
 
   /** @format int32 */
   columnWidth?: number;
-
-  /** @format int32 */
-  gap?: number;
+  gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
@@ -850,6 +844,10 @@ export interface ApiScript {
 
 export interface ApiSearchAreaResult {
   items?: ApiArea[];
+}
+
+export interface ApiSearchDashboardResult {
+  items?: ApiDashboard[];
 }
 
 export interface ApiSearchDeviceResult {
@@ -1870,7 +1868,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       body: {
         name?: string;
         columnWidth?: number;
-        gap?: number;
+        gap?: boolean;
         background?: string;
         icon?: string;
         enabled?: boolean;
@@ -1949,6 +1947,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: body,
         secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardService
+     * @name DashboardServiceSearchDashboard
+     * @summary search area
+     * @request GET:/v1/dashboards/search
+     * @secure
+     */
+    dashboardServiceSearchDashboard: (
+      query?: { query?: string; limit?: string; offset?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiSearchDashboardResult, RpcStatus>({
+        path: `/v1/dashboards/search`,
+        method: "GET",
+        query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -2180,7 +2200,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     entityStorageServiceGetEntityStorageList: (
       entityId: string,
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: { page?: string; limit?: string; sort?: string; startDate?: string; endDate?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetEntityStorageResult, RpcStatus>({
@@ -2382,6 +2402,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiGetLogListResult, RpcStatus>({
         path: `/v1/logs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags MetricService
+     * @name MetricServiceGetMetric
+     * @summary get metric
+     * @request GET:/v1/metric
+     * @secure
+     */
+    metricServiceGetMetric: (
+      query?: { id?: string; range?: string; from?: string; to?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiMetric, RpcStatus>({
+        path: `/v1/metric`,
         method: "GET",
         query: query,
         secure: true,
