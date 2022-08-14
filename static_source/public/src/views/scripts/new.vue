@@ -173,7 +173,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.push({ path: '/scripts/list' })
+    router.go(-1)
   }
 }
 </script>

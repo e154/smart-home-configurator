@@ -131,11 +131,11 @@ export default class extends Vue {
   }
 
   private goto(area: ApiArea) {
-    router.push({ path: `/areas/edit/${area.id}` })
+    router.push({ path: `areas/edit/${area.id}` })
   }
 
   private add() {
-    router.push({ path: '/areas/new' })
+    router.push({ path: 'areas/new' })
   }
 }
 </script>

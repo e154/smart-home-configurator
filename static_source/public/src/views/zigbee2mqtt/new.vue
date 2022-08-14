@@ -101,7 +101,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.push({ path: '/zigbee2mqtt' })
+    router.go(-1)
   }
 }
 </script>

@@ -4,12 +4,12 @@ import Develop from '@/layout/develop.vue'
 const logsRouter: RouteConfig = {
   path: '/logs',
   component: Develop,
-  redirect: '/logs/list',
+  redirect: '/logs',
   name: 'logs',
   meta: { hidden: false },
   children: [
     {
-      path: 'index',
+      path: '',
       component: () => import('@/views/log/index.vue'),
       name: 'Logs',
       meta: {

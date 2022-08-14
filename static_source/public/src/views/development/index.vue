@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import api from '@/api/api'
-import stream from '@/api/stream'
-import { UUID } from 'uuid-generator-ts'
-import { Core, requestCurrentState } from '@/views/dashboard/core'
-import { EventStateChange } from '@/api/stream_types'
-import DashboardTabMuu from '@/views/dashboard/view/tab-muu.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import api from '@/api/api';
+import stream from '@/api/stream';
+import {UUID} from 'uuid-generator-ts';
+import {Core, requestCurrentState} from '@/views/dashboard/core';
+import {EventStateChange} from '@/api/stream_types';
+import DashboardTabMuu from '@/views/dashboard/view/tab-muu.vue';
 
 @Component({
   name: 'Dashboard',
@@ -39,7 +39,7 @@ import DashboardTabMuu from '@/views/dashboard/view/tab-muu.vue'
   }
 })
 export default class extends Vue {
-  @Prop({ required: false, default: 34 }) private id!: number;
+  @Prop({required: false}) private id!: number;
 
   private loading = true;
   private bus: Vue = new Vue();
@@ -50,21 +50,22 @@ export default class extends Vue {
   private currentID = '';
 
   private created() {
-    const uuid = new UUID()
-    this.currentID = uuid.getDashFreeUUID()
+    const uuid = new UUID();
+    this.currentID = uuid.getDashFreeUUID();
 
-    this.fetchDashboard()
+    this.fetchDashboard();
+
     setTimeout(() => {
-      stream.subscribe('state_changed', this.currentID, this.onStateChanged)
+      stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
       for (const entityId in this.board.current.entities) {
-        requestCurrentState(entityId)
+        requestCurrentState(entityId);
       }
-    }, 1000)
+    }, 1000);
   }
 
   private destroyed() {
-    stream.unsubscribe('state_changed', this.currentID)
+    stream.unsubscribe('state_changed', this.currentID);
   }
 
   private mounted() {
@@ -72,15 +73,28 @@ export default class extends Vue {
   }
 
   private async fetchDashboard() {
-    this.loading = true
-    const { data } = await api.v1.dashboardServiceGetDashboardById(this.id)
-    this.board.currentBoard(data)
-    this.loading = false
+    this.loading = true;
+
+    api.v1.variableServiceGetVariableByName('devDashboard').then((resp) => {
+
+      if (!resp?.data?.value) {
+        this.loading = false;
+        return;
+      }
+
+      const id = parseInt(resp?.data?.value);
+
+      api.v1.dashboardServiceGetDashboardById(id).then((resp) => {
+        this.loading = false;
+
+        this.board.currentBoard(resp.data);
+      });
+    });
   }
 
   private onStateChanged(event: EventStateChange) {
-    this.bus.$emit('state_changed', event)
-    this.board.onStateChanged(event)
+    this.bus.$emit('state_changed', event);
+    this.board.onStateChanged(event);
   }
 }
 </script>

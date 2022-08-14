@@ -48,19 +48,19 @@
 
 <script lang="ts">
 
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import api from '@/api/api'
-import { ApiArea } from '@/api/stub'
-import router from '@/router'
-import { Form } from 'element-ui'
-import CardWrapper from '@/components/card-wrapper/index.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import api from '@/api/api';
+import {ApiArea} from '@/api/stub';
+import router from '@/router';
+import {Form} from 'element-ui';
+import CardWrapper from '@/components/card-wrapper/index.vue';
 
 @Component({
   name: 'AreaEditor',
-  components: { CardWrapper }
+  components: {CardWrapper}
 })
 export default class extends Vue {
-  @Prop({ required: true }) private id!: number;
+  @Prop({required: true}) private id!: number;
 
   private listLoading = true;
   private currentArea: ApiArea = {
@@ -70,48 +70,48 @@ export default class extends Vue {
 
   private rules = {
     name: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ],
     description: [
-      { required: false, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: false, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ]
   };
 
   created() {
-    this.fetch()
+    this.fetch();
   }
 
   private async fetch() {
-    this.listLoading = true
-    const { data } = await api.v1.areaServiceGetAreaById(this.id)
-    this.currentArea = data
-    this.listLoading = false
+    this.listLoading = true;
+    const {data} = await api.v1.areaServiceGetAreaById(this.id);
+    this.currentArea = data;
+    this.listLoading = false;
   }
 
   private async save() {
     (this.$refs.currentArea as Form).validate(async valid => {
       if (!valid) {
-        return
+        return;
       }
-      const { data } = await api.v1.areaServiceUpdateArea(this.id, this.currentArea)
-    })
+      const {data} = await api.v1.areaServiceUpdateArea(this.id, this.currentArea);
+    });
   }
 
   private cancel() {
-    router.push({ path: '/areas/list' })
+    router.go(-1);
   }
 
   private async remove() {
-    const { data } = await api.v1.areaServiceDeleteArea(this.id)
+    const {data} = await api.v1.areaServiceDeleteArea(this.id);
     this.$notify({
       title: 'Success',
       message: 'Delete Successfully',
       type: 'success',
       duration: 2000
-    })
-    router.push({ path: '/areas' })
+    });
+    router.go(-1);
   }
 }
 </script>

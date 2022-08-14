@@ -9,41 +9,41 @@
         </el-button>
       </div>
 
-      <el-form v-if="metrics[selectedMetric]" label-position="top" label-width="100px"
+      <el-form v-if="value[selectedMetric]" label-position="top" label-width="100px"
                ref="currentItem"
-               :model="metrics[selectedMetric]"
+               :model="value[selectedMetric]"
                :rules="rules2"
                style="width: 100%">
         <el-form-item :label="$t('entities.metric.name')" prop="name">
-          <el-input size="small" v-model="metrics[selectedMetric].name"></el-input>
+          <el-input size="small" v-model="value[selectedMetric].name"></el-input>
         </el-form-item>
         <el-form-item :label="$t('entities.metric.description')" prop="description">
-          <el-input size="small" v-model="metrics[selectedMetric].description"></el-input>
+          <el-input size="small" v-model="value[selectedMetric].description"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('entities.metric.type')" prop="type">
-          <el-select v-model="metrics[selectedMetric].type" placeholder="please select type" default-first-option
-                     style="width: 100%">
-            <el-option label="LINE" value="line"></el-option>
-            <el-option label="PIE" value="pie"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="$t('entities.metric.ranges')" prop="ranges">
-          <el-select
-            v-model="metrics[selectedMetric].ranges"
-            placeholder="please select type"
-            :multiple="true"
-            remote
-            clearable
-            style="width: 100%"
-          >
-            <el-option label="1h" value="1h"></el-option>
-            <el-option label="6h" value="6h"></el-option>
-            <el-option label="12h" value="12h"></el-option>
-            <el-option label="24h" value="24h"></el-option>
-            <el-option label="7d" value="7d"></el-option>
-            <el-option label="30d" value="30d"></el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item :label="$t('entities.metric.type')" prop="type">-->
+<!--          <el-select v-model="value[selectedMetric].type" placeholder="please select type" default-first-option-->
+<!--                     style="width: 100%">-->
+<!--            <el-option label="LINE" value="line"></el-option>-->
+<!--            <el-option label="PIE" value="pie"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item :label="$t('entities.metric.ranges')" prop="ranges">-->
+<!--          <el-select-->
+<!--            v-model="value[selectedMetric].ranges"-->
+<!--            placeholder="please select type"-->
+<!--            :multiple="true"-->
+<!--            remote-->
+<!--            clearable-->
+<!--            style="width: 100%"-->
+<!--          >-->
+<!--            <el-option label="1h" value="1h"></el-option>-->
+<!--            <el-option label="6h" value="6h"></el-option>-->
+<!--            <el-option label="12h" value="12h"></el-option>-->
+<!--            <el-option label="24h" value="24h"></el-option>-->
+<!--            <el-option label="7d" value="7d"></el-option>-->
+<!--            <el-option label="30d" value="30d"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
       </el-form>
 
       <el-divider v-if="selectedMetric >= 0" content-position="left">Properties</el-divider>
@@ -55,11 +55,11 @@
       </div>
 
       <!-- props -->
-      <el-collapse v-if="metrics[selectedMetric] && metrics[selectedMetric].options">
+      <el-collapse v-if="value[selectedMetric] && value[selectedMetric].options">
         <el-collapse-item
           :name="index"
           :key="index"
-          v-for="(prop, index) in metrics[selectedMetric].options.items"
+          v-for="(prop, index) in value[selectedMetric].options.items"
         >
 
           <template slot="title">
@@ -128,7 +128,7 @@
       <!-- /props -->
 
       <div style="padding: 20px 0; text-align: right"
-           v-if="metrics[selectedMetric]"
+           v-if="value[selectedMetric]"
       >
         <el-popconfirm
           :confirm-button-text="$t('main.ok')"
@@ -153,12 +153,12 @@
         </div>
 
         <el-menu
-          v-if="metrics"
+          v-if="value"
           :default-active="selectedMetric + ''"
           v-model="selectedMetric"
           class="el-menu-vertical-demo"
         >
-          <el-menu-item :index="index + ''" v-for="(metric, index) in metrics"
+          <el-menu-item :index="index + ''" v-for="(metric, index) in value"
                         @click="menuClick(index)">
             <span>{{ metric.name }}</span>
           </el-menu-item>
@@ -178,7 +178,7 @@ import {ApiMetric} from '@/api/stub';
   components: {}
 })
 export default class extends Vue {
-  @Prop({default: [], required: true}) private metrics!: ApiMetric[];
+  @Prop({default: [], required: true}) private value!: ApiMetric[];
 
   private selectedMetric = -1;
 
@@ -221,36 +221,36 @@ export default class extends Vue {
   };
 
   created() {
-    if (this.metrics && this.metrics.length) {
+    if (this.value && this.value.length) {
       this.selectedMetric = 0;
     }
   }
 
   private add() {
-    this.metrics.push({
+    this.value.push({
       description: undefined,
-      name: `new metric ${this.metrics.length}`,
+      name: `new metric ${this.value.length}`,
       ranges: [],
       type: 'LINE',
       options: {
         items: []
       }
     } as ApiMetric);
-    this.selectedMetric = this.metrics.length - 1 || 0;
+    this.selectedMetric = this.value.length - 1 || 0;
   }
 
   private remove() {
-    if (!this.metrics || !this.metrics.length || this.selectedMetric < 0) {
+    if (!this.value || !this.value.length || this.selectedMetric < 0) {
       return;
     }
-    this.metrics.splice(this.selectedMetric, 1);
-    this.selectedMetric = this.metrics.length - 1;
+    this.value.splice(this.selectedMetric, 1);
+    this.selectedMetric = this.value.length - 1;
   }
 
   private addProp() {
 
 
-    this.metrics[this.selectedMetric].options!.items!.push({
+    this.value[this.selectedMetric].options!.items!.push({
       name: 'new label',
       description: '',
       color: '#FF0000',
@@ -260,11 +260,11 @@ export default class extends Vue {
   }
 
   private removeProp(index: number) {
-    if (this.selectedMetric < 0 || !this.metrics[this.selectedMetric]) {
+    if (this.selectedMetric < 0 || !this.value[this.selectedMetric]) {
       return;
     }
 
-    this.metrics[this.selectedMetric].options!.items!.splice(index, 1);
+    this.value[this.selectedMetric].options!.items!.splice(index, 1);
     this.selectedMetric = 0;
   }
 

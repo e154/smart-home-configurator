@@ -431,31 +431,21 @@ export interface ApiLog {
 }
 
 export interface ApiMeta {
-  /** @format uint64 */
   limit: number;
-
-  /** @format uint64 */
   page: number;
-
-  /** @format uint64 */
   total: number;
   sort: string;
 }
 
 export interface ApiMetric {
-  /** @format int64 */
-  id?: string;
+  id?: number;
   name?: string;
   description?: string;
   options?: ApiMetricOption;
   data?: ApiMetricOptionData[];
   type?: string;
   ranges?: string[];
-
-  /** @format date-time */
   createdAt?: string;
-
-  /** @format date-time */
   updatedAt?: string;
 }
 
@@ -465,11 +455,7 @@ export interface ApiMetricOption {
 
 export interface ApiMetricOptionData {
   value?: Record<string, number>;
-
-  /** @format int64 */
-  metricId?: string;
-
-  /** @format date-time */
+  metricId?: number;
   time?: string;
 }
 
@@ -699,6 +685,10 @@ export interface ApiScript {
 
 export interface ApiSearchAreaResult {
   items: ApiArea[];
+}
+
+export interface ApiSearchDashboardResult {
+  items: ApiDashboard[];
 }
 
 export interface ApiSearchDeviceResult {
@@ -1322,6 +1312,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     areaServiceSearchArea: (query?: { query?: string; limit?: number; offset?: number }, params: RequestParams = {}) =>
       this.request<ApiSearchAreaResult, RpcStatus>({
         path: `/v1/areas/search`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags DashboardService
+     * @name DashboardServiceSearchDashboard
+     * @summary search area
+     * @request GET:/v1/areas/search
+     * @secure
+     */
+    dashboardServiceSearchDashboard: (query?: { query?: string; limit?: number; offset?: number }, params: RequestParams = {}) =>
+      this.request<ApiSearchDashboardResult, RpcStatus>({
+        path: `/v1/dashboards/search`,
         method: 'GET',
         query: query,
         secure: true,
@@ -2242,6 +2251,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
 
+    /**
+     * No description
+     *
+     * @tags MetricService
+     * @name MetricServiceGetMetric
+     * @summary get metric
+     * @request GET:/v1/metric
+     * @secure
+     */
+    metricServiceGetMetric: (
+      query?: { id?: number; range?: string; from?: string; to?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiMetric, RpcStatus>({
+        path: `/v1/metric`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
 
     /**
      * No description
@@ -3043,7 +3073,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/v1/variable/{name}
      * @secure
      */
-    variableServiceUpdateVariable: (name: string, body: { value?: string }, params: RequestParams = {}) =>
+    variableServiceUpdateVariable: (name: string, body: {name: string, value?: string }, params: RequestParams = {}) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable/${name}`,
         method: 'PUT',
@@ -3064,7 +3094,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     variableServiceGetVariableList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: { page?: number; limit?: number; sort?: string },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetVariableListResult, RpcStatus>({

@@ -41,10 +41,7 @@
         <div class="text-404__info">
           Please check that the URL you entered is correct, or click the button below to return to the homepage.
         </div>
-        <a
-          href=""
-          class="text-404__return-home"
-        >Back to home</a>
+        <a @click.prevent.stop="cancel" class="text-404__return-home">Back to home</a>
       </div>
     </div>
   </div>
@@ -52,12 +49,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import router from '@/router';
 
 @Component({
   name: 'Page404'
 })
 export default class extends Vue {
   private message = '404 Page Not Found'
+
+  private cancel() {
+    router.go(-1)
+  }
 }
 </script>
 
