@@ -178,6 +178,9 @@ export default {
     addCondition: 'Add condition',
     addAction: 'Add action',
     addNew: 'Add task',
+    trigger: {
+      pluginOptions: 'Plugin options'
+    },
     table: {
       id: 'Id',
       name: 'Name',
