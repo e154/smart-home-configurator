@@ -181,11 +181,11 @@ export default class extends Vue {
   }
 
   private goto(area: ApiUserShot) {
-    router.push({ path: `/users/edit/${area.id}` })
+    router.push({ path: `/etc/users/edit/${area.id}` })
   }
 
   private add() {
-    router.push({ path: '/users/new' })
+    router.push({ path: '/etc/users/new' })
   }
 }
 </script>

@@ -131,7 +131,7 @@ client:
 
 front_client:
 	@echo MARK: generate front client lib
-	npx swagger-typescript-api --axios -p ./conf/swagger/api.swagger.yml -o ./static_source/public/src/api -n stub_new.ts
+	npx swagger-typescript-api@9.2.0 --axios -p ./conf/swagger/api.swagger.yml -o ./static_source/public/src/api -n stub_new.ts
 
 lint:
 	golangci-lint run ./...

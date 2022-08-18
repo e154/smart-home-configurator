@@ -257,7 +257,7 @@ export default class extends Vue {
       type: 'success',
       duration: 2000
     })
-    router.push({ path: '/users/list' })
+    router.go(-1)
   }
 
   private changedStatus(status: string) {

@@ -220,11 +220,7 @@ export interface ApiEntity {
   attributes?: Map<string, ApiAttribute>;
   settings?: Map<string, ApiAttribute>;
   metrics?: ApiMetric[];
-
-  /** @format date-time */
   createdAt?: string;
-
-  /** @format date-time */
   updatedAt?: string;
 }
 
@@ -298,6 +294,10 @@ export interface ApiExecSrcScriptRequest {
 export interface ApiGetAreaListResult {
   items: ApiArea[];
   meta: ApiMeta;
+}
+
+export interface ApiGetBackupListResult {
+  items: string[];
 }
 
 export interface ApiGetBridgeListResult {
@@ -645,6 +645,10 @@ export interface ApiResponse {
 
   /** @format byte */
   body?: string;
+}
+
+export interface ApiRestoreBackupRequest {
+  name?: string;
 }
 
 export interface ApiRole {
@@ -1322,19 +1326,58 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags DashboardService
-     * @name DashboardServiceSearchDashboard
-     * @summary search area
-     * @request GET:/v1/areas/search
+     * @tags BackupService
+     * @name BackupServiceNewBackup
+     * @summary new backup
+     * @request POST:/v1/backup
      * @secure
      */
-    dashboardServiceSearchDashboard: (query?: { query?: string; limit?: number; offset?: number }, params: RequestParams = {}) =>
-      this.request<ApiSearchDashboardResult, RpcStatus>({
-        path: `/v1/dashboards/search`,
-        method: 'GET',
-        query: query,
+    backupServiceNewBackup: (body: any, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/backup`,
+        method: "POST",
+        body: body,
         secure: true,
-        format: 'json',
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BackupService
+     * @name BackupServiceRestoreBackup
+     * @summary restore backup
+     * @request PUT:/v1/backup/restore
+     * @secure
+     */
+    backupServiceRestoreBackup: (body: ApiRestoreBackupRequest, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/backup/restore`,
+        method: "PUT",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BackupService
+     * @name BackupServiceGetBackupList
+     * @summary get backup list
+     * @request GET:/v1/backups
+     * @secure
+     */
+    backupServiceGetBackupList: (params: RequestParams = {}) =>
+      this.request<ApiGetBackupListResult, RpcStatus>({
+        path: `/v1/backups`,
+        method: "GET",
+        secure: true,
+        format: "json",
         ...params,
       }),
 
@@ -1820,6 +1863,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags DashboardService
+     * @name DashboardServiceSearchDashboard
+     * @summary search area
+     * @request GET:/v1/dashboards/search
+     * @secure
+     */
+    dashboardServiceSearchDashboard: (
+      query?: { query?: string; limit?: number; offset?: number },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiSearchDashboardResult, RpcStatus>({
+        path: `/v1/dashboards/search`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags DeveloperToolsService
      * @name DeveloperToolsServiceReloadEntity
      * @summary reload entity
@@ -1913,6 +1978,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query: query,
         secure: true,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityService
+     * @name EntityServiceImportEntity
+     * @summary import entity
+     * @request POST:/v1/entities/import
+     * @secure
+     */
+    entityServiceImportEntity: (body: ApiEntity, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/entities/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 

@@ -388,10 +388,7 @@ export interface ApiEntityStorage {
   state?: string;
   attributes?: Record<string, ApiAttribute>;
 
-  /**
-   * map<string, google.protobuf.Any> attributes = 4;
-   * @format date-time
-   */
+  /** @format date-time */
   createdAt?: string;
 }
 
@@ -409,6 +406,10 @@ export interface ApiExecSrcScriptRequest {
 export interface ApiGetAreaListResult {
   items?: ApiArea[];
   meta?: ApiMeta;
+}
+
+export interface ApiGetBackupListResult {
+  items?: string[];
 }
 
 export interface ApiGetBridgeListResult {
@@ -803,6 +804,10 @@ export interface ApiResponse {
 
   /** @format byte */
   body?: string;
+}
+
+export interface ApiRestoreBackupRequest {
+  name?: string;
 }
 
 export interface ApiRole {
@@ -1205,6 +1210,7 @@ export interface ProtobufAny {
    * expect it to use in the context of Any. However, for URLs which use the
    * scheme `http`, `https`, or no scheme, one can optionally set up a type
    * server that maps type URLs to message definitions as follows:
+   *
    * * If no scheme is provided, `https` is assumed.
    * * An HTTP GET on the URL must yield a [google.protobuf.Type][]
    *   value in binary format, or produce an error.
@@ -1213,9 +1219,11 @@ export interface ProtobufAny {
    *   lookup. Therefore, binary compatibility needs to be preserved
    *   on changes to types. (Use versioned type names to manage
    *   breaking changes.)
+   *
    * Note: this functionality is not currently available in the official
    * protobuf release, and it is not used for type URLs beginning with
    * type.googleapis.com.
+   *
    * Schemes other than `http`, `https` (or the empty scheme) might be
    * used with implementation specific semantics.
    */
@@ -1491,6 +1499,64 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/v1/areas/search`,
         method: "GET",
         query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BackupService
+     * @name BackupServiceNewBackup
+     * @summary new backup
+     * @request POST:/v1/backup
+     * @secure
+     */
+    backupServiceNewBackup: (body: any, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/backup`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BackupService
+     * @name BackupServiceRestoreBackup
+     * @summary restore backup
+     * @request PUT:/v1/backup/restore
+     * @secure
+     */
+    backupServiceRestoreBackup: (body: ApiRestoreBackupRequest, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/backup/restore`,
+        method: "PUT",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags BackupService
+     * @name BackupServiceGetBackupList
+     * @summary get backup list
+     * @request GET:/v1/backups
+     * @secure
+     */
+    backupServiceGetBackupList: (params: RequestParams = {}) =>
+      this.request<ApiGetBackupListResult, RpcStatus>({
+        path: `/v1/backups`,
+        method: "GET",
         secure: true,
         format: "json",
         ...params,
@@ -2069,6 +2135,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityService
+     * @name EntityServiceImportEntity
+     * @summary import entity
+     * @request POST:/v1/entities/import
+     * @secure
+     */
+    entityServiceImportEntity: (body: ApiEntity, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/entities/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

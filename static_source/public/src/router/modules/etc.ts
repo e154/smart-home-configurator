@@ -71,6 +71,41 @@ const etcRouter: RouteConfig = {
         title: 'areaNew',
         hidden: true
       }
+    },
+    {
+      path: 'users',
+      component: () => import('@/views/users/index.vue'),
+      name: 'user list',
+      meta: {
+        title: 'userList'
+      }
+    },
+    {
+      path: 'users/edit/:id',
+      component: () => import('@/views/users/edit.vue'),
+      props: true,
+      name: 'user edit',
+      meta: {
+        title: 'UserEdit',
+        hidden: true
+      }
+    },
+    {
+      path: 'users/new',
+      component: () => import('@/views/users/new.vue'),
+      name: 'user new',
+      meta: {
+        hidden: true,
+        title: 'UserNew'
+      }
+    },
+    {
+      path: 'backups',
+      component: () => import('@/views/backup/index.vue'),
+      name: 'backup list',
+      meta: {
+        title: 'backupList'
+      }
     }
   ]
 };

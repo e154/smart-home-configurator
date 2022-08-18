@@ -11,7 +11,6 @@ import entitiesRouter from '@/router/modules/entities';
 import automationRouter from '@/router/modules/automation';
 import zigbee2mqttRouter from '@/router/modules/zigbee2mqtt';
 import logsRouter from '@/router/modules/log';
-import usersRouter from '@/router/modules/users';
 import etcRouter from '@/router/modules/etc';
 import dashboardsRouter from '@/router/modules/dashboard';
 
@@ -181,7 +180,6 @@ export const developRoutes: RouteConfig[] = [
   automationRouter,
   zigbee2mqttRouter,
   dashboardsRouter,
-  usersRouter,
   logsRouter,
   etcRouter,
   {

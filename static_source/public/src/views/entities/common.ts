@@ -47,3 +47,35 @@ export const createCard = async(val: ApiNewEntityRequest) => {
 
   return api.v1.entityServiceAddEntity(entity)
 }
+
+export const importEntity = async(val: ApiEntity) => {
+  const entity: ApiEntity = {
+    id: val.id,
+    pluginName: val.pluginName,
+    description: val.description,
+    area: val.area,
+    icon: val.icon,
+    image: val.image,
+    autoLoad: val.autoLoad,
+    parent: val.parent || undefined,
+    actions: [],
+    states: [],
+    attributes: val.attributes,
+    settings: val.settings,
+    scripts: val.scripts
+  }
+
+  // update actions
+  for (const i in val.actions) {
+    const action = Object.assign({}, val.actions[<any> i])
+    entity.actions?.push(action)
+  }
+
+  // update states
+  for (const i in val.states) {
+    const state = Object.assign({}, val.states[<any> i])
+    entity.states?.push(state)
+  }
+
+  return api.v1.entityServiceImportEntity(entity)
+}
