@@ -109,7 +109,7 @@
               v-if="internal.pluginOptions.actorCustomSetts || Object.keys(internal.pluginOptions.actorSetts).length"
             >
               <AttributesEditor
-                  v-model="internal.settings"
+                v-model="internal.settings"
                 :attrs="internal.pluginOptions.actorSetts"
                 :customAttrs="internal.pluginOptions.actorCustomSetts"
                 @update-value="changedAttributes($event, 'settings')"
@@ -541,7 +541,7 @@ export default class extends Vue {
   }
 
   private cancel() {
-    router.go(-1)
+    router.go(-1);
   }
 
   private showExport: boolean = false;
@@ -549,7 +549,8 @@ export default class extends Vue {
   private _export() {
     let entity: any;
     entity = this.prepareSave();
-    entity.name = this.currentEntity.id?.replaceAll(entity.pluginName + '.', '');
+    entity.id = this.currentEntity.id;
+    entity.name = this.currentEntity.id?.replaceAll('.' + entity.pluginName, '');
     this.internal.exportValue = entity;
     this.showExport = true;
   }

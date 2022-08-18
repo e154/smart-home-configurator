@@ -2143,6 +2143,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags EntityService
+     * @name EntityServiceImportEntity
+     * @summary import entity
+     * @request POST:/v1/entities/import
+     * @secure
+     */
+    entityServiceImportEntity: (body: ApiEntity, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/entities/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityService
      * @name EntityServiceAddEntity
      * @summary add new entity
      * @request POST:/v1/entity
