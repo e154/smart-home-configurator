@@ -147,7 +147,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Pagination from '@/components/Pagination/index.vue'
 import { ApiArea, ApiEntity } from '@/api/stub'
 import ExportTool from '@/components/export-tool/index.vue'
-import { createCard } from '@/views/entities/common'
+import {createCard, importEntity} from '@/views/entities/common';
 
 @Component({
   name: 'EntitiesList',
@@ -264,7 +264,7 @@ export default class extends Vue {
 
   private async onImport(value: string, event?: any) {
     const json = JSON.parse(value)
-    const { data } = await createCard(json)
+    const { data } = await importEntity(json)
     if (data) {
       this.getList()
       this.$notify({

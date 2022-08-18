@@ -220,11 +220,7 @@ export interface ApiEntity {
   attributes?: Map<string, ApiAttribute>;
   settings?: Map<string, ApiAttribute>;
   metrics?: ApiMetric[];
-
-  /** @format date-time */
   createdAt?: string;
-
-  /** @format date-time */
   updatedAt?: string;
 }
 
@@ -1982,6 +1978,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query: query,
         secure: true,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EntityService
+     * @name EntityServiceImportEntity
+     * @summary import entity
+     * @request POST:/v1/entities/import
+     * @secure
+     */
+    entityServiceImportEntity: (body: ApiEntity, params: RequestParams = {}) =>
+      this.request<any, RpcStatus>({
+        path: `/v1/entities/import`,
+        method: "POST",
+        body: body,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
