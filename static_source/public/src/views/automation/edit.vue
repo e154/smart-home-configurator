@@ -58,7 +58,6 @@
             >
               <triggers
                 v-model="currentTask.triggers"
-                @update-value="changedTriggers"
                 v-on:call-trigger="callTrigger"
               />
             </el-tab-pane>
@@ -187,14 +186,6 @@ export default class extends Vue {
       this.$set(this.currentTask, 'area', values)
     } else {
       this.$set(this.currentTask, 'area', undefined)
-    }
-  }
-
-  private changedTriggers(values: ApiTrigger[], event?: any) {
-    if (values) {
-      this.$set(this.currentTask, 'triggers', values)
-    } else {
-      this.$set(this.currentTask, 'triggers', undefined)
     }
   }
 

@@ -13,7 +13,7 @@
 
         <el-form-item :label="$t('automation.table.script')" prop="script">
 
-          <span slot="label"  v-if="currentItem.script && currentItem.script.id">
+          <span slot="label" v-if="currentItem.script && currentItem.script.id">
             {{ $t('entities.table.script') }}
              <script-dialog
                :visible.sync="dialogScriptVisible"
@@ -23,7 +23,7 @@
             <el-button
               type="text"
               @click="dialogScriptVisible=true">
-             {{ $t('scripts.view') }}   <svg-icon name="link" />
+             {{ $t('scripts.view') }}   <svg-icon name="link"/>
             </el-button>
           </span>
 
@@ -56,30 +56,33 @@
         </el-form-item>
 
         <el-form-item
-          v-if="currentItem.pluginName=='time'"
-          :label="$t('automation.table.attributes')"
+          v-if="currentItem.pluginName==='time'"
+          :label="$t('automation.trigger.pluginOptions')"
           prop="attributes"
         >
           <el-input
             v-model="attributes.time"
-            onchange="changedAttrParams"
+            @change="changedAttrParams"
           ></el-input>
         </el-form-item>
 
         <el-form-item
-          v-if="currentItem.pluginName=='alexa'"
-          :label="$t('automation.table.attributes')"
+          v-if="currentItem.pluginName==='alexa'"
+          :label="$t('automation.trigger.pluginOptions')"
           prop="attributes"
         >
           <el-input
             type="number"
             v-model="attributes.alexa"
-            onchange="changedAttrParams"
+            @change="changedAttrParams"
           ></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{$t('entities.addAction') }}</el-button>
+          <el-button v-if="mode == 'NEW'" type="primary" @click="submitForm()">{{
+              $t('entities.addAction')
+            }}
+          </el-button>
           <el-button v-if="mode == 'EDIT'" type="primary" @click="submitForm()">{{ $t('main.update') }}</el-button>
           <el-button @click="resetForm()">{{ $t('main.cancel') }}</el-button>
           <el-button v-if="mode == 'EDIT'" type="danger" @click="removeItem()">{{ $t('main.remove') }}</el-button>
@@ -111,7 +114,7 @@
               width="200px"
             >
               <template slot-scope="{row}">
-               <span> {{ row.name }}</span>
+                <span> {{ row.name }}</span>
               </template>
             </el-table-column>
 
@@ -133,7 +136,7 @@
               width="120px"
             >
               <template slot-scope="{row}">
-                  {{ row.entity.id }}
+                {{ row.entity.id }}
               </template>
             </el-table-column>
 
@@ -171,14 +174,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { ApiAction, ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes } from '@/api/stub'
-import { Form } from 'element-ui'
-import ScriptSearch from '@/views/scripts/components/script_search.vue'
-import EntitySearch from '@/views/entities/components/entity_search.vue'
-import AttributesEditor from '@/views/entities/components/attributes_editor.vue'
-import ScriptEditModal from '@/views/scripts/edit-modal.vue'
-import ScriptDialog from '@/views/scripts/dialog.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {ApiAttribute, ApiEntity, ApiScript, ApiTrigger, ApiTypes} from '@/api/stub';
+import {Form} from 'element-ui';
+import ScriptSearch from '@/views/scripts/components/script_search.vue';
+import EntitySearch from '@/views/entities/components/entity_search.vue';
+import AttributesEditor from '@/views/entities/components/attributes_editor.vue';
+import ScriptEditModal from '@/views/scripts/edit-modal.vue';
+import ScriptDialog from '@/views/scripts/dialog.vue';
 
 export enum Mode {
   VIEW = 'VIEW',
@@ -197,7 +200,7 @@ export enum Mode {
   }
 })
 export default class extends Vue {
-  @Prop({ required: false, default: () => [] }) private value?: ApiTrigger[];
+  @Prop({required: false, default: () => []}) private value?: ApiTrigger[];
 
   private mode: Mode = Mode.VIEW;
   private currentItem: ApiTrigger = {
@@ -205,156 +208,161 @@ export default class extends Vue {
   };
 
   private currentItemIndex?: number;
-  private attributes = {
+  private attributes: {
+    cron: string
+    alexa: number
+    time: string
+  } = {
     cron: '',
-    alexa: 0
+    alexa: 0,
+    time: ''
   };
 
   private dialogScriptVisible = false;
 
   private rules = {
     name: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ],
     script: [
-      { required: true, trigger: 'blur' }
+      {required: true, trigger: 'blur'}
     ],
     entity: [
-      { required: true, trigger: 'blur' }
+      {required: true, trigger: 'blur'}
     ],
     pluginName: [
-      { required: true, trigger: 'blur' }
+      {required: true, trigger: 'blur'}
     ]
   };
 
   private editTrigger(trigger: ApiTrigger, index: number) {
-    this.currentItem = Object.assign({}, trigger)
-    this.currentItemIndex = index
-    this.mode = Mode.EDIT
+    this.currentItem = Object.assign({}, trigger);
+    this.currentItemIndex = index;
+    this.mode = Mode.EDIT;
     if (this.currentItem && this.currentItem.pluginName) {
-      this.changedPlugin(this.currentItem.pluginName)
+      this.changedPlugin(this.currentItem.pluginName);
     }
   }
 
   private add() {
     this.currentItem = {
       name: ''
-    }
-    this.mode = Mode.NEW
+    };
+    this.mode = Mode.NEW;
   }
 
   private resetForm() {
-    this.currentItem = {}
-    this.mode = Mode.VIEW
-    this.currentItemIndex = undefined
+    this.currentItem = {};
+    this.mode = Mode.VIEW;
+    this.currentItemIndex = undefined;
   }
 
   private removeItem() {
     if (this.value) {
       for (const index in this.value) {
         if (this.currentItem && this.value[index].name == this.currentItem.name) {
-          this.value.splice(+index, 1)
+          this.value.splice(+index, 1);
         }
       }
     }
-    this.mode = Mode.VIEW
-    this.currentItem = {}
+    this.mode = Mode.VIEW;
+    this.currentItem = {};
   }
 
   private changedScript(value: ApiScript, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'script', { id: value.id, name: value.name })
+      this.$set(this.currentItem, 'script', {id: value.id, name: value.name});
     } else {
-      this.$set(this.currentItem, 'script', undefined)
+      this.$set(this.currentItem, 'script', undefined);
     }
   }
 
   private changedEntity(value: ApiEntity, event?: any) {
     if (value) {
-      this.$set(this.currentItem, 'entity', { id: value.id })
+      this.$set(this.currentItem, 'entity', {id: value.id});
     } else {
-      this.$set(this.currentItem, 'entity', undefined)
+      this.$set(this.currentItem, 'entity', undefined);
     }
   }
 
   private changedPlugin(value: string) {
     switch (value) {
       case 'state_change':
-        break
+        break;
       case 'time':
         if (this.currentItem.attributes && this.currentItem.attributes.cron) {
-          this.$set(this.attributes, 'time', this.currentItem.attributes.cron.string)
+          this.$set(this.attributes, 'time', this.currentItem.attributes.cron.string);
         }
-        break
+        break;
       case 'system':
-        break
+        break;
       case 'alexa':
         if (this.currentItem.attributes && this.currentItem.attributes.skillId) {
-          this.$set(this.attributes, 'alexa', this.currentItem.attributes.skillId.int)
+          this.$set(this.attributes, 'alexa', this.currentItem.attributes.skillId.int);
         }
-        break
+        break;
       default:
-        console.log('unknown plugin name', value)
+        console.log('unknown plugin name', value);
     }
   }
 
   private changedAttrParams(value: any) {
     if (value) {
-      const attributes: { [key: string]: ApiAttribute } = {}
+      let attributes: { [key: string]: ApiAttribute } = {};
 
-      switch (value) {
+      switch (this.currentItem.pluginName) {
         case 'state_change':
-          break
+          break;
         case 'time':
           attributes.cron = {
             name: 'cron',
             type: ApiTypes.STRING,
             string: value
-          }
-          break
+          };
+          break;
         case 'system':
-          break
+          break;
         case 'alexa':
           attributes.skillId = {
             name: 'skillId',
             type: ApiTypes.INT,
             int: value
-          }
-          break
+          };
+          break;
         default:
-          console.log('unknown plugin name', value)
+          console.log('unknown plugin name', value);
       }
 
-      this.$set(this.currentItem, 'attributes', attributes)
+      this.$set(this.currentItem, 'attributes', attributes);
     } else {
-      this.$set(this.currentItem, 'attributes', undefined)
+      this.$set(this.currentItem, 'attributes', undefined);
     }
   }
 
   private submitForm() {
     (this.$refs.currentItem as Form).validate(valid => {
       if (!valid) {
-        return
+        return;
       }
 
       if (this.mode === Mode.NEW) {
         if (this.value) {
-          this.value.push(Object.assign({}, this.currentItem))
+          this.value.push(Object.assign({}, this.currentItem));
         }
       } else if (this.mode === Mode.EDIT) {
         if (this.value) {
           if (this.currentItemIndex != undefined) {
-            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem)
+            this.value[this.currentItemIndex] = Object.assign({}, this.currentItem);
           }
         }
       }
-      this.resetForm()
-    })
+      this.resetForm();
+    });
   }
 
   private callTrigger(tr: ApiTrigger, index: number) {
-    this.$emit('call-trigger', tr.name)
+    this.$emit('call-trigger', tr.name);
   }
 }
 </script>
