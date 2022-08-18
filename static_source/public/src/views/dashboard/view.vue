@@ -38,7 +38,7 @@ import DashboardTabMuu from '@/views/dashboard/view/tab-muu.vue';
   }
 })
 export default class extends Vue {
-  @Prop({required: false, default: 3}) private id!: number;
+  @Prop({required: false}) private id!: number;
 
   private loading = true;
   private bus: Vue = new Vue();

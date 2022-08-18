@@ -201,7 +201,7 @@ export default class extends Vue {
           type: 'success',
           duration: 2000
         })
-        router.push({ path: `/users/edit/${data.id}` })
+        router.push({ path: `/etc/users/edit/${data.id}` })
       }
     })
   }

@@ -48,7 +48,8 @@ export default {
     mqtt: 'Mqtt',
     mqttList: 'List',
     etc: 'etc',
-    variables: 'Variables'
+    variables: 'Variables',
+    backupList: 'Backups'
   },
   navbar: {
     logOut: 'Log Out',
@@ -216,6 +217,13 @@ export default {
       level: 'Level',
       body: 'Body',
       createdAt: 'Created at'
+    }
+  },
+  backup: {
+    addNew: 'Create new backup',
+    table: {
+      name: 'Name',
+      restore: 'Restore'
     }
   },
   dashboard: {
