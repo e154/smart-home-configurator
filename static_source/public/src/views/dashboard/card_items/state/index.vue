@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { ButtonAction, CardItem } from '@/views/dashboard/core'
+import {ButtonAction, CardItem, requestCurrentState} from '@/views/dashboard/core';
 import { Compare, Resolve } from '@/views/dashboard/render'
 import { Attribute, GetAttrValue } from '@/api/stream_types'
 import { ApiImage } from '@/api/stub'
@@ -64,6 +64,7 @@ export default class extends Vue {
     this.internal.currentImage = this.item?.payload.state.default_image
 
     this.update()
+    requestCurrentState(this.item?.entityId);
   }
 
   reload() {

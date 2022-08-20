@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItem } from '@/views/dashboard/core'
+import {CardItem, requestCurrentState} from '@/views/dashboard/core';
 import api from '@/api/api'
 
 @Component({
@@ -28,6 +28,7 @@ export default class extends Vue {
   @Prop({ default: false }) private disabled!: boolean;
 
   private created() {
+    requestCurrentState(this.item?.entityId);
   }
 
   private mounted() {

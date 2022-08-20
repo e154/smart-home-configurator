@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { CardItem } from '@/views/dashboard/core'
+import {CardItem, requestCurrentState} from '@/views/dashboard/core';
 import { ApiLog } from '@/api/stub'
 import api from '@/api/api'
 import { UUID } from 'uuid-generator-ts'
@@ -130,6 +130,8 @@ export default class extends Vue {
     setTimeout(() => {
       stream.subscribe('log', this.currentID, this.onLogs)
     }, 1000)
+
+    requestCurrentState(this.item?.entityId);
   }
 
   private destroyed() {
