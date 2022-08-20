@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { CardItem } from '@/views/dashboard/core'
+import {CardItem, requestCurrentState} from '@/views/dashboard/core';
 import { Cache, Compare, GetTokens, RenderText, Resolve } from '@/views/dashboard/render'
 import { Attribute, GetAttrValue } from '@/api/stream_types'
 
@@ -31,6 +31,7 @@ export default class extends Vue {
   private created() {
     this._cache = new Cache()
     this.update()
+    requestCurrentState(this.item?.entityId!);
   }
 
   private mounted() {

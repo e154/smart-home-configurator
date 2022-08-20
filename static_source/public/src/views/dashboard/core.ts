@@ -1043,7 +1043,10 @@ function getSize(): number {
   return 200;
 }
 
-export function requestCurrentState(entityId: string) {
+export function requestCurrentState(entityId?: string) {
+  if (!entityId) {
+    return;
+  }
   stream.send({
     id: UUID.createUUID(),
     query: 'event_get_last_state',

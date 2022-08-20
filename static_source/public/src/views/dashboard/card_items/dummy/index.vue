@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItem } from '@/views/dashboard/core'
+import {CardItem, requestCurrentState} from '@/views/dashboard/core';
 
 @Component({
   name: 'Dummy',
@@ -16,7 +16,9 @@ import { CardItem } from '@/views/dashboard/core'
 export default class extends Vue {
   @Prop() private item?: CardItem;
 
-  private created() {}
+  private created() {
+    requestCurrentState(this.item?.entityId);
+  }
   private mounted() {}
 }
 </script>
