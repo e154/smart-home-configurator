@@ -56,9 +56,9 @@ export default class extends Vue {
     setTimeout(() => {
       stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
-      for (const entityId in this.board.current.entities) {
-        requestCurrentState(entityId);
-      }
+      // for (const entityId in this.board.current.entities) {
+      //   requestCurrentState(entityId);
+      // }
     }, 1000);
   }
 
