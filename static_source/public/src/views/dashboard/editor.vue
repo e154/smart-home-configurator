@@ -634,13 +634,13 @@ export default class extends Vue {
       this.onSelectedCard(m);
     });
 
-    setTimeout(() => {
+    // setTimeout(() => {
       stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
-      for (const entityId in this.board.current.entities) {
-        requestCurrentState(entityId);
-      }
-    }, 1000);
+      // for (const entityId in this.board.current.entities) {
+      //   requestCurrentState(entityId);
+      // }
+    // }, 1000);
   }
 
   private destroyed() {

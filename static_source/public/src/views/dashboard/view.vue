@@ -27,7 +27,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import api from '@/api/api';
 import stream from '@/api/stream';
 import {UUID} from 'uuid-generator-ts';
-import {Core, requestCurrentState} from '@/views/dashboard/core';
+import {Core} from '@/views/dashboard/core';
 import {EventStateChange} from '@/api/stream_types';
 import DashboardTabMuu from '@/views/dashboard/view/tab-muu.vue';
 
@@ -53,13 +53,13 @@ export default class extends Vue {
     this.currentID = uuid.getDashFreeUUID();
 
     this.fetchDashboard();
-    setTimeout(() => {
-      stream.subscribe('state_changed', this.currentID, this.onStateChanged);
+    // setTimeout(() => {
+    stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
-      // for (const entityId in this.board.current.entities) {
-      //   requestCurrentState(entityId);
-      // }
-    }, 1000);
+    // for (const entityId in this.board.current.entities) {
+    //   requestCurrentState(entityId);
+    // }
+    // }, 1000);
   }
 
   private destroyed() {

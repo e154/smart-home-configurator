@@ -34,7 +34,7 @@ export default class extends Vue {
 
   private created() {
     this._cache = new Cache()
-    this.update()
+    // this.update()
     requestCurrentState(this.item?.entityId);
   }
 

@@ -419,9 +419,8 @@ export class CardItem {
 
     // console.log(event);
 
-    this.update();
-
     this._lastEvent = event;
+    this.update();
 
     // hide
     for (const prop of this.hideOn) {
@@ -433,6 +432,7 @@ export class CardItem {
       const tr = Compare(val, prop.value, prop.comparison);
       if (tr) {
         this.hidden = true;
+        this.update();
         return;
       }
     }
@@ -447,6 +447,7 @@ export class CardItem {
       const tr = Compare(val, prop.value, prop.comparison);
       if (tr) {
         this.hidden = false;
+        this.update();
         return;
       }
     }
@@ -1047,6 +1048,7 @@ export function requestCurrentState(entityId?: string) {
   if (!entityId) {
     return;
   }
+  console.log('requestCurrentState', entityId)
   stream.send({
     id: UUID.createUUID(),
     query: 'event_get_last_state',

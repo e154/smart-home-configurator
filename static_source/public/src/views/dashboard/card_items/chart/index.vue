@@ -75,7 +75,7 @@ export default class extends Vue {
     if (!this.item) {
       return;
     }
-    this.prepareData();
+    // this.prepareData();
     requestCurrentState(this.item?.entityId);
   }
 
