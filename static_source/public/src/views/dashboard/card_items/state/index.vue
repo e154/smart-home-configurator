@@ -37,12 +37,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
 import {ButtonAction, CardItem, requestCurrentState} from '@/views/dashboard/core';
-import { Compare, Resolve } from '@/views/dashboard/render'
-import { Attribute, GetAttrValue } from '@/api/stream_types'
-import { ApiImage } from '@/api/stub'
-import api from '@/api/api'
+import {Compare, Resolve} from '@/views/dashboard/render';
+import {Attribute, GetAttrValue} from '@/api/stream_types';
+import {ApiImage} from '@/api/stub';
+import api from '@/api/api';
 
 @Component({
   name: 'IState',
@@ -59,99 +59,101 @@ export default class extends Vue {
 
   private created() {
     if (!this.item?.payload.state || !this.item?.payload.state.default_image) {
-      return
+      return;
     }
-    this.internal.currentImage = this.item?.payload.state.default_image
+    this.internal.currentImage = this.item?.payload.state.default_image;
 
-    this.update()
+    // setTimeout(() => {
     requestCurrentState(this.item?.entityId);
+    // }, 1000);
+    // this.update()
   }
 
   reload() {
-    this.reloadKey += 1
+    this.reloadKey += 1;
   }
 
   private mounted() {
   }
 
   private setImage(image: ApiImage | undefined) {
-    this.internal.currentImage = image
+    this.internal.currentImage = image;
     // TODO fix reload
     // this.reload();
   }
 
   private update() {
-    let counter = 0
+    let counter = 0;
 
     if (this.item?.payload.state?.items) {
       for (const prop of this.item?.payload.state?.items) {
-        let val = Resolve(prop.key, this.item?.lastEvent)
+        let val = Resolve(prop.key, this.item?.lastEvent);
         if (!val) {
-          continue
+          continue;
         }
 
         if (typeof val === 'object') {
           if (val && val.hasOwnProperty('type') && val.hasOwnProperty('name')) {
-            val = GetAttrValue(val as Attribute)
+            val = GetAttrValue(val as Attribute);
           }
         }
 
         if (val == undefined) {
-          val = '[NO VALUE]'
+          val = '[NO VALUE]';
         }
 
-        const tr = Compare(val, prop.value, prop.comparison)
+        const tr = Compare(val, prop.value, prop.comparison);
         if (tr && prop.image) {
-          counter++
-          this.setImage(prop.image)
+          counter++;
+          this.setImage(prop.image);
         }
       }
     }
 
     if (counter == 0) {
-      this.setImage(this.item?.payload?.state?.default_image)
+      this.setImage(this.item?.payload?.state?.default_image);
     }
   }
 
-  @Watch('item.uuid')
+  @Watch('item', {deep: true})
   private onUpdateItem(item: CardItem) {
-    this.update()
+    this.update();
   }
 
   private timer: any;
 
   private mouseLive() {
     if (!this.showMenu) {
-      return
+      return;
     }
     this.timer = setTimeout(() => {
-      this.showMenu = false
-      this.timer = null
-    }, 2000)
+      this.showMenu = false;
+      this.timer = null;
+    }, 2000);
   }
 
   private mouseOver() {
-    this.showMenu = true
+    this.showMenu = true;
     if (!this.timer) {
-      return
+      return;
     }
-    clearTimeout(this.timer)
+    clearTimeout(this.timer);
   }
 
   private async callAction(action: ButtonAction) {
     if (!action) {
-      return
+      return;
     }
     await api.v1.interactServiceEntityCallAction({
       id: this.item?.entityId,
       name: action.action || ''
-    })
+    });
     this.$notify({
       title: 'Success',
       message: 'Call Successfully',
       type: 'success',
       duration: 2000
-    })
+    });
   }
 }
 </script>
