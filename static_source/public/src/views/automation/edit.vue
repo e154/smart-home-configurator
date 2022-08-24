@@ -20,7 +20,7 @@
                        :rules="rules"
                        style="width: 100%">
                 <el-form-item :label="$t('automation.table.name')" prop="name">
-                  <el-input disabled v-model.trim="currentTask.name"/>
+                  <el-input v-model.trim="currentTask.name"/>
                 </el-form-item>
                 <el-form-item :label="$t('automation.table.description')" prop="description">
                   <el-input v-model.trim="currentTask.description"/>
