@@ -78,8 +78,11 @@ export default class extends Vue {
     if (!this.$refs.line) {
       return;
     }
-    // @ts-ignore
-    this.$refs.line.updateChart();
+    try {
+      // @ts-ignore
+      this.$refs.line.updateChart();
+    } catch (e) {
+    }
   }
 }
 </script>

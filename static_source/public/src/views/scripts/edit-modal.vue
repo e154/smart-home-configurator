@@ -22,7 +22,7 @@
 import CodeMirror, { Editor } from 'codemirror'
 import 'codemirror/addon/lint/lint.css'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/darcula.css'
+import 'codemirror/theme/mdn-like.css'
 import 'codemirror/mode/coffeescript/coffeescript'
 import 'codemirror/addon/lint/lint'
 import 'codemirror/addon/lint/json-lint'
@@ -105,7 +105,7 @@ export default class extends Vue {
       lineNumbers: true,
       mode: 'application/vnd.coffeescript',
       gutters: ['CodeMirror-lint-markers'],
-      theme: 'darcula',
+      theme: 'mdn-like',
       lint: true
     })
 

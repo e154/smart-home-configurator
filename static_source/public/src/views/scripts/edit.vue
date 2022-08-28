@@ -90,7 +90,7 @@
 <script lang="ts">
 import 'codemirror/addon/lint/lint.css'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/darcula.css'
+import 'codemirror/theme/mdn-like.css'
 import 'codemirror/mode/coffeescript/coffeescript'
 import 'codemirror/addon/lint/lint'
 import 'codemirror/addon/lint/json-lint'

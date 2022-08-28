@@ -145,7 +145,7 @@ export default class extends Vue {
       return;
     }
     await api.v1.interactServiceEntityCallAction({
-      id: this.item?.entityId,
+      id: action.entityId,
       name: action.action || ''
     });
     this.$notify({
