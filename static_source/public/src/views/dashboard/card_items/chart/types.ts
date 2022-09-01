@@ -36,4 +36,5 @@ export const FilterList: ItemsType[] = [
   {label: 'formatdate', value: 'formatdate'},
   {label: 'formatBytes', value: 'formatBytes'},
   {label: 'seconds', value: 'seconds'},
+  {label: 'getDayOfWeek', value: 'getDayOfWeek'},
 ];

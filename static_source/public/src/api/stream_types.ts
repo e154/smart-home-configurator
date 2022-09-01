@@ -7,6 +7,7 @@ export enum Types {
   BOOL = 'bool',
   ARRAY = 'array',
   TIME = 'time',
+  MAP = 'map',
 }
 
 export interface Attribute {
@@ -64,6 +65,9 @@ export function GetAttrValue(attr: Attribute): string {
       break
     case Types.TIME:
       val = parseTime(attr.value) as string
+      break
+    case Types.MAP:
+      val = attr.value
       break
     default:
       return `unknown type "${attr.type}"`

@@ -26,8 +26,9 @@ import {ItemPayloadChart} from '@/views/dashboard/card_items/chart/types';
 
 export interface ButtonAction {
   entityId: string;
+  entity?: { id?: string };
   action: string;
-  image?: ApiImage;
+  image?: ApiImage | null;
 }
 
 export interface Position {
@@ -206,6 +207,19 @@ export class CardItem {
   serialize(): ApiDashboardCardItem {
     const style = JSON.parse(this.styleString || '{}');
     this.styleObj = style;
+    let buttonActions: ButtonAction[] = [];
+    for (const action of this.buttonActions) {
+      let entity!: { id?: string };
+      if (action.entity) {
+        entity = {id: action.entity?.id};
+      }
+      buttonActions.push({
+        entityId: action.entityId,
+        entity: entity,
+        action: action.action,
+        image: action.image,
+      });
+    }
     const payload = btoa(unescape(encodeURIComponent(JSON.stringify({
       width: this.width,
       height: this.height,
@@ -215,7 +229,7 @@ export class CardItem {
       showOn: this.showOn,
       hideOn: this.hideOn,
       asButton: this.asButton,
-      buttonActions: this.buttonActions
+      buttonActions: buttonActions
     }))));
     const item = {
       id: this.id,
@@ -1048,7 +1062,7 @@ export function requestCurrentState(entityId?: string) {
   if (!entityId) {
     return;
   }
-  console.log('requestCurrentState', entityId)
+  console.log('requestCurrentState', entityId);
   stream.send({
     id: UUID.createUUID(),
     query: 'event_get_last_state',

@@ -99,9 +99,12 @@ export default class extends Vue {
     this.callAction();
   }
 
-  chartData!: {
+  chartData: {
     labels: Array<string>
     datasets: Array<ChartDataSet>
+  } = {
+    labels: [],
+    datasets: []
   };
   chartOptions: any = {};
 

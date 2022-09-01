@@ -67,6 +67,8 @@ export interface ApiAttribute {
   string?: string;
   bool?: boolean;
   float?: number;
+  time?: string;
+  map?: Map<string, ApiAttribute>;
   array?: ApiAttribute[];
 }
 
@@ -753,6 +755,8 @@ export enum ApiTypes {
   FLOAT = 'FLOAT',
   BOOL = 'BOOL',
   ARRAY = 'ARRAY',
+  MAP = 'MAP',
+  TIME = 'TIME',
 }
 
 export interface ApiUpdateEntityRequestAction {
@@ -1335,11 +1339,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     backupServiceNewBackup: (body: any, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/backup`,
-        method: "POST",
+        method: 'POST',
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1355,11 +1359,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     backupServiceRestoreBackup: (body: ApiRestoreBackupRequest, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/backup/restore`,
-        method: "PUT",
+        method: 'PUT',
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1375,9 +1379,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     backupServiceGetBackupList: (params: RequestParams = {}) =>
       this.request<ApiGetBackupListResult, RpcStatus>({
         path: `/v1/backups`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1494,11 +1498,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardCardServiceImportDashboardCard: (body: ApiDashboardCard, params: RequestParams = {}) =>
       this.request<ApiDashboardCard, RpcStatus>({
         path: `/v1/dashboard_card/import`,
-        method: "POST",
+        method: 'POST',
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1852,11 +1856,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dashboardServiceImportDashboard: (body: ApiDashboard, params: RequestParams = {}) =>
       this.request<ApiDashboard, RpcStatus>({
         path: `/v1/dashboards/import`,
-        method: "POST",
+        method: 'POST',
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1875,10 +1879,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiSearchDashboardResult, RpcStatus>({
         path: `/v1/dashboards/search`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -1993,11 +1997,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     entityServiceImportEntity: (body: ApiEntity, params: RequestParams = {}) =>
       this.request<any, RpcStatus>({
         path: `/v1/entities/import`,
-        method: "POST",
+        method: 'POST',
         body: body,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2133,10 +2137,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiGetEntityStorageResult, RpcStatus>({
         path: `/v1/entity_storage/${entityId}`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2351,10 +2355,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<ApiMetric, RpcStatus>({
         path: `/v1/metric`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3158,7 +3162,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/v1/variable/{name}
      * @secure
      */
-    variableServiceUpdateVariable: (name: string, body: {name: string, value?: string }, params: RequestParams = {}) =>
+    variableServiceUpdateVariable: (name: string, body: { name: string, value?: string }, params: RequestParams = {}) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable/${name}`,
         method: 'PUT',

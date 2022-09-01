@@ -129,6 +129,9 @@ func (s *Server) setUpProxy() (err error) {
 			if strings.Contains(r.URL.String(), "upload") && r.Method == "GET" {
 				return false
 			}
+			if strings.Contains(r.URL.String(), "static") && r.Method == "GET" {
+				return false
+			}
 			return true
 		},
 		Balancer: rrb,

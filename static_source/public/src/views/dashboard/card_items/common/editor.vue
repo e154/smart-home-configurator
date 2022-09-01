@@ -321,8 +321,8 @@
                     <el-form-item :label="$t('dashboard.editor.entity')" prop="entity">
                       <entity-search
                         disabled=""
-                        v-model="item.entity"
-                        @update-value="changedEntity"
+                        v-model="prop.entity"
+                        @update-value="changedForActionButton($event, index)"
                       />
                     </el-form-item>
 
@@ -342,10 +342,10 @@
                         style="width: 100%"
                       >
                         <el-option
-                          v-for="item in item.entityActions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value">
+                          v-for="item in getButtonAction(prop.entity)"
+                          :key="item.name"
+                          :label="item.name"
+                          :value="item.name">
                         </el-option>
                       </el-select>
 
@@ -406,20 +406,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { CardItem, comparisonType, Core } from '@/views/dashboard/core'
-import { ApiEntity, ApiImage } from '@/api/stub'
-import EntitySearch from '@/views/entities/components/entity_search.vue'
-import ImagePreview from '@/views/images/preview.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {CardItem, comparisonType, Core} from '@/views/dashboard/core';
+import {ApiEntity, ApiImage} from '@/api/stub';
+import EntitySearch from '@/views/entities/components/entity_search.vue';
+import ImagePreview from '@/views/images/preview.vue';
 
 interface Action {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 @Component({
   name: 'CommonEditor',
-  components: { ImagePreview, EntitySearch }
+  components: {ImagePreview, EntitySearch}
 })
 export default class extends Vue {
   @Prop() private item!: CardItem;
@@ -428,106 +428,123 @@ export default class extends Vue {
   private created() {
     setTimeout(() => {
       if (this.item.entityId) {
-        this.fetchEntity(this.item.entityId)
+        this.fetchEntity(this.item.entityId);
       }
-    }, 1000)
+    }, 1000);
   }
 
   private mounted() {
   }
 
   private async fetchEntity(id: string) {
-    const entity = await this.board.fetchEntity(id)
-    this.item.entity = entity
+    const entity = await this.board.fetchEntity(id);
+    this.item.entity = entity;
   }
 
   private changedEntity(entity: ApiEntity, event?: any) {
     if (!entity?.id) {
-      this.item.entity = undefined
-      return
+      this.item.entity = undefined;
+      return;
     }
-    this.fetchEntity(entity.id)
+    this.fetchEntity(entity.id);
+  }
+
+  private async changedForActionButton(entity: ApiEntity, index: number) {
+    if (entity?.id) {
+      this.item.buttonActions[index].entity = await this.board.fetchEntity(entity.id);
+      this.item.buttonActions[index].entityId = entity.id;
+    } else {
+      this.item.buttonActions[index].entity = undefined;
+      this.item.buttonActions[index].entityId = '';
+      this.item.buttonActions[index].action = '';
+    }
+  }
+
+  private getButtonAction(entity?: ApiEntity) {
+    if (!entity) {
+      return [];
+    }
+    return entity.actions;
   }
 
   private addShowOnProp() {
     // console.log('addShowOnProp');
 
     if (!this.item?.showOn) {
-      this.item.showOn = []
+      this.item.showOn = [];
     }
 
-    let counter = 0
+    let counter = 0;
     if (this.item.showOn.length) {
-      counter = this.item.showOn.length
+      counter = this.item.showOn.length;
     }
 
     this.item.showOn.push({
-
       key: 'new proper ' + counter,
       value: '',
       comparison: comparisonType.EQ
-    })
+    });
   }
 
   private addHideOnProp() {
     // console.log('addHideOnProp');
 
     if (!this.item?.hideOn) {
-      this.item.hideOn = []
+      this.item.hideOn = [];
     }
 
-    let counter = 0
+    let counter = 0;
     if (this.item.hideOn.length) {
-      counter = this.item.hideOn.length
+      counter = this.item.hideOn.length;
     }
 
     this.item.hideOn.push({
-
       key: 'new proper ' + counter,
       value: '',
       comparison: comparisonType.EQ
-    })
+    });
   }
 
   private removeShowOnProp(index: number) {
     if (!this.item.showOn) {
-      return
+      return;
     }
 
-    this.item.showOn.splice(index, 1)
+    this.item.showOn.splice(index, 1);
   }
 
   private removeHideOnProp(index: number) {
     if (!this.item.hideOn) {
-      return
+      return;
     }
 
-    this.item.hideOn.splice(index, 1)
+    this.item.hideOn.splice(index, 1);
   }
 
   private onSelectImageForAction(index: number, image: ApiImage) {
     // console.log('select image', index, image);
     if (!this.item.buttonActions[index]) {
-      return
+      return;
     }
 
-    this.item.buttonActions[index].image = image as ApiImage || undefined
+    this.item.buttonActions[index].image = image as ApiImage || undefined;
   }
 
   private addAction() {
     this.item.buttonActions.push({
+      entity: undefined,
       entityId: this.item.entityId,
       action: '',
-      image: {}
-    })
+      image: null,
+    });
   }
 
   private removeAction(index: number) {
     if (!this.item.buttonActions) {
-      return
+      return;
     }
 
-    this.item.buttonActions.splice(index, 1)
+    this.item.buttonActions.splice(index, 1);
   }
 }
 </script>

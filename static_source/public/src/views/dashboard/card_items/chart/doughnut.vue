@@ -70,8 +70,11 @@ export default class extends Vue {
     if (! this.$refs.doughnut) {
       return
     }
-    // @ts-ignore
-    this.$refs.doughnut.updateChart();
+    try {
+      // @ts-ignore
+      this.$refs.line.updateChart();
+    } catch (e) {
+    }
   }
 }
 </script>
