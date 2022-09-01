@@ -44,6 +44,8 @@
                 <el-option label="Float" value="FLOAT"></el-option>
                 <el-option label="Bool" value="BOOL"></el-option>
                 <el-option label="Array" value="ARRAY"></el-option>
+                <el-option label="Time" value="TIME"></el-option>
+                <el-option label="Map" value="MAP"></el-option>
               </el-select>
             </template>
 
@@ -73,6 +75,14 @@
                 <el-option label="TRUE" :value="true"></el-option>
                 <el-option label="FALSE" :value="false"></el-option>
               </el-select>
+
+              <div v-if="row.type === 'TIME'">
+                <el-input type="string" v-model="row.time"/>
+              </div>
+
+              <div v-if="row.type === 'MAP'">
+                <el-input type="string" v-model="row.map"/>
+              </div>
             </template>
 
           </el-table-column>

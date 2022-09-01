@@ -40,6 +40,12 @@
         <div v-if="row.type === 'BOOL'">
           <span>{{ row.bool }}</span>
         </div>
+        <div v-if="row.type === 'TIME'">
+          <span>{{ row.time | parseTime }}</span>
+        </div>
+        <div v-if="row.type === 'MAP'">
+          <span>{{ row.map }}</span>
+        </div>
       </template>
 
     </el-table-column>
