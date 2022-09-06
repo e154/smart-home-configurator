@@ -303,6 +303,7 @@ export default {
       textOptions: 'Text options',
       eventstateJSONobject: 'Event state JSON object',
       round: 'Round',
+      attrField: 'Attribute field',
       chart: {
         type: 'Chart type',
         entity_metric: 'Entity metric',

@@ -3179,6 +3179,15 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/apiAttribute'
+      map:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/apiAttribute'
+      time:
+        type: string
+        format: date-time
+      imageUrl:
+        type: string
   apiAutomationRequest:
     type: object
     properties:
@@ -4467,6 +4476,9 @@ definitions:
       - FLOAT
       - BOOL
       - ARRAY
+      - MAP
+      - TIME
+      - IMAGE
     default: INT
   apiUpdateEntityRequestAction:
     type: object

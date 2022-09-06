@@ -46,6 +46,7 @@
                 <el-option label="Array" value="ARRAY"></el-option>
                 <el-option label="Time" value="TIME"></el-option>
                 <el-option label="Map" value="MAP"></el-option>
+                <el-option label="Image" value="IMAGE"></el-option>
               </el-select>
             </template>
 
@@ -58,6 +59,9 @@
             <template slot-scope="{row}">
               <div v-if="row.type === 'STRING'">
                 <el-input type="string" v-model="row.string"/>
+              </div>
+              <div v-if="row.type === 'IMAGE'">
+                <el-input type="string" v-model="row.imageUrl"/>
               </div>
               <div v-if="row.type === 'INT'">
                 <el-input type="number" v-model="row.int"/>

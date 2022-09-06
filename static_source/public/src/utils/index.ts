@@ -1,4 +1,6 @@
 // Parse the time to string
+import {ApiImage} from '@/api/stub';
+
 export const parseTime = (
   time?: object | string | number | null,
   cFormat?: string
@@ -88,3 +90,5 @@ export const toggleClass = (ele: HTMLElement, className: string) => {
   }
   ele.className = classString
 }
+
+export const basePath: string = process.env.VUE_APP_BASE_API || window.location.origin;

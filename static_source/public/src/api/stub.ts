@@ -70,6 +70,7 @@ export interface ApiAttribute {
   time?: string;
   map?: Map<string, ApiAttribute>;
   array?: ApiAttribute[];
+  imageUrl?: string;
 }
 
 export interface ApiCondition {
