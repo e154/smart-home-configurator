@@ -23,6 +23,7 @@ import {ItemPayloadState} from '@/views/dashboard/card_items/state/types';
 import {ItemPayloadLogs} from '@/views/dashboard/card_items/logs/types';
 import {ItemPayloadProgress} from '@/views/dashboard/card_items/progress/types';
 import {ItemPayloadChart} from '@/views/dashboard/card_items/chart/types';
+import {basePath} from '@/utils';
 
 export interface ButtonAction {
   entityId: string;
@@ -65,9 +66,14 @@ export interface CompareProp {
   value: string;
 }
 
+export interface ItemPayloadImage {
+  attrField?: string;
+  image?: ApiImage;
+}
+
 export interface ItemPayload {
   text?: ItemPayloadText;
-  image?: ApiImage;
+  image?: ItemPayloadImage;
   button?: ItemPayloadButton;
   state?: ItemPayloadState;
   logs?: ItemPayloadLogs;
@@ -158,7 +164,16 @@ export class CardItem {
         this.hideOn = payload.hideOn;
       }
       if (!this.payload.image) {
-        this.payload.image = undefined;
+        this.payload.image = {
+          image: undefined,
+          attrField: ''
+        } as ItemPayloadImage;
+      }
+      if (this.payload.image.attrField == undefined) {
+        this.payload.image.attrField = '';
+      }
+      if (!this.payload.image.image) {
+        this.payload.image.image = undefined;
       }
       if (!this.payload.button) {
         this.payload.button = {} as ItemPayloadButton;
@@ -298,13 +313,11 @@ export class CardItem {
     return new CardItem(data);
   }
 
-  private basePath: string = process.env.VUE_APP_BASE_API || window.location.origin;
-
   getUrl(image: ApiImage | undefined): string {
     if (!image || !image.url) {
       return '';
     }
-    return this.basePath + image.url;
+    return basePath + image.url;
   }
 
   private clearActions() {

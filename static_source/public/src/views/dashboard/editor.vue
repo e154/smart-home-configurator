@@ -540,7 +540,7 @@ import {UUID} from 'uuid-generator-ts';
 import Editor from '@/views/automation/new.vue';
 import api from '@/api/api';
 import {Form} from 'element-ui';
-import {Card, Core, requestCurrentState, Tab} from '@/views/dashboard/core';
+import {Card, Core, Tab} from '@/views/dashboard/core';
 import ImagePreview from '@/views/images/preview.vue';
 import CardWrapper from '@/components/card-wrapper/index.vue';
 import EntitySearch from '@/views/entities/components/entity_search.vue';
@@ -548,12 +548,12 @@ import {
   CardEditorName,
   CardItemList,
   IButtonEditor,
+  IChartEditor,
   IImageEditor,
   ILogsEditor,
   IProgressEditor,
   IStateEditor,
-  ITextEditor,
-  IChartEditor
+  ITextEditor
 } from '@/views/dashboard/card_items';
 import {EventStateChange} from '@/api/stream_types';
 import ExportTool from '@/components/export-tool/index.vue';
@@ -635,11 +635,11 @@ export default class extends Vue {
     });
 
     // setTimeout(() => {
-      stream.subscribe('state_changed', this.currentID, this.onStateChanged);
+    stream.subscribe('state_changed', this.currentID, this.onStateChanged);
 
-      // for (const entityId in this.board.current.entities) {
-      //   requestCurrentState(entityId);
-      // }
+    // for (const entityId in this.board.current.entities) {
+    //   requestCurrentState(entityId);
+    // }
     // }, 1000);
   }
 
@@ -883,9 +883,13 @@ export default class extends Vue {
       return;
     }
 
-    const wd = this.board.tabs[this.board.activeTab].cards[index - 1].weight;
-    this.board.tabs[this.board.activeTab].cards[index - 1].weight = card.weight;
-    this.board.tabs[this.board.activeTab].cards[index].weight = wd;
+    let weight1 = this.board.tabs[this.board.activeTab].cards[index - 1].weight;
+    const weight2 = card.weight;
+    if (weight1 === weight2) {
+      weight1 += 1;
+    }
+    this.board.tabs[this.board.activeTab].cards[index - 1].weight = weight2;
+    this.board.tabs[this.board.activeTab].cards[index].weight = weight1;
     this.board.tabs[this.board.activeTab].cards[index].update();
     this.board.tabs[this.board.activeTab].cards[index - 1].update();
 

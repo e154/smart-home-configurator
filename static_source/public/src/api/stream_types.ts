@@ -8,6 +8,7 @@ export enum Types {
   ARRAY = 'array',
   TIME = 'time',
   MAP = 'map',
+  IMAGE = 'image',
 }
 
 export interface Attribute {
@@ -62,6 +63,9 @@ export function GetAttrValue(attr: Attribute): string {
       break
     case Types.ARRAY:
       val = '[ARRAY]'
+      break
+    case Types.IMAGE:
+      val = attr.value
       break
     case Types.TIME:
       val = parseTime(attr.value) as string

@@ -89,6 +89,7 @@ export interface ApiAttribute {
   int?: string;
   string?: string;
   bool?: boolean;
+  image_url?: string;
 
   /** @format float */
   float?: number;
