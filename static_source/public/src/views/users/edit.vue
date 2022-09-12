@@ -65,11 +65,11 @@
             </el-form-item>
 
             <el-form-item :label="$t('users.table.password')" prop="password">
-              <el-input v-model.trim="currentUser.password" type="password"/>
+              <el-input v-model="currentUser.password" type="password"/>
             </el-form-item>
 
             <el-form-item :label="$t('users.table.passwordRepeat')" prop="passwordRepeat">
-              <el-input v-model.trim="currentUser.passwordRepeat" type="password"/>
+              <el-input v-model="currentUser.passwordRepeat" type="password"/>
             </el-form-item>
 
           </el-form>
@@ -99,28 +99,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import api from '@/api/api'
-import { ApiRole, ApiImage, ApiNewtUserRequest } from '@/api/stub'
-import router from '@/router'
-import { Form } from 'element-ui'
-import CardWrapper from '@/components/card-wrapper/index.vue'
-import ImagePreview from '@/views/images/preview.vue'
-import RoleSearch from '@/views/users/components/role_search.vue'
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import api from '@/api/api';
+import {ApiImage, ApiNewtUserRequest, ApiRole, ApiUserMeta} from '@/api/stub';
+import router from '@/router';
+import {Form} from 'element-ui';
+import CardWrapper from '@/components/card-wrapper/index.vue';
+import ImagePreview from '@/views/images/preview.vue';
+import RoleSearch from '@/views/users/components/role_search.vue';
 
 // HACK: have to use script-loader to load jsonlint
 /* eslint-disable import/no-webpack-loader-syntax */
-require('script-loader!jsonlint')
+require('script-loader!jsonlint');
 
 @Component({
   name: 'UserEdit',
-  components: { RoleSearch, ImagePreview, CardWrapper }
+  components: {RoleSearch, ImagePreview, CardWrapper}
 })
 export default class extends Vue {
-  @Prop({ required: true }) private id!: number;
+  @Prop({required: true}) private id!: number;
 
   created() {
-    this.fetchUser()
+    this.fetchUser();
   }
 
   private options: {
@@ -137,7 +137,19 @@ export default class extends Vue {
     }
   ];
 
-  private currentUser: ApiNewtUserRequest = {
+  private currentUser: {
+    nickname: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    lang: string;
+    password: string;
+    passwordRepeat: string;
+    status: string;
+    image?: ApiImage;
+    meta?: ApiUserMeta[];
+    role?: ApiRole;
+  } = {
     nickname: '',
     firstName: '',
     lastName: '',
@@ -146,58 +158,58 @@ export default class extends Vue {
     password: '',
     passwordRepeat: '',
     meta: [],
-    status: ''
+    status: '',
   };
 
   private validatePasswordRepeat = (rule: any, value: string, callback: Function) => {
     if (!this.currentUser.password && !value) {
-      callback()
-      return
+      callback();
+      return;
     }
     if (value != this.currentUser.password) {
-      callback(new Error('Please enter the correct password repeat'))
+      callback(new Error('Please enter the correct password repeat'));
     } else {
-      callback()
+      callback();
     }
   };
 
   private rules = {
     nickname: [
-      { required: true, trigger: 'blur' },
-      { min: 4, max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {min: 4, max: 255, trigger: 'blur'}
     ],
     firstName: [
-      { required: false, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: false, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ],
     lastName: [
-      { required: false, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: false, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ],
     role: [
-      { required: false, trigger: 'blur' }
+      {required: false, trigger: 'blur'}
     ],
     email: [
-      { required: true, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ],
     lang: [
-      { required: true, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: true, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ],
     password: [
-      { required: false, trigger: 'blur' },
-      { max: 255, trigger: 'blur' }
+      {required: false, trigger: 'blur'},
+      {max: 255, trigger: 'blur'}
     ],
     passwordRepeat: [
-      { validator: this.validatePasswordRepeat, required: false, trigger: 'blur' }
+      {validator: this.validatePasswordRepeat, required: false, trigger: 'blur'}
     ]
   };
 
   private async save() {
     (this.$refs.currentUser as Form).validate(async valid => {
       if (!valid) {
-        return
+        return;
       }
       const user: ApiNewtUserRequest = {
         nickname: this.currentUser.nickname,
@@ -207,63 +219,71 @@ export default class extends Vue {
         lang: this.currentUser.lang,
         password: this.currentUser.password,
         passwordRepeat: this.currentUser.passwordRepeat,
-        role: { name: this.currentUser?.role?.name },
-        image: { id: this.currentUser?.image?.id },
-        meta: this.currentUser.meta,
+        role: {name: this.currentUser?.role?.name},
+        image: {id: this.currentUser?.image?.id},
+        meta: this.currentUser.meta || [],
         status: this.currentUser.status
-      }
-      const { data } = await api.v1.userServiceUpdateUserById(this.id, user)
+      };
+      const {data} = await api.v1.userServiceUpdateUserById(this.id, user);
       if (data) {
         this.$notify({
           title: 'Success',
           message: 'user updated successfully',
           type: 'success',
           duration: 2000
-        })
+        });
       }
-    })
+    });
   }
 
   private cancel() {
-    router.go(-1)
+    router.go(-1);
   }
 
   private onSelectImage(image: ApiImage, event?: any) {
     if (image) {
-      this.$set(this.currentUser, 'image', image)
+      this.$set(this.currentUser, 'image', image);
     } else {
-      this.$set(this.currentUser, 'image', undefined)
+      this.$set(this.currentUser, 'image', undefined);
     }
   }
 
   private changedRole(role: ApiRole, event?: any) {
     if (role) {
-      this.$set(this.currentUser, 'role', { name: role.name })
+      this.$set(this.currentUser, 'role', {name: role.name});
     } else {
-      this.$set(this.currentUser, 'role', undefined)
+      this.$set(this.currentUser, 'role', undefined);
     }
   }
 
   private async fetchUser() {
-    const { data } = await api.v1.userServiceGetUserById(this.id)
-    this.currentUser = data
+    const {data} = await api.v1.userServiceGetUserById(this.id);
+    this.currentUser.nickname = data.nickname;
+    this.currentUser.firstName = data.firstName;
+    this.currentUser.lastName = data.lastName;
+    this.currentUser.email = data.email;
+    this.currentUser.lang = data.lang;
+    this.currentUser.meta = data.meta;
+    this.currentUser.status = data.status;
+    this.currentUser.role = data.role;
+    this.currentUser.image = data.image;
   }
 
   private async remove() {
-    const { data } = await api.v1.userServiceDeleteUserById(this.id)
+    const {data} = await api.v1.userServiceDeleteUserById(this.id);
     this.$notify({
       title: 'Success',
       message: 'Delete Successfully',
       type: 'success',
       duration: 2000
-    })
-    router.go(-1)
+    });
+    router.go(-1);
   }
 
   private changedStatus(status: string) {
-    console.log('-----')
-    console.log(status)
-    console.log('-----')
+    console.log('-----');
+    console.log(status);
+    console.log('-----');
   }
 }
 </script>
