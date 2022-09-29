@@ -215,6 +215,7 @@ export default {
     table: {
       id: 'Id',
       level: 'Level',
+      owner: 'Owner',
       body: 'Body',
       createdAt: 'Created at'
     }

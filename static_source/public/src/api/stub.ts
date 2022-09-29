@@ -430,6 +430,7 @@ export interface ApiLog {
   id: number;
   level: string;
   body: string;
+  owner: string;
   createdAt: string;
 }
 
