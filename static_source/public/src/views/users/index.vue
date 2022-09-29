@@ -47,6 +47,21 @@
           </el-table-column>
 
           <el-table-column
+            :label="$t('users.table.role')"
+            prop="roleName"
+            sortable="custom"
+            align="left"
+            width="150px"
+            :class-roleName="getSortClass('role')"
+          >
+            <template slot-scope="{row}">
+              <el-tag type="info">
+                {{ row.roleName }}
+              </el-tag>
+            </template>
+          </el-table-column>
+
+          <el-table-column
             :label="$t('users.table.email')"
             prop="email"
             sortable="custom"
