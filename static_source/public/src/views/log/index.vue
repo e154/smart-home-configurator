@@ -71,7 +71,7 @@
             prop="level"
             sortable="custom"
             align="left"
-            width="100px"
+            width="90px"
             :class-name="getSortClass('level')"
           >
             <template slot-scope="{row}">
@@ -87,6 +87,19 @@
           >
             <template slot-scope="{row}">
               {{ row.body }}
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            :label="$t('log.table.owner')"
+            prop="owner"
+            sortable="custom"
+            align="left"
+            width="150px"
+            :class-name="getSortClass('owner')"
+          >
+            <template slot-scope="{row}">
+              <span>{{ row.owner }}</span>
             </template>
           </el-table-column>
 
@@ -248,6 +261,13 @@ export default class extends Vue {
           this.listQuery.sort = '+level'
         } else {
           this.listQuery.sort = '-level'
+        }
+        break
+      case 'owner':
+        if (order === 'ascending') {
+          this.listQuery.sort = '+owner'
+        } else {
+          this.listQuery.sort = '-owner'
         }
         break
       default:

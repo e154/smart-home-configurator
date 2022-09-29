@@ -22,6 +22,14 @@ export function ApplyFilter(value: any, filter: string): any {
       return seconds(value, ...args);
     case 'getDayOfWeek':
       return getDayOfWeek(value, ...args);
+    case 'toFixed':
+      return toFixed(value, ...args);
+    case 'scToTitleCase':
+      return snakeCaseStringToTitleCase(value, ...args);
+    case 'ccToTitleCase':
+      return camelCaseStringToTitleCase(value, ...args);
+    case 'toTitleCase':
+      return toTitleCase(value, ...args);
     default:
       console.warn(`unknown filter "${filter}"!`);
       return value;
@@ -80,6 +88,32 @@ function getDayOfWeek(value: string, ...args: string[]): string {
   );
 }
 
+function toFixed(value: string, ...args: string[]): string {
+  const date = parseFloat(value);
+  if (args && args.length > 0) {
+    return date.toFixed(parseInt(args[0]));
+  }
+  return date.toString();
+}
+
+function snakeCaseStringToTitleCase(value: string, ...args: string[]): string {
+  return value.replace(/^_*(.)|_+(.)/g, (s, c, d) => c ? c.toUpperCase() : ' ' + d.toUpperCase());
+}
+
+function camelCaseStringToTitleCase(value: string, ...args: string[]): string {
+  const result = value.replace(/([A-Z])/g, ' $1');
+  return result.charAt(0).toUpperCase() + result.slice(1);
+}
+
+function toTitleCase(value: string, ...args: string[]): string {
+  return value.replace(
+    /\w\S*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  );
+}
+
 function formatBytes(value: string, decimals = 2): number | string {
   const bytes = parseInt(value);
 
@@ -128,6 +162,26 @@ export function filterList(): filterInfo[] {
       name: 'getDayOfWeek',
       description: 'Get the Day of the Week',
       args: ['long', 'short', 'narrow']
+    },
+    {
+      name: 'toFixed',
+      description: 'Function rounds to the desired decimal point',
+      args: ['1', '2', '3']
+    },
+    {
+      name: 'scToTitleCase',
+      description: 'snake case string to title case',
+      args: []
+    },
+    {
+      name: 'ccToTitleCase',
+      description: 'camel case string to title case',
+      args: []
+    },
+    {
+      name: 'toTitleCase',
+      description: 'string to title case',
+      args: []
     }
   ];
   return info;
