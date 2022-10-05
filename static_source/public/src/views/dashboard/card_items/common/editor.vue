@@ -62,7 +62,11 @@
           >
 
             <template slot="title">
-              {{ prop.key }}
+              <el-tag size="mini">{{ prop.key }}</el-tag>
+              +
+              <el-tag size="mini">{{ prop.comparison }}</el-tag>
+              +
+              <el-tag size="mini">{{ prop.value }}</el-tag>
             </template>
 
             <el-card shadow="never" class="item-card-editor">
@@ -177,7 +181,11 @@
           >
 
             <template slot="title">
-              {{ prop.key }}
+              <el-tag size="mini">{{ prop.key }}</el-tag>
+              +
+              <el-tag size="mini">{{ prop.comparison }}</el-tag>
+              +
+              <el-tag size="mini">{{ prop.value }}</el-tag>
             </template>
 
             <el-card shadow="never" class="item-card-editor">
