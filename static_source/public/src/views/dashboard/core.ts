@@ -13,7 +13,7 @@ import {
 import api from '@/api/api';
 import {randColor} from '@/utils/rans';
 import {Vue} from 'vue-property-decorator';
-import {EventStateChange} from '@/api/stream_types';
+import {Attribute, EventStateChange, GetAttrValue} from '@/api/stream_types';
 import {UUID} from 'uuid-generator-ts';
 import {Compare, Resolve} from '@/views/dashboard/render';
 import stream from '@/api/stream';
@@ -451,9 +451,18 @@ export class CardItem {
 
     // hide
     for (const prop of this.hideOn) {
-      const val = Resolve(prop.key, event);
+      let val = Resolve(prop.key, event);
       if (!val) {
         continue;
+      }
+      if (typeof val === 'object') {
+        if (val && val.hasOwnProperty('type') && val.hasOwnProperty('name')) {
+          val = GetAttrValue(val as Attribute);
+        }
+      }
+
+      if (val == undefined) {
+        val = '[NO VALUE]';
       }
 
       const tr = Compare(val, prop.value, prop.comparison);
@@ -466,9 +475,18 @@ export class CardItem {
 
     // show
     for (const prop of this.showOn) {
-      const val = Resolve(prop.key, event);
+      let val = Resolve(prop.key, event);
       if (!val) {
         continue;
+      }
+      if (typeof val === 'object') {
+        if (val && val.hasOwnProperty('type') && val.hasOwnProperty('name')) {
+          val = GetAttrValue(val as Attribute);
+        }
+      }
+
+      if (val == undefined) {
+        val = '[NO VALUE]';
       }
 
       const tr = Compare(val, prop.value, prop.comparison);
