@@ -53,7 +53,7 @@
     </el-form-item>
 
     <el-form-item :label="$t('dashboard.editor.chart.filter')" prop="index">
-      <el-select v-model="item.payload.chart.filter" placeholder="Select">
+      <el-select v-model="item.payload.chart.filter" placeholder="Select" clearable>
         <el-option
           v-for="(props, index) in filterList"
           :key="props.value"
