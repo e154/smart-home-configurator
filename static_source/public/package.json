@@ -41,7 +41,7 @@
     "screenfull": "^5.1.0",
     "script-loader": "^0.7.2",
     "sortablejs": "^1.13.0",
-    "tinymce": "^5.7.1",
+    "tinymce": "^5.10.7",
     "uuid-generator-ts": "^1.1.0",
     "vue": "^2.6.12",
     "vue-chartjs": "^4.1.1",
