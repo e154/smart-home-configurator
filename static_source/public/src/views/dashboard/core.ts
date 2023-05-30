@@ -1093,7 +1093,7 @@ export function requestCurrentState(entityId?: string) {
   if (!entityId) {
     return;
   }
-  console.log('requestCurrentState', entityId);
+  // console.log('requestCurrentState', entityId);
   stream.send({
     id: UUID.createUUID(),
     query: 'event_get_last_state',

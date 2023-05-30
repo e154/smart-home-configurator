@@ -8,6 +8,7 @@ import { PermissionModule } from '@/store/modules/permission'
 import i18n from '@/lang' // Internationalization
 import settings from './settings'
 import stream from '@/api/stream'
+import customNavigator from '@/navigator';
 
 NProgress.configure({ showSpinner: false })
 
@@ -41,6 +42,8 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           const roles = UserModule.roles
           // ws
           stream.connect(process.env.VUE_APP_BASE_API || window.location.origin, UserModule.token)
+          // geo location
+          customNavigator.watchPosition()
           // Generate accessible routes map based on role
           PermissionModule.GenerateRoutes(roles)
           // Dynamically add accessible routes

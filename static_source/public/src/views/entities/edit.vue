@@ -7,7 +7,7 @@
           :xs="24"
         >
 
-          <el-tabs v-model="internal.activeTab">
+          <el-tabs v-model="internal.activeTab" @tab-click="handleTabChange">
             <el-tab-pane
               label="Main"
               name="main"
@@ -295,7 +295,6 @@ export default class extends Vue {
 
     setTimeout(() => {
       stream.subscribe('state_changed', this.currentID, this.onStateChanged);
-      this.requestCurrentState();
     }, 1000);
   }
 
@@ -556,6 +555,12 @@ export default class extends Vue {
   }
 
   private lastEvent: EventStateChange = {} as EventStateChange;
+
+  private handleTabChange(tab: any, event: any) {
+    if (this.internal.activeTab == 'current_event') {
+      this.requestCurrentState();
+    }
+  }
 
   private requestCurrentState() {
     stream.send({

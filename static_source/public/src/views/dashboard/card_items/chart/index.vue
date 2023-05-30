@@ -207,6 +207,9 @@ export default class extends Vue {
               title: {
                 display: false,
                 // text: 'Value'
+              },
+              ticks: {
+                autoSkip: true
               }
             }
           }

@@ -42,6 +42,11 @@ export interface EventStateChange {
   new_state: EventState
 }
 
+export interface EventHTML5Notify {
+  title: string
+  options?: NotificationOptions
+}
+
 export function GetAttrValue(attr: Attribute): string {
   let val: string
   switch (attr.type) {

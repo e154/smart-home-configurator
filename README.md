@@ -82,32 +82,20 @@ ng g service @core/services/window
 
 ### install depends on MAC OS
 
+install macports from https://www.macports.org/install.php
+
+install specific version nodejs and npm
 ```bash
-brew search node
-brew install node@8
-brew link node@8
+sudo port install nodejs14
+sudo port install npm6
 ```
 
-now add string at ~/.bash_profile
+### build frontend
 
-```bash
-echo 'export PATH="/usr/local/opt/node@8/bin:$PATH"' >> ~/.bash_profile
-```
-
-install gulp and bower
-
-```bash
-node -v
-#v8.16.1
-
-npm -v
-#6.4.1
-
-./cd static_source && npm install
-
-node install gulp -g
-node install bower -g
-```
+``bash
+cd  static_source/public
+npm run serve
+``
 
 It's all
 
