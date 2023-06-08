@@ -63,17 +63,11 @@ main() {
 
 __init() {
 
-    cd ${ROOT}/static_source/private
-    bower install
-
     cd ${ROOT}/static_source/public
-    bower install
-
-    cd ${ROOT}/static_source
-    npm install
+    npm i
 
     cd ${ROOT}
-    go mod vendor
+    go mod tidy
 
     cp ${ROOT}/conf/config.dev.json ${ROOT}/conf/config.json
 }
@@ -83,11 +77,7 @@ __clean() {
     rm -rf ${ROOT}/build
     rm -rf ${ROOT}/tmp
     rm -rf ${ROOT}/static_source/node_modules
-    rm -rf ${ROOT}/static_source/private/bower_components
-    rm -rf ${ROOT}/static_source/private/tmp
-    rm -rf ${ROOT}/static_source/public/bower_components
     rm -rf ${ROOT}/static_source/public/tmp
-    rm -rf ${ROOT}/vendor/*
     rm -rf ${TMP_DIR}
 }
 

@@ -32,7 +32,7 @@ git clone https://github.com/e154/smart-home-configurator $GOPATH/src/github.com
 
 cd $GOPATH/src/github.com/e154/smart-home-configurator
 
-go mod vendor
+go mod tidy
 
 go build
 ```
@@ -48,36 +48,6 @@ init project files
 
 ```bash
 ./bin/project.sh --init
-```
-
-run frontend development tools
-
-```bash
-./cd static_source && gulp
-```
-
-run server
-
-```bash
-./smart-home-configurator
-```
-
-new module
-
-```bash
-ng g m config --route config --module=app
-```
-
-new component
-
-```bash
-ng g c auth/base --module=auth
-```
-
-new service
-
-```bash
-ng g service @core/services/window
 ```
 
 ### install depends on MAC OS
