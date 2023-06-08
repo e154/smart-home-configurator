@@ -63,7 +63,7 @@ class Stream {
       const {result} = JSON.parse(ev.data);
       m = result;
       const body: EventHTML5Notify = JSON.parse(atob(m.body));
-      console.log(body)
+      // console.log(body)
       this.notify(body);
       return;
     }

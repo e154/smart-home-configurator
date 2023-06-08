@@ -9,6 +9,7 @@ import i18n from '@/lang' // Internationalization
 import settings from './settings'
 import stream from '@/api/stream'
 import customNavigator from '@/navigator';
+import registerServiceWorker from '@/pwa/register-service-worker';
 
 NProgress.configure({ showSpinner: false })
 
@@ -42,6 +43,8 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           const roles = UserModule.roles
           // ws
           stream.connect(process.env.VUE_APP_BASE_API || window.location.origin, UserModule.token)
+          // push service
+          registerServiceWorker.start();
           // geo location
           customNavigator.watchPosition()
           // Generate accessible routes map based on role
@@ -56,6 +59,8 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
         } catch (err) {
           // Remove token and redirect to login page
           UserModule.ResetToken()
+          // push service
+          registerServiceWorker.stop();
           // ws
           stream.disconnect()
           // message

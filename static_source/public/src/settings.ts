@@ -12,7 +12,7 @@ interface ISettings {
 
 // You can customize below settings :)
 const settings: ISettings = {
-  title: 'Vue Typescript Admin',
+  title: 'Smart home',
   showSettings: true,
   showTagsView: false,
   fixedHeader: false,

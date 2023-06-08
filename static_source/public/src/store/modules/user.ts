@@ -8,6 +8,7 @@ import api from '@/api/api';
 import {ApiMeta, ApiUserHistory} from '@/api/stub';
 import stream from '@/api/stream';
 import customNavigator from '@/navigator';
+import registerServiceWorker from '@/pwa/register-service-worker';
 
 export interface IUserState {
   id: number;
@@ -99,7 +100,9 @@ class User extends VuexModule implements IUserState {
     // ws
     stream.connect(process.env.VUE_APP_BASE_API || window.location.origin, data.accessToken);
     // geo location
-    customNavigator.watchPosition()
+    customNavigator.watchPosition();
+    // push service
+    registerServiceWorker.start();
   }
 
   @Action
@@ -108,6 +111,8 @@ class User extends VuexModule implements IUserState {
     this.SET_TOKEN('');
     this.SET_ROLES([]);
     this.SET_ID(0);
+    // push service
+    registerServiceWorker.stop();
     // ws
     stream.disconnect();
   }
