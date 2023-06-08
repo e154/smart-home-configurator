@@ -96,6 +96,7 @@ build_structure:
 	cp ${ROOT}/${EXEC}-linux-arm-6 ${TMP_DIR}
 	cp ${ROOT}/${EXEC}-linux-arm-5 ${TMP_DIR}
 	cp ${ROOT}/${EXEC}-darwin-10.6-amd64 ${TMP_DIR}
+	cp ${ROOT}/${EXEC}-darwin-10.6-arm64 ${TMP_DIR}
 	cp ${ROOT}/bin/configurator ${TMP_DIR}
 
 build_archive:
@@ -161,4 +162,5 @@ clean:
 	rm -f ${ROOT}/${EXEC}-linux-arm-6
 	rm -f ${ROOT}/${EXEC}-linux-arm-5
 	rm -f ${ROOT}/${EXEC}-darwin-10.6-amd64
+	rm -f ${ROOT}/${EXEC}-darwin-10.6-arm64
 	rm -f ${HOME}/${ARCHIVE}
