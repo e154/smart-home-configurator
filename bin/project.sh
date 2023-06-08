@@ -169,6 +169,9 @@ __check_os() {
         (mip64le)
             OS_ARCH="mip64le"
         ;;
+        (arm64)
+            OS_ARCH="arm64"
+        ;;
     esac
 }
 

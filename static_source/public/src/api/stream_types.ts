@@ -42,6 +42,16 @@ export interface EventStateChange {
   new_state: EventState
 }
 
+export interface EventHTML5Notify {
+  title: string
+  options?: NotificationOptions
+}
+
+export interface EventNewWebPushPublicKey {
+  user_id?: number
+  public_key: string
+}
+
 export function GetAttrValue(attr: Attribute): string {
   let val: string
   switch (attr.type) {
