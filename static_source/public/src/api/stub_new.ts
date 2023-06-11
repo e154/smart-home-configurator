@@ -15,7 +15,6 @@ export interface AccessListListOfString {
 
 export interface GetImageFilterListResultfilter {
   date?: string;
-
   /** @format int32 */
   count?: number;
 }
@@ -30,12 +29,10 @@ export interface UpdateDashboardCardRequestItem {
   id?: string;
   title?: string;
   type?: string;
-
   /** @format int32 */
   weight?: number;
   enabled?: boolean;
   entityId?: string;
-
   /** @format byte */
   payload?: string;
   hidden?: boolean;
@@ -84,16 +81,17 @@ export interface ApiArea {
 export interface ApiAttribute {
   name?: string;
   type?: ApiTypes;
-
   /** @format int64 */
   int?: string;
   string?: string;
   bool?: boolean;
-  image_url?: string;
-
   /** @format float */
   float?: number;
   array?: ApiAttribute[];
+  map?: Record<string, ApiAttribute>;
+  /** @format date-time */
+  time?: string;
+  imageUrl?: string;
 }
 
 export interface ApiAutomationRequest {
@@ -119,22 +117,17 @@ export interface ApiCurrentUser {
   status?: string;
   history?: ApiUserHistory[];
   image?: ApiImage;
-
   /** @format int64 */
   signInCount?: string;
   meta?: ApiUserMeta[];
   role?: ApiRole;
   lang?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
-
   /** @format date-time */
   currentSignInAt?: string;
-
   /** @format date-time */
   lastSignInAt?: string;
 }
@@ -145,16 +138,13 @@ export interface ApiDashboard {
   name?: string;
   description?: string;
   enabled?: boolean;
-
   /** @format int64 */
   areaId?: string;
   area?: ApiArea;
   tabs?: ApiDashboardTab[];
   entities?: Record<string, ApiEntity>;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -163,29 +153,22 @@ export interface ApiDashboardCard {
   /** @format int64 */
   id?: string;
   title?: string;
-
   /** @format int32 */
   height?: number;
-
   /** @format int32 */
   width?: number;
   background?: string;
-
   /** @format int32 */
   weight?: number;
   enabled?: boolean;
-
   /** @format int64 */
   dashboardTabId?: string;
-
   /** @format byte */
   payload?: string;
   items?: ApiDashboardCardItem[];
   entities?: Record<string, ApiEntity>;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -195,23 +178,18 @@ export interface ApiDashboardCardItem {
   id?: string;
   title?: string;
   type?: string;
-
   /** @format int32 */
   weight?: number;
   enabled?: boolean;
-
   /** @format int64 */
   dashboardCardId?: string;
   entityId?: string;
-
   /** @format byte */
   payload?: string;
   hidden?: boolean;
   frozen?: boolean;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -222,13 +200,10 @@ export interface ApiDashboardShort {
   name?: string;
   description?: string;
   enabled?: boolean;
-
   /** @format int64 */
   areaId?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -237,25 +212,20 @@ export interface ApiDashboardTab {
   /** @format int64 */
   id?: string;
   name?: string;
-
   /** @format int32 */
   columnWidth?: number;
   gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
-
   /** @format int32 */
   weight?: number;
-
   /** @format int64 */
   dashboardId?: string;
   cards?: ApiDashboardCard[];
   entities?: Record<string, ApiEntity>;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -264,23 +234,18 @@ export interface ApiDashboardTabShort {
   /** @format int64 */
   id?: string;
   name?: string;
-
   /** @format int32 */
   columnWidth?: number;
   gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
-
   /** @format int32 */
   weight?: number;
-
   /** @format int64 */
   dashboardId?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -326,10 +291,8 @@ export interface ApiEntity {
   attributes?: Record<string, ApiAttribute>;
   settings?: Record<string, ApiAttribute>;
   metrics?: ApiMetric[];
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -366,10 +329,8 @@ export interface ApiEntityShort {
   icon?: string;
   autoLoad?: boolean;
   parent?: ApiEntityParent;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -388,8 +349,10 @@ export interface ApiEntityStorage {
   entityId?: string;
   state?: string;
   attributes?: Record<string, ApiAttribute>;
-
-  /** @format date-time */
+  /**
+   * map<string, google.protobuf.Any> attributes = 4;
+   * @format date-time
+   */
   createdAt?: string;
 }
 
@@ -466,6 +429,11 @@ export interface ApiGetLogListResult {
   meta?: ApiMeta;
 }
 
+export interface ApiGetMessageDeliveryListResult {
+  items?: ApiMessageDelivery[];
+  meta?: ApiMeta;
+}
+
 export interface ApiGetPluginListResult {
   items?: ApiPlugin[];
   meta?: ApiMeta;
@@ -532,11 +500,9 @@ export interface ApiImage {
   image?: string;
   mimeType?: string;
   title?: string;
-
   /** @format int64 */
   size?: string;
   name?: string;
-
   /** @format date-time */
   createdAt?: string;
 }
@@ -546,18 +512,41 @@ export interface ApiLog {
   id?: string;
   level?: string;
   body?: string;
-
+  owner?: string;
   /** @format date-time */
   createdAt?: string;
+}
+
+export interface ApiMessage {
+  /** @format int64 */
+  id?: string;
+  type?: string;
+  attributes?: Record<string, string>;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string;
+}
+
+export interface ApiMessageDelivery {
+  /** @format int64 */
+  id?: string;
+  message?: ApiMessage;
+  address?: string;
+  status?: string;
+  errorMessageStatus?: string;
+  errorMessageBody?: string;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiMeta {
   /** @format uint64 */
   limit?: string;
-
   /** @format uint64 */
   page?: string;
-
   /** @format uint64 */
   total?: string;
   sort?: string;
@@ -572,10 +561,8 @@ export interface ApiMetric {
   data?: ApiMetricOptionData[];
   type?: string;
   ranges?: string[];
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -586,10 +573,8 @@ export interface ApiMetricOption {
 
 export interface ApiMetricOptionData {
   value?: Record<string, number>;
-
   /** @format int64 */
   metricId?: string;
-
   /** @format date-time */
   time?: string;
 }
@@ -614,15 +599,12 @@ export interface ApiNewAreaRequest {
 export interface ApiNewDashboardCardItemRequest {
   title?: string;
   type?: string;
-
   /** @format int32 */
   weight?: number;
   enabled?: boolean;
-
   /** @format int64 */
   dashboardCardId?: string;
   entityId?: string;
-
   /** @format byte */
   payload?: string;
   hidden?: boolean;
@@ -631,21 +613,16 @@ export interface ApiNewDashboardCardItemRequest {
 
 export interface ApiNewDashboardCardRequest {
   title?: string;
-
   /** @format int32 */
   height?: number;
-
   /** @format int32 */
   width?: number;
   background?: string;
-
   /** @format int32 */
   weight?: number;
   enabled?: boolean;
-
   /** @format int64 */
   dashboardTabId?: string;
-
   /** @format byte */
   payload?: string;
 }
@@ -654,24 +631,20 @@ export interface ApiNewDashboardRequest {
   name?: string;
   description?: string;
   enabled?: boolean;
-
   /** @format int64 */
   areaId?: string;
 }
 
 export interface ApiNewDashboardTabRequest {
   name?: string;
-
   /** @format int32 */
   columnWidth?: number;
   gap?: boolean;
   background?: string;
   icon?: string;
   enabled?: boolean;
-
   /** @format int32 */
   weight?: number;
-
   /** @format int64 */
   dashboardId?: string;
 }
@@ -720,7 +693,6 @@ export interface ApiNewImageRequest {
   image?: string;
   mimeType?: string;
   title?: string;
-
   /** @format int64 */
   size?: string;
   name?: string;
@@ -802,7 +774,6 @@ export interface ApiReloadRequest {
 export interface ApiResponse {
   id?: string;
   query?: string;
-
   /** @format byte */
   body?: string;
 }
@@ -817,10 +788,8 @@ export interface ApiRole {
   description?: string;
   children?: ApiRole[];
   accessList?: ApiRoleAccessList;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -840,10 +809,8 @@ export interface ApiScript {
   name?: string;
   source?: string;
   description?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -892,10 +859,8 @@ export interface ApiTask {
   conditions?: ApiCondition[];
   actions?: ApiAction[];
   area?: ApiArea;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -914,12 +879,16 @@ export interface ApiTriggerEntity {
   id?: string;
 }
 
+/** @default "INT" */
 export enum ApiTypes {
   INT = "INT",
   STRING = "STRING",
   FLOAT = "FLOAT",
   BOOL = "BOOL",
   ARRAY = "ARRAY",
+  MAP = "MAP",
+  TIME = "TIME",
+  IMAGE = "IMAGE",
 }
 
 export interface ApiUpdateEntityRequestAction {
@@ -968,7 +937,6 @@ export interface ApiUserFull {
   status?: string;
   history?: ApiUserHistory[];
   image?: ApiImage;
-
   /** @format int64 */
   signInCount?: string;
   meta?: ApiUserMeta[];
@@ -979,22 +947,16 @@ export interface ApiUserFull {
   currentSignInIp?: string;
   lastSignInIp?: string;
   user?: ApiUserFullParent;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
-
   /** @format date-time */
   currentSignInAt?: string;
-
   /** @format date-time */
   lastSignInAt?: string;
-
   /** @format date-time */
   resetPasswordSentAt?: string;
-
   /** @format date-time */
   deletedAt?: string;
 }
@@ -1007,7 +969,6 @@ export interface ApiUserFullParent {
 
 export interface ApiUserHistory {
   ip?: string;
-
   /** @format date-time */
   time?: string;
 }
@@ -1030,10 +991,8 @@ export interface ApiUserShot {
   role?: ApiRole;
   roleName?: string;
   user?: ApiUserShotParent;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -1048,39 +1007,32 @@ export interface ApiVariable {
   name?: string;
   value?: string;
   system?: boolean;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
 
 export interface ApiZigbee2Mqtt {
   scanInProcess?: boolean;
-
   /** @format date-time */
   lastScan?: string;
   networkmap?: string;
   status?: string;
-
   /** @format int64 */
   id?: string;
   name?: string;
   login?: string;
   permitJoin?: boolean;
   baseTopic?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
 
 export interface ApiZigbee2MqttDevice {
   id?: string;
-
   /** @format int64 */
   zigbee2mqttId?: string;
   name?: string;
@@ -1091,10 +1043,8 @@ export interface ApiZigbee2MqttDevice {
   functions?: string[];
   imageUrl?: string;
   status?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
@@ -1106,98 +1056,96 @@ export interface ApiZigbee2MqttShort {
   login?: string;
   permitJoin?: boolean;
   baseTopic?: string;
-
   /** @format date-time */
   createdAt?: string;
-
   /** @format date-time */
   updatedAt?: string;
 }
 
 /**
-* `Any` contains an arbitrary serialized protocol buffer message along with a
-URL that describes the type of the serialized message.
-
-Protobuf library provides support to pack/unpack Any values in the form
-of utility functions or additional generated methods of the Any type.
-
-Example 1: Pack and unpack a message in C++.
-
-    Foo foo = ...;
-    Any any;
-    any.PackFrom(foo);
-    ...
-    if (any.UnpackTo(&foo)) {
-      ...
-    }
-
-Example 2: Pack and unpack a message in Java.
-
-    Foo foo = ...;
-    Any any = Any.pack(foo);
-    ...
-    if (any.is(Foo.class)) {
-      foo = any.unpack(Foo.class);
-    }
-
- Example 3: Pack and unpack a message in Python.
-
-    foo = Foo(...)
-    any = Any()
-    any.Pack(foo)
-    ...
-    if any.Is(Foo.DESCRIPTOR):
-      any.Unpack(foo)
-      ...
-
- Example 4: Pack and unpack a message in Go
-
-     foo := &pb.Foo{...}
-     any, err := anypb.New(foo)
-     if err != nil {
-       ...
-     }
-     ...
-     foo := &pb.Foo{}
-     if err := any.UnmarshalTo(foo); err != nil {
-       ...
-     }
-
-The pack methods provided by protobuf library will by default use
-'type.googleapis.com/full.type.name' as the type URL and the unpack
-methods only use the fully qualified type name after the last '/'
-in the type URL, for example "foo.bar.com/x/y.z" will yield type
-name "y.z".
-
-
-JSON
-====
-The JSON representation of an `Any` value uses the regular
-representation of the deserialized, embedded message, with an
-additional field `@type` which contains the type URL. Example:
-
-    package google.profile;
-    message Person {
-      string first_name = 1;
-      string last_name = 2;
-    }
-
-    {
-      "@type": "type.googleapis.com/google.profile.Person",
-      "firstName": <string>,
-      "lastName": <string>
-    }
-
-If the embedded message type is well-known and has a custom JSON
-representation, that representation will be embedded adding a field
-`value` which holds the custom JSON in addition to the `@type`
-field. Example (for message [google.protobuf.Duration][]):
-
-    {
-      "@type": "type.googleapis.com/google.protobuf.Duration",
-      "value": "1.212s"
-    }
-*/
+ * `Any` contains an arbitrary serialized protocol buffer message along with a
+ * URL that describes the type of the serialized message.
+ *
+ * Protobuf library provides support to pack/unpack Any values in the form
+ * of utility functions or additional generated methods of the Any type.
+ *
+ * Example 1: Pack and unpack a message in C++.
+ *
+ *     Foo foo = ...;
+ *     Any any;
+ *     any.PackFrom(foo);
+ *     ...
+ *     if (any.UnpackTo(&foo)) {
+ *       ...
+ *     }
+ *
+ * Example 2: Pack and unpack a message in Java.
+ *
+ *     Foo foo = ...;
+ *     Any any = Any.pack(foo);
+ *     ...
+ *     if (any.is(Foo.class)) {
+ *       foo = any.unpack(Foo.class);
+ *     }
+ *
+ * Example 3: Pack and unpack a message in Python.
+ *
+ *     foo = Foo(...)
+ *     any = Any()
+ *     any.Pack(foo)
+ *     ...
+ *     if any.Is(Foo.DESCRIPTOR):
+ *       any.Unpack(foo)
+ *       ...
+ *
+ * Example 4: Pack and unpack a message in Go
+ *
+ *      foo := &pb.Foo{...}
+ *      any, err := anypb.New(foo)
+ *      if err != nil {
+ *        ...
+ *      }
+ *      ...
+ *      foo := &pb.Foo{}
+ *      if err := any.UnmarshalTo(foo); err != nil {
+ *        ...
+ *      }
+ *
+ * The pack methods provided by protobuf library will by default use
+ * 'type.googleapis.com/full.type.name' as the type URL and the unpack
+ * methods only use the fully qualified type name after the last '/'
+ * in the type URL, for example "foo.bar.com/x/y.z" will yield type
+ * name "y.z".
+ *
+ *
+ * JSON
+ *
+ * The JSON representation of an `Any` value uses the regular
+ * representation of the deserialized, embedded message, with an
+ * additional field `@type` which contains the type URL. Example:
+ *
+ *     package google.profile;
+ *     message Person {
+ *       string first_name = 1;
+ *       string last_name = 2;
+ *     }
+ *
+ *     {
+ *       "@type": "type.googleapis.com/google.profile.Person",
+ *       "firstName": <string>,
+ *       "lastName": <string>
+ *     }
+ *
+ * If the embedded message type is well-known and has a custom JSON
+ * representation, that representation will be embedded adding a field
+ * `value` which holds the custom JSON in addition to the `@type`
+ * field. Example (for message [google.protobuf.Duration][]):
+ *
+ *     {
+ *       "@type": "type.googleapis.com/google.protobuf.Duration",
+ *       "value": "1.212s"
+ *     }
+ */
 export interface ProtobufAny {
   /**
    * A URL/resource name that uniquely identifies the type of the serialized
@@ -1229,7 +1177,6 @@ export interface ProtobufAny {
    * used with implementation specific semantics.
    */
   typeUrl?: string;
-
   /**
    * Must be a valid serialized protocol buffer of the above specified type.
    * @format byte
@@ -1244,7 +1191,8 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
+import HeadersDefaults from "axios"
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse,  ResponseType } from "axios";
 
 export type QueryParamsType = Record<string | number, any>;
 
@@ -1277,6 +1225,7 @@ export enum ContentType {
   Json = "application/json",
   FormData = "multipart/form-data",
   UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
@@ -1297,12 +1246,15 @@ export class HttpClient<SecurityDataType = unknown> {
     this.securityData = data;
   };
 
-  private mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
+  protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
+    const method = params1.method || (params2 && params2.method);
+
     return {
       ...this.instance.defaults,
       ...params1,
       ...(params2 || {}),
       headers: {
+        // ...((method && this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) || {}),
         ...(this.instance.defaults.headers || {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -1310,17 +1262,24 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  private createFormData(input: Record<string, unknown>): FormData {
+  protected stringifyFormItem(formItem: unknown) {
+    if (typeof formItem === "object" && formItem !== null) {
+      return JSON.stringify(formItem);
+    } else {
+      return `${formItem}`;
+    }
+  }
+
+  protected createFormData(input: Record<string, unknown>): FormData {
     return Object.keys(input || {}).reduce((formData, key) => {
       const property = input[key];
-      formData.append(
-        key,
-        property instanceof Blob
-          ? property
-          : typeof property === "object" && property !== null
-          ? JSON.stringify(property)
-          : `${property}`,
-      );
+      const propertyContent: any[] = property instanceof Array ? property : [property];
+
+      for (const formItem of propertyContent) {
+        const isFileType = formItem instanceof Blob || formItem instanceof File;
+        formData.append(key, isFileType ? formItem : this.stringifyFormItem(formItem));
+      }
+
       return formData;
     }, new FormData());
   }
@@ -1340,21 +1299,21 @@ export class HttpClient<SecurityDataType = unknown> {
         (await this.securityWorker(this.securityData))) ||
       {};
     const requestParams = this.mergeRequestParams(params, secureParams);
-    const responseFormat = (format && this.format) || void 0;
+    const responseFormat = format || this.format || undefined;
 
     if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
-      requestParams.headers.common = { Accept: "*/*" };
-      requestParams.headers.post = {};
-      requestParams.headers.put = {};
-
       body = this.createFormData(body as Record<string, unknown>);
+    }
+
+    if (type === ContentType.Text && body && body !== null && typeof body !== "string") {
+      body = JSON.stringify(body);
     }
 
     return this.instance.request({
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
         ...(requestParams.headers || {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
       params: query,
       responseType: responseFormat,
@@ -1456,7 +1415,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/v1/area/{id}
      * @secure
      */
-    areaServiceUpdateArea: (id: string, body: { name?: string; description?: string }, params: RequestParams = {}) =>
+    areaServiceUpdateArea: (
+      id: string,
+      body: {
+        name?: string;
+        description?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiArea, RpcStatus>({
         path: `/v1/area/${id}`,
         method: "PUT",
@@ -1476,7 +1442,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/areas
      * @secure
      */
-    areaServiceGetAreaList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
+    areaServiceGetAreaList: (
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiGetAreaListResult, RpcStatus>({
         path: `/v1/areas`,
         method: "GET",
@@ -1495,7 +1470,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/areas/search
      * @secure
      */
-    areaServiceSearchArea: (query?: { query?: string; limit?: string; offset?: string }, params: RequestParams = {}) =>
+    areaServiceSearchArea: (
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiSearchAreaResult, RpcStatus>({
         path: `/v1/areas/search`,
         method: "GET",
@@ -1630,7 +1614,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     dashboardServiceUpdateDashboard: (
       id: string,
-      body: { name?: string; description?: string; enabled?: boolean; areaId?: string },
+      body: {
+        name?: string;
+        description?: string;
+        enabled?: boolean;
+        /** @format int64 */
+        areaId?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiDashboard, RpcStatus>({
@@ -1732,12 +1722,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       body: {
         title?: string;
+        /** @format int32 */
         height?: number;
+        /** @format int32 */
         width?: number;
         background?: string;
+        /** @format int32 */
         weight?: number;
         enabled?: boolean;
+        /** @format int64 */
         dashboardTabId?: string;
+        /** @format byte */
         payload?: string;
         items?: UpdateDashboardCardRequestItem[];
       },
@@ -1823,10 +1818,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       body: {
         title?: string;
         type?: string;
+        /** @format int32 */
         weight?: number;
         enabled?: boolean;
+        /** @format int64 */
         dashboardCardId?: string;
         entityId?: string;
+        /** @format byte */
         payload?: string;
         hidden?: boolean;
         frozen?: boolean;
@@ -1853,7 +1851,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardCardItemServiceGetDashboardCardItemList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardCardItemListResult, RpcStatus>({
@@ -1934,12 +1938,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       id: string,
       body: {
         name?: string;
+        /** @format int32 */
         columnWidth?: number;
         gap?: boolean;
         background?: string;
         icon?: string;
         enabled?: boolean;
+        /** @format int32 */
         weight?: number;
+        /** @format int64 */
         dashboardId?: string;
       },
       params: RequestParams = {},
@@ -1964,7 +1971,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardTabServiceGetDashboardTabList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardTabListResult, RpcStatus>({
@@ -1986,7 +1999,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardServiceGetDashboardList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetDashboardListResult, RpcStatus>({
@@ -2028,7 +2047,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     dashboardServiceSearchDashboard: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchDashboardResult, RpcStatus>({
@@ -2128,7 +2153,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     entityServiceGetEntityList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetEntityListResult, RpcStatus>({
@@ -2190,7 +2221,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     entityServiceSearchEntity: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchEntityResult, RpcStatus>({
@@ -2287,7 +2324,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     entityStorageServiceGetEntityStorageList: (
       entityId: string,
-      query?: { page?: string; limit?: string; sort?: string; startDate?: string; endDate?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+        startDate?: string;
+        endDate?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetEntityStorageResult, RpcStatus>({
@@ -2386,7 +2431,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     imageServiceUpdateImageById: (
       id: string,
-      body: { thumb?: string; image?: string; mimeType?: string; title?: string; size?: string; name?: string },
+      body: {
+        thumb?: string;
+        image?: string;
+        mimeType?: string;
+        title?: string;
+        /** @format int64 */
+        size?: string;
+        name?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiImage, RpcStatus>({
@@ -2408,7 +2461,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/images
      * @secure
      */
-    imageServiceGetImageList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
+    imageServiceGetImageList: (
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiGetImageListResult, RpcStatus>({
         path: `/v1/images`,
         method: "GET",
@@ -2445,7 +2507,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/images/filtered
      * @secure
      */
-    imageServiceGetImageListByDate: (query?: { filter?: string }, params: RequestParams = {}) =>
+    imageServiceGetImageListByDate: (
+      query?: {
+        filter?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiGetImageListByDateResult, RpcStatus>({
         path: `/v1/images/filtered`,
         method: "GET",
@@ -2484,11 +2551,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     logServiceGetLogList: (
-      query?: { page?: string; limit?: string; sort?: string; query?: string; startDate?: string; endDate?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+        query?: string;
+        startDate?: string;
+        endDate?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetLogListResult, RpcStatus>({
         path: `/v1/logs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags MessageDeliveryService
+     * @name MessageDeliveryServiceGetMessageDeliveryList
+     * @summary get list
+     * @request GET:/v1/message_delivery
+     * @secure
+     */
+    messageDeliveryServiceGetMessageDeliveryList: (
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetMessageDeliveryListResult, RpcStatus>({
+        path: `/v1/message_delivery`,
         method: "GET",
         query: query,
         secure: true,
@@ -2506,7 +2610,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     metricServiceGetMetric: (
-      query?: { id?: string; range?: string; from?: string; to?: string },
+      query?: {
+        /** @format int64 */
+        id?: string;
+        range?: string;
+        /** @format date-time */
+        from?: string;
+        /** @format date-time */
+        to?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiMetric, RpcStatus>({
@@ -2582,7 +2694,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     pluginServiceGetPluginList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetPluginListResult, RpcStatus>({
@@ -2604,7 +2722,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     pluginServiceSearchPlugin: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchPluginResult, RpcStatus>({
@@ -2683,7 +2807,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     roleServiceUpdateRoleByName: (
       name: string,
-      body: { description?: string; parent?: string },
+      body: {
+        description?: string;
+        parent?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiRole, RpcStatus>({
@@ -2725,7 +2852,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     roleServiceUpdateRoleAccessList: (
       name: string,
-      body: { accessListDiff?: Record<string, UpdateRoleAccessListRequestAccessListDiff> },
+      body: {
+        accessListDiff?: Record<string, UpdateRoleAccessListRequestAccessListDiff>;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiRoleAccessListResult, RpcStatus>({
@@ -2747,7 +2876,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/roles
      * @secure
      */
-    roleServiceGetRoleList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
+    roleServiceGetRoleList: (
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiGetRoleListResult, RpcStatus>({
         path: `/v1/roles`,
         method: "GET",
@@ -2767,7 +2905,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     roleServiceSearchRoleByName: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchRoleListResult, RpcStatus>({
@@ -2866,7 +3010,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     scriptServiceUpdateScriptById: (
       id: string,
-      body: { lang?: string; name?: string; source?: string; description?: string },
+      body: {
+        lang?: string;
+        name?: string;
+        source?: string;
+        description?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiScript, RpcStatus>({
@@ -2925,7 +3074,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     scriptServiceGetScriptList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetScriptListResult, RpcStatus>({
@@ -2947,7 +3102,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     scriptServiceSearchScript: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchScriptListResult, RpcStatus>({
@@ -3130,7 +3291,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     automationServiceGetTaskList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetTaskListResult, RpcStatus>({
@@ -3243,7 +3410,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/v1/users
      * @secure
      */
-    userServiceGetUserList: (query?: { page?: string; limit?: string; sort?: string }, params: RequestParams = {}) =>
+    userServiceGetUserList: (
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiGetUserListResult, RpcStatus>({
         path: `/v1/users`,
         method: "GET",
@@ -3318,7 +3494,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/v1/variable/{name}
      * @secure
      */
-    variableServiceUpdateVariable: (name: string, body: { value?: string }, params: RequestParams = {}) =>
+    variableServiceUpdateVariable: (
+      name: string,
+      body: {
+        value?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ApiVariable, RpcStatus>({
         path: `/v1/variable/${name}`,
         method: "PUT",
@@ -3339,7 +3521,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     variableServiceGetVariableList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetVariableListResult, RpcStatus>({
@@ -3361,7 +3549,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceGetBridgeList: (
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiGetBridgeListResult, RpcStatus>({
@@ -3440,7 +3634,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     zigbee2MqttServiceUpdateBridgeById: (
       id: string,
-      body: { name?: string; login?: string; password?: string; permitJoin?: boolean; baseTopic?: string },
+      body: {
+        name?: string;
+        login?: string;
+        password?: string;
+        permitJoin?: boolean;
+        baseTopic?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiZigbee2Mqtt, RpcStatus>({
@@ -3464,7 +3664,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     zigbee2MqttServiceDeviceList: (
       id: string,
-      query?: { page?: string; limit?: string; sort?: string },
+      query?: {
+        /** @format uint64 */
+        page?: string;
+        /** @format uint64 */
+        limit?: string;
+        sort?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiDeviceListResult, RpcStatus>({
@@ -3600,7 +3806,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     zigbee2MqttServiceSearchDevice: (
-      query?: { query?: string; limit?: string; offset?: string },
+      query?: {
+        query?: string;
+        /** @format int64 */
+        limit?: string;
+        /** @format int64 */
+        offset?: string;
+      },
       params: RequestParams = {},
     ) =>
       this.request<ApiSearchDeviceResult, RpcStatus>({
@@ -3621,8 +3833,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/ws
      * @secure
      */
-    streamServiceSubscribe: (query?: { id?: string; query?: string; body?: string }, params: RequestParams = {}) =>
-      this.request<{ result?: ApiResponse; error?: RpcStatus }, RpcStatus>({
+    streamServiceSubscribe: (
+      query?: {
+        id?: string;
+        query?: string;
+        /** @format byte */
+        body?: string;
+        accessToken?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<
+        {
+          result?: ApiResponse;
+          error?: RpcStatus;
+        },
+        RpcStatus
+      >({
         path: `/ws`,
         method: "GET",
         query: query,

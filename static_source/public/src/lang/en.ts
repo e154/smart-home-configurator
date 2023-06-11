@@ -49,7 +49,8 @@ export default {
     mqttList: 'List',
     etc: 'etc',
     variables: 'Variables',
-    backupList: 'Backups'
+    backupList: 'Backups',
+    messageDelivery: 'Message Delivery'
   },
   navbar: {
     logOut: 'Log Out',
@@ -192,6 +193,21 @@ export default {
       pluginName: 'Plugin',
       script: 'Script',
       entity: 'Entity',
+      createdAt: 'Created at',
+      updatedAt: 'Updated at'
+    }
+  },
+  message: {
+    attributes: 'Attributes',
+    table: {
+      type: 'Message type',
+    }
+  },
+  message_delivery: {
+    table: {
+      id: 'Id',
+      attributes: 'Attributes',
+      status: 'Status',
       createdAt: 'Created at',
       updatedAt: 'Updated at'
     }
