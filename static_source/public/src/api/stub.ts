@@ -9,7 +9,7 @@
  * ---------------------------------------------------------------
  */
 
-import {ApiGetDashboardCardItemListResult} from '@/api/stub_new';
+import HeadersDefaults from "axios"
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType} from 'axios';
 
 export interface AccessListListOfString {
@@ -313,6 +313,11 @@ export interface ApiGetDashboardCardListResult {
   meta: ApiMeta;
 }
 
+export interface ApiGetDashboardCardItemListResult {
+  items: ApiDashboardCardItem[];
+  meta: ApiMeta;
+}
+
 export interface ApiGetDashboardListResult {
   items: ApiDashboardShort[];
   meta: ApiMeta;
@@ -353,6 +358,11 @@ export interface ApiGetImageListResult {
 
 export interface ApiGetLogListResult {
   items: ApiLog[];
+  meta: ApiMeta;
+}
+
+export interface ApiGetMessageDeliveryListResult {
+  items: ApiMessageDelivery[];
   meta: ApiMeta;
 }
 
@@ -432,6 +442,31 @@ export interface ApiLog {
   body: string;
   owner: string;
   createdAt: string;
+}
+
+export interface ApiMessage {
+  /** @format int64 */
+  id: number;
+  type: string;
+  attributes?: Record<string, string>;
+  /** @format date-time */
+  createdAt: string;
+  /** @format date-time */
+  updatedAt: string;
+}
+
+export interface ApiMessageDelivery {
+  /** @format int64 */
+  id: number;
+  message: ApiMessage;
+  address?: string;
+  status: string;
+  errorMessageStatus?: string;
+  errorMessageBody?: string;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string;
 }
 
 export interface ApiMeta {
@@ -2339,6 +2374,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query: query,
         secure: true,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags MessageDeliveryService
+     * @name MessageDeliveryServiceGetMessageDeliveryList
+     * @summary get list
+     * @request GET:/v1/message_delivery
+     * @secure
+     */
+    messageDeliveryServiceGetList: (
+      query?: { page?: number; limit?: number; sort?: string; message_type?: string; startDate?: string; endDate?: string },
+      params: RequestParams = {},
+    ) =>
+      this.request<ApiGetMessageDeliveryListResult, RpcStatus>({
+        path: `/v1/message_delivery`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
         ...params,
       }),
 

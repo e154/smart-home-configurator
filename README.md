@@ -1,4 +1,4 @@
-`Smart home configurator
+Smart home configurator
 -----------------------
 
 [Project site](https://e154.github.io/smart-home/) |
@@ -17,7 +17,7 @@
 |master      | ![Build Status](https://github.com/e154/smart-home-configurator/actions/workflows/test.yml/badge.svg?branch=master)   |
 |dev         | ![Build Status](https://github.com/e154/smart-home-configurator/actions/workflows/test.yml/badge.svg?branch=develop)  |
 
-Attention! The project is under active development.
+Attention! The project is now embeded in main [Project](https://e154.github.io/smart-home/) and is no longer being developed. 
 ---------
 
 | screenshots | screenshots |

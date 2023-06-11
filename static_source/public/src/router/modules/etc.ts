@@ -106,6 +106,14 @@ const etcRouter: RouteConfig = {
       meta: {
         title: 'backupList'
       }
+    },
+    {
+      path: 'message_delivery',
+      component: () => import('@/views/message_delivery/index.vue'),
+      name: 'Message Delivery',
+      meta: {
+        title: 'messageDelivery'
+      }
     }
   ]
 };

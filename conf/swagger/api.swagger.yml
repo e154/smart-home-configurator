@@ -22,6 +22,7 @@ tags:
   - name: ImageService
   - name: InteractService
   - name: LogService
+  - name: MessageDeliveryService
   - name: MetricService
   - name: PluginService
   - name: RoleService
@@ -1538,6 +1539,38 @@ paths:
         - LogService
       security:
         - ApiKeyAuth: []
+  /v1/message_delivery:
+    get:
+      summary: get list
+      operationId: MessageDeliveryService_GetMessageDeliveryList
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetMessageDeliveryListResult'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: page
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: limit
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: sort
+          in: query
+          required: false
+          type: string
+      tags:
+        - MessageDeliveryService
+      security:
+        - ApiKeyAuth: []
   /v1/metric:
     get:
       summary: get metric
@@ -3043,6 +3076,10 @@ paths:
           required: false
           type: string
           format: byte
+        - name: accessToken
+          in: query
+          required: false
+          type: string
       tags:
         - StreamService
 definitions:
@@ -3749,6 +3786,15 @@ definitions:
           $ref: '#/definitions/apiLog'
       meta:
         $ref: '#/definitions/apiMeta'
+  apiGetMessageDeliveryListResult:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/apiMessageDelivery'
+      meta:
+        $ref: '#/definitions/apiMeta'
   apiGetPluginListResult:
     type: object
     properties:
@@ -3894,7 +3940,49 @@ definitions:
         type: string
       body:
         type: string
+      owner:
+        type: string
       createdAt:
+        type: string
+        format: date-time
+  apiMessage:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+      type:
+        type: string
+      attributes:
+        type: object
+        additionalProperties:
+          type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  apiMessageDelivery:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+      message:
+        $ref: '#/definitions/apiMessage'
+      address:
+        type: string
+      status:
+        type: string
+      errorMessageStatus:
+        type: string
+      errorMessageBody:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
         type: string
         format: date-time
   apiMeta:
@@ -4814,7 +4902,7 @@ definitions:
             foo = any.unpack(Foo.class);
           }
 
-       Example 3: Pack and unpack a message in Python.
+      Example 3: Pack and unpack a message in Python.
 
           foo = Foo(...)
           any = Any()
@@ -4824,7 +4912,7 @@ definitions:
             any.Unpack(foo)
             ...
 
-       Example 4: Pack and unpack a message in Go
+      Example 4: Pack and unpack a message in Go
 
            foo := &pb.Foo{...}
            any, err := anypb.New(foo)
@@ -4845,7 +4933,7 @@ definitions:
 
 
       JSON
-      ====
+
       The JSON representation of an `Any` value uses the regular
       representation of the deserialized, embedded message, with an
       additional field `@type` which contains the type URL. Example:
